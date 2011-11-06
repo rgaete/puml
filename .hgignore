@@ -4,6 +4,5 @@ syntax: regexp
 \.o$
 \.out$
 latex.*
-html.*
 ^pUML$
 \.hg.*$
