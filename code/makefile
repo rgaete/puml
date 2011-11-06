@@ -18,5 +18,8 @@ utilities.o: constants.h utilities.h utilities.cpp
 clean:
 	rm -rf *.o callgrind.out.* pUML
 
+doxy:
+	doxygen ../documentation/pUML_doxy
+
 tar:
 	tar -cvf pUML.tar nodes.cpp diagrams.cpp utilities.cpp pUML.cpp pUML.h makefile
