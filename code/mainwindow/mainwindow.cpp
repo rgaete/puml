@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     canvasWidget = new Canvas;
     setCentralWidget(canvasWidget);
 
-    ui->setupUi(this);
+    ui->setupUi(this,NONE);
 }
 
 MainWindow::~MainWindow()
@@ -23,7 +23,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionNew_triggered(bool checked)
 {
-
+    //dialog of UML types
+    dlg.show();
+    ui->setupUi(this, dlg.getDiagramType());
 }
 
 void MainWindow::on_actionOpen_triggered(bool checked)

@@ -15,14 +15,28 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     canvas.cpp \
-    nodes.cpp
+    nodes.cpp \
+    dialognew.cpp \
+    dialog.cpp
 
 HEADERS  += mainwindow.h \
     GUI.h \
     canvas.h \
-    nodes.h
+    nodes.h \
+    dialognew.h \
+    dialog.h
 
-FORMS    +=
+FORMS    += \
+    dialognew.ui
+
+
+
+
+
+
+
+
+
 
 
 

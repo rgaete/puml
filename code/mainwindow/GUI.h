@@ -64,7 +64,7 @@ public:
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
-    void setupUi(QMainWindow *MainWindow)
+    void setupUi(QMainWindow *MainWindow, int diagramType)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
@@ -223,7 +223,13 @@ public:
         menuHelp->addAction(actionAbout);
 
         retranslateUi(MainWindow);
-
+        if(diagramType==None)
+        {
+            menuEdit->setDisabled(true);
+            menuTools->setDisabled(true);
+            menuShapes->setDisabled(true);
+            menuWindow->setDisabled(true);
+        }
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
 
@@ -281,7 +287,8 @@ public:
         menuWindow->setTitle(QApplication::translate("MainWindow", "Window", 0, QApplication::UnicodeUTF8));
         menuHelp->setTitle(QApplication::translate("MainWindow", "Help", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
-
+private:
+    enum diagramType { None=0, UseCase=1, Class=2, Activity=3, Interaction=4, State=5};
 };
 
 namespace Ui {
