@@ -68,6 +68,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>launch point for program  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="pUML_8h_source.html">pUML.h</a>&quot;</code><br/>
+<code>#include &lt;vector&gt;</code><br/>
 </div><table class="memberdecls">
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -115,6 +116,15 @@ Functions</h2></td></tr>
 
     stick.<a class="code" href="classStickPerson.html#a50be794c2f01a71f64cda3b88169c304">test_msg</a>();
 
+    cout &lt;&lt; <span class="stringliteral">&quot;-- testing vectors --&quot;</span> &lt;&lt; endl;
+    vector&lt;BaseNode*&gt; test_vect;
+    test_vect.push_back(&amp;stick);
+    test_vect.push_back(&amp;oval);
+
+    <span class="keywordflow">for</span>(vector&lt;BaseNode*&gt;::iterator it = test_vect.begin(); it != test_vect.end(); ++it) {
+        (*it) -&gt; test_msg();
+    }
+
     <span class="keywordflow">return</span> 0;
 }
 </pre></div>
@@ -135,7 +145,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Nov 6 2011 14:46:47 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Dec 4 2011 15:26:50 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
