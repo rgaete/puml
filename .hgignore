@@ -4,6 +4,6 @@ syntax: regexp
 \.o$
 \.out$
 latex.*
-^pUMLx$
+^pUML$
 \.hg.*$
 .*\.lock\..*
