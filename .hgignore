@@ -1,0 +1,9 @@
+syntax: regexp
+\.pyc$
+\.sw[op]$
+\.o$
+\.out$
+latex.*
+^pUML$
+\.hg.*$
+.*\.lock\..*
