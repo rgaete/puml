@@ -6,6 +6,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    canvasWidget = new Canvas;
+    setCentralWidget(canvasWidget);
+
     ui->setupUi(this);
 }
 
@@ -100,7 +103,9 @@ void MainWindow::on_actionInverse_Select_triggered()
 
 void MainWindow::on_actionCircle_toggled(bool arg1)
 {
-
+    if (arg1 == true) {
+        canvasWidget->setNewShape(Canvas::ShpOval);
+    }
 }
 
 void MainWindow::on_actionDiamond_toggled(bool arg1)
