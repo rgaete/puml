@@ -13,9 +13,17 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    canvas.cpp \
+    nodes.cpp
 
 HEADERS  += mainwindow.h \
-    GUI.h
+    GUI.h \
+    canvas.h \
+    nodes.h
 
 FORMS    +=
+
+
+
+
