@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "canvas.h"
 
 
 namespace Ui {
@@ -74,7 +75,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-
+    Canvas *canvasWidget;
 
 
 
