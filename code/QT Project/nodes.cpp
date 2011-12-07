@@ -25,9 +25,10 @@ int BaseNode::id(string shape) {
 
 /* ObjectNode functions ***********/
 
-ObjectNode::ObjectNode(QPoint pos) : BaseNode()
+ObjectNode::ObjectNode(QPoint UpperLeft,QPoint BottomRight) : BaseNode()
 {
-    position = pos;
+    position.setX(UpperLeft.rx()+(BottomRight.rx()-UpperLeft.rx())/2);
+    position.setY(UpperLeft.ry()+(BottomRight.ry()-UpperLeft.ry())/2);
 }
 
 int ObjectNode::getClosestConnectionPoint(QPoint whereAt)
@@ -102,23 +103,57 @@ void SimpleLine::draw(QPainter &painter)
 
 /* Stickperson Functions *******/
 
-/*StickPerson::StickPerson()
-            :ObjectNode() {
-}*/
+StickPerson::StickPerson(QPoint UpperLeft,QPoint BottomRight)
+            :ObjectNode(UpperLeft,BottomRight) {
+    this->lenght = BottomRight.rx() - UpperLeft.rx();
+    this->height = BottomRight.ry() - UpperLeft.ry();
+    QPoint pos;
+    pos.setX((BottomRight.rx()-UpperLeft.rx())/2);
+    pos.setY((BottomRight.ry()-UpperLeft.ry())/2);
+    this->addConnectionPoint(pos);
+}
 
 void StickPerson::draw(QPainter &painter)
 {
     //drawing a stickperson
+    int tempx = position.x();
+    int tempy = position.y();
+
+    //background
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(Qt::white);
+    painter.drawLine(tempx,tempy,tempx,tempy-10/70.0*height);//neck
+    painter.drawLine(tempx,tempy,tempx,tempy+20/70.0*height); //body
+    painter.drawLine(tempx,tempy,tempx-10/50.0*lenght,tempy); //left arm
+    painter.drawLine(tempx,tempy,tempx+10/50.0*lenght,tempy); //right arm
+    painter.drawLine(tempx,tempy+20/70.0*height,tempx-10/50.0*lenght,tempy+(20+15)/70.0*height); //left leg
+    painter.drawLine(tempx,tempy+20/70.0*height,tempx+10/50.0*lenght,tempy+(20+15)/70.0*height); //right leg
+    painter.drawEllipse(tempx-16/2/50.0*lenght, tempy-(10+16)/70.0*height,16/50.0*lenght,16/70.0*height); //head
+
+    //edge
+    painter.setPen(Qt::black);
+    painter.setBrush(Qt::NoBrush);
+    painter.drawLine(tempx,tempy,tempx,tempy-10/70.0*height);//neck
+    painter.drawLine(tempx,tempy,tempx,tempy+20/70.0*height); //body
+    painter.drawLine(tempx,tempy,tempx-10/50.0*lenght,tempy); //left arm
+    painter.drawLine(tempx,tempy,tempx+10/50.0*lenght,tempy); //right arm
+    painter.drawLine(tempx,tempy+20/70.0*height,tempx-10/50.0*lenght,tempy+(20+15)/70.0*height); //left leg
+    painter.drawLine(tempx,tempy+20/70.0*height,tempx+10/50.0*lenght,tempy+(20+15)/70.0*height); //right leg
+    painter.drawEllipse(tempx-16/2/50.0*lenght, tempy-(10+16)/70.0*height,16/50.0*lenght,16/70.0*height); //head
 
 }
 
 /* Oval Functions **************/
 
-Oval::Oval(QPoint pos)
-     :ObjectNode(pos) {
-    this->radius = 50;
+Oval::Oval(QPoint UpperLeft,QPoint BottomRight)
+     :ObjectNode(UpperLeft,BottomRight) {
+    this->lenght = BottomRight.rx() - UpperLeft.rx();
+    this->height = BottomRight.ry() - UpperLeft.ry();
     //Adding a connection point at the center
     //is a cheap shortcut. Needs to be updated.
+    QPoint pos;
+    pos.setX((BottomRight.rx()-UpperLeft.rx())/2);
+    pos.setY((BottomRight.ry()-UpperLeft.ry())/2);
     this->addConnectionPoint(pos);
 }
 
@@ -127,24 +162,28 @@ void Oval::draw(QPainter &painter)
     //drawing an oval
     int tempx = position.x();
     int tempy = position.y();
-    int tempr = radius;
+
 
     QPoint point(tempx, tempy);
     //background
     painter.setPen(Qt::NoPen);
     painter.setBrush(Qt::white);
-    painter.drawEllipse(point,tempr, tempr);
+    painter.drawEllipse(point,lenght,height);
     //edge
     painter.setPen(Qt::black);
     painter.setBrush(Qt::NoBrush);
-    painter.drawEllipse(point,tempr, tempr);
+    painter.drawEllipse(point,lenght,height);
 }
 
 /* Diamond Functions ***********/
-Diamond::Diamond(QPoint pos)
-     :ObjectNode(pos) {
-    this->width = 50;
-    this->height = 50;
+Diamond::Diamond(QPoint UpperLeft,QPoint BottomRight)
+     :ObjectNode(UpperLeft,BottomRight) {
+
+    this->width = BottomRight.rx() - UpperLeft.rx();
+    this->height = BottomRight.ry() - UpperLeft.ry();
+    QPoint pos;
+    pos.setX((BottomRight.rx()-UpperLeft.rx())/2);
+    pos.setY((BottomRight.ry()-UpperLeft.ry())/2);
     this->addConnectionPoint(pos);
 }
 
