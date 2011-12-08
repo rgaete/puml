@@ -206,7 +206,7 @@ void MainWindow::setupUI()
     connect(actionImport_Export, SIGNAL(triggered()), this, SLOT(on_actionImport_Export_triggered()));
     connect(actionCircle, SIGNAL(toggled(bool)), this, SLOT(on_actionCircle_toggled(bool)));
     connect(actionDiamond, SIGNAL(toggled(bool)), this, SLOT(on_actionDiamond_toggled(bool)));
-
+    connect(actionStickMan,SIGNAL(toggled(bool)),this,SLOT(on_actionStickMan_toggled(bool)));
     /* list of slots
     void on_actionNew_triggered();
     void on_actionOpen_triggered();
@@ -398,7 +398,9 @@ void MainWindow::on_actionRectangle_toggled(bool arg1)
 
 void MainWindow::on_actionStickMan_toggled(bool arg1)
 {
-
+    if (arg1 == true) {
+        canvasWidget->setNewShape(Canvas::ShpStickMan);
+    }
 }
 
 void MainWindow::on_actionArrow_toggled(bool arg1)

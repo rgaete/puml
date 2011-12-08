@@ -44,8 +44,11 @@ void Canvas::setNewShape(Canvas::ShapeType type)
 
 void Canvas::mouseReleaseEvent(QMouseEvent *event)
 {
+    BottomRight = event->pos();
+
+
     if (whatToDrawNext == Object) {
-        createObject(event->pos());
+        createObject(UpperLeft,BottomRight);
         //drawList();
         update();
         //Here update is better than drawList so that a QPainter
@@ -53,7 +56,7 @@ void Canvas::mouseReleaseEvent(QMouseEvent *event)
     }
 }
 
-void Canvas::createObject(const QPoint &where)
+void Canvas::createObject(QPoint UpperLeft, QPoint BottomRight)
 {
     if (whatToDrawNext != Object) {
         //we have an error, this function shouldn't be called
@@ -63,10 +66,13 @@ void Canvas::createObject(const QPoint &where)
         //create whatever shape we need
         switch (typeOfNewObject) {
         case ShpOval:
-            newShape = new Oval(where);
+            newShape = new Oval(UpperLeft,BottomRight);
             break;
         case ShpDiamond:
-            newShape = new Diamond(where);
+            newShape = new Diamond(UpperLeft,BottomRight);
+            break;
+        case ShpStickMan:
+            newShape = new StickPerson(UpperLeft,BottomRight);
             break;
         }
 
@@ -116,5 +122,14 @@ void Canvas::paintEvent(QPaintEvent *event)
 
 void Canvas::mousePressEvent(QMouseEvent *event)
 {
-
+    UpperLeft.setX(event->x());
+    UpperLeft.setY(event->y());
 }
+
+void Canvas::mouseMoveEvent(QMouseEvent *event)
+{
+    BottomRight.setX(event->x());
+    BottomRight.setY(event->y());
+}
+
+

@@ -24,14 +24,17 @@ private:
     vector<BaseNode*> nodes;
     ShapeType typeOfNewObject;
     DrawingNext whatToDrawNext;
+    QPoint UpperLeft, BottomRight;
 
 
 public:
+    int l, h;
+
     explicit Canvas(QWidget *parent = 0);
     QSize sizeHint() const;
     void drawList(QPainter &painter);
     void setNewShape(ShapeType type);
-    void createObject(const QPoint &pos);
+    void createObject(QPoint UpperLeft,QPoint BottomRight);
     //void setSelectedObject();
     //void click();
     //void popupMenu();
@@ -40,6 +43,7 @@ protected:
     void mouseReleaseEvent(QMouseEvent *event);
     void mousePressEvent(QMouseEvent *event);
     void paintEvent(QPaintEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
 
 signals:
 
