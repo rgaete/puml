@@ -4,7 +4,7 @@ syntax: regexp
 \.o$
 \.out$
 latex.*
-^pUML$
+^pUMLs$
 \.hg.*$
 .*\.lock\..*
 syntax: glob
