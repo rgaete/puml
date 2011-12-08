@@ -98,7 +98,7 @@ class BaseNode {
  */
 class ObjectNode: public BaseNode {
 public:
-    ObjectNode(QPoint pos);
+    ObjectNode(QPoint UpperLeft,QPoint BottomRight);
     //~ObjectNode() {}
 
     //virtual BaseNode* factory();
@@ -140,13 +140,14 @@ protected:
  */
 class StickPerson: public ObjectNode {
 public:
-    StickPerson();
+    StickPerson(QPoint UpperLeft,QPoint BottomRight);
     ~StickPerson() {}
 
     //BaseNode* factory();
     //void test_msg();
     void draw(QPainter &painter);
 private:
+         int lenght,height;
 };
 
 /*!
@@ -155,10 +156,10 @@ private:
  */
 class Oval: public ObjectNode {
 private:
-    int radius;
+    int lenght,height;
 
 public:
-    Oval(QPoint pos);
+    Oval(QPoint UpperLeft,QPoint BottomRight);
     ~Oval() {}
 
     //BaseNode* factory();
@@ -176,7 +177,7 @@ private:
     int height;
 
 public:
-    Diamond(QPoint pos);
+    Diamond(QPoint UpperLeft,QPoint BottomRight);
     ~Diamond() {}
 
     //BaseNode* factory();
