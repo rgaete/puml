@@ -1,0 +1,57 @@
+3.1.1 Hardware Interfaces
+--Operating system and environment capable of running QT 4.2.
+--Storage disk
+E.g., harddrive, SSD, or secondary flash. 15 MB of space on one of these storage disks will be required to execute the pUML executable. Additional space will be required to save user generated projects.
+
+3.1.2 Software Interfaces
+Note: Software interfaces are expected to change before the next release. 
+--QT 4.2
+--C++ compiler
+
+3.1.3 User Interfaces
+--Monitor
+As pUML is a graphical program, a sufficiently large and bright monitor is recommended.
+--Keyboard
+The user will frequently need to fill in text fields. 
+--Mouse
+The majority of user interaction is through the mouse.
+
+3.1.4 Other Communication Interfaces
+No other interfaces are required. 
+
+++++++++++++++++++++++++
+3.2 SYSTEM FEATURES
+
+3.2.1 (Insert the Use Case Diagrams)
+
+3.2.2 System feature 1: Project management tasks
+
+3.2.2.1 Non-task feature description
+pUML is capable of saving and managing projects through its project management tasks suite. 
+
+3.2.2.2 Introduction/Purpose of this feature
+Several processes are required to manage projects. These include the saving of files, loading projects from files, and deleting projects.
+
+3.2.2.3 Input/Output sequence for this feature
+User selects the "File" pulldown menu at the top left corner of his or her screen. The options currently supported are "New", "Open", "Revert", "Copy As", "Save", "Save As", and "Delete Project". 
+
+3.2.2.3.1 "New"
+This creates a new project space. The user shall be presented with a dialog option to save the previous project. Once completing this dialog, the previous project will be closed and a new project space will be created. 
+
+3.2.2.3.2 "Open"
+This opens a previously saved project. The user shall be presented with a dialog option to save the previous project. Once completing this dialog, the previous project will be closed and the selected project will be opened.
+
+3.2.2.3.3 "Revert"
+This disregards all unsaved changes made to the project and reverts to the saved version. A confirmation dialog shall be presented to the user before this action is completed.
+
+3.2.2.3.4 "Copy As"
+This creates a new project space. First, the program will be saved. Then the user shall be presented with a dialog to choose a unique name for the new project space. Once completing this dialog, a copy of the previous project will be cloned into the new project space. The previous project shall be closed and the new project shall be opened.
+
+3.2.2.3.5 "Save"
+This saves the current state of the project into an XML that can later be used to recreate the project state. If the current project does not have a name, the "Save" option will be an alias for the "Save As" option.
+
+3.2.2.3.6 "Save As"
+This creates a new project space and then saves the project state into the new project. In contrast with "Copy As", this option does not affect the previous project. 
+
+3.2.2.3.7 "Delete Project"
+This deletes the current project and all files within the project folder. The user shall be presented with a confirmation dialog before this action is completed. Upon completion, a blank and unnamed project will be active in the project window. 
