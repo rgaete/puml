@@ -1,7 +1,7 @@
-3.1.1 Hardware Interfaces
+﻿3.1.1 Hardware Interfaces
 --Operating system and environment capable of running QT 4.2.
 --Storage disk
-E.g., harddrive, SSD, or secondary flash. 15 MB of space on one of these storage disks will be required to execute the pUML executable. Additional space will be required to save user generated projects.
+E.g., hard drive, SSD, or secondary flash. 15 MB of space on one of these storage disks will be required to execute the pUML executable. Additional space will be required to save user generated projects.
 
 3.1.2 Software Interfaces
 Note: Software interfaces are expected to change before the next release. 
@@ -33,7 +33,7 @@ pUML is capable of saving and managing projects through its project management t
 Several processes are required to manage projects. These include the saving of files, loading projects from files, and deleting projects.
 
 3.2.2.3 Input/Output sequence for this feature
-User selects the "File" pulldown menu at the top left corner of his or her screen. The options currently supported are "New", "Open", "Revert", "Copy As", "Save", "Save As", and "Delete Project". 
+User selects the "File" pull down menu at the top left corner of his or her screen. The options currently supported are "New", "Open", "Revert", "Copy As", "Save", "Save As", and "Delete Project". 
 
 3.2.2.3.1 "New"
 This creates a new project space. The user shall be presented with a dialog option to save the previous project. Once completing this dialog, the previous project will be closed and a new project space will be created. 
