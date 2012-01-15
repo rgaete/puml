@@ -3,7 +3,7 @@
 #include <QMenuBar>
 #include <QMenu>
 #include <QString>
-#include <QToolbar>
+#include <QToolBar>
 #include <QStatusBar>
 #include <QFileDialog>
 #include <QPrinter>
@@ -61,11 +61,18 @@ void MainWindow::setupUI()
     Shapes_Connectors -> setExclusive(true);
 
     actionCircle = new QAction(this);
+    actionCircle->setIcon(QIcon("/home/zach/Class/CS383/Project/puml/code/QT Project/Images/circle.jpg"));
+    // all of these jpg and jpeg files are set for the directory that I put them in, they need to be changed in order to work on anyone elses computer
+    // not sure if the line below is needed anymore
     actionCircle->setObjectName(QString::fromUtf8("actionCircle"));
     actionCircle->setCheckable(true);
     Shapes_Connectors->addAction(actionCircle);
 
     actionDiamond = new QAction(this);
+    actionDiamond->setIcon(QIcon("/home/zach/Class/CS383/Project/puml/code/QT Project/Images/diamond.jpeg"));
+
+    // all of these jpg and jpeg files are set for the directory that I put them in, they need to be changed in order to work on anyone elses computer
+    // not sure if the line below is needed anymore
     actionDiamond->setObjectName(QString::fromUtf8("actionDiamond"));
     actionDiamond->setCheckable(true);
     Shapes_Connectors->addAction(actionDiamond);
@@ -76,6 +83,9 @@ void MainWindow::setupUI()
     Shapes_Connectors->addAction(actionRectangle);
 
     actionStickMan = new QAction(this);
+    actionStickMan->setIcon(QIcon("/home/zach/Class/CS383/Project/puml/code/QT Project/Images/stickman.jpeg"));
+    // all of these jpg and jpeg files are set for the directory that I put them in, they need to be changed in order to work on anyone elses computer
+    // not sure if the line below is needed anymore
     actionStickMan->setObjectName(QString::fromUtf8("actionStickMan"));
     actionStickMan->setCheckable(true);
     Shapes_Connectors->addAction(actionStickMan);
@@ -141,6 +151,11 @@ void MainWindow::setupUI()
     mainToolBar = new QToolBar(this);
     mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
     this->addToolBar(Qt::TopToolBarArea, mainToolBar);
+
+    mainToolBar->addAction(actionCircle);
+    mainToolBar->addAction(actionDiamond);
+    mainToolBar->addAction(actionStickMan);
+
     statusBar = new QStatusBar(this);
     statusBar->setObjectName(QString::fromUtf8("statusBar"));
     this->setStatusBar(statusBar);
@@ -382,6 +397,7 @@ void MainWindow::on_actionCircle_toggled(bool arg1)
     if (arg1 == true) {
         canvasWidget->setNewShape(Canvas::ShpOval);
     }
+    statusBar->showMessage("Circle");
 }
 
 void MainWindow::on_actionDiamond_toggled(bool arg1)
@@ -389,6 +405,7 @@ void MainWindow::on_actionDiamond_toggled(bool arg1)
     if (arg1 == true) {
         canvasWidget->setNewShape(Canvas::ShpDiamond);
     }
+    statusBar->showMessage("Diamond");
 }
 
 void MainWindow::on_actionRectangle_toggled(bool arg1)
@@ -401,6 +418,7 @@ void MainWindow::on_actionStickMan_toggled(bool arg1)
     if (arg1 == true) {
         canvasWidget->setNewShape(Canvas::ShpStickMan);
     }
+    statusBar->showMessage("Stickman");
 }
 
 void MainWindow::on_actionArrow_toggled(bool arg1)
