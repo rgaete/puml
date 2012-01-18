@@ -61,7 +61,7 @@ void MainWindow::setupUI()
     Shapes_Connectors -> setExclusive(true);
 
     actionCircle = new QAction(this);
-    actionCircle->setIcon(QIcon("/home/zach/Class/CS383/Project/puml/code/QT Project/Images/circle.jpg"));
+    actionCircle->setIcon(QIcon(":/Images/circle.png"));
     // all of these jpg and jpeg files are set for the directory that I put them in, they need to be changed in order to work on anyone elses computer
     // not sure if the line below is needed anymore
     actionCircle->setObjectName(QString::fromUtf8("actionCircle"));
@@ -69,7 +69,7 @@ void MainWindow::setupUI()
     Shapes_Connectors->addAction(actionCircle);
 
     actionDiamond = new QAction(this);
-    actionDiamond->setIcon(QIcon("/home/zach/Class/CS383/Project/puml/code/QT Project/Images/diamond.jpeg"));
+    actionDiamond->setIcon(QIcon(":/Images/diamond.png"));
 
     // all of these jpg and jpeg files are set for the directory that I put them in, they need to be changed in order to work on anyone elses computer
     // not sure if the line below is needed anymore
@@ -83,9 +83,7 @@ void MainWindow::setupUI()
     Shapes_Connectors->addAction(actionRectangle);
 
     actionStickMan = new QAction(this);
-    actionStickMan->setIcon(QIcon("/home/zach/Class/CS383/Project/puml/code/QT Project/Images/stickman.jpeg"));
-    // all of these jpg and jpeg files are set for the directory that I put them in, they need to be changed in order to work on anyone elses computer
-    // not sure if the line below is needed anymore
+    actionStickMan->setIcon(QIcon(":/Images/stickman.png"));
     actionStickMan->setObjectName(QString::fromUtf8("actionStickMan"));
     actionStickMan->setCheckable(true);
     Shapes_Connectors->addAction(actionStickMan);
