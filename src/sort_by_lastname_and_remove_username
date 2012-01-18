@@ -1,0 +1,67 @@
+#!/usr/bin/ruby
+
+def run no_username=false
+    names = []
+    lines = []
+
+    File.open("credits.cpp", 'r').each do |line|
+        lines.push line
+    end
+
+    lines.each do |line|
+        if /\s*"(\w+)\s+(\w+)\s+(\w*)".*$/ =~ line
+            tmp = []
+            [$2, $1, $3].each {|v| tmp.push v}
+            names.push tmp
+        end
+    end
+
+    names = names.sort
+
+    File.open("credits.cpp.tmp", 'w') do |f|
+        first = "char * credits[] = {\n"
+
+        first = [
+            '#include <iostream>',
+            'using namespace std;',
+            '',
+            'char * credits[] = {'
+        ]
+
+
+        last = [
+            '};',
+            '',
+            'int main(){',
+            '    for(int i=0; i<9; i++)',
+            '        cout << credits[i] << endl;',
+            '}'
+        ]
+
+        first.each {|l| f.write l + "\n"}
+
+        names.each_with_index do |l, i|
+            if i != names.length - 1
+                if no_username || l[2]==''
+                    f.write "   \"#{l[1]} #{l[0]}\",\n"
+                else
+                    f.write "   \"#{l[1]} #{l[0]} #{l[2]}\",\n"
+                end
+            else
+                if no_username || l[2]==''
+                    f.write "   \"#{l[1]} #{l[0]}\"\n"
+                else
+                    f.write "   \"#{l[1]} #{l[0]} #{l[2]}\"\n"
+                end
+            end
+        end
+
+        last.each {|l| f.write l + "\n"}
+    end
+
+    %x/mv credits.cpp.tmp credits.cpp/
+end
+
+if __FILE__ == $0
+    run true
+end
