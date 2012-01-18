@@ -21,6 +21,11 @@ HEADERS  += mainwindow.h \
     nodes.h \
     dialognew.h
 
+OTHER_FILES +=
+
+RESOURCES += \
+    icons.qrc
+
 
 
 
