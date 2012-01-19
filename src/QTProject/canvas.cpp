@@ -1,5 +1,9 @@
 #include "canvas.h"
 
+/*! Constructor for the canvas. It sets the sizing policy,
+  sets the background to white, and sets the
+  whatToDrawNext variable to Nothing.
+  */
 Canvas::Canvas(QWidget *parent) :
     QWidget(parent)
 {
@@ -21,13 +25,14 @@ Canvas::Canvas(QWidget *parent) :
     whatToDrawNext = Nothing;
 }
 
-/* sizeHint: returns a recomended size, used by layouts. */
+/*! sizeHint: returns a recomended size, used by layouts. */
 QSize Canvas::sizeHint() const
 {
     return QSize(50,50);
 }
 
-/** This draws all of the objects that are in the nodes vector
+/*! This draws all of the objects that are in the nodes vector
+    by calling their draw functions.
   */
 void Canvas::drawList(QPainter &painter)
 {
@@ -36,27 +41,33 @@ void Canvas::drawList(QPainter &painter)
     }
 }
 
+/*! This function is called when you want to set
+    what the canvas is going to draw next.
+ */
 void Canvas::setNewShape(Canvas::ShapeType type)
 {
     typeOfNewObject = type;
     whatToDrawNext = Object;
 }
 
+/*! This function will do various things based on
+    what whatToDrawNext is set to. It can create
+    objects and connections, select objects, etc.
+*/
 void Canvas::mouseReleaseEvent(QMouseEvent *event)
 {
-    BottomRight = event->pos();
-
-
     if (whatToDrawNext == Object) {
-        createObject(UpperLeft,BottomRight);
-        //drawList();
+        createObject(event->pos());
+        //Call to update to initiate a paintEvent
         update();
-        //Here update is better than drawList so that a QPainter
-        //can be created by the widget
     }
 }
 
-void Canvas::createObject(QPoint UpperLeft, QPoint BottomRight)
+/*! This function is used to create a new object at a
+    certain position. It will create a new object
+    based on what typeOfNewObject is.
+*/
+void Canvas::createObject(QPoint position)
 {
     if (whatToDrawNext != Object) {
         //we have an error, this function shouldn't be called
@@ -66,13 +77,13 @@ void Canvas::createObject(QPoint UpperLeft, QPoint BottomRight)
         //create whatever shape we need
         switch (typeOfNewObject) {
         case ShpOval:
-            newShape = new Oval(UpperLeft,BottomRight);
+            newShape = new Oval(position);
             break;
         case ShpDiamond:
-            newShape = new Diamond(UpperLeft,BottomRight);
+            newShape = new Diamond(position);
             break;
         case ShpStickMan:
-            newShape = new StickPerson(UpperLeft,BottomRight);
+            newShape = new StickPerson(position);
             break;
         }
 
@@ -81,6 +92,9 @@ void Canvas::createObject(QPoint UpperLeft, QPoint BottomRight)
     }
 }
 
+/*! This function paints the canvas. That means it
+    draws the background grid and then calls drawList.
+*/
 void Canvas::paintEvent(QPaintEvent *event)
 {
      QPainter painter(this);
@@ -120,16 +134,18 @@ void Canvas::paintEvent(QPaintEvent *event)
      painter.end();
 }
 
+//These functions aren't used yet.
+
 void Canvas::mousePressEvent(QMouseEvent *event)
 {
-    UpperLeft.setX(event->x());
-    UpperLeft.setY(event->y());
+    //UpperLeft.setX(event->x());
+    //UpperLeft.setY(event->y());
 }
 
 void Canvas::mouseMoveEvent(QMouseEvent *event)
 {
-    BottomRight.setX(event->x());
-    BottomRight.setY(event->y());
+    //BottomRight.setX(event->x());
+    //BottomRight.setY(event->y());
 }
 
 

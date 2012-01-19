@@ -34,7 +34,7 @@ public:
     QSize sizeHint() const;
     void drawList(QPainter &painter);
     void setNewShape(ShapeType type);
-    void createObject(QPoint UpperLeft,QPoint BottomRight);
+    void createObject(QPoint position);
     //void setSelectedObject();
     //void click();
     //void popupMenu();

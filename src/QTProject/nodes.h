@@ -84,7 +84,6 @@ class BaseNode {
         int id(string shape) {return -1;}
         string id(int shape_ID) {return "Bad string";}
 
-        virtual void test_msg() {}
         virtual void draw(QPainter &painter) =0;
     private:
         int id_int;
@@ -98,11 +97,11 @@ class BaseNode {
  */
 class ObjectNode: public BaseNode {
 public:
-    ObjectNode(QPoint UpperLeft,QPoint BottomRight);
+    ObjectNode(QPoint position);
     //~ObjectNode() {}
 
     //virtual BaseNode* factory();
-    void setPos(const QPoint &pos) { position = pos; }
+    void setPosition(const QPoint &pos) { position = pos; }
     void addConnectionPoint(QPoint point) { connectionPoints.push_back(point); }
     int getClosestConnectionPoint(QPoint whereAt);
     QPoint translateConnectionPoint(int pointIndex);
@@ -140,14 +139,14 @@ protected:
  */
 class StickPerson: public ObjectNode {
 public:
-    StickPerson(QPoint UpperLeft,QPoint BottomRight);
+    StickPerson(QPoint position);
     ~StickPerson() {}
 
     //BaseNode* factory();
     //void test_msg();
     void draw(QPainter &painter);
 private:
-         int lenght,height;
+         int length,height;
 };
 
 /*!
@@ -156,10 +155,10 @@ private:
  */
 class Oval: public ObjectNode {
 private:
-    int lenght,height;
+    int length,height;
 
 public:
-    Oval(QPoint UpperLeft,QPoint BottomRight);
+    Oval(QPoint position);
     ~Oval() {}
 
     //BaseNode* factory();
@@ -177,7 +176,7 @@ private:
     int height;
 
 public:
-    Diamond(QPoint UpperLeft,QPoint BottomRight);
+    Diamond(QPoint position);
     ~Diamond() {}
 
     //BaseNode* factory();
