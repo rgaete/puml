@@ -11,20 +11,29 @@
 #include <QMessageBox>
 #include <QCloseEvent>
 
+/*! In the MainWindow constructor, we need to create
+    all the actions and all the widgets. We call
+    setupUI for this.
+*/
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     setupUI();
 }
 
+/*! Mainwindow deconstructor
+*/
 MainWindow::~MainWindow()
 {
     delete actionNew;
     delete actionOpen;
     delete actionSave;
     delete actionSave_As;
+    //... should all the actions be deleted here?
 }
 
+/*! Here we are creating all the actions and all the widgets.
+*/
 void MainWindow::setupUI()
 {
     if (this->objectName().isEmpty())

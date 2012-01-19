@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<java version="1.6.0_26" class="java.beans.XMLDecoder"> 
+<java version="1.6.0_30" class="java.beans.XMLDecoder"> 
  <object class="com.horstmann.violet.ClassDiagramGraph"> 
   <void method="addNode"> 
    <object id="ClassNode0" class="com.horstmann.violet.ClassNode"> 
     <void property="attributes"> 
      <void property="text"> 
-      <string>public:
-BaseNode()
-int id(string shape)  // private
-string id(int shape_ID)
-private:
-int id_int
+      <string>int id_int
 string id_str</string> 
      </void> 
     </void> 
     <void property="methods"> 
      <void property="text"> 
       <string>virtual void draw( )
-virtual void test_msg()
-valid_in(diagram) //**</string> 
+int id(string shape) 
+string id(int shape_ID)</string> 
      </void> 
     </void> 
     <void property="name"> 
@@ -29,8 +24,8 @@ valid_in(diagram) //**</string>
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>486.0</double> 
-     <double>29.0</double> 
+     <double>616.0</double> 
+     <double>10.0</double> 
     </void> 
    </object> 
   </void> 
@@ -59,8 +54,8 @@ get(diagram)</string>
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>219.0</double> 
-     <double>23.0</double> 
+     <double>249.0</double> 
+     <double>18.0</double> 
     </void> 
    </object> 
   </void> 
@@ -87,8 +82,8 @@ grid</string>
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>168.0</double> 
-     <double>213.0</double> 
+     <double>139.0</double> 
+     <double>218.0</double> 
     </void> 
    </object> 
   </void> 
@@ -96,16 +91,21 @@ grid</string>
    <object id="ClassNode3" class="com.horstmann.violet.ClassNode"> 
     <void property="attributes"> 
      <void property="text"> 
-      <string>connections(x,y)  // four acceptable connection points
-title: string</string> 
+      <string>protected:
+vector&lt;QPoint&gt; connectionPoints
+QPoint position
+QRect my_shape</string> 
      </void> 
     </void> 
     <void property="methods"> 
      <void property="text"> 
-      <string>xml
-is_in_object ( x, y )
-collision?( )
-resizeObject( )</string> 
+      <string>ObjectNode(QPoint UpperLeft, QPoint Bottomright)
+void addConnectionPoint(QPoint point)
+int getClosestConnectionPoint
+QPoint translateConnectionPoint(int pointIndex)
+void setPosition(const QPoint point)
+QPoint getPosition()
+</string> 
      </void> 
     </void> 
     <void property="name"> 
@@ -116,8 +116,8 @@ resizeObject( )</string>
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>680.0</double> 
-     <double>260.0</double> 
+     <double>882.0</double> 
+     <double>200.0</double> 
     </void> 
    </object> 
   </void> 
@@ -141,13 +141,15 @@ Project Meeting</string>
    <object id="ClassNode4" class="com.horstmann.violet.ClassNode"> 
     <void property="attributes"> 
      <void property="text"> 
-      <string>connectionpoints</string> 
+      <string>protected:
+ObjectNode *connectionPoint1
+ObjectNode *connectionPoint1</string> 
      </void> 
     </void> 
     <void property="methods"> 
      <void property="text"> 
-      <string>xml
-connect( x[2], y[2] ) </string> 
+      <string>ConnectionNode(ObjectNode *point1, ObjectNode *point2)
+~ConnectionNode()</string> 
      </void> 
     </void> 
     <void property="name"> 
@@ -158,8 +160,8 @@ connect( x[2], y[2] ) </string>
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>505.0</double> 
-     <double>295.0</double> 
+     <double>522.0</double> 
+     <double>210.0</double> 
     </void> 
    </object> 
   </void> 
@@ -185,21 +187,22 @@ registerNote(Basenode* to_register)</string>
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>695.0</double> 
-     <double>67.0</double> 
+     <double>824.0</double> 
+     <double>17.0</double> 
     </void> 
    </object> 
   </void> 
   <void method="addNode"> 
    <object id="ClassNode6" class="com.horstmann.violet.ClassNode"> 
+    <void property="attributes"> 
+     <void property="text"> 
+      <string>int length
+int height</string> 
+     </void> 
+    </void> 
     <void property="methods"> 
      <void property="text"> 
-      <string>read xml // virtual method
-write xml // virtual method
-draw self
-valid_in( diagram )
-draw( )
-render title</string> 
+      <string>draw(QPainter &amp;painter)</string> 
      </void> 
     </void> 
     <void property="name"> 
@@ -211,8 +214,8 @@ example of a specific object</string>
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>739.0</double> 
-     <double>415.0</double> 
+     <double>950.0</double> 
+     <double>469.0</double> 
     </void> 
    </object> 
   </void> 
@@ -242,19 +245,37 @@ Zach Curtis</string>
    <object class="com.horstmann.violet.ClassNode"> 
     <void property="attributes"> 
      <void property="text"> 
-      <string>vector &lt;objectNode&gt; objec
+      <string>public:
+enum ShapeType
+enum DrawingNext
+int l
+int h
+
+
+private:
+vector &lt;BaseNode*&gt; nodes
+ShapeType typeOfNewObject
+DrawingNext whatToDrawNext
+QPoint UpperLeft
+QPoint BottomRight
+
 </string> 
      </void> 
     </void> 
     <void property="methods"> 
      <void property="text"> 
-      <string>drawlist()
-setNewShape()
-createObject()
-setSelectedObject()
-click()  // left click
-popupMenu()
-rightClick()</string> 
+      <string>void drawlist(QPainter &amp;painter)
+setNewShape(ShapeType type)
+createObject(QPoint UpperLeft, QPoint BottomRight)
+//setSelectedObject()
+//click()
+//popupMenu()
+//rightClick()
+protected:
+void MouseReleaseEvent(QMouseEvent *event)
+void mousePressEvent(QMouseEvent *event)
+void paintEvent(QPaintEvent *event)
+void mouseMoveEvent(QMouseEvent *event)</string> 
      </void> 
     </void> 
     <void property="name"> 
@@ -265,44 +286,8 @@ rightClick()</string>
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>166.0</double> 
-     <double>357.0</double> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="addNode"> 
-   <object class="com.horstmann.violet.ClassNode"> 
-    <void property="methods"> 
-     <void property="text"> 
-      <string>show()
-</string> 
-     </void> 
-    </void> 
-    <void property="name"> 
-     <void property="text"> 
-      <string>QMenu</string> 
-     </void> 
-    </void> 
-   </object> 
-   <object class="java.awt.geom.Point2D$Double"> 
-    <void method="setLocation"> 
-     <double>52.0</double> 
-     <double>506.0</double> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="addNode"> 
-   <object class="com.horstmann.violet.ClassNode"> 
-    <void property="name"> 
-     <void property="text"> 
-      <string>QToolbar</string> 
-     </void> 
-    </void> 
-   </object> 
-   <object class="java.awt.geom.Point2D$Double"> 
-    <void method="setLocation"> 
-     <double>47.0</double> 
-     <double>582.0</double> 
+     <double>133.0</double> 
+     <double>337.0</double> 
     </void> 
    </object> 
   </void> 
@@ -323,8 +308,8 @@ vector &lt;ObjectNodes&gt;  // valid in this diagram type
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>185.0</double> 
-     <double>564.0</double> 
+     <double>537.0</double> 
+     <double>419.0</double> 
     </void> 
    </object> 
   </void> 

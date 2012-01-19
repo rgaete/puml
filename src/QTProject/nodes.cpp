@@ -5,32 +5,19 @@
 
 #include "nodes.h"
 
-/*
-bool BaseNode::valid_in(Diagram diagram) {
-    cerr << "Invalid call -> BaseNode::valid_in()" << endl;
-    return false;
-}
-
-int BaseNode::id(string shape) {
-    return id_int;
-}
-*/
-
-/*!
- * Registers the node in the valid_nodes global object.
- */
-/*BaseNode::BaseNode() {
-    valid_nodes.register_node(this);
-}*/
-
+/**********************************/
 /* ObjectNode functions ***********/
+/**********************************/
 
-ObjectNode::ObjectNode(QPoint UpperLeft,QPoint BottomRight) : BaseNode()
+/*! The ObjectNode constructor sets the position variable
+  */
+ObjectNode::ObjectNode(QPoint position) : BaseNode()
 {
-    position.setX(UpperLeft.rx()+(BottomRight.rx()-UpperLeft.rx())/2);
-    position.setY(UpperLeft.ry()+(BottomRight.ry()-UpperLeft.ry())/2);
+    this->position = position;
 }
 
+/*! NOT YET IMPLEMENTED
+*/
 int ObjectNode::getClosestConnectionPoint(QPoint whereAt)
 {
     if (connectionPoints.size() == 0) {
@@ -40,6 +27,8 @@ int ObjectNode::getClosestConnectionPoint(QPoint whereAt)
     }
 }
 
+/*! NYI
+*/
 QPoint ObjectNode::translateConnectionPoint(int pointIndex)
 {
     if (pointIndex < 0 || pointIndex > (int)connectionPoints.size()-1) {
@@ -50,29 +39,36 @@ QPoint ObjectNode::translateConnectionPoint(int pointIndex)
     }
 }
 
-
+/*******************************/
 /* ConnectionNode Functions ****/
+/*******************************/
 
+/*! */
 ConnectionNode::ConnectionNode(ObjectNode *point1, ObjectNode *point2) : BaseNode()
 {
     connectionPoint1 = point1;
     connectionPoint2 = point2;
 }
 
+/*! */
 ConnectionNode::~ConnectionNode()
 {
     //Do not delete connectionPoint1 and 2, that is
     //taken care of by the Canvas
 }
 
+/*******************************/
 /* SimpleLine Functions ********/
+/*******************************/
 
+/*! */
 SimpleLine::SimpleLine(ObjectNode *point1, ObjectNode *point2)
     :ConnectionNode(point1, point2)
 {
     thickness = 2;
 }
 
+/*! */
 void SimpleLine::draw(QPainter &painter)
 {
     //We want to draw a line from connectionPoint1's
@@ -100,19 +96,27 @@ void SimpleLine::draw(QPainter &painter)
 }
 
 
-
+/*******************************/
 /* Stickperson Functions *******/
+/*******************************/
 
-StickPerson::StickPerson(QPoint UpperLeft,QPoint BottomRight)
-            :ObjectNode(UpperLeft,BottomRight) {
-    this->lenght = BottomRight.rx() - UpperLeft.rx();
-    this->height = BottomRight.ry() - UpperLeft.ry();
+/*! In the stickperson constructor we set
+  the initial length and height and add
+  any connection points.
+*/
+StickPerson::StickPerson(QPoint position)
+            :ObjectNode(position) {
+    this->length = 50;
+    this->height = 70;
     QPoint pos;
-    pos.setX((BottomRight.rx()-UpperLeft.rx())/2);
-    pos.setY((BottomRight.ry()-UpperLeft.ry())/2);
+    pos.setX(position.x() + length/2);
+    pos.setY(position.y() + height);
     this->addConnectionPoint(pos);
 }
 
+/*! Draws a stickperson on the given painter
+    at position.
+*/
 void StickPerson::draw(QPainter &painter)
 {
     //drawing a stickperson
@@ -124,67 +128,65 @@ void StickPerson::draw(QPainter &painter)
     painter.setBrush(Qt::white);
     painter.drawLine(tempx,tempy,tempx,tempy-10/70.0*height);//neck
     painter.drawLine(tempx,tempy,tempx,tempy+20/70.0*height); //body
-    painter.drawLine(tempx,tempy,tempx-10/50.0*lenght,tempy); //left arm
-    painter.drawLine(tempx,tempy,tempx+10/50.0*lenght,tempy); //right arm
-    painter.drawLine(tempx,tempy+20/70.0*height,tempx-10/50.0*lenght,tempy+(20+15)/70.0*height); //left leg
-    painter.drawLine(tempx,tempy+20/70.0*height,tempx+10/50.0*lenght,tempy+(20+15)/70.0*height); //right leg
-    painter.drawEllipse(tempx-16/2/50.0*lenght, tempy-(10+16)/70.0*height,16/50.0*lenght,16/70.0*height); //head
+    painter.drawLine(tempx,tempy,tempx-10/50.0*length,tempy); //left arm
+    painter.drawLine(tempx,tempy,tempx+10/50.0*length,tempy); //right arm
+    painter.drawLine(tempx,tempy+20/70.0*height,tempx-10/50.0*length,tempy+(20+15)/70.0*height); //left leg
+    painter.drawLine(tempx,tempy+20/70.0*height,tempx+10/50.0*length,tempy+(20+15)/70.0*height); //right leg
+    painter.drawEllipse(tempx-16/2/50.0*length, tempy-(10+16)/70.0*height,16/50.0*length,16/70.0*height); //head
 
     //edge
     painter.setPen(Qt::black);
     painter.setBrush(Qt::NoBrush);
     painter.drawLine(tempx,tempy,tempx,tempy-10/70.0*height);//neck
     painter.drawLine(tempx,tempy,tempx,tempy+20/70.0*height); //body
-    painter.drawLine(tempx,tempy,tempx-10/50.0*lenght,tempy); //left arm
-    painter.drawLine(tempx,tempy,tempx+10/50.0*lenght,tempy); //right arm
-    painter.drawLine(tempx,tempy+20/70.0*height,tempx-10/50.0*lenght,tempy+(20+15)/70.0*height); //left leg
-    painter.drawLine(tempx,tempy+20/70.0*height,tempx+10/50.0*lenght,tempy+(20+15)/70.0*height); //right leg
-    painter.drawEllipse(tempx-16/2/50.0*lenght, tempy-(10+16)/70.0*height,16/50.0*lenght,16/70.0*height); //head
+    painter.drawLine(tempx,tempy,tempx-10/50.0*length,tempy); //left arm
+    painter.drawLine(tempx,tempy,tempx+10/50.0*length,tempy); //right arm
+    painter.drawLine(tempx,tempy+20/70.0*height,tempx-10/50.0*length,tempy+(20+15)/70.0*height); //left leg
+    painter.drawLine(tempx,tempy+20/70.0*height,tempx+10/50.0*length,tempy+(20+15)/70.0*height); //right leg
+    painter.drawEllipse(tempx-16/2/50.0*length, tempy-(10+16)/70.0*height,16/50.0*length,16/70.0*height); //head
 
 }
 
+/*******************************/
 /* Oval Functions **************/
+/*******************************/
 
-Oval::Oval(QPoint UpperLeft,QPoint BottomRight)
-     :ObjectNode(UpperLeft,BottomRight) {
-    this->lenght = BottomRight.rx() - UpperLeft.rx();
-    this->height = BottomRight.ry() - UpperLeft.ry();
-    //Adding a connection point at the center
+Oval::Oval(QPoint position)
+     :ObjectNode(position) {
+    this->length = 50;
+    this->height = 50;
+
+    //Adding a connection point at the top left
     //is a cheap shortcut. Needs to be updated.
-    QPoint pos;
-    pos.setX((BottomRight.rx()-UpperLeft.rx())/2);
-    pos.setY((BottomRight.ry()-UpperLeft.ry())/2);
-    this->addConnectionPoint(pos);
+    this->addConnectionPoint(position);
 }
 
 void Oval::draw(QPainter &painter)
 {
     //drawing an oval
-    int tempx = position.x();
-    int tempy = position.y();
 
-
-    QPoint point(tempx, tempy);
     //background
     painter.setPen(Qt::NoPen);
     painter.setBrush(Qt::white);
-    painter.drawEllipse(point,lenght,height);
+    painter.drawEllipse(position,length/2,height/2);
     //edge
     painter.setPen(Qt::black);
     painter.setBrush(Qt::NoBrush);
-    painter.drawEllipse(point,lenght,height);
+    painter.drawEllipse(position,length/2,height/2);
 }
 
-/* Diamond Functions ***********/
-Diamond::Diamond(QPoint UpperLeft,QPoint BottomRight)
-     :ObjectNode(UpperLeft,BottomRight) {
 
-    this->width = BottomRight.rx() - UpperLeft.rx();
-    this->height = BottomRight.ry() - UpperLeft.ry();
-    QPoint pos;
-    pos.setX((BottomRight.rx()-UpperLeft.rx())/2);
-    pos.setY((BottomRight.ry()-UpperLeft.ry())/2);
-    this->addConnectionPoint(pos);
+/*******************************/
+/* Diamond Functions ***********/
+/*******************************/
+
+Diamond::Diamond(QPoint position)
+     :ObjectNode(position) {
+
+    this->width = 50;
+    this->height = 50;
+
+    this->addConnectionPoint(position);
 }
 
 void Diamond::draw(QPainter &painter)
