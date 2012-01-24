@@ -13,7 +13,8 @@ public:
     enum ShapeType {
         ShpOval,
         ShpStickMan,
-        ShpDiamond
+        ShpDiamond,
+        ShpClassRectangle
     };
     enum DrawingNext {
         Object,
