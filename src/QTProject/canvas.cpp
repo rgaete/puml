@@ -96,6 +96,9 @@ void Canvas::createObject(QPoint position)
         case ShpStickMan:
             newShape = new StickPerson(position);
             break;
+        case ShpClassRectangle:
+            newShape = new ClassRectangle(position);
+            break;
         }
 
         //add the node to the vector
@@ -113,14 +116,14 @@ void Canvas::paintEvent(QPaintEvent *event)
      /* Draw a grid. Shamelessly stolen from a previous
       * assignment. */
      int lineThickness = 1;
-     QColor lineColor = QColor("black");
-     int colWidth = 50;
-     int rowHeight = 50;
+     QColor lineColor = QColor(245,245,245,255);
+     int colWidth = 10;
+     int rowHeight = 10;
      //set up the pen using the preferences
      QPen pen;
      pen.setWidth(lineThickness);
      pen.setColor(lineColor);
-     pen.setStyle(Qt::DotLine);
+//     pen.setStyle(Qt::DotLine);
      painter.setPen(pen);
 
      //Create two vectors of lines, then use drawLines
