@@ -119,6 +119,9 @@ StickPerson::StickPerson(QPoint position)
 */
 void StickPerson::draw(QPainter &painter)
 {
+    QPen pen;
+    pen.setWidth(2);
+
     //drawing a stickperson
     int tempx = position.x();
     int tempy = position.y();
@@ -126,16 +129,10 @@ void StickPerson::draw(QPainter &painter)
     //background
     painter.setPen(Qt::NoPen);
     painter.setBrush(Qt::white);
-    painter.drawLine(tempx,tempy,tempx,tempy-10/70.0*height);//neck
-    painter.drawLine(tempx,tempy,tempx,tempy+20/70.0*height); //body
-    painter.drawLine(tempx,tempy,tempx-10/50.0*length,tempy); //left arm
-    painter.drawLine(tempx,tempy,tempx+10/50.0*length,tempy); //right arm
-    painter.drawLine(tempx,tempy+20/70.0*height,tempx-10/50.0*length,tempy+(20+15)/70.0*height); //left leg
-    painter.drawLine(tempx,tempy+20/70.0*height,tempx+10/50.0*length,tempy+(20+15)/70.0*height); //right leg
     painter.drawEllipse(tempx-16/2/50.0*length, tempy-(10+16)/70.0*height,16/50.0*length,16/70.0*height); //head
 
     //edge
-    painter.setPen(Qt::black);
+    painter.setPen(pen);
     painter.setBrush(Qt::NoBrush);
     painter.drawLine(tempx,tempy,tempx,tempy-10/70.0*height);//neck
     painter.drawLine(tempx,tempy,tempx,tempy+20/70.0*height); //body
@@ -153,7 +150,7 @@ void StickPerson::draw(QPainter &painter)
 
 Oval::Oval(QPoint position)
      :ObjectNode(position) {
-    this->length = 50;
+    this->length = 100;
     this->height = 50;
 
     //Adding a connection point at the top left
@@ -173,6 +170,37 @@ void Oval::draw(QPainter &painter)
     painter.setPen(Qt::black);
     painter.setBrush(Qt::NoBrush);
     painter.drawEllipse(position,length/2,height/2);
+}
+
+/*******************************/
+/*** ClassRectangle Functions **/
+/*******************************/
+
+ClassRectangle::ClassRectangle(QPoint position)
+     :ObjectNode(position) {
+    this->width = 120;
+    this->height = 80;
+    this->addConnectionPoint(position);
+}
+
+void ClassRectangle::draw(QPainter &painter)
+{
+    painter.save();
+
+    QRect r(0,0, width, height-60);
+    painter.translate(position);
+    //background top
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(Qt::white);
+    painter.drawRect(0,0,width,height);
+    //edge top
+    painter.setPen(Qt::black);
+    painter.setBrush(Qt::NoBrush);
+    painter.drawRect(r);
+    painter.drawRect(0,20,width,height-50);
+    painter.drawRect(0,50,width,height-50);
+
+    painter.restore();
 }
 
 

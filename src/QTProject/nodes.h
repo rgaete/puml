@@ -138,6 +138,8 @@ protected:
  * @sa ObjectNode
  */
 class StickPerson: public ObjectNode {
+private:
+    int length,height;
 public:
     StickPerson(QPoint position);
     ~StickPerson() {}
@@ -145,8 +147,6 @@ public:
     //BaseNode* factory();
     //void test_msg();
     void draw(QPainter &painter);
-private:
-         int length,height;
 };
 
 /*!
@@ -163,6 +163,21 @@ public:
 
     //BaseNode* factory();
     //void test_msg();
+    void draw(QPainter &painter);
+};
+
+/* !
+ *  This concrete class is the ClassRectangle node.
+ *  @sa ObjectNode
+ */
+class ClassRectangle: public ObjectNode {
+private:
+    int width,height;
+
+public:
+    ClassRectangle(QPoint position);
+    ~ClassRectangle() {}
+
     void draw(QPainter &painter);
 };
 

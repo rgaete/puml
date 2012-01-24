@@ -91,6 +91,7 @@ void MainWindow::setupUI()
     actionRectangle->setCheckable(true);
     Shapes_Connectors->addAction(actionRectangle);
 
+
     actionStickMan = new QAction(this);
     actionStickMan->setIcon(QIcon(":/Images/stickman.png"));
     actionStickMan->setObjectName(QString::fromUtf8("actionStickMan"));
@@ -228,6 +229,7 @@ void MainWindow::setupUI()
     connect(actionImport_Export, SIGNAL(triggered()), this, SLOT(on_actionImport_Export_triggered()));
     connect(actionCircle, SIGNAL(toggled(bool)), this, SLOT(on_actionCircle_toggled(bool)));
     connect(actionDiamond, SIGNAL(toggled(bool)), this, SLOT(on_actionDiamond_toggled(bool)));
+    connect(actionRectangle, SIGNAL(toggled(bool)), this, SLOT(on_actionRectangle_toggled(bool)));
     connect(actionStickMan,SIGNAL(toggled(bool)),this,SLOT(on_actionStickMan_toggled(bool)));
     /* list of slots
     void on_actionNew_triggered();
@@ -417,7 +419,10 @@ void MainWindow::on_actionDiamond_toggled(bool arg1)
 
 void MainWindow::on_actionRectangle_toggled(bool arg1)
 {
-
+    if (arg1 == true){
+        canvasWidget->setNewShape(Canvas::ShpClassRectangle);
+    }
+    statusBar->showMessage("Class Rectangle");
 }
 
 void MainWindow::on_actionStickMan_toggled(bool arg1)
