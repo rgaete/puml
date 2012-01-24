@@ -77,7 +77,10 @@ private:
     QAction *actionTile_Vertically;
     QAction *actionCascade;
     QAction *actionDocument;
+
     QAction *actionAbout;
+    QAction *actionDelete;
+    QAction *actionEdit;
     //QWidget *centralWidget;
     //QScrollBar *verticalScrollBar;
     //QScrollBar *horizontalScrollBar_2;
@@ -89,6 +92,7 @@ private:
     QMenu *menuConnectors;
     QMenu *menuWindow;
     QMenu *menuHelp;
+    QMenu *menuPopup;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 

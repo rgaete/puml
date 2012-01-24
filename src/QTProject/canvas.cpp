@@ -23,6 +23,30 @@ Canvas::Canvas(QWidget *parent) :
 
     //Initialize typeOfNewObject
     whatToDrawNext = Nothing;
+
+    //Create the actions
+    actionDelete = new QAction(this);
+    actionDelete->setText("Delete");
+    actionCut = new QAction(this);
+    actionCut->setText("Cut");
+    actionCopy = new QAction(this);
+    actionCopy->setText("Copy");
+    actionPaste = new QAction(this);
+    actionPaste->setText("Paste");
+    connect(actionDelete, SIGNAL(triggered()), this, SLOT(on_actionDelete_triggered()));
+    connect(actionCut, SIGNAL(triggered()), this, SLOT(on_actionCut_triggered()));
+    connect(actionCopy, SIGNAL(triggered()), this, SLOT(on_actionCopy_triggered()));
+    connect(actionPaste, SIGNAL(triggered()), this, SLOT(on_actionPaste_triggered()));
+
+    menuPopup = new QMenu(this);
+    menuPopup->addAction(actionCut);
+    menuPopup->addAction(actionCopy);
+    menuPopup->addAction(actionPaste);
+    menuPopup->addAction(actionDelete);
+
+    //setContextMenuPolicy(Qt::CustomContextMenu);
+
+
 }
 
 /*! sizeHint: returns a recomended size, used by layouts. */
@@ -48,19 +72,6 @@ void Canvas::setNewShape(Canvas::ShapeType type)
 {
     typeOfNewObject = type;
     whatToDrawNext = Object;
-}
-
-/*! This function will do various things based on
-    what whatToDrawNext is set to. It can create
-    objects and connections, select objects, etc.
-*/
-void Canvas::mouseReleaseEvent(QMouseEvent *event)
-{
-    if (whatToDrawNext == Object) {
-        createObject(event->pos());
-        //Call to update to initiate a paintEvent
-        update();
-    }
 }
 
 /*! This function is used to create a new object at a
@@ -138,14 +149,71 @@ void Canvas::paintEvent(QPaintEvent *event)
 
 void Canvas::mousePressEvent(QMouseEvent *event)
 {
-    //UpperLeft.setX(event->x());
-    //UpperLeft.setY(event->y());
+    if (event->button() == Qt::LeftButton) {
+        switch (whatToDrawNext) {
+        case Object:
+            //don't select or draw anything,
+            //the work is done in the release event
+            break;
+        case Connection:
+        case Nothing:
+            //find what object the user is
+            //clicking on
+            //determineSelectedObject()
+            break;
+        }
+    }
 }
 
 void Canvas::mouseMoveEvent(QMouseEvent *event)
 {
     //BottomRight.setX(event->x());
     //BottomRight.setY(event->y());
+}
+
+/*! This function will do various things based on
+    what whatToDrawNext is set to. It can create
+    objects and connections, select objects, etc.
+*/
+void Canvas::mouseReleaseEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton) {
+        if (whatToDrawNext == Object) {
+            createObject(event->pos());
+            //Call to update to initiate a paintEvent
+            update();
+        }
+    }
+}
+
+/*! This function is called when the widget thinks that
+    a contect menu is needed. E.g., the right mouse
+    button is clicked or the menu keyboard button is
+    pressed.
+*/
+void Canvas::contextMenuEvent(QContextMenuEvent *event)
+{
+    //popup the menu at the current mouse position
+    menuPopup->exec(event->globalPos());
+}
+
+void Canvas::on_actionDelete_triggered()
+{
+    //
+}
+
+void Canvas::on_actionCut_triggered()
+{
+
+}
+
+void Canvas::on_actionPaste_triggered()
+{
+
+}
+
+void Canvas::on_actionCopy_triggered()
+{
 }
 
 

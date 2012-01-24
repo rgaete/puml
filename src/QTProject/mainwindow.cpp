@@ -205,9 +205,12 @@ void MainWindow::setupUI()
     menuHelp->addSeparator();
     menuHelp->addAction(actionAbout);
 
+
+
     canvasWidget = new Canvas(this);
     canvasWidget->setObjectName(QString::fromUtf8("canvasWidget"));
     this->setCentralWidget(canvasWidget);
+
 
     retranslateUI();
 
