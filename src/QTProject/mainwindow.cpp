@@ -70,7 +70,7 @@ void MainWindow::setupUI()
     Shapes_Connectors -> setExclusive(true);
 
     actionCircle = new QAction(this);
-    actionCircle->setIcon(QIcon(":/Images/circle.png"));
+    actionCircle->setIcon(QIcon(":/Images/oval.png"));
     // all of these jpg and jpeg files are set for the directory that I put them in, they need to be changed in order to work on anyone elses computer
     // not sure if the line below is needed anymore
     actionCircle->setObjectName(QString::fromUtf8("actionCircle"));
@@ -87,6 +87,7 @@ void MainWindow::setupUI()
     Shapes_Connectors->addAction(actionDiamond);
 
     actionRectangle = new QAction(this);
+    actionRectangle->setIcon(QIcon(":/Images/rectangle.png"));
     actionRectangle->setObjectName(QString::fromUtf8("actionRectangle"));
     actionRectangle->setCheckable(true);
     Shapes_Connectors->addAction(actionRectangle);
@@ -163,6 +164,7 @@ void MainWindow::setupUI()
     mainToolBar->addAction(actionCircle);
     mainToolBar->addAction(actionDiamond);
     mainToolBar->addAction(actionStickMan);
+    mainToolBar->addAction(actionRectangle);
 
     statusBar = new QStatusBar(this);
     statusBar->setObjectName(QString::fromUtf8("statusBar"));
