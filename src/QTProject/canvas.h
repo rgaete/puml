@@ -15,7 +15,8 @@ public:
         ShpOval,
         ShpStickMan,
         ShpDiamond,
-        ShpClassRectangle
+        ShpClassRectangle,
+        ShpSquare
     };
     enum DrawingNext {
         Object,

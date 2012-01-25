@@ -181,6 +181,16 @@ public:
     void draw(QPainter &painter);
 };
 
+class SquareBoundary: public ObjectNode {
+private:
+    int width, height;
+public:
+    SquareBoundary(QPoint position);
+    ~SquareBoundary() {}
+
+    void draw (QPainter &painter);
+};
+
 /*!
  * This concrete class is the Diamond node.
  * @sa ObjectNode

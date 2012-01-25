@@ -34,6 +34,7 @@ public slots:
     void on_actionCircle_toggled(bool arg1);
     void on_actionDiamond_toggled(bool arg1);
     void on_actionRectangle_toggled(bool arg1);
+    void on_actionSquare_toggled(bool arg1);
     void on_actionStickMan_toggled(bool arg1);
     void on_actionArrow_toggled(bool arg1);
     void on_actionLine_toggled(bool arg1);
@@ -69,6 +70,7 @@ private:
     QAction *actionCircle;
     QAction *actionDiamond;
     QAction *actionRectangle;
+    QAction *actionSquare;
     QAction *actionStickMan;
     QAction *actionArrow;
     QAction *actionLine;

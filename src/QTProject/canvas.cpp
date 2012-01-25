@@ -99,6 +99,9 @@ void Canvas::createObject(QPoint position)
         case ShpClassRectangle:
             newShape = new ClassRectangle(position);
             break;
+        case ShpSquare:
+            newShape = new SquareBoundary(position);
+            break;
         }
 
         //add the node to the vector
