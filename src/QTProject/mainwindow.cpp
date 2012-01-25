@@ -79,7 +79,6 @@ void MainWindow::setupUI()
 
     actionDiamond = new QAction(this);
     actionDiamond->setIcon(QIcon(":/Images/diamond.png"));
-
     // all of these jpg and jpeg files are set for the directory that I put them in, they need to be changed in order to work on anyone elses computer
     // not sure if the line below is needed anymore
     actionDiamond->setObjectName(QString::fromUtf8("actionDiamond"));
@@ -92,6 +91,11 @@ void MainWindow::setupUI()
     actionRectangle->setCheckable(true);
     Shapes_Connectors->addAction(actionRectangle);
 
+    actionSquare = new QAction(this);
+    actionSquare->setIcon(QIcon(":/Images/square.png"));
+    actionSquare->setObjectName(QString::fromUtf8("actionSquare"));
+    actionSquare->setCheckable(true);
+    Shapes_Connectors->addAction(actionSquare);
 
     actionStickMan = new QAction(this);
     actionStickMan->setIcon(QIcon(":/Images/stickman.png"));
@@ -162,8 +166,9 @@ void MainWindow::setupUI()
     this->addToolBar(Qt::TopToolBarArea, mainToolBar);
 
     mainToolBar->addAction(actionCircle);
-    mainToolBar->addAction(actionDiamond);
+    mainToolBar->addAction(actionSquare);
     mainToolBar->addAction(actionStickMan);
+    mainToolBar->addAction(actionDiamond);
     mainToolBar->addAction(actionRectangle);
 
     statusBar = new QStatusBar(this);
@@ -195,9 +200,10 @@ void MainWindow::setupUI()
     menuTools->addAction(menuShapes->menuAction());
     menuTools->addAction(menuConnectors->menuAction());
     menuShapes->addAction(actionCircle);
+    menuShapes->addAction(actionSquare);
+    menuShapes->addAction(actionStickMan);
     menuShapes->addAction(actionDiamond);
     menuShapes->addAction(actionRectangle);
-    menuShapes->addAction(actionStickMan);
     menuConnectors->addAction(actionArrow);
     menuConnectors->addAction(actionLine);
     menuConnectors->addAction(actionDotted_Line);
@@ -235,6 +241,7 @@ void MainWindow::setupUI()
     connect(actionCircle, SIGNAL(toggled(bool)), this, SLOT(on_actionCircle_toggled(bool)));
     connect(actionDiamond, SIGNAL(toggled(bool)), this, SLOT(on_actionDiamond_toggled(bool)));
     connect(actionRectangle, SIGNAL(toggled(bool)), this, SLOT(on_actionRectangle_toggled(bool)));
+    connect(actionSquare,SIGNAL(toggled(bool)),this,SLOT(on_actionSquare_toggled(bool)));
     connect(actionStickMan,SIGNAL(toggled(bool)),this,SLOT(on_actionStickMan_toggled(bool)));
     /* list of slots
     void on_actionNew_triggered();
@@ -302,6 +309,7 @@ void MainWindow::retranslateUI()
     actionCircle->setText(tr("Circle"));
     actionDiamond->setText(tr("Diamond"));
     actionRectangle->setText(tr("Rectangle"));
+    actionSquare->setText(tr("Boundary"));
     actionStickMan->setText(tr("StickMan"));
     actionArrow->setText(tr("Arrow Line"));
     actionLine->setText(tr("Straight Line"));
@@ -428,6 +436,14 @@ void MainWindow::on_actionRectangle_toggled(bool arg1)
         canvasWidget->setNewShape(Canvas::ShpClassRectangle);
     }
     statusBar->showMessage("Class Rectangle");
+}
+
+void MainWindow::on_actionSquare_toggled(bool arg1)
+{
+    if(arg1 == true){
+        canvasWidget->setNewShape(Canvas::ShpSquare);
+    }
+    statusBar->showMessage("Boundary");
 }
 
 void MainWindow::on_actionStickMan_toggled(bool arg1)

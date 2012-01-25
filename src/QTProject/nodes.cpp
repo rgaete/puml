@@ -187,18 +187,48 @@ void ClassRectangle::draw(QPainter &painter)
 {
     painter.save();
 
-    QRect r(0,0, width, height-60);
+    QRect r(0-width/2,0-height/2, width, height-60);
     painter.translate(position);
-    //background top
+    //background
     painter.setPen(Qt::NoPen);
     painter.setBrush(Qt::white);
-    painter.drawRect(0,0,width,height);
-    //edge top
+    painter.drawRect(0-width/2,0-height/2,width,height);
+    //edges
     painter.setPen(Qt::black);
     painter.setBrush(Qt::NoBrush);
     painter.drawRect(r);
-    painter.drawRect(0,20,width,height-50);
-    painter.drawRect(0,50,width,height-50);
+    painter.drawRect(0-width/2,(0-height/2)+20,width,height-50);
+    painter.drawRect(0-width/2,(0-height/2)+50,width,height-50);
+
+    painter.restore();
+}
+
+
+/************************************************/
+/********* SquareBoundary Functions *************/
+/************************************************/
+SquareBoundary::SquareBoundary(QPoint position)
+    :ObjectNode(position){
+    this->width = 200;
+    this->height = 200;
+    this->addConnectionPoint(position);
+}
+
+void SquareBoundary::draw(QPainter &painter)
+{
+    painter.save();
+
+    QRect r(0-width/2,0-height/2,width,height);
+    painter.translate(position);
+    //background
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(Qt::white);
+    painter.drawRect(r);
+    //edges
+    painter.setPen(Qt::black);
+    painter.drawText((0-width/2)+6,(0-height/2)+12,"USE CASE BOUNDARY");
+    painter.setBrush(Qt::NoBrush);
+    painter.drawRect(r);
 
     painter.restore();
 }

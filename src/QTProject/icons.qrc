@@ -5,5 +5,6 @@
         <file>Images/stickman.png</file>
         <file>Images/circle.png</file>
         <file>Images/oval.png</file>
+        <file>Images/square.png</file>
     </qresource>
 </RCC>
