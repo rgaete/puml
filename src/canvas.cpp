@@ -163,7 +163,6 @@ void Canvas::paintEvent(QPaintEvent *event)
 
 void Canvas::mousePressEvent(QMouseEvent *event)
 {
-    /*
     if (event->button() == Qt::LeftButton) {
         switch (whatToDrawNext) {
         case Object:
@@ -178,7 +177,6 @@ void Canvas::mousePressEvent(QMouseEvent *event)
             break;
         }
     }
-    */
 }
 
 /*! This function sets the selectedObject variable to the

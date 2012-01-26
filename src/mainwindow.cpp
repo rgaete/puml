@@ -195,19 +195,18 @@ void MainWindow::setupUI()
     menuEdit->addAction(actionCut);
     menuEdit->addAction(actionPaste);
     menuEdit->addSeparator();
-    menuEdit->addAction(actionSelect);
     menuEdit->addAction(actionSelect_All);
     menuEdit->addAction(actionInverse_Select);
     menuTools->addAction(actionSelect);
     menuTools->addAction(menuShapes->menuAction());
     menuTools->addAction(menuConnectors->menuAction());
-    menuShapes->addAction(actionSelectionMode);
+    menuShapes->addAction(actionSelect);
     menuShapes->addAction(actionCircle);
     menuShapes->addAction(actionSquare);
     menuShapes->addAction(actionStickMan);
     menuShapes->addAction(actionDiamond);
     menuShapes->addAction(actionRectangle);
-    menuConnectors->addAction(actionSelectionMode);
+    menuConnectors->addAction(actionSelect);
     menuConnectors->addAction(actionArrow);
     menuConnectors->addAction(actionLine);
     menuConnectors->addAction(actionDotted_Line);
@@ -246,7 +245,7 @@ void MainWindow::setupUI()
     connect(actionRectangle, SIGNAL(toggled(bool)), this, SLOT(on_actionRectangle_toggled(bool)));
     connect(actionSquare, SIGNAL(toggled(bool)) ,this, SLOT(on_actionSquare_toggled(bool)));
     connect(actionStickMan, SIGNAL(toggled(bool)) ,this, SLOT(on_actionStickMan_toggled(bool)));
-    connect(actionSelectionMode, SIGNAL(toggled(bool)), this, SLOT(on_actionSelectionMode_toggled(bool)));
+    connect(actionSelect, SIGNAL(toggled(bool)), this, SLOT(on_actionSelect_toggled(bool)));
 
     /* list of slots
     void on_actionNew_triggered();
@@ -402,14 +401,6 @@ void MainWindow::on_actionPaste_triggered()
 
 }
 
-void MainWindow::on_actionSelect_toggled(bool arg1)
-{
-    if(arg1 == true){
-        canvasWidget->setNewShape();
-    }
-    statusBar->showMessage("Select");
-}
-
 void MainWindow::on_actionSelect_All_triggered()
 {
 
@@ -511,7 +502,7 @@ void MainWindow::on_actionAbout_triggered()
          " and Google code repository.</p>"));
 }
 
-void MainWindow::on_actionSelectionMode_toggled(bool arg1)
+void MainWindow::on_actionSelect_toggled(bool arg1)
 {
     if (arg1 == true) {
         canvasWidget->setMode(Canvas::Nothing);

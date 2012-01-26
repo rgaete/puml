@@ -28,7 +28,6 @@ public slots:
     void on_actionCopy_triggered();
     void on_actionCut_triggered();
     void on_actionPaste_triggered();
-    void on_actionSelect_toggled(bool arg1);
     void on_actionSelect_All_triggered();
     void on_actionInverse_Select_triggered();
     void on_actionCircle_toggled(bool arg1);
@@ -44,7 +43,7 @@ public slots:
     void on_actionCascade_toggled(bool arg1);
     void on_actionDocument_triggered();
     void on_actionAbout_triggered();
-    void on_actionSelectionMode_toggled(bool arg1);
+    void on_actionSelect_toggled(bool arg1);
 
 private:
     void setupUI();
@@ -68,7 +67,6 @@ private:
     QAction *actionSelect_All;
     QAction *actionInverse_Select;
     QActionGroup *Shapes_Connectors;
-    QAction *actionSelectionMode;
     QAction *actionCircle;
     QAction *actionDiamond;
     QAction *actionRectangle;
