@@ -59,8 +59,6 @@ void MainWindow::setupUI()
     actionCut->setObjectName(QString::fromUtf8("actionCut"));
     actionPaste = new QAction(this);
     actionPaste->setObjectName(QString::fromUtf8("actionPaste"));
-    actionSelect = new QAction(this);
-    actionSelect->setObjectName(QString::fromUtf8("actionSelect"));
     actionSelect_All = new QAction(this);
     actionSelect_All->setObjectName(QString::fromUtf8("actionSelect_All"));
     actionInverse_Select = new QAction(this);
@@ -68,6 +66,12 @@ void MainWindow::setupUI()
 
     Shapes_Connectors = new QActionGroup(this);
     Shapes_Connectors -> setExclusive(true);
+
+    actionSelect = new QAction(this);
+    actionSelect->setIcon(QIcon(":/Images/select.png"));
+    actionSelect->setObjectName(QString::fromUtf8("actionSelect"));
+    actionSelect->setCheckable(true);
+    Shapes_Connectors->addAction(actionSelect);
 
     actionCircle = new QAction(this);
     actionCircle->setIcon(QIcon(":/Images/oval.png"));
@@ -165,6 +169,7 @@ void MainWindow::setupUI()
     mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
     this->addToolBar(Qt::TopToolBarArea, mainToolBar);
 
+    mainToolBar->addAction(actionSelect);
     mainToolBar->addAction(actionCircle);
     mainToolBar->addAction(actionSquare);
     mainToolBar->addAction(actionStickMan);
@@ -197,6 +202,7 @@ void MainWindow::setupUI()
     menuEdit->addAction(actionSelect);
     menuEdit->addAction(actionSelect_All);
     menuEdit->addAction(actionInverse_Select);
+    menuTools->addAction(actionSelect);
     menuTools->addAction(menuShapes->menuAction());
     menuTools->addAction(menuConnectors->menuAction());
     menuShapes->addAction(actionCircle);
@@ -238,11 +244,12 @@ void MainWindow::setupUI()
     connect(actionExit, SIGNAL(triggered()), this, SLOT(on_actionExit_triggered()));
     connect(actionPrint, SIGNAL(triggered()), this, SLOT(on_actionPrint_triggered()));
     connect(actionImport_Export, SIGNAL(triggered()), this, SLOT(on_actionImport_Export_triggered()));
+    connect(actionSelect, SIGNAL(toggled(bool)), this, SLOT(on_actionSelect_toggled(bool)));
     connect(actionCircle, SIGNAL(toggled(bool)), this, SLOT(on_actionCircle_toggled(bool)));
     connect(actionDiamond, SIGNAL(toggled(bool)), this, SLOT(on_actionDiamond_toggled(bool)));
     connect(actionRectangle, SIGNAL(toggled(bool)), this, SLOT(on_actionRectangle_toggled(bool)));
-    connect(actionSquare,SIGNAL(toggled(bool)),this,SLOT(on_actionSquare_toggled(bool)));
-    connect(actionStickMan,SIGNAL(toggled(bool)),this,SLOT(on_actionStickMan_toggled(bool)));
+    connect(actionSquare, SIGNAL(toggled(bool)) ,this, SLOT(on_actionSquare_toggled(bool)));
+    connect(actionStickMan, SIGNAL(toggled(bool)) ,this, SLOT(on_actionStickMan_toggled(bool)));
     /* list of slots
     void on_actionNew_triggered();
     void on_actionOpen_triggered();
@@ -397,9 +404,12 @@ void MainWindow::on_actionPaste_triggered()
 
 }
 
-void MainWindow::on_actionSelect_triggered()
+void MainWindow::on_actionSelect_toggled(bool arg1)
 {
-
+    if(arg1 == true){
+        canvasWidget->setNewShape();
+    }
+    statusBar->showMessage("Select");
 }
 
 void MainWindow::on_actionSelect_All_triggered()
@@ -497,7 +507,6 @@ void MainWindow::on_actionAbout_triggered()
          " their spare time. The development tools is provided by Nokia -- Qt"
          " and Google code repository.</p>"));
 }
-
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {

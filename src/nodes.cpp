@@ -243,7 +243,6 @@ Diamond::Diamond(QPoint position)
 
     this->width = 50;
     this->height = 50;
-
     this->addConnectionPoint(position);
 }
 

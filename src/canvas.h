@@ -38,6 +38,7 @@ public:
     QSize sizeHint() const;
     void drawList(QPainter &painter);       //Should this function be private?
     void setNewShape(ShapeType type);
+    void setNewShape(void);
     void createObject(QPoint position);
     //void setSelectedObject();
 

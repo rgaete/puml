@@ -68,10 +68,15 @@ void Canvas::drawList(QPainter &painter)
 /*! This function is called when you want to set
     what the canvas is going to draw next.
  */
-void Canvas::setNewShape(Canvas::ShapeType type)
+void Canvas::setNewShape(ShapeType type)
 {
     typeOfNewObject = type;
     whatToDrawNext = Object;
+}
+
+void Canvas::setNewShape()
+{
+    whatToDrawNext = Nothing;
 }
 
 /*! This function is used to create a new object at a
@@ -155,6 +160,7 @@ void Canvas::paintEvent(QPaintEvent *event)
 
 void Canvas::mousePressEvent(QMouseEvent *event)
 {
+    /*
     if (event->button() == Qt::LeftButton) {
         switch (whatToDrawNext) {
         case Object:
@@ -169,6 +175,7 @@ void Canvas::mousePressEvent(QMouseEvent *event)
             break;
         }
     }
+    */
 }
 
 void Canvas::mouseMoveEvent(QMouseEvent *event)
@@ -184,10 +191,15 @@ void Canvas::mouseMoveEvent(QMouseEvent *event)
 void Canvas::mouseReleaseEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton) {
-        if (whatToDrawNext == Object) {
+        switch(whatToDrawNext) {
+        case Object:
             createObject(event->pos());
             //Call to update to initiate a paintEvent
             update();
+            break;
+        case Connection:
+        case Nothing:
+            break;
         }
     }
 }
