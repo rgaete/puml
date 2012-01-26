@@ -16,6 +16,22 @@ ObjectNode::ObjectNode(QPoint position) : BaseNode()
     this->position = position;
 }
 
+/*! This is the default implementation of the hitTest function.
+    It simply checks if (x,y) is inside the box defined by
+    length, length and position. This is a virtual function, so
+    it can be reimplemented by children classes as needed.
+*/
+bool ObjectNode::hitTest(int x, int y) {
+    if ((x >= (position.x()-length/2)) &&
+        (x <= (position.x()+length/2))) {
+        if ((y >= position.y()-length/2) &&
+            (y <= position.y()+height/2)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 /*! NOT YET IMPLEMENTED
 */
 int ObjectNode::getClosestConnectionPoint(QPoint whereAt)
@@ -55,6 +71,13 @@ ConnectionNode::~ConnectionNode()
 {
     //Do not delete connectionPoint1 and 2, that is
     //taken care of by the Canvas
+}
+
+/*! */
+bool ConnectionNode::hitTest(int x, int y) {
+    //functionality for hit testing on lines has
+    //not yet been defined.
+    return false;
 }
 
 /*******************************/
@@ -128,7 +151,11 @@ void StickPerson::draw(QPainter &painter)
 
     //background
     painter.setPen(Qt::NoPen);
-    painter.setBrush(Qt::white);
+    if (selected == true) {
+        painter.setBrush(Qt::blue);
+    } else {
+        painter.setBrush(Qt::white);
+    }
     painter.drawEllipse(tempx-16/2/50.0*length, tempy-(10+16)/70.0*height,16/50.0*length,16/70.0*height); //head
 
     //edge
@@ -165,6 +192,11 @@ void Oval::draw(QPainter &painter)
     //background
     painter.setPen(Qt::NoPen);
     painter.setBrush(Qt::white);
+    if (selected == true) {
+        painter.setBrush(Qt::blue);
+    } else {
+        painter.setBrush(Qt::white);
+    }
     painter.drawEllipse(position,length/2,height/2);
     //edge
     painter.setPen(Qt::black);
@@ -178,7 +210,7 @@ void Oval::draw(QPainter &painter)
 
 ClassRectangle::ClassRectangle(QPoint position)
      :ObjectNode(position) {
-    this->width = 120;
+    this->length = 120;
     this->height = 80;
     this->addConnectionPoint(position);
 }
@@ -187,18 +219,23 @@ void ClassRectangle::draw(QPainter &painter)
 {
     painter.save();
 
-    QRect r(0-width/2,0-height/2, width, height-60);
+    QRect r(0-length/2,0-height/2, length, height-60);
     painter.translate(position);
     //background
     painter.setPen(Qt::NoPen);
     painter.setBrush(Qt::white);
-    painter.drawRect(0-width/2,0-height/2,width,height);
+    if (selected == true) {
+        painter.setBrush(Qt::blue);
+    } else {
+        painter.setBrush(Qt::white);
+    }
+    painter.drawRect(0-length/2,0-height/2,length,height);
     //edges
     painter.setPen(Qt::black);
     painter.setBrush(Qt::NoBrush);
     painter.drawRect(r);
-    painter.drawRect(0-width/2,(0-height/2)+20,width,height-50);
-    painter.drawRect(0-width/2,(0-height/2)+50,width,height-50);
+    painter.drawRect(0-length/2,(0-height/2)+20,length,height-50);
+    painter.drawRect(0-length/2,(0-height/2)+50,length,height-50);
 
     painter.restore();
 }
@@ -209,7 +246,7 @@ void ClassRectangle::draw(QPainter &painter)
 /************************************************/
 SquareBoundary::SquareBoundary(QPoint position)
     :ObjectNode(position){
-    this->width = 200;
+    this->length = 200;
     this->height = 200;
     this->addConnectionPoint(position);
 }
@@ -218,15 +255,20 @@ void SquareBoundary::draw(QPainter &painter)
 {
     painter.save();
 
-    QRect r(0-width/2,0-height/2,width,height);
+    QRect r(0-length/2,0-height/2,length,height);
     painter.translate(position);
     //background
     painter.setPen(Qt::NoPen);
     painter.setBrush(Qt::white);
+    if (selected == true) {
+        painter.setBrush(Qt::blue);
+    } else {
+        painter.setBrush(Qt::white);
+    }
     painter.drawRect(r);
     //edges
     painter.setPen(Qt::black);
-    painter.drawText((0-width/2)+6,(0-height/2)+12,"USE CASE BOUNDARY");
+    painter.drawText((0-length/2)+6,(0-height/2)+12,"USE CASE BOUNDARY");
     painter.setBrush(Qt::NoBrush);
     painter.drawRect(r);
 
@@ -241,7 +283,7 @@ void SquareBoundary::draw(QPainter &painter)
 Diamond::Diamond(QPoint position)
      :ObjectNode(position) {
 
-    this->width = 50;
+    this->length = 50;
     this->height = 50;
     this->addConnectionPoint(position);
 }
@@ -250,12 +292,17 @@ void Diamond::draw(QPainter &painter)
 {
     painter.save();
 
-    QRect r(0-width/2, 0-height/2, width, height);
+    QRect r(0-length/2, 0-height/2, length, height);
     painter.translate(position);
     painter.rotate(45);
     //background
     painter.setPen(Qt::NoPen);
     painter.setBrush(Qt::white);
+    if (selected == true) {
+        painter.setBrush(Qt::blue);
+    } else {
+        painter.setBrush(Qt::white);
+    }
     painter.drawRect(r);
     //edge
     painter.setPen(Qt::black);
