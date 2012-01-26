@@ -22,73 +22,27 @@ using namespace std;
 class BaseNode;
 
 /*!
- * This allows for a dynamic list of nodes.
- * @todo {
- *      Migrate the linked list over to a vector implementation?
- * }
- */
-typedef struct linked_nodes {
-    BaseNode* node;
-    struct linked_nodes* next;
-} linked_nodes;
-
-/*!
- * This is a singleton object that lists all possible nodes. The node objects
- * held in this class are not drawn. Instead, they are kept as a toolbar reference.
- * This class has been replaced with a simple vector inside the Canvas class
- */
-/*
-class AllNodes {
-    public:
-        AllNodes() {nodes = NULL;}
-
-        void register_node(BaseNode* to_register) {
-            debug("> AllNodes::register_node()");
-            linked_nodes* cursor;
-
-            if (nodes == NULL) { //Initial registration
-                cursor = (linked_nodes*)malloc(sizeof(linked_nodes));
-                nodes = cursor;
-            } else {
-                cursor = nodes;
-
-                while (cursor -> next != NULL) {
-                    cursor = cursor -> next;
-                }
-
-                cursor -> next = (linked_nodes*)malloc(sizeof(linked_nodes));
-                cursor = cursor -> next;
-            }
-
-            //cursor now points at last element, where we want to tack on the new node.
-            cursor -> node = to_register;
-            cursor -> next = NULL;
-            debug("< AllNodes::register_node()");
-        }
-    private:
-        linked_nodes* nodes;
-};
-
-extern AllNodes valid_nodes;
-*/
-
-/*!
  * This defines the generic drawable object, which includes connectors (arrows and the like)
  * and objects (such as a stick person or a state oval).
  */
 class BaseNode {
     public:
-        //BaseNode();
+        BaseNode() { selected = false; }
         //~BaseNode() {}
 
         int id(string shape) {return -1;}
         string id(int shape_ID) {return "Bad string";}
 
+        void setSelected(bool newState) { selected = newState; }
+
         virtual void draw(QPainter &painter) =0;
+        virtual bool hitTest(int x, int y) =0;
     private:
         int id_int;
         string id_str;
-        //static AllNodes valid_nodes;
+    protected:
+        bool selected;
+
 };
 
 /*!
@@ -106,17 +60,21 @@ public:
     int getClosestConnectionPoint(QPoint whereAt);
     QPoint translateConnectionPoint(int pointIndex);
     QPoint getPosition() { return position; }
+    bool hitTest(int x, int y);
 protected:
     QRect my_shape;
+    //NOTE that the position is the CENTER not the top left.
     QPoint position;
     vector<QPoint> connectionPoints;
+    int length;
+    int height;
 };
 
 /*!
  * This abstract base class describes the connection nodes.
- * Note that even though this class has pointer members,
+ * NOTE that even though this class has pointer members,
  * it does not a special copy constructor, assignment operator or
- * destructor for them.
+ * destructor for them. So don't assign or copy ConnectionNodes yet.
  * @sa BaseNode
  */
 class ConnectionNode: public BaseNode {
@@ -124,12 +82,13 @@ public:
     ConnectionNode(ObjectNode *point1, ObjectNode *point2);
     ~ConnectionNode();
 
-
+    bool hitTest(int x, int y);
     //virtual BaseNode* factory();
 
 protected:
     ObjectNode *connectionPoint1;
     ObjectNode *connectionPoint2;
+
 
 };
 
@@ -139,7 +98,7 @@ protected:
  */
 class StickPerson: public ObjectNode {
 private:
-    int length,height;
+
 public:
     StickPerson(QPoint position);
     ~StickPerson() {}
@@ -155,7 +114,6 @@ public:
  */
 class Oval: public ObjectNode {
 private:
-    int length,height;
 
 public:
     Oval(QPoint position);
@@ -172,7 +130,6 @@ public:
  */
 class ClassRectangle: public ObjectNode {
 private:
-    int width,height;
 
 public:
     ClassRectangle(QPoint position);
@@ -183,7 +140,7 @@ public:
 
 class SquareBoundary: public ObjectNode {
 private:
-    int width, height;
+
 public:
     SquareBoundary(QPoint position);
     ~SquareBoundary() {}
@@ -197,8 +154,6 @@ public:
  */
 class Diamond: public ObjectNode {
 private:
-    int width;
-    int height;
 
 public:
     Diamond(QPoint position);
