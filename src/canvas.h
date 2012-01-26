@@ -30,6 +30,10 @@ private:
     int indexOfSelectedObject;      //This is the index of the
                                     //selected object in nodes.
                                     //-1 signifies nothing selected.
+    QPoint positionDelta;           //This is is difference between where
+                                    //the user clicked on an object and
+                                    //where the position of the object is.
+                                    //Used for dragging objects.
     QMenu *menuPopup;
     QAction *actionDelete;
     QAction *actionCut;
