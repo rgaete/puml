@@ -7,6 +7,8 @@
 Canvas::Canvas(QWidget *parent) :
     QWidget(parent)
 {
+    indexOfSelectedObject = -1;
+
     //Set the size policy to say that sizeHint() is a recomended
     //minimum, but the widget should take up all space available,
     //and the widget can also be smaller than the sizeHint().
@@ -72,6 +74,15 @@ void Canvas::setNewShape(ShapeType type)
 {
     typeOfNewObject = type;
     whatToDrawNext = Object;
+}
+
+/*! This function is called when you want to set
+    what type of object the canvas is going to
+    draw next.
+*/
+void Canvas::setMode(Canvas::DrawingNext mode)
+{
+    whatToDrawNext = mode;
 }
 
 /*! This function is used to create a new object at a
@@ -151,8 +162,40 @@ void Canvas::paintEvent(QPaintEvent *event)
      painter.end();
 }
 
-//These functions aren't used yet.
+/*! This function sets the selectedObject variable to the
+    object that is at the x,y coordinate.
+    NOTE: order currently is based on what order the objects
+    are in the vector.
+*/
+void Canvas::determineSelectedObject(int x, int y)
+{
+    //reset the selected property of previously
+    //selected node
+    if (indexOfSelectedObject != -1) {
+        nodes.at(indexOfSelectedObject)->setSelected(false);
+    }
 
+    //start at the end of the vector and find the
+    //first object with a positive hittest.
+    indexOfSelectedObject = -1;
+    for (int i=nodes.size()-1; i>=0; i--) {
+        if (nodes.at(i)->hitTest(x,y) == true) {
+            indexOfSelectedObject = i;
+            nodes.at(i)->setSelected(true);
+            break;
+        }
+    }
+
+    //call update to have the objectes redraw themselves.
+    update();
+    //QMessageBox::information(this, "Index of Selected Object", QString::number(indexOfSelectedObject), QMessageBox::Ok);
+}
+
+/*! This event occures when the user presses down on the
+    the mouse but hasn't release it yet. Here is where
+    we want to select objects if the canvas is in
+    selection mode.
+*/
 void Canvas::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton) {
@@ -162,15 +205,17 @@ void Canvas::mousePressEvent(QMouseEvent *event)
             //the work is done in the release event
             break;
         case Connection:
+            break;
         case Nothing:
             //find what object the user is
             //clicking on
-            //determineSelectedObject()
+            determineSelectedObject(event->x(), event->y());
             break;
         }
     }
 }
 
+/* Not used yet */
 void Canvas::mouseMoveEvent(QMouseEvent *event)
 {
     //BottomRight.setX(event->x());

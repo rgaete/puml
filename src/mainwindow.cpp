@@ -203,7 +203,7 @@ void MainWindow::setupUI()
     menuTools->addAction(actionSelect);
     menuTools->addAction(menuShapes->menuAction());
     menuTools->addAction(menuConnectors->menuAction());
-    menuShapes->addAction(actionSelectionMode);
+    menuShapes->addAction(actionSelect);
     menuShapes->addAction(actionCircle);
     menuShapes->addAction(actionSquare);
     menuShapes->addAction(actionStickMan);
@@ -250,7 +250,6 @@ void MainWindow::setupUI()
     connect(actionRectangle, SIGNAL(toggled(bool)), this, SLOT(on_actionRectangle_toggled(bool)));
     connect(actionSquare, SIGNAL(toggled(bool)) ,this, SLOT(on_actionSquare_toggled(bool)));
     connect(actionStickMan, SIGNAL(toggled(bool)) ,this, SLOT(on_actionStickMan_toggled(bool)));
-    connect(actionSelect, SIGNAL(toggled(bool)), this, SLOT(on_actionSelect_toggled(bool)));
     /* list of slots
     void on_actionNew_triggered();
     void on_actionOpen_triggered();
@@ -415,6 +414,12 @@ void MainWindow::on_actionInverse_Select_triggered()
 
 }
 
+void MainWindow::on_actionSelect_toggled(bool arg1) {
+    if (arg1 == true) {
+        canvasWidget->setMode(Canvas::Nothing);
+    }
+}
+
 void MainWindow::on_actionCircle_toggled(bool arg1)
 {
     //if this action (menu item or toolbar button)
@@ -501,7 +506,7 @@ void MainWindow::on_actionAbout_triggered()
          " and Google code repository.</p>"));
 }
 
-void MainWindow::on_actionSelect_toggled(bool arg1)
+
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
