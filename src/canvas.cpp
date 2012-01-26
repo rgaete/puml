@@ -210,6 +210,9 @@ void Canvas::mousePressEvent(QMouseEvent *event)
             //find what object the user is
             //clicking on
             determineSelectedObject(event->x(), event->y());
+            if (indexOfSelectedObject != -1) {
+                positionDelta = event->pos() - nodes.at(indexOfSelectedObject)->getPosition();
+            }
             break;
         }
     }
@@ -218,8 +221,17 @@ void Canvas::mousePressEvent(QMouseEvent *event)
 /* Not used yet */
 void Canvas::mouseMoveEvent(QMouseEvent *event)
 {
-    //BottomRight.setX(event->x());
-    //BottomRight.setY(event->y());
+    if ((event->buttons() = Qt::LeftButton) &&
+        (whatToDrawNext == Nothing) &&
+        (indexOfSelectedObject != -1))
+    {
+        //The user is moving the mouse while holding down
+        //the left mouse button, and the canvas is in
+        //selection mode, and there is an object selected,
+        //they must be dragging!
+        nodes.at(indexOfSelectedObject)->setPosition(this->mapFromGlobal(event->globalPos()) - positionDelta);
+        update();
+    }
 }
 
 /*! This function will do various things based on

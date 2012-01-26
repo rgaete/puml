@@ -34,7 +34,8 @@ class BaseNode {
         int id() {return id_int;}
 
         void setSelected(bool newState) { selected = newState; }
-
+        void setPosition(const QPoint &pos) { position = pos; }
+        QPoint getPosition() { return position; }
         virtual void draw(QPainter &painter) =0;
         virtual bool hitTest(int x, int y) =0;
     private:
@@ -42,6 +43,7 @@ class BaseNode {
                                 //the diagrams that are opened.
     protected:
         bool selected;
+        QPoint position;
 
 };
 
@@ -55,16 +57,15 @@ public:
     //~ObjectNode() {}
 
     //virtual BaseNode* factory();
-    void setPosition(const QPoint &pos) { position = pos; }
+
     void addConnectionPoint(QPoint point) { connectionPoints.push_back(point); }
     int getClosestConnectionPoint(QPoint whereAt);
     QPoint translateConnectionPoint(int pointIndex);
-    QPoint getPosition() { return position; }
+
     bool hitTest(int x, int y);
 
 protected:
     QRect my_shape;
-    QPoint position;
     vector<QPoint> connectionPoints;
     int length;
     int height;
