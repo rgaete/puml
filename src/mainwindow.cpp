@@ -75,16 +75,12 @@ void MainWindow::setupUI()
 
     actionCircle = new QAction(this);
     actionCircle->setIcon(QIcon(":/Images/oval.png"));
-    // all of these jpg and jpeg files are set for the directory that I put them in, they need to be changed in order to work on anyone elses computer
-    // not sure if the line below is needed anymore
     actionCircle->setObjectName(QString::fromUtf8("actionCircle"));
     actionCircle->setCheckable(true);
     Shapes_Connectors->addAction(actionCircle);
 
     actionDiamond = new QAction(this);
     actionDiamond->setIcon(QIcon(":/Images/diamond.png"));
-    // all of these jpg and jpeg files are set for the directory that I put them in, they need to be changed in order to work on anyone elses computer
-    // not sure if the line below is needed anymore
     actionDiamond->setObjectName(QString::fromUtf8("actionDiamond"));
     actionDiamond->setCheckable(true);
     Shapes_Connectors->addAction(actionDiamond);
@@ -205,11 +201,13 @@ void MainWindow::setupUI()
     menuTools->addAction(actionSelect);
     menuTools->addAction(menuShapes->menuAction());
     menuTools->addAction(menuConnectors->menuAction());
+    menuShapes->addAction(actionSelectionMode);
     menuShapes->addAction(actionCircle);
     menuShapes->addAction(actionSquare);
     menuShapes->addAction(actionStickMan);
     menuShapes->addAction(actionDiamond);
     menuShapes->addAction(actionRectangle);
+    menuConnectors->addAction(actionSelectionMode);
     menuConnectors->addAction(actionArrow);
     menuConnectors->addAction(actionLine);
     menuConnectors->addAction(actionDotted_Line);
@@ -234,9 +232,7 @@ void MainWindow::setupUI()
     //menuShapes->setDisabled(true);
     menuWindow->setDisabled(true);
 
-    //Instead of using connectSlotsByName and dealing with that,
     //manually connect the slots
-    //QMetaObject::connectSlotsByName(this);
     connect(actionNew, SIGNAL(triggered()), this, SLOT(on_actionNew_triggered()));
     connect(actionOpen, SIGNAL(triggered()), this, SLOT(on_actionOpen_triggered()));
     connect(actionSave, SIGNAL(triggered()), this, SLOT(on_actionSave_triggered()));
@@ -250,6 +246,8 @@ void MainWindow::setupUI()
     connect(actionRectangle, SIGNAL(toggled(bool)), this, SLOT(on_actionRectangle_toggled(bool)));
     connect(actionSquare, SIGNAL(toggled(bool)) ,this, SLOT(on_actionSquare_toggled(bool)));
     connect(actionStickMan, SIGNAL(toggled(bool)) ,this, SLOT(on_actionStickMan_toggled(bool)));
+    connect(actionSelectionMode, SIGNAL(toggled(bool)), this, SLOT(on_actionSelectionMode_toggled(bool)));
+
     /* list of slots
     void on_actionNew_triggered();
     void on_actionOpen_triggered();
@@ -427,6 +425,7 @@ void MainWindow::on_actionCircle_toggled(bool arg1)
     //if this action (menu item or toolbar button)
     //was was toggled on, update the canvas
     if (arg1 == true) {
+        canvasWidget->setMode(Canvas::Object);
         canvasWidget->setNewShape(Canvas::ShpOval);
     }
     statusBar->showMessage("Circle");
@@ -435,6 +434,7 @@ void MainWindow::on_actionCircle_toggled(bool arg1)
 void MainWindow::on_actionDiamond_toggled(bool arg1)
 {
     if (arg1 == true) {
+        canvasWidget->setMode(Canvas::Object);
         canvasWidget->setNewShape(Canvas::ShpDiamond);
     }
     statusBar->showMessage("Diamond");
@@ -443,6 +443,7 @@ void MainWindow::on_actionDiamond_toggled(bool arg1)
 void MainWindow::on_actionRectangle_toggled(bool arg1)
 {
     if (arg1 == true){
+        canvasWidget->setMode(Canvas::Object);
         canvasWidget->setNewShape(Canvas::ShpClassRectangle);
     }
     statusBar->showMessage("Class Rectangle");
@@ -451,6 +452,7 @@ void MainWindow::on_actionRectangle_toggled(bool arg1)
 void MainWindow::on_actionSquare_toggled(bool arg1)
 {
     if(arg1 == true){
+        canvasWidget->setMode(Canvas::Object);
         canvasWidget->setNewShape(Canvas::ShpSquare);
     }
     statusBar->showMessage("Boundary");
@@ -459,6 +461,7 @@ void MainWindow::on_actionSquare_toggled(bool arg1)
 void MainWindow::on_actionStickMan_toggled(bool arg1)
 {
     if (arg1 == true) {
+        canvasWidget->setMode(Canvas::Object);
         canvasWidget->setNewShape(Canvas::ShpStickMan);
     }
     statusBar->showMessage("Stickman");
@@ -506,6 +509,14 @@ void MainWindow::on_actionAbout_triggered()
          " final project.</p><p> It was developed by seven awesome students during"
          " their spare time. The development tools is provided by Nokia -- Qt"
          " and Google code repository.</p>"));
+}
+
+void MainWindow::on_actionSelectionMode_toggled(bool arg1)
+{
+    if (arg1 == true) {
+        canvasWidget->setMode(Canvas::Nothing);
+    }
+    statusBar->showMessage("Selection Mode");
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
