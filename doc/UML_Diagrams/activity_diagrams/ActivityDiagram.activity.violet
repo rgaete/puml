@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<java version="1.6.0_26" class="java.beans.XMLDecoder"> 
+<java version="1.6.0_30" class="java.beans.XMLDecoder"> 
  <object class="com.horstmann.violet.product.diagram.activity.ActivityDiagramGraph"> 
   <void method="addNode"> 
    <object id="ActivityNode0" class="com.horstmann.violet.product.diagram.activity.ActivityNode"> 
