@@ -27,18 +27,24 @@ private:
     vector<BaseNode*> nodes;
     ShapeType typeOfNewObject;
     DrawingNext whatToDrawNext;
+    int indexOfSelectedObject;      //This is the index of the
+                                    //selected object in nodes.
+                                    //-1 signifies nothing selected.
     QMenu *menuPopup;
     QAction *actionDelete;
     QAction *actionCut;
     QAction *actionCopy;
     QAction *actionPaste;
 
+    void determineSelectedObject(int x, int y);
+    void drawList(QPainter &painter);
+    void createObject(QPoint position);
 public:
     explicit Canvas(QWidget *parent = 0);
     QSize sizeHint() const;
-    void drawList(QPainter &painter);       //Should this function be private?
     void setNewShape(ShapeType type);
-    void createObject(QPoint position);
+    void setMode(DrawingNext mode);
+
     //void setSelectedObject();
 
 protected:
