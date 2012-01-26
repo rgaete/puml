@@ -1,5 +1,4 @@
 #include "canvas.h"
-#include <QMessageBox>
 
 /*! Constructor for the canvas. It sets the sizing policy,
   sets the background to white, and sets the
@@ -8,8 +7,6 @@
 Canvas::Canvas(QWidget *parent) :
     QWidget(parent)
 {
-    indexOfSelectedObject = -1;
-
     //Set the size policy to say that sizeHint() is a recomended
     //minimum, but the widget should take up all space available,
     //and the widget can also be smaller than the sizeHint().
@@ -75,11 +72,6 @@ void Canvas::setNewShape(Canvas::ShapeType type)
 {
     typeOfNewObject = type;
     whatToDrawNext = Object;
-}
-
-void Canvas::setMode(Canvas::DrawingMode mode)
-{
-    whatToDrawNext = mode;
 }
 
 /*! This function is used to create a new object at a
@@ -173,39 +165,10 @@ void Canvas::mousePressEvent(QMouseEvent *event)
         case Nothing:
             //find what object the user is
             //clicking on
-            determineSelectedObject(event->x(), event->y());
+            //determineSelectedObject()
             break;
         }
     }
-}
-
-/*! This function sets the selectedObject variable to the
-    object that is at the x,y coordinate.
-    NOTE: order currently is based on what order the objects
-    are in the vector.
-*/
-void Canvas::determineSelectedObject(int x, int y)
-{
-    //reset the selected property of previously
-    //selected node
-    if (indexOfSelectedObject != -1) {
-        nodes.at(indexOfSelectedObject)->setSelected(false);
-    }
-
-    //start at the end of the vector and find the
-    //first object with a positive hittest.
-    indexOfSelectedObject = -1;
-    for (int i=nodes.size()-1; i>=0; i--) {
-        if (nodes.at(i)->hitTest(x,y) == true) {
-            indexOfSelectedObject = i;
-            nodes.at(i)->setSelected(true);
-            break;
-        }
-    }
-
-    //call update to have the objectes redraw themselves.
-    update();
-    //QMessageBox::information(this, "HI", QString::number(indexOfSelectedObject), QMessageBox::Ok);
 }
 
 void Canvas::mouseMoveEvent(QMouseEvent *event)
@@ -258,7 +221,5 @@ void Canvas::on_actionPaste_triggered()
 void Canvas::on_actionCopy_triggered()
 {
 }
-
-
 
 
