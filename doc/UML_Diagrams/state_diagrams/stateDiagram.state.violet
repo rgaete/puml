@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<java version="1.6.0_26" class="java.beans.XMLDecoder"> 
+<java version="1.6.0_30" class="java.beans.XMLDecoder"> 
  <object class="com.horstmann.violet.StateDiagramGraph"> 
   <void method="addNode"> 
    <object id="CircularInitialStateNode0" class="com.horstmann.violet.CircularStateNode"/> 
@@ -85,6 +85,22 @@ Edited</string>
     <void method="setLocation"> 
      <double>839.0</double> 
      <double>209.0</double> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="addNode"> 
+   <object class="com.horstmann.violet.NoteNode"> 
+    <void property="text"> 
+     <void property="text"> 
+      <string>State Diagram
+November 11, 2011</string> 
+     </void> 
+    </void> 
+   </object> 
+   <object class="java.awt.geom.Point2D$Double"> 
+    <void method="setLocation"> 
+     <double>298.0</double> 
+     <double>113.0</double> 
     </void> 
    </object> 
   </void> 

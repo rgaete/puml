@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<java version="1.6.0_26" class="java.beans.XMLDecoder"> 
+<java version="1.6.0_30" class="java.beans.XMLDecoder"> 
  <object class="com.horstmann.violet.SequenceDiagramGraph"> 
   <void method="addNode"> 
    <object id="LifelineNode0" class="com.horstmann.violet.ImplicitParameterNode"> 
@@ -172,14 +172,15 @@
 this may change depending on 
 how we determine what objects exist,
 where they are located, and how 
-to send this information to a save file</string> 
+to send this information to a save file
+November 13, 2011</string> 
      </void> 
     </void> 
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>25.0</double> 
-     <double>219.0</double> 
+     <double>15.0</double> 
+     <double>143.0</double> 
     </void> 
    </object> 
   </void> 
@@ -207,44 +208,6 @@ to send this information to a save file</string>
     <void method="setLocation"> 
      <double>468.0</double> 
      <double>407.0</double> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="addNode"> 
-   <object class="com.horstmann.violet.NoteNode"> 
-    <void property="text"> 
-     <void property="text"> 
-      <string>Sunday, November 13, 2011
-Project Meeting</string> 
-     </void> 
-    </void> 
-   </object> 
-   <object class="java.awt.geom.Point2D$Double"> 
-    <void method="setLocation"> 
-     <double>20.0</double> 
-     <double>13.0</double> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="addNode"> 
-   <object class="com.horstmann.violet.NoteNode"> 
-    <void property="text"> 
-     <void property="text"> 
-      <string>Attendees: 
-David Wells
-Jeremy Klas
-Josh Armstrong
-Logan Evans
-Maxine Major
-Xiaozhe Shen
-Zach Curtis</string> 
-     </void> 
-    </void> 
-   </object> 
-   <object class="java.awt.geom.Point2D$Double"> 
-    <void method="setLocation"> 
-     <double>33.0</double> 
-     <double>59.0</double> 
     </void> 
    </object> 
   </void> 

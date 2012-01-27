@@ -62,7 +62,8 @@
       <string>Use Case RUNNING
 User options for when a diagram is being modified.
 This use case inherits from LAUNCH
-EDIT inherits from this use case.</string> 
+EDIT inherits from this use case.
+January 26, 2012</string> 
      </void> 
     </void> 
    </object> 

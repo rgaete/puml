@@ -125,8 +125,9 @@ QPoint getPosition()
    <object class="com.horstmann.violet.NoteNode"> 
     <void property="text"> 
      <void property="text"> 
-      <string>Sunday, November 13, 2011
-Project Meeting</string> 
+      <string>Class Diagram
+November 13, 2011
+</string> 
      </void> 
     </void> 
    </object> 
@@ -216,28 +217,6 @@ example of a specific object</string>
     <void method="setLocation"> 
      <double>950.0</double> 
      <double>469.0</double> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="addNode"> 
-   <object class="com.horstmann.violet.NoteNode"> 
-    <void property="text"> 
-     <void property="text"> 
-      <string>Attendees: 
-David Wells
-Jeremy Klas
-Josh Armstrong
-Logan Evans
-Maxine Major
-Xiaozhe Shen
-Zach Curtis</string> 
-     </void> 
-    </void> 
-   </object> 
-   <object class="java.awt.geom.Point2D$Double"> 
-    <void method="setLocation"> 
-     <double>19.0</double> 
-     <double>68.0</double> 
     </void> 
    </object> 
   </void> 

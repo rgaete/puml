@@ -121,7 +121,8 @@
      <void property="text"> 
       <string>Use Case LAUNCH
 User options for when the program is launched
-All other use cases inherit from this case.</string> 
+All other use cases inherit from this case.
+January 26, 2012</string> 
      </void> 
     </void> 
    </object> 

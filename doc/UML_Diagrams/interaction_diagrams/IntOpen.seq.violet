@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<java version="1.6.0_29" class="java.beans.XMLDecoder"> 
+<java version="1.6.0_30" class="java.beans.XMLDecoder"> 
  <object class="com.horstmann.violet.SequenceDiagramGraph"> 
   <void method="addNode"> 
    <object id="LifelineNode0" class="com.horstmann.violet.ImplicitParameterNode"> 
@@ -136,8 +136,9 @@
    <object class="com.horstmann.violet.NoteNode"> 
     <void property="text"> 
      <void property="text"> 
-      <string>Sunday, December 04, 2011
-Project Meeting</string> 
+      <string>Open a new diagram file
+December 04, 2011
+</string> 
      </void> 
     </void> 
    </object> 
@@ -145,28 +146,6 @@ Project Meeting</string>
     <void method="setLocation"> 
      <double>20.0</double> 
      <double>13.0</double> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="addNode"> 
-   <object class="com.horstmann.violet.NoteNode"> 
-    <void property="text"> 
-     <void property="text"> 
-      <string>Attendees: 
-David Wells
-Jeremy Klas
-Josh Armstrong
-Logan Evans
-Maxine Major
-Xiaozhe Shen
-Zach Curtis</string> 
-     </void> 
-    </void> 
-   </object> 
-   <object class="java.awt.geom.Point2D$Double"> 
-    <void method="setLocation"> 
-     <double>33.0</double> 
-     <double>59.0</double> 
     </void> 
    </object> 
   </void> 

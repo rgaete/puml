@@ -288,8 +288,8 @@ Properties</string>
    <object class="com.horstmann.violet.NoteNode"> 
     <void property="text"> 
      <void property="text"> 
-      <string>Sunday, November 6, 2011
-Project Meeting</string> 
+      <string>Activity Diagram
+November 6, 2011</string> 
      </void> 
     </void> 
    </object> 
@@ -297,28 +297,6 @@ Project Meeting</string>
     <void method="setLocation"> 
      <double>8.0</double> 
      <double>11.0</double> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="addNode"> 
-   <object class="com.horstmann.violet.NoteNode"> 
-    <void property="text"> 
-     <void property="text"> 
-      <string>Attendees: 
-David Wells
-Jeremy Klas
-Josh Armstrong
-Logan Evans
-Maxine Major
-Xiaozhe Shen
-Zach Curtis</string> 
-     </void> 
-    </void> 
-   </object> 
-   <object class="java.awt.geom.Point2D$Double"> 
-    <void method="setLocation"> 
-     <double>7.0</double> 
-     <double>60.0</double> 
     </void> 
    </object> 
   </void> 

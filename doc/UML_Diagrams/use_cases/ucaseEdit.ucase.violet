@@ -121,7 +121,9 @@
      <void property="text"> 
       <string>Use Case EDIT
 User options for when a diagram is being modified.
-This use case inherits from RUNNING and LAUNCH</string> 
+This use case inherits from RUNNING and LAUNCH
+January 26, 2012
+</string> 
      </void> 
     </void> 
    </object> 

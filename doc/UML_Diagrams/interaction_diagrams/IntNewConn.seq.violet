@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<java version="1.6.0_26" class="java.beans.XMLDecoder"> 
+<java version="1.6.0_30" class="java.beans.XMLDecoder"> 
  <object class="com.horstmann.violet.SequenceDiagramGraph"> 
   <void method="addNode"> 
    <object id="LifelineNode0" class="com.horstmann.violet.ImplicitParameterNode"> 
@@ -20,58 +20,20 @@
    <object class="com.horstmann.violet.NoteNode"> 
     <void property="text"> 
      <void property="text"> 
-      <string>Sunday, November 13, 2011
-Project Meeting
-(Original Diagram separated into 3 separate
-interaction diagrams November 17, 2011)</string> 
-     </void> 
-    </void> 
-   </object> 
-   <object class="java.awt.geom.Point2D$Double"> 
-    <void method="setLocation"> 
-     <double>575.0</double> 
-     <double>5.0</double> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="addNode"> 
-   <object class="com.horstmann.violet.NoteNode"> 
-    <void property="text"> 
-     <void property="text"> 
-      <string>Attendees: 
-David Wells
-Jeremy Klas
-Josh Armstrong
-Logan Evans
-Maxine Major
-Xiaozhe Shen
-Zach Curtis</string> 
-     </void> 
-    </void> 
-   </object> 
-   <object class="java.awt.geom.Point2D$Double"> 
-    <void method="setLocation"> 
-     <double>579.0</double> 
-     <double>103.0</double> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="addNode"> 
-   <object class="com.horstmann.violet.NoteNode"> 
-    <void property="text"> 
-     <void property="text"> 
       <string>PLACE CONNECTORS
 This interaction diagram follows 
 the interactions of a user 
 selecting a connector, 
-placing it between two objects</string> 
+placing it between two objects
+
+November 17, 2011</string> 
      </void> 
     </void> 
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>582.0</double> 
-     <double>245.0</double> 
+     <double>591.0</double> 
+     <double>4.0</double> 
     </void> 
    </object> 
   </void> 
