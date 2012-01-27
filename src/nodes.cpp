@@ -55,6 +55,35 @@ bool ObjectNode::hitTest(int x, int y) {
     return false;
 }
 
+/*! Draws the selection boxes
+*/
+void ObjectNode::draw(QPainter &painter)
+{
+    if (selected == true) {
+        int handleWidth = 5;
+        int handleHeight = 5;
+
+        painter.setPen(Qt::NoPen);
+        painter.setBrush(Qt::blue);
+        painter.drawRect(position.x()-length/2-handleWidth,
+                         position.y()-height/2-handleHeight,
+                         handleWidth,
+                         handleHeight);
+        painter.drawRect(position.x()+length/2,
+                         position.y()+height/2,
+                         handleWidth,
+                         handleHeight);
+        painter.drawRect(position.x()+length/2,
+                         position.y()-height/2-handleHeight,
+                         handleWidth,
+                         handleHeight);
+        painter.drawRect(position.x()-length/2-handleWidth,
+                         position.y()+height/2,
+                         handleWidth,
+                         handleHeight);
+    }
+}
+
 /*! NYI
 */
 QPoint ObjectNode::translateConnectionPoint(int pointIndex)
@@ -154,6 +183,10 @@ StickPerson::StickPerson(QPoint position)
 */
 void StickPerson::draw(QPainter &painter)
 {
+    //Always call this ObjectNode's draw function because it
+    //draws the selection boxes as needed.
+    ObjectNode::draw(painter);
+
     QPen pen;
     pen.setWidth(2);
 
@@ -164,17 +197,6 @@ void StickPerson::draw(QPainter &painter)
     //background
     painter.setPen(Qt::NoPen);
     painter.setBrush(Qt::white);
-
-    /* The next few lines need to deleted and
-       replaced by something better, graphically,
-       to signify selection
-     */
-    if (selected == true) {
-        painter.setBrush(Qt::blue);
-    } else {
-        painter.setBrush(Qt::white);
-    }
-
     painter.drawEllipse(tempx-16/2/50.0*length, tempy-(10+16)/70.0*height,16/50.0*length,16/70.0*height); //head
 
     //edge
@@ -206,21 +228,13 @@ Oval::Oval(QPoint position)
 
 void Oval::draw(QPainter &painter)
 {
-    //drawing an oval
+    //Always call this ObjectNode's draw function because it
+    //draws the selection boxes as needed.
+    ObjectNode::draw(painter);
 
     //background
     painter.setPen(Qt::NoPen);
     painter.setBrush(Qt::white);
-
-    /* The next few lines need to deleted and
-       replaced by something better, graphically,
-       to signify selection
-     */
-    if (selected == true) {
-        painter.setBrush(Qt::blue);
-    } else {
-        painter.setBrush(Qt::white);
-    }
 
     painter.drawEllipse(position,length/2,height/2);
     //edge
@@ -242,6 +256,10 @@ ClassRectangle::ClassRectangle(QPoint position)
 
 void ClassRectangle::draw(QPainter &painter)
 {
+    //Always call this ObjectNode's draw function because it
+    //draws the selection boxes as needed.
+    ObjectNode::draw(painter);
+
     painter.save();
 
     QRect r(0-length/2,0-height/2, length, height-60);
@@ -249,16 +267,6 @@ void ClassRectangle::draw(QPainter &painter)
     //background
     painter.setPen(Qt::NoPen);
     painter.setBrush(Qt::white);
-
-    /* The next few lines need to deleted and
-       replaced by something better, graphically,
-       to signify selection
-     */
-    if (selected == true) {
-        painter.setBrush(Qt::blue);
-    } else {
-        painter.setBrush(Qt::white);
-    }
     painter.drawRect(0-length/2,0-height/2,length,height);
     //edges
     painter.setPen(Qt::black);
@@ -283,6 +291,10 @@ SquareBoundary::SquareBoundary(QPoint position)
 
 void SquareBoundary::draw(QPainter &painter)
 {
+    //Always call this ObjectNode's draw function because it
+    //draws the selection boxes as needed.
+    ObjectNode::draw(painter);
+
     painter.save();
 
     QRect r(0-length/2,0-height/2,length,height);
@@ -290,16 +302,6 @@ void SquareBoundary::draw(QPainter &painter)
     //background
     painter.setPen(Qt::NoPen);
     painter.setBrush(Qt::white);
-
-    /* The next few lines need to deleted and
-       replaced by something better, graphically,
-       to signify selection
-     */
-    if (selected == true) {
-        painter.setBrush(Qt::blue);
-    } else {
-        painter.setBrush(Qt::white);
-    }
     painter.drawRect(r);
     //edges
     painter.setPen(Qt::black);
@@ -325,6 +327,10 @@ Diamond::Diamond(QPoint position)
 
 void Diamond::draw(QPainter &painter)
 {
+    //Always call this ObjectNode's draw function because it
+    //draws the selection boxes as needed.
+    ObjectNode::draw(painter);
+
     painter.save();
 
     QRect r(0-length/2, 0-height/2, length, height);
@@ -333,16 +339,6 @@ void Diamond::draw(QPainter &painter)
     //background
     painter.setPen(Qt::NoPen);
     painter.setBrush(Qt::white);
-
-    /* The next few lines need to deleted and
-       replaced by something better, graphically,
-       to signify selection
-     */
-    if (selected == true) {
-        painter.setBrush(Qt::blue);
-    } else {
-        painter.setBrush(Qt::white);
-    }
     painter.drawRect(r);
     //edge
     painter.setPen(Qt::black);

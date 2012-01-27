@@ -63,6 +63,7 @@ public:
     QPoint translateConnectionPoint(int pointIndex);
 
     bool hitTest(int x, int y);
+    void draw(QPainter &painter);
 
 protected:
     QRect my_shape;
