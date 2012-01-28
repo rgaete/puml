@@ -18,22 +18,28 @@ public:
         ShpClassRectangle,
         ShpSquare
     };
+
     enum DrawingNext {
         Object,
         Connection,
         Nothing
     };
+
 private:
     vector<BaseNode*> nodes;
     ShapeType typeOfNewObject;
     DrawingNext whatToDrawNext;
-    int indexOfSelectedObject;      //This is the index of the
-                                    //selected object in nodes.
-                                    //-1 signifies nothing selected.
-    QPoint positionDelta;           //This is is difference between where
-                                    //the user clicked on an object and
-                                    //where the position of the object is.
-                                    //Used for dragging objects.
+
+    //This is the index of the
+    //selected object in nodes.
+    //-1 signifies nothing selected.
+    int indexOfSelectedObject;
+
+    //This is is difference between where
+    //the user clicked on an object and
+    //where the position of the object is.
+    //Used for dragging objects.
+    QPoint positionDelta;
     QMenu *menuPopup;
     QAction *actionDelete;
     QAction *actionCut;
