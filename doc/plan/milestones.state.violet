@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<java version="1.6.0_30" class="java.beans.XMLDecoder"> 
+<java version="1.6.0_29" class="java.beans.XMLDecoder"> 
  <object class="com.horstmann.violet.StateDiagramGraph"> 
   <void method="addNode"> 
    <object id="StateNode0" class="com.horstmann.violet.StateNode"> 
@@ -12,8 +12,8 @@ Continue Design</string>
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>172.0</double> 
-     <double>336.0</double> 
+     <double>110.0</double> 
+     <double>285.0</double> 
     </void> 
    </object> 
   </void> 
@@ -28,8 +28,8 @@ Working Diagram</string>
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>266.0</double> 
-     <double>245.0</double> 
+     <double>252.0</double> 
+     <double>229.0</double> 
     </void> 
    </object> 
   </void> 
@@ -46,8 +46,8 @@ Restore</string>
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>340.0</double> 
-     <double>353.0</double> 
+     <double>250.0</double> 
+     <double>331.0</double> 
     </void> 
    </object> 
   </void> 
@@ -61,8 +61,8 @@ Restore</string>
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>568.0</double> 
-     <double>520.0</double> 
+     <double>240.0</double> 
+     <double>534.0</double> 
     </void> 
    </object> 
   </void> 
@@ -78,8 +78,8 @@ Windows/Debian</string>
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>569.0</double> 
-     <double>361.0</double> 
+     <double>467.0</double> 
+     <double>363.0</double> 
     </void> 
    </object> 
   </void> 
@@ -94,8 +94,8 @@ Legality</string>
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>490.0</double> 
-     <double>258.0</double> 
+     <double>391.0</double> 
+     <double>276.0</double> 
     </void> 
    </object> 
   </void> 
@@ -109,8 +109,8 @@ Legality</string>
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>727.0</double> 
-     <double>344.0</double> 
+     <double>605.0</double> 
+     <double>365.0</double> 
     </void> 
    </object> 
   </void> 
@@ -124,8 +124,8 @@ Legality</string>
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>844.0</double> 
-     <double>434.0</double> 
+     <double>723.0</double> 
+     <double>466.0</double> 
     </void> 
    </object> 
   </void> 
@@ -140,8 +140,8 @@ Completion</string>
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>831.0</double> 
-     <double>338.0</double> 
+     <double>724.0</double> 
+     <double>377.0</double> 
     </void> 
    </object> 
   </void> 
@@ -158,8 +158,8 @@ Completion</string>
    <object id="CircularFinalStateNode0" class="com.horstmann.violet.product.diagram.state.CircularFinalStateNode"/> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>878.0</double> 
-     <double>501.0</double> 
+     <double>753.0</double> 
+     <double>563.0</double> 
     </void> 
    </object> 
   </void> 

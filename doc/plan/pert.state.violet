@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<java version="1.6.0_30" class="java.beans.XMLDecoder"> 
+<java version="1.6.0_29" class="java.beans.XMLDecoder"> 
  <object class="com.horstmann.violet.StateDiagramGraph"> 
   <void method="addNode"> 
    <object id="CircularInitialStateNode0" class="com.horstmann.violet.CircularStateNode"/> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>28.0</double> 
+     <double>44.0</double> 
      <double>57.0</double> 
     </void> 
    </object> 
@@ -14,8 +14,8 @@
    <object id="CircularFinalStateNode0" class="com.horstmann.violet.product.diagram.state.CircularFinalStateNode"/> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>1109.0</double> 
-     <double>793.0</double> 
+     <double>1103.0</double> 
+     <double>794.0</double> 
     </void> 
    </object> 
   </void> 
@@ -23,14 +23,15 @@
    <object id="StateNode0" class="com.horstmann.violet.StateNode"> 
     <void property="name"> 
      <void property="text"> 
-      <string>T4
+      <string>T04 
+connector hitttest
 Ver. 0.1</string> 
      </void> 
     </void> 
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>71.0</double> 
+     <double>93.0</double> 
      <double>43.0</double> 
     </void> 
    </object> 
@@ -39,14 +40,15 @@ Ver. 0.1</string>
    <object id="StateNode1" class="com.horstmann.violet.StateNode"> 
     <void property="name"> 
      <void property="text"> 
-      <string>T5</string> 
+      <string>T05
+connections</string> 
      </void> 
     </void> 
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>187.0</double> 
-     <double>37.0</double> 
+     <double>208.0</double> 
+     <double>36.0</double> 
     </void> 
    </object> 
   </void> 
@@ -54,7 +56,8 @@ Ver. 0.1</string>
    <object id="StateNode2" class="com.horstmann.violet.StateNode"> 
     <void property="name"> 
      <void property="text"> 
-      <string>T6</string> 
+      <string>T06
+snap to grid</string> 
      </void> 
     </void> 
    </object> 
@@ -69,7 +72,8 @@ Ver. 0.1</string>
    <object id="StateNode3" class="com.horstmann.violet.StateNode"> 
     <void property="name"> 
      <void property="text"> 
-      <string>T3</string> 
+      <string>T03
+Toolbar</string> 
      </void> 
     </void> 
    </object> 
@@ -84,7 +88,8 @@ Ver. 0.1</string>
    <object id="StateNode4" class="com.horstmann.violet.StateNode"> 
     <void property="name"> 
      <void property="text"> 
-      <string>T1</string> 
+      <string>T01
+Use Case</string> 
      </void> 
     </void> 
    </object> 
@@ -99,14 +104,15 @@ Ver. 0.1</string>
    <object id="StateNode5" class="com.horstmann.violet.StateNode"> 
     <void property="name"> 
      <void property="text"> 
-      <string>M1</string> 
+      <string>M1
+one working diagram</string> 
      </void> 
     </void> 
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>523.0</double> 
-     <double>119.0</double> 
+     <double>502.0</double> 
+     <double>116.0</double> 
     </void> 
    </object> 
   </void> 
@@ -114,7 +120,8 @@ Ver. 0.1</string>
    <object id="StateNode6" class="com.horstmann.violet.StateNode"> 
     <void property="name"> 
      <void property="text"> 
-      <string>T10</string> 
+      <string>T10
+preferences</string> 
      </void> 
     </void> 
    </object> 
@@ -129,7 +136,8 @@ Ver. 0.1</string>
    <object id="StateNode7" class="com.horstmann.violet.StateNode"> 
     <void property="name"> 
      <void property="text"> 
-      <string>T2</string> 
+      <string>T02
+Other diagrams</string> 
      </void> 
     </void> 
    </object> 
@@ -144,14 +152,15 @@ Ver. 0.1</string>
    <object id="StateNode8" class="com.horstmann.violet.StateNode"> 
     <void property="name"> 
      <void property="text"> 
-      <string>M2</string> 
+      <string>M2
+all diagrams working</string> 
      </void> 
     </void> 
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>748.0</double> 
-     <double>131.0</double> 
+     <double>776.0</double> 
+     <double>132.0</double> 
     </void> 
    </object> 
   </void> 
@@ -159,14 +168,15 @@ Ver. 0.1</string>
    <object id="StateNode9" class="com.horstmann.violet.StateNode"> 
     <void property="name"> 
      <void property="text"> 
-      <string>T7</string> 
+      <string>T07
+delete objects</string> 
      </void> 
     </void> 
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>481.0</double> 
-     <double>322.0</double> 
+     <double>426.0</double> 
+     <double>226.0</double> 
     </void> 
    </object> 
   </void> 
@@ -174,14 +184,15 @@ Ver. 0.1</string>
    <object id="StateNode10" class="com.horstmann.violet.StateNode"> 
     <void property="name"> 
      <void property="text"> 
-      <string>T8</string> 
+      <string>T08
+resize</string> 
      </void> 
     </void> 
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>578.0</double> 
-     <double>323.0</double> 
+     <double>550.0</double> 
+     <double>232.0</double> 
     </void> 
    </object> 
   </void> 
@@ -189,14 +200,15 @@ Ver. 0.1</string>
    <object id="StateNode11" class="com.horstmann.violet.StateNode"> 
     <void property="name"> 
      <void property="text"> 
-      <string>T12</string> 
+      <string>T12
+xml store</string> 
      </void> 
     </void> 
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>686.0</double> 
-     <double>228.0</double> 
+     <double>689.0</double> 
+     <double>219.0</double> 
     </void> 
    </object> 
   </void> 
@@ -204,14 +216,15 @@ Ver. 0.1</string>
    <object id="StateNode12" class="com.horstmann.violet.StateNode"> 
     <void property="name"> 
      <void property="text"> 
-      <string>T13</string> 
+      <string>T13
+xml restore</string> 
      </void> 
     </void> 
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>788.0</double> 
-     <double>231.0</double> 
+     <double>789.0</double> 
+     <double>221.0</double> 
     </void> 
    </object> 
   </void> 
@@ -219,14 +232,15 @@ Ver. 0.1</string>
    <object id="StateNode13" class="com.horstmann.violet.StateNode"> 
     <void property="name"> 
      <void property="text"> 
-      <string>M3</string> 
+      <string>M3
+save / load</string> 
      </void> 
     </void> 
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>744.0</double> 
-     <double>323.0</double> 
+     <double>740.0</double> 
+     <double>309.0</double> 
     </void> 
    </object> 
   </void> 
@@ -235,14 +249,15 @@ Ver. 0.1</string>
     <void property="name"> 
      <void property="text"> 
       <string>T15
+installer packages (1)
 Ver. 0.5</string> 
      </void> 
     </void> 
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>1037.0</double> 
-     <double>435.0</double> 
+     <double>887.0</double> 
+     <double>434.0</double> 
     </void> 
    </object> 
   </void> 
@@ -256,8 +271,8 @@ Ver. 0.5</string>
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>906.0</double> 
-     <double>433.0</double> 
+     <double>744.0</double> 
+     <double>398.0</double> 
     </void> 
    </object> 
   </void> 
@@ -265,14 +280,15 @@ Ver. 0.5</string>
    <object id="StateNode16" class="com.horstmann.violet.StateNode"> 
     <void property="name"> 
      <void property="text"> 
-      <string>T9</string> 
+      <string>T09
+legality</string> 
      </void> 
     </void> 
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>497.0</double> 
-     <double>420.0</double> 
+     <double>466.0</double> 
+     <double>332.0</double> 
     </void> 
    </object> 
   </void> 
@@ -280,14 +296,15 @@ Ver. 0.5</string>
    <object id="StateNode17" class="com.horstmann.violet.StateNode"> 
     <void property="name"> 
      <void property="text"> 
-      <string>M4</string> 
+      <string>M4
+legality</string> 
      </void> 
     </void> 
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>558.0</double> 
-     <double>419.0</double> 
+     <double>530.0</double> 
+     <double>329.0</double> 
     </void> 
    </object> 
   </void> 
@@ -295,14 +312,15 @@ Ver. 0.5</string>
    <object id="StateNode18" class="com.horstmann.violet.StateNode"> 
     <void property="name"> 
      <void property="text"> 
-      <string>T11</string> 
+      <string>T11 
+color illegal object</string> 
      </void> 
     </void> 
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>872.0</double> 
-     <double>520.0</double> 
+     <double>741.0</double> 
+     <double>494.0</double> 
     </void> 
    </object> 
   </void> 
@@ -316,8 +334,8 @@ Ver. 0.5</string>
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>1151.0</double> 
-     <double>440.0</double> 
+     <double>1024.0</double> 
+     <double>429.0</double> 
     </void> 
    </object> 
   </void> 
@@ -325,7 +343,8 @@ Ver. 0.5</string>
    <object id="StateNode19" class="com.horstmann.violet.StateNode"> 
     <void property="name"> 
      <void property="text"> 
-      <string>T17</string> 
+      <string>T17
+testing</string> 
      </void> 
     </void> 
    </object> 
@@ -340,7 +359,8 @@ Ver. 0.5</string>
    <object class="com.horstmann.violet.StateNode"> 
     <void property="name"> 
      <void property="text"> 
-      <string>M5</string> 
+      <string>M5
+installers</string> 
      </void> 
     </void> 
    </object> 
@@ -355,7 +375,8 @@ Ver. 0.5</string>
    <object id="StateNode20" class="com.horstmann.violet.StateNode"> 
     <void property="name"> 
      <void property="text"> 
-      <string>T14</string> 
+      <string>T14
+documentation (SSRS/SSDD)</string> 
      </void> 
     </void> 
    </object> 
@@ -370,7 +391,8 @@ Ver. 0.5</string>
    <object id="StateNode21" class="com.horstmann.violet.StateNode"> 
     <void property="name"> 
      <void property="text"> 
-      <string>M6</string> 
+      <string>M6
+testing</string> 
      </void> 
     </void> 
    </object> 
@@ -385,7 +407,8 @@ Ver. 0.5</string>
    <object id="StateNode22" class="com.horstmann.violet.StateNode"> 
     <void property="name"> 
      <void property="text"> 
-      <string>T19</string> 
+      <string>T19
+user manual</string> 
      </void> 
     </void> 
    </object> 
@@ -400,7 +423,8 @@ Ver. 0.5</string>
    <object id="StateNode23" class="com.horstmann.violet.StateNode"> 
     <void property="name"> 
      <void property="text"> 
-      <string>T16</string> 
+      <string>T16
+code review</string> 
      </void> 
     </void> 
    </object> 
@@ -415,7 +439,8 @@ Ver. 0.5</string>
    <object id="StateNode24" class="com.horstmann.violet.StateNode"> 
     <void property="name"> 
      <void property="text"> 
-      <string>T18</string> 
+      <string>T18
+installer packages (2)</string> 
      </void> 
     </void> 
    </object> 
@@ -430,14 +455,15 @@ Ver. 0.5</string>
    <object id="StateNode25" class="com.horstmann.violet.StateNode"> 
     <void property="name"> 
      <void property="text"> 
-      <string>T20</string> 
+      <string>T20
+deliverable completion</string> 
      </void> 
     </void> 
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>835.0</double> 
-     <double>769.0</double> 
+     <double>748.0</double> 
+     <double>768.0</double> 
     </void> 
    </object> 
   </void> 
@@ -445,7 +471,8 @@ Ver. 0.5</string>
    <object id="StateNode26" class="com.horstmann.violet.StateNode"> 
     <void property="name"> 
      <void property="text"> 
-      <string>M7</string> 
+      <string>M7
+completion</string> 
      </void> 
     </void> 
    </object> 
@@ -461,14 +488,15 @@ Ver. 0.5</string>
     <void property="name"> 
      <void property="text"> 
       <string>M8
+deploy
 Ver. 1.0</string> 
      </void> 
     </void> 
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>995.0</double> 
-     <double>774.0</double> 
+     <double>1004.0</double> 
+     <double>772.0</double> 
     </void> 
    </object> 
   </void> 
@@ -506,11 +534,6 @@ Ver. 1.0</string>
    <object class="com.horstmann.violet.StateTransitionEdge"/> 
    <object idref="StateNode5"/> 
    <object idref="StateNode6"/> 
-  </void> 
-  <void method="connect"> 
-   <object class="com.horstmann.violet.StateTransitionEdge"/> 
-   <object idref="StateNode4"/> 
-   <object idref="StateNode5"/> 
   </void> 
   <void method="connect"> 
    <object class="com.horstmann.violet.StateTransitionEdge"/> 
