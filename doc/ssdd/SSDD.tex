@@ -11,6 +11,7 @@
 \usepackage{supertabular}
 \usepackage{hhline}
 \usepackage{hyperref}
+\usepackage{multirow}
 \hypersetup{pdftex, colorlinks=true, linkcolor=blue, citecolor=blue, filecolor=blue, urlcolor=blue, pdftitle=SYSTEM AND SOFTWARE ARCHITECTURAL AND DETAILED DESIGN DESCRIPTI, pdfauthor=Clinton Jeffery, pdfsubject=, pdfkeywords=}
 \usepackage[pdftex]{graphicx}
 % Outline numbering
@@ -1015,6 +1016,579 @@ he wants to draw and then clicks on the Canvas to draw them. Then the user
 can select objects by clicking on them on the Canvas, and right clicking
 on them to popup a menu. From the popup menu he can delete or edit the object.}
 
+\subsubsection{Use Cases and Descriptions}
+{\selectlanguage{english}\color{black}
+The following use cases represent three different stages at which options will be available to the user.
+}
+
+
+
+\paragraph[\ Use Category]
+{\ Launch} {\selectlanguage{english}\color{black}
+These options will be available to the user upon the immediate launch of pUML.
+}
+
+\bigskip
+\bigskip
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=6.0in]{ucaseLaunch.jpg}
+\end{figure}
+
+
+
+\begin{flushleft}
+\tablehead{}
+\begin{tabular}{|m{2.0in} m{5.0in}|}
+\hline
+{\selectlanguage{english}\bfseries\color{black}\emph{Use Case Name}}
+&
+{\selectlanguage{english}\bfseries\color{black}
+Run Program
+}
+\\\hline
+\emph{
+Details
+}
+&
+TBD
+\\\hline
+\end{tabular}
+\end{flushleft}
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{tabular}{|m{2.0in} m{5.0in}|}
+\hline
+{\selectlanguage{english}\bfseries\color{black}\emph{Use Case Name}}
+&
+{\selectlanguage{english}\bfseries\color{black}
+Create New Project
+}
+\\\hline
+\emph{
+Details
+}
+&
+TBD
+\\\hline
+\end{tabular}
+\end{flushleft}
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{tabular}{|m{2.0in} m{5.0in}|}
+\hline
+{\selectlanguage{english}\bfseries\color{black}\emph{Use Case Name}}
+&
+{\selectlanguage{english}\bfseries\color{black}
+Open Project
+}
+\\\hline
+\emph{
+Details
+}
+&
+TBD
+\\\hline
+\end{tabular}
+\end{flushleft}
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{tabular}{|m{2.0in} m{5.0in}|}
+\hline
+{\selectlanguage{english}\bfseries\color{black}\emph{Use Case Name}}
+&
+{\selectlanguage{english}\bfseries\color{black}
+New Diagram
+}
+\\\hline
+\emph{
+Participating Actor
+}
+&
+User
+\\\hline
+\multirow{2}{*}{\emph{
+Flow of Events
+}}
+& 1.  The user selects new file from menu \\
+& 2.  Program requests user select a diagram type
+(includes ChooseDiagramType use case) \\
+& 3.  The program responds by creating a new file with a blank drawing canvas
+\\\hline
+\emph{
+Entry Condition
+}
+&
+User selects New File from commands
+\\\hline
+\emph{
+Exit Condition
+}
+&
+Program successfully opens new file
+\\\hline
+\emph{
+Quality Requirements
+}
+&
+TBD
+\\\hline
+\end{tabular}
+\end{flushleft}
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{tabular}{|m{2.0in} m{5.0in}|}
+\hline
+{\selectlanguage{english}\bfseries\color{black}\emph{Use Case Name}}
+&
+{\selectlanguage{english}\bfseries\color{black}
+Choose Diagram Type}
+\\\hline
+\emph{
+Participating Actor
+}
+&
+User
+\\\hline
+\multirow{2}{*}{\emph{
+Flow of Events
+}}
+& 1.  User selects a diagram type \\
+& 2.  Program loads and displays only objects for the selected diagram type
+\\\hline
+\emph{
+Entry Condition
+}
+&
+Included from New Diagram use case
+\\\hline
+\emph{
+Exit Condition
+}
+&
+Included from New Diagram use case
+\\\hline
+\emph{
+Quality Requirements
+}
+&
+TBD
+\\\hline
+\end{tabular}
+\end{flushleft}
+
+\bigskip
+
+
+\begin{flushleft}
+\tablehead{}
+\begin{tabular}{|m{2.0in} m{5.0in}|}
+\hline
+{\selectlanguage{english}\bfseries\color{black}\emph{Use Case Name}}
+&
+{\selectlanguage{english}\bfseries\color{black}
+Open Diagram}
+\\\hline
+\emph{
+Participating Actor
+}
+&
+User
+\\\hline
+\multirow{2}{*}{\emph{
+Flow of Events
+}}
+& 1. User selects Open File from menu \\
+& 2. Program opens an explorer window \\
+& 3. User selects a file \\
+& 4. Program loads selected file into program \\\hline
+\emph{
+Entry Condition
+}
+&
+User selects Open File from menu.
+\\\hline
+\emph{
+Exit Condition
+}
+&
+File is successfully opened.
+\\\hline
+\emph{
+Quality Requirements
+}
+&
+User selected file must be able to be opened in pUML.
+\\\hline
+\end{tabular}
+\end{flushleft}
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{tabular}{|m{2.0in} m{5.0in}|}
+\hline
+{\selectlanguage{english}\bfseries\color{black}\emph{Use Case Name}}
+&
+{\selectlanguage{english}\bfseries\color{black}
+Close Program}
+\\\hline
+\emph{
+Participating Actor
+}
+&
+User
+\\\hline
+\multirow{2}{*}{\emph{
+Flow of Events
+}}
+& 1. User clicks X \\
+& 2. If file is not saved, include Save File As use case \\
+& 3. Program Exits \\\hline
+\emph{
+Entry Condition
+}
+&
+User initiates File menu option Close Program or clicks X in the corner of the window.
+\\\hline
+\emph{
+Exit Condition
+}
+&
+File is successfully saved and the program exits.
+\\\hline
+\emph{
+Quality Requirements
+}
+&
+TBD
+\\\hline
+\end{tabular}
+\end{flushleft}
+
+
+
+
+
+\bigskip
+\bigskip
+
+
+
+\paragraph[\ Use Category]
+{\ Running} {\selectlanguage{english}\color{black}
+These options will be available to the user if a project has been opened.  This case inherits all options from Launch.
+}
+
+\bigskip
+\bigskip
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=6.0in]{ucaseRunning.jpg}
+\end{figure}
+
+\begin{flushleft}
+\tablehead{}
+\begin{tabular}{|m{2.0in} m{5.0in}|}
+\hline
+{\selectlanguage{english}\bfseries\color{black}\emph{Use Case Name}}
+&
+{\selectlanguage{english}\bfseries\color{black}
+Save File}
+\\\hline
+\emph{
+Participating Actor
+}
+&
+User
+\\\hline
+\multirow{2}{*}{\emph{
+Flow of Events
+}}
+& 1. The user selects save file \\
+& 2. Program saves file \\
+& a. If file has not been previously saved, ask user where to save \\
+& b. If file has been previously saved, ask user where to save
+\\\hline
+\emph{
+Entry Condition
+}
+&
+User selects Save File from main menu or clicks save button.
+\\\hline
+\emph{
+Exit Condition
+}
+&
+File is successfully saved
+\\\hline
+\emph{
+Quality Requirements
+}
+&
+TBD
+\\\hline
+\end{tabular}
+\end{flushleft}
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{tabular}{|m{2.0in} m{5.0in}|}
+\hline
+{\selectlanguage{english}\bfseries\color{black}\emph{Use Case Name}}
+&
+{\selectlanguage{english}\bfseries\color{black}
+Save As
+}
+\\\hline
+\emph{
+Details
+}
+&
+TBD
+\\\hline
+\end{tabular}
+\end{flushleft}
+
+\bigskip
+
+
+\begin{flushleft}
+\tablehead{}
+\begin{tabular}{|m{2.0in} m{5.0in}|}
+\hline
+{\selectlanguage{english}\bfseries\color{black}\emph{Use Case Name}}
+&
+{\selectlanguage{english}\bfseries\color{black}
+Print Diagram}
+\\\hline
+\emph{
+Participating Actor
+}
+&
+User
+\\\hline
+\multirow{2}{*}{\emph{
+Flow of Events
+}}
+& 1.  User initiates print. \\
+& 2.  Program sends to printer
+\\\hline
+\emph{
+Entry Condition
+}
+&
+User initiates Print
+\\\hline
+\emph{
+Exit Condition
+}
+&
+Diagram successfully sent to printer
+\\\hline
+\emph{
+Quality Requirements
+}
+&
+TBD
+\\\hline
+\end{tabular}
+\end{flushleft}
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{tabular}{|m{2.0in} m{5.0in}|}
+\hline
+{\selectlanguage{english}\bfseries\color{black}\emph{Use Case Name}}
+&
+{\selectlanguage{english}\bfseries\color{black}
+Close Diagram
+}
+\\\hline
+\emph{
+Details
+}
+&
+TBD
+\\\hline
+\end{tabular}
+\end{flushleft}
+
+\bigskip
+\bigskip
+
+\paragraph[\ Use Category]
+{\ Editing} {\selectlanguage{english}\color{black}
+These options will be available to the user while ediiting a UML diagram.  This case inherits all use cases from Launch and Running.
+}
+
+\bigskip
+\bigskip
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=6.0in]{ucaseEdit.jpg}
+\end{figure}
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{tabular}{|m{2.0in} m{5.0in}|}
+\hline
+{\selectlanguage{english}\bfseries\color{black}\emph{Use Case Name}}
+&
+{\selectlanguage{english}\bfseries\color{black}
+Create New Object
+}
+\\\hline
+\emph{
+Participating Actor
+}
+&
+User
+\\\hline
+\multirow{2}{*}{\emph{
+Flow of Events
+}}
+& 1.  User selects an object from a valid list of objects \\
+& 2.  User places object on canvas.
+\\\hline
+\emph{
+Entry Condition
+}
+&
+Toolbar is loaded with valid objects for diagram type
+\\\hline
+\emph{
+Exit Condition
+}
+&
+Object has been successfully placed on drawing canvas.
+\\\hline
+\emph{
+Quality Requirements
+}
+&
+TBD
+\\\hline
+\end{tabular}
+\end{flushleft}
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{tabular}{|m{2.0in} m{5.0in}|}
+\hline
+{\selectlanguage{english}\bfseries\color{black}\emph{Use Case Name}}
+&
+{\selectlanguage{english}\bfseries\color{black}
+Edit Object
+}
+\\\hline
+\emph{
+Details
+}
+&
+TBD
+\\\hline
+\end{tabular}
+\end{flushleft}
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{tabular}{|m{2.0in} m{5.0in}|}
+\hline
+{\selectlanguage{english}\bfseries\color{black}\emph{Use Case Name}}
+&
+{\selectlanguage{english}\bfseries\color{black}
+Edit Connector
+}
+\\\hline
+\emph{
+Details
+}
+&
+TBD
+\\\hline
+\end{tabular}
+\end{flushleft}
+
+\bigskip
+
+
+
+\begin{flushleft}
+\tablehead{}
+\begin{tabular}{|m{2.0in} m{5.0in}|}
+\hline
+{\selectlanguage{english}\bfseries\color{black}\emph{Use Case Name}}
+&
+{\selectlanguage{english}\bfseries\color{black}
+Undo
+}
+\\\hline
+\emph{
+Details
+}
+&
+TBD
+\\\hline
+\end{tabular}
+\end{flushleft}
+
+\bigskip
+
+
+\begin{flushleft}
+\tablehead{}
+\begin{tabular}{|m{2.0in} m{5.0in}|}
+\hline
+{\selectlanguage{english}\bfseries\color{black}\emph{Use Case Name}}
+&
+{\selectlanguage{english}\bfseries\color{black}
+Redo
+}
+\\\hline
+\emph{
+Details
+}
+&
+TBD
+\\\hline
+\end{tabular}
+\end{flushleft}
+
+\bigskip
+
+
+\clearpage
+
+
+
+
 \subsection[CONSISTENCY OF ARCHITECTURAL
 VIEWS]{\selectlanguage{english}\bfseries\color{black} CONSISTENCY OF
 ARCHITECTURAL VIEWS}
@@ -1120,7 +1694,7 @@ Below is the diagram depicting classes and relationships between classes for the
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=6.0in]{class.jpg}
+\includegraphics[width=5.0in]{class.jpg}
 \end{figure}
 
 \clearpage
