@@ -7,4 +7,4 @@ PDF: ssdd.pdf
 	xpdf ssdd.pdf
 
 clean: 
-	rm *.aux *.log *.out *.toc 
+	rm *.aux *.log *.out *.toc
