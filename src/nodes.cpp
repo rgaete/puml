@@ -15,6 +15,8 @@
 BaseNode::BaseNode()
 {
     selected = false;
+    action = new QAction(this);
+    connect(action, SIGNAL(triggered()), this, SLOT(on_action_triggered()));
 }
 
 /**********************************/
@@ -55,7 +57,7 @@ bool ObjectNode::hitTest(int x, int y) {
     return false;
 }
 
-/*! Draws the selection boxes
+/*! Draws the selection boxes as needed
 */
 void ObjectNode::draw(QPainter &painter)
 {

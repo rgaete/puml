@@ -13,6 +13,7 @@
 #include <string.h>
 #include <QRect>
 #include <QPainter>
+#include <QAction>
 
 //#include "utilities.h"
 //#include "diagrams.h"
@@ -32,18 +33,26 @@ class BaseNode {
         //~BaseNode() {}
 
         int id() {return id_int;}
-
         void setSelected(bool newState) { selected = newState; }
         void setPosition(const QPoint &pos) { position = pos; }
         QPoint getPosition() { return position; }
         virtual void draw(QPainter &painter) =0;
         virtual bool hitTest(int x, int y) =0;
+
     private:
-        int id_int;             //This id is unique for each object in all the
-                                //the diagrams that are opened.
+        //This id is unique for each object in all the
+        //the diagrams that are opened.
+        int id_int;
     protected:
         bool selected;
         QPoint position;
+        //The node specific action that connects to
+        //on_action_triggered().
+        QAction action;
+
+    public slots:
+        virtual void on_action_triggered() =0;
+
 
 };
 
@@ -92,6 +101,11 @@ public:
 protected:
     ObjectNode *connectionPoint1;
     ObjectNode *connectionPoint2;
+    int connectionPoint1Index;
+    int connectionPoint2Index;
+    int object1Index;
+    int object2Index;
+
 
 };
 
