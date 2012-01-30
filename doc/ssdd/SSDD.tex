@@ -108,54 +108,7 @@
 \author{Clinton Jeffery}
 \date{2010-11-18T11:30:10.24}
 \begin{document}
-\clearpage\setcounter{page}{1}\pagestyle{Standard}
-\thispagestyle{FirstPage}
-{\centering\selectlanguage{english}\bfseries\color{black}
-SYSTEM AND SOFTWARE\newline
-DESIGN DESCRIPTION (SSDD) TEMPLATE
-\par}
 
-{\centering\selectlanguage{english}\bfseries\color{black}
-(Incorporating Architectural Views and Detailed Design Criteria)
-\par}
-
-{\centering\selectlanguage{english}\bfseries\color{black}
-Version A.2, November 2010
-\par}
-
-{\centering\selectlanguage{english}\bfseries\color{black}
-FOREWORD
-\par}
-
-{\selectlanguage{english}\color{black}
-This template was created to provide system and software development
-projects with a model System and Software Design Description (SSDD)
-that incorporates both architectural views and detailed design
-criteria. \ The template is based on work compiled by Dr.~Paul Oman
-from a large collection of software engineering design document
-standards discussed in Section 1.5. \ It has been edited and updated by
-Dr.~Clint Jeffery for use in UI CS 383.}
-
-{\selectlanguage{english}\color{black}
-The SSDD template begins on the next page. \ Just throw away this page
-and enter your project specifications into the following template.
-\ Don{\textquoteright}t forget to change the headers and footers as
-necessary. \ The following conventions are used to guide you in
-developing your SSDD:}
-
-{\selectlanguage{english}\color{black}
-{[ Text
-]\ \ }{\textbf{Replace}}{
-this text with your project design text.}}
-
-{\selectlanguage{english}\color{black}
-{\textit{text
-in italics }}{\ \ Notes/instructions to the
-author. }{\textbf{Delete in your finished
-document.}}}
-
-
-\bigskip
 
 \clearpage
 
@@ -208,7 +161,7 @@ Version 0.0
 \par}
 
 {\centering\selectlanguage{english}\bfseries\color{black}
-December 10, 2011
+January 30, 2012
 \par}
 
 
@@ -220,11 +173,15 @@ December 10, 2011
 {\centering\selectlanguage{english}\bfseries\color{black}
 Prepared for:
 \par}
-
 {\centering\selectlanguage{english}\bfseries\color{black}
 Bruce Bolden
 \par}
-
+{\centering\selectlanguage{english}\bfseries\color{black}
+and
+\par}
+{\centering\selectlanguage{english}\bfseries\color{black}
+Dr. Clint Jeffery
+\par}
 
 \bigskip
 
@@ -238,11 +195,15 @@ Prepared by:
 {\centering\selectlanguage{english}\bfseries\color{black}
 Josh Armstrong
 \\Zach Curtis
+\\Brian Bowles
 \\Logan Evans
 \\Jeremy Klas
+\\Nathan Krussel
 \\Maxine Major
-\\Xiaozhe Shen
+\\Morgan Weir
 \\David Wells
+\\and
+\\Xiaozhe Shen
 \par}
 
 {\centering\selectlanguage{english}\bfseries\color{black}
@@ -750,16 +711,15 @@ The pUML software will be designed to provide functionality to create UML diagra
 The completed product would be available to the general public for purchase.
 }
 
+
+\clearpage
 \subsection[DEFINITIONS, ACRONYMS, AND
 ABBREVIATIONS]{\selectlanguage{english}\bfseries\color{black}
 DEFINITIONS, ACRONYMS, AND ABBREVIATIONS}
 {\selectlanguage{english}\itshape\color{black}
 This section shall list and define all special terms, acronyms and
-abbreviations used throughout this document. \ A tabular form is
-preferable, but not mandatory.}
+abbreviations used throughout this document.}
 
-
-\bigskip
 
 \begin{flushleft}
 \tablehead{\hline
@@ -859,14 +819,6 @@ enclosed software, and their relationship and interfaces.\\\hline
 individual, team, or organization (or classes thereof) with interests
 in, or concerns, relative to, a system{\textquotedblright} ISO/IEC
 42010:2007 (\S3.8).}\\\hline
-~
- &
-~
-\\\hline
-~
- &
-~
-\\\hline
 \end{supertabular}
 \end{flushleft}
 \subsection[DOCUMENT REFERENCES]{\selectlanguage{english}\bfseries\color{black} DOCUMENT
@@ -915,6 +867,9 @@ and International Electrotechnical Commission, (ISO/IEC), Case postale
 Institute of Electrical and Electronics Engineers, Inc., (IEEE), 445
 Hoes Lane, Piscataway, NJ 08854, USA.}}
 \end{enumerate}
+
+
+\clearpage
 \subsection{DOCUMENT OVERVIEW}
 
 {\selectlanguage{english}\color{black}
@@ -948,29 +903,29 @@ RESTRICTIONS}
 This document is for LIMITED RELEASE ONLY to UI CS personnel working on
 the project.}
 
-\section{CONSTRAINTS and stakeholder concerns}
+\clearpage
+\section{CONSTRAINTS AND STAKEHOLDER CONCERNS}
 
 \subsection{CONSTRAINTS}
 
-\subsubsection{Environmental constraints.}
+\subsubsection{Environmental Constraints.}
 {\selectlanguage{english}\color{black}
-The pUML software poses no Environmental constraints at this time .
+The pUML software poses no environmental constraints at this time .
 }
 
-\subsubsection{System requirement constraints.}
+\subsubsection{System Requirement Constraints.}
 {\selectlanguage{english}\color{black}
 The pUML software will be designed to function on, at a minimum, Windows 7, Mac OSX, and Linux.  Cross platform functionality will minimize portability errors and allow for projects to be migrated between platforms with minimal difficulty.
 }
 
-\subsubsection{User characteristic constraints.}
+\subsubsection{User Characteristic Constraints.}
 {\selectlanguage{english}\color{black}
 University of Idaho Computer Science students and faculty should be able
 to reasonably understand and operate the pUML software.
 }
 
-\subsection[STAKEHOLDER
-CONCERNS]{\selectlanguage{english}\bfseries\color{black} STAKEHOLDER
-CONCERNS}
+\subsection[STAKEHOLDER CONCERNS]
+{\selectlanguage{english}\bfseries\color{black} STAKEHOLDER CONCERNS}
 {\selectlanguage{english}\color{black}
 There are no stakeholders for our software at this time.
 }
@@ -1026,13 +981,11 @@ the Canvas takes the X and Y coordinates of the click and translates that
 into the index of the object selected. Then the Canvas can popup a menu
 to edit the node or delete the node. }
 
-{\centering\includegraphics[]{Canvas.png}}
-
 
 \subsubsection{Developer{\textquoteright}s Architectural Rationale}
 
 {\selectlanguage{english}\color{black}
-We decided to create a new QWidget for the canvas so that it can handle
+We decided to create a new QWidget for the Canvas so that it can handle
 click events and have a paint function. We then decided to have the nodes
 represented by a vector so that it can be easily iterated over and quickly
 accessed by index. We decided to have the nodes be represented by specific
@@ -1041,7 +994,7 @@ ObjectNodes. This way each of the nodes can define their own draw function,
 as well private data such as radius for circles. This allows new objects to
 be easily created. }
 
-
+\clearpage
 \subsection[USER{\textquoteright}S ARCHITECTURAL
 VIEW]{\selectlanguage{english}\bfseries\color{black}
 USER{\textquoteright}S ARCHITECTURAL VIEW}
@@ -1058,8 +1011,8 @@ Description }
 {\selectlanguage{english}\color{black}
 The menu and the toolbar have redundant functionality. The toolbar has
 quick access to certain menu items. Either way, the user selects what object
-he wants to draw and then clicks on the canvas to draw them. Then the user
-can select objects by clicking on them on the canvas, and right clicking
+he wants to draw and then clicks on the Canvas to draw them. Then the user
+can select objects by clicking on them on the Canvas, and right clicking
 on them to popup a menu. From the popup menu he can delete or edit the object.}
 
 \subsection[CONSISTENCY OF ARCHITECTURAL
@@ -1076,6 +1029,7 @@ NA}
 {\selectlanguage{english}\color{black}
 NA}
 
+\clearpage
 \section{SOFTWARE DETAILED DESIGN}
 
 \bigskip
@@ -1085,9 +1039,13 @@ DESIGN]{\foreignlanguage{english}{\ }\foreignlanguage{english}{DEVELOPER{\textqu
 VIEWPOINT DETAILED SOFTWARE DESIGN}}
 
 {\selectlanguage{english}\color{black}
-The Canvas widget is the main viewpoint of our software design.}
+The Canvas widget is the main viewpoint of our software design.  
+All other classes either house this widget or support it.}
 
 \subsection[COMPONENT/ENTITY DICTIONARY]{\selectlanguage{english}\bfseries\color{black} COMPONENT/ENTITY DICTIONARY}
+{\selectlanguage{english}\color{black}
+This table shows the individual components, implemented as classes, utilized in the development of this software,
+and how each class is related to the other classes.}
 
 \begin{flushleft}
 \tablehead{}
@@ -1096,7 +1054,7 @@ The Canvas widget is the main viewpoint of our software design.}
 \multicolumn{5}{|m{6.57056in}|}{\centering
 \selectlanguage{english}\bfseries\color{black} Component/Entity
 Dictionary}\\\hline
-\centering \selectlanguage{english}\bfseries\color{black} Name &
+\centering \selectlanguage{english}\bfseries\color{black} Name of Class &
 \centering \selectlanguage{english}\bfseries\color{black} Type/Range &
 \centering \selectlanguage{english}\bfseries\color{black}
 Purpose/Function &
@@ -1108,7 +1066,7 @@ Subordinates
 &
 ~ QMainWindow
  &
-~ To have GUI and house Canvas
+~ To generate GUI and house Canvas
  &
 ~ N/A
  &
@@ -1126,7 +1084,7 @@ Subordinates
 \\\hline
 ~ Main Menu
  &
-~
+~ TBD
  &
 ~
  &
@@ -1136,7 +1094,7 @@ Subordinates
 \\\hline
 ~ QMenu
  &
-~
+~ TBD
  &
 ~
  &
@@ -1146,7 +1104,7 @@ Subordinates
 \\\hline
 ~ Toolbar
  &
-~
+~ TBD
  &
 ~
  &
@@ -1156,115 +1114,346 @@ Subordinates
 \\\hline
 \end{supertabular}
 \end{flushleft}
-\subsection[COMPONENT/ENTITY DETAILED
-DESIGN]{\selectlanguage{english}\bfseries\color{black} COMPONENT/ENTITY
-DETAILED DESIGN}
 
-\subsubsection{Detailed Design for Component/Entity: Main Window}
-
-\paragraph[\ Introduction/Purpose of this
-Component/Entity]{\ Introduction/Purpose of this Component/Entity}
 {\selectlanguage{english}\color{black}
-To have a GUI that supports canvas widget.
-}
+Below is the diagram depicting classes and relationships between classes for the pUML software.}
 
-\paragraph[Input for this Component/Entity]{Input for this
-Component/Entity}
-{\selectlanguage{english}\color{black}
-It should open an XML file.
-}
-
-\paragraph{Output for this Component/Entity}
-{\selectlanguage{english}\color{black}
-Should output an XML file to save canvas state.
-}
-
-\paragraph{Component/Entity Process to Convert Input to Output}
-{\selectlanguage{english}\color{black}
-Inserting objects into XML tree structure.
-}
-
-\paragraph{Design constraints and performance requirements of this
-Component/Entity}
-{\selectlanguage{english}\color{black}
-Have a functional UI that isn't clunky or hard to use.
-}
-
-\begin{figure}
+\begin{figure}[h]
 \centering
-\includegraphics[width=5.0in]{2011-12-04_IntExit.jpg}
+\includegraphics[width=6.0in]{class.jpg}
 \end{figure}
 
-\bigskip
+\clearpage
 
 
-\subsubsection{Detailed Design for Component/Entity: Canvas}
-
-\paragraph[\ Introduction/Purpose of this
-Component/Entity]{\ Introduction/Purpose of this Component/Entity}
+\subsection[FEATURE DETAILED DESIGN]
+{\selectlanguage{english}\bfseries\color{black} FEATURE DETAILED DESIGN}
 {\selectlanguage{english}\color{black}
-To draw UML shapes and connectors based on UML diagram type}
-
-\paragraph{Input for this Component/Entity}
-{\selectlanguage{english}\color{black}
-Mouse click events}
-
-\paragraph{Output for this Component/Entity}
-{\selectlanguage{english}\color{black}
-Drawing shapes and connectors to screen}
-
-\paragraph{Component/Entity Process to Convert Input to Output}
-{\selectlanguage{english}\color{black}
-QT drawing/update functions}
-
-\paragraph{Design constraints and performance requirements of this
-Component/Entity}
-{\selectlanguage{english}\color{black}
-It should run fast enough that it shouldn't bog down system or run
-jerky due to too much cpu/gpu usage.
+Each of the diagrams in this section represent an important functionality
+of the pUML software.  The interaction diagrams detail the object classes
+that will be utilized in the execution of each of these major features of
+the software, as well as show how these classes interact.
 }
 
-\begin{figure}
+\subsubsection{Detailed Design for Feature: Place New Object }
+
+\paragraph[\ Introduction/Purpose of this Feature]
+{\ Introduction/Purpose of this Feature}
+{\selectlanguage{english}\color{black}
+The user will be able to select objects from the toolbar and place them on the Canvas.
+}
+
+\paragraph[Input for this Feature]{Input for this Feature}
+{\selectlanguage{english}\color{black}
+The user will click on a shape on the toolbar.  The first subsequent click of the mouse over the Canvas area will place the selected shape at that location.
+}
+
+\paragraph{Output for this Feature}
+{\selectlanguage{english}\color{black}
+The object will be placed on the Canvas, at a location of the user{\textquoteright}s choosing, provided there are no collisions with other objects.
+}
+
+\paragraph{Feature Process to Convert Input to Output}
+{\selectlanguage{english}\color{black}
+The mouse click on a shape on the toolbar will lock that shape in memory.
+The subsequent mouse click on the Canvas will send the shape information from the toolbar to the Canvas.  
+The Canvas will draw the shape at the specific coordinates of the mouse click, and will update the list of existing shapes on the Canvas for that particular diagram.
+}
+
+\paragraph{Design Constraints and Performance Requirements of this Feature}
+{\selectlanguage{english}\color{black}
+The object will not be permitted to be placed at an overlapping location with another object.
+}
+\bigskip
+\bigskip
+
+\begin{figure}[h]
 \centering
-\includegraphics[width=5.0in]{2011-11-17_IntNewObj.jpg}
+\includegraphics[width=6.0in]{IntNewObj.jpg}
 \end{figure}
 
+\clearpage
+
+
+\subsubsection{Detailed Design for Feature: Place a New Connector}
+
+\paragraph[\ Introduction/Purpose of this Feature]
+{\ Introduction/Purpose of this Feature}
+{\selectlanguage{english}\color{black}
+This feature allows the user to place a connecting line between two objects.
+}
+
+\paragraph[Input for this Feature]{Input for this Feature}
+{\selectlanguage{english}\color{black}
+The user selects a connector shape from the toolbar, and then selects two objects between which to place the connector.
+}
+
+\paragraph{Output for this Feature}
+{\selectlanguage{english}\color{black}
+A connector line is drawn between the two objects the user selected.
+}
+
+\paragraph{Feature Process to Convert Input to Output}
+{\selectlanguage{english}\color{black}
+User clicks on a connector shape in the Toolbar.  
+The Canvas gets the connector information from the Toolbar.  
+The user clicks on an object.
+The Canvas verifies that an object exists at that location, identifies the closest connection point on the object to the click, and stores this information.
+The user clicks on a second object on the Canvas.  
+The Canvas verifies that an object exists at the second location, identifies the closest connection point on the object to the click, and stores this information.  
+The Canvas draws the connector at the coordinates of the user{\textquoteright}s click on the Canvas.  
+Canvas updates list of objects on the Canvas.  
+}
+
+\paragraph{Design Constraints and Performance Requirements of this Feature}
+{\selectlanguage{english}\color{black}
+More than one connector may not connect the same two objects.
+\\A connector may not be placed if two different objects have not been selected to place the connector between.
+}
+\bigskip
 \bigskip
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=5.0in]{IntNewConn.jpg}
+\end{figure}
 
-\subsubsection{Detailed Design for Component/Entity:
-}
+\clearpage
 
-\paragraph[\ Introduction/Purpose of this
-Component/Entity]{\ Introduction/Purpose of this Component/Entity}
+\subsubsection{Detailed Design for Feature: Edit an Object}
+
+\paragraph[\ Introduction/Purpose of this Feature]
+{\ Introduction/Purpose of this Feature}
 {\selectlanguage{english}\color{black}
-
+The user may edit an object{\textquoteright}s properties, such as names, descriptions, etc..
 }
 
-\paragraph[Input for this Component/Entity]{Input for this
-Component/Entity}
+\paragraph[Input for this Feature]{Input for this Feature}
 {\selectlanguage{english}\color{black}
-
+The user right clicks on the object they wish to modify.
 }
 
-\paragraph{Output for this Component/Entity}
+\paragraph{Output for this Feature}
 {\selectlanguage{english}\color{black}
-
+The program displays a dialog box with object properties the user may modify, and updates the program with changes.
 }
 
-\paragraph{Component/Entity Process to Convert Input to Output}
+\paragraph{Feature Process to Convert Input to Output}
 {\selectlanguage{english}\color{black}
-
+User right clicks on an object on the Canvas. The Canvas determines whether an object resides at those coordinates. If valid, the Canvas sets that object, and activates QMenu, which in turn shows the Dialog for the selected object.
+The user modifies the object properties per the Dialog.  The Dialog sends the updated object information back to the Canvas.
 }
 
-\paragraph{Design constraints and performance requirements of this
-Component/Entity}
+\paragraph{Design Constraints and Performance Requirements of this Feature}
 {\selectlanguage{english}\color{black}
-
+The user may not edit Canvas properties.
 }
-
+\bigskip
 \bigskip
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=6.0in]{IntEditObj.jpg}
+\end{figure}
+
+\clearpage
+
+
+\subsubsection{Detailed Design for Feature: Edit a connector}
+
+\paragraph[\ Introduction/Purpose of this Feature]
+{\ Introduction/Purpose of this Feature}
+{\selectlanguage{english}\color{black}
+User may edit a connector{\textquoteright}s features, such as name, descriptors, arrowheads, direction, etc..
+}
+
+\paragraph[Input for this Feature]{Input for this Feature}
+{\selectlanguage{english}\color{black}
+The user right clicks on a connector.
+}
+
+\paragraph{Output for this Feature}
+{\selectlanguage{english}\color{black}
+A dialog is displayed from which the user may make changes to the connector{\textquoteright}s properties.
+}
+
+\paragraph{Feature Process to Convert Input to Output}
+{\selectlanguage{english}\color{black}
+User right clicks on a connector on the Canvas. The Canvas determines whether a connector resides at those coordinates. If valid, the Canvas sets that connector, and activates QMenu, which in turn shows the Dialog for the selected connector.
+The user modifies the connector properties per the Dialog.  The Dialog sends the updated connector information back to the Canvas.
+}
+
+\paragraph{Design Constraints and Performance Requirements of this Feature}
+{\selectlanguage{english}\color{black}
+The user may not be able to edit all properties of all connectors due to the differences in connector utilization in differing UML diagrams.
+}
+\bigskip
+\bigskip
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=6.0in]{IntEditConn.jpg}
+\end{figure}
+
+\clearpage
+
+\subsubsection{Detailed Design for Feature: Select an Object}
+
+\paragraph[\ Introduction/Purpose of this Feature]
+{\ Introduction/Purpose of this Feature}
+{\selectlanguage{english}\color{black}
+User wishes to select an object, either for editing purposes or to move the object.
+}
+
+\paragraph[Input for this Feature]{Input for this Feature}
+{\selectlanguage{english}\color{black}
+User clicks on the object.
+}
+
+\paragraph{Output for this Feature}
+{\selectlanguage{english}\color{black}
+The canvas identifies and displays the object as selected.
+}
+
+\paragraph{Feature Process to Convert Input to Output}
+{\selectlanguage{english}\color{black}
+The user clicks on an object. Canvas stores the coordinates of the click and sends them to nodes to test whether an object resides at those coordinates on the Canvas.  nodes returns true or false. Canvas updates the index of selected items, and draws this list back to nodes.
+}
+
+\paragraph{Design Constraints and Performance Requirements of this Feature}
+{\selectlanguage{english}\color{black}
+Actions that may be based upon an object{\textquoteright}s selection have not been developed at this time.
+}
+\bigskip
+\bigskip
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=5.0in]{IntSelectObj.jpg}
+\end{figure}
+
+\clearpage
+
+
+
+ 
+
+\subsubsection{Detailed Design for Feature: Delete an Object}
+
+\paragraph[\ Introduction/Purpose of this Feature]
+{\ Introduction/Purpose of this Feature}
+{\selectlanguage{english}\color{black}
+The user deletes an object from the Canvas.
+}
+
+\paragraph[Input for this Feature]{Input for this Feature}
+{\selectlanguage{english}\color{black}
+The user right-clicks on an object to be deleted, and selects the delete option from the QMenu.
+}
+
+\paragraph{Output for this Feature}
+{\selectlanguage{english}\color{black}
+The Canvas removes the object from itself.
+}
+
+\paragraph{Feature Process to Convert Input to Output}
+{\selectlanguage{english}\color{black}
+User right clicks on an object on the Canvas. The Canvas verifies that an object exists at the coordinates of the click, and sets the object.  The Canvas prompts the QMenu to show itself.  The user selects the delete option from the QMenu.  The QMenu tells the Canvas to delete that object. The Canvas deletes the object and draws the updated list of objects.
+}
+
+\paragraph{Design Constraints and Performance Requirements of this Feature}
+{\selectlanguage{english}\color{black}
+It has not been determined at this time when an object is deleted if any associated connectors will automatically be deleted as well.
+}
+\bigskip
+\bigskip
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=6.0in]{IntDelObj.jpg}
+\end{figure}
+
+\clearpage
+
+
+  
+
+\subsubsection{Detailed Design for Feature: Delete a Connector}
+
+\paragraph[\ Introduction/Purpose of this Feature]
+{\ Introduction/Purpose of this Feature}
+{\selectlanguage{english}\color{black}
+The user deletes a connector from between two objects.
+}
+
+\paragraph[Input for this Feature]{Input for this Feature}
+{\selectlanguage{english}\color{black}
+The user right-clicks on an object to be deleted, and selects the delete option from the QMenu.
+}
+
+\paragraph{Output for this Feature}
+{\selectlanguage{english}\color{black}
+The Canvas deletes the connector.
+}
+
+\paragraph{Feature Process to Convert Input to Output}
+{\selectlanguage{english}\color{black}
+User right clicks on an connector on the Canvas. The Canvas verifies that an connector exists at the coordinates of the click, and sets the connector.  The Canvas prompts the QMenu to show itself.  The user selects the delete option from the QMenu.  The QMenu tells the Canvas to delete that connector. The Canvas deletes the connector and draws the updated list of connectors.
+}
+
+\paragraph{Design Constraints and Performance Requirements of this Feature}
+{\selectlanguage{english}\color{black}
+N/A
+}
+\bigskip
+\bigskip
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=6.0in]{IntDelConn.jpg}
+\end{figure}
+
+\clearpage
+
+  
+
+
+\subsubsection{Detailed Design for Feature: Save As }
+
+\paragraph[\ Introduction/Purpose of this Feature]
+{\ Introduction/Purpose of this Feature}
+{\selectlanguage{english}\color{black}
+The user wishes to save a UML diagram under a new file name.
+}
+
+\paragraph[Input for this Feature]{Input for this Feature}
+{\selectlanguage{english}\color{black}
+The user opens the File Menu and selects Save As.
+}
+
+\paragraph{Output for this Feature}
+{\selectlanguage{english}\color{black}
+pUML produces a QDialog box through which the user may type a new file name, and then saves the file.
+}
+
+\paragraph{Feature Process to Convert Input to Output}
+{\selectlanguage{english}\color{black}
+User clicks on the File menu option. User clicks on the Save As option. Main Menu creates a predefined QDialog and shows it to the user. The user types in the desired file name, and the QDialog submits this information to the Main Menu. Main Menu sends updated information about the file{\textquoteright}s saved status to the Canvas. Canvas acknowledges and returns xml.  Main Menu prints new xml information.
+}
+
+\paragraph{Design Constraints and Performance Requirements of this Feature}
+{\selectlanguage{english}\color{black}
+Directory browsing functionality within the QDialog may not be developed until a later release.
+}
+\bigskip
+\bigskip
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=6.0in]{IntSaveAs.jpg}
+\end{figure}
+
+\clearpage
 
 
 
