@@ -1,15 +1,5 @@
 #include "mainwindow.h"
-#include <QAction>
-#include <QMenuBar>
-#include <QMenu>
-#include <QString>
-#include <QToolBar>
-#include <QStatusBar>
-#include <QFileDialog>
-#include <QPrinter>
-#include <QPrintDialog>
-#include <QMessageBox>
-#include <QCloseEvent>
+
 
 /*! In the MainWindow constructor, we need to create
     all the actions and all the widgets. We call
@@ -18,60 +8,124 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    setupUI();
+    createActions();
+    createMenus();
+    createWidgets();
+    connectSignalsSlots();
+
+    signalMapper = new QSignalMapper(this);
+    currentDocument = -1;
+
+    //register the objects
+    registerObjectWithFactory(new OvalNode);
+
+    //connect all the actions in the signalmapper to the one createObject slot.
+    connect(signalMapper, SIGNAL(mapped(int)), this, SLOT(setPrototypeID(int)));
+
+    //At this point, we need to add the actions created by registerObject
+    //and put them into the menu structure and toolbar. Then
+    //whenever one of the actions are triggered, the setPrototypeID function
+    //is triggered with a prototype ID specified by the signalmapper
+    for (int i=0; i<(int)actions.size(); i++) {
+        Shapes_Connectors->addAction(actions.at(i));
+        mainToolBar->addAction(actions.at(i));
+        menuShapes->addAction(actions.at(i));
+
+    }
+
+    this->resize(600,500);
+    this->setWindowTitle(tr("Phunctional UML Editor"));
+}
+
+//This is a helper function that registers an arbitrary Node* as a
+//prototype in the factory. It then creates a new QAction based on
+//data from the Node* and adds the action to signalmapper and
+//actions.
+//This function would be part of MainWindow, and actions and signalmapper
+//would be both be member variables. Factory would probably be a singleton
+void MainWindow::registerObjectWithFactory(BaseNode* newPrototype)
+{
+    int newID;
+    QAction* newAction;
+
+    //register the prototype
+    newID = NodeFactory::getInstance()->registerPrototype(newPrototype);
+    //create the action
+    newAction = new QAction(this);
+    //set up the action with the right icon, text
+    newAction->setText(newPrototype->getText());
+    newAction->setIcon(QIcon(newPrototype->getIconPath()));
+    newAction->setCheckable(true);
+    //add this action to the signalmapper
+    connect(newAction, SIGNAL(triggered()), signalMapper, SLOT(map()));
+    //add this action to the actions vector so we can access it later
+    actions.push_back(newAction);
+    //map this signal with the prototype's ID.
+    signalMapper->setMapping(newAction, newID);
+}
+
+void MainWindow::setCurrentDocument(int index)
+{
+    assert(index >= -1);
+    assert(index < (int)documents.size());
+    assert(currentDocument >= -1);
+    assert(currentDocument < (int)documents.size());
+
+    //first disconnect the currently connected document
+    if (currentDocument != -1) {
+        disconnect(canvasWidget, 0, documents.at(currentDocument), 0);
+        disconnect(documents.at(currentDocument), 0, canvasWidget, 0);
+    }
+
+    currentDocument = index;
+    connect(canvasWidget, SIGNAL(createObject(const QPoint &)), documents.at(currentDocument), SLOT(createObject(const QPoint &)));
+    connect(canvasWidget, SIGNAL(moveSelectedObject(const QPoint &)), documents.at(currentDocument), SLOT(moveSelectedObject(const QPoint &)));
+    connect(canvasWidget, SIGNAL(objectSelectionChange(const QPoint &)), documents.at(currentDocument), SLOT(setSelectedObject(const QPoint &)));
+    connect(documents.at(currentDocument), SIGNAL(modelChanged()), canvasWidget, SLOT(update()));
+    connect(canvasWidget, SIGNAL(redraw(QPainter&)), documents.at(currentDocument), SLOT(drawList(QPainter&)));
+
+    actionSelect->trigger();
+}
+
+//Slot. It would probably be located in either the canvas or
+//a seperate data structure, somewhere where it can have
+//direct or indirect access to the vector of nodes.
+void MainWindow::setPrototypeID(int prototypeID)
+{
+    //QMessageBox::information(this, "setPrototypeID: prototypeID", QString::number(prototypeID), QMessageBox::Ok);
+    assert(currentDocument >= -1);
+    assert(currentDocument < (int)documents.size());
+
+    //notify the canvas that it should be in object mode
+    canvasWidget->setMode(Canvas::Object);
+
+    //we need to set the prototype id in currently
+    //active document, so it knows what to create.
+    if (currentDocument != -1) {
+        documents.at(currentDocument)->setNewObjectID(prototypeID);
+    }
+
+
 }
 
 /*! Mainwindow deconstructor
 */
 MainWindow::~MainWindow()
 {
-    delete actionNew;
-    delete actionOpen;
-    delete actionSave;
-    delete actionSave_As;
-    //... should all the actions be deleted here?
+    //Since we have a vector of pointers, we need to make sure
+    //to free all of them manually.
+    for (int i=0; i<(int)actions.size(); i++) {
+        delete actions.at(i);
+    }
+    for (int i=0; i<(int)documents.size(); i++) {
+        delete documents.at(i);
+    }
+
+
 }
 
-/*! Here we are creating all the actions and all the widgets.
-*/
-void MainWindow::setupUI()
-{
-    if (this->objectName().isEmpty())
-        this->setObjectName(QString::fromUtf8("MainWindow"));
-    this->resize(600,500);
-    actionNew = new QAction(this);
-    actionNew->setObjectName(QString::fromUtf8("actionNew"));
-    actionOpen = new QAction(this);
-    actionOpen->setObjectName(QString::fromUtf8("actionOpen"));
-    actionSave = new QAction(this);
-    actionSave->setObjectName(QString::fromUtf8("actionSave"));
-    actionSave_As = new QAction(this);
-    actionSave_As->setObjectName(QString::fromUtf8("actionSave_As"));
-    actionPrint = new QAction(this);
-    actionPrint->setObjectName(QString::fromUtf8("actionPrint"));
-    actionImport_Export = new QAction(this);
-    actionImport_Export->setObjectName(QString::fromUtf8("actionImport_Export"));
-    actionExit = new QAction(this);
-    actionExit->setObjectName(QString::fromUtf8("actionExit"));
-    actionCopy = new QAction(this);
-    actionCopy->setObjectName(QString::fromUtf8("actionCopy"));
-    actionCut = new QAction(this);
-    actionCut->setObjectName(QString::fromUtf8("actionCut"));
-    actionPaste = new QAction(this);
-    actionPaste->setObjectName(QString::fromUtf8("actionPaste"));
-    actionSelect_All = new QAction(this);
-    actionSelect_All->setObjectName(QString::fromUtf8("actionSelect_All"));
-    actionInverse_Select = new QAction(this);
-    actionInverse_Select->setObjectName(QString::fromUtf8("actionInverse_Select"));
 
-    Shapes_Connectors = new QActionGroup(this);
-    Shapes_Connectors -> setExclusive(true);
-
-    actionSelect = new QAction(this);
-    actionSelect->setIcon(QIcon(":/Images/select.png"));
-    actionSelect->setObjectName(QString::fromUtf8("actionSelect"));
-    actionSelect->setCheckable(true);
-    Shapes_Connectors->addAction(actionSelect);
+    /*
     actionCircle = new QAction(this);
     actionCircle->setIcon(QIcon(":/Images/oval.png"));
     // all of these jpg and jpeg files are set for the directory that I put them in, they need to be changed in order to work on anyone elses computer
@@ -120,65 +174,85 @@ void MainWindow::setupUI()
     actionDotted_Line->setObjectName(QString::fromUtf8("actionDotted_Line"));
     actionDotted_Line->setCheckable(true);
     Shapes_Connectors->addAction(actionDotted_Line);
+*/
 
 
+    //menuEdit->setDisabled(true);
+    //menuTools->setDisabled(true);
+    //menuShapes->setDisabled(true);
+    //menuWindow->setDisabled(true);
+
+
+void MainWindow::createActions()
+{
+    actionNew = new QAction(this);
+    actionNew->setText(tr("New"));
+    actionNew->setToolTip(tr("Create New pUML File"));
+    actionOpen = new QAction(this);
+    actionOpen->setText(tr("Open"));
+    actionOpen->setToolTip(tr("Open a exsiting pUML file"));
+    actionSave = new QAction(this);
+    actionSave->setText(tr("Save"));
+    actionSave->setToolTip(tr("Save current work into file"));
+    actionSave_As = new QAction(this);
+    actionSave_As->setText(tr("Save As.."));
+    actionSave_As->setToolTip(tr("Save current work into another file"));
+    actionPrint = new QAction(this);
+    actionPrint->setText(tr("Print"));
+    actionPrint->setToolTip(tr("Print the current work"));
+    actionImport_Export = new QAction(this);
+    actionImport_Export->setText(tr("Import/Export"));
+    actionImport_Export->setToolTip(tr("Import/Export from/to other UML type file"));
+    actionExit = new QAction(this);
+    actionExit->setText(tr("Exit"));
+    actionCopy = new QAction(this);
+    actionCopy->setText(tr("Copy"));
+    actionCut = new QAction(this);
+    actionCut->setText(tr("Cut"));
+    actionPaste = new QAction(this);
+    actionPaste->setText(tr("Paste"));
+    actionSelect_All = new QAction(this);
+    actionSelect_All->setText(tr("Select All"));
+    actionInverse_Select = new QAction(this);
+    actionInverse_Select->setText(tr("Inverse Select"));
+    Shapes_Connectors = new QActionGroup(this);
+    Shapes_Connectors -> setExclusive(true);
     actionTile_Horizontally = new QAction(this);
-    actionTile_Horizontally->setObjectName(QString::fromUtf8("actionTile_Horizontally"));
     actionTile_Horizontally->setCheckable(true);
+    actionTile_Horizontally->setText(tr("Tile Horizontally"));
     actionTile_Vertically = new QAction(this);
-    actionTile_Vertically->setObjectName(QString::fromUtf8("actionTile_Vertically"));
     actionTile_Vertically->setCheckable(true);
+    actionTile_Vertically->setText(tr("Tile Vertically"));
     actionCascade = new QAction(this);
-    actionCascade->setObjectName(QString::fromUtf8("actionCascade"));
     actionCascade->setCheckable(true);
+    actionCascade->setText(tr("Cascade"));
     actionDocument = new QAction(this);
-    actionDocument->setObjectName(QString::fromUtf8("actionDocument"));
+    actionDocument->setText(tr("Help Document"));
     actionAbout = new QAction(this);
-    actionAbout->setObjectName(QString::fromUtf8("actionAbout"));
-    //centralWidget = new QWidget(this);
-    //centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
-    //verticalScrollBar = new QScrollBar(centralWidget);
-    //verticalScrollBar->setObjectName(QString::fromUtf8("verticalScrollBar"));
-    //verticalScrollBar->setGeometry(QRect(650, 0, 20, 401));
-    //verticalScrollBar->setOrientation(Qt::Vertical);
-    //horizontalScrollBar_2 = new QScrollBar(centralWidget);
-    //horizontalScrollBar_2->setObjectName(QString::fromUtf8("horizontalScrollBar_2"));
-    //horizontalScrollBar_2->setGeometry(QRect(0, 380, 651, 20));
-    //horizontalScrollBar_2->setOrientation(Qt::Horizontal);
-    //this->setCentralWidget(centralWidget);
+    actionAbout->setText(tr("About"));
+
+
+
+    actionSelect = new QAction(this);
+    actionSelect->setIcon(QIcon(":/Images/select.png"));
+    actionSelect->setObjectName(QString::fromUtf8("actionSelect"));
+    actionSelect->setCheckable(true);
+    actionSelect->setText(tr("Select"));
+    Shapes_Connectors->addAction(actionSelect);
+}
+
+void MainWindow::createMenus()
+{
     menuBar = new QMenuBar(this);
-    menuBar->setObjectName(QString::fromUtf8("menuBar"));
     menuBar->setGeometry(QRect(0, 0, 673, 21));
     menuFile = new QMenu(menuBar);
-    menuFile->setObjectName(QString::fromUtf8("menuFile"));
     menuEdit = new QMenu(menuBar);
-    menuEdit->setObjectName(QString::fromUtf8("menuEdit"));
     menuTools = new QMenu(menuBar);
-    menuTools->setObjectName(QString::fromUtf8("menuTools"));
     menuShapes = new QMenu(menuTools);
-    menuShapes->setObjectName(QString::fromUtf8("menuShapes"));
     menuConnectors = new QMenu(menuTools);
-    menuConnectors->setObjectName(QString::fromUtf8("menuConnectors"));
     menuWindow = new QMenu(menuBar);
-    menuWindow->setObjectName(QString::fromUtf8("menuWindow"));
     menuHelp = new QMenu(menuBar);
-    menuHelp->setObjectName(QString::fromUtf8("menuHelp"));
     this->setMenuBar(menuBar);
-    mainToolBar = new QToolBar(this);
-    mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
-    this->addToolBar(Qt::TopToolBarArea, mainToolBar);
-
-    mainToolBar->addAction(actionSelect);
-    mainToolBar->addAction(actionCircle);
-    mainToolBar->addAction(actionSquare);
-    mainToolBar->addAction(actionStickMan);
-    mainToolBar->addAction(actionDiamond);
-    mainToolBar->addAction(actionRectangle);
-
-    statusBar = new QStatusBar(this);
-    statusBar->setObjectName(QString::fromUtf8("statusBar"));
-    this->setStatusBar(statusBar);
-
     menuBar->addAction(menuFile->menuAction());
     menuBar->addAction(menuEdit->menuAction());
     menuBar->addAction(menuTools->menuAction());
@@ -204,15 +278,7 @@ void MainWindow::setupUI()
     menuTools->addAction(menuShapes->menuAction());
     menuTools->addAction(menuConnectors->menuAction());
     menuShapes->addAction(actionSelect);
-    menuShapes->addAction(actionCircle);
-    menuShapes->addAction(actionSquare);
-    menuShapes->addAction(actionStickMan);
-    menuShapes->addAction(actionDiamond);
-    menuShapes->addAction(actionRectangle);
     menuConnectors->addAction(actionSelect);
-    menuConnectors->addAction(actionArrow);
-    menuConnectors->addAction(actionLine);
-    menuConnectors->addAction(actionDotted_Line);
     menuWindow->addAction(actionTile_Horizontally);
     menuWindow->addAction(actionTile_Vertically);
     menuWindow->addAction(actionCascade);
@@ -220,20 +286,31 @@ void MainWindow::setupUI()
     menuHelp->addSeparator();
     menuHelp->addAction(actionAbout);
 
+    menuFile->setTitle(tr("File"));
+    menuEdit->setTitle(tr("Edit"));
+    menuTools->setTitle(tr("Tools"));
+    menuShapes->setTitle(tr("Shapes"));
+    menuConnectors->setTitle(tr("Connectors"));
+    menuWindow->setTitle(tr("Window"));
+    menuHelp->setTitle(tr("Help"));
+}
 
+void MainWindow::createWidgets()
+{
+    mainToolBar = new QToolBar(this);
+    this->addToolBar(Qt::TopToolBarArea, mainToolBar);
+    statusBar = new QStatusBar(this);
+    this->setStatusBar(statusBar);
 
     canvasWidget = new Canvas(this);
     canvasWidget->setObjectName(QString::fromUtf8("canvasWidget"));
     this->setCentralWidget(canvasWidget);
 
+    mainToolBar->addAction(actionSelect);
+}
 
-    retranslateUI();
-
-    menuEdit->setDisabled(true);
-    //menuTools->setDisabled(true);
-    //menuShapes->setDisabled(true);
-    menuWindow->setDisabled(true);
-
+void MainWindow::connectSignalsSlots()
+{
     //Instead of using connectSlotsByName and dealing with that,
     //manually connect the slots
     //QMetaObject::connectSlotsByName(this);
@@ -245,11 +322,6 @@ void MainWindow::setupUI()
     connect(actionPrint, SIGNAL(triggered()), this, SLOT(on_actionPrint_triggered()));
     connect(actionImport_Export, SIGNAL(triggered()), this, SLOT(on_actionImport_Export_triggered()));
     connect(actionSelect, SIGNAL(toggled(bool)), this, SLOT(on_actionSelect_toggled(bool)));
-    connect(actionCircle, SIGNAL(toggled(bool)), this, SLOT(on_actionCircle_toggled(bool)));
-    connect(actionDiamond, SIGNAL(toggled(bool)), this, SLOT(on_actionDiamond_toggled(bool)));
-    connect(actionRectangle, SIGNAL(toggled(bool)), this, SLOT(on_actionRectangle_toggled(bool)));
-    connect(actionSquare, SIGNAL(toggled(bool)) ,this, SLOT(on_actionSquare_toggled(bool)));
-    connect(actionStickMan, SIGNAL(toggled(bool)) ,this, SLOT(on_actionStickMan_toggled(bool)));
     /* list of slots
     void on_actionNew_triggered();
     void on_actionOpen_triggered();
@@ -279,69 +351,17 @@ void MainWindow::setupUI()
     */
 }
 
-void MainWindow::retranslateUI()
-{
-    this->setWindowTitle(tr("MainWindow"));
-    actionNew->setText(tr("New"));
-#ifndef QT_NO_TOOLTIP
-    actionNew->setToolTip(tr("Create New pUML File"));
-#endif // QT_NO_TOOLTIP
-    actionOpen->setText(tr("Open"));
-#ifndef QT_NO_TOOLTIP
-    actionOpen->setToolTip(tr("Open a exsiting pUML file"));
-#endif // QT_NO_TOOLTIP
-    actionSave->setText(tr("Save"));
-#ifndef QT_NO_TOOLTIP
-    actionSave->setToolTip(tr("Save current work into file"));
-#endif // QT_NO_TOOLTIP
-    actionSave_As->setText(tr("Save As.."));
-#ifndef QT_NO_TOOLTIP
-    actionSave_As->setToolTip(tr("Save current work into another file"));
-#endif // QT_NO_TOOLTIP
-    actionPrint->setText(tr("Print"));
-#ifndef QT_NO_TOOLTIP
-    actionPrint->setToolTip(tr("Print the current work"));
-#endif // QT_NO_TOOLTIP
-    actionImport_Export->setText(tr("Import/Export"));
-#ifndef QT_NO_TOOLTIP
-    actionImport_Export->setToolTip(tr("Import/Export from/to other UML type file"));
-#endif // QT_NO_TOOLTIP
-    actionExit->setText(tr("Exit"));
-    actionCopy->setText(tr("Copy"));
-    actionCut->setText(tr("Cut"));
-    actionPaste->setText(tr("Paste"));
-    actionSelect->setText(tr("Select"));
-    actionSelect_All->setText(tr("Select All"));
-    actionInverse_Select->setText(tr("Inverse Select"));
-    actionCircle->setText(tr("Circle"));
-    actionDiamond->setText(tr("Diamond"));
-    actionRectangle->setText(tr("Rectangle"));
-    actionSquare->setText(tr("Boundary"));
-    actionStickMan->setText(tr("StickMan"));
-    actionArrow->setText(tr("Arrow Line"));
-    actionLine->setText(tr("Straight Line"));
-    actionDotted_Line->setText(tr("Dotted Line"));
-    actionTile_Horizontally->setText(tr("Tile Horizontally"));
-    actionTile_Vertically->setText(tr("Tile Vertically"));
-    actionCascade->setText(tr("Cascade"));
-    actionDocument->setText(tr("Help Document"));
-    actionAbout->setText(tr("About"));
-    menuFile->setTitle(tr("File"));
-    menuEdit->setTitle(tr("Edit"));
-    menuTools->setTitle(tr("Tools"));
-    menuShapes->setTitle(tr("Shapes"));
-    menuConnectors->setTitle(tr("Connectors"));
-    menuWindow->setTitle(tr("Window"));
-    menuHelp->setTitle(tr("Help"));
-}
-
 void MainWindow::on_actionNew_triggered()
 {
     //dialog of UML types
     //dialogNew = new DialogNew;
     //dialogNew->show();
-    QMessageBox::information(this, "HI", "I'm here", QMessageBox::Ok);
+    QMessageBox::information(this, "pUML", "Creating a new generic diagram", QMessageBox::Ok);
 
+    Document* newdoc = new Document;
+    documents.push_back(newdoc);
+
+    setCurrentDocument(documents.size()-1);
 }
 
 void MainWindow::on_actionOpen_triggered()
@@ -420,62 +440,6 @@ void MainWindow::on_actionSelect_toggled(bool arg1) {
     }
 }
 
-void MainWindow::on_actionCircle_toggled(bool arg1)
-{
-    //if this action (menu item or toolbar button)
-    //was was toggled on, update the canvas
-    if (arg1 == true) {
-        canvasWidget->setNewShape(Canvas::ShpOval);
-    }
-    statusBar->showMessage("Circle");
-}
-
-void MainWindow::on_actionDiamond_toggled(bool arg1)
-{
-    if (arg1 == true) {
-        canvasWidget->setNewShape(Canvas::ShpDiamond);
-    }
-    statusBar->showMessage("Diamond");
-}
-
-void MainWindow::on_actionRectangle_toggled(bool arg1)
-{
-    if (arg1 == true){
-        canvasWidget->setNewShape(Canvas::ShpClassRectangle);
-    }
-    statusBar->showMessage("Class Rectangle");
-}
-
-void MainWindow::on_actionSquare_toggled(bool arg1)
-{
-    if(arg1 == true){
-        canvasWidget->setNewShape(Canvas::ShpSquare);
-    }
-    statusBar->showMessage("Boundary");
-}
-
-void MainWindow::on_actionStickMan_toggled(bool arg1)
-{
-    if (arg1 == true) {
-        canvasWidget->setNewShape(Canvas::ShpStickMan);
-    }
-    statusBar->showMessage("Stickman");
-}
-
-void MainWindow::on_actionArrow_toggled(bool arg1)
-{
-
-}
-
-void MainWindow::on_actionLine_toggled(bool arg1)
-{
-
-}
-
-void MainWindow::on_actionDotted_Line_toggled(bool arg1)
-{
-
-}
 
 void MainWindow::on_actionTile_Horizontally_toggled(bool arg1)
 {

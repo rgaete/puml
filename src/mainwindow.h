@@ -3,7 +3,24 @@
 
 #include <QMainWindow>
 #include <QActionGroup>
+
+#include <QSignalMapper>
+#include <QAction>
+#include <QMenuBar>
+#include <QMenu>
+#include <QString>
+#include <QToolBar>
+#include <QStatusBar>
+#include <QFileDialog>
+#include <QPrinter>
+#include <QPrintDialog>
+#include <QMessageBox>
+#include <QCloseEvent>
+#include "UMLnodes.h"
 #include "canvas.h"
+#include "nodefactory.h"
+#include "document.h"
+#include "assert.h"
 
 
 class MainWindow : public QMainWindow
@@ -30,14 +47,6 @@ public slots:
     void on_actionPaste_triggered();
     void on_actionSelect_All_triggered();
     void on_actionInverse_Select_triggered();
-    void on_actionCircle_toggled(bool arg1);
-    void on_actionDiamond_toggled(bool arg1);
-    void on_actionRectangle_toggled(bool arg1);
-    void on_actionSquare_toggled(bool arg1);
-    void on_actionStickMan_toggled(bool arg1);
-    void on_actionArrow_toggled(bool arg1);
-    void on_actionLine_toggled(bool arg1);
-    void on_actionDotted_Line_toggled(bool arg1);
     void on_actionTile_Horizontally_toggled(bool arg1);
     void on_actionTile_Vertically_toggled(bool arg1);
     void on_actionCascade_toggled(bool arg1);
@@ -45,13 +54,25 @@ public slots:
     void on_actionAbout_triggered();
     void on_actionSelect_toggled(bool arg1);
 
+    void setPrototypeID(int prototypeID);
+
 private:
-    void setupUI();
-    void retranslateUI();
+    void createActions();
+    void createMenus();
+    void createWidgets();
+    void connectSignalsSlots();
+    void registerObjectWithFactory(BaseNode* newPrototype);
+    void setCurrentDocument(int index);
 
 private:
     Canvas *canvasWidget;
     //DialogNew *dialogNew;
+    vector<QAction*> actions;
+    QSignalMapper *signalMapper;
+    //! Pointers are used again for polymorphic purposes.
+    vector<Document*> documents;
+    //! Index pointing to the current document
+    int currentDocument;
 
     QAction *actionNew;
     QAction *actionOpen;
@@ -67,25 +88,14 @@ private:
     QAction *actionSelect_All;
     QAction *actionInverse_Select;
     QActionGroup *Shapes_Connectors;
-    QAction *actionCircle;
-    QAction *actionDiamond;
-    QAction *actionRectangle;
-    QAction *actionSquare;
-    QAction *actionStickMan;
-    QAction *actionArrow;
-    QAction *actionLine;
-    QAction *actionDotted_Line;
     QAction *actionTile_Horizontally;
     QAction *actionTile_Vertically;
     QAction *actionCascade;
     QAction *actionDocument;
-
     QAction *actionAbout;
     QAction *actionDelete;
     QAction *actionEdit;
-    //QWidget *centralWidget;
-    //QScrollBar *verticalScrollBar;
-    //QScrollBar *horizontalScrollBar_2;
+
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuEdit;
@@ -95,6 +105,7 @@ private:
     QMenu *menuWindow;
     QMenu *menuHelp;
     QMenu *menuPopup;
+
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
