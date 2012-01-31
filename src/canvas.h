@@ -25,17 +25,6 @@ private:
     QAction *actionCut;
     QAction *actionCopy;
     QAction *actionPaste;
-
-    //void determineSelectedObject(int x, int y);
-    //void drawList(QPainter &painter);
-    //void createObject(QPoint position);
-
-    //This is is difference between where
-    //the user clicked on an object and
-    //where the position of the object is.
-    //Used for dragging objects.
-    QPoint positionDelta;
-
 public:
     explicit Canvas(QWidget *parent = 0);
     QSize sizeHint() const;

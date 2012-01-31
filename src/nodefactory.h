@@ -15,10 +15,10 @@ public:
     //call this to register a new prototype. Returns
     //the id of the new prototype (which is an index
     //into the vector
-    int registerPrototype(BaseNode* newPrototype);
+    static int registerPrototype(BaseNode* newPrototype);
     //Call this to get a clone of a prototype. Use the
     //id returned by registerPrototype
-    BaseNode* produce(int prototype_id);
+    static BaseNode* produce(int prototype_id);
 
     static NodeFactory* getInstance();
 
@@ -27,7 +27,7 @@ private:
    NodeFactory(NodeFactory const &) {}              // copy constructor is private
    NodeFactory& operator=(NodeFactory const&) {}    // assignment operator is private
 
-   vector<BaseNode*> prototypes;
+   static vector<BaseNode*> prototypes;
    static NodeFactory* instance;
 };
 

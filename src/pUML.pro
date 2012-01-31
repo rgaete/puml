@@ -14,7 +14,6 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     canvas.cpp \
     nodes.cpp \
-    dialognew.cpp \
     nodefactory.cpp \
     UMLnodes.cpp \
     document.cpp
@@ -22,7 +21,6 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h \
     canvas.h \
     nodes.h \
-    dialognew.h \
     nodefactory.h \
     UMLnodes.h \
     document.h
