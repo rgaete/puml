@@ -1,4 +1,5 @@
 #include "canvas.h"
+#include <QMessageBox>
 
 /*! Constructor for the canvas. It sets the sizing policy,
   sets the background to white, and sets the
@@ -7,8 +8,6 @@
 Canvas::Canvas(QWidget *parent) :
     QWidget(parent)
 {
-    indexOfSelectedObject = -1;
-
     //Set the size policy to say that sizeHint() is a recomended
     //minimum, but the widget should take up all space available,
     //and the widget can also be smaller than the sizeHint().
@@ -24,7 +23,7 @@ Canvas::Canvas(QWidget *parent) :
     setPalette(newPalette);
 
     //Initialize typeOfNewObject
-    whatToDrawNext = Nothing;
+    drawingMode = Nothing;
 
     //Create the actions
     actionDelete = new QAction(this);
@@ -57,67 +56,14 @@ QSize Canvas::sizeHint() const
     return QSize(50,50);
 }
 
-/*! This draws all of the objects that are in the nodes vector
-    by calling their draw functions.
-  */
-void Canvas::drawList(QPainter &painter)
-{
-    for (int i=0; i<(int)nodes.size(); i++) {
-        nodes[i]->draw(painter);
-    }
-}
-
-/*! This function is called when you want to set
-    what the canvas is going to draw next.
- */
-void Canvas::setNewShape(ShapeType type)
-{
-    typeOfNewObject = type;
-    whatToDrawNext = Object;
-}
-
 /*! This function is called when you want to set
     what type of object the canvas is going to
     draw next.
 */
-void Canvas::setMode(Canvas::DrawingNext mode)
+void Canvas::setMode(DrawingMode mode)
 {
-    whatToDrawNext = mode;
-}
-
-/*! This function is used to create a new object at a
-    certain position. It will create a new object
-    based on what typeOfNewObject is.
-*/
-void Canvas::createObject(QPoint position)
-{
-    if (whatToDrawNext != Object) {
-        //we have an error, this function shouldn't be called
-        //if we aren't drawing an object
-    } else {
-        ObjectNode *newShape;
-        //create whatever shape we need
-        switch (typeOfNewObject) {
-        case ShpOval:
-            newShape = new Oval(position);
-            break;
-        case ShpDiamond:
-            newShape = new Diamond(position);
-            break;
-        case ShpStickMan:
-            newShape = new StickPerson(position);
-            break;
-        case ShpClassRectangle:
-            newShape = new ClassRectangle(position);
-            break;
-        case ShpSquare:
-            newShape = new SquareBoundary(position);
-            break;
-        }
-
-        //add the node to the vector
-        nodes.push_back(newShape);
-    }
+    drawingMode = mode;
+    //QMessageBox::information(0, "setMode: mode", QString::number((int)drawingMode), QMessageBox::Ok);
 }
 
 /*! This function paints the canvas. That means it
@@ -129,6 +75,7 @@ void Canvas::paintEvent(QPaintEvent *event)
 
      /* Draw a grid. Shamelessly stolen from a previous
       * assignment. */
+     /* Update with stored preferences, zoom level */
      int lineThickness = 1;
      QColor lineColor = QColor(245,245,245,255);
      int colWidth = 10;
@@ -156,39 +103,11 @@ void Canvas::paintEvent(QPaintEvent *event)
      painter.drawLines(vlines);
 
      //Draw the nodes!!!
-     drawList(painter);
+     //Emit a draw signal
+     emit redraw(painter);
 
      //Kill the painter
      painter.end();
-}
-
-/*! This function sets the selectedObject variable to the
-    object that is at the x,y coordinate.
-    NOTE: order currently is based on what order the objects
-    are in the vector.
-*/
-void Canvas::determineSelectedObject(int x, int y)
-{
-    //reset the selected property of previously
-    //selected node
-    if (indexOfSelectedObject != -1) {
-        nodes.at(indexOfSelectedObject)->setSelected(false);
-    }
-
-    //start at the end of the vector and find the
-    //first object with a positive hittest.
-    indexOfSelectedObject = -1;
-    for (int i=nodes.size()-1; i>=0; i--) {
-        if (nodes.at(i)->hitTest(x,y) == true) {
-            indexOfSelectedObject = i;
-            nodes.at(i)->setSelected(true);
-            break;
-        }
-    }
-
-    //call update to have the objectes redraw themselves.
-    update();
-    //QMessageBox::information(this, "Index of Selected Object", QString::number(indexOfSelectedObject), QMessageBox::Ok);
 }
 
 /*! This event occures when the user presses down on the
@@ -199,7 +118,7 @@ void Canvas::determineSelectedObject(int x, int y)
 void Canvas::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton) {
-        switch (whatToDrawNext) {
+        switch (drawingMode) {
         case Object:
             //don't select or draw anything,
             //the work is done in the release event
@@ -209,10 +128,8 @@ void Canvas::mousePressEvent(QMouseEvent *event)
         case Nothing:
             //find what object the user is
             //clicking on
-            determineSelectedObject(event->x(), event->y());
-            if (indexOfSelectedObject != -1) {
-                positionDelta = event->pos() - nodes.at(indexOfSelectedObject)->getPosition();
-            }
+            emit objectSelectionChange(event->pos());
+            //this->positionDelta = event->pos();
             break;
         }
     }
@@ -222,14 +139,15 @@ void Canvas::mousePressEvent(QMouseEvent *event)
 void Canvas::mouseMoveEvent(QMouseEvent *event)
 {
     if ((event->buttons() = Qt::LeftButton) &&
-        (whatToDrawNext == Nothing) &&
-        (indexOfSelectedObject != -1))
+        (drawingMode == Nothing))
     {
         //The user is moving the mouse while holding down
         //the left mouse button, and the canvas is in
         //selection mode, and there is an object selected,
         //they must be dragging!
-        nodes.at(indexOfSelectedObject)->setPosition(this->mapFromGlobal(event->globalPos()) - positionDelta);
+        //nodes.at(indexOfSelectedObject)->setPosition(this->mapFromGlobal(event->globalPos()) - positionDelta);
+
+        emit moveSelectedObject(this->mapFromGlobal(event->globalPos()));
         update();
     }
 }
@@ -240,15 +158,21 @@ void Canvas::mouseMoveEvent(QMouseEvent *event)
 */
 void Canvas::mouseReleaseEvent(QMouseEvent *event)
 {
+   // QMessageBox::information(0, "pUML", QString::number((int)drawingMode), QMessageBox::Ok);
     if (event->button() == Qt::LeftButton) {
-        switch(whatToDrawNext) {
+        switch(drawingMode) {
         case Object:
-            createObject(event->pos());
+
+            emit createObject(event->pos());
+            //createObject(event->pos());
             //Call to update to initiate a paintEvent
-            update();
+            //update();
             break;
         case Connection:
+            //QMessageBox::information(0, "pUML", "Mouse Release connection", QMessageBox::Ok);
+             break;
         case Nothing:
+            //QMessageBox::information(0, "pUML", "Mouse Release Nothing", QMessageBox::Ok);
             break;
         }
     }
@@ -282,6 +206,6 @@ void Canvas::on_actionPaste_triggered()
 
 void Canvas::on_actionCopy_triggered()
 {
-}
 
+}
 

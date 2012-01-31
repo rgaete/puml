@@ -14,12 +14,18 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     canvas.cpp \
     nodes.cpp \
-    dialognew.cpp
+    dialognew.cpp \
+    nodefactory.cpp \
+    UMLnodes.cpp \
+    document.cpp
 
 HEADERS  += mainwindow.h \
     canvas.h \
     nodes.h \
-    dialognew.h
+    dialognew.h \
+    nodefactory.h \
+    UMLnodes.h \
+    document.h
 
 OTHER_FILES +=
 

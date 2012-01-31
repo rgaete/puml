@@ -32,52 +32,62 @@ class BaseNode {
         BaseNode();
         //~BaseNode() {}
 
-        int id() {return id_int;}
+        //int id() {return id_int;}
         void setSelected(bool newState) { selected = newState; }
         void setPosition(const QPoint &pos) { position = pos; }
         QPoint getPosition() { return position; }
+
         virtual void draw(QPainter &painter) =0;
-        virtual bool hitTest(int x, int y) =0;
+        virtual BaseNode* clone() =0;
+        virtual QDialog* getDialog() =0;
+        virtual QString getIconPath() =0;
+        virtual QString getText() =0;
+        virtual bool hitTest(const QPoint &point) =0;
 
     private:
         //This id is unique for each object in all the
         //the diagrams that are opened.
-        int id_int;
+        //int id_int;
     protected:
         bool selected;
         QPoint position;
-        //The node specific action that connects to
-        //on_action_triggered().
-        QAction action;
-
-    public slots:
-        virtual void on_action_triggered() =0;
-
-
 };
 
 /*!
- * This abstract base class describes the object nodes.
+ * @class ObjectNode
+ * @brief This is the base class for all object nodes.
  * @sa BaseNode
+ *
+ * All objects should inherit from this class, while all
+ * connection should inherit from @see ConnectionNode.
+ * This function defines only two of the virtual methods
+ * inherited from BaseNode, the rest need to be defined by
+ * derived classes.
  */
 class ObjectNode: public BaseNode {
 public:
-    ObjectNode(QPoint position);
-    //~ObjectNode() {}
+    /*! ObjectNode constructor, set the position.
+     *  @param position The center of the object, relative to the containing widget.
+     */
+    ObjectNode();
 
-    //virtual BaseNode* factory();
+    /*! This function performs a simple hittest by test whether
+     *  the specified point is inside the box defined by the
+     *  @see position, @see length, and @see height.
+     *  @param point The point to hittest at, relative to the canvas widget.
+     */
+    bool hitTest(const QPoint &point);
 
-    void addConnectionPoint(QPoint point) { connectionPoints.push_back(point); }
-    int getClosestConnectionPoint(QPoint whereAt);
-    QPoint translateConnectionPoint(int pointIndex);
-
-    bool hitTest(int x, int y);
+    /*! This function draws selection boxes at the corners
+     *  defined by @see length and @see height.
+     *  @param painter A valid QPainter passed by the containing widget.
+     */
     void draw(QPainter &painter);
 
 protected:
-    QRect my_shape;
-    vector<QPoint> connectionPoints;
+    //! The length (i.e. width) of the bounding box for this object
     int length;
+    //! The height of the bounding box for this object
     int height;
 
 };
@@ -89,110 +99,20 @@ protected:
  * destructor for them.
  * @sa BaseNode
  */
+
 class ConnectionNode: public BaseNode {
 public:
-    ConnectionNode(ObjectNode *point1, ObjectNode *point2);
+    ConnectionNode();
     ~ConnectionNode();
 
+    void setPoints(const QPoint &point1, const QPoint &point2);
 
     //virtual BaseNode* factory();
     bool hitTest(int x, int y);
 
 protected:
-    ObjectNode *connectionPoint1;
-    ObjectNode *connectionPoint2;
-    int connectionPoint1Index;
-    int connectionPoint2Index;
-    int object1Index;
-    int object2Index;
-
-
+    QPoint connectionPoint1;
+    QPoint connectionPoint2;
 };
 
-/*!
- * This concrete class is the StickPerson node.
- * @sa ObjectNode
- */
-class StickPerson: public ObjectNode {
-private:
-public:
-    StickPerson(QPoint position);
-    ~StickPerson() {}
-
-    //BaseNode* factory();
-    //void test_msg();
-    void draw(QPainter &painter);
-};
-
-/*!
- * This concrete class is the Oval node.
- * @sa ObjectNode
- */
-class Oval: public ObjectNode {
-private:
-
-public:
-    Oval(QPoint position);
-    ~Oval() {}
-
-    //BaseNode* factory();
-    //void test_msg();
-    void draw(QPainter &painter);
-};
-
-/* !
- *  This concrete class is the ClassRectangle node.
- *  @sa ObjectNode
- */
-class ClassRectangle: public ObjectNode {
-private:
-
-public:
-    ClassRectangle(QPoint position);
-    ~ClassRectangle() {}
-
-    void draw(QPainter &painter);
-};
-
-class SquareBoundary: public ObjectNode {
-private:
-
-public:
-    SquareBoundary(QPoint position);
-    ~SquareBoundary() {}
-
-    void draw (QPainter &painter);
-};
-
-/*!
- * This concrete class is the Diamond node.
- * @sa ObjectNode
- */
-class Diamond: public ObjectNode {
-private:
-
-public:
-    Diamond(QPoint position);
-    ~Diamond() {}
-
-    //BaseNode* factory();
-    //void test_msg();
-    void draw(QPainter &painter);
-};
-
-/*!
- * This concrete class is the SimpleLine node.
- * @sa ObjectNode
- */
-class SimpleLine: public ConnectionNode {
-private:
-    int thickness;
-public:
-    SimpleLine(ObjectNode *point1, ObjectNode *point2);
-    ~SimpleLine() {}
-
-    //BaseNode* factory();
-    //void test_msg();
-    void draw(QPainter &painter);
-};
 #endif
