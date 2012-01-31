@@ -1,6 +1,7 @@
 #include "nodefactory.h"
 
 NodeFactory* NodeFactory::instance = 0;
+vector<BaseNode*> NodeFactory::prototypes;
 
 NodeFactory::~NodeFactory()
 {
