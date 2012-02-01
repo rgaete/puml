@@ -1,4 +1,5 @@
 #include "canvas.h"
+#include "dialognew.h"
 
 /*! Constructor for the canvas. It sets the sizing policy,
   sets the background to white, and sets the
@@ -244,6 +245,11 @@ void Canvas::mouseReleaseEvent(QMouseEvent *event)
         switch(whatToDrawNext) {
         case Object:
             createObject(event->pos());
+            if(typeOfNewObject == ShpStickMan)
+            {
+                ActorDialog *dialog = new ActorDialog;
+                dialog->show();
+            }
             //Call to update to initiate a paintEvent
             update();
             break;

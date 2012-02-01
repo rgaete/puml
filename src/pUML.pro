@@ -14,19 +14,19 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     canvas.cpp \
     nodes.cpp \
-    dialognew.cpp \
-    actorDialog.cpp
+    dialognew.cpp
 
 HEADERS  += mainwindow.h \
     canvas.h \
     nodes.h \
-    dialognew.h \
-    actorDialog.h
+    dialognew.h
 
 OTHER_FILES +=
 
 RESOURCES += \
     icons.qrc
+
+
 
 
 
