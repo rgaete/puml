@@ -25,6 +25,7 @@ private:
     QAction *actionCut;
     QAction *actionCopy;
     QAction *actionPaste;
+    QAction *actionProperties;
 public:
     explicit Canvas(QWidget *parent = 0);
     QSize sizeHint() const;
@@ -42,12 +43,14 @@ signals:
     void moveSelectedObject(const QPoint &point);
     void createObject(const QPoint &point);
     void redraw(QPainter &painter);
+    void showPropertiesDialog();
 
 public slots:
     void on_actionDelete_triggered();
     void on_actionCut_triggered();
     void on_actionCopy_triggered();
     void on_actionPaste_triggered();
+    void on_actionProperties_triggered();
 };
 
 #endif // CANVAS_H

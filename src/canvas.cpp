@@ -34,16 +34,20 @@ Canvas::Canvas(QWidget *parent) :
     actionCopy->setText("Copy");
     actionPaste = new QAction(this);
     actionPaste->setText("Paste");
+    actionProperties = new QAction(this);
+    actionProperties->setText("Properties");
     connect(actionDelete, SIGNAL(triggered()), this, SLOT(on_actionDelete_triggered()));
     connect(actionCut, SIGNAL(triggered()), this, SLOT(on_actionCut_triggered()));
     connect(actionCopy, SIGNAL(triggered()), this, SLOT(on_actionCopy_triggered()));
     connect(actionPaste, SIGNAL(triggered()), this, SLOT(on_actionPaste_triggered()));
+    connect(actionProperties, SIGNAL(triggered()), this, SLOT(on_actionProperties_triggered()));
 
     menuPopup = new QMenu(this);
     menuPopup->addAction(actionCut);
     menuPopup->addAction(actionCopy);
     menuPopup->addAction(actionPaste);
     menuPopup->addAction(actionDelete);
+    menuPopup->addAction(actionProperties);
 
     //setContextMenuPolicy(Qt::CustomContextMenu);
 
@@ -202,6 +206,12 @@ void Canvas::on_actionCut_triggered()
 void Canvas::on_actionPaste_triggered()
 {
 
+}
+
+void Canvas::on_actionProperties_triggered()
+{
+    //Call up the properties for the node.
+    emit showPropertiesDialog();
 }
 
 void Canvas::on_actionCopy_triggered()
