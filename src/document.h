@@ -30,6 +30,7 @@ public slots:
     void setSelectedObject(const QPoint &point);
     void moveSelectedObject(const QPoint &point);
     void createObject(const QPoint &position);
+    void showPropertiesDialog();
 };
 
 #endif // DOCUMENT_H

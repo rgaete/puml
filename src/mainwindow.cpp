@@ -36,6 +36,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->resize(600,500);
     this->setWindowTitle(tr("Phunctional UML Editor"));
+
+    //create a new document on launch
+    on_actionNew_triggered();
 }
 
 //This is a helper function that registers an arbitrary Node* as a
@@ -78,12 +81,14 @@ void MainWindow::setCurrentDocument(int index)
         disconnect(documents.at(currentDocument), 0, canvasWidget, 0);
     }
 
+    //Then connection the canvas to the new document
     currentDocument = index;
     connect(canvasWidget, SIGNAL(createObject(const QPoint &)), documents.at(currentDocument), SLOT(createObject(const QPoint &)));
     connect(canvasWidget, SIGNAL(moveSelectedObject(const QPoint &)), documents.at(currentDocument), SLOT(moveSelectedObject(const QPoint &)));
     connect(canvasWidget, SIGNAL(objectSelectionChange(const QPoint &)), documents.at(currentDocument), SLOT(setSelectedObject(const QPoint &)));
     connect(documents.at(currentDocument), SIGNAL(modelChanged()), canvasWidget, SLOT(update()));
     connect(canvasWidget, SIGNAL(redraw(QPainter&)), documents.at(currentDocument), SLOT(drawList(QPainter&)));
+    connect(canvasWidget, SIGNAL(showPropertiesDialog()), documents.at(currentDocument), SLOT(showPropertiesDialog()));
 
     actionSelect->trigger();
 }
@@ -154,12 +159,6 @@ MainWindow::~MainWindow()
     actionSquare->setObjectName(QString::fromUtf8("actionSquare"));
     actionSquare->setCheckable(true);
     Shapes_Connectors->addAction(actionSquare);
-
-    actionStickMan = new QAction(this);
-    actionStickMan->setIcon(QIcon(":/Images/stickman.png"));
-    actionStickMan->setObjectName(QString::fromUtf8("actionStickMan"));
-    actionStickMan->setCheckable(true);
-    Shapes_Connectors->addAction(actionStickMan);
 
     actionArrow = new QAction(this);
     actionArrow->setObjectName(QString::fromUtf8("actionArrow"));

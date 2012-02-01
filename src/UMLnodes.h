@@ -3,11 +3,30 @@
 
 #include "nodes.h"
 #include <QDialog>
+#include <QDialog>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 
 
 class StickDialog : public QDialog {
+    Q_OBJECT
+public:
+    StickDialog(QWidget *parent = 0);
 
+signals:
+
+private slots:
+
+private:
+    QLabel *label;
+    QLineEdit *lineEdit;
+    QPushButton *acceptButton;
+    QPushButton *closeButton;
 };
+
 /*!
  * This concrete class is the StickPerson node.
  * @sa ObjectNode
