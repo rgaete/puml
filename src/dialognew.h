@@ -2,6 +2,29 @@
 #define DIALOGNEW_H
 
 #include <QDialog>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+
+class ActorDialog : public QDialog
+{
+    Q_OBJECT
+
+public:
+    ActorDialog(QWidget *parent = 0);
+
+signals:
+
+private slots:
+
+private:
+    QLabel *label;
+    QLineEdit *lineEdit;
+    QPushButton *acceptButton;
+    QPushButton *closeButton;
+};
 
 class DialogNew : public QDialog
 {
