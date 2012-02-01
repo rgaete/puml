@@ -52,22 +52,20 @@ void SimpleLine::draw(QPainter &painter)
   the initial length and height and add
   any connection points.
 */
-/*
-StickPerson::StickPerson(QPoint position)
-            :ObjectNode(position) {
+
+StickPerson::StickPerson()
+            :ObjectNode() {
     this->length = 50;
     this->height = 70;
     QPoint pos;
     pos.setX(position.x() + length/2);
     pos.setY(position.y() + height);
-    this->addConnectionPoint(pos);
 }
-*/
+
 
 /*! Draws a stickperson on the given painter
     at position.
 */
-/*
 void StickPerson::draw(QPainter &painter)
 {
     //Always call this ObjectNode's draw function because it
@@ -96,9 +94,36 @@ void StickPerson::draw(QPainter &painter)
     painter.drawLine(tempx,tempy+20/70.0*height,tempx-10/50.0*length,tempy+(20+15)/70.0*height); //left leg
     painter.drawLine(tempx,tempy+20/70.0*height,tempx+10/50.0*length,tempy+(20+15)/70.0*height); //right leg
     painter.drawEllipse(tempx-16/2/50.0*length, tempy-(10+16)/70.0*height,16/50.0*length,16/70.0*height); //head
-
 }
-*/
+
+StickDialog::StickDialog(QWidget *parent)
+    :QDialog(parent)
+{
+    label = new QLabel(tr("Actor name:"));
+    lineEdit = new QLineEdit;
+    label->setBuddy(lineEdit);
+
+    acceptButton = new QPushButton(tr("Ok"));
+    closeButton = new QPushButton(tr("Close"));
+
+    QHBoxLayout *inputLayout = new QHBoxLayout;
+    inputLayout->addWidget(label);
+    inputLayout->addWidget(lineEdit);
+
+    QHBoxLayout *buttonLayout = new QHBoxLayout;
+    buttonLayout->addWidget(acceptButton);
+    buttonLayout->addWidget(closeButton);
+
+    QVBoxLayout *mainLayout = new QVBoxLayout;
+    mainLayout->addLayout(inputLayout);
+    mainLayout->addLayout(buttonLayout);
+
+    setLayout(mainLayout);
+    setWindowTitle(tr("Actor Properties"));
+
+    connect(closeButton, SIGNAL(clicked()),this,SLOT(close()));
+    connect(acceptButton, SIGNAL(clicked()),this,SLOT(close()));
+}
 
 /*******************************/
 /* Oval Functions **************/
@@ -126,6 +151,7 @@ void OvalNode::draw(QPainter &painter)
     painter.setBrush(Qt::NoBrush);
     painter.drawEllipse(position,length/2,height/2);
 }
+
 
 /*******************************/
 /*** ClassRectangle Functions **/
