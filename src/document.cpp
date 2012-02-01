@@ -68,6 +68,9 @@ void Document::moveSelectedObject(const QPoint &point)
 
 void Document::createObject(const QPoint &position)
 {
+    assert(indexOfSelectedObject >= -1);
+    assert(indexOfSelectedObject < (int)nodes.size());
+
     //create a new node using the factory
     //QMessageBox::information(0, "pUML", QString::number(nodes.size()), QMessageBox::Ok);
     BaseNode* newNode;
@@ -81,7 +84,32 @@ void Document::createObject(const QPoint &position)
    addNode(newNode);
    //QMessageBox::information(0, "pUML", QString::number(nodes.size()), QMessageBox::Ok);
 
+   //reset the selected property of previously
+   //selected node
+   if (indexOfSelectedObject != -1) {
+       nodes.at(indexOfSelectedObject)->setSelected(false);
+   }
+
+   //set the selected index to be the created object
+   indexOfSelectedObject = nodes.size()-1;
+   nodes.at(indexOfSelectedObject)->setSelected(true);
+
    emit modelChanged();
+}
+
+void Document::showPropertiesDialog()
+{
+    assert(indexOfSelectedObject >= -1);
+    assert(indexOfSelectedObject < (int)nodes.size());
+
+    if (indexOfSelectedObject != -1) {
+        QDialog *properties;
+        properties = nodes.at(indexOfSelectedObject)->getDialog();
+
+        properties->exec();
+        delete properties;
+    }
+
 }
 
 void Document::drawList(QPainter &painter)

@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     //register the objects
     registerObjectWithFactory(new OvalNode);
+    registerObjectWithFactory(new StickPerson);
 
     //connect all the actions in the signalmapper to the one createObject slot.
     connect(signalMapper, SIGNAL(mapped(int)), this, SLOT(setPrototypeID(int)));
@@ -35,6 +36,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->resize(600,500);
     this->setWindowTitle(tr("Phunctional UML Editor"));
+
+    //create a new document on launch
+    on_actionNew_triggered();
 }
 
 //This is a helper function that registers an arbitrary Node* as a
@@ -77,12 +81,14 @@ void MainWindow::setCurrentDocument(int index)
         disconnect(documents.at(currentDocument), 0, canvasWidget, 0);
     }
 
+    //Then connection the canvas to the new document
     currentDocument = index;
     connect(canvasWidget, SIGNAL(createObject(const QPoint &)), documents.at(currentDocument), SLOT(createObject(const QPoint &)));
     connect(canvasWidget, SIGNAL(moveSelectedObject(const QPoint &)), documents.at(currentDocument), SLOT(moveSelectedObject(const QPoint &)));
     connect(canvasWidget, SIGNAL(objectSelectionChange(const QPoint &)), documents.at(currentDocument), SLOT(setSelectedObject(const QPoint &)));
     connect(documents.at(currentDocument), SIGNAL(modelChanged()), canvasWidget, SLOT(update()));
     connect(canvasWidget, SIGNAL(redraw(QPainter&)), documents.at(currentDocument), SLOT(drawList(QPainter&)));
+    connect(canvasWidget, SIGNAL(showPropertiesDialog()), documents.at(currentDocument), SLOT(showPropertiesDialog()));
 
     actionSelect->trigger();
 }
@@ -154,12 +160,6 @@ MainWindow::~MainWindow()
     actionSquare->setCheckable(true);
     Shapes_Connectors->addAction(actionSquare);
 
-    actionStickMan = new QAction(this);
-    actionStickMan->setIcon(QIcon(":/Images/stickman.png"));
-    actionStickMan->setObjectName(QString::fromUtf8("actionStickMan"));
-    actionStickMan->setCheckable(true);
-    Shapes_Connectors->addAction(actionStickMan);
-
     actionArrow = new QAction(this);
     actionArrow->setObjectName(QString::fromUtf8("actionArrow"));
     actionArrow->setCheckable(true);
@@ -217,21 +217,10 @@ void MainWindow::createActions()
     actionInverse_Select->setText(tr("Inverse Select"));
     Shapes_Connectors = new QActionGroup(this);
     Shapes_Connectors -> setExclusive(true);
-    actionTile_Horizontally = new QAction(this);
-    actionTile_Horizontally->setCheckable(true);
-    actionTile_Horizontally->setText(tr("Tile Horizontally"));
-    actionTile_Vertically = new QAction(this);
-    actionTile_Vertically->setCheckable(true);
-    actionTile_Vertically->setText(tr("Tile Vertically"));
-    actionCascade = new QAction(this);
-    actionCascade->setCheckable(true);
-    actionCascade->setText(tr("Cascade"));
     actionDocument = new QAction(this);
     actionDocument->setText(tr("Help Document"));
     actionAbout = new QAction(this);
     actionAbout->setText(tr("About"));
-
-
 
     actionSelect = new QAction(this);
     actionSelect->setIcon(QIcon(":/Images/select.png"));
@@ -250,13 +239,11 @@ void MainWindow::createMenus()
     menuTools = new QMenu(menuBar);
     menuShapes = new QMenu(menuTools);
     menuConnectors = new QMenu(menuTools);
-    menuWindow = new QMenu(menuBar);
     menuHelp = new QMenu(menuBar);
     this->setMenuBar(menuBar);
     menuBar->addAction(menuFile->menuAction());
     menuBar->addAction(menuEdit->menuAction());
     menuBar->addAction(menuTools->menuAction());
-    menuBar->addAction(menuWindow->menuAction());
     menuBar->addAction(menuHelp->menuAction());
     menuFile->addAction(actionNew);
     menuFile->addAction(actionOpen);
@@ -277,11 +264,6 @@ void MainWindow::createMenus()
     menuTools->addAction(actionSelect);
     menuTools->addAction(menuShapes->menuAction());
     menuTools->addAction(menuConnectors->menuAction());
-    menuShapes->addAction(actionSelect);
-    menuConnectors->addAction(actionSelect);
-    menuWindow->addAction(actionTile_Horizontally);
-    menuWindow->addAction(actionTile_Vertically);
-    menuWindow->addAction(actionCascade);
     menuHelp->addAction(actionDocument);
     menuHelp->addSeparator();
     menuHelp->addAction(actionAbout);
@@ -291,7 +273,6 @@ void MainWindow::createMenus()
     menuTools->setTitle(tr("Tools"));
     menuShapes->setTitle(tr("Shapes"));
     menuConnectors->setTitle(tr("Connectors"));
-    menuWindow->setTitle(tr("Window"));
     menuHelp->setTitle(tr("Help"));
 }
 

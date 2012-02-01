@@ -88,9 +88,6 @@ private:
     QAction *actionSelect_All;
     QAction *actionInverse_Select;
     QActionGroup *Shapes_Connectors;
-    QAction *actionTile_Horizontally;
-    QAction *actionTile_Vertically;
-    QAction *actionCascade;
     QAction *actionDocument;
     QAction *actionAbout;
     QAction *actionDelete;
@@ -102,7 +99,6 @@ private:
     QMenu *menuTools;
     QMenu *menuShapes;
     QMenu *menuConnectors;
-    QMenu *menuWindow;
     QMenu *menuHelp;
     QMenu *menuPopup;
 
