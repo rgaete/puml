@@ -5,22 +5,25 @@
 #include <QDialog>
 
 
+class StickDialog : public QDialog {
+
+};
 /*!
  * This concrete class is the StickPerson node.
  * @sa ObjectNode
  */
-/*
 class StickPerson: public ObjectNode {
-private:
 public:
-    StickPerson(QPoint position);
-    ~StickPerson() {}
+    StickPerson();
+    BaseNode* clone() { return new StickPerson; }
+    QDialog* getDialog() { return new StickDialog; }
+    QString getIconPath() { return QString(":/Images/stickman.png"); }
+    QString getText() { return "Stick Person"; }
 
-    //BaseNode* factory();
-    //void test_msg();
     void draw(QPainter &painter);
+private:
 };
-*/
+
 
 class OvalDialog : public QDialog {
 

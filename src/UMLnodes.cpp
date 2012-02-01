@@ -52,22 +52,20 @@ void SimpleLine::draw(QPainter &painter)
   the initial length and height and add
   any connection points.
 */
-/*
-StickPerson::StickPerson(QPoint position)
-            :ObjectNode(position) {
+
+StickPerson::StickPerson()
+            :ObjectNode() {
     this->length = 50;
     this->height = 70;
     QPoint pos;
     pos.setX(position.x() + length/2);
     pos.setY(position.y() + height);
-    this->addConnectionPoint(pos);
 }
-*/
+
 
 /*! Draws a stickperson on the given painter
     at position.
 */
-/*
 void StickPerson::draw(QPainter &painter)
 {
     //Always call this ObjectNode's draw function because it
@@ -96,9 +94,7 @@ void StickPerson::draw(QPainter &painter)
     painter.drawLine(tempx,tempy+20/70.0*height,tempx-10/50.0*length,tempy+(20+15)/70.0*height); //left leg
     painter.drawLine(tempx,tempy+20/70.0*height,tempx+10/50.0*length,tempy+(20+15)/70.0*height); //right leg
     painter.drawEllipse(tempx-16/2/50.0*length, tempy-(10+16)/70.0*height,16/50.0*length,16/70.0*height); //head
-
 }
-*/
 
 /*******************************/
 /* Oval Functions **************/
