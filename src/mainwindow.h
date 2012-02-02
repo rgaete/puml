@@ -2,12 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QActionGroup>
-
+#include <QActionGroup>f
 #include <QSignalMapper>
 #include <QAction>
 #include <QMenuBar>
 #include <QMenu>
+#include <QPushButton>
+#include <QLabel>
 #include <QString>
 #include <QToolBar>
 #include <QStatusBar>
@@ -59,6 +60,7 @@ public slots:
 private:
     void createActions();
     void createMenus();
+    void createToolbar();
     void createWidgets();
     void connectSignalsSlots();
     void registerObjectWithFactory(BaseNode* newPrototype);
