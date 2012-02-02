@@ -1,0 +1,228 @@
+#!/bin/bash
+if [ -z  "$1" ] ; then
+	echo you must enter files
+        exit 0
+fi
+
+if [ -n "$1" ] ; then
+  if [ -f "$1" ] ; then
+   filename=${1%.*}
+   if [ -d "$filename" ]; then
+   filename="$filename"diff
+   else
+   mkdir $filename
+   fi
+   cp $1 $filename
+   cd $filename
+   cd ..
+   else
+    echo "you must enter a valid filename"
+    exit 0
+  fi
+fi
+
+if [ -n "$2" ] ; then
+  if [ -f "$2" ] ; then
+     cd $filename
+   if [ -f "$2" ] ; then
+      echo press 1 if you want to rename the file, 2 if you want to overwrite the file and 3 if you dont want to copy the file
+      read opt
+    if [ $opt = 1 ] ; then
+      cd ..
+      echo enter name
+      read newname
+      mv $2 $newname
+      cp $newname $filename
+   fi
+   if [ $opt = 2 ]; then
+      rm $2
+      cd ..
+      cp $2 $filename
+   fi
+   else
+   cd ..
+   cp $2 $filename
+   fi
+  fi
+else
+  tar -cf "$filename".tar $filename
+  rm -r $filename
+  exit 0
+fi
+
+
+if [ -n "$3" ] ; then
+  if [ -f "$3" ] ; then
+     cd $filename
+   if [ -f "$3" ] ; then
+      echo press 1 if you want to rename the file, 2 if you want to overwrite the file and 3 if you dont want to copy the file
+      read opt
+    if [ $opt = 1 ] ; then
+      cd ..
+      echo enter name
+      read newname
+      mv $3 $newname
+      cp $newname $filename
+   fi   
+   if [ $opt = 2 ]; then
+      rm $3
+      cd ..                                                                      
+      cp $3 $filename
+   fi
+   else
+   cd ..
+   cp $3 $filename
+   fi
+  fi
+else
+  tar -cf "$filename".tar $filename
+  rm -r $filename
+  exit 0
+fi
+	
+if [ -n "$4" ] ; then
+  if [ -f "$4" ] ; then
+     cd $filename
+   if [ -f "$4" ] ; then
+      echo press 1 if you want to rename the file, 2 if you want to overwrite the file and 3 if you dont want to copy the file
+      read opt
+    if [ $opt = 1 ] ; then
+      cd ..
+      echo enter name
+      read newname
+      mv $4 $newname
+      cp $newname $filename
+   fi
+   if [ $opt = 2 ]; then
+      rm $4
+      cd ..
+      cp $4 $filename
+   fi
+   else
+   cd ..
+   cp $4 $filename
+   fi
+  fi
+else
+  tar -cf "$filename".tar $filename
+  rm -r $filename
+   exit 0
+fi
+
+if [ -n "$5" ] ; then
+  if [ -f "$5" ] ; then
+     cd $filename
+   if [ -f "$5" ] ; then
+      echo press 1 if you want to rename the file, 2 if you want to overwrite the file and 3 if you dont want to copy the file
+      read opt
+    if [ $opt = 1 ] ; then
+      cd ..
+      echo enter name
+      read newname
+      mv $5 $newname
+      cp $newname $filename
+   fi
+   if [ $opt = 2 ]; then
+      rm $5
+      cd ..
+      cp $5 $filename
+   fi
+   else
+   cd ..
+   cp $5 $filename
+   fi
+  fi
+else
+  tar -cf "$filename".tar $filename
+  rm -r $filename
+  exit 0
+fi
+
+if [ -n "$6" ] ; then
+  if [ -f "$6" ] ; then
+     cd $filename
+   if [ -f "$6" ] ; then
+      echo press 1 if you want to rename the file, 2 if you want to overwrite the file and 3 if you dont want to copy the file
+      read opt
+    if [ $opt = 1 ] ; then
+      cd ..
+      echo enter name
+      read newname
+      mv $6 $newname
+      cp $newname $filename
+   fi
+   if [ $opt = 2 ]; then
+      rm $6
+      cd ..
+      cp $6 $filename
+   fi
+   else
+   cd ..
+   cp $6 $filename
+   fi
+  fi
+else
+  tar -cf "$filename".tar $filename
+  rm -r $filename
+  exit 0
+fi
+
+if [ -n "$7" ] ; then
+  if [ -f "$7" ] ; then
+     cd $filename
+   if [ -f "$7" ] ; then
+      echo press 1 if you want to rename the file, 2 if you want to overwrite the file and 3 if you dont want to copy the file
+      read opt
+    if [ $opt = 1 ] ; then
+      cd ..
+      echo enter name
+      read newname
+      mv $7 $newname
+      cp $newname $filename
+   fi
+   if [ $opt = 2 ]; then
+      rm $7
+      cd ..
+      cp $7 $filename
+   fi   
+   else
+   cd ..
+   cp $7 $filename
+   fi
+  fi
+else
+  tar -cf "$filename".tar $filename
+  rm -r $filename
+  exit 0
+fi
+
+
+if [ -n "$8" ] ; then
+  if [ -f "$8" ] ; then
+     cd $filename
+   if [ -f "$8" ] ; then
+      echo press 1 if you want to rename the file, 2 if you want to overwrite the file and 3 if you dont want to copy the file
+      read opt
+    if [ $opt = 1 ] ; then
+      cd ..
+      echo enter name
+      read newname
+      mv $8 $newname
+      cp $newname $filename
+   fi
+   if [ $opt = 2 ]; then
+      rm $8   
+      cd ..
+      cp $8 $filename
+   fi
+   else
+   cd ..
+   cp $8 $filename
+   fi
+  fi
+else
+  tar -cf "$filename".tar $filename
+  rm -r $filename
+  exit 0
+fi
+

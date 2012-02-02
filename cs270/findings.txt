@@ -1,0 +1,69 @@
+David Wells
+CS 270
+
+funtions       size      location
+ 
+average()       78       0x08048456    
+                  
+minimum()      102       0x08048405
+
+maximum()      102       0x080483b4
+                  
+main()         130       0x080484f0
+
+
+
+Entry point address: 0x80482e0
+
+
+IO subroutines         size       location
+
+scanf@GLIBC_2.0 (2)     65         0x0
+
+printf@GLIBC_2.0 (2)    57         0x0
+
+_IO_stdin_used           4         08048628
+
+
+
+data section sizes:
+
+.data    0x000004
+.bss     0x00004c 
+
+
+AFTER OPTIMIZATION....
+
+
+funtions       size      location
+ 
+average()      61       0x08048456    
+                  
+minimum()      81       0x08048405
+
+maximum()      81       0x080483b4
+                  
+main()         105       0x080484f0
+
+
+Entry point address: 0x80482e0
+
+
+IO subroutines         size       location
+
+scanf@GLIBC_2.0 (2)     65         0x0
+
+printf@GLIBC_2.0 (2)    57         0x0
+
+_IO_stdin_used           4         08048628
+
+
+data section sizes:
+
+.data    0x000004
+.bss     0x00004c
+
+
+I notice that after optimization, my function sizes shrink. It does not affect where in memory the functions are called though. I also found that "readelf main.o" has its 
+entry point set to 0x0, while "readelf a.out" entry point is 0x80482e0. this is because main.o is not yet linked. a.out however is linked and there for set in memory. 
+

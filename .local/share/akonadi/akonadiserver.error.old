@@ -1,0 +1,28 @@
+Database process exited unexpectedly during initial connection! 
+executable: "/usr/libexec/mysqld" 
+arguments: ("--defaults-file=/home/well4536/.local/share/akonadi//mysql.conf", "--datadir=/home/well4536/.local/share/akonadi/db_data/", "--socket=/home/well4536/.local/share/akonadi/db_misc/mysql.socket") 
+stdout: "" 
+stderr: "120126 16:18:30 [Warning] '--log_slow_queries' is deprecated and will be removed in a future release. Please use ''--slow_query_log'/'--slow_query_log_file'' instead.
+" 
+exit code: 1 
+process error: "Process operation timed out" 
+"[
+0: akonadiserver(_Z11akBacktracev+0x39) [0x40ad19]
+1: akonadiserver() [0x40b25a]
+2: /lib64/libc.so.6() [0x3bcac32900]
+3: /lib64/libc.so.6(gsignal+0x35) [0x3bcac32885]
+4: /lib64/libc.so.6(abort+0x175) [0x3bcac34065]
+5: /usr/lib64/libQtCore.so.4(_Z17qt_message_output9QtMsgTypePKc+0x74) [0x3bd6069a74]
+6: akonadiserver(_ZN15FileDebugStream9writeDataEPKcx+0xa8) [0x40bdf8]
+7: /usr/lib64/libQtCore.so.4(_ZN9QIODevice5writeEPKcx+0x77) [0x3bd60f1297]
+8: /usr/lib64/libQtCore.so.4() [0x3bd61022c9]
+9: /usr/lib64/libQtCore.so.4(_ZN11QTextStreamD1Ev+0x39) [0x3bd6103309]
+10: akonadiserver(_ZN6QDebugD1Ev+0x49) [0x406b99]
+11: /usr/lib64/libakonadiprivate.so.1(_ZN7Akonadi13AkonadiServer20startDatabaseProcessEv+0x177d) [0x3bcd0568ad]
+12: /usr/lib64/libakonadiprivate.so.1(_ZN7Akonadi13AkonadiServerC1EP7QObject+0x69) [0x3bcd058a39]
+13: /usr/lib64/libakonadiprivate.so.1(_ZN7Akonadi13AkonadiServer8instanceEv+0x4a) [0x3bcd059c4a]
+14: akonadiserver(main+0x429) [0x405fd9]
+15: /lib64/libc.so.6(__libc_start_main+0xfd) [0x3bcac1ecdd]
+16: akonadiserver() [0x405ab9]
+]
+" 

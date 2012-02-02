@@ -1,0 +1,72 @@
+procedure sum(l)
+	sumN:=0
+	x:=0
+	every sumN:=sumN+!l
+	return sumN
+end
+
+procedure runningSum(l)
+	sumR:=0
+	every sumR:=sumR+!l do suspend sumR
+end
+
+procedure sumto(l,x)
+	i:=0
+	j:=0
+	L:=list(2)
+	every !L:=list(2)
+	every !l & i:=0 & j:=j+1 & !l & i:=i+1 & (l[i]+l[j]=x) & suspend [l[j],l[i]] 
+end
+
+procedure isPalindromic(n)
+	str1:=string(n)
+	str2:=reverse(str1)
+	if str1==str2 then return 1 else fail
+end
+
+procedure makeList(g,n)
+	M:=[]
+	every x:=g(n) do put(M,x)
+	suspend M
+end
+
+procedure palindromicPrimes()
+	every x:=prime() & isPalindromic(x)do suspend x
+end
+
+procedure allnums(start)
+	every (i:=start) &| (i+:=1) & suspend i-1
+end
+
+procedure prime()
+	x:=0
+	every x:=allnums(0) & isPrime(x) do suspend x
+end
+
+procedure divisors(n)
+	every (x:=0) &| ((x+:=1),x<=n) & n % x=0 & suspend x
+end
+
+procedure onlyOddDigits(n)
+	str:=string(n)
+	i:=0
+	every !str & i:=i+1 & s:=numeric(str[i]) & s % 2 =0 do fail
+	return 1
+end
+
+procedure oddReversablePrimes()
+	every x:=prime() & str:=string(x) & revstr:=reverse(str) & isPrime(revstr) & onlyOddDigits(x) & rx:=numeric(revstr) & x<=rx do suspend x 
+end
+
+procedure leftPrimes()
+	every x:=prime() & str:=string(x) & str:=stripLeft(str) & num:=numeric(str) & isPrime(num) & if *str=1 then suspend x
+end
+
+procedure stripLeft(s)
+	every i:=0 to *s & if i~=0 then s:=s[2:0] & suspend s else suspend s
+end
+
+procedure perfect()
+	L:=[]
+	every x:=allnums(1) & L:=makeList(divisors,x) & d:=sum(L)& d=(2*x) do suspend x
+end

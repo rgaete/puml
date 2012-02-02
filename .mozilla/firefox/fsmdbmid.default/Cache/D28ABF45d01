@@ -1,0 +1,496 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><!-- InstanceBegin template="/Templates/arduinolearn.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<link rel="alternate" type="application/rss+xml" title="ladyada.net blog  RSS Feed" href="http://www.ladyada.net/feed/" />
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-7723544-2");
+pageTracker._trackPageview();
+} catch(err) {}</script> 
+
+<!-- InstanceBeginEditable name="overlib" -->
+<script type="text/javascript" src="/javascript/overlib.js"><!-- overLIB (c) Erik Bosrup --></script>
+<!-- InstanceEndEditable -->
+<meta http-equiv="imagetoolbar" content="no" />
+<LINK REL=stylesheet HREF="/css/make.css" TYPE="text/css">
+<LINK REL=stylesheet HREF="/css/skeleton.css" TYPE="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>Arduino Tutorial - Lesson 1 - Let there be blink!</title>
+<!-- InstanceEndEditable --><!-- InstanceBeginEditable name="head" -->
+<style type="text/css">
+<!--
+.style1 {font-weight: bold}
+.style3 {font-weight: bold}
+-->
+</style><!-- InstanceEndEditable -->
+</head>
+
+<body>
+
+    <div id="overDiv" style="position:absolute; visibility:hidden; z-index:1000;"></div>
+  
+<!-- InstanceBeginEditable name="badge" -->
+<div class="topheader" ><img src="../../images/arduino/topheaderbadge.gif" width="171" height="190"></div>
+<!-- InstanceEndEditable -->
+<span class="topheadertext"><!-- InstanceBeginEditable name="heading" -->Arduino Tutorial <!-- InstanceEndEditable --></span>
+<span class="topsubheadertext"><!-- InstanceBeginEditable name="Subheading" -->Lesson 1: Let there be <blink>blink</blink>!<!-- InstanceEndEditable --></span>
+
+<ul id="menu">
+	<li class="first"></li> 
+  
+    <li>
+      <div class="menuitemtext"><a href="index.html">Intro</a></div>
+    </li>
+  
+    <li>
+      <div class="menuitemtext"><a href="starterpack.html">Starting</a></div>
+    </li>
+  
+    <li>
+      <div class="menuitemtext"><a href="lesson0.html">Lesson 0</a></div>
+    </li>
+    
+  
+    <li>
+      <div class="menuitemtext"><a href="lesson1.html">Lesson 1</a> </div>
+    </li>
+  
+    <li>
+      <div class="menuitemtext"><a href="lesson2.html">Lesson 2 </a></div>
+    </li>
+  
+    <li>
+      <div class="menuitemtext"><a href="lesson3.html">Lesson 3 </a></div>
+    </li>
+  
+    <li>
+      <div class="menuitemtext"><a href="lesson4.html">Lesson 4 </a></div>
+    </li>
+  
+    <li>
+      <div class="menuitemtext"><a href="lesson5.html">Lesson 5 </a></div>
+    </li>
+  
+    <li>
+      <div class="menuitemtext"><a href="LEDs.html">#6 - LEDs</a></div>
+    </li>
+  
+    <li>
+      <div class="menuitemtext"><a href="lcd.html">LCDs</a></div>
+    </li>
+  
+    <li>
+      <div class="menuitemtext"><a href="ethfiles.html">Eth + SD</a></div>
+    </li>
+  
+    <li>
+      <div class="menuitemtext"><a href="help.html">HELP!!!</a></div>
+    </li>
+  
+    <li>
+      <div class="menuitemtext"><a href="http://www.adafruit.com/index.php?main_page=index&cPath=17">Buy stuff </a></div>
+    </li>
+  
+    <li>
+      <div class="menuitemtext"><a href="http://forums.ladyada.net/">Forums</a></div>
+    </li>
+  
+	<li class="last"></li>
+</ul>
+
+<ul id="nav">
+
+<li><a href="http://www.ladyada.net">Home</a></li>
+
+<li><a href="http://www.ladyada.net/about.html">About<!--[if gte IE 7]><!--></a><!--<![endif]-->
+<!--[if lte IE 6]><table><tr><td><![endif]-->
+<ul>
+	<li><a href="http://www.ladyada.net/about.html">ladyada.net</a></li>
+	<li><a href="http://www.ladyada.net/portfolio/2007/index.html">Portfolio</a></li>
+	<li><a href="http://www.ladyada.net/pub/research.html">Research</a></li>
+	<li><a href="http://www.ladyada.net/pub/press.html">Press</a></li>
+	<li><a href="http://www.ladyada.net/pub/pub.html">Publication &amp; Presentation</a></li>
+	<li><a href="http://www.flickr.com/photos/ladyada/">Photos</a></li>
+	<li><a href="http://www.ladyada.net/wiki">Wiki (backend)</a></li>
+	</ul>
+<!--[if lte IE 6]></td></tr></table></a><![endif]-->
+</li>
+
+<li><a href="http://www.ladyada.net/make/">Projects<!--[if gte IE 7]><!--></a><!--<![endif]-->
+<!--[if lte IE 6]><table><tr><td><![endif]-->
+<ul>
+	<li><a href="#nogo">Arduino &#187;<!--[if gte IE 7]><!--></a><!--<![endif]-->
+	<!--[if lte IE 6]><table><tr><td><![endif]-->
+	<ul>
+    	<li><a href="http://www.ladyada.net/make/logshield/">Datalogger&nbsp;Shield</a></li>
+	    <li><a href="http://www.ladyada.net/make/eshield/">Ethernet&nbsp;Shield</a></li>
+	    <li><a href="http://www.ladyada.net/make/gpsshield/">GPS&nbsp;Shield</a></li>
+	  	<li><a href="http://www.ladyada.net/make/pshield/">Proto&nbsp;Shield</a></li>
+	  	<li><a href="http://www.ladyada.net/make/mshield/">Motor&nbsp;Shield</a></li>
+	  	<li><a href="http://www.ladyada.net/make/waveshield/">Wave&nbsp;Shield</a></li>
+	  </ul>
+	<!--[if lte IE 6]></td></tr></table></a><![endif]-->
+	<li><a href="http://www.ladyada.net/make/bbpsup/">Adj.&nbsp;power&nbsp;supply</a></li>
+	<li><a href="http://www.ladyada.net/make/brain/">Brain&nbsp;Machine</a></li>
+	<li><a href="http://www.ladyada.net/make/boarduino/">BoArduino</a></li>
+	<li><a href="http://www.ladyada.net/make/digg/">DIGG&nbsp;Button</a></li>
+	<li><a href="http://www.ladyada.net/make/drawdio/">Drawdio</a></li>
+    <li><a href="http://www.ladyada.net/make/fuzebox/">Fuzebox</a></li>
+    <li><a href="http://www.ladyada.net/make/gamegrrl/">Game&nbsp;Grrl</a></li>
+	<li><a href="http://www.ladyada.net/make/conway/">Game&nbsp;of&nbsp;Life</a></li>
+	<li><a href="http://www.ladyada.net/make/icetube/">Ice&nbsp;Tube&nbsp;clock</a></li>
+    <li><a href="http://www.ladyada.net/make/midisense/">MIDIsense</a></li>
+	<li><a href="http://www.ladyada.net/make/minipov2/">MiniPOV2</a></li>
+	<li><a href="http://www.ladyada.net/make/minipov3/">MiniPOV3</a></li>
+	<li><a href="http://www.ladyada.net/make/minty/">MintyMP3</a></li>
+	<li><a href="http://www.ladyada.net/make/mintyboost/">MintyBoost</a></li>
+    <li><a href="http://www.ladyada.net/make/monochron/">MONOCHRON</a></li>
+    <li><a href="http://www.ladyada.net/make/simreader/">SIM&nbsp;Reader</a></li>
+	<li><a href="http://www.ladyada.net/make/spokepov/">SpokePOV</a></li>
+	<li><a href="http://www.ladyada.net/make/tvbgone/">TV-B-Gone</a></li>
+	<li><a href="http://www.ladyada.net/make/tweetawatt/">Tweet-a-Watt</a></li>
+    <li><a href="http://www.ladyada.net/make/usbtinyisp/">USBtinyISP</a></li>
+	<li><a href="http://www.ladyada.net/make/wavebubble/">Wave&nbsp;Bubble</a></li>
+	<li><a href="http://www.ladyada.net/make/x0xb0x/">x0xb0x</a></li>
+	<li><a href="http://www.ladyada.net/make/xbee/">XBee</a></li>
+	<li><a href="http://www.ladyada.net/make/ybox2/">YBox2</a></li>
+	<li><a href="#nogo">Quickies &#187;<!--[if gte IE 7]><!--></a><!--<![endif]-->
+	<!--[if lte IE 6]><table><tr><td><![endif]-->
+	<ul>
+    <li><a href="http://www.ladyada.net/make/usbgamepad/index.html">USB&nbsp;Gamepad</a></li>
+	    <li><a href="http://www.ladyada.net/make/pumpkin/pumpkin.html">Halloween&nbsp;Pumpkin</a></li>
+	    <li><a href="http://www.ladyada.net/make/vintagelight/index.html">Vintage&nbsp;Bike&nbsp;Lite</a></li>
+	  	<li><a href="http://www.ladyada.net/make/sudc4kap/index.html">Kite&nbsp;Arial&nbsp;Photo</a></li>
+	  	<li><a href="http://www.ladyada.net/make/bikestand/index.html">Bike&nbsp;Stand</a></li>
+	  	<li><a href="http://www.ladyada.net/make/bikelite/index.html">LiIon&nbsp;Bike&nbsp;Lite</a></li>
+     	<li><a href="http://www.ladyada.net/make/pogojig/index.html">Pogo&nbsp;Jib</a></li>
+	  	<li><a href="http://www.ladyada.net/make/massprog/index.html">Mass&nbsp;Programming</a></li>
+	  	<li><a href="http://www.ladyada.net/make/solarlipo/index.html">Solar&nbsp;LiPo&nbsp;Charging</a></li>
+	  	<li><a href="http://www.ladyada.net/make/magstripe/index.html">Magstripe&nbsp;Reader</a></li>
+	  	<li><a href="http://www.ladyada.net/make/solarlogger/index.html">Solar&nbsp;Tracker</a></li>
+        <li><a href="http://www.ladyada.net/make/tronbag/">TRON&nbsp;Bag</a></li>
+	  </ul><!--[if lte IE 6]></td></tr></table></a><![endif]-->
+      </li>
+   	<li><a href="http://www.ladyada.net/make/">More...</a></li>
+	<li><a href="http://www.instructables.com/member/ladyada/">->Instructables</a></li>
+</ul>
+<!--[if lte IE 6]></td></tr></table></a><![endif]-->
+</li>
+
+<li><a href="http://www.ladyada.net/learn/">Learn<!--[if gte IE 7]><!--></a><!--<![endif]-->
+<!--[if lte IE 6]><table><tr><td><![endif]-->
+<ul>
+	<li><a href="http://www.ladyada.net/learn/arduino/">Arduino&nbsp;tutorial</a></li>
+	<li><a href="http://www.ladyada.net/learn/avr/">AVR&nbsp;tutorial</a></li>
+	<li><a href="http://www.ladyada.net/learn/barcodescan/">Barcode&nbsp;scanners</a></li>
+	<li><a href="http://www.ladyada.net/learn/el-wire/">EL&nbsp;Wire&nbsp;tutorial</a></li>
+	<li><a href="http://www.ladyada.net/learn/lcd/">LCDs</a></li>
+	<li><a href="http://www.ladyada.net/learn/arduino/LEDs.html">LEDs</a></li>
+	<li><a href="http://www.ladyada.net/learn/multimeter/">Multimeter&nbsp;tutorial</a></li>
+   	<li><a href="http://www.ladyada.net/learn/scale/">Digital&nbsp;scales</a></li>
+    <li><a href="http://www.ladyada.net/learn/sensors/">Sensors &#187;<!--[if gte IE 7]><!--></a><!--<![endif]-->
+	<!--[if lte IE 6]><table><tr><td><![endif]-->
+	<ul>
+    	<li><a href="http://www.ladyada.net/learn/sensors/fsr.html">FSR</a></li>
+	    <li><a href="http://www.ladyada.net/learn/sensors/cds.html">CdS&nbsp;Photocell</a></li>
+	    <li><a href="http://www.ladyada.net/learn/sensors/tmp36.html">Temperature</a></li>
+	  	<li><a href="http://www.ladyada.net/learn/sensors/tilt.html">Tilt</a></li>
+	  	<li><a href="http://www.ladyada.net/learn/sensors/pir.html">PIR</a></li>
+        <li><a href="http://www.ladyada.net/learn/sensors/thermocouple.html">Thermocouple</a></li>
+        <li><a href="http://www.ladyada.net/learn/sensors/ir.html">IR&nbsp;Receiver</a></li>
+	  </ul>
+	<!--[if lte IE 6]></td></tr></table></a><![endif]-->
+    </li>
+        <li><a href="http://www.ladyada.net/learn/breakoutplus/">Breakout boards &#187;<!--[if gte IE 7]><!--></a><!--<![endif]-->
+	<!--[if lte IE 6]><table><tr><td><![endif]-->
+	<ul>
+    	<li><a href="http://www.ladyada.net/learn/breakoutplus/ds1307rtc.html">DS1307&nbsp;RTC</a></li>
+        <li><a href="http://www.ladyada.net/learn/sensors/thermocouple.html">MAX6675</a></li>
+        <li><a href="http://www.ladyada.net/learn/products/atmega32u4breakout/">ATmega32u4&nbsp;Breakout+</a></li>
+	  </ul>
+	<!--[if lte IE 6]></td></tr></table></a><![endif]-->
+    </li>
+  
+          <li><a href="http://www.ladyada.net/products/">Products &#187;<!--[if gte IE 7]><!--></a><!--<![endif]-->
+	<!--[if lte IE 6]><table><tr><td><![endif]-->
+	<ul>
+     <li><a href="http://www.ladyada.net/learn/products/i2cspilcdbackpack/">i2c/SPI&nbsp;LCD&nbsp;backpack</a></li>
+     <li><a href="http://www.ladyada.net/learn/products/usbboarduino/">USB&nbsp;Boarduino</a></li>
+     <li><a href="http://www.ladyada.net/learn/products/atmega32u4breakout/">ATmega32u4&nbsp;Breakout+</a></li>
+     <li><a href="http://www.ladyada.net/learn/products/tfttouchbreakout/">2.8&nbsp;TFT&nbsp;touchscreen</a></li>
+     <li><a href="http://www.ladyada.net/learn/products/18tftbreakout/">1.8&nbsp;SPI&nbsp;TFT&nbsp;</a></li>
+     <li><a href="http://www.ladyada.net/learn/products/rfidnfc/">RFID/NFC</a></li>
+     	  </ul>
+	<!--[if lte IE 6]></td></tr></table></a><![endif]-->
+    </li>
+      
+	<li><a href="http://www.ladyada.net/learn/chumby/">Chumby&nbsp;Hacker&nbsp;Board</a></li>
+	<li><a href="http://www.ladyada.net/learn/soldering/">Soldering&nbsp;tutorial</a></li>
+	<li><a href="http://www.ladyada.net/learn/powersupply/">Power&nbsp;Supply&nbsp;tutorial</a></li>
+    <li><a href="http://www.ladyada.net/learn/electroknit/">Brother&nbsp;KH-9033&nbsp;tutorial</a></li>
+	<li><a href="http://www.ladyada.net/learn/diykinect/">USB&nbsp;reverse-engineering&nbsp;tutorial</a></li>
+    <li><a href="http://www.ladyada.net/learn/calipers/">Calipers&nbsp;tutorial</a></li>
+    <li><a href="http://www.ladyada.net/products/rgbledstrip/">RGB&nbsp;LED&nbsp;Strips</a></li>
+    <li><a href="http://www.ladyada.net/products/rgbledpixels/">RGB&nbsp;LED&nbsp;Pixels</a></li>
+    <li><a href="http://www.ladyada.net/learn/lipoly/">LiIon&nbsp;&amp;&nbsp;LiPoly&nbsp;Batteries</a></li>
+</ul>
+<!--[if lte IE 6]></td></tr></table></a><![endif]-->
+</li>
+
+	
+<li><a href="http://www.ladyada.net/library/">Library<!--[if gte IE 7]><!--></a><!--<![endif]-->
+<!--[if lte IE 6]><table><tr><td><![endif]-->
+<ul>	
+	<li><a href="http://www.ladyada.net/library/arduino/">Arduino&nbsp;Hacks</a></li>
+    <li><a href="http://www.ladyada.net/library/batteries.html">Batteries</a></li>
+	<li><a href="http://www.ladyada.net/library/diyboostcalc.html">Boost&nbsp;Calc</a></li>
+    <li><a href="http://www.ladyada.net/library/equipt/">E.E.&nbsp;Tools</a></li>
+	<li><a href="http://www.ladyada.net/library/hackcomputer.html">E.E.&nbsp;Computer</a></li>
+    <li><a href="http://www.ladyada.net/library/procure/">Find&nbsp;Parts</a></li>
+	<li><a href="http://www.ladyada.net/library/kits/">Kits</a></li>
+	<li><a href="http://www.ladyada.net/library/laser/">Laser</a></li>
+	<li><a href="http://www.ladyada.net/library/ucannoyances.html">uC Annoyances</a></li>
+	<li><a href="http://www.ladyada.net/library/openhardware/">Open Source Hardware</a></li>
+	<li><a href="http://www.ladyada.net/library/pcb/">PCB&nbsp;Design&nbsp;&amp;&nbsp;Tips</a></li>
+	<li><a href="http://www.ladyada.net/library/picvsavr.html">PIC&nbsp;vs.&nbsp;AVR</a></li>
+	<li><a href="http://www.ladyada.net/library/software/index.html">Software</a></li>
+	<li><a href="http://www.ladyada.net/library/smt/index.html">SMT</a></li>
+        <li><a href="http://www.ladyada.net/library/zencart/">Zen-Cart&nbsp;Mods</a></li>
+</ul>
+<!--[if lte IE 6]></td></tr></table></a><![endif]-->
+</li>
+
+<li><a href="http://www.adafruit.com/blog/">Blog</a></li>
+
+<li><a href="http://www.adafruit.com" target="_blank">Store</a></li>
+
+<li><a href="http://forums.adafruit.com/" target="_blank">Forums</a></li>
+
+</ul>
+
+<div id="searchbox">
+<!-- Google CSE Search Box Begins -->
+<form id="searchbox_012941403977924873237:omv8mprm6ek" action="http://www.google.com/cse" target="_top"> <input type="hidden" name="cx" value="012941403977924873237:omv8mprm6ek" /> <input name="q" type="text" size="23" /><br /> <span class="style1">ladyada.net</span> <input type="submit" name="sa" value="Search" /> <input type="hidden" name="cof" value="FORID:0" /> </form><script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=searchbox_012941403977924873237%3Aomv8mprm6ek"></script>
+<!-- Google CSE Search Box Ends -->
+</div>
+
+<div id="lefttcol">
+<!-- this is just a buffer -->
+</div>
+
+<div id="content">
+  <!-- InstanceBeginRepeat name="texts" --><!-- InstanceBeginRepeatEntry -->
+  <div class="textblockheader"> <!-- InstanceBeginEditable name="Header" -->Introduction<!-- InstanceEndEditable --> </div>
+  <div class="textblock"> <!-- InstanceBeginEditable name="text" -->
+    <p>Ah yes, it is finally time to make your Arduino do something! We're going to start with the <a href="http://en.wikipedia.org/wiki/Hello_world">classic <strong>hello world!</strong></a> of electronics, a blinking light. </p>
+    <p>This lesson will basically get you up and running using the Arduino software and uploading a sketch to the Arduino board. Once you've completed this step we can continue to the really exciting stuff, which is when we start writing our own sketches!</p>
+    <p>These instructions mostly show Windows software. Except when indicated, the software (should be) identical on all platforms. Linux will be added once I figure out how to get it working (yay) </p>
+  <!-- InstanceEndEditable --> </div>
+  <!-- InstanceEndRepeatEntry --><!-- InstanceBeginRepeatEntry -->
+  <div class="textblockheader"> <!-- InstanceBeginEditable name="Header" -->Do you have everything you need? <!-- InstanceEndEditable --> </div>
+  <div class="textblock"> <!-- InstanceBeginEditable name="text" -->
+    <p>Not much is needed for this lesson, just a USB cable and an Arduino.
+If you have an older Arduino you may also need an LED. Any LED is fine as long as it looks sorta like the photo, with a plastic bulb and two legs</p>
+    <p>Make sure you've gone through <a href="lesson0.html">Lesson 0</a> first! </p>
+    <p>
+    <table width="100%" border="2" cellpadding="5" cellspacing="0" bgcolor="#CCCCCC">
+      <tr>
+        <td bgcolor="#FFFFFF"><div align="center"><span class="imagetd"><a href="../../images/parts/attiny2313dip.jpg"><img src="../../images/arduino/diecimilla.jpg" width="350" height="263" border="0"></a></span></div></td>
+        <td>Assembled Arduino board, preferrably a Diecimila (or whatever the latest version is) </td>
+        <td><p><a href="http://www.adafruit.com/index.php?main_page=product_info&cPath=17&products_id=50">Adafruit</a></p>
+        </td>
+        <td><div align="center">$35</div></td>
+      </tr>
+      <tr>
+        <td bgcolor="#FFFFFF"><div align="center"><a href="../../images/parts/10MHzcermosc.jpg"><img src="../../images/arduino/usbcable.jpg" width="350" height="263" border="0"></a></div></td>
+        <td>USB Cable. Standard A-B cable is required. Any length is OK. </td>
+        <td><p><a href="http://www.adafruit.com/index.php?main_page=product_info&products_id=62">Adafruit</a></p>
+            <p>Or any computer supply store </p>
+            <p>&nbsp;</p></td>
+        <td><div align="center">$5</div></td>
+      </tr>
+      <tr>
+        <td bgcolor="#FFFFFF"><div align="center"><img src="../../images/parts/clear5mmled_t.jpg" width="200" height="85"></div></td>
+        <td>LED -  <strong>Optional</strong><br>
+        Nearly any LED is OK, as long as it has two wire legs. This part is only required for <strong>NG rev c</strong> Arduinos (and maybe other older ones). Diecimila Arduino's have this part 'built-in' </td>
+        <td>Any electronics supply store </td>
+        <td>$1</td>
+      </tr>
+    </table><p></p>
+  <!-- InstanceEndEditable --> </div>
+  <!-- InstanceEndRepeatEntry --><!-- InstanceBeginRepeatEntry -->
+  <div class="textblockheader"> <!-- InstanceBeginEditable name="Header" -->Download the Software <!-- InstanceEndEditable --> </div>
+  <div class="textblock"> <!-- InstanceBeginEditable name="text" -->
+    <p>The first thing to do is download the Arduino software.</p>
+    <p>Go to the <a href="http://www.arduino.cc/en/Main/Software">Arduino Software Download page</a> and grab the right file for your OS. As of Sept 2007 the version is <strong>009</strong> but you should use whatever is most recent. </p>
+    <p>The packages are quite large, 30-50 MB so it may take a while to finish</p>
+    <p align="center"><img src="../../images/arduino/downloadsoft.jpg" width="397" height="235"> </p>
+  <!-- InstanceEndEditable --> </div>
+  <!-- InstanceEndRepeatEntry --><!-- InstanceBeginRepeatEntry -->
+  <div class="textblockheader"> <!-- InstanceBeginEditable name="Header" -->Unpack and Install<!-- InstanceEndEditable --> </div>
+  <div class="textblock"> <!-- InstanceBeginEditable name="text" -->
+    <p>Extract the package onto the Desktop</p>
+    <p align="center"><img src="../../images/arduino/winsoftextract.jpg" width="441" height="384"> <br>
+    Windows</p>
+    <p align="center"><img src="../../images/arduino/macsoftextract.jpg" width="416" height="90" border="1"><br>
+      Mac OS X
+    </p>
+    <p align="center"><img src="../../images/arduino/winsoftfiles.jpg" width="691" height="487"><br>
+    Windows</p>
+    <p align="center"><img src="../../images/arduino/macosarduinopkg.jpg" width="785" height="443" border="1"><br>
+      Mac OS X
+    </p>
+  <!-- InstanceEndEditable --> </div>
+  <!-- InstanceEndRepeatEntry --><!-- InstanceBeginRepeatEntry -->
+  <div class="textblockheader"> <!-- InstanceBeginEditable name="Header" -->Startup!<!-- InstanceEndEditable --> </div>
+  <div class="textblock"> <!-- InstanceBeginEditable name="text" -->
+    <p>Double click the Arduino software icon</p>
+    <p align="center"><img src="../../images/arduino/arduinoicon.jpg" width="221" height="129" border="1"> <br>
+    Windows</p>
+    <p align="center"><img src="../../images/arduino/macarduinoicon.jpg" width="304" height="191" border="1"><br>
+      Mac OS X
+    </p>
+    <p align="left">To open up the workspace</p>
+    <p align="center"><img src="../../images/arduino/winworkspacestart.jpg" width="561" height="589" border="1"></p>
+    <p align="left">I think I get the red error text shown because I already have Arduino installed. Either way, it isn't a problem if you do or don't see it. </p>
+  <!-- InstanceEndEditable --> </div>
+  <!-- InstanceEndRepeatEntry --><!-- InstanceBeginRepeatEntry -->
+  <div class="textblockheader"> <!-- InstanceBeginEditable name="Header" -->Select chip<!-- InstanceEndEditable --> </div>
+  <div class="textblock"> <!-- InstanceBeginEditable name="text" -->
+    <div align="center">
+      <p align="left">The first step is to configure the Arduino software for the correct chip. Almost all Arduinos use the ATmega168, but there's a chance you have an ATmega8. Look for the chip on the Arduino that looks like this: </p>
+      <p align="center"><img src="../../images/parts/atmega8_t.jpg" width="322" height="120" border="1"> <br>
+      <img src="../../images/parts/atmega168.jpg" width="322" height="154" border="1">      </p>
+      <p align="left">If the text says ATMEGA8-16P then you have an <strong>atmega8 </strong>chip. If the text says ATMEGA168-20P then you have an <strong>atmega168</strong> chip. If it says &quot;ATMEGA328P-20P&quot; you have an <strong>atmega328p </strong>chip</p>
+      <p><img src="../../images/arduino/winchipselect.jpg" width="434" height="224" border="1"></p>
+      <p align="left">Make sure the correct chip is selected (this picture is really old, will be fixed soon). This preference is saved so you only have to set it once, the program will remember next time it's run. </p>
+    </div>
+  <!-- InstanceEndEditable --> </div>
+  <!-- InstanceEndRepeatEntry --><!-- InstanceBeginRepeatEntry -->
+  <div class="textblockheader"> <!-- InstanceBeginEditable name="Header" -->Select port <!-- InstanceEndEditable --> </div>
+  <div class="textblock"> <!-- InstanceBeginEditable name="text" -->
+    <p>Next, its time to configure the Serial Port (also known as the COM Port). Go back to <a href="lesson0.html">lesson 0</a> to remind yourself of which port it is. On a PC it will probably be something like <strong>COM3</strong> or <strong>COM4</strong>. On a Mac it will be something like <strong>tty.usbserial-xxxxx</strong></p>
+    <p align="center"><img src="../../images/arduino/winportselect.jpg" width="386" height="220" border="1"><br>
+      Windows port selection</p>
+    <p align="center"><img src="../../images/arduino/macselectport.jpg" width="590" height="311" border="1"><br>
+      Mac port selection
+    </p>
+    <p align="left">This preference is saved so you only have to set it once, the program will remember next time it's run. </p>
+    <p align="left">However, if you have multiple Arduino's, they may be assigned difference COM ports. So every time you plug in a new Arduino, double check that the correct port is selected. </p>
+  <!-- InstanceEndEditable --> </div>
+  <!-- InstanceEndRepeatEntry --><!-- InstanceBeginRepeatEntry -->
+  <div class="textblockheader"> <!-- InstanceBeginEditable name="Header" -->Open blink sketch <!-- InstanceEndEditable --> </div>
+  <div class="textblock"> <!-- InstanceBeginEditable name="text" -->
+    <div align="center">
+      <p align="left"><strong>Sketches</strong> are little scripts that you can send to the Arduino to tell it how to act. Let's open up an <strong>Example Sketch</strong>. Go to the <strong>File menu -&gt; Sketchbook -&gt; Examples -&gt; Digital -&gt; Blink</strong> </p>
+      <p><img src="../../images/arduino/winblinkopen.jpg" width="601" height="287" border="1"></p>
+      <p align="left">The window should now look like this, with a bunch of text in the formerly empty white space and the tab <strong>Blink</strong> above it </p>
+      <p><img src="../../images/arduino/winblinkopened.jpg" width="557" height="715"></p>
+    </div>
+  <!-- InstanceEndEditable --> </div>
+  <!-- InstanceEndRepeatEntry --><!-- InstanceBeginRepeatEntry -->
+  <div class="textblockheader"> <!-- InstanceBeginEditable name="Header" -->Verify / Compile <!-- InstanceEndEditable --> </div>
+  <div class="textblock"> <!-- InstanceBeginEditable name="text" -->
+    <p align="left">The first step to getting a <strong>Sketch</strong> ready for transfer over to the arduino is to <strong>Verify/Compile</strong> it. That means check it over for mistakes (sort of like editing) and then translate it into an application that is compatible with the Arduino hardware.</p>
+    <p align="center"><img src="../../images/arduino/winverifyblink.jpg" width="274" height="173" border="1"></p>
+    <p align="left">After a few seconds, you should see the message <strong>Done compiling.</strong> in the <strong>Status Bar</strong> and <strong>Binary Sketch Size: </strong> in the <strong>Notification area.</strong> This means the sketch was well-written and is ready for uploading to the Arduino board! </p>
+    <p align="center"><img src="../../images/arduino/winblinkcompiled.jpg" width="557" height="715"></p>
+  <!-- InstanceEndEditable --> </div>
+  <!-- InstanceEndRepeatEntry --><!-- InstanceBeginRepeatEntry -->
+  <div class="textblockheader"> <!-- InstanceBeginEditable name="Header" -->Reset (NG only) <!-- InstanceEndEditable --> </div>
+  <div class="textblock"> <!-- InstanceBeginEditable name="text" -->
+    <div align="center">
+      <p align="left">To tell the Arduino that it should prepare itself for a new Sketch upload, you must reset the board. Diecimila Arduino's have built-in auto-reset capability, so you don't need to do anything. Older Arduinos, such as NG, must be manually reset before uploading a sketch. To do that simply press the black button on the right hand side of the board, shown here. </p>
+      <p><a href="../../images/arduino/ngresetbutton.jpg"><img src="../../images/arduino/ngresetbutton_t.jpg" width="500" height="381" border="1"></a></p>
+    </div>
+  <!-- InstanceEndEditable --> </div>
+  <!-- InstanceEndRepeatEntry --><!-- InstanceBeginRepeatEntry -->
+  <div class="textblockheader"> <!-- InstanceBeginEditable name="Header" -->Upload<!-- InstanceEndEditable --> </div>
+  <div class="textblock"> <!-- InstanceBeginEditable name="text" -->
+    <p>Now it's time to upload. Make sure the Arduino is plugged in, the green light is on and the correct Serial Port is selected.</p>
+    <p>If you have an NG Arduino, press the <strong>Reset Button</strong> now, just before you select the <strong>Upload</strong> menu item. </p>
+    <p>Select <strong>Upload to I/O Board </strong> from the <strong>File menu</strong></p>
+    <p align="center"><strong><img src="../../images/arduino/winupload.jpg" width="423" height="272" border="1"></strong></p>
+    <p>After a few seconds you should get this screen, with the message <strong>Done uploading.</strong> in the status bar.</p>
+    <p align="center"><img src="../../images/arduino/windoneupload.jpg" width="530" height="581" border="1"></p>
+    <p align="left">If you get the following error message &quot;<strong>avrdude: stk500_getsync(): not in sync: resp=0x00&quot;</strong> that means that the Arduino is not responding </p>
+    <p align="center"><img src="../../images/arduino/winuploadtimeout.jpg" width="530" height="189" border="1"></p>
+    <p align="left">Then check the following:</p>
+    <ul>
+      <li>If you have a NG Arduino, did you press reset just before selecting <strong>Upload</strong> menu item?</li>
+      <li>Is the correct Serial Port selected?</li>
+      <li>Is the correct driver installed? </li>
+      <li>Is the chip inserted into the Arduino properly? (If you built your own arduino or have burned the bootloader on yourself) </li>
+      <li>Does the chip have the correct bootloader on it? (If you built your own arduino or have burned the bootloader on yourself) </li>
+    </ul>
+    <p>If you get the following error message: </p>
+    <p align="center"><img src="../../images/arduino/setdtrnullptr.jpg" width="679" height="218" border="1"></p>
+It means you dont have a serial port selected, go back and verify that the correct driver is installed (<a href="lesson0.html">lesson 0</a>)</p>
+ and that you have the correct serial port selected in the menu.
+ <p align="left">If you get the following error <strong>Expected signature for ATMEGA</strong></p>
+    <p align="center"><img src="../../images/arduino/wrongsigupload.jpg" width="483" height="203" border="1"> </p>
+    <p align="left">Then you have either the incorrect chip selected in the <strong>Tools</strong> menu or the wrong bootloader burned onto the chip</p>
+    <p align="left">If you get the following error: <span class="postbody style3"> can't open device "COM10": The system cannot find the file specified</span><span class="postbody "> (under Windows, COM port value may vary) </span></p>
+    <p align="center"><img src="../../images/arduino/comporttoohigh.jpg" width="545" height="212"></p>
+    <p align="left">It means that you have too many COM ports (maybe you've got 9 Arduinos?) You should make sure that the port is numbered as low as possible. You can use a program like <a href="http://www.ftdichip.com/Resources/Utilities.htm">FTClean</a> to clear out old COM ports you aren't using anymore. Once you've cleaned out the ports, you'll have to reinstall the driver again (see lesson 0). <br>
+    Alternately, if you're sure that the ports are not used for something else but are left over from other USB devices, you can simply change the COM port using the <strong>Device Manager</strong>. Select the USB device in the Device Manager, right click and select <strong>Properties</strong></p>
+    <p align="center"><img src="../../images/boarduino/portsettings.jpg" width="412" height="455"></p>
+    <p align="left">Then click <strong>Advanced</strong>... and in the next window change the COM port to something like <strong>COM4</strong> or <strong>COM5</strong>. Don't forget to select the new port name in the Arduino software. The lower port names may say <strong>(in use</strong>) but as long as the other USB devices aren't plugged in, it shouldn't be a problem. This is a little riskier than just using FTClean...</p>
+  <!-- InstanceEndEditable --> </div>
+  <!-- InstanceEndRepeatEntry --><!-- InstanceBeginRepeatEntry -->
+  <div class="textblockheader"> <!-- InstanceBeginEditable name="Header" -->Video of all steps <!-- InstanceEndEditable --> </div>
+  <div class="textblock"> <!-- InstanceBeginEditable name="text" -->Here is a video showing the timing of the steps described so far.
+    <p>
+    <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0" width="565" height="624">
+        <param name="movie" value="../../media/arduino/arduinoblink.swf">
+        <param name="quality" value="high">
+        <embed src="../../media/arduino/arduinoblink.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="565" height="624"></embed>
+    </object>
+</p>
+  <p>&nbsp;</p>
+  <!-- InstanceEndEditable --> </div>
+  <!-- InstanceEndRepeatEntry --><!-- InstanceBeginRepeatEntry -->
+  <div class="textblockheader"> <!-- InstanceBeginEditable name="Header" -->Insert LED (NG Arduinos) <!-- InstanceEndEditable --> </div>
+  <div class="textblock"> <!-- InstanceBeginEditable name="text" -->
+    <div align="center">
+      <p align="left">Some older Arduinos don't have a built in LED, its easy to tell if yours does or not</p>
+      <p align="left">If you have a Diecimila or other Arduino with a built in LED you will see a translucent part as shown </p>
+      <p align="center"><img src="../../images/arduino/diecledplaced.jpg" width="500" height="334" border="1"></p>
+      <p align="left">If you have an NG rev C or other Arduino without an LED, the translucent part will not be there, and instead you will see two silver dots </p>
+      <p><img src="../../images/arduino/ngledplace.jpg" width="500" height="321" border="1"></p>
+      <p align="left">If you don't have an LED, you'll need to add your own. Any LED will do, as long as it has two legs and kinda looks like the one shown here. LEDs are <strong>directional</strong> components. That means if you put it in backwards it will not work! To help you put the LED in right, the LED factory cuts the legs at different lengths. The longer leg goes in the hole marked <strong>13</strong> and the shorter one goes in the hole marked <strong>GND</strong></p>
+      <p><a href="../../images/arduino/ngled.jpg"><img src="../../images/arduino/ngled_t.jpg" width="500" height="375" border="1"></a></p>
+    </div>
+  <!-- InstanceEndEditable --> </div>
+  <!-- InstanceEndRepeatEntry --><!-- InstanceBeginRepeatEntry -->
+  <div class="textblockheader"> <!-- InstanceBeginEditable name="Header" -->Watch!<!-- InstanceEndEditable --> </div>
+  <div class="textblock"> <!-- InstanceBeginEditable name="text" -->
+    <p>If you have a Diecimila Arduino, the upload process is quite fast, just start the Upload from the software. The board will automatically reset itself, transfer the sketch and start the sketch. The little translucent LED will start blinking</p>
+    <p><center>																					<script type="text/javascript" src="http://blip.tv/scripts/pokkariPlayer.js?ver=2007082501"></script><script type="text/javascript" src="http://blip.tv/syndication/write_player?skin=js&posts_id=386213&source=3&autoplay=false&file_type=flv&player_width=320&player_height=240"></script><div id="blip_movie_content_386213"><a rel="enclosure" href="http://blip.tv/file/get/Ladyada-DiecimilaArduinoBlinkUpload640.flv" onclick="play_blip_movie_386213(); return false;"><img title="Click to play" alt="Video thumbnail. Click to play." src="http://blip.tv/file/get/Ladyada-DiecimilaArduinoBlinkUpload640.flv.jpg" border="0" title="Click To Play" /></a><br /><a rel="enclosure" href="http://blip.tv/file/get/Ladyada-DiecimilaArduinoBlinkUpload640.flv" onclick="play_blip_movie_386213(); return false;">Click To Play</a></div><script type="text/javascript">	play_blip_movie_386213();</script>															</center></p>
+    <p>If you have an NG arduino, make sure the LED is inserted as indicated before. Here is a video of the entire uploading process. Right after I press the Reset Button I start the sketch upload. There is a short wait while the software prepares to transfer the sketch. Then the two small orange lights blink, indicating the sketch is being transfered. When its done, there is a 7 second delay until the sketch starts.</p>
+    <center>																					<script type="text/javascript" src="http://blip.tv/scripts/pokkariPlayer.js?ver=2007082501"></script><script type="text/javascript" src="http://blip.tv/syndication/write_player?skin=js&posts_id=386202&source=3&autoplay=false&file_type=flv&player_width=0&player_height=0"></script><div id="blip_movie_content_386202"><a rel="enclosure" href="http://blip.tv/file/get/Ladyada-ArduinoNGUploadBlink905.mp4" onclick="play_blip_movie_386202(); return false;"><img title="Click to play" alt="Video thumbnail. Click to play." src="http://blip.tv/file/get/Ladyada-ArduinoNGUploadBlink905.mp4.jpg" border="0" title="Click To Play" /></a><br /><a rel="enclosure" href="http://blip.tv/file/get/Ladyada-ArduinoNGUploadBlink905.mp4" onclick="play_blip_movie_386202(); return false;">Click To Play</a></div><script type="text/javascript">	play_blip_movie_386202();</script>															</center>
+   
+    <p></p>
+  If you don't get a blinking LED, make sure you put the part in the right way, in the correct holes, and perhaps try a different LED as it may be bad. <!-- InstanceEndEditable --> </div>
+  <!-- InstanceEndRepeatEntry --><!-- InstanceEndRepeat --> <div class="wikiinclude">
+<!-- InstanceBeginEditable name="wikispace" --><!-- InstanceEndEditable -->
+</div></div>
+
+<div id="rightcol">
+<!-- this is just a buffer -->
+</div>
+
+
+
+<div id="history">
+<!-- #BeginDate format:Am1m -->May 17, 2011  20:06<!-- #EndDate --></div>
+
+</body>
+<!-- InstanceEnd --></html>
