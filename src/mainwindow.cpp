@@ -30,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
     //is triggered with a prototype ID specified by the signalmapper
     for (int i=0; i<(int)actions.size(); i++) {
         Shapes_Connectors->addAction(actions.at(i));
-//        mainToolBar->addAction(actions.at(i));
+        mainToolBar->addAction(actions.at(i));
         menuShapes->addAction(actions.at(i));
 
     }
@@ -281,7 +281,6 @@ void MainWindow::createToolbar()
     mainToolBar = new QToolBar(this);
     this->addToolBar(Qt::LeftToolBarArea, mainToolBar);
     mainToolBar->setMovable(false);
-    mainToolBar->setMinimumWidth(150);
 }
 
 void MainWindow::createWidgets()
@@ -291,7 +290,10 @@ void MainWindow::createWidgets()
 
     canvasWidget = new Canvas(this);
     canvasWidget->setObjectName(QString::fromUtf8("canvasWidget"));
-    this->setCentralWidget(canvasWidget);
+    tabWidget = new QTabWidget(this);
+
+    this->setCentralWidget(tabWidget);
+    tabWidget->addTab(canvasWidget,"Use Case");
 
     createToolbar();
 }

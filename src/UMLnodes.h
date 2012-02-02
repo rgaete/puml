@@ -4,6 +4,7 @@
 #include "nodes.h"
 #include <QDialog>
 #include <QDialog>
+#include <QInputDialog>
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
@@ -17,7 +18,7 @@ public:
     StickDialog(QWidget *parent = 0);
 
 signals:
-
+    void setName(QString newName);
 private slots:
 
 private:
@@ -41,6 +42,10 @@ public:
 
     void draw(QPainter &painter);
 private:
+    QString name;
+
+private slots:
+//    void setName(QString newName) { name = newName; }
 };
 
 
