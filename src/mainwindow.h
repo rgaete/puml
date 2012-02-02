@@ -2,7 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QActionGroup>f
+#include <QActionGroup>
+#include <QHBoxLayout>
+#include <QLayout>
 #include <QSignalMapper>
 #include <QAction>
 #include <QMenuBar>
@@ -68,6 +70,7 @@ private:
 
 private:
     Canvas *canvasWidget;
+    QTabWidget *tabWidget;
     //DialogNew *dialogNew;
     vector<QAction*> actions;
     QSignalMapper *signalMapper;

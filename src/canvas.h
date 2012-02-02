@@ -2,6 +2,7 @@
 #define CANVAS_H
 
 #include <QWidget>
+#include <QTableWidget>
 #include <vector>
 #include <QMouseEvent>
 #include <QMenu>
