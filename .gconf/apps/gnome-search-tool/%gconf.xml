@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<gconf>
-	<entry name="default_window_maximized" mtime="1327623359" type="bool" value="false"/>
-	<entry name="default_window_height" mtime="1327623359" type="int" value="350"/>
-	<entry name="default_window_width" mtime="1327623359" type="int" value="554"/>
-	<entry name="look_in_folder" mtime="1327623297" type="string">
-		<stringvalue>/</stringvalue>
-	</entry>
-</gconf>
