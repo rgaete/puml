@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
     currentDocument = -1;
 
     //register the objects
+    actions.push_back(actionSelect);
     registerObjectWithFactory(new OvalNode);
     registerObjectWithFactory(new StickPerson);
 
@@ -29,12 +30,12 @@ MainWindow::MainWindow(QWidget *parent)
     //is triggered with a prototype ID specified by the signalmapper
     for (int i=0; i<(int)actions.size(); i++) {
         Shapes_Connectors->addAction(actions.at(i));
-        mainToolBar->addAction(actions.at(i));
+//        mainToolBar->addAction(actions.at(i));
         menuShapes->addAction(actions.at(i));
 
     }
 
-    this->resize(600,500);
+    this->resize(800,500);
     this->setWindowTitle(tr("Phunctional UML Editor"));
 
     //create a new document on launch
@@ -227,7 +228,6 @@ void MainWindow::createActions()
     actionSelect->setObjectName(QString::fromUtf8("actionSelect"));
     actionSelect->setCheckable(true);
     actionSelect->setText(tr("Select"));
-    Shapes_Connectors->addAction(actionSelect);
 }
 
 void MainWindow::createMenus()
@@ -276,10 +276,16 @@ void MainWindow::createMenus()
     menuHelp->setTitle(tr("Help"));
 }
 
-void MainWindow::createWidgets()
+void MainWindow::createToolbar()
 {
     mainToolBar = new QToolBar(this);
-    this->addToolBar(Qt::TopToolBarArea, mainToolBar);
+    this->addToolBar(Qt::LeftToolBarArea, mainToolBar);
+    mainToolBar->setMovable(false);
+    mainToolBar->setMinimumWidth(150);
+}
+
+void MainWindow::createWidgets()
+{
     statusBar = new QStatusBar(this);
     this->setStatusBar(statusBar);
 
@@ -287,7 +293,7 @@ void MainWindow::createWidgets()
     canvasWidget->setObjectName(QString::fromUtf8("canvasWidget"));
     this->setCentralWidget(canvasWidget);
 
-    mainToolBar->addAction(actionSelect);
+    createToolbar();
 }
 
 void MainWindow::connectSignalsSlots()
