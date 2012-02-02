@@ -1,9 +1,0 @@
-120126 16:18:36  InnoDB: Started; log sequence number 0 44233
-120126 16:18:37 [ERROR] Can't start server : Bind on unix socket: No such file or directory
-120126 16:18:37 [ERROR] Do you already have another mysqld server running on socket: /home/well4536/.local/share/akonadi/db_misc/mysql.socket ?
-120126 16:18:37 [ERROR] Aborting
-
-120126 16:18:37  InnoDB: Starting shutdown...
-120126 16:18:42  InnoDB: Shutdown completed; log sequence number 0 44233
-120126 16:18:42 [Note] /usr/libexec/mysqld: Shutdown complete
-

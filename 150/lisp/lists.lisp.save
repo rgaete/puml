@@ -1,4 +1,0 @@
-(defun splice (L1 L2) (cons (CAR L1) (CAR L2))
-(if (= L2 )
-1
-(splice L1 L2)))
