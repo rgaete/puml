@@ -1,340 +1,0 @@
-Script started on Wed 20 Apr 2011 12:39:40 PM PDT
-bash-3.2$ clisp
-  i i i i i i i       ooooo    o        ooooooo   ooooo   ooooo
-  I I I I I I I      8     8   8           8     8     o  8    8
-  I  \ `+' /  I      8         8           8     8        8    8
-   \  `-+-'  /       8         8           8      ooooo   8oooo
-    `-__|__-'        8         8           8           8  8
-        |            8     o   8           8     o     8  8
-  ------+------       ooooo    8oooooo  ooo8ooo   ooooo   8
-
-Welcome to GNU CLISP 2.47 (2008-10-23) <http://clisp.cons.org/>
-
-Copyright (c) Bruno Haible, Michael Stoll 1992, 1993
-Copyright (c) Bruno Haible, Marcus Daniels 1994-1997
-Copyright (c) Bruno Haible, Pierpaolo Bernardi, Sam Steingold 1998
-Copyright (c) Bruno Haible, Sam Steingold 1999-2000
-Copyright (c) Sam Steingold, Bruno Haible 2001-2008
-
-Type :h and hit Enter for context help.
-
-[1]> re  union '(a b c)(a b c) ['  '(a c d e)(c d e))
-
-*** - SYSTEM::READ-EVAL-PRINT: variable UNION has no value
-The following restarts are available:
-USE-VALUE      :R1      Input a value to be used instead of UNION.
-STORE-VALUE    :R2      Input a new value for UNION.
-ABORT          :R3      Abort main loop
-Break 1 [2]> union '(a b c) '(c d e)) 
-
-*** - SYSTEM::READ-EVAL-PRINT: variable UNION has no value
-The following restarts are available:
-USE-VALUE      :R1      Input a value to be used instead of UNION.
-STORE-VALUE    :R2      Input a new value for UNION.
-ABORT          :R3      Abort debug loop
-ABORT          :R4      Abort main loop
-Break 2 [3]> union '(a b c) '(c d e)_ )[4h([4l[1P[4h([4l
-(A B C D E)
-Break 2 [3]> (reduce 'list '(a b c d e)(a b c d e))Break 2 [3]> (reduce 'list '(a b c d e))
-((((A B) C) D) E)
-Break 2 [3]> (reduce (lambda ( x y)( x y)(  ([1Px y) (> x y)(> x y))(lambda (x y) (> x y)) '(1 3 4 1 2 3)(1 3 4 1 2 3))Break 2 [3]> (reduce (lambda (x y) (> x y)) '(1 3 4 1 2 3))) [4h([4l[1P[4hi[4l[4hf[4l[4h [4l[4h([4l> x y)[4h [4l[4hx[4l[4h [4l[4hy[4l) [4h#[4l[4h`[4l(lambda (x y) ([1P[4h'[4l(lambda (x y) (if (
-
-*** - READ: input stream #<INPUT CONCATENATED-STREAM> ends within an object
-The following restarts are available:
-ABORT          :R1      Abort debug loop
-ABORT          :R2      Abort debug loop
-ABORT          :R3      Abort main loop
-Break 3 [4]> (reduce #'(lambda (x y) (if (> x y) x y) '(1 3 4 1 2 3))[4h)[4lBreak 3 [4]> (reduce #'(lambda (x y) (if (> x y) x y)) '
-4
-Break 3 [4]> first tests 1 and 3, then the bif ggest of those two and 4, then biggest of that then 1 ect..
-
-*** - SYSTEM::READ-EVAL-PRINT: variable FIRST has no value
-The following restarts are available:
-USE-VALUE      :R1      Input a value to be used instead of FIRST.
-STORE-VALUE    :R2      Input a new value for FIRST.
-ABORT          :R3      Abort debug loop
-ABORT          :R4      Abort debug loop
-ABORT          :R5      Abort debug loop
-ABORT          :R6      Abort main loop
-Break 4 [5]> 'f dog
-DOG
-Break 4 [5]> (qi uote dog)(quote dog)
-DOG
-Break 4 [5]> #'sqrt
-#<SYSTEM-FUNCTION SQRT>
-Break 4 [5]> (function sqrt)Break 4 [5]> (function sqrt)
-#<SYSTEM-FUNCTION SQRT>
-Break 4 [5]> setq    (ste  et1 q cities / '((moscow ((sopk   pokane 90)(spokane 90) ()()  (colfax 20)(colfax 20) ( le lewi    w ewiston 30)( lewiston 30))Break 4 [5]> (setq cities '((moscow ((spokane 90) (colfax 20) ( lewiston 30)))Break 4 [5]> (setq cities '((moscow ((spokane 90) (colfax 20) ( lewiston 30)))
-
-Commands may be abbreviated as shown in the second column.
-COMMAND        ABBR     DESCRIPTION
-Help           :h, ?    print this command list
-Error          :e       print the last error message
-Inspect        :i       inspect the last error
-Abort          :a       abort to the next recent input loop
-Unwind         :uw      abort to the next recent input loop
-Reset          :re      toggle *PACKAGE* and *READTABLE* between the
-                          local bindings and the sane values
-Quit           :q       quit to the top-level input loop
-Where          :w       inspect this frame
-Up             :u       go up one frame, inspect it
-Top            :t       go to top frame, inspect it
-Down           :d       go down one frame, inspect it
-Bottom         :b       go to bottom (most recent) frame, inspect it
-Mode mode      :m       set stack mode for Backtrace: 1=all the stack elements
-             2=all the frames                         3=only lexical frames
-             4=only EVAL and APPLY frames (default)   5=only APPLY frames
-Frame-limit n  :fl      set the frame-limit for Backtrace. This many frames
-                          will be printed in a backtrace at most.
-Backtrace [mode [limit]] :bt  inspect the stack
-Break+         :br+     set breakpoint in EVAL frame
-Break-         :br-     disable breakpoint in EVAL frame
-Redo           :rd      re-evaluate form in EVAL frame
-Return value   :rt      leave EVAL frame, prescribing the return values
-The following restarts are available:
-USE-VALUE      :R1      Input a value to be used instead of FIRST.
-STORE-VALUE    :R2      Input a new value for FIRST.
-ABORT          :R3      Abort debug loop
-ABORT          :R4      Abort debug loop
-ABORT          :R5      Abort debug loop
-ABORT          :R6      Abort main loop
-[K(setq cities '((moscow ((spokane 90) (colfax 20) ( lewiston 30)))
-(spokane((moscow 0 90)(spokane((moscow 90) (sol   colfax 70)(colfax 70) *lewi    (  (lewiston 120)(lewiston 120))(spokane((moscow 90) (colfax 70) (lewiston 120)))(spokane((moscow 90) (colfax 70) (lewiston 120)))) 
-
-*** - READ: input stream #<INPUT CONCATENATED-STREAM> ends within an object
-The following restarts are available:
-ABORT          :R1      Abort debug loop
-ABORT          :R2      Abort debug loop
-ABORT          :R3      Abort debug loop
-ABORT          :R4      Abort debug loop
-ABORT          :R5      Abort main loop
-Break 5 [6]> (setq cities '((moscow ((spokane 90) (colfax 20) ( lewiston 30)))
-(setq cities '((moscow ((spokane 90) (colfax 20) ( lewiston 30)))
-(spokane((moscow 90) (colfax 70) (lewiston 120)))20)))                                                 [A[ABreak 5 [6]> (setq cities '((moscow ((spokane 90) (colfax 20) ( lewiston 30)))
-
-[K[K[A(setq cities '((moscow ((spokane 90) (colfax 20) ( lewiston 30)))[ABreak 5 [6]> (function sqrt)[K
-[K[ABreak 5 [6]> (function sqrt)setq cities '((moscow ((spokane 90) (colfax 20) ( lewiston 30)))
-(setq cities '((moscow ((spokane 90) (colfax 20) ( lewiston 30)))[ABreak 5 [6]> (function sqrt)[K
-[K[ABreak 5 [6]> (function sqrt)setq cities '((moscow ((spokane 90) (colfax 20) ( lewiston 30)))
-(setq cities '((moscow ((spokane 90) (colfax 20) ( lewiston 30)))                                                                spokane((moscow 90)(spokane((moscow 90) (colfax 70)(colfax 70) *(  (lewiston 2 120)(lewiston 120))(spokane((moscow 90) (colfax 70) (lewiston 120)))(spokane((moscow 90) (colfax 70) (lewiston 120))))[A
-(spokane((moscow 90) (colfax 70) (lewiston 120)))))[ABreak 5 [6]> 
-(spokane((moscow 90) (colfax 70) (lewiston 120)))))) 
-((MOSCOW ((SPOKANE 90) (COLFAX 20) (LEWISTON 30))) (SPOKANE ((MOSCOW 90) (COLFAX 70) (LEWISTON 120))))
-Break 5 [6]> (fe  defun a; list  -keys (l)(l) (mapcar 'dir   f9 irst l )(mapcar 'first l ))Break 5 [6]> (defun alist-keys (l) (mapcar 'first l ))
-ALIST-KEYS
-Break 5 [6]> (* alist-keys cities)Break 5 [6]> (alist-keys cities)
-(MOSCOW SPOKANE)
-Break 5 [6]> (defun all0 -cities )Break 5 [6]> (defun all-cities ) (l)(l) (alist  -keys a cities)(alist-keys cities))Break 5 [6]> (defun all-cities (l) (alist-keys cities))
-ALL-CITIES
-Break 5 [6]> ( * (all-cities key   cities  es( )Break 5 [6]> (all-cities cities)
-(MOSCOW SPOKANE)
-Break 5 [6]> (dfun   efun city-routes (x c_ )(c) (second (assoc c cities)(assoc c cities))(second (assoc c cities)))Break 5 [6]> (defun city-routes (c) (second (assoc c cities)))) 
-CITY-ROUTES
-Break 5 [6]> cityt   -routes ( [4h([4lcity-routes spokane)Break 5 [6]> (city-routes spokane)
-
-*** - SYSTEM::READ-EVAL-PRINT: variable SPOKANE has no value
-The following restarts are available:
-USE-VALUE      :R1      Input a value to be used instead of SPOKANE.
-STORE-VALUE    :R2      Input a new value for SPOKANE.
-ABORT          :R3      Abort debug loop
-ABORT          :R4      Abort debug loop
-ABORT          :R5      Abort debug loop
-ABORT          :R6      Abort debug loop
-ABORT          :R7      Abort debug loop
-ABORT          :R8      Abort main loop
-Break 6 [7]> (city-routes spokane)[4h'[4l
-((MOSCOW 90) (COLFAX 70) (LEWISTON 120))
-Break 6 [7]> (defun si  dist (x y)(x y) (second (assoc y (city0 -routes x )(city-routes x )  )(city-routes x))(assoc y (city-routes x)))Break 6 [7]> (defun dist (x y) (second (assoc y (city-routes x))))Break 6 [7]> (defun dist (x y) (second (assoc y (city-routes x))))
-DIST
-Break 6 [7]> di  * (dist 'spokane 'lewiston)Break 6 [7]> (dist 'spokane 'lewiston)
-120
-Break 6 [7]> mapcan assumes you returned list
-
-*** - SYSTEM::READ-EVAL-PRINT: variable MAPCAN has no value
-The following restarts are available:
-USE-VALUE      :R1      Input a value to be used instead of MAPCAN.
-STORE-VALUE    :R2      Input a new value for MAPCAN.
-ABORT          :R3      Abort debug loop
-ABORT          :R4      Abort debug loop
-ABORT          :R5      Abort debug loop
-ABORT          :R6      Abort debug loop
-ABORT          :R7      Abort debug loop
-ABORT          :R8      Abort debug loop
-ABORT          :R9      Abort main loop
-Break 7 [8]> mapcar makes list
-
-*** - SYSTEM::READ-EVAL-PRINT: variable MAPCAR has no value
-The following restarts are available:
-USE-VALUE      :R1      Input a value to be used instead of MAPCAR.
-STORE-VALUE    :R2      Input a new value for MAPCAR.
-ABORT          :R3      Abort debug loop
-ABORT          :R4      Abort debug loop
-ABORT          :R5      Abort debug loop
-ABORT          :R6      Abort debug loop
-ABORT          :R7      Abort debug loop
-ABORT          :R8      Abort debug loop
-ABORT          :R9      Abort debug loop
-ABORT          :R10     Abort main loop
-Break 8 [9]> commoo n        (fe  degun   fun within ()()  (miles x)(miles x)
-(mapcan #; 'l (m oa  lambda (z)(z))(mapcan #'(lambda (z)) (city-routes x)(city-routes x))(mapcan #'(lambda (z)) (city-routes x))) ) 
-)
-WITHIN
-Break 8 [9]> withi     * (within (120 spokane)(120 spokane)[4h'[4l
-
-*** - READ: input stream #<INPUT CONCATENATED-STREAM> ends within an object
-The following restarts are available:
-ABORT          :R1      Abort debug loop
-ABORT          :R2      Abort debug loop
-ABORT          :R3      Abort debug loop
-ABORT          :R4      Abort debug loop
-ABORT          :R5      Abort debug loop
-ABORT          :R6      Abort debug loop
-ABORT          :R7      Abort debug loop
-ABORT          :R8      Abort debug loop
-ABORT          :R9      Abort main loop
-Break 9 [10]> (within (120 'spokane)Break 9 [10]> (defun within (miles x)
-(mapcan #'(lambda (z)) (city-routes x))
-) [A[ABreak 9 [10]> (defun within (miles x)
-
-[K[K[A(mapcan #'(lambda (z)) (city-routes x))(c[4hi[4l[4hf[4l[4h([4l[4h<[4l[4h=[4l[4h([4l[4hs[4l[4he[4lc[4hc[4l[4ho[4l[4hn[4l[4hd[4l[4h [4l[4hz[4l[4h)[4l(second z)[4h [4l[4hm[4l[4hi[4l[4hl[4l[4he[4l[4hs[4l[4h)[4l(<=(second z) miles)[4h)[4l(if(<=(second z) miles))[4h [4l[4h)[4l(mapcan #'(lambda (z)) (if(<=(second z) miles)) )[1P[4h([4l[4hf[4l[4hi[4l[4hr[4l[4hs[4l[4ht[4l[4h [4l[4hz[4l[4h)[4l(first z)[4h)[4l(mapcan #'(lambda (z)) (if(<=(second z) miles)) (first z))[4h)[4l[ABreak 9 [10]> 
-(mapcan #'(lambda (z)) (if(<=(second z) miles)) (first z)))[1P[4hl[4l[4hi[4l[4hs[4l[4ht[4l[4h [4l[4h([4lfirst z))[4h [4l[ABreak 9 [10]> ([1Pwithin (120 'spokane
-[K[ABreak 9 [10]> (within (120 'spokane)Break 9 [10]> (defun within (miles x)
-(mapcan #'(lambda (z)) (if(<=(second z) miles)) (list (first z)) city-routes x))les)) (list (first z)) city-routes [4h [4l[4hn[4l[4hi[4l[4hl[4l[4h)[4l(mapcan #'(lambda (z)) (if(<=(second z) miles)) (list (first z)) nil) city-routes x))) [1P (list (first z)) nil) city-routes x))) _ ) [1P (if(<=(second z) miles) (list (first z)) nil)[4h)[4l(mapcan #'(lambda (z) (if(<=(second z) miles) (list (first z)) nil)) city-routes x))) 
-WITHIN
-Break 9 [10]> (win thin 120 sp  'spokane)Break 9 [10]> (within 120 'spokane)
-
-*** - WITHIN: variable CITY-ROUTES has no value
-The following restarts are available:
-USE-VALUE      :R1      Input a value to be used instead of CITY-ROUTES.
-STORE-VALUE    :R2      Input a new value for CITY-ROUTES.
-ABORT          :R3      Abort debug loop
-ABORT          :R4      Abort debug loop
-ABORT          :R5      Abort debug loop
-ABORT          :R6      Abort debug loop
-ABORT          :R7      Abort debug loop
-ABORT          :R8      Abort debug loop
-ABORT          :R9      Abort debug loop
-ABORT          :R10     Abort debug loop
-ABORT          :R11     Abort debug loop
-ABORT          :R12     Abort main loop
-Break 10 [11]> (within 120 'spokane)'[1P
-
-*** - SYSTEM::READ-EVAL-PRINT: variable SPOKANE has no value
-The following restarts are available:
-USE-VALUE      :R1      Input a value to be used instead of SPOKANE.
-STORE-VALUE    :R2      Input a new value for SPOKANE.
-ABORT          :R3      Abort debug loop
-ABORT          :R4      Abort debug loop
-ABORT          :R5      Abort debug loop
-ABORT          :R6      Abort debug loop
-ABORT          :R7      Abort debug loop
-ABORT          :R8      Abort debug loop
-ABORT          :R9      Abort debug loop
-ABORT          :R10     Abort debug loop
-ABORT          :R11     Abort debug loop
-ABORT          :R12     Abort debug loop
-ABORT          :R13     Abort main loop
-Break 11 [12]> (within 120 spokane)[1P[1P[4h0[4l[4h0[4l
-
-*** - SYSTEM::READ-EVAL-PRINT: variable SPOKANE has no value
-The following restarts are available:
-USE-VALUE      :R1      Input a value to be used instead of SPOKANE.
-STORE-VALUE    :R2      Input a new value for SPOKANE.
-ABORT          :R3      Abort debug loop
-ABORT          :R4      Abort debug loop
-ABORT          :R5      Abort debug loop
-ABORT          :R6      Abort debug loop
-ABORT          :R7      Abort debug loop
-ABORT          :R8      Abort debug loop
-ABORT          :R9      Abort debug loop
-ABORT          :R10     Abort debug loop
-ABORT          :R11     Abort debug loop
-ABORT          :R12     Abort debug loop
-ABORT          :R13     Abort debug loop
-ABORT          :R14     Abort main loop
-Break 12 [13]> (within 100 spokane)100  [4h'[4l
-
-*** - WITHIN: variable CITY-ROUTES has no value
-The following restarts are available:
-USE-VALUE      :R1      Input a value to be used instead of CITY-ROUTES.
-STORE-VALUE    :R2      Input a new value for CITY-ROUTES.
-ABORT          :R3      Abort debug loop
-ABORT          :R4      Abort debug loop
-ABORT          :R5      Abort debug loop
-ABORT          :R6      Abort debug loop
-ABORT          :R7      Abort debug loop
-ABORT          :R8      Abort debug loop
-ABORT          :R9      Abort debug loop
-ABORT          :R10     Abort debug loop
-ABORT          :R11     Abort debug loop
-ABORT          :R12     Abort debug loop
-ABORT          :R13     Abort debug loop
-ABORT          :R14     Abort debug loop
-ABORT          :R15     Abort main loop
-Break 13 [14]> (within 100 'spokane)[1Pspokane)20 spokane)[4h'[4lspokane)Break 13 [14]> (defun within (miles x)
-(mapcan #'(lambda (z) (if(<=(second z) miles) (list (first z)) nil)) city-routes x))[ABreak 13 [14]> ([1Pwithin (120 'spokane
-[K[ABreak 13 [14]> (within (120 'spokane)Break 13 [14]> (defun within (miles x)
-(mapcan #'(lambda (z) (if(<=(second z) miles) (list (first z)) nil)) city-routes x))[ABreak 13 [14]> ([2Pwithin 120 'spokane
-[K[ABreak 13 [14]> (within 120 'spokane)Break 13 [14]> (defun within (miles x)
-(mapcan #'(lambda (z) (if(<=(second z) miles) (list (first z)) nil)) city-routes x)) x)))
-WITHIN
-Break 13 [14]> (within 100 'spokane
-)
-
-*** - WITHIN: variable CITY-ROUTES has no value
-The following restarts are available:
-USE-VALUE      :R1      Input a value to be used instead of CITY-ROUTES.
-STORE-VALUE    :R2      Input a new value for CITY-ROUTES.
-ABORT          :R3      Abort debug loop
-ABORT          :R4      Abort debug loop
-ABORT          :R5      Abort debug loop
-ABORT          :R6      Abort debug loop
-ABORT          :R7      Abort debug loop
-ABORT          :R8      Abort debug loop
-ABORT          :R9      Abort debug loop
-ABORT          :R10     Abort debug loop
-ABORT          :R11     Abort debug loop
-ABORT          :R12     Abort debug loop
-ABORT          :R13     Abort debug loop
-ABORT          :R14     Abort debug loop
-ABORT          :R15     Abort debug loop
-ABORT          :R16     Abort main loop
-Break 14 [15]> (within 100 'spokane
-) [ABreak 14 [15]> (within 100 'spokane
-[K[K[ABreak 14 [15]> (within 100 'spokane)Break 14 [15]> (within 100 'spokane)
-
-*** - WITHIN: variable CITY-ROUTES has no value
-The following restarts are available:
-USE-VALUE      :R1      Input a value to be used instead of CITY-ROUTES.
-STORE-VALUE    :R2      Input a new value for CITY-ROUTES.
-ABORT          :R3      Abort debug loop
-ABORT          :R4      Abort debug loop
-ABORT          :R5      Abort debug loop
-ABORT          :R6      Abort debug loop
-ABORT          :R7      Abort debug loop
-ABORT          :R8      Abort debug loop
-ABORT          :R9      Abort debug loop
-ABORT          :R10     Abort debug loop
-ABORT          :R11     Abort debug loop
-ABORT          :R12     Abort debug loop
-ABORT          :R13     Abort debug loop
-ABORT          :R14     Abort debug loop
-ABORT          :R15     Abort debug loop
-ABORT          :R16     Abort debug loop
-ABORT          :R17     Abort main loop
-Break 15 [16]> (within 100 'spokane) 
-)[Areak 15 [16]> (defun within (miles x)
-(mapcan #'(lambda (z) (if(<=(second z) miles) (list (first z)) nil)) city-routes x))) ) nil)) city-r[ABreak 15 [16]> (defun within (miles x)   ([3Pwithin 100 'spokane
-)[K[Areak 15 [16]> (defun within (miles x)
-(mapcan #'(lambda (z) (if(<=(second z) miles) (list (first z)) nil)) city-routes x))[4h([4lcity-routes x)))[ABreak 15 [16]> 
-(mapcan #'(lambda (z) (if(<=(second z) miles) (list (first z)) nil)) (city-routes x)))
-WITHIN
-Break 15 [16]> (within 100 'spokane)Break 15 [16]> (within 100 'spokane)
-(MOSCOW COLFAX)
-Break 15 [16]> (within 100 'spokane)0[1P[1P[4h5[4l[1P[1P[4h5[4l[4h0[4l 'spokane[1P)[1P)[1P)[1P)[1P)[1P)[1P)m)o)s)o)c)[1P)[1P)c)o)w)
-(COLFAX LEWISTON)
-Break 15 [16]> l lllllllllpopl             (quit)(quit)
-Bye.
-bash-3.2$ exit
-
-Script done on Wed 20 Apr 2011 01:19:16 PM PDT
