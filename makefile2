@@ -1,0 +1,112 @@
+prog: array_casts.o array_const_prop.o arrayref_elision.o binary_read.o bitwidth_narrow.o scan.o gram.o build_ddcf.o code_motion.o collect_decls.o const_fold_tree.o const_fold.o convert_concat_masked.o copy_graph.o cse.o ddcf_consistency.o ddcf.o ddcf2dfg.o dead_code.o deftab.o duped_inputs.o error.o flow.o full_unroll.o func_inline.o identities.o intlist.o lookup_tables.o loop_fuse.o main.o num_converions.o scoping.o show_ddcf.o show_tree.o size_prop_down.o size_prop_up.o size_propagation.o strength_reduction.o switch_const.o symtab.o tree.o type_pass1.o type_pass2.o type_pass3.o type_unify.o window_tile.o window_to_elegen.o lex.yy.o gram.tab.o scan.o gram.o
+	gcc -o prog array_casts.o array_const_prop.o arrayref_elision.o binary_read.o bitwidth_narrow.o build_ddcf.o code_motion.o collect_decls.o const_fold_tree.o const_fold.o convert_concat_masked.o copy_graph.o cse.o ddcf_consistency.o ddcf.o ddcf2dfg.o dead_code.o deftab.o duped_inputs.o error.o flow.o full_unroll.o func_inline.o identities.o intlist.o lookup_tables.o loop_fuse.o main.o num_converions.o scoping.o show_ddcf.o show_tree.o size_prop_down.o size_prop_up.o size_propagation.o strength_reduction.o switch_const.o symtab.o tree.o type_pass1.o type_pass2.o type_pass3.o type_unify.o window_tile.o window_to_elegen.o lex.yy.o gram.tab.o
+
+lex.yy.o: lex.yy.c
+	cc -c -g lex.yy.c
+lex.yy.c: scan.l gram.tab.h
+	flex scan.l
+gram.tab.o: gram.tab.c
+	cc -c -g gram.tab.c
+gram.tab.c: gram.y
+	bison gram.y
+gram.tab.h: gram.y
+	bison -d gram.y
+scan.o: scan.c lex.yy.c gram.tab.h
+	gcc -c scan.c
+gram.o: gram.c gram.tab.c gram.tab.h
+	gcc -c gram.c
+array_casts.o: array_casts.c sassy.h ddcf.h error.h
+	gcc -c array_casts.c
+array_const_prop.o: array_const_prop.c sassy.h ddcf.h error.h
+	gcc -c array_const_prop.c
+arrayref_elision.o: arrayref_elision.c sassy.h ddcf.h error.h
+	gcc -c arrayref_elision.c
+binary_read.o: binary_read.c sassy.h ddcf.h error.h
+	gcc -c binary_read.c
+bitwidth_narrow.o: bitwidth_narrow.c sassy.h ddcf.h error.h
+	gcc -c bitwidth_narrow.c
+build_ddcf.o: build_ddcf.c
+	gcc -c build_ddcf.c
+code_motion.o: code_motion.c sassy.h ddcf.h error.h
+	gcc -c code_motion.c
+collect_decls.o: collect_decls.c sassy.h error.h node.h deftab.h
+	gcc -c collect_decls.c
+const_fold_tree.o: const_fold_tree.c sassy.h deftab.h error.h node.h
+	gcc -c const_fold_tree.c
+const_fold.o: const_fold.c sassy.h ddcf.h error.h
+	gcc -c const_fold.c
+convert_concat_masked.o:convert_concat_masked.c sassy.h ddcf.h error.h
+	gcc -c convert_concat_masked.c
+copy_graph.o: copy_graph.c sassy.h ddcf.h error.h
+	gcc -c copy_graph.c
+cse.o: cse.c sassy.h ddcf.h error.h
+	gcc -c cse.c
+ddcf_consistency.o: ddcf_consistency.c sassy.h ddcf.h error.h
+	gcc -c ddcf_consistency.c
+ddcf.o: ddcf.c sassy.h ddcf.h error.h
+	gcc -c ddcf.c
+ddcf2dfg.o: ddcf2dfg.c sassy.h ddcf.h error.h
+	gcc -c ddcf2dfg.c
+dead_code.o: dead_code.c sassy.h ddcf.h error.h
+	gcc -c dead_code.c
+deftab.o: deftab.c sassy.h deftab.h error.h node.h
+	gcc -c deftab.c
+duped_inputs.o: duped_inputs.c sassy.h ddcf.h error.h
+	gcc -c duped_inputs.c
+error.o: error.c sassy.h node.h error.h
+	gcc -c error.c
+flow.o: flow.c sassy.h deftab.h error.h node.h
+	gcc -c flow.c
+full_unroll.o: full_unroll.c sassy.h ddcf.h error.h
+	gcc -c full_unroll.c
+func_inline.o: func_inline.c sassy.h ddcf.h error.h
+	gcc -c func_inline.c
+identities.o: identities.c sassy.h ddcf.h error.h
+	gcc -c identities.c
+intlist.o: intlist.c sassy.h error.h
+	gcc -c intlist.c
+lookup_tables.o: lookup_tables.c sassy.h ddcf.h error.h
+	gcc -c lookup_tables.c
+loop_fuse.o: loop_fuse.c sassy.h ddcf.h error.h
+	gcc -c loop_fuse.c
+main.o: main.c sassy.h ddcf.h error.h deftab.h node.h
+	gcc -c main.c
+num_converions.o: num_converions.c sassy.h
+	gcc -c num_converions.c
+scoping.o: scoping.c sassy.h error.h deftab.h node.h
+	gcc -c scoping.c
+show_ddcf.o: show_ddcf.c sassy.h ddcf.h error.h
+	gcc -c show_ddcf.c
+show_tree.o: show_tree.c sassy.h node.h
+	gcc -c show_tree.c
+size_prop_down.o: size_prop_down.c sassy.h ddcf.h error.h
+	gcc -c size_prop_down.c
+size_prop_up.o: size_prop_up.c sassy.h ddcf.h error.h
+	gcc -c size_prop_up.c
+size_propagation.o: size_propagation.c sassy.h ddcf.h error.h
+	gcc -c size_propagation.c
+strength_reduction.o: strength_reduction.c sassy.h ddcf.h error.h
+	gcc -c strength_reduction.c
+switch_const.o: switch_const.c sassy.h ddcf.h error.h
+	gcc -c switch_const.c
+symtab.o: symtab.c sassy.h error.h
+	gcc -c symtab.c
+tree.o: tree.c sassy.h node.h error.h
+	gcc -c tree.c
+type_pass1.o: type_pass1.c sassy.h deftab.h node.h error.h
+	gcc -c type_pass1.c
+type_pass2.o: type_pass2.c sassy.h deftab.h node.h error.h
+	gcc -c type_pass2.c
+type_pass3.o: type_pass3.c sassy.h node.h deftab.h error.h
+	gcc -c type_pass3.c
+type_unify.o: type_unify.c sassy.h deftab.h error.h node.h
+	gcc -c type_unify.c
+window_tile.o: window_tile.c sassy.h ddcf.h error.h
+	gcc -c window_tile.c
+window_to_elegen.o: window_to_elegen.c sassy.h ddcf.h error.h
+	gcc -c window_to_elegen.c
+
+clean:
+	rm -rf *o prog
+	rm lex.yy.c gram.tab.h gram.tab.c gram.c scan.c
+

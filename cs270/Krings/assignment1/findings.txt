@@ -1,0 +1,43 @@
+This assignment was to learn how to use readelf to read and discern how executables are organized.  
+My executable entry point (_start) is at 0x400450. The data information is as follows:
+
+(non optimized)
+.text is 0x04e8 big and loaded at the entry point (0x0400450)
+.rodata is 0x087 big and is at 0x0400948
+.data is 0x04 big and is at 0x0600d50
+.bss is 0x0fc0 big and is at 0x0600d60
+
+(Optimized)
+.text is 0x0428 big and loaded at the entry point (0x0400450)
+.rodata is 0x08b big and is at 0x0400888
+.data is 0x04 big and is at 0x0600c80
+.bss is 0x0fc0 big and is at 0x0600ca0
+
+Now looking at the symbol table, you can see my functions and their sizes and locations.
+(non-optimized)
+
+.Partition. is loaded at 0x0400571 and its size is 128 
+.Bubble. is loaded at 0x04005f1 and its size is 143
+.quicksort. is loaded at 0x400528 and its size is 73
+.swap. is loaded at 0x04006f5 and its size is 80 
+.selectionsort. is loaded at 0x0400680 and its size is 117
+.main. is loaded at 0x0400745 and its size is 273 
+
+(Optimized)
+.Partition. is loaded at 0x0400620 and its size is 77 
+.Bubble. is loaded at 0x04005b0 and its size is 102
+.quicksort. is loaded at 0x400670 and its size is 78
+.swap. is loaded at 0x0400530 and its size is 35
+.selectionsort. is loaded at 0x0400560 and its size is 72
+.main. is loaded at 0x04006c0 and its size is 216 
+
+
+
+As for the library functions, there are two used from stdio.h. They are as follows:
+Printf@@GLIBC_2.2.5 is not loaded at an address and its size is 162
+ScanF@@GLIBC_2.2.5 is not loaded at an address and its size is 164
+
+After optimization, the entry point did not change. However, above you can see the text section 
+size went from 0x04e8 to 0x0428 after optimizing and in the symbol table you can see that the 
+function sizes shrunk (except for .quicksort).
+

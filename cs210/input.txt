@@ -1,0 +1,206 @@
+// numbers
+10
+1.816
+.816
+1.
+007
+700
+0-007
+0
+(666)
+
+// add
+11+22
+11     +         22
+
+// sub
+33 - 44
+33 - 20 - 10
+33 - (20 - 10)
+(33 - 20) - 10
+
+// mul
+34 * 234
+
+// div
+34 / 234
+34 / 234 / 3
+
+// pow
+2 ^ 4
+4 ^ 3 ^ 2
+2 ^ 4
+
+// as
+42 as 7
+3 * 7 * 2 as 4 + 3
+
+// parens
+(3+4)*5
+[3+4]*5
+([3+4]*5)^2
+[(3+4)*5]^2
+
+// measurements
+m
+meter
+meters
+kg
+kilo
+kilogram
+kilograms
+s
+sec
+second
+seconds
+radian
+radians
+deg
+degree
+degrees
+l
+liter
+liters
+gal
+gallon
+gallons
+lb
+lbs
+pound
+pounds
+g
+gm
+gms
+gram
+grams
+ly
+lightyear
+lightyears
+k
+km
+kilometer
+kilometers
+cm
+centimeter
+centimeters
+mm
+millimeter
+millimeters
+micron
+microns
+in
+inch
+inches
+yd
+yard
+yards
+ft
+feet
+foot
+mi
+mile
+miles
+a
+ac
+acre
+acres
+ha
+hectare
+hectares
+mph
+kph
+day
+days
+h
+hr
+hour
+hours
+min
+minute
+minutes
+
+// conversions
+17 mi as ft
+42 mph as cm/second
+67 acres as ft^2
+(33 + 19) mi sec kg
+33 + 19 mi sec kg
+
+// constants
+e^pi
+pi^e
+
+// functions
+(1 + sqrt(5))/2
+abs(0-5)
+ln(e)
+sin(34)^2 + cos(34)^2
+exp(1) - e
+sin(pi)
+cos(pi)
+
+// last computed value
+pi
+#-pi
+2
+#^2
+#^2
+#^2
+#^2
+
+// vars
+A = 666
+A
+B = A
+B - A
+C = D = 36
+C*C - A
+D*D - A
+E = 45 + 107
+
+// ternary operator
+//0 ? 1 : 2
+0 ? 1 : 2
+
+//1 ? 2 : 3
+1 ? 2 : 3
+
+//1 ? 2 : 3 ? 4 : 5
+1 ? 2 : 3 ? 4 : 5
+
+//0 ? 2 : 3 ? 4 : 5
+0 ? 2 : 3 ? 4 : 5
+
+//0 ? 2 : 0 ? 4 : 5
+0 ? 2 : 0 ? 4 : 5
+
+//1 ? 2 ? 3 : 4 : 5
+1 ? 2 ? 3 : 4 : 5
+
+//1 ? 0 ? 3 : 4 : 5
+1 ? 0 ? 3 : 4 : 5
+
+//0 ? 2 ? 3 : 4 : 5
+0 ? 2 ? 3 : 4 : 5
+
+// complex expressions
+X = 3
+1 + 1/X + 1/X^2 + 1/X^3
+1 - 1/X + 1/X^2 - 1/X^3
+((1 - (1/(X))) + (1/X^2 - 1/X^3))
+
+// complex conversions
+12 kgms as pound feet hours
+3598 grams as pounds
+231 grams as kg
+.578 l as gals
+3.12 ft * 0.0455 yd * 7.87 in as cm^3
+.2587 ft^3 as mm^3
+55 mph as m/s
+2.87 lbs/in^3 as g/l
+44 mph * 50 min as k
+.5 * (130cm * 226cm * 40cm) / (200 ml/min) as min
+19.3 g/cm^3 as lbs/ft^3
+exit
+stop
+quit

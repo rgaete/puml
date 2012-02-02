@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<session>
+  <history>
+    <bookmark name="lc3" icon="gnome-fs-directory" uri="file:///net/ugrads/well4536/lc3"/>
+    <bookmark name="Computer" icon="gnome-fs-client" uri="computer:///"/>
+    <bookmark name="lc3tools" icon="gnome-fs-bookmark-missing" uri="file:///net/ugrads/well4536/lc3tools"/>
+    <bookmark name="well4536" icon="user-home" uri="file:///net/ugrads/well4536"/>
+  </history>
+</session>

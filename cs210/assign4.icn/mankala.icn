@@ -1,0 +1,109 @@
+record cupR (stones,safe)
+
+procedure genmove(cups, cup, moves, win)
+	turns:=cups[cup].stones
+	if(cups[cup].stones=0) then fail	
+	
+	every(i:=cup+1 to cup+turns) do {
+		cups[(i-1)%*cups+1].stones+:=1 & cups[cup].stones-:=1 
+	endcup:=(i-1)%*cups+1 }
+	
+	if(cups[endcup].safe=0 & cups[endcup].stones=1) then {  backstep(cups,cup,turns)} & return -1
+	else {
+		put(moves, cup)
+	        if(genwin(cups)) then {win:=-1 & if (*moves <9) then writes( "Win in   ", *moves, " moves: ")& writelist(moves) else writes( "Win in  ", *moves, " moves: ")& writelist(moves)}
+	        tmpcups:=copyCups(cups)
+		pass:=0
+		if(cups[endcup].safe=1) then {
+			every(j:=1 to *cups, cups[j].safe=0, cups[j].stones~=0, tmp:=copyCups(tmpcups), win:=genmove(tmp, j, moves, win))
+		}
+		else {
+			win:=genmove(cups, endcup, moves, win)        
+	             }
+		 pull(moves)
+	}
+	return win
+end
+
+procedure backstep(cups, cup, turns)
+	every(i:=cup+1 to cup+turns) do {
+                        cups[(i-1)%*cups+1].stones-:=1 & cups[cup].stones+:=1
+                        }
+end
+
+#Function from Dr Heckendorn
+procedure writeanys(l)
+    case type(l) of {
+	"cset" : writes("'", l, "'")
+	"string" : writes("\"", l, "\"")
+	"integer" : writes(l)
+	"real" : writes(l)
+	"list" : writelists(l)
+	"table" : writelists(sort(l))
+	default : write("don't know how to write type: ", type(l))
+    }
+    return
+end
+
+#Function from Dr. Heckendorn
+procedure writeany(l)
+    writeanys(l)
+    write()
+    return 
+end
+
+
+#Function from Dr. Heckendorn
+procedure writelists(l)
+    writes("[")
+    every (i:=1 to *l, writeanys(l[i]), i<*l, writes(", "))
+    writes("]")
+    return 
+end
+
+
+#Function from Dr. Heckendorn
+procedure writelist(l)
+    writelists(l)
+    write()
+    return 
+end
+
+
+procedure genwin(cups)
+	every(i:=1 to *cups, cups[i].safe=0, cups[i].stones~=0) do fail 
+	return 1
+end
+ 
+procedure genplay(cups, win)
+	cupCopy:=copyCups(cups)
+	moves:=[]
+	win:=0
+	every(i:=1 to *cups, cupCopy[i].safe=0, cupCopy[i].stones~=0) do {
+		win:=genmove(cupCopy, i, moves, win)
+		cupCopy:=copyCups(cups)
+		moves:=[]
+		suspend
+	}
+	return win
+end
+
+procedure copyCups(cups)
+	copiedcups:=[]
+	every i:=1 to *cups do put(copiedcups, cupR(cups[i].stones, cups[i].safe))
+	return copiedcups
+end
+
+procedure main()
+	cups:=[]
+	win:=0
+        while (numstones:=read()) do {      # number of stones in a cup
+        	safe:=read()                    # the word "safe" or "unsafe"
+        	if safe=="safe" then safe:=1 else safe:=0
+		put(cups, cupR(numstones, safe)) # push onto cups list a cup record
+        }
+        cups[1].safe:=1                # the first cup is always safe
+	every win:=genplay(cups, win)
+   	if win=0 then write("No wins!")
+end
+

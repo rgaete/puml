@@ -1,0 +1,105 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+
+
+
+int runcmd(char **cmd, int V);
+int Parse(char **cmd,char *temp);
+int input(char *temp,char **cmd);
+int newalias();
+
+struct Alias
+{
+  char alias[100];
+  char realcmd[100];
+  struct Alias *next;
+}; 
+
+
+int main()
+{
+  char *cmd[100], temp[100];
+  int m=0, V=0, end==0;
+  struct Alias *head='\0';
+  
+      end=input(temp, cmd);
+    
+  Parse(cmd, temp);    /*parsing input into a 2 dimensional array so that execvp can use it*/
+  runcmd(cmd, V);         /*executes child process to run shell command*/
+}
+
+
+int input(char *temp, char **cmd)
+{
+  int i=-1, V=0, end=0;
+      printf("\n$");  /*command line symbol*/
+      while(temp[i]!='\n')
+        {
+          i++;
+          temp[i]=getchar(); /*grabing char by char from command line*/
+          if(temp[i]==EOF)
+	    {
+	      exit(0);
+	    }
+          else if(temp[i]=='/')
+            {
+              V=1;              /*path specified input*/
+            }
+        }     
+ 
+  return end;
+}
+
+int runcmd(char **cmd, int V)
+{
+  int status;
+  pid_t pid=fork();
+
+ if(pid<0)   /* if it failed*/
+  {
+    printf("could not make child process\n");
+  }
+  else if(pid==0 && V==0)   /*child process*/          /*if standard command without path specification*/
+  {
+    printf("it is %d", wait(&status));
+    execvp(*cmd, cmd);
+    exit(0);
+  }
+  else if(pid==0 && V==1)                    /*if it is a path input*/
+    {
+      execv(*cmd, cmd);
+      V=0;
+    }
+  else if(pid!=wait(&status))                /*wait for child process to end*/
+  {
+    printf("parent did not wait for child to end");
+  }
+  else
+  {
+    // exit(0);
+  }
+}
+
+
+int Parse(char **cmd, char *temp)
+{
+  int i=0, flag=0, col=0;
+  while(temp[i]!='\n')
+    {
+      if((temp[i]==' ' || temp[i]=='\t') && flag==1)  /*NULLing spaces in input*/
+        {
+          temp[i]='\0';   
+	  flag=0;
+	}
+      else if(flag==0) 
+	{
+	  cmd[col]=&temp[i];
+	  flag=1;
+	  col++;
+	}
+      i++;
+    }
+  temp[i]='\0';  /* nullifying the \n character from input*/
+}
