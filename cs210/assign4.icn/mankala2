@@ -1,0 +1,74 @@
+record cupR (stones,safe)
+
+procedure genmove(cups, cup, moves)
+	if(genwin(cups)) then return
+	turns:=cups[cup].stones
+	if(cups[cup].stones=0) then fail	
+	
+	every(i:=cup+1 to cup+turns) do
+		cups[(i-1)%*cups+1].stones<-cups[(i-1)%*cups+1].stones+1 & cups[cup].stones-:=1 
+	endcup:=(i-1)%*cups+1
+	
+	every i:=1 to *cups do write("ammount in cup ", i, " is ", cups[i].stones)
+	
+	if(cups[endcup].safe=0 & cups[endcup].stones=1) then {
+		every(i:=cup+1 to cup+turns) do { write("WHOOPS") &
+			cups[(i-1)%*cups+1].stones-:=1 & cups[cup].stones+:=1 
+			} & &fail
+	}
+	else {
+		put(moves, cup)
+		 tmpcups:=copyCups(cups)
+		if(cups[endcup].safe=1) then {
+			every(j:=1 to *cups, cups[j].safe=0, cups[j].stones~=0 , write("Now going with cup ", j), write(), genmove(cups, j, moves))
+		}
+		else
+			write("Now going with cup :LOUJ", endcup) & genmove(cups, endcup, moves)
+	}
+
+end
+
+procedure backstep
+	every(i:=cup+1 to cup+turns) do { write("WHOOPS") &
+                        cups[(i-1)%*cups+1].stones-:=1 & cups[cup].stones+:=1
+                        }
+end
+
+procedure genwin(cups)
+	every(i:=1 to *cups, cups[i].safe=0, cups[i].stones~=0) do fail
+	 write("WIN!") 
+	return
+end
+ 
+procedure genplay(cups)
+	cupCopy:=copyCups(cups)
+	moves:=[]
+	
+	every(i:=1 to *cups, cupCopy[i].safe=0, cupCopy[i].stones~=0) do {
+	#	write("starting with cup:", i)
+		genmove(cupCopy, i, moves)
+		if(genwin(cupCopy)) then every(i:=!moves) do writes(i, ", ") 
+		cupCopy:=copyCups(cups)
+		moves:=[]
+		suspend
+	}
+end
+
+procedure copyCups(cups)
+	copiedcups:=[]
+	every i:=1 to *cups do put(copiedcups, cupR(cups[i].stones, cups[i].safe))
+	return copiedcups
+end
+
+procedure main()
+	cups:=[]
+	put(cups, cupR(0, 1))
+	put(cups, cupR(2, 0))
+	put(cups, cupR(1, 0))
+	put(cups, cupR(0, 1))
+#	put(cups, cupR(3, 0))
+	every genplay(cups)
+        write()
+
+end
+

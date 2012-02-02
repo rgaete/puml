@@ -1,0 +1,8 @@
+(defun splice (L1 L2)
+(if(listp L3)
+(setq L3 (car L1))
+(list L3 (car L1)
+(list L3 (car L2)
+(if (eql (cdr L2) nil)
+(splice (cdr L1 cdr L2))
+)))

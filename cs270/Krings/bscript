@@ -1,0 +1,8 @@
+#! /bin/bash
+
+read COUNT
+# bash while loop
+while [ $COUNT -eq 0 ]; do
+    echo Value of count is: $COUNT
+#    let COUNT=COUNT-1
+done 

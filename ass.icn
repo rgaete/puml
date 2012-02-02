@@ -1,0 +1,54 @@
+procedure sum(l)
+	sum:=0
+	every sum:=sum+!l
+             return sum
+end
+
+procedure runningsum(l)
+	sum:=0
+	suspend sum:=sum+!l
+end
+
+procedure sumto(l,x)
+	i:=0
+	j:=0
+	every !l & i:=0 & j:=j+1 & !l & i:=i+1 & (l[i]+l[j]=x) & suspend [l[i],l[j]] 
+end
+
+procedure makeList(g,n)
+	M:=[ ]
+	every x:=g(n) do write(x)
+#	write(M[2])
+end
+
+procedure allnums(start)
+	every (i:=start) & | (i+:=1) & suspend i
+end
+
+procedure prime()
+	x:=0
+	every x:=allnums(0) & isPrime(x) do suspend x
+end
+
+procedure divisors(n)
+	every (x:=0) & | (x+:=1) & n % x=0 do suspend x
+end
+
+procedure onlyOddDigits(n)
+	str:=string(n)
+	i:=0
+	every !str & i:=i+1 & s:=numeric(str[i]) & s % 2 =0 & return 0
+	return 1
+end
+
+procedure oddReversablePrimes()
+
+end
+
+procedure main()
+	#car1 := [3, 2, 1]
+	#i:=0
+	makeList(divisors,12)	
+	##k:=onlyOddDigits(153277)
+	##every s:=allnums(4) do write(s)
+end
