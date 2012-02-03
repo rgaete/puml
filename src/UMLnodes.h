@@ -48,6 +48,10 @@ private slots:
 //    void setName(QString newName) { name = newName; }
 };
 
+class connectionline : public ConnectionNode {
+
+
+};
 
 class OvalDialog : public QDialog {
 

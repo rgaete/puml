@@ -19,12 +19,13 @@
 #include <QPrintDialog>
 #include <QMessageBox>
 #include <QCloseEvent>
+#include <QGroupBox>
+#include <QButtonGroup>
 #include "UMLnodes.h"
 #include "canvas.h"
 #include "nodefactory.h"
 #include "document.h"
 #include "assert.h"
-
 
 class MainWindow : public QMainWindow
 {
@@ -55,7 +56,7 @@ public slots:
     void on_actionCascade_toggled(bool arg1);
     void on_actionDocument_triggered();
     void on_actionAbout_triggered();
-    void on_actionSelect_toggled(bool arg1);
+    void on_actionSelect_triggered();
 
     void setPrototypeID(int prototypeID);
 
@@ -65,7 +66,7 @@ private:
     void createToolbar();
     void createWidgets();
     void connectSignalsSlots();
-    void registerObjectWithFactory(BaseNode* newPrototype);
+    void registerObject(BaseNode* newPrototype);
     void setCurrentDocument(int index);
 
 private:
@@ -80,6 +81,26 @@ private:
     //! Index pointing to the current document
     int currentDocument;
 
+    //these frames are for mainToolbar
+    QGroupBox *connectorsFrame;
+    QVBoxLayout *connectorsFrameLayout;
+    QGroupBox *objectsFrame;
+    QVBoxLayout *objectsFrameLayout;
+    //these button groups are for mainToolbar. They are need so buttons can be exclusively checked.
+    QButtonGroup *objectsButtonGroup;
+    QButtonGroup *connectorsButtonGroup;
+    //A vector to keep track of mainToolbar's buttons (probably could be deleted, no need to access them after they are created)
+    vector<QPushButton*> toolbarButtons;
+    QToolBar *mainToolBar;
+    //! The status bar
+    QStatusBar *statusBar;
+
+    //the rightside toolbar, a regular toolbar with a stylesheet targeted towards it (see main.cpp)
+    QToolBar *newToolbar;
+    //label for newToolbar
+    QLabel *toolbarLabel;
+
+    QActionGroup *objectsActionGroup;
     QAction *actionNew;
     QAction *actionOpen;
     QAction *actionSave;
@@ -90,7 +111,6 @@ private:
     QAction *actionCopy;
     QAction *actionCut;
     QAction *actionPaste;
-    QAction *actionSelect;
     QAction *actionSelect_All;
     QAction *actionInverse_Select;
     QActionGroup *Shapes_Connectors;
@@ -98,6 +118,9 @@ private:
     QAction *actionAbout;
     QAction *actionDelete;
     QAction *actionEdit;
+
+    QAction *actionSelect;
+    QPushButton *buttonSelect;
 
     QMenuBar *menuBar;
     QMenu *menuFile;
@@ -108,8 +131,6 @@ private:
     QMenu *menuHelp;
     QMenu *menuPopup;
 
-    QToolBar *mainToolBar;
-    QStatusBar *statusBar;
 
 };
 

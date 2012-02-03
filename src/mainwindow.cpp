@@ -8,18 +8,18 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
+    createWidgets();
     createActions();
     createMenus();
-    createWidgets();
     connectSignalsSlots();
 
     signalMapper = new QSignalMapper(this);
     currentDocument = -1;
 
     //register the objects
-    actions.push_back(actionSelect);
-    registerObjectWithFactory(new OvalNode);
-    registerObjectWithFactory(new StickPerson);
+    //actions.push_back(actionSelect);
+    registerObject(new OvalNode);
+    registerObject(new StickPerson);
 
     //connect all the actions in the signalmapper to the one createObject slot.
     connect(signalMapper, SIGNAL(mapped(int)), this, SLOT(setPrototypeID(int)));
@@ -28,12 +28,14 @@ MainWindow::MainWindow(QWidget *parent)
     //and put them into the menu structure and toolbar. Then
     //whenever one of the actions are triggered, the setPrototypeID function
     //is triggered with a prototype ID specified by the signalmapper
+    /*
     for (int i=0; i<(int)actions.size(); i++) {
+
         Shapes_Connectors->addAction(actions.at(i));
- //       mainToolBar->addAction(actions.at(i));
         menuShapes->addAction(actions.at(i));
 
     }
+    */
 
     this->resize(700,500);
     this->setWindowTitle(tr("Phunctional UML Editor"));
@@ -47,27 +49,61 @@ MainWindow::MainWindow(QWidget *parent)
 //data from the Node* and adds the action to signalmapper and
 //actions.
 //This function would be part of MainWindow, and actions and signalmapper
-//would be both be member variables. Factory would probably be a singleton
-void MainWindow::registerObjectWithFactory(BaseNode* newPrototype)
+//would be both be member variables.
+void MainWindow::registerObject(BaseNode* newPrototype)
 {
     int newID;
     QAction* newAction;
+    QPushButton* newButton;
 
-    //register the prototype
+    //register the prototype with the factory
     newID = NodeFactory::getInstance()->registerPrototype(newPrototype);
+
     //create the action
     newAction = new QAction(this);
     //set up the action with the right icon, text
     newAction->setText(newPrototype->getText());
     newAction->setIcon(QIcon(newPrototype->getIconPath()));
     newAction->setCheckable(true);
-    //add this action to the signalmapper
+
+    //create the toolbar button
+    newButton = new QPushButton(this);
+    //set up the button with the right icon, text
+    newButton->setText(newPrototype->getText());
+    newButton->setIcon(QIcon(newPrototype->getIconPath()));
+    newButton->setStyleSheet("text-align: left; font-size: 12px");
+    newButton->setCheckable(true);
+    newButton->setMinimumWidth(125);
+    newButton->setObjectName("nodebutton");
+
+    //add the action and button to the signalmapper
     connect(newAction, SIGNAL(triggered()), signalMapper, SLOT(map()));
-    //add this action to the actions vector so we can access it later
+    connect(newButton, SIGNAL(clicked()), signalMapper, SLOT(map()));
+
+    //add the action to the appropriate menu
+    menuShapes->addAction(newAction);
+    newToolbar->addAction(newAction);
+    objectsActionGroup->addAction(newAction);
+
+    //push the button and action back so we can access it later
     actions.push_back(newAction);
-    //map this signal with the prototype's ID.
+    toolbarButtons.push_back(newButton);
+
+    //map this button and action's signals with the prototype's ID.
     signalMapper->setMapping(newAction, newID);
+    signalMapper->setMapping(newButton, newID);
+
+    //add the button to the appropriate frame layout, which is in the
+    //the appropriate groupbox, which is in the mainToolbar
+    if (newPrototype->isConnector() == true) {
+        connectorsFrameLayout->addWidget(newButton);
+        connectorsButtonGroup->addButton(newButton);
+    } else {
+        objectsFrameLayout->addWidget(newButton);
+        objectsButtonGroup->addButton(newButton);
+    }
 }
+
 
 void MainWindow::setCurrentDocument(int index)
 {
@@ -111,8 +147,6 @@ void MainWindow::setPrototypeID(int prototypeID)
     if (currentDocument != -1) {
         documents.at(currentDocument)->setNewObjectID(prototypeID);
     }
-
-
 }
 
 /*! Mainwindow deconstructor
@@ -130,58 +164,6 @@ MainWindow::~MainWindow()
 
 
 }
-
-
-    /*
-    actionCircle = new QAction(this);
-    actionCircle->setIcon(QIcon(":/Images/oval.png"));
-    // all of these jpg and jpeg files are set for the directory that I put them in, they need to be changed in order to work on anyone elses computer
-    // not sure if the line below is needed anymore
-    actionCircle->setObjectName(QString::fromUtf8("actionCircle"));
-    actionCircle->setCheckable(true);
-    Shapes_Connectors->addAction(actionCircle);
-
-    actionDiamond = new QAction(this);
-    actionDiamond->setIcon(QIcon(":/Images/diamond.png"));
-    // all of these jpg and jpeg files are set for the directory that I put them in, they need to be changed in order to work on anyone elses computer
-    // not sure if the line below is needed anymore
-    actionDiamond->setObjectName(QString::fromUtf8("actionDiamond"));
-    actionDiamond->setCheckable(true);
-    Shapes_Connectors->addAction(actionDiamond);
-
-    actionRectangle = new QAction(this);
-    actionRectangle->setIcon(QIcon(":/Images/rectangle.png"));
-    actionRectangle->setObjectName(QString::fromUtf8("actionRectangle"));
-    actionRectangle->setCheckable(true);
-    Shapes_Connectors->addAction(actionRectangle);
-
-    actionSquare = new QAction(this);
-    actionSquare->setIcon(QIcon(":/Images/square.png"));
-    actionSquare->setObjectName(QString::fromUtf8("actionSquare"));
-    actionSquare->setCheckable(true);
-    Shapes_Connectors->addAction(actionSquare);
-
-    actionArrow = new QAction(this);
-    actionArrow->setObjectName(QString::fromUtf8("actionArrow"));
-    actionArrow->setCheckable(true);
-    Shapes_Connectors->addAction(actionArrow);
-
-    actionLine = new QAction(this);
-    actionLine->setObjectName(QString::fromUtf8("actionLine"));
-    actionLine->setCheckable(true);
-    Shapes_Connectors->addAction(actionLine);
-
-    actionDotted_Line = new QAction(this);
-    actionDotted_Line->setObjectName(QString::fromUtf8("actionDotted_Line"));
-    actionDotted_Line->setCheckable(true);
-    Shapes_Connectors->addAction(actionDotted_Line);
-*/
-
-
-    //menuEdit->setDisabled(true);
-    //menuTools->setDisabled(true);
-    //menuShapes->setDisabled(true);
-    //menuWindow->setDisabled(true);
 
 
 void MainWindow::createActions()
@@ -222,12 +204,17 @@ void MainWindow::createActions()
     actionDocument->setText(tr("Help Document"));
     actionAbout = new QAction(this);
     actionAbout->setText(tr("About"));
+    objectsActionGroup = new QActionGroup(this);
+    objectsActionGroup->setExclusive(true);
 
+    //Create the select action
     actionSelect = new QAction(this);
     actionSelect->setIcon(QIcon(":/Images/select.png"));
     actionSelect->setObjectName(QString::fromUtf8("actionSelect"));
     actionSelect->setCheckable(true);
     actionSelect->setText(tr("Select"));
+    newToolbar->addAction(actionSelect);
+    objectsActionGroup->addAction(actionSelect);
 }
 
 void MainWindow::createMenus()
@@ -274,18 +261,20 @@ void MainWindow::createMenus()
     menuShapes->setTitle(tr("Shapes"));
     menuConnectors->setTitle(tr("Connectors"));
     menuHelp->setTitle(tr("Help"));
+
+    menuShapes->addAction(actionSelect);
 }
 
 void MainWindow::createToolbar()
 {
-    QLabel* label = new QLabel;
-    label->setText("Available Tools");
-    label->setStyleSheet("padding-left: 13px; padding-top: 2px; font-size: 12px; font: bold");
 
+
+/*
     QPushButton* select = new QPushButton(QIcon(":/Images/select.png"),"Select",this);
     select->setStyleSheet("text-align: left; font-size: 12px");
     select->setMinimumWidth(125);
     select->setCheckable(true);
+
 
     QPushButton* useCase = new QPushButton(QIcon(":/Images/oval.png"),"Use Case",this);
     useCase->setStyleSheet("text-align: left; font-size: 12px");
@@ -296,35 +285,88 @@ void MainWindow::createToolbar()
     actor->setStyleSheet("text-align: left; font-size: 12px");
     actor->setCheckable(true);
     actor->setMinimumWidth(125);
+    */
 
-    mainToolBar = new QToolBar(this);
-    this->addToolBar(Qt::LeftToolBarArea, mainToolBar);
-    mainToolBar->setMovable(false);
-    mainToolBar->setMinimumWidth(125);
-    mainToolBar->addWidget(label);
-    mainToolBar->addSeparator();
-    mainToolBar->addWidget(select);
-    mainToolBar->addWidget(actor);
-    mainToolBar->addWidget(useCase);
+
+    //mainToolBar->addWidget(actor);
+    //mainToolBar->addWidget(useCase);
 //    mainToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 
 }
 
 void MainWindow::createWidgets()
 {
+    //status bar
     statusBar = new QStatusBar(this);
     this->setStatusBar(statusBar);
 
+    //canvas widgets
     canvasWidget = new Canvas(this);
     test = new Canvas(this);
-    canvasWidget->setObjectName(QString::fromUtf8("canvasWidget"));
-    tabWidget = new QTabWidget(this);
+    //canvasWidget->setObjectName(QString::fromUtf8("canvasWidget"));
 
-    this->setCentralWidget(tabWidget);
+
+    //tabwidgets
+    tabWidget = new QTabWidget(this);
     tabWidget->addTab(canvasWidget,"Use Case");
     tabWidget->addTab(test,"Test");
+    this->setCentralWidget(tabWidget);
+
+    //toolbars
+    mainToolBar = new QToolBar(this);
+    mainToolBar->setMovable(false);
+    mainToolBar->setMinimumWidth(125);
+    this->addToolBar(Qt::LeftToolBarArea, mainToolBar);
+
+    newToolbar = new QToolBar(this);
+    newToolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    this->addToolBar(Qt::RightToolBarArea, newToolbar);
+
+    //the select button
+    buttonSelect = new QPushButton(QIcon(":/Images/select.png"),"Select",this);
+    buttonSelect->setStyleSheet("text-align: left; font-size: 12px");
+    buttonSelect->setMinimumWidth(125);
+    buttonSelect->setCheckable(true);
+    buttonSelect->setObjectName("nodebutton");
+
+    //toolbar labels
+    toolbarLabel = new QLabel;
+    toolbarLabel->setText("Available Tools");
+    toolbarLabel->setStyleSheet("padding-left: 13px; padding-top: 2px; font-size: 12px; font: bold");
+
+    //toolbar groupboxes
+    connectorsFrameLayout = new QVBoxLayout;
+    connectorsFrameLayout->addWidget(buttonSelect);
+    connectorsFrame = new QGroupBox;
+    connectorsFrame->setLayout(connectorsFrameLayout);
+    connectorsFrame->setTitle("Connectors");
+    connectorsFrame->setAlignment(Qt::AlignCenter);
+    connectorsFrame->setFlat(true);
+    objectsFrameLayout = new QVBoxLayout;
+    objectsFrameLayout->addWidget(buttonSelect);
+    objectsFrame = new QGroupBox;
+    objectsFrame->setLayout(objectsFrameLayout);
+    objectsFrame->setTitle("Objects");
+    objectsFrame->setAlignment(Qt::AlignCenter);
+    objectsFrame->setFlat(true);
+    objectsButtonGroup = new QButtonGroup;
+    objectsButtonGroup->addButton(buttonSelect);
+    objectsButtonGroup->setExclusive(true);
+
+    newToolbar->addWidget(toolbarLabel);
+    mainToolBar->addWidget(objectsFrame);
+    mainToolBar->addWidget(connectorsFrame);
+
+
+/*
+    toolbarLabel = new QLabel;
+    toolbarLabel->setText("Available Tools");
+    toolbarLabel->setStyleSheet("padding-left: 13px; padding-top: 2px; font-size: 12px; font: bold");
+
+
 
     createToolbar();
+    */
 }
 
 void MainWindow::connectSignalsSlots()
@@ -339,7 +381,10 @@ void MainWindow::connectSignalsSlots()
     connect(actionExit, SIGNAL(triggered()), this, SLOT(on_actionExit_triggered()));
     connect(actionPrint, SIGNAL(triggered()), this, SLOT(on_actionPrint_triggered()));
     connect(actionImport_Export, SIGNAL(triggered()), this, SLOT(on_actionImport_Export_triggered()));
-    connect(actionSelect, SIGNAL(toggled(bool)), this, SLOT(on_actionSelect_toggled(bool)));
+
+    connect(actionSelect, SIGNAL(triggered()), this, SLOT(on_actionSelect_triggered()));
+    connect(buttonSelect, SIGNAL(clicked()), this, SLOT(on_actionSelect_triggered()));
+
     /* list of slots
     void on_actionNew_triggered();
     void on_actionOpen_triggered();
@@ -452,10 +497,8 @@ void MainWindow::on_actionInverse_Select_triggered()
 
 }
 
-void MainWindow::on_actionSelect_toggled(bool arg1) {
-    if (arg1 == true) {
-        canvasWidget->setMode(Canvas::Nothing);
-    }
+void MainWindow::on_actionSelect_triggered() {
+    canvasWidget->setMode(Canvas::Nothing);
 }
 
 

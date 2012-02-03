@@ -43,6 +43,7 @@ class BaseNode {
         virtual QString getIconPath() =0;
         virtual QString getText() =0;
         virtual bool hitTest(const QPoint &point) =0;
+        virtual bool isConnector() =0;
 
     private:
         //This id is unique for each object in all the
@@ -84,6 +85,11 @@ public:
      */
     void draw(QPainter &painter);
 
+    /*!
+     *
+     */
+    bool isConnector() { return false; }
+
 protected:
     //! The length (i.e. width) of the bounding box for this object
     int length;
@@ -109,6 +115,7 @@ public:
 
     //virtual BaseNode* factory();
     bool hitTest(int x, int y);
+    bool isConnector() { return true; }
 
 protected:
     QPoint connectionPoint1;

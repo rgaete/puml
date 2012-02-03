@@ -29,6 +29,7 @@ int main(int argc, char *argv[])
 {
     //MyApplication a(argc, argv);
     QApplication a(argc, argv);
+    a.setStyleSheet("QToolButton { min-width: 125px }");
     MainWindow w;
     w.show();
 
