@@ -14,13 +14,15 @@ public:
     ~Document();
     void addNode(BaseNode *newNode) { nodes.push_back(newNode); }
     void setNewObjectID(int prototypeID);
-
+    int getNewObjectID() { return newObjectID; }
+    int getCanvasIndex() { return canvasIndex; }
+    void setCanvasIndex(int index) { canvasIndex = index; }
 private:
     vector<BaseNode*> nodes;
     int indexOfSelectedObject;
     int newObjectID;
     QPoint positionDelta;
-
+    int canvasIndex;
 
 signals:
     void modelChanged();
