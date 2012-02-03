@@ -30,12 +30,12 @@ MainWindow::MainWindow(QWidget *parent)
     //is triggered with a prototype ID specified by the signalmapper
     for (int i=0; i<(int)actions.size(); i++) {
         Shapes_Connectors->addAction(actions.at(i));
-        mainToolBar->addAction(actions.at(i));
+ //       mainToolBar->addAction(actions.at(i));
         menuShapes->addAction(actions.at(i));
 
     }
 
-    this->resize(800,500);
+    this->resize(700,500);
     this->setWindowTitle(tr("Phunctional UML Editor"));
 
     //create a new document on launch
@@ -278,9 +278,36 @@ void MainWindow::createMenus()
 
 void MainWindow::createToolbar()
 {
+    QLabel* label = new QLabel;
+    label->setText("Available Tools");
+    label->setStyleSheet("padding-left: 13px; padding-top: 2px; font-size: 12px; font: bold");
+
+    QPushButton* select = new QPushButton(QIcon(":/Images/select.png"),"Select",this);
+    select->setStyleSheet("text-align: left; font-size: 12px");
+    select->setMinimumWidth(125);
+    select->setCheckable(true);
+
+    QPushButton* useCase = new QPushButton(QIcon(":/Images/oval.png"),"Use Case",this);
+    useCase->setStyleSheet("text-align: left; font-size: 12px");
+    useCase->setCheckable(true);
+    useCase->setMinimumWidth(125);
+
+    QPushButton* actor = new QPushButton(QIcon(":/Images/stickman.png"),"Actor",this);
+    actor->setStyleSheet("text-align: left; font-size: 12px");
+    actor->setCheckable(true);
+    actor->setMinimumWidth(125);
+
     mainToolBar = new QToolBar(this);
     this->addToolBar(Qt::LeftToolBarArea, mainToolBar);
     mainToolBar->setMovable(false);
+    mainToolBar->setMinimumWidth(125);
+    mainToolBar->addWidget(label);
+    mainToolBar->addSeparator();
+    mainToolBar->addWidget(select);
+    mainToolBar->addWidget(actor);
+    mainToolBar->addWidget(useCase);
+//    mainToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+
 }
 
 void MainWindow::createWidgets()
@@ -289,11 +316,13 @@ void MainWindow::createWidgets()
     this->setStatusBar(statusBar);
 
     canvasWidget = new Canvas(this);
+    test = new Canvas(this);
     canvasWidget->setObjectName(QString::fromUtf8("canvasWidget"));
     tabWidget = new QTabWidget(this);
 
     this->setCentralWidget(tabWidget);
     tabWidget->addTab(canvasWidget,"Use Case");
+    tabWidget->addTab(test,"Test");
 
     createToolbar();
 }

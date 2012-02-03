@@ -70,6 +70,7 @@ private:
 
 private:
     Canvas *canvasWidget;
+    Canvas *test;
     QTabWidget *tabWidget;
     //DialogNew *dialogNew;
     vector<QAction*> actions;
