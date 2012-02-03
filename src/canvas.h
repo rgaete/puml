@@ -27,10 +27,15 @@ private:
     QAction *actionCopy;
     QAction *actionPaste;
     QAction *actionProperties;
+
+    int documentIndex;
 public:
     explicit Canvas(QWidget *parent = 0);
     QSize sizeHint() const;
     void setMode(DrawingMode mode);
+    DrawingMode getMode() { return drawingMode; }
+    int getDocumentIndex() { return documentIndex; }
+    void setDocumentIndex(int docIndex) { documentIndex = docIndex; }
 
 protected:
     void mouseReleaseEvent(QMouseEvent *event);

@@ -107,7 +107,7 @@ void MainWindow::registerObject(BaseNode* newPrototype)
 
 void MainWindow::setCurrentDocument(int index)
 {
-    assert(index >= -1);
+    /*assert(index >= -1);
     assert(index < (int)documents.size());
     assert(currentDocument >= -1);
     assert(currentDocument < (int)documents.size());
@@ -127,27 +127,39 @@ void MainWindow::setCurrentDocument(int index)
     connect(canvasWidget, SIGNAL(redraw(QPainter&)), documents.at(currentDocument), SLOT(drawList(QPainter&)));
     connect(canvasWidget, SIGNAL(showPropertiesDialog()), documents.at(currentDocument), SLOT(showPropertiesDialog()));
 
+    actionSelect->trigger();*/
+}
+
+void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex)
+{
+    assert(canvasIndex >= 0);
+    assert(canvasIndex < (int)canvases.size());
+    assert(documentIndex >= 0);
+    assert(documentIndex < (int)documents.size());
+    assert(canvases.at(canvasIndex)->getDocumentIndex() >= 0);
+    assert(canvases.at(canvasIndex)->getDocumentIndex() < documents.size());
+    assert(documents.at(documentIndex)->getCanvasIndex() >= 0);
+    assert(documents.at(documentIndex)->getCanvasIndex() < canvases.size());
+
+    Canvas* canvas = canvases.at(canvasIndex);
+    Document* document = documents.at(documentIndex);
+
+    //first disconnect the currently connected document
+    disconnect(canvas, 0, documents.at(canvas->getDocumentIndex()), 0);
+    disconnect(document, 0, canvases.at(document->getCanvasIndex()), 0);
+
+    //Then connect the canvas to the document
+    connect(canvas, SIGNAL(createObject(const QPoint &)), document, SLOT(createObject(const QPoint &)));
+    connect(canvas, SIGNAL(moveSelectedObject(const QPoint &)), document, SLOT(moveSelectedObject(const QPoint &)));
+    connect(canvas, SIGNAL(objectSelectionChange(const QPoint &)), document, SLOT(setSelectedObject(const QPoint &)));
+    connect(document, SIGNAL(modelChanged()), canvas, SLOT(update()));
+    connect(canvas, SIGNAL(redraw(QPainter&)), document, SLOT(drawList(QPainter&)));
+    connect(canvas, SIGNAL(showPropertiesDialog()), document, SLOT(showPropertiesDialog()));
+
     actionSelect->trigger();
 }
 
-//Slot. It would probably be located in either the canvas or
-//a seperate data structure, somewhere where it can have
-//direct or indirect access to the vector of nodes.
-void MainWindow::setPrototypeID(int prototypeID)
-{
-    //QMessageBox::information(this, "setPrototypeID: prototypeID", QString::number(prototypeID), QMessageBox::Ok);
-    assert(currentDocument >= -1);
-    assert(currentDocument < (int)documents.size());
 
-    //notify the canvas that it should be in object mode
-    canvasWidget->setMode(Canvas::Object);
-
-    //we need to set the prototype id in currently
-    //active document, so it knows what to create.
-    if (currentDocument != -1) {
-        documents.at(currentDocument)->setNewObjectID(prototypeID);
-    }
-}
 
 /*! Mainwindow deconstructor
 */
@@ -301,15 +313,18 @@ void MainWindow::createWidgets()
     this->setStatusBar(statusBar);
 
     //canvas widgets
-    canvasWidget = new Canvas(this);
-    test = new Canvas(this);
+    //canvasWidget = new Canvas(this);
+    //test = new Canvas(this);
     //canvasWidget->setObjectName(QString::fromUtf8("canvasWidget"));
 
 
     //tabwidgets
     tabWidget = new QTabWidget(this);
-    tabWidget->addTab(canvasWidget,"Use Case");
-    tabWidget->addTab(test,"Test");
+    tabWidget->setTabsClosable(true);
+    tabWidget->setMovable(true);
+    tabWidget->setDocumentMode(true);
+    //tabWidget->addTab(canvasWidget,"Use Case");
+    //tabWidget->addTab(test,"Test");
     this->setCentralWidget(tabWidget);
 
     //toolbars
@@ -381,6 +396,7 @@ void MainWindow::connectSignalsSlots()
     connect(actionExit, SIGNAL(triggered()), this, SLOT(on_actionExit_triggered()));
     connect(actionPrint, SIGNAL(triggered()), this, SLOT(on_actionPrint_triggered()));
     connect(actionImport_Export, SIGNAL(triggered()), this, SLOT(on_actionImport_Export_triggered()));
+    connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(on_tabWidget_currentChanged(int)));
 
     connect(actionSelect, SIGNAL(triggered()), this, SLOT(on_actionSelect_triggered()));
     connect(buttonSelect, SIGNAL(clicked()), this, SLOT(on_actionSelect_triggered()));
@@ -414,6 +430,48 @@ void MainWindow::connectSignalsSlots()
     */
 }
 
+//Slot. It would probably be located in either the canvas or
+//a seperate data structure, somewhere where it can have
+//direct or indirect access to the vector of nodes.
+void MainWindow::setPrototypeID(int prototypeID)
+{
+    //QMessageBox::information(this, "setPrototypeID: prototypeID", QString::number(prototypeID), QMessageBox::Ok);
+
+    Canvas* currentCanvas;
+    int canvasIndex;
+
+    //Find the current canvas with the map
+    canvasIndex = tabToCanvasMappings[tabWidget->currentIndex()];
+    currentCanvas = canvases.at(canvasIndex);
+
+    //notify the canvas that it should be in object mode
+    currentCanvas->setMode(Canvas::Object);
+
+    //we need to set the prototype id in currently
+    //active document, so it knows what to create.
+    documents.at(currentCanvas->getDocumentIndex())->setNewObjectID(prototypeID);
+}
+
+/*! This slot updates the currently active canvas's mode to Nothing. It
+ *  uses a map of tab indices to canvas indices to find the current canvas.
+ */
+void MainWindow::on_actionSelect_triggered() {
+    /* The old way with a static cast (...shiver...)
+    Canvas* canvas;
+    canvas = static_cast<Canvas*>(tabWidget->currentWidget());
+    canvas->setMode(Canvas::Nothing);
+    */
+
+    /* The new way with the map :) */
+    int canvasIndex;
+    canvasIndex = tabToCanvasMappings[tabWidget->currentIndex()];
+    canvases.at(canvasIndex)->setMode(Canvas::Nothing);
+}
+
+/*! This slot first asks the user what type of diagram to create with a dialog.
+ *  Then it create a new canvas and document, then connects them together.
+ *  The canvas is added to a new tab and the tab-to-canvas map is updated.
+ */
 void MainWindow::on_actionNew_triggered()
 {
     //dialog of UML types
@@ -421,10 +479,58 @@ void MainWindow::on_actionNew_triggered()
     //dialogNew->show();
     QMessageBox::information(this, "pUML", "Creating a new generic diagram", QMessageBox::Ok);
 
+    //Create the new document and canvas
     Document* newdoc = new Document;
     documents.push_back(newdoc);
+    Canvas* newcanvas = new Canvas;
+    canvases.push_back(newcanvas);
 
-    setCurrentDocument(documents.size()-1);
+    //this might not be necessary
+    newdoc->setCanvasIndex(canvases.size()-1);
+    newcanvas->setDocumentIndex(documents.size()-1);
+
+    //add the tab and update the map.
+    int newTabIndex = tabWidget->addTab(newcanvas, "New Diagram");
+    tabToCanvasMappings.insert(pair<int,int>(newTabIndex, canvases.size()-1));
+    tabWidget->setCurrentIndex(newTabIndex);
+
+    //setCurrentDocument(documents.size()-1);
+    connectCanvasWithDocument(canvases.size()-1, documents.size()-1);
+}
+
+/*! This slot receives the currentChanged signal from the tabWidget.
+ *  It should reupdate the toolbar with the previously selected tool
+ *  and only the legal buttons for the diagram.
+ */
+void MainWindow::on_tabWidget_currentChanged(int newIndex)
+{
+    actionSelect->trigger();
+    /*
+    Canvas* canvas;
+    Document* document;
+    int documentIndex;
+    Canvas::DrawingMode drawingMode;
+
+    canvas = static_cast<Canvas*>(tabWidget->widget(newIndex));
+    documentIndex = canvas->getDocumentIndex();
+    document = documents.at(documentIndex);
+    drawingMode = canvas->getMode();
+
+    if (drawingMode == Canvas::Nothing) {
+
+    } else {
+        int newObjectID;
+        QAction* lastAction;
+
+        newObjectID = document->getNewObjectID();
+        lastAction = static_cast<QAction*>(signalMapper->mapped(document->getNewObjectID()));
+
+        lastAction->trigger();
+    }
+
+
+*/
+
 }
 
 void MainWindow::on_actionOpen_triggered()
@@ -497,9 +603,9 @@ void MainWindow::on_actionInverse_Select_triggered()
 
 }
 
-void MainWindow::on_actionSelect_triggered() {
-    canvasWidget->setMode(Canvas::Nothing);
-}
+
+
+
 
 
 void MainWindow::on_actionTile_Horizontally_toggled(bool arg1)
