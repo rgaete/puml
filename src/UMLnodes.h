@@ -74,7 +74,21 @@ private:
     int radius;
 };
 
+class InteractionLineDialog : public QDialog
+{
 
+};
+
+class InteractionLine : public ConnectionNode
+{
+public:
+    BaseNode* clone() { return new InteractionLine; }
+    bool hitTest(const QPoint &point) {return false;}
+    QDialog* getDialog() { return new InteractionLineDialog; }
+    QString getIconPath() { return QString(":/Images/oval.png"); }
+    QString getText() { return "InteractionLine"; }
+    void draw(QPainter& painter);
+};
 
 /* !
  *  This concrete class is the ClassRectangle node.

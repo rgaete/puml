@@ -48,6 +48,8 @@ signals:
     void objectSelectionChange(const QPoint &point);
     void moveSelectedObject(const QPoint &point);
     void createObject(const QPoint &point);
+    void createConnectionPoint1(const QPoint &point);
+    void createConnectionPoint2(const QPoint &point);
     void redraw(QPainter &painter);
     void showPropertiesDialog();
 
