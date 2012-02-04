@@ -23,7 +23,7 @@ private:
     int newObjectID;
     QPoint positionDelta;
     int canvasIndex;
-
+    QPoint tempPoint1;
 signals:
     void modelChanged();
 
@@ -32,7 +32,8 @@ public slots:
     void setSelectedObject(const QPoint &point);
     void moveSelectedObject(const QPoint &point);
     void createObject(const QPoint &position);
+    void createConnectionPoint1(const QPoint &point);
+    void createConnectionPoint2(const QPoint &point);
     void showPropertiesDialog();
 };
-
 #endif // DOCUMENT_H

@@ -152,6 +152,11 @@ void OvalNode::draw(QPainter &painter)
     painter.drawEllipse(position,length/2,height/2);
 }
 
+void InteractionLine::draw(QPainter& painter)
+{
+    painter.setPen(Qt::black);
+    painter.drawLine(point1, point2);
+}
 
 /*******************************/
 /*** ClassRectangle Functions **/

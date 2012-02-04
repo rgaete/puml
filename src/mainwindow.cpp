@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     //actions.push_back(actionSelect);
     registerObject(new OvalNode);
     registerObject(new StickPerson);
+    registerObject(new InteractionLine);
 
     //connect all the actions in the signalmapper to the one createObject slot.
     connect(signalMapper, SIGNAL(mapped(int)), this, SLOT(setPrototypeID(int)));
@@ -67,6 +68,7 @@ void MainWindow::registerObject(BaseNode* newPrototype)
     newAction->setCheckable(true);
 
     //create the toolbar button
+    /*
     newButton = new QPushButton(this);
     //set up the button with the right icon, text
     newButton->setText(newPrototype->getText());
@@ -75,10 +77,11 @@ void MainWindow::registerObject(BaseNode* newPrototype)
     newButton->setCheckable(true);
     newButton->setMinimumWidth(125);
     newButton->setObjectName("nodebutton");
+    */
 
     //add the action and button to the signalmapper
     connect(newAction, SIGNAL(triggered()), signalMapper, SLOT(map()));
-    connect(newButton, SIGNAL(clicked()), signalMapper, SLOT(map()));
+    //connect(newButton, SIGNAL(clicked()), signalMapper, SLOT(map()));
 
     //add the action to the appropriate menu
     menuShapes->addAction(newAction);
@@ -87,14 +90,15 @@ void MainWindow::registerObject(BaseNode* newPrototype)
 
     //push the button and action back so we can access it later
     actions.push_back(newAction);
-    toolbarButtons.push_back(newButton);
+    //toolbarButtons.push_back(newButton);
 
     //map this button and action's signals with the prototype's ID.
     signalMapper->setMapping(newAction, newID);
-    signalMapper->setMapping(newButton, newID);
+    //signalMapper->setMapping(newButton, newID);
 
     //add the button to the appropriate frame layout, which is in the
     //the appropriate groupbox, which is in the mainToolbar
+    /*
     if (newPrototype->isConnector() == true) {
         connectorsFrameLayout->addWidget(newButton);
         connectorsButtonGroup->addButton(newButton);
@@ -102,6 +106,7 @@ void MainWindow::registerObject(BaseNode* newPrototype)
         objectsFrameLayout->addWidget(newButton);
         objectsButtonGroup->addButton(newButton);
     }
+    */
 }
 
 
@@ -155,6 +160,8 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex)
     connect(document, SIGNAL(modelChanged()), canvas, SLOT(update()));
     connect(canvas, SIGNAL(redraw(QPainter&)), document, SLOT(drawList(QPainter&)));
     connect(canvas, SIGNAL(showPropertiesDialog()), document, SLOT(showPropertiesDialog()));
+    connect(canvas, SIGNAL(createConnectionPoint1(const QPoint &)), document, SLOT(createConnectionPoint1(const QPoint &)));
+    connect(canvas, SIGNAL(createConnectionPoint2(const QPoint &)), document, SLOT(createConnectionPoint2(const QPoint &)));
 
     actionSelect->trigger();
 }
@@ -328,21 +335,24 @@ void MainWindow::createWidgets()
     this->setCentralWidget(tabWidget);
 
     //toolbars
-    mainToolBar = new QToolBar(this);
+    /*mainToolBar = new QToolBar(this);
     mainToolBar->setMovable(false);
     mainToolBar->setMinimumWidth(125);
     this->addToolBar(Qt::LeftToolBarArea, mainToolBar);
+    */
 
     newToolbar = new QToolBar(this);
     newToolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     this->addToolBar(Qt::RightToolBarArea, newToolbar);
 
     //the select button
+    /*
     buttonSelect = new QPushButton(QIcon(":/Images/select.png"),"Select",this);
     buttonSelect->setStyleSheet("text-align: left; font-size: 12px");
     buttonSelect->setMinimumWidth(125);
     buttonSelect->setCheckable(true);
     buttonSelect->setObjectName("nodebutton");
+    */
 
     //toolbar labels
     toolbarLabel = new QLabel;
@@ -350,7 +360,7 @@ void MainWindow::createWidgets()
     toolbarLabel->setStyleSheet("padding-left: 13px; padding-top: 2px; font-size: 12px; font: bold");
 
     //toolbar groupboxes
-    connectorsFrameLayout = new QVBoxLayout;
+    /*connectorsFrameLayout = new QVBoxLayout;
     connectorsFrameLayout->addWidget(buttonSelect);
     connectorsFrame = new QGroupBox;
     connectorsFrame->setLayout(connectorsFrameLayout);
@@ -367,10 +377,11 @@ void MainWindow::createWidgets()
     objectsButtonGroup = new QButtonGroup;
     objectsButtonGroup->addButton(buttonSelect);
     objectsButtonGroup->setExclusive(true);
+    */
 
     newToolbar->addWidget(toolbarLabel);
-    mainToolBar->addWidget(objectsFrame);
-    mainToolBar->addWidget(connectorsFrame);
+    //mainToolBar->addWidget(objectsFrame);
+    //mainToolBar->addWidget(connectorsFrame);
 
 
 /*
@@ -399,7 +410,7 @@ void MainWindow::connectSignalsSlots()
     connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(on_tabWidget_currentChanged(int)));
 
     connect(actionSelect, SIGNAL(triggered()), this, SLOT(on_actionSelect_triggered()));
-    connect(buttonSelect, SIGNAL(clicked()), this, SLOT(on_actionSelect_triggered()));
+    //connect(buttonSelect, SIGNAL(clicked()), this, SLOT(on_actionSelect_triggered()));
 
     /* list of slots
     void on_actionNew_triggered();
@@ -446,6 +457,7 @@ void MainWindow::setPrototypeID(int prototypeID)
 
     //notify the canvas that it should be in object mode
     currentCanvas->setMode(Canvas::Object);
+
 
     //we need to set the prototype id in currently
     //active document, so it knows what to create.
@@ -527,7 +539,6 @@ void MainWindow::on_tabWidget_currentChanged(int newIndex)
 
         lastAction->trigger();
     }
-
 
 */
 

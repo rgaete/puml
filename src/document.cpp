@@ -97,6 +97,20 @@ void Document::createObject(const QPoint &position)
    emit modelChanged();
 }
 
+void Document::createConnectionPoint1(const QPoint &point)
+{
+    tempPoint1 = point;
+}
+
+void Document::createConnectionPoint2(const QPoint &point)
+{
+    BaseNode *newNode;
+    newNode = NodeFactory::getInstance()->produce(newObjectID);
+    newNode->setPoints(tempPoint1, point);
+    addNode(newNode);
+    emit modelChanged();
+}
+
 void Document::showPropertiesDialog()
 {
     assert(indexOfSelectedObject >= -1);
