@@ -342,8 +342,9 @@ void MainWindow::createWidgets()
     */
 
     newToolbar = new QToolBar(this);
+    newToolbar->setMovable(false);
     newToolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-    this->addToolBar(Qt::RightToolBarArea, newToolbar);
+    this->addToolBar(Qt::LeftToolBarArea, newToolbar);
 
     //the select button
     /*
