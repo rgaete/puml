@@ -173,7 +173,7 @@ void Canvas::mouseReleaseEvent(QMouseEvent *event)
             //createObject(event->pos());
             //Call to update to initiate a paintEvent
             //update();
-            emit createConnectionPoint2(event->pos());
+ //           emit createConnectionPoint2(event->pos());
             break;
         case Connection:
             //QMessageBox::information(0, "pUML", "Mouse Release connection", QMessageBox::Ok);
