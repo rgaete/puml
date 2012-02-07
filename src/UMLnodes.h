@@ -10,6 +10,7 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <time.h>
 
 
 class StickDialog : public QDialog {
@@ -41,8 +42,16 @@ public:
     QString getText() { return "Stick Person"; }
 
     void draw(QPainter &painter);
+
 private:
     QString name;
+    //animation vars
+        // 0 == punch, 1 == no punch
+    bool punchhand;
+        time_t start;
+        time_t end;
+        double dif;
+
 
 private slots:
 //    void setName(QString newName) { name = newName; }
