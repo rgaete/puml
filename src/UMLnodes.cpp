@@ -60,6 +60,7 @@ StickPerson::StickPerson()
     QPoint pos;
     pos.setX(position.x() + length/2);
     pos.setY(position.y() + height);
+    time(&start);
 }
 
 
@@ -116,7 +117,14 @@ void StickPerson::draw(QPainter &painter)
     painter.drawEllipse(tempx-20/50.0*length,tempy-(300)/70, 16/50.0*length/2,16/70.0*height/2); //left glove
 
     //animation
+    time(&end);
+    dif = difftime(end, start);
+    if(dif >= 1)
+    {
+        start = end;
         punchhand = 1 - punchhand;
+    }
+
 }
 
 StickDialog::StickDialog(QWidget *parent)
