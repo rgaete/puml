@@ -128,32 +128,18 @@ void StickPerson::draw(QPainter &painter)
 }
 
 StickDialog::StickDialog(QWidget *parent)
-    :QDialog(parent)
+    :QInputDialog(parent)
 {
-    label = new QLabel(tr("Actor name:"));
-    lineEdit = new QLineEdit;
-    label->setBuddy(lineEdit);
+    setCancelButtonText("Cancel");
+    setLabelText("Actor Name:");
+    setWindowTitle("Actor Properties");
+    setOkButtonText("Ok");
 
-    acceptButton = new QPushButton(tr("Ok"));
-    closeButton = new QPushButton(tr("Close"));
+    connect(this,SIGNAL(textValueSelected(QString)),this,SLOT(setName(QString)));
+}
 
-    QHBoxLayout *inputLayout = new QHBoxLayout;
-    inputLayout->addWidget(label);
-    inputLayout->addWidget(lineEdit);
+void StickDialog::setName(QString newName){
 
-    QHBoxLayout *buttonLayout = new QHBoxLayout;
-    buttonLayout->addWidget(acceptButton);
-    buttonLayout->addWidget(closeButton);
-
-    QVBoxLayout *mainLayout = new QVBoxLayout;
-    mainLayout->addLayout(inputLayout);
-    mainLayout->addLayout(buttonLayout);
-
-    setLayout(mainLayout);
-    setWindowTitle(tr("Actor Properties"));
-
-    connect(closeButton, SIGNAL(clicked()),this,SLOT(close()));
-    connect(acceptButton, SIGNAL(clicked()),this,SLOT(close()));
 }
 
 /*******************************/
@@ -183,6 +169,19 @@ void OvalNode::draw(QPainter &painter)
     painter.drawEllipse(position,length/2,height/2);
 }
 
+OvalDialog::OvalDialog(QWidget *parent)
+    :QInputDialog(parent)
+{
+    setWindowTitle("Use Case Properties");
+    setOkButtonText("Ok");
+    setCancelButtonText("Cancel");
+    setLabelText("Use Case Name:");
+
+}
+
+/********************************/
+/** Interaction Line Functions **/
+/********************************/
 void InteractionLine::draw(QPainter& painter)
 {
     painter.setPen(Qt::black);

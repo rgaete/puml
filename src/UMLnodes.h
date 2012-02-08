@@ -13,15 +13,15 @@
 #include <time.h>
 
 
-class StickDialog : public QDialog {
+class StickDialog : public QInputDialog {
     Q_OBJECT
 public:
     StickDialog(QWidget *parent = 0);
 
 signals:
-    void setName(QString newName);
-private slots:
 
+private slots:
+    void setName(QString newName);
 private:
     QLabel *label;
     QLineEdit *lineEdit;
@@ -42,7 +42,7 @@ public:
     QString getText() { return "Stick Person"; }
 
     void draw(QPainter &painter);
-
+    void setName(QString newName) { name = newName; }
 private:
     QString name;
     //animation vars
@@ -62,8 +62,10 @@ class connectionline : public ConnectionNode {
 
 };
 
-class OvalDialog : public QDialog {
-
+class OvalDialog : public QInputDialog {
+    Q_OBJECT
+public:
+    OvalDialog(QWidget *parent = 0);
 };
 
 /*!
