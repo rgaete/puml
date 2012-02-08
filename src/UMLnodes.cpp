@@ -167,6 +167,7 @@ void OvalNode::draw(QPainter &painter)
     painter.setPen(Qt::black);
     painter.setBrush(Qt::NoBrush);
     painter.drawEllipse(position,length/2,height/2);
+    painter.drawText(position.x(),position.y(), this->name);
 }
 
 OvalDialog::OvalDialog(QWidget *parent)
@@ -179,6 +180,19 @@ OvalDialog::OvalDialog(QWidget *parent)
 
 }
 
+QDialog * OvalNode::getDialog()
+{
+    OvalDialog *dialog = new OvalDialog;
+    dialog->setTextValue(name);
+    connect(dialog,SIGNAL(textValueSelected(QString)),this,SLOT(setName(QString)));
+    return dialog;
+}
+
+void OvalNode::setName(QString newName)
+{
+    this->name = newName;
+}
+
 /********************************/
 /** Interaction Line Functions **/
 /********************************/
@@ -187,6 +201,8 @@ void InteractionLine::draw(QPainter& painter)
     painter.setPen(Qt::black);
     painter.drawLine(point1, point2);
 }
+
+
 
 /*******************************/
 /*** ClassRectangle Functions **/
