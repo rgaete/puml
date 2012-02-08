@@ -72,17 +72,21 @@ public:
  * This concrete class is the Oval node.
  * @sa ObjectNode
  */
-class OvalNode: public ObjectNode {
+class OvalNode: public QObject, public ObjectNode {
+    Q_OBJECT
 public:
     OvalNode();
     BaseNode* clone() { return new OvalNode; }
-    QDialog* getDialog() { return new OvalDialog; }
+    QDialog* getDialog();
     QString getIconPath() { return QString(":/Images/oval.png"); }
     QString getText() { return "Oval"; }
 
     void draw(QPainter &painter);
+public slots:
+    void setName(QString newname);
 private:
     int radius;
+    QString name;
 };
 
 class InteractionLineDialog : public QDialog
