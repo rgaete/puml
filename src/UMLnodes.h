@@ -20,8 +20,6 @@ public:
 
 signals:
 
-private slots:
-    void setName(QString newName);
 private:
     QLabel *label;
     QLineEdit *lineEdit;
@@ -33,16 +31,18 @@ private:
  * This concrete class is the StickPerson node.
  * @sa ObjectNode
  */
-class StickPerson: public ObjectNode {
+class StickPerson: public QObject, public ObjectNode {
+    Q_OBJECT
 public:
     StickPerson();
     BaseNode* clone() { return new StickPerson; }
-    QDialog* getDialog() { return new StickDialog; }
+    QDialog* getDialog();
     QString getIconPath() { return QString(":/Images/stickman.png"); }
     QString getText() { return "Stick Person"; }
 
     void draw(QPainter &painter);
-    void setName(QString newName) { name = newName; }
+public slots:
+    void setName(QString newName) { this->name = newName; }
 private:
     QString name;
     //animation vars
@@ -83,7 +83,7 @@ public:
 
     void draw(QPainter &painter);
 public slots:
-    void setName(QString newname);
+    void setName(QString newName) { this->name = newName; }
 private:
     int radius;
     QString name;

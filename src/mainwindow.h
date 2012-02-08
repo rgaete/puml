@@ -65,7 +65,6 @@ public slots:
 private:
     void createActions();
     void createMenus();
-    void createToolbar();
     void createWidgets();
     void connectSignalsSlots();
     void registerObject(BaseNode* newPrototype);
@@ -90,24 +89,7 @@ private:
     //
     map<int,int> tabToCanvasMappings;
 
-    //these frames are for mainToolbar
-    /*
-    QGroupBox *connectorsFrame;
-    QVBoxLayout *connectorsFrameLayout;
-    QGroupBox *objectsFrame;
-    QVBoxLayout *objectsFrameLayout;
-    //these button groups are for mainToolbar. They are needed so buttons can be exclusively checked.
-    QButtonGroup *objectsButtonGroup;
-    QButtonGroup *connectorsButtonGroup;
-    //A vector to keep track of mainToolbar's buttons (probably could be deleted, no need to access them after they are created)
-    vector<QPushButton*> toolbarButtons;
     QToolBar *mainToolBar;
-    */
-
-    //the rightside toolbar, a regular toolbar with a stylesheet targeted towards it (see main.cpp)
-    //(much cleaner)
-    QToolBar *newToolbar;
-    //label for newToolbar
     QLabel *toolbarLabel;
 
     QActionGroup *objectsActionGroup;

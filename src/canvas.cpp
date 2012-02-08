@@ -170,6 +170,7 @@ void Canvas::mouseReleaseEvent(QMouseEvent *event)
         case Object:
 
             emit createObject(event->pos());
+            emit showPropertiesDialog();
             //createObject(event->pos());
             //Call to update to initiate a paintEvent
             //update();
