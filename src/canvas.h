@@ -27,10 +27,15 @@ private:
     QAction *actionCopy;
     QAction *actionPaste;
     QAction *actionProperties;
+
+    int documentIndex;
 public:
     explicit Canvas(QWidget *parent = 0);
     QSize sizeHint() const;
     void setMode(DrawingMode mode);
+    DrawingMode getMode() { return drawingMode; }
+    int getDocumentIndex() { return documentIndex; }
+    void setDocumentIndex(int docIndex) { documentIndex = docIndex; }
 
 protected:
     void mouseReleaseEvent(QMouseEvent *event);
@@ -43,6 +48,8 @@ signals:
     void objectSelectionChange(const QPoint &point);
     void moveSelectedObject(const QPoint &point);
     void createObject(const QPoint &point);
+    void createConnectionPoint1(const QPoint &point);
+    void createConnectionPoint2(const QPoint &point);
     void redraw(QPainter &painter);
     void showPropertiesDialog();
 

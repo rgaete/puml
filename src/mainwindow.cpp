@@ -8,18 +8,18 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
+    createWidgets();
     createActions();
     createMenus();
-    createWidgets();
     connectSignalsSlots();
 
     signalMapper = new QSignalMapper(this);
     currentDocument = -1;
 
     //register the objects
-    actions.push_back(actionSelect);
-    registerObjectWithFactory(new OvalNode);
-    registerObjectWithFactory(new StickPerson);
+    registerObject(new OvalNode);
+    registerObject(new StickPerson);
+    registerObject(new InteractionLine);
 
     //connect all the actions in the signalmapper to the one createObject slot.
     connect(signalMapper, SIGNAL(mapped(int)), this, SLOT(setPrototypeID(int)));
@@ -28,12 +28,14 @@ MainWindow::MainWindow(QWidget *parent)
     //and put them into the menu structure and toolbar. Then
     //whenever one of the actions are triggered, the setPrototypeID function
     //is triggered with a prototype ID specified by the signalmapper
+    /*
     for (int i=0; i<(int)actions.size(); i++) {
+
         Shapes_Connectors->addAction(actions.at(i));
- //       mainToolBar->addAction(actions.at(i));
         menuShapes->addAction(actions.at(i));
 
     }
+    */
 
     this->resize(700,500);
     this->setWindowTitle(tr("Phunctional UML Editor"));
@@ -47,31 +49,41 @@ MainWindow::MainWindow(QWidget *parent)
 //data from the Node* and adds the action to signalmapper and
 //actions.
 //This function would be part of MainWindow, and actions and signalmapper
-//would be both be member variables. Factory would probably be a singleton
-void MainWindow::registerObjectWithFactory(BaseNode* newPrototype)
+//would be both be member variables.
+void MainWindow::registerObject(BaseNode* newPrototype)
 {
     int newID;
     QAction* newAction;
 
-    //register the prototype
+    //register the prototype with the factory
     newID = NodeFactory::getInstance()->registerPrototype(newPrototype);
+
     //create the action
     newAction = new QAction(this);
     //set up the action with the right icon, text
     newAction->setText(newPrototype->getText());
     newAction->setIcon(QIcon(newPrototype->getIconPath()));
     newAction->setCheckable(true);
-    //add this action to the signalmapper
+
+    //add the action to the signalmapper
     connect(newAction, SIGNAL(triggered()), signalMapper, SLOT(map()));
-    //add this action to the actions vector so we can access it later
+
+    //add the action to the appropriate menu
+    menuShapes->addAction(newAction);
+    mainToolBar->addAction(newAction);
+    objectsActionGroup->addAction(newAction);
+
+    //push the action back so we can access it later
     actions.push_back(newAction);
-    //map this signal with the prototype's ID.
+
+    //map action's signals with the prototype's ID.
     signalMapper->setMapping(newAction, newID);
 }
 
+
 void MainWindow::setCurrentDocument(int index)
 {
-    assert(index >= -1);
+    /*assert(index >= -1);
     assert(index < (int)documents.size());
     assert(currentDocument >= -1);
     assert(currentDocument < (int)documents.size());
@@ -91,29 +103,41 @@ void MainWindow::setCurrentDocument(int index)
     connect(canvasWidget, SIGNAL(redraw(QPainter&)), documents.at(currentDocument), SLOT(drawList(QPainter&)));
     connect(canvasWidget, SIGNAL(showPropertiesDialog()), documents.at(currentDocument), SLOT(showPropertiesDialog()));
 
+    actionSelect->trigger();*/
+}
+
+void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex)
+{
+    assert(canvasIndex >= 0);
+    assert(canvasIndex < (int)canvases.size());
+    assert(documentIndex >= 0);
+    assert(documentIndex < (int)documents.size());
+    assert(canvases.at(canvasIndex)->getDocumentIndex() >= 0);
+    assert(canvases.at(canvasIndex)->getDocumentIndex() < documents.size());
+    assert(documents.at(documentIndex)->getCanvasIndex() >= 0);
+    assert(documents.at(documentIndex)->getCanvasIndex() < canvases.size());
+
+    Canvas* canvas = canvases.at(canvasIndex);
+    Document* document = documents.at(documentIndex);
+
+    //first disconnect the currently connected document
+    disconnect(canvas, 0, documents.at(canvas->getDocumentIndex()), 0);
+    disconnect(document, 0, canvases.at(document->getCanvasIndex()), 0);
+
+    //Then connect the canvas to the document
+    connect(canvas, SIGNAL(createObject(const QPoint &)), document, SLOT(createObject(const QPoint &)));
+    connect(canvas, SIGNAL(moveSelectedObject(const QPoint &)), document, SLOT(moveSelectedObject(const QPoint &)));
+    connect(canvas, SIGNAL(objectSelectionChange(const QPoint &)), document, SLOT(setSelectedObject(const QPoint &)));
+    connect(document, SIGNAL(modelChanged()), canvas, SLOT(update()));
+    connect(canvas, SIGNAL(redraw(QPainter&)), document, SLOT(drawList(QPainter&)));
+    connect(canvas, SIGNAL(showPropertiesDialog()), document, SLOT(showPropertiesDialog()));
+    connect(canvas, SIGNAL(createConnectionPoint1(const QPoint &)), document, SLOT(createConnectionPoint1(const QPoint &)));
+    connect(canvas, SIGNAL(createConnectionPoint2(const QPoint &)), document, SLOT(createConnectionPoint2(const QPoint &)));
+
     actionSelect->trigger();
 }
 
-//Slot. It would probably be located in either the canvas or
-//a seperate data structure, somewhere where it can have
-//direct or indirect access to the vector of nodes.
-void MainWindow::setPrototypeID(int prototypeID)
-{
-    //QMessageBox::information(this, "setPrototypeID: prototypeID", QString::number(prototypeID), QMessageBox::Ok);
-    assert(currentDocument >= -1);
-    assert(currentDocument < (int)documents.size());
 
-    //notify the canvas that it should be in object mode
-    canvasWidget->setMode(Canvas::Object);
-
-    //we need to set the prototype id in currently
-    //active document, so it knows what to create.
-    if (currentDocument != -1) {
-        documents.at(currentDocument)->setNewObjectID(prototypeID);
-    }
-
-
-}
 
 /*! Mainwindow deconstructor
 */
@@ -130,58 +154,6 @@ MainWindow::~MainWindow()
 
 
 }
-
-
-    /*
-    actionCircle = new QAction(this);
-    actionCircle->setIcon(QIcon(":/Images/oval.png"));
-    // all of these jpg and jpeg files are set for the directory that I put them in, they need to be changed in order to work on anyone elses computer
-    // not sure if the line below is needed anymore
-    actionCircle->setObjectName(QString::fromUtf8("actionCircle"));
-    actionCircle->setCheckable(true);
-    Shapes_Connectors->addAction(actionCircle);
-
-    actionDiamond = new QAction(this);
-    actionDiamond->setIcon(QIcon(":/Images/diamond.png"));
-    // all of these jpg and jpeg files are set for the directory that I put them in, they need to be changed in order to work on anyone elses computer
-    // not sure if the line below is needed anymore
-    actionDiamond->setObjectName(QString::fromUtf8("actionDiamond"));
-    actionDiamond->setCheckable(true);
-    Shapes_Connectors->addAction(actionDiamond);
-
-    actionRectangle = new QAction(this);
-    actionRectangle->setIcon(QIcon(":/Images/rectangle.png"));
-    actionRectangle->setObjectName(QString::fromUtf8("actionRectangle"));
-    actionRectangle->setCheckable(true);
-    Shapes_Connectors->addAction(actionRectangle);
-
-    actionSquare = new QAction(this);
-    actionSquare->setIcon(QIcon(":/Images/square.png"));
-    actionSquare->setObjectName(QString::fromUtf8("actionSquare"));
-    actionSquare->setCheckable(true);
-    Shapes_Connectors->addAction(actionSquare);
-
-    actionArrow = new QAction(this);
-    actionArrow->setObjectName(QString::fromUtf8("actionArrow"));
-    actionArrow->setCheckable(true);
-    Shapes_Connectors->addAction(actionArrow);
-
-    actionLine = new QAction(this);
-    actionLine->setObjectName(QString::fromUtf8("actionLine"));
-    actionLine->setCheckable(true);
-    Shapes_Connectors->addAction(actionLine);
-
-    actionDotted_Line = new QAction(this);
-    actionDotted_Line->setObjectName(QString::fromUtf8("actionDotted_Line"));
-    actionDotted_Line->setCheckable(true);
-    Shapes_Connectors->addAction(actionDotted_Line);
-*/
-
-
-    //menuEdit->setDisabled(true);
-    //menuTools->setDisabled(true);
-    //menuShapes->setDisabled(true);
-    //menuWindow->setDisabled(true);
 
 
 void MainWindow::createActions()
@@ -222,12 +194,17 @@ void MainWindow::createActions()
     actionDocument->setText(tr("Help Document"));
     actionAbout = new QAction(this);
     actionAbout->setText(tr("About"));
+    objectsActionGroup = new QActionGroup(this);
+    objectsActionGroup->setExclusive(true);
 
+    //Create the select action
     actionSelect = new QAction(this);
     actionSelect->setIcon(QIcon(":/Images/select.png"));
     actionSelect->setObjectName(QString::fromUtf8("actionSelect"));
     actionSelect->setCheckable(true);
     actionSelect->setText(tr("Select"));
+    mainToolBar->addAction(actionSelect);
+    objectsActionGroup->addAction(actionSelect);
 }
 
 void MainWindow::createMenus()
@@ -274,57 +251,33 @@ void MainWindow::createMenus()
     menuShapes->setTitle(tr("Shapes"));
     menuConnectors->setTitle(tr("Connectors"));
     menuHelp->setTitle(tr("Help"));
-}
 
-void MainWindow::createToolbar()
-{
-    QLabel* label = new QLabel;
-    label->setText("Available Tools");
-    label->setStyleSheet("padding-left: 13px; padding-top: 2px; font-size: 12px; font: bold");
-
-    QPushButton* select = new QPushButton(QIcon(":/Images/select.png"),"Select",this);
-    select->setStyleSheet("text-align: left; font-size: 12px");
-    select->setMinimumWidth(125);
-    select->setCheckable(true);
-
-    QPushButton* useCase = new QPushButton(QIcon(":/Images/oval.png"),"Use Case",this);
-    useCase->setStyleSheet("text-align: left; font-size: 12px");
-    useCase->setCheckable(true);
-    useCase->setMinimumWidth(125);
-
-    QPushButton* actor = new QPushButton(QIcon(":/Images/stickman.png"),"Actor",this);
-    actor->setStyleSheet("text-align: left; font-size: 12px");
-    actor->setCheckable(true);
-    actor->setMinimumWidth(125);
-
-    mainToolBar = new QToolBar(this);
-    this->addToolBar(Qt::LeftToolBarArea, mainToolBar);
-    mainToolBar->setMovable(false);
-    mainToolBar->setMinimumWidth(125);
-    mainToolBar->addWidget(label);
-    mainToolBar->addSeparator();
-    mainToolBar->addWidget(select);
-    mainToolBar->addWidget(actor);
-    mainToolBar->addWidget(useCase);
-//    mainToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-
+    menuShapes->addAction(actionSelect);
 }
 
 void MainWindow::createWidgets()
 {
+    //status bar
     statusBar = new QStatusBar(this);
     this->setStatusBar(statusBar);
 
-    canvasWidget = new Canvas(this);
-    test = new Canvas(this);
-    canvasWidget->setObjectName(QString::fromUtf8("canvasWidget"));
+    //tabwidgets
     tabWidget = new QTabWidget(this);
-
+    tabWidget->setTabsClosable(true);
+    tabWidget->setMovable(true);
     this->setCentralWidget(tabWidget);
-    tabWidget->addTab(canvasWidget,"Use Case");
-    tabWidget->addTab(test,"Test");
 
-    createToolbar();
+    mainToolBar = new QToolBar(this);
+    mainToolBar->setMovable(false);
+    mainToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    this->addToolBar(Qt::LeftToolBarArea, mainToolBar);
+
+    //toolbar labels
+    toolbarLabel = new QLabel;
+    toolbarLabel->setText("Available Tools");
+    toolbarLabel->setStyleSheet("padding-left: 13px; padding-top: 2px; font-size: 12px; font: bold");
+
+    mainToolBar->addWidget(toolbarLabel);
 }
 
 void MainWindow::connectSignalsSlots()
@@ -339,7 +292,11 @@ void MainWindow::connectSignalsSlots()
     connect(actionExit, SIGNAL(triggered()), this, SLOT(on_actionExit_triggered()));
     connect(actionPrint, SIGNAL(triggered()), this, SLOT(on_actionPrint_triggered()));
     connect(actionImport_Export, SIGNAL(triggered()), this, SLOT(on_actionImport_Export_triggered()));
-    connect(actionSelect, SIGNAL(toggled(bool)), this, SLOT(on_actionSelect_toggled(bool)));
+    connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(on_tabWidget_currentChanged(int)));
+
+    connect(actionSelect, SIGNAL(triggered()), this, SLOT(on_actionSelect_triggered()));
+    //connect(buttonSelect, SIGNAL(clicked()), this, SLOT(on_actionSelect_triggered()));
+
     /* list of slots
     void on_actionNew_triggered();
     void on_actionOpen_triggered();
@@ -369,6 +326,49 @@ void MainWindow::connectSignalsSlots()
     */
 }
 
+//Slot. It would probably be located in either the canvas or
+//a seperate data structure, somewhere where it can have
+//direct or indirect access to the vector of nodes.
+void MainWindow::setPrototypeID(int prototypeID)
+{
+    //QMessageBox::information(this, "setPrototypeID: prototypeID", QString::number(prototypeID), QMessageBox::Ok);
+
+    Canvas* currentCanvas;
+    int canvasIndex;
+
+    //Find the current canvas with the map
+    canvasIndex = tabToCanvasMappings[tabWidget->currentIndex()];
+    currentCanvas = canvases.at(canvasIndex);
+
+    //notify the canvas that it should be in object mode
+    currentCanvas->setMode(Canvas::Object);
+
+
+    //we need to set the prototype id in currently
+    //active document, so it knows what to create.
+    documents.at(currentCanvas->getDocumentIndex())->setNewObjectID(prototypeID);
+}
+
+/*! This slot updates the currently active canvas's mode to Nothing. It
+ *  uses a map of tab indices to canvas indices to find the current canvas.
+ */
+void MainWindow::on_actionSelect_triggered() {
+    /* The old way with a static cast (...shiver...)
+    Canvas* canvas;
+    canvas = static_cast<Canvas*>(tabWidget->currentWidget());
+    canvas->setMode(Canvas::Nothing);
+    */
+
+    /* The new way with the map :) */
+    int canvasIndex;
+    canvasIndex = tabToCanvasMappings[tabWidget->currentIndex()];
+    canvases.at(canvasIndex)->setMode(Canvas::Nothing);
+}
+
+/*! This slot first asks the user what type of diagram to create with a dialog.
+ *  Then it create a new canvas and document, then connects them together.
+ *  The canvas is added to a new tab and the tab-to-canvas map is updated.
+ */
 void MainWindow::on_actionNew_triggered()
 {
     //dialog of UML types
@@ -376,10 +376,57 @@ void MainWindow::on_actionNew_triggered()
     //dialogNew->show();
     QMessageBox::information(this, "pUML", "Creating a new generic diagram", QMessageBox::Ok);
 
+    //Create the new document and canvas
     Document* newdoc = new Document;
     documents.push_back(newdoc);
+    Canvas* newcanvas = new Canvas;
+    canvases.push_back(newcanvas);
 
-    setCurrentDocument(documents.size()-1);
+    //this might not be necessary
+    newdoc->setCanvasIndex(canvases.size()-1);
+    newcanvas->setDocumentIndex(documents.size()-1);
+
+    //add the tab and update the map.
+    int newTabIndex = tabWidget->addTab(newcanvas, "New Diagram");
+    tabToCanvasMappings.insert(pair<int,int>(newTabIndex, canvases.size()-1));
+    tabWidget->setCurrentIndex(newTabIndex);
+
+    //setCurrentDocument(documents.size()-1);
+    connectCanvasWithDocument(canvases.size()-1, documents.size()-1);
+}
+
+/*! This slot receives the currentChanged signal from the tabWidget.
+ *  It should reupdate the toolbar with the previously selected tool
+ *  and only the legal buttons for the diagram.
+ */
+void MainWindow::on_tabWidget_currentChanged(int newIndex)
+{
+    actionSelect->trigger();
+    /*
+    Canvas* canvas;
+    Document* document;
+    int documentIndex;
+    Canvas::DrawingMode drawingMode;
+
+    canvas = static_cast<Canvas*>(tabWidget->widget(newIndex));
+    documentIndex = canvas->getDocumentIndex();
+    document = documents.at(documentIndex);
+    drawingMode = canvas->getMode();
+
+    if (drawingMode == Canvas::Nothing) {
+
+    } else {
+        int newObjectID;
+        QAction* lastAction;
+
+        newObjectID = document->getNewObjectID();
+        lastAction = static_cast<QAction*>(signalMapper->mapped(document->getNewObjectID()));
+
+        lastAction->trigger();
+    }
+
+*/
+
 }
 
 void MainWindow::on_actionOpen_triggered()
@@ -451,13 +498,6 @@ void MainWindow::on_actionInverse_Select_triggered()
 {
 
 }
-
-void MainWindow::on_actionSelect_toggled(bool arg1) {
-    if (arg1 == true) {
-        canvasWidget->setMode(Canvas::Nothing);
-    }
-}
-
 
 void MainWindow::on_actionTile_Horizontally_toggled(bool arg1)
 {

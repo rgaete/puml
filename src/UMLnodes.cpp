@@ -60,6 +60,7 @@ StickPerson::StickPerson()
     QPoint pos;
     pos.setX(position.x() + length/2);
     pos.setY(position.y() + height);
+    time(&start);
 }
 
 
@@ -79,10 +80,24 @@ void StickPerson::draw(QPainter &painter)
     int tempx = position.x();
     int tempy = position.y();
 
+    // init bools
+    if(punchhand != true)
+    {
+        if(punchhand != false)
+        {
+            punchhand = 0;
+        }
+    }
+
     //background
     painter.setPen(Qt::NoPen);
     painter.setBrush(Qt::white);
     painter.drawEllipse(tempx-16/2/50.0*length, tempy-(10+16)/70.0*height,16/50.0*length,16/70.0*height); //head
+
+    //glove background
+    painter.setBrush(Qt::red);
+    painter.drawEllipse(tempx+10/50.0*length*punchhand,tempy-(300)/70, 16/50.0*((length/2)+(length*(1 - punchhand)/2)),16/70.0*((height/2)+(height*(1 - punchhand)/2))); //right glove
+    painter.drawEllipse(tempx-20/50.0*length,tempy-(300)/70, 16/50.0*length/2,16/70.0*height/2); //left glove
 
     //edge
     painter.setPen(pen);
@@ -90,39 +105,45 @@ void StickPerson::draw(QPainter &painter)
     painter.drawLine(tempx,tempy,tempx,tempy-10/70.0*height);//neck
     painter.drawLine(tempx,tempy,tempx,tempy+20/70.0*height); //body
     painter.drawLine(tempx,tempy,tempx-10/50.0*length,tempy); //left arm
-    painter.drawLine(tempx,tempy,tempx+10/50.0*length,tempy); //right arm
+    painter.drawLine(tempx,tempy,tempx+10/50.0*length*punchhand,tempy); //right arm
     painter.drawLine(tempx,tempy+20/70.0*height,tempx-10/50.0*length,tempy+(20+15)/70.0*height); //left leg
     painter.drawLine(tempx,tempy+20/70.0*height,tempx+10/50.0*length,tempy+(20+15)/70.0*height); //right leg
     painter.drawEllipse(tempx-16/2/50.0*length, tempy-(10+16)/70.0*height,16/50.0*length,16/70.0*height); //head
+
+    // gloves
+    painter.setBrush(Qt::red);
+
+    painter.drawEllipse(tempx+10/50.0*length*punchhand,tempy-(300)/70, 16/50.0*((length/2)+(length*(1 - punchhand)/2)),16/70.0*((height/2)+(height*(1 - punchhand)/2))); //right glove
+    painter.drawEllipse(tempx-20/50.0*length,tempy-(300)/70, 16/50.0*length/2,16/70.0*height/2); //left glove
+
+    painter.drawText(tempx-10,tempy+50,this->name);
+
+    //animation
+    time(&end);
+    dif = difftime(end, start);
+    if(dif >= 1)
+    {
+        start = end;
+        punchhand = 1 - punchhand;
+    }
+
 }
 
 StickDialog::StickDialog(QWidget *parent)
-    :QDialog(parent)
+    :QInputDialog(parent)
 {
-    label = new QLabel(tr("Actor name:"));
-    lineEdit = new QLineEdit;
-    label->setBuddy(lineEdit);
+    setCancelButtonText("Cancel");
+    setLabelText("Actor Name:");
+    setWindowTitle("Actor Properties");
+    setOkButtonText("Ok");
+}
 
-    acceptButton = new QPushButton(tr("Ok"));
-    closeButton = new QPushButton(tr("Close"));
-
-    QHBoxLayout *inputLayout = new QHBoxLayout;
-    inputLayout->addWidget(label);
-    inputLayout->addWidget(lineEdit);
-
-    QHBoxLayout *buttonLayout = new QHBoxLayout;
-    buttonLayout->addWidget(acceptButton);
-    buttonLayout->addWidget(closeButton);
-
-    QVBoxLayout *mainLayout = new QVBoxLayout;
-    mainLayout->addLayout(inputLayout);
-    mainLayout->addLayout(buttonLayout);
-
-    setLayout(mainLayout);
-    setWindowTitle(tr("Actor Properties"));
-
-    connect(closeButton, SIGNAL(clicked()),this,SLOT(close()));
-    connect(acceptButton, SIGNAL(clicked()),this,SLOT(close()));
+QDialog * StickPerson::getDialog()
+{
+    StickDialog *dialog = new StickDialog;
+    dialog->setTextValue(name);
+    connect(dialog,SIGNAL(textValueSelected(QString)),this,SLOT(setName(QString)));
+    return dialog;
 }
 
 /*******************************/
@@ -150,7 +171,37 @@ void OvalNode::draw(QPainter &painter)
     painter.setPen(Qt::black);
     painter.setBrush(Qt::NoBrush);
     painter.drawEllipse(position,length/2,height/2);
+    painter.drawText(position.x(),position.y(), this->name);
 }
+
+OvalDialog::OvalDialog(QWidget *parent)
+    :QInputDialog(parent)
+{
+    setWindowTitle("Use Case Properties");
+    setOkButtonText("Ok");
+    setCancelButtonText("Cancel");
+    setLabelText("Use Case Name:");
+}
+
+QDialog * OvalNode::getDialog()
+{
+    OvalDialog *dialog = new OvalDialog;
+    dialog->setTextValue(name);
+    connect(dialog,SIGNAL(textValueSelected(QString)),this,SLOT(setName(QString)));
+    return dialog;
+}
+
+/********************************/
+/** Interaction Line Functions **/
+/********************************/
+void InteractionLine::draw(QPainter& painter)
+{
+    painter.setPen(Qt::black);
+    painter.drawLine(point1, point2);
+}
+
+
+
 
 
 /*******************************/
