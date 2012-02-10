@@ -126,6 +126,8 @@ void Canvas::mousePressEvent(QMouseEvent *event)
         case Object:
             //don't select or draw anything,
             //the work is done in the release event
+            emit createConnectionPoint1(event->pos());
+
             break;
         case Connection:
             break;
@@ -168,9 +170,11 @@ void Canvas::mouseReleaseEvent(QMouseEvent *event)
         case Object:
 
             emit createObject(event->pos());
+            emit showPropertiesDialog();
             //createObject(event->pos());
             //Call to update to initiate a paintEvent
             //update();
+ //           emit createConnectionPoint2(event->pos());
             break;
         case Connection:
             //QMessageBox::information(0, "pUML", "Mouse Release connection", QMessageBox::Ok);

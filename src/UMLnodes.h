@@ -10,16 +10,15 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <time.h>
 
 
-class StickDialog : public QDialog {
+class StickDialog : public QInputDialog {
     Q_OBJECT
 public:
     StickDialog(QWidget *parent = 0);
 
 signals:
-    void setName(QString newName);
-private slots:
 
 private:
     QLabel *label;
@@ -32,45 +31,79 @@ private:
  * This concrete class is the StickPerson node.
  * @sa ObjectNode
  */
-class StickPerson: public ObjectNode {
+class StickPerson: public QObject, public ObjectNode {
+    Q_OBJECT
 public:
     StickPerson();
     BaseNode* clone() { return new StickPerson; }
-    QDialog* getDialog() { return new StickDialog; }
+    QDialog* getDialog();
     QString getIconPath() { return QString(":/Images/stickman.png"); }
     QString getText() { return "Stick Person"; }
 
     void draw(QPainter &painter);
+public slots:
+    void setName(QString newName) { this->name = newName; }
 private:
     QString name;
+    //animation vars
+        // 0 == punch, 1 == no punch
+    bool punchhand;
+        time_t start;
+        time_t end;
+        double dif;
+
 
 private slots:
 //    void setName(QString newName) { name = newName; }
 };
 
+class connectionline : public ConnectionNode {
 
-class OvalDialog : public QDialog {
 
+};
+
+class OvalDialog : public QInputDialog {
+    Q_OBJECT
+public:
+    OvalDialog(QWidget *parent = 0);
 };
 
 /*!
  * This concrete class is the Oval node.
  * @sa ObjectNode
  */
-class OvalNode: public ObjectNode {
+class OvalNode: public QObject, public ObjectNode {
+    Q_OBJECT
 public:
     OvalNode();
     BaseNode* clone() { return new OvalNode; }
-    QDialog* getDialog() { return new OvalDialog; }
+    QDialog* getDialog();
     QString getIconPath() { return QString(":/Images/oval.png"); }
     QString getText() { return "Oval"; }
 
     void draw(QPainter &painter);
+public slots:
+    void setName(QString newName) { this->name = newName; }
 private:
     int radius;
+    QString name;
 };
 
+class InteractionLineDialog : public QDialog
+{
 
+};
+
+class InteractionLine : public ConnectionNode
+{
+public:
+    BaseNode* clone() { return new InteractionLine; }
+    bool hitTest(const QPoint &point) {return false;}
+    QDialog* getDialog() { return new InteractionLineDialog; }
+    QString getIconPath() { return QString(":/Images/oval.png"); }
+    QString getText() { return "InteractionLine"; }
+    void draw(QPainter& painter);
+};
 
 /* !
  *  This concrete class is the ClassRectangle node.

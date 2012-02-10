@@ -35,6 +35,7 @@ class BaseNode {
         //int id() {return id_int;}
         void setSelected(bool newState) { selected = newState; }
         void setPosition(const QPoint &pos) { position = pos; }
+        void setPoints(const QPoint &p1, const QPoint &p2) {point1=p1; point2=p2;}
         QPoint getPosition() { return position; }
 
         virtual void draw(QPainter &painter) =0;
@@ -43,6 +44,7 @@ class BaseNode {
         virtual QString getIconPath() =0;
         virtual QString getText() =0;
         virtual bool hitTest(const QPoint &point) =0;
+        virtual bool isConnector() =0;
 
     private:
         //This id is unique for each object in all the
@@ -51,6 +53,8 @@ class BaseNode {
     protected:
         bool selected;
         QPoint position;
+        QPoint point1;
+        QPoint point2;
 };
 
 /*!
@@ -84,6 +88,11 @@ public:
      */
     void draw(QPainter &painter);
 
+    /*!
+     *
+     */
+    bool isConnector() { return false; }
+
 protected:
     //! The length (i.e. width) of the bounding box for this object
     int length;
@@ -102,17 +111,13 @@ protected:
 
 class ConnectionNode: public BaseNode {
 public:
-    ConnectionNode();
-    ~ConnectionNode();
-
-    void setPoints(const QPoint &point1, const QPoint &point2);
+    //void setPoints(const QPoint &point1, const QPoint &point2);
 
     //virtual BaseNode* factory();
-    bool hitTest(int x, int y);
+    //bool hitTest(int x, int y);
+    bool isConnector() { return true; }
 
 protected:
-    QPoint connectionPoint1;
-    QPoint connectionPoint2;
 };
 
 #endif
