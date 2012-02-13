@@ -62,10 +62,10 @@ private:
     QString name;
     //animation vars
         // 0 == punch, 1 == no punch
-    bool punchhand;
-        time_t start;
-        time_t end;
-        double dif;
+    int punchhand;
+    time_t start;
+    time_t end;
+    double dif;
 
 
 private slots:
