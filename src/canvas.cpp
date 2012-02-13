@@ -126,22 +126,24 @@ void Canvas::mousePressEvent(QMouseEvent *event)
         case Object:
             //don't select or draw anything,
             //the work is done in the release event
-            emit createConnectionPoint1(event->pos());
-
             break;
         case Connection:
+            //let the document know what the first point was
+            //The document will work out what to connect to.
+            emit createConnectionPoint1(event->pos());
             break;
         case Nothing:
-            //find what object the user is
-            //clicking on
+            //let the document know that the new selection is
+            //under this position.
             emit objectSelectionChange(event->pos());
-            //this->positionDelta = event->pos();
             break;
         }
     }
 }
 
-/* Not used yet */
+/*! In the mouseMoveEvent of the canvas, an object
+    will be moved if the canvas is in selection mode.
+*/
 void Canvas::mouseMoveEvent(QMouseEvent *event)
 {
     if ((event->buttons() = Qt::LeftButton) &&
@@ -168,17 +170,16 @@ void Canvas::mouseReleaseEvent(QMouseEvent *event)
     if (event->button() == Qt::LeftButton) {
         switch(drawingMode) {
         case Object:
-
+            //let the document know to create an object at this position.
             emit createObject(event->pos());
+            //tell the document to show a properties dialog.
             emit showPropertiesDialog();
-            //createObject(event->pos());
-            //Call to update to initiate a paintEvent
-            //update();
- //           emit createConnectionPoint2(event->pos());
             break;
         case Connection:
             //QMessageBox::information(0, "pUML", "Mouse Release connection", QMessageBox::Ok);
-             break;
+            //let the document know this is the second connection position.
+            emit createConnectionPoint2(event->pos());
+            break;
         case Nothing:
             //QMessageBox::information(0, "pUML", "Mouse Release Nothing", QMessageBox::Ok);
             break;

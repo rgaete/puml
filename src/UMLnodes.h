@@ -13,6 +13,10 @@
 #include <time.h>
 
 
+/*! This concrete class defines the input dialog for
+    a StickPerson.
+    @sa StickPersonNode
+*/
 class StickDialog : public QInputDialog {
     Q_OBJECT
 public:
@@ -31,11 +35,11 @@ private:
  * This concrete class is the StickPerson node.
  * @sa ObjectNode
  */
-class StickPerson: public QObject, public ObjectNode {
+class StickPersonNode : public ObjectNode {
     Q_OBJECT
 public:
-    StickPerson();
-    BaseNode* clone() { return new StickPerson; }
+    StickPersonNode();
+    BaseNode* clone() { return new StickPersonNode; }
     QDialog* getDialog();
     QString getIconPath() { return QString(":/Images/stickman.png"); }
     QString getText() { return "Stick Person"; }
@@ -57,11 +61,15 @@ private slots:
 //    void setName(QString newName) { name = newName; }
 };
 
+/*! This concrete class defines a ...
+*/
 class connectionline : public ConnectionNode {
 
 
 };
 
+/*! This defines a custom dialog for a OvalNode
+*/
 class OvalDialog : public QInputDialog {
     Q_OBJECT
 public:
@@ -72,7 +80,7 @@ public:
  * This concrete class is the Oval node.
  * @sa ObjectNode
  */
-class OvalNode: public QObject, public ObjectNode {
+class OvalNode: public ObjectNode {
     Q_OBJECT
 public:
     OvalNode();
@@ -89,11 +97,16 @@ private:
     QString name;
 };
 
+/*! This class provides a custom dialog for an InteractionLineNode.
+*/
 class InteractionLineDialog : public QDialog
 {
 
 };
 
+/*! This concrete class defines an Interaction line in a Use
+    Case diagram (line from the actor to the use case)
+*/
 class InteractionLine : public ConnectionNode
 {
 public:

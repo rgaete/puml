@@ -9,6 +9,8 @@ Document::Document()
 Document::~Document()
 {
     for (int i=0; i<(int)nodes.size(); i++) {
+        assert(nodes.at(i) != 0);
+        //QMessageBox::information(0, "node text", nodes.at(i)->getText(), QMessageBox::Ok, QMessageBox::Ok);
         delete nodes.at(i);
     }
 }

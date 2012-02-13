@@ -27,6 +27,7 @@
 #include "nodefactory.h"
 #include "document.h"
 #include "assert.h"
+#include "nodeaction.h"
 
 class MainWindow : public QMainWindow
 {
@@ -60,7 +61,7 @@ public slots:
     void on_actionSelect_triggered();
     void on_tabWidget_currentChanged(int newIndex);
 
-    void setPrototypeID(int prototypeID);
+    void on_NodeAction_triggered(Canvas::DrawingMode drawingMode, int prototypeID);
 
 private:
     void createActions();

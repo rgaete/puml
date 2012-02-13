@@ -27,15 +27,14 @@ class BaseNode;
  * This defines the generic drawable object, which includes connectors (arrows and the like)
  * and objects (such as a stick person or a state oval).
  */
-class BaseNode {
+class BaseNode : public QObject {
     public:
         BaseNode();
         //~BaseNode() {}
 
-        //int id() {return id_int;}
         void setSelected(bool newState) { selected = newState; }
         void setPosition(const QPoint &pos) { position = pos; }
-        void setPoints(const QPoint &p1, const QPoint &p2) {point1=p1; point2=p2;}
+        void setPoints(const QPoint &p1, const QPoint &p2) { point1=p1; point2=p2; }
         QPoint getPosition() { return position; }
 
         virtual void draw(QPainter &painter) =0;
@@ -69,6 +68,7 @@ class BaseNode {
  * derived classes.
  */
 class ObjectNode: public BaseNode {
+    Q_OBJECT
 public:
     /*! ObjectNode constructor, set the position.
      *  @param position The center of the object, relative to the containing widget.
