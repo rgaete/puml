@@ -18,8 +18,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     //register the objects
     registerObject(new OvalNode);
-    registerObject(new StickPersonNode);
     registerObject(new InteractionLine);
+    registerObject(new StickPersonNode);
+
 
     //connect all the actions in the signalmapper to the one createObject slot.
     //connect(signalMapper, SIGNAL(mapped(int)), this, SLOT(setPrototypeID(int)));
@@ -80,11 +81,15 @@ void MainWindow::registerObject(BaseNode* newPrototype)
             this, SLOT(on_NodeAction_triggered(Canvas::DrawingMode, int)));
 
     //add the action to the appropriate menu
-    menuShapes->addAction(newAction);
+    if (drawingMode == Canvas::Connection) {
+        menuConnectors->addAction(newAction);
+    } else {
+        menuShapes->addAction(newAction);
+    }
+    toolsActionGroup->addAction(newAction);
     mainToolBar->addAction(newAction);
-    objectsActionGroup->addAction(newAction);
 
-    //push the action back so we can access it later
+    //push the action back so we can access it later (we don't access it later ;P)
     actions.push_back(newAction);
 }
 
@@ -197,14 +202,14 @@ void MainWindow::createActions()
     actionSelect_All->setText(tr("Select All"));
     actionInverse_Select = new QAction(this);
     actionInverse_Select->setText(tr("Inverse Select"));
-    Shapes_Connectors = new QActionGroup(this);
-    Shapes_Connectors -> setExclusive(true);
     actionDocument = new QAction(this);
     actionDocument->setText(tr("Help Document"));
     actionAbout = new QAction(this);
     actionAbout->setText(tr("About"));
-    objectsActionGroup = new QActionGroup(this);
-    objectsActionGroup->setExclusive(true);
+    toolsActionGroup = new QActionGroup(this);
+    toolsActionGroup->setExclusive(true);
+    connectorsActionGroup = new QActionGroup(this);
+    connectorsActionGroup->setExclusive(true);
 
     //Create the select action
     actionSelect = new QAction(this);
@@ -213,7 +218,7 @@ void MainWindow::createActions()
     actionSelect->setCheckable(true);
     actionSelect->setText(tr("Select"));
     mainToolBar->addAction(actionSelect);
-    objectsActionGroup->addAction(actionSelect);
+    toolsActionGroup->addAction(actionSelect);
 }
 
 void MainWindow::createMenus()
@@ -247,7 +252,6 @@ void MainWindow::createMenus()
     menuEdit->addSeparator();
     menuEdit->addAction(actionSelect_All);
     menuEdit->addAction(actionInverse_Select);
-    menuTools->addAction(actionSelect);
     menuTools->addAction(menuShapes->menuAction());
     menuTools->addAction(menuConnectors->menuAction());
     menuHelp->addAction(actionDocument);
@@ -261,7 +265,7 @@ void MainWindow::createMenus()
     menuConnectors->setTitle(tr("Connectors"));
     menuHelp->setTitle(tr("Help"));
 
-    menuShapes->addAction(actionSelect);
+    //menuShapes->addAction(actionSelect);
 }
 
 /*!
@@ -279,6 +283,7 @@ void MainWindow::createWidgets()
     tabWidget->setMovable(true);
     this->setCentralWidget(tabWidget);
 
+    //toolbar
     mainToolBar = new QToolBar(this);
     mainToolBar->setMovable(false);
     mainToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
@@ -286,7 +291,7 @@ void MainWindow::createWidgets()
 
     //toolbar labels
     toolbarLabel = new QLabel;
-    toolbarLabel->setText("Available Tools");
+    toolbarLabel->setText("Diagram Tools");
     toolbarLabel->setStyleSheet("padding-left: 13px; padding-top: 2px; font-size: 12px; font: bold");
 
     mainToolBar->addWidget(toolbarLabel);

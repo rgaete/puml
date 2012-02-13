@@ -75,11 +75,9 @@ private:
 private:
     //! The main document tabs
     QTabWidget *tabWidget;
-    //This vector could probably be safely deleted.
+    //This vector could probably be safely removed.
     vector<QAction*> actions;
-    //! Maps all of the node actions to a single slot in mainwindow
-    QSignalMapper *signalMapper;
-    //! Pointers are used again for polymorphic purposes.
+    //! The list of open documents
     vector<Document*> documents;
     //! The canvases in all the tabs
     vector<Canvas*> canvases;
@@ -87,13 +85,15 @@ private:
     int currentDocument;
     //! The status bar
     QStatusBar *statusBar;
-    //
+    //! A 1-to-1 mapping from the tabs to the canvases.
+    //! There might be a better way to store this data directly in the tabs.
     map<int,int> tabToCanvasMappings;
 
     QToolBar *mainToolBar;
     QLabel *toolbarLabel;
 
-    QActionGroup *objectsActionGroup;
+    QActionGroup *toolsActionGroup;
+    QActionGroup *connectorsActionGroup;
     QAction *actionNew;
     QAction *actionOpen;
     QAction *actionSave;
@@ -106,7 +106,7 @@ private:
     QAction *actionPaste;
     QAction *actionSelect_All;
     QAction *actionInverse_Select;
-    QActionGroup *Shapes_Connectors;
+    //QActionGroup *Shapes_Connectors;
     QAction *actionDocument;
     QAction *actionAbout;
     QAction *actionDelete;

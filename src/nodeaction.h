@@ -4,6 +4,7 @@
 #include <QAction>
 #include "canvas.h"
 
+
 class NodeAction : public QAction {
     Q_OBJECT
 public:
