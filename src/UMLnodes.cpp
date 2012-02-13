@@ -79,7 +79,8 @@ void StickPersonObject::draw(QPainter &painter)
                         16/70.0*((height/2)+(height*(1 - punchhand)/2))); //right glove
     painter.drawEllipse(tempx-20/50.0*length,tempy-(300)/70, 16/50.0*length/2,16/70.0*height/2); //left glove
 
-    painter.drawText(tempx-10,tempy+50,this->name);
+    //painter.drawText(tempx-10,tempy+50,this->name);
+    painter.drawText(QRect(tempx-length/2, tempy+height/2, length, 50), Qt::AlignCenter | Qt::AlignTop | Qt::TextDontClip, this->name);
 
     //animation
     time(&end);
@@ -140,7 +141,10 @@ void OvalObject::draw(QPainter &painter)
     painter.setPen(Qt::black);
     painter.setBrush(Qt::NoBrush);
     painter.drawEllipse(position,length/2,height/2);
-    painter.drawText(position.x(),position.y(), this->name);
+    //painter.drawText(position.x(),position.y(), this->name);
+    painter.drawText(QRect(position.x()-length/2, position.y()-height/2, length, height),
+                     Qt::AlignCenter | Qt::AlignHCenter | Qt::TextDontClip,
+                     this->name);
 }
 
 OvalObjectDialog::OvalObjectDialog(QWidget *parent)
