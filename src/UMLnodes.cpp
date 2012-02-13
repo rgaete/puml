@@ -17,6 +17,7 @@ StickPersonObject::StickPersonObject()
     pos.setX(position.x() + length/2);
     pos.setY(position.y() + height);
     time(&start);
+    punchhand = 0;
 }
 
 
@@ -37,6 +38,7 @@ void StickPersonObject::draw(QPainter &painter)
     int tempy = position.y();
 
     // init bools
+    /*
     if(punchhand != true)
     {
         if(punchhand != false)
@@ -44,6 +46,7 @@ void StickPersonObject::draw(QPainter &painter)
             punchhand = 0;
         }
     }
+    */
 
     //background
     painter.setPen(Qt::NoPen);
@@ -52,7 +55,9 @@ void StickPersonObject::draw(QPainter &painter)
 
     //glove background
     painter.setBrush(Qt::red);
-    painter.drawEllipse(tempx+10/50.0*length*punchhand,tempy-(300)/70, 16/50.0*((length/2)+(length*(1 - punchhand)/2)),16/70.0*((height/2)+(height*(1 - punchhand)/2))); //right glove
+    painter.drawEllipse(tempx+10/50.0*length*punchhand,tempy-(300)/70,
+                        16/50.0*((length/2)+(length*(1 - punchhand)/2)),
+                        16/70.0*((height/2)+(height*(1 - punchhand)/2))); //right glove
     painter.drawEllipse(tempx-20/50.0*length,tempy-(300)/70, 16/50.0*length/2,16/70.0*height/2); //left glove
 
     //edge
@@ -69,7 +74,9 @@ void StickPersonObject::draw(QPainter &painter)
     // gloves
     painter.setBrush(Qt::red);
 
-    painter.drawEllipse(tempx+10/50.0*length*punchhand,tempy-(300)/70, 16/50.0*((length/2)+(length*(1 - punchhand)/2)),16/70.0*((height/2)+(height*(1 - punchhand)/2))); //right glove
+    painter.drawEllipse(tempx+10/50.0*length*punchhand,
+                        tempy-(300)/70, 16/50.0*((length/2)+(length*(1 - punchhand)/2)),
+                        16/70.0*((height/2)+(height*(1 - punchhand)/2))); //right glove
     painter.drawEllipse(tempx-20/50.0*length,tempy-(300)/70, 16/50.0*length/2,16/70.0*height/2); //left glove
 
     painter.drawText(tempx-10,tempy+50,this->name);
