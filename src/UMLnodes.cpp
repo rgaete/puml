@@ -2,49 +2,6 @@
 #include "UMLnodes.h"
 
 /*******************************/
-/* SimpleLine Functions ********/
-/*******************************/
-
-/*! */
-/*
-SimpleLine::SimpleLine(ObjectNode *point1, ObjectNode *point2)
-    :ConnectionNode(point1, point2)
-{
-    thickness = 2;
-}
-*/
-
-/*! */
-/*
-void SimpleLine::draw(QPainter &painter)
-{
-    //We want to draw a line from connectionPoint1's
-    //connection point to connectionPoint2's
-    //connection point.
-
-    int point1index, point2index;
-    point1index = connectionPoint1->getClosestConnectionPoint(connectionPoint2->getPosition());
-    point2index = connectionPoint2->getClosestConnectionPoint(connectionPoint1->getPosition());
-
-    QPoint point1, point2;
-    point1 = connectionPoint1->translateConnectionPoint(point1index);
-    point2 = connectionPoint2->translateConnectionPoint(point2index);
-
-    QPen pen;
-    int lineThickness = 1;
-    QColor lineColor = QColor(Qt::black);
-    pen.setWidth(lineThickness);
-    pen.setColor(lineColor);
-    pen.setStyle(Qt::SolidLine);
-    painter.setPen(pen);
-
-    painter.drawLine(point1,point2);
-
-}
-*/
-
-
-/*******************************/
 /* Stickperson Functions *******/
 /*******************************/
 
@@ -52,8 +9,7 @@ void SimpleLine::draw(QPainter &painter)
   the initial length and height and add
   any connection points.
 */
-
-StickPersonNode::StickPersonNode()
+StickPersonObject::StickPersonObject()
             :ObjectNode() {
     this->length = 50;
     this->height = 70;
@@ -65,9 +21,9 @@ StickPersonNode::StickPersonNode()
 
 
 /*! Draws a stickperson on the given painter
-    at position.
+    at position. Extends Objectnode.draw().
 */
-void StickPersonNode::draw(QPainter &painter)
+void StickPersonObject::draw(QPainter &painter)
 {
     //Always call this ObjectNode's draw function because it
     //draws the selection boxes as needed.
@@ -129,7 +85,10 @@ void StickPersonNode::draw(QPainter &painter)
 
 }
 
-StickDialog::StickDialog(QWidget *parent)
+/*! The StickDialog constructor initializes the dialog and
+    passes parent to QInputDialog.
+*/
+StickPersonObjectDialog::StickPersonObjectDialog(QWidget *parent)
     :QInputDialog(parent)
 {
     setCancelButtonText("Cancel");
@@ -138,9 +97,12 @@ StickDialog::StickDialog(QWidget *parent)
     setOkButtonText("Ok");
 }
 
-QDialog * StickPersonNode::getDialog()
+/*! Returns a new StickDialog. The dialog is hooked up to
+    the setname slot so that it can store any changes made.
+*/
+QDialog *StickPersonObject::getDialog()
 {
-    StickDialog *dialog = new StickDialog;
+    StickPersonObjectDialog *dialog = new StickPersonObjectDialog;
     dialog->setTextValue(name);
     connect(dialog,SIGNAL(textValueSelected(QString)),this,SLOT(setName(QString)));
     return dialog;
@@ -150,13 +112,13 @@ QDialog * StickPersonNode::getDialog()
 /* Oval Functions **************/
 /*******************************/
 
-OvalNode::OvalNode()
+OvalObject::OvalObject()
      :ObjectNode() {
     this->length = 100;
     this->height = 50;
 }
 
-void OvalNode::draw(QPainter &painter)
+void OvalObject::draw(QPainter &painter)
 {
     //Always call this ObjectNode's draw function because it
     //draws the selection boxes as needed.
@@ -174,7 +136,7 @@ void OvalNode::draw(QPainter &painter)
     painter.drawText(position.x(),position.y(), this->name);
 }
 
-OvalDialog::OvalDialog(QWidget *parent)
+OvalObjectDialog::OvalObjectDialog(QWidget *parent)
     :QInputDialog(parent)
 {
     setWindowTitle("Use Case Properties");
@@ -183,9 +145,9 @@ OvalDialog::OvalDialog(QWidget *parent)
     setLabelText("Use Case Name:");
 }
 
-QDialog * OvalNode::getDialog()
+QDialog * OvalObject::getDialog()
 {
-    OvalDialog *dialog = new OvalDialog;
+    OvalObjectDialog *dialog = new OvalObjectDialog;
     dialog->setTextValue(name);
     connect(dialog,SIGNAL(textValueSelected(QString)),this,SLOT(setName(QString)));
     return dialog;
@@ -194,14 +156,11 @@ QDialog * OvalNode::getDialog()
 /********************************/
 /** Interaction Line Functions **/
 /********************************/
-void InteractionLine::draw(QPainter& painter)
+void InteractionConnection::draw(QPainter& painter)
 {
     painter.setPen(Qt::black);
     painter.drawLine(point1, point2);
 }
-
-
-
 
 
 /*******************************/

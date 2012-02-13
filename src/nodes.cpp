@@ -58,7 +58,8 @@ bool ObjectNode::hitTest(const QPoint &point) {
     return false;
 }
 
-/*! Draws the selection boxes as needed
+/*! Draws the selection boxes as needed with painter. Assumes
+    painter is a valid QPainter.
 */
 void ObjectNode::draw(QPainter &painter)
 {
@@ -104,24 +105,6 @@ QPoint ObjectNode::translateConnectionPoint(int pointIndex)
 /*******************************/
 /* ConnectionNode Functions ****/
 /*******************************/
-
-/*! */
-/*
-ConnectionNode::ConnectionNode(ObjectNode *point1, ObjectNode *point2) : BaseNode()
-{
-    connectionPoint1 = point1;
-    connectionPoint2 = point2;
-}
-*/
-
-/*! */
-/*
-ConnectionNode::~ConnectionNode()
-{
-    //Do not delete connectionPoint1 and 2, that is
-    //taken care of by the Canvas
-}
-*/
 
 /*! NOT YET IMPLEMENTED */
 /*

@@ -2,7 +2,7 @@
 #include <QMessageBox>
 #include "mainwindow.h"
 
-/*
+/* //This application class can catch exceptions thrown by signals.
 class MyApplication : public QApplication {
 public:
   MyApplication(int& argc, char ** argv) :
@@ -21,6 +21,7 @@ public:
   }
 };
 */
+
 /*!
  * @param argc
  * @param *argv

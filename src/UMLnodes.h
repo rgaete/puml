@@ -1,3 +1,14 @@
+/*! Declares the concrete ObjectNodes and ConnectionNodes.
+
+    Some naming conventions to keep the code orderly:
+
+    Parentclass:    Naming convention:      Example:
+    ObjectNode      <nodename>Node          OvalObject, StickPersonObject
+    ConnectionNode  <nodename>Connection    InteractionConnection
+    QInputDialog    <nodename>Dialog        OvalObjectDialog, InteractionConnectionDialog
+
+*/
+
 #ifndef UMLNODES_H
 #define UMLNODES_H
 
@@ -15,12 +26,12 @@
 
 /*! This concrete class defines the input dialog for
     a StickPerson.
-    @sa StickPersonNode
+    @sa StickPersonObject
 */
-class StickDialog : public QInputDialog {
+class StickPersonObjectDialog : public QInputDialog {
     Q_OBJECT
 public:
-    StickDialog(QWidget *parent = 0);
+    StickPersonObjectDialog(QWidget *parent = 0);
 
 signals:
 
@@ -35,11 +46,11 @@ private:
  * This concrete class is the StickPerson node.
  * @sa ObjectNode
  */
-class StickPersonNode : public ObjectNode {
+class StickPersonObject : public ObjectNode {
     Q_OBJECT
 public:
-    StickPersonNode();
-    BaseNode* clone() { return new StickPersonNode; }
+    StickPersonObject();
+    BaseNode* clone() { return new StickPersonObject; }
     QDialog* getDialog();
     QString getIconPath() { return QString(":/Images/stickman.png"); }
     QString getText() { return "Stick Person"; }
@@ -61,30 +72,24 @@ private slots:
 //    void setName(QString newName) { name = newName; }
 };
 
-/*! This concrete class defines a ...
+
+/*! This defines a custom dialog for a OvalObject
 */
-class connectionline : public ConnectionNode {
-
-
-};
-
-/*! This defines a custom dialog for a OvalNode
-*/
-class OvalDialog : public QInputDialog {
+class OvalObjectDialog : public QInputDialog {
     Q_OBJECT
 public:
-    OvalDialog(QWidget *parent = 0);
+    OvalObjectDialog(QWidget *parent = 0);
 };
 
 /*!
  * This concrete class is the Oval node.
  * @sa ObjectNode
  */
-class OvalNode: public ObjectNode {
+class OvalObject: public ObjectNode {
     Q_OBJECT
 public:
-    OvalNode();
-    BaseNode* clone() { return new OvalNode; }
+    OvalObject();
+    BaseNode* clone() { return new OvalObject; }
     QDialog* getDialog();
     QString getIconPath() { return QString(":/Images/oval.png"); }
     QString getText() { return "Oval"; }
@@ -99,7 +104,7 @@ private:
 
 /*! This class provides a custom dialog for an InteractionLineNode.
 */
-class InteractionLineDialog : public QDialog
+class InteractionConnectionDialog : public QDialog
 {
 
 };
@@ -107,12 +112,12 @@ class InteractionLineDialog : public QDialog
 /*! This concrete class defines an Interaction line in a Use
     Case diagram (line from the actor to the use case)
 */
-class InteractionLine : public ConnectionNode
+class InteractionConnection : public ConnectionNode
 {
 public:
-    BaseNode* clone() { return new InteractionLine; }
+    BaseNode* clone() { return new InteractionConnection; }
     bool hitTest(const QPoint &point) {return false;}
-    QDialog* getDialog() { return new InteractionLineDialog; }
+    QDialog* getDialog() { return new InteractionConnectionDialog; }
     QString getIconPath() { return QString(":/Images/interaction.png"); }
     QString getText() { return "Interaction Line"; }
     void draw(QPainter& painter);

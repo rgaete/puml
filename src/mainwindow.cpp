@@ -2,8 +2,9 @@
 
 
 /*! In the MainWindow constructor, we need to create
-    all the actions and all the widgets. We call
-    setupUI for this.
+    all the actions, menus and widgets. registerObject is
+    used to add prototypes to the NodeFactory and their buttons
+    to the menus and toolbar. The new document slot is triggered.
 */
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -17,26 +18,9 @@ MainWindow::MainWindow(QWidget *parent)
     currentDocument = -1;
 
     //register the objects
-    registerObject(new OvalNode);
-    registerObject(new InteractionLine);
-    registerObject(new StickPersonNode);
-
-
-    //connect all the actions in the signalmapper to the one createObject slot.
-    //connect(signalMapper, SIGNAL(mapped(int)), this, SLOT(setPrototypeID(int)));
-
-    //At this point, we need to add the actions created by registerObject
-    //and put them into the menu structure and toolbar. Then
-    //whenever one of the actions are triggered, the setPrototypeID function
-    //is triggered with a prototype ID specified by the signalmapper
-    /*
-    for (int i=0; i<(int)actions.size(); i++) {
-
-        Shapes_Connectors->addAction(actions.at(i));
-        menuShapes->addAction(actions.at(i));
-
-    }
-    */
+    registerObject(new OvalObject);
+    registerObject(new InteractionConnection);
+    registerObject(new StickPersonObject);
 
     this->resize(700,500);
     this->setWindowTitle(tr("Phunctional UML Editor"));
@@ -51,6 +35,9 @@ MainWindow::MainWindow(QWidget *parent)
 //actions.
 //This function would be part of MainWindow, and actions and signalmapper
 //would be both be member variables.
+/*! Registers a protoype BaseNode* into NodeFactory, and creates a NodeAction from
+    the prototype. It also adds the NodeAction into the menus and the toolbar.
+*/
 void MainWindow::registerObject(BaseNode* newPrototype)
 {
     int newID;
@@ -75,8 +62,7 @@ void MainWindow::registerObject(BaseNode* newPrototype)
     newAction->setIcon(QIcon(newPrototype->getIconPath()));
     newAction->setCheckable(true);
 
-    //add the action to the signalmapper
-    //connect(newAction, SIGNAL(triggered()), signalMapper, SLOT(map()));
+    //connect the action to the NodeAction slots
     connect(newAction, SIGNAL(triggered(Canvas::DrawingMode,int)),
             this, SLOT(on_NodeAction_triggered(Canvas::DrawingMode, int)));
 
@@ -89,36 +75,15 @@ void MainWindow::registerObject(BaseNode* newPrototype)
     toolsActionGroup->addAction(newAction);
     mainToolBar->addAction(newAction);
 
-    //push the action back so we can access it later (we don't access it later ;P)
+    //push the action back so we can access it later (we don't actually access it later?)
     actions.push_back(newAction);
 }
 
-
-void MainWindow::setCurrentDocument(int index)
-{
-    /*assert(index >= -1);
-    assert(index < (int)documents.size());
-    assert(currentDocument >= -1);
-    assert(currentDocument < (int)documents.size());
-
-    //first disconnect the currently connected document
-    if (currentDocument != -1) {
-        disconnect(canvasWidget, 0, documents.at(currentDocument), 0);
-        disconnect(documents.at(currentDocument), 0, canvasWidget, 0);
-    }
-
-    //Then connection the canvas to the new document
-    currentDocument = index;
-    connect(canvasWidget, SIGNAL(createObject(const QPoint &)), documents.at(currentDocument), SLOT(createObject(const QPoint &)));
-    connect(canvasWidget, SIGNAL(moveSelectedObject(const QPoint &)), documents.at(currentDocument), SLOT(moveSelectedObject(const QPoint &)));
-    connect(canvasWidget, SIGNAL(objectSelectionChange(const QPoint &)), documents.at(currentDocument), SLOT(setSelectedObject(const QPoint &)));
-    connect(documents.at(currentDocument), SIGNAL(modelChanged()), canvasWidget, SLOT(update()));
-    connect(canvasWidget, SIGNAL(redraw(QPainter&)), documents.at(currentDocument), SLOT(drawList(QPainter&)));
-    connect(canvasWidget, SIGNAL(showPropertiesDialog()), documents.at(currentDocument), SLOT(showPropertiesDialog()));
-
-    actionSelect->trigger();*/
-}
-
+/*! Connects certain signals and slots of a canvas widget to signals and slots of
+    a document. The document and canvas are specified with indices into canvases and
+    documents. The signals from the canvas and the signals from the document are
+    first disconnected before reconnecting.
+*/
 void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex)
 {
     assert(canvasIndex >= 0);
@@ -130,6 +95,7 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex)
     assert(documents.at(documentIndex)->getCanvasIndex() >= 0);
     assert(documents.at(documentIndex)->getCanvasIndex() < canvases.size());
 
+    //get the canvas and document to connect
     Canvas* canvas = canvases.at(canvasIndex);
     Document* document = documents.at(documentIndex);
 
@@ -151,25 +117,21 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex)
     actionSelect->trigger();
 }
 
-
-
-/*! Mainwindow deconstructor
+/*! This deconstructor frees up the memory held in any vectors that
+    hold objects which don't have parents (basically any non-Qt objects)
 */
 MainWindow::~MainWindow()
 {
     //Since we have a vector of pointers, we need to make sure
     //to free all of them manually.
-    for (int i=0; i<(int)actions.size(); i++) {
-        assert(actions.at(i) != 0);
-        delete actions.at(i);
-    }
     for (int i=0; i<(int)documents.size(); i++) {
         assert(actions.at(i) != 0);
         delete documents.at(i);
     }
 }
 
-
+/*! Helps the constructor create the menu actions.
+*/
 void MainWindow::createActions()
 {
     actionNew = new QAction(this);
@@ -221,6 +183,8 @@ void MainWindow::createActions()
     toolsActionGroup->addAction(actionSelect);
 }
 
+/*! Helps the constructor create the menus.
+*/
 void MainWindow::createMenus()
 {
     menuBar = new QMenuBar(this);
@@ -264,12 +228,9 @@ void MainWindow::createMenus()
     menuShapes->setTitle(tr("Shapes"));
     menuConnectors->setTitle(tr("Connectors"));
     menuHelp->setTitle(tr("Help"));
-
-    //menuShapes->addAction(actionSelect);
 }
 
-/*!
-
+/*! Helps the constructor create the widgets
 */
 void MainWindow::createWidgets()
 {
@@ -289,11 +250,10 @@ void MainWindow::createWidgets()
     mainToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     this->addToolBar(Qt::LeftToolBarArea, mainToolBar);
 
-    //toolbar labels
+    //toolbar label
     toolbarLabel = new QLabel;
     toolbarLabel->setText("Diagram Tools");
     toolbarLabel->setStyleSheet("padding-left: 13px; padding-top: 2px; font-size: 12px; font: bold");
-
     mainToolBar->addWidget(toolbarLabel);
 }
 
@@ -312,7 +272,6 @@ void MainWindow::connectSignalsSlots()
     connect(actionPrint, SIGNAL(triggered()), this, SLOT(on_actionPrint_triggered()));
     connect(actionImport_Export, SIGNAL(triggered()), this, SLOT(on_actionImport_Export_triggered()));
     connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(on_tabWidget_currentChanged(int)));
-
     connect(actionSelect, SIGNAL(triggered()), this, SLOT(on_actionSelect_triggered()));
 
     /* list of slots
@@ -346,7 +305,7 @@ void MainWindow::connectSignalsSlots()
 
 /*! This slot gets triggered whenever one of the NodeActions are triggered,
     which could be from the toolbar or menu. Those NodeActions hold
-    the drawingMode and prototypID. This slot then puts the canvas and
+    the drawingMode and prototypeID. This slot then puts the canvas and
     document into the right modes and sets the right id's.
 */
 void MainWindow::on_NodeAction_triggered(Canvas::DrawingMode drawingMode, int prototypeID)
@@ -370,6 +329,8 @@ void MainWindow::on_NodeAction_triggered(Canvas::DrawingMode drawingMode, int pr
 
 /*! This slot updates the currently active canvas's mode to Nothing. It
  *  uses a map of tab indices to canvas indices to find the current canvas.
+ *  @todo Try move the mappings into the tabs themselves or into the documents
+          to eleminate the need for a map.
  */
 void MainWindow::on_actionSelect_triggered() {
     /* The old way with a static cast (...shiver...)
@@ -384,9 +345,11 @@ void MainWindow::on_actionSelect_triggered() {
     canvases.at(canvasIndex)->setMode(Canvas::Nothing);
 }
 
-/*! This slot first asks the user what type of diagram to create with a dialog.
+/*! Creates a new diagram file.
+ *  This slot first asks the user what type of diagram to create with a dialog.
  *  Then it create a new canvas and document, then connects them together.
  *  The canvas is added to a new tab and the tab-to-canvas map is updated.
+ *  @todo This should also add the diagram to the current project.
  */
 void MainWindow::on_actionNew_triggered()
 {
@@ -401,7 +364,9 @@ void MainWindow::on_actionNew_triggered()
     Canvas* newcanvas = new Canvas;
     canvases.push_back(newcanvas);
 
-    //this might not be necessary
+    //These member variables aren't used in any other function
+    //they should either be removed or the map should be removed
+    //and something like this should take it's place.
     newdoc->setCanvasIndex(canvases.size()-1);
     newcanvas->setDocumentIndex(documents.size()-1);
 
@@ -410,7 +375,7 @@ void MainWindow::on_actionNew_triggered()
     tabToCanvasMappings.insert(pair<int,int>(newTabIndex, canvases.size()-1));
     tabWidget->setCurrentIndex(newTabIndex);
 
-    //setCurrentDocument(documents.size()-1);
+    //Connect the new canvas with the new document.
     connectCanvasWithDocument(canvases.size()-1, documents.size()-1);
 }
 
@@ -422,6 +387,7 @@ void MainWindow::on_tabWidget_currentChanged(int newIndex)
 {
     actionSelect->trigger();
     /*
+    //An attempt at making the toolbar update with the last selected tool...
     Canvas* canvas;
     Document* document;
     int documentIndex;
