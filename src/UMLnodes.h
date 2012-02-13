@@ -113,8 +113,8 @@ public:
     BaseNode* clone() { return new InteractionLine; }
     bool hitTest(const QPoint &point) {return false;}
     QDialog* getDialog() { return new InteractionLineDialog; }
-    QString getIconPath() { return QString(":/Images/oval.png"); }
-    QString getText() { return "InteractionLine"; }
+    QString getIconPath() { return QString(":/Images/interaction.png"); }
+    QString getText() { return "Interaction Line"; }
     void draw(QPainter& painter);
 };
 

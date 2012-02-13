@@ -72,6 +72,7 @@ void Canvas::setMode(DrawingMode mode)
 
 /*! This function paints the canvas. That means it
     draws the background grid and then calls drawList.
+    @todo Update the grid settings using some sort of user preference
 */
 void Canvas::paintEvent(QPaintEvent *event)
 {
@@ -84,6 +85,7 @@ void Canvas::paintEvent(QPaintEvent *event)
      QColor lineColor = QColor(245,245,245,255);
      int colWidth = 10;
      int rowHeight = 10;
+
      //set up the pen using the preferences
      QPen pen;
      pen.setWidth(lineThickness);
@@ -105,6 +107,14 @@ void Canvas::paintEvent(QPaintEvent *event)
      }
      painter.drawLines(hlines);
      painter.drawLines(vlines);
+
+     //draw the line hint for connections if need be
+     if (drawLineHint == true) {
+         pen.setWidth(2);
+         pen.setColor(Qt::blue);
+         painter.setPen(pen);
+         painter.drawLine(lineHint1, lineHint2);
+     }
 
      //Draw the nodes!!!
      //Emit a draw signal
@@ -131,6 +141,11 @@ void Canvas::mousePressEvent(QMouseEvent *event)
             //let the document know what the first point was
             //The document will work out what to connect to.
             emit createConnectionPoint1(event->pos());
+            //draw the line hint
+            drawLineHint = true;
+            lineHint1 = event->pos();
+            lineHint2 = event->pos();
+            update();
             break;
         case Nothing:
             //let the document know that the new selection is
@@ -146,17 +161,19 @@ void Canvas::mousePressEvent(QMouseEvent *event)
 */
 void Canvas::mouseMoveEvent(QMouseEvent *event)
 {
-    if ((event->buttons() = Qt::LeftButton) &&
-        (drawingMode == Nothing))
-    {
-        //The user is moving the mouse while holding down
-        //the left mouse button, and the canvas is in
-        //selection mode, and there is an object selected,
-        //they must be dragging!
-        //nodes.at(indexOfSelectedObject)->setPosition(this->mapFromGlobal(event->globalPos()) - positionDelta);
-
-        emit moveSelectedObject(this->mapFromGlobal(event->globalPos()));
-        update();
+    if (event->buttons() = Qt::LeftButton) {
+        switch (drawingMode) {
+        case Nothing:
+            //The user is moving the mouse while holding down
+            //the left mouse button, and the canvas is in
+            //selection mode, they must be dragging!
+            emit moveSelectedObject(this->mapFromGlobal(event->globalPos()));
+            break;
+        case Connection:
+            lineHint2 = this->mapFromGlobal(event->globalPos());
+            update();
+            break;
+        }
     }
 }
 
@@ -179,6 +196,9 @@ void Canvas::mouseReleaseEvent(QMouseEvent *event)
             //QMessageBox::information(0, "pUML", "Mouse Release connection", QMessageBox::Ok);
             //let the document know this is the second connection position.
             emit createConnectionPoint2(event->pos());
+            //stop drawing the line hint
+            drawLineHint = false;
+            update();
             break;
         case Nothing:
             //QMessageBox::information(0, "pUML", "Mouse Release Nothing", QMessageBox::Ok);
@@ -188,12 +208,13 @@ void Canvas::mouseReleaseEvent(QMouseEvent *event)
 }
 
 /*! This function is called when the widget thinks that
-    a contect menu is needed. E.g., the right mouse
-    button is clicked or the menu keyboard button is
-    pressed.
+    a context menu is needed. E.g., the right mouse
+    button is clicked or the menu button is pressed.
 */
 void Canvas::contextMenuEvent(QContextMenuEvent *event)
 {
+    //select what's the under the mouse
+    emit objectSelectionChange(event->pos());
     //popup the menu at the current mouse position
     menuPopup->exec(event->globalPos());
 }

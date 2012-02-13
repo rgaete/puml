@@ -20,6 +20,10 @@ public:
 
 private:
     DrawingMode drawingMode;
+    int documentIndex;
+    QPoint lineHint1;
+    QPoint lineHint2;
+    bool drawLineHint;
 
     QMenu *menuPopup;
     QAction *actionDelete;
@@ -27,8 +31,6 @@ private:
     QAction *actionCopy;
     QAction *actionPaste;
     QAction *actionProperties;
-
-    int documentIndex;
 public:
     explicit Canvas(QWidget *parent = 0);
     QSize sizeHint() const;

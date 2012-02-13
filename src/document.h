@@ -5,6 +5,7 @@
 #include "nodes.h"
 #include "nodefactory.h"
 #include "assert.h"
+#include <map>
 
 class Document : public QObject
 {
