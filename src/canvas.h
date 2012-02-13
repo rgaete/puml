@@ -19,12 +19,18 @@ public:
     };
 
 private:
+    //! The mode the canvas is in, which determines what happens at mouse events
     DrawingMode drawingMode;
+    //! The index of the currently connected document
     int documentIndex;
+    //! The first point of the line hint
     QPoint lineHint1;
+    //! The second point of the line hint
     QPoint lineHint2;
+    //! True -> draw the line hint, false -> don't draw it.
     bool drawLineHint;
 
+    //! The context menu
     QMenu *menuPopup;
     QAction *actionDelete;
     QAction *actionCut;

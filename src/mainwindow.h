@@ -69,7 +69,6 @@ private:
     void createWidgets();
     void connectSignalsSlots();
     void registerObject(BaseNode* newPrototype);
-    void setCurrentDocument(int index);
     void connectCanvasWithDocument(int canvasIndex, int documentIndex);
 
 private:

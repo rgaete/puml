@@ -141,7 +141,7 @@ void Canvas::mousePressEvent(QMouseEvent *event)
             //let the document know what the first point was
             //The document will work out what to connect to.
             emit createConnectionPoint1(event->pos());
-            //draw the line hint
+            //start drawing the line hint
             drawLineHint = true;
             lineHint1 = event->pos();
             lineHint2 = event->pos();
@@ -170,6 +170,7 @@ void Canvas::mouseMoveEvent(QMouseEvent *event)
             emit moveSelectedObject(this->mapFromGlobal(event->globalPos()));
             break;
         case Connection:
+            //update the second line hint point
             lineHint2 = this->mapFromGlobal(event->globalPos());
             update();
             break;
@@ -193,7 +194,6 @@ void Canvas::mouseReleaseEvent(QMouseEvent *event)
             emit showPropertiesDialog();
             break;
         case Connection:
-            //QMessageBox::information(0, "pUML", "Mouse Release connection", QMessageBox::Ok);
             //let the document know this is the second connection position.
             emit createConnectionPoint2(event->pos());
             //stop drawing the line hint

@@ -5,7 +5,6 @@
 #include "nodes.h"
 #include "nodefactory.h"
 #include "assert.h"
-#include <map>
 
 class Document : public QObject
 {
@@ -20,11 +19,19 @@ public:
     int getCanvasIndex() { return canvasIndex; }
     void setCanvasIndex(int index) { canvasIndex = index; }
 private:
+    //! The main vector of nodes
     vector<BaseNode*> nodes;
+    //! The index of the selected object, -1 if nothing's selected
     int indexOfSelectedObject;
+    //! The prototypeID of the next object to create
     int newObjectID;
+    //! The difference between where a user clicked on the
+    //! object and the actual position of that object
     QPoint positionDelta;
+    //! A member variable that could be used to store the index
+    //! the currently connected canvas (Not used yet - 2/13/12)
     int canvasIndex;
+    //! This is first click when creating a connection node
     QPoint tempPoint1;
 signals:
     void modelChanged();
