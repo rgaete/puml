@@ -53,7 +53,7 @@ void SimpleLine::draw(QPainter &painter)
   any connection points.
 */
 
-StickPerson::StickPerson()
+StickPersonNode::StickPersonNode()
             :ObjectNode() {
     this->length = 50;
     this->height = 70;
@@ -67,7 +67,7 @@ StickPerson::StickPerson()
 /*! Draws a stickperson on the given painter
     at position.
 */
-void StickPerson::draw(QPainter &painter)
+void StickPersonNode::draw(QPainter &painter)
 {
     //Always call this ObjectNode's draw function because it
     //draws the selection boxes as needed.
@@ -138,7 +138,7 @@ StickDialog::StickDialog(QWidget *parent)
     setOkButtonText("Ok");
 }
 
-QDialog * StickPerson::getDialog()
+QDialog * StickPersonNode::getDialog()
 {
     StickDialog *dialog = new StickDialog;
     dialog->setTextValue(name);

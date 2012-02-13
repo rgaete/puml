@@ -13,16 +13,16 @@ MainWindow::MainWindow(QWidget *parent)
     createMenus();
     connectSignalsSlots();
 
-    signalMapper = new QSignalMapper(this);
+    //signalMapper = new QSignalMapper(this);
     currentDocument = -1;
 
     //register the objects
     registerObject(new OvalNode);
-    registerObject(new StickPerson);
+    registerObject(new StickPersonNode);
     registerObject(new InteractionLine);
 
     //connect all the actions in the signalmapper to the one createObject slot.
-    connect(signalMapper, SIGNAL(mapped(int)), this, SLOT(setPrototypeID(int)));
+    //connect(signalMapper, SIGNAL(mapped(int)), this, SLOT(setPrototypeID(int)));
 
     //At this point, we need to add the actions created by registerObject
     //and put them into the menu structure and toolbar. Then
@@ -53,20 +53,31 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::registerObject(BaseNode* newPrototype)
 {
     int newID;
-    QAction* newAction;
+    NodeAction *newAction;
+    Canvas::DrawingMode drawingMode;
 
     //register the prototype with the factory
     newID = NodeFactory::getInstance()->registerPrototype(newPrototype);
 
-    //create the action
-    newAction = new QAction(this);
+    //Get the drawing mode for the action to hold
+    if (newPrototype->isConnector() == true) {
+        drawingMode = Canvas::Connection;
+    } else {
+        drawingMode = Canvas::Object;
+    }
+
+    //create the action with the mode, prototypeid, and parent
+    newAction = new NodeAction(drawingMode, newID, this);
+
     //set up the action with the right icon, text
     newAction->setText(newPrototype->getText());
     newAction->setIcon(QIcon(newPrototype->getIconPath()));
     newAction->setCheckable(true);
 
     //add the action to the signalmapper
-    connect(newAction, SIGNAL(triggered()), signalMapper, SLOT(map()));
+    //connect(newAction, SIGNAL(triggered()), signalMapper, SLOT(map()));
+    connect(newAction, SIGNAL(triggered(Canvas::DrawingMode,int)),
+            this, SLOT(on_NodeAction_triggered(Canvas::DrawingMode, int)));
 
     //add the action to the appropriate menu
     menuShapes->addAction(newAction);
@@ -75,9 +86,6 @@ void MainWindow::registerObject(BaseNode* newPrototype)
 
     //push the action back so we can access it later
     actions.push_back(newAction);
-
-    //map action's signals with the prototype's ID.
-    signalMapper->setMapping(newAction, newID);
 }
 
 
@@ -134,6 +142,7 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex)
     connect(canvas, SIGNAL(createConnectionPoint1(const QPoint &)), document, SLOT(createConnectionPoint1(const QPoint &)));
     connect(canvas, SIGNAL(createConnectionPoint2(const QPoint &)), document, SLOT(createConnectionPoint2(const QPoint &)));
 
+    //Go into selection mode
     actionSelect->trigger();
 }
 
@@ -146,13 +155,13 @@ MainWindow::~MainWindow()
     //Since we have a vector of pointers, we need to make sure
     //to free all of them manually.
     for (int i=0; i<(int)actions.size(); i++) {
+        assert(actions.at(i) != 0);
         delete actions.at(i);
     }
     for (int i=0; i<(int)documents.size(); i++) {
+        assert(actions.at(i) != 0);
         delete documents.at(i);
     }
-
-
 }
 
 
@@ -255,6 +264,9 @@ void MainWindow::createMenus()
     menuShapes->addAction(actionSelect);
 }
 
+/*!
+
+*/
 void MainWindow::createWidgets()
 {
     //status bar
@@ -280,11 +292,13 @@ void MainWindow::createWidgets()
     mainToolBar->addWidget(toolbarLabel);
 }
 
+/*! Constructor helper, it connects all of the the various
+    widgets and actions that MainWindow owns to all of the
+    MainWindow's slots.
+*/
 void MainWindow::connectSignalsSlots()
 {
-    //Instead of using connectSlotsByName and dealing with that,
     //manually connect the slots
-    //QMetaObject::connectSlotsByName(this);
     connect(actionNew, SIGNAL(triggered()), this, SLOT(on_actionNew_triggered()));
     connect(actionOpen, SIGNAL(triggered()), this, SLOT(on_actionOpen_triggered()));
     connect(actionSave, SIGNAL(triggered()), this, SLOT(on_actionSave_triggered()));
@@ -295,7 +309,6 @@ void MainWindow::connectSignalsSlots()
     connect(tabWidget, SIGNAL(currentChanged(int)), this, SLOT(on_tabWidget_currentChanged(int)));
 
     connect(actionSelect, SIGNAL(triggered()), this, SLOT(on_actionSelect_triggered()));
-    //connect(buttonSelect, SIGNAL(clicked()), this, SLOT(on_actionSelect_triggered()));
 
     /* list of slots
     void on_actionNew_triggered();
@@ -326,10 +339,12 @@ void MainWindow::connectSignalsSlots()
     */
 }
 
-//Slot. It would probably be located in either the canvas or
-//a seperate data structure, somewhere where it can have
-//direct or indirect access to the vector of nodes.
-void MainWindow::setPrototypeID(int prototypeID)
+/*! This slot gets triggered whenever one of the NodeActions are triggered,
+    which could be from the toolbar or menu. Those NodeActions hold
+    the drawingMode and prototypID. This slot then puts the canvas and
+    document into the right modes and sets the right id's.
+*/
+void MainWindow::on_NodeAction_triggered(Canvas::DrawingMode drawingMode, int prototypeID)
 {
     //QMessageBox::information(this, "setPrototypeID: prototypeID", QString::number(prototypeID), QMessageBox::Ok);
 
@@ -341,8 +356,7 @@ void MainWindow::setPrototypeID(int prototypeID)
     currentCanvas = canvases.at(canvasIndex);
 
     //notify the canvas that it should be in object mode
-    currentCanvas->setMode(Canvas::Object);
-
+    currentCanvas->setMode(drawingMode);
 
     //we need to set the prototype id in currently
     //active document, so it knows what to create.
