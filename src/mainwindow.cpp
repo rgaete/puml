@@ -19,8 +19,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     //register the objects
     registerObject(new OvalObject);
-    registerObject(new InteractionConnection);
     registerObject(new StickPersonObject);
+    registerObject(new InteractionConnection);
 
     this->resize(700,500);
     this->setWindowTitle(tr("Phunctional UML Editor"));
@@ -110,6 +110,7 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex)
     connect(document, SIGNAL(modelChanged()), canvas, SLOT(update()));
     connect(canvas, SIGNAL(redraw(QPainter&)), document, SLOT(drawList(QPainter&)));
     connect(canvas, SIGNAL(showPropertiesDialog()), document, SLOT(showPropertiesDialog()));
+    connect(canvas, SIGNAL(removeObject()), document, SLOT(removeObject()));
     connect(canvas, SIGNAL(createConnectionPoint1(const QPoint &)), document, SLOT(createConnectionPoint1(const QPoint &)));
     connect(canvas, SIGNAL(createConnectionPoint2(const QPoint &)), document, SLOT(createConnectionPoint2(const QPoint &)));
 

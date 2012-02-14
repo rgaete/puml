@@ -44,5 +44,6 @@ public slots:
     void createConnectionPoint1(const QPoint &point);
     void createConnectionPoint2(const QPoint &point);
     void showPropertiesDialog();
+    void removeObject();
 };
 #endif // DOCUMENT_H

@@ -162,3 +162,16 @@ void Document::drawList(QPainter &painter)
         nodes[i]->draw(painter);
     }
 }
+
+void Document::removeObject()
+{
+    assert(indexOfSelectedObject >= -1);
+    assert(indexOfSelectedObject < (int)nodes.size());
+
+    if(indexOfSelectedObject != -1){
+        nodes.erase(nodes.begin()+indexOfSelectedObject);
+    }
+
+    indexOfSelectedObject = -1;
+    emit modelChanged();
+}
