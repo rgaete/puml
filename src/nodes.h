@@ -14,6 +14,8 @@
 #include <QRect>
 #include <QPainter>
 #include <QAction>
+#include <list>
+#include "math.h"
 
 //#include "utilities.h"
 //#include "diagrams.h"
@@ -33,7 +35,7 @@ class BaseNode : public QObject {
         //~BaseNode() {}
 
         void setSelected(bool newState) { selected = newState; }
-        void setPosition(const QPoint &pos) { position = pos; }
+        void setPosition(const QPoint &pos) { position = pos; setUpConnectionPoints();}
         void setPoints(const QPoint &p1, const QPoint &p2) { point1=p1; point2=p2; }
         QPoint getPosition() { return position; }
 
@@ -45,15 +47,30 @@ class BaseNode : public QObject {
         virtual bool hitTest(const QPoint &point) =0;
         virtual bool isConnector() =0;
 
+
+        void addConnnectionPoint(const QPoint &newpoint);
+        void addConnectedNode(BaseNode *newObject);
+        void removeConnectedNode(BaseNode *object);
+        QPoint getClosestConnectionPoint(const QPoint& point);
+        list<BaseNode*> getConnectedNodes();
+
+
+
     private:
-        //This id is unique for each object in all the
-        //the diagrams that are opened.
-        //int id_int;
+        vector<QPoint> connectionPoints;
+
     protected:
+        virtual void setUpConnectionPoints();
+
         bool selected;
         QPoint position;
         QPoint point1;
         QPoint point2;
+        //! The length (i.e. width) of the bounding box for this object
+        int length;
+        //! The height of the bounding box for this object
+        int height;
+        list<BaseNode*> connectedObjects;
 };
 
 /*!
@@ -94,10 +111,7 @@ public:
     bool isConnector() { return false; }
 
 protected:
-    //! The length (i.e. width) of the bounding box for this object
-    int length;
-    //! The height of the bounding box for this object
-    int height;
+
 
 };
 

@@ -167,10 +167,24 @@ QDialog * OvalObject::getDialog()
 /********************************/
 /** Interaction Line Functions **/
 /********************************/
+
+
 void InteractionConnection::draw(QPainter& painter)
 {
+
+    QPoint pt1, pt2;
+    BaseNode *obj1, *obj2;
+    list<BaseNode*>::iterator it = connectedObjects.begin();
+    obj1 = *(it);
+    it++;
+    obj2 = *(it);
+
+    pt1 = obj1->getClosestConnectionPoint(obj2->getPosition());
+    pt2 = obj2->getClosestConnectionPoint(obj1->getPosition());
+
     painter.setPen(Qt::black);
-    painter.drawLine(point1, point2);
+    painter.drawLine(pt1, pt2);
+
 }
 
 
