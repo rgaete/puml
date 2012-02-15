@@ -30,6 +30,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -65,6 +66,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <div class="textblock"><code>#include &lt;QtGui/QApplication&gt;</code><br/>
+<code>#include &lt;QMessageBox&gt;</code><br/>
 <code>#include &quot;<a class="el" href="mainwindow_8h_source.html">mainwindow.h</a>&quot;</code><br/>
 </div><table class="memberdecls">
 <tr><td colspan="2"><h2><a name="func-members"></a>
@@ -104,7 +106,9 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <div class="fragment"><pre class="fragment">{
+    <span class="comment">//MyApplication a(argc, argv);</span>
     QApplication a(argc, argv);
+    a.setStyleSheet(<span class="stringliteral">&quot;QToolButton { min-width: 125px }&quot;</span>);
     <a class="code" href="classMainWindow.html">MainWindow</a> w;
     w.show();
 
@@ -128,7 +132,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 12:24:48 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Feb 15 2012 13:33:53 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -30,6 +30,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -75,14 +76,11 @@ Inheritance diagram for BaseNode:</div>
  <div class="center">
   <img src="classBaseNode.png" usemap="#BaseNode_map" alt=""/>
   <map id="BaseNode_map" name="BaseNode_map">
-<area href="classConnectionNode.html" alt="ConnectionNode" shape="rect" coords="0,56,107,80"/>
-<area href="classObjectNode.html" alt="ObjectNode" shape="rect" coords="351,56,458,80"/>
-<area href="classSimpleLine.html" alt="SimpleLine" shape="rect" coords="0,112,107,136"/>
-<area href="classClassRectangle.html" alt="ClassRectangle" shape="rect" coords="117,112,224,136"/>
-<area href="classDiamond.html" alt="Diamond" shape="rect" coords="234,112,341,136"/>
-<area href="classOval.html" alt="Oval" shape="rect" coords="351,112,458,136"/>
-<area href="classSquareBoundary.html" alt="SquareBoundary" shape="rect" coords="468,112,575,136"/>
-<area href="classStickPerson.html" alt="StickPerson" shape="rect" coords="585,112,692,136"/>
+<area href="classConnectionNode.html" alt="ConnectionNode" shape="rect" coords="0,56,135,80"/>
+<area href="classObjectNode.html" title="This is the base class for all object nodes." alt="ObjectNode" shape="rect" coords="217,56,352,80"/>
+<area href="classInteractionConnection.html" alt="InteractionConnection" shape="rect" coords="0,112,135,136"/>
+<area href="classOvalObject.html" alt="OvalObject" shape="rect" coords="145,112,280,136"/>
+<area href="classStickPersonObject.html" alt="StickPersonObject" shape="rect" coords="290,112,425,136"/>
 </map>
  </div></div>
 
@@ -91,16 +89,23 @@ Inheritance diagram for BaseNode:</div>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a8707f8359c128d58e81a6c61fea432f7">BaseNode</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a68cbe002fb704896732f485745d2e707">id</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a4f1b5df25d1033cadefbfe2336fff505">setSelected</a> (bool newState)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#aa6675efee5af9fc0e9b2e19c98e4b7dc">setPosition</a> (const QPoint &amp;pos)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a8b51b88f62243368d3d7cb3804636864">setPoints</a> (const QPoint &amp;p1, const QPoint &amp;p2)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QPoint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a79627d9a052108d60082dddbd60dfb02">draw</a> (QPainter &amp;painter)=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a1e0deac88a0ef9a65d436faef1bc3012">hitTest</a> (int x, int y)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classBaseNode.html">BaseNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a78866f78aa92c207f9d0ea1861e15b13">clone</a> ()=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual QDialog *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a990ffea58e51f55cfa8c6862b79fd880">getDialog</a> ()=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a681bcfe2beced6d0a3bf0051faeb608e">getIconPath</a> ()=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a86bd186e3435098add1b9bdd79e25cdb">getText</a> ()=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a6ba6b3ac267709d4d4d8bed400d7a47b">hitTest</a> (const QPoint &amp;point)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a7f1ca77b551e9d5320fb08512c9f3d47">isConnector</a> ()=0</td></tr>
 <tr><td colspan="2"><h2><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a321a3231c6688686d5ee779ab169b741">selected</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QPoint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QPoint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a66ba0ffc241873792fbc076750d94037">point1</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QPoint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a147ecf80895c62e7df284d2af5825cfc">point2</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This defines the generic drawable object, which includes connectors (arrows and the like) and objects (such as a stick person or a state oval). </p>
@@ -126,6 +131,24 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a78866f78aa92c207f9d0ea1861e15b13"></a><!-- doxytag: member="BaseNode::clone" ref="a78866f78aa92c207f9d0ea1861e15b13" args="()=0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classBaseNode.html">BaseNode</a>* BaseNode::clone </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Implemented in <a class="el" href="classStickPersonObject.html#a9f71b9d71b9f72c6f4f24213dc6fab8e">StickPersonObject</a>, <a class="el" href="classOvalObject.html#a32221c2b341ca074f37b181209ad000e">OvalObject</a>, and <a class="el" href="classInteractionConnection.html#a609140b6f83bcbc3de6b7a8bc31d72e5">InteractionConnection</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a79627d9a052108d60082dddbd60dfb02"></a><!-- doxytag: member="BaseNode::draw" ref="a79627d9a052108d60082dddbd60dfb02" args="(QPainter &amp;painter)=0" -->
 <div class="memitem">
 <div class="memproto">
@@ -141,7 +164,43 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Implemented in <a class="el" href="classObjectNode.html#ae0422bfde3bfb8554826dfbe4806fb08">ObjectNode</a>, <a class="el" href="classStickPerson.html#ad164651282f7a05175b87802ef58745a">StickPerson</a>, <a class="el" href="classOval.html#a0cd56e2729bf1d9e1cc75440a941b762">Oval</a>, <a class="el" href="classClassRectangle.html#a11e95a4f57a429d5324d14944165a71a">ClassRectangle</a>, <a class="el" href="classSquareBoundary.html#a60b8d6f6f958be76045dac08a62c5303">SquareBoundary</a>, <a class="el" href="classDiamond.html#a027ef9195684ee6d17f3cb6177589872">Diamond</a>, and <a class="el" href="classSimpleLine.html#af459d19bbb6041438da11d7b8c82c0f7">SimpleLine</a>.</p>
+<p>Implemented in <a class="el" href="classObjectNode.html#ae0422bfde3bfb8554826dfbe4806fb08">ObjectNode</a>, <a class="el" href="classStickPersonObject.html#abd84d82f09b25b71bb8e033a140708de">StickPersonObject</a>, <a class="el" href="classOvalObject.html#aa60cb82c3c78097ca70dc7242b120f87">OvalObject</a>, and <a class="el" href="classInteractionConnection.html#a235c5a54a3fbc8a2d39867e66c707337">InteractionConnection</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a990ffea58e51f55cfa8c6862b79fd880"></a><!-- doxytag: member="BaseNode::getDialog" ref="a990ffea58e51f55cfa8c6862b79fd880" args="()=0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual QDialog* BaseNode::getDialog </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Implemented in <a class="el" href="classStickPersonObject.html#ad4ba9e63a54a7f26246c80a0c2c67120">StickPersonObject</a>, <a class="el" href="classOvalObject.html#a29f690a35240ec93437cbfb483343ee5">OvalObject</a>, and <a class="el" href="classInteractionConnection.html#aa3b4b6dc1c9479e7f9725c7ce2aae413">InteractionConnection</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a681bcfe2beced6d0a3bf0051faeb608e"></a><!-- doxytag: member="BaseNode::getIconPath" ref="a681bcfe2beced6d0a3bf0051faeb608e" args="()=0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual QString BaseNode::getIconPath </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Implemented in <a class="el" href="classStickPersonObject.html#a0ca8491c2017a3633f10e1527d820799">StickPersonObject</a>, <a class="el" href="classOvalObject.html#a8fe7f02bdd2ebe2b649d130f0de42ad4">OvalObject</a>, and <a class="el" href="classInteractionConnection.html#a5fbef912f8cf6453e0f3f100bc738413">InteractionConnection</a>.</p>
 
 </div>
 </div>
@@ -162,49 +221,86 @@ Protected Attributes</h2></td></tr>
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="a1e0deac88a0ef9a65d436faef1bc3012"></a><!-- doxytag: member="BaseNode::hitTest" ref="a1e0deac88a0ef9a65d436faef1bc3012" args="(int x, int y)=0" -->
+<a class="anchor" id="a86bd186e3435098add1b9bdd79e25cdb"></a><!-- doxytag: member="BaseNode::getText" ref="a86bd186e3435098add1b9bdd79e25cdb" args="()=0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual QString BaseNode::getText </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Implemented in <a class="el" href="classStickPersonObject.html#a4a18a17af81e5b59a8fc2a495fcabc51">StickPersonObject</a>, <a class="el" href="classOvalObject.html#ae3ad4cdff1ebf931d136bdcd974878d2">OvalObject</a>, and <a class="el" href="classInteractionConnection.html#a5000603d44579d0f464c461cb34c1c55">InteractionConnection</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6ba6b3ac267709d4d4d8bed400d7a47b"></a><!-- doxytag: member="BaseNode::hitTest" ref="a6ba6b3ac267709d4d4d8bed400d7a47b" args="(const QPoint &amp;point)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">virtual bool BaseNode::hitTest </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>y</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [pure virtual]</code></td>
+          <td class="paramtype">const QPoint &amp;&#160;</td>
+          <td class="paramname"><em>point</em></td><td>)</td>
+          <td><code> [pure virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Implemented in <a class="el" href="classObjectNode.html#a07e51ab3d96d5c28332fef5617dc17cf">ObjectNode</a>, and <a class="el" href="classConnectionNode.html#a5ebe91159b4b9fe5768506300b913875">ConnectionNode</a>.</p>
+<p>Implemented in <a class="el" href="classObjectNode.html#a13fdcf09dd354e7f386a377fa5707185">ObjectNode</a>, and <a class="el" href="classInteractionConnection.html#a2c123d44bff9ac1aa1ea2e49e2f696ed">InteractionConnection</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a68cbe002fb704896732f485745d2e707"></a><!-- doxytag: member="BaseNode::id" ref="a68cbe002fb704896732f485745d2e707" args="()" -->
+<a class="anchor" id="a7f1ca77b551e9d5320fb08512c9f3d47"></a><!-- doxytag: member="BaseNode::isConnector" ref="a7f1ca77b551e9d5320fb08512c9f3d47" args="()=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int BaseNode::id </td>
+          <td class="memname">virtual bool BaseNode::isConnector </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [inline]</code></td>
+          <td><code> [pure virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{<span class="keywordflow">return</span> id_int;}
+
+<p>Implemented in <a class="el" href="classObjectNode.html#aabcfb753d1453d305c132143ff387a0a">ObjectNode</a>, and <a class="el" href="classConnectionNode.html#a5ada624151c7259a23e5273f79db60a2">ConnectionNode</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8b51b88f62243368d3d7cb3804636864"></a><!-- doxytag: member="BaseNode::setPoints" ref="a8b51b88f62243368d3d7cb3804636864" args="(const QPoint &amp;p1, const QPoint &amp;p2)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BaseNode::setPoints </td>
+          <td>(</td>
+          <td class="paramtype">const QPoint &amp;&#160;</td>
+          <td class="paramname"><em>p1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QPoint &amp;&#160;</td>
+          <td class="paramname"><em>p2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{ <a class="code" href="classBaseNode.html#a66ba0ffc241873792fbc076750d94037">point1</a>=p1; <a class="code" href="classBaseNode.html#a147ecf80895c62e7df284d2af5825cfc">point2</a>=p2; }
 </pre></div>
 </div>
 </div>
@@ -245,6 +341,32 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="a66ba0ffc241873792fbc076750d94037"></a><!-- doxytag: member="BaseNode::point1" ref="a66ba0ffc241873792fbc076750d94037" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QPoint <a class="el" href="classBaseNode.html#a66ba0ffc241873792fbc076750d94037">BaseNode::point1</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a147ecf80895c62e7df284d2af5825cfc"></a><!-- doxytag: member="BaseNode::point2" ref="a147ecf80895c62e7df284d2af5825cfc" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QPoint <a class="el" href="classBaseNode.html#a147ecf80895c62e7df284d2af5825cfc">BaseNode::point2</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a336b329e3212cfd27d37616553e1965d"></a><!-- doxytag: member="BaseNode::position" ref="a336b329e3212cfd27d37616553e1965d" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -290,7 +412,7 @@ Protected Attributes</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 12:24:48 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Feb 15 2012 13:33:53 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

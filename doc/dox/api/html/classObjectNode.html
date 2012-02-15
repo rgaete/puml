@@ -30,6 +30,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -68,6 +69,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="ObjectNode" --><!-- doxytag: inherits="BaseNode" -->
+<p>This is the base class for all object nodes.  
+ <a href="classObjectNode.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="nodes_8h_source.html">nodes.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ObjectNode:</div>
@@ -75,12 +79,9 @@ Inheritance diagram for ObjectNode:</div>
  <div class="center">
   <img src="classObjectNode.png" usemap="#ObjectNode_map" alt=""/>
   <map id="ObjectNode_map" name="ObjectNode_map">
-<area href="classBaseNode.html" alt="BaseNode" shape="rect" coords="234,0,341,24"/>
-<area href="classClassRectangle.html" alt="ClassRectangle" shape="rect" coords="0,112,107,136"/>
-<area href="classDiamond.html" alt="Diamond" shape="rect" coords="117,112,224,136"/>
-<area href="classOval.html" alt="Oval" shape="rect" coords="234,112,341,136"/>
-<area href="classSquareBoundary.html" alt="SquareBoundary" shape="rect" coords="351,112,458,136"/>
-<area href="classStickPerson.html" alt="StickPerson" shape="rect" coords="468,112,575,136"/>
+<area href="classBaseNode.html" alt="BaseNode" shape="rect" coords="63,0,179,24"/>
+<area href="classOvalObject.html" alt="OvalObject" shape="rect" coords="0,112,116,136"/>
+<area href="classStickPersonObject.html" alt="StickPersonObject" shape="rect" coords="126,112,242,136"/>
 </map>
  </div></div>
 
@@ -88,39 +89,45 @@ Inheritance diagram for ObjectNode:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObjectNode.html#aafc826d194f78cf0ad4c5454c47242d8">ObjectNode</a> (QPoint <a class="el" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObjectNode.html#ae3bc3d36f66a7b978652e674750a37bd">addConnectionPoint</a> (QPoint point)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObjectNode.html#a1b2025e4898303d3f39145ff78d05152">getClosestConnectionPoint</a> (QPoint whereAt)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">QPoint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObjectNode.html#ae19d7c1626becb65e5f4bca48fa02ccf">translateConnectionPoint</a> (int pointIndex)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObjectNode.html#a07e51ab3d96d5c28332fef5617dc17cf">hitTest</a> (int x, int y)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObjectNode.html#a9a66f6f6af4296a650d06f98a8a181d5">ObjectNode</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObjectNode.html#a13fdcf09dd354e7f386a377fa5707185">hitTest</a> (const QPoint &amp;point)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObjectNode.html#ae0422bfde3bfb8554826dfbe4806fb08">draw</a> (QPainter &amp;painter)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObjectNode.html#aabcfb753d1453d305c132143ff387a0a">isConnector</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">QRect&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObjectNode.html#a0db64c5c13734ce53ce049514de3776b">my_shape</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">vector&lt; QPoint &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObjectNode.html#a67f172337d81d3637f867f07d0488ce5">connectionPoints</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObjectNode.html#af42a4d16af0fe77206181b796e4f09b4">length</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The length (i.e. width) of the bounding box for this object.  <a href="#af42a4d16af0fe77206181b796e4f09b4"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classObjectNode.html#a17ac726d3e93ee71e10ef5bb26900e58">height</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The height of the bounding box for this object.  <a href="#a17ac726d3e93ee71e10ef5bb26900e58"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>This abstract base class describes the object nodes. </p>
-<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="classBaseNode.html">BaseNode</a> </dd></dl>
+<div class="textblock"><p>This is the base class for all object nodes. </p>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="classBaseNode.html">BaseNode</a></dd></dl>
+<p>All objects should inherit from this class, while all connection should inherit from </p>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="classConnectionNode.html">ConnectionNode</a>. This function defines only two of the virtual methods inherited from <a class="el" href="classBaseNode.html">BaseNode</a>, the rest need to be defined by derived classes. </dd></dl>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="aafc826d194f78cf0ad4c5454c47242d8"></a><!-- doxytag: member="ObjectNode::ObjectNode" ref="aafc826d194f78cf0ad4c5454c47242d8" args="(QPoint position)" -->
+<a class="anchor" id="a9a66f6f6af4296a650d06f98a8a181d5"></a><!-- doxytag: member="ObjectNode::ObjectNode" ref="a9a66f6f6af4296a650d06f98a8a181d5" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">ObjectNode::ObjectNode </td>
           <td>(</td>
-          <td class="paramtype">QPoint&#160;</td>
-          <td class="paramname"><em>position</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<p>The <a class="el" href="classObjectNode.html">ObjectNode</a> constructor sets the position variable </p>
-<div class="fragment"><pre class="fragment">                                      : <a class="code" href="classBaseNode.html#a8707f8359c128d58e81a6c61fea432f7">BaseNode</a>()
+<p><a class="el" href="classObjectNode.html" title="This is the base class for all object nodes.">ObjectNode</a> constructor, set the position. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>The center of the object, relative to the containing widget.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>The <a class="el" href="classObjectNode.html" title="This is the base class for all object nodes.">ObjectNode</a> constructor sets the position variable </p>
+<div class="fragment"><pre class="fragment">    : <a class="code" href="classBaseNode.html#a8707f8359c128d58e81a6c61fea432f7">BaseNode</a>()
 {
     this-&gt;<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a> = <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>;
 }
@@ -128,24 +135,6 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="ae3bc3d36f66a7b978652e674750a37bd"></a><!-- doxytag: member="ObjectNode::addConnectionPoint" ref="ae3bc3d36f66a7b978652e674750a37bd" args="(QPoint point)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ObjectNode::addConnectionPoint </td>
-          <td>(</td>
-          <td class="paramtype">QPoint&#160;</td>
-          <td class="paramname"><em>point</em></td><td>)</td>
-          <td><code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">{ <a class="code" href="classObjectNode.html#a67f172337d81d3637f867f07d0488ce5">connectionPoints</a>.push_back(point); }
-</pre></div>
-</div>
-</div>
 <a class="anchor" id="ae0422bfde3bfb8554826dfbe4806fb08"></a><!-- doxytag: member="ObjectNode::draw" ref="ae0422bfde3bfb8554826dfbe4806fb08" args="(QPainter &amp;painter)" -->
 <div class="memitem">
 <div class="memproto">
@@ -160,11 +149,21 @@ Protected Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Draws the selection boxes </p>
+<p>This function draws selection boxes at the corners defined by </p>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="classObjectNode.html#af42a4d16af0fe77206181b796e4f09b4" title="The length (i.e. width) of the bounding box for this object.">length</a> and </dd>
+<dd>
+<a class="el" href="classObjectNode.html#a17ac726d3e93ee71e10ef5bb26900e58" title="The height of the bounding box for this object.">height</a>. </dd></dl>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">painter</td><td>A valid QPainter passed by the containing widget.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Draws the selection boxes as needed with painter. Assumes painter is a valid QPainter. </p>
 
 <p>Implements <a class="el" href="classBaseNode.html#a79627d9a052108d60082dddbd60dfb02">BaseNode</a>.</p>
 
-<p>Reimplemented in <a class="el" href="classStickPerson.html#ad164651282f7a05175b87802ef58745a">StickPerson</a>, <a class="el" href="classOval.html#a0cd56e2729bf1d9e1cc75440a941b762">Oval</a>, <a class="el" href="classClassRectangle.html#a11e95a4f57a429d5324d14944165a71a">ClassRectangle</a>, <a class="el" href="classSquareBoundary.html#a60b8d6f6f958be76045dac08a62c5303">SquareBoundary</a>, and <a class="el" href="classDiamond.html#a027ef9195684ee6d17f3cb6177589872">Diamond</a>.</p>
+<p>Reimplemented in <a class="el" href="classStickPersonObject.html#abd84d82f09b25b71bb8e033a140708de">StickPersonObject</a>, and <a class="el" href="classOvalObject.html#aa60cb82c3c78097ca70dc7242b120f87">OvalObject</a>.</p>
 <div class="fragment"><pre class="fragment">{
     <span class="keywordflow">if</span> (<a class="code" href="classBaseNode.html#a321a3231c6688686d5ee779ab169b741">selected</a> == <span class="keyword">true</span>) {
         <span class="keywordtype">int</span> handleWidth = 5;
@@ -172,20 +171,20 @@ Protected Attributes</h2></td></tr>
 
         painter.setPen(Qt::NoPen);
         painter.setBrush(Qt::blue);
-        painter.drawRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()-<a class="code" href="classObjectNode.html#af42a4d16af0fe77206181b796e4f09b4">length</a>/2-handleWidth,
-                         <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()-<a class="code" href="classObjectNode.html#a17ac726d3e93ee71e10ef5bb26900e58">height</a>/2-handleHeight,
+        painter.drawRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()-<a class="code" href="classObjectNode.html#af42a4d16af0fe77206181b796e4f09b4" title="The length (i.e. width) of the bounding box for this object.">length</a>/2-handleWidth,
+                         <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()-<a class="code" href="classObjectNode.html#a17ac726d3e93ee71e10ef5bb26900e58" title="The height of the bounding box for this object.">height</a>/2-handleHeight,
                          handleWidth,
                          handleHeight);
-        painter.drawRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()+<a class="code" href="classObjectNode.html#af42a4d16af0fe77206181b796e4f09b4">length</a>/2,
-                         <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()+<a class="code" href="classObjectNode.html#a17ac726d3e93ee71e10ef5bb26900e58">height</a>/2,
+        painter.drawRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()+<a class="code" href="classObjectNode.html#af42a4d16af0fe77206181b796e4f09b4" title="The length (i.e. width) of the bounding box for this object.">length</a>/2,
+                         <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()+<a class="code" href="classObjectNode.html#a17ac726d3e93ee71e10ef5bb26900e58" title="The height of the bounding box for this object.">height</a>/2,
                          handleWidth,
                          handleHeight);
-        painter.drawRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()+<a class="code" href="classObjectNode.html#af42a4d16af0fe77206181b796e4f09b4">length</a>/2,
-                         <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()-<a class="code" href="classObjectNode.html#a17ac726d3e93ee71e10ef5bb26900e58">height</a>/2-handleHeight,
+        painter.drawRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()+<a class="code" href="classObjectNode.html#af42a4d16af0fe77206181b796e4f09b4" title="The length (i.e. width) of the bounding box for this object.">length</a>/2,
+                         <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()-<a class="code" href="classObjectNode.html#a17ac726d3e93ee71e10ef5bb26900e58" title="The height of the bounding box for this object.">height</a>/2-handleHeight,
                          handleWidth,
                          handleHeight);
-        painter.drawRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()-<a class="code" href="classObjectNode.html#af42a4d16af0fe77206181b796e4f09b4">length</a>/2-handleWidth,
-                         <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()+<a class="code" href="classObjectNode.html#a17ac726d3e93ee71e10ef5bb26900e58">height</a>/2,
+        painter.drawRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()-<a class="code" href="classObjectNode.html#af42a4d16af0fe77206181b796e4f09b4" title="The length (i.e. width) of the bounding box for this object.">length</a>/2-handleWidth,
+                         <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()+<a class="code" href="classObjectNode.html#a17ac726d3e93ee71e10ef5bb26900e58" title="The height of the bounding box for this object.">height</a>/2,
                          handleWidth,
                          handleHeight);
     }
@@ -193,63 +192,41 @@ Protected Attributes</h2></td></tr>
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="a1b2025e4898303d3f39145ff78d05152"></a><!-- doxytag: member="ObjectNode::getClosestConnectionPoint" ref="a1b2025e4898303d3f39145ff78d05152" args="(QPoint whereAt)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int ObjectNode::getClosestConnectionPoint </td>
-          <td>(</td>
-          <td class="paramtype">QPoint&#160;</td>
-          <td class="paramname"><em>whereAt</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>NOT YET IMPLEMENTED </p>
-<div class="fragment"><pre class="fragment">{
-    <span class="keywordflow">if</span> (<a class="code" href="classObjectNode.html#a67f172337d81d3637f867f07d0488ce5">connectionPoints</a>.size() == 0) {
-        <span class="keywordflow">return</span> -1;
-    } <span class="keywordflow">else</span> {
-        <span class="keywordflow">return</span> 0;
-    }
-}
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="a07e51ab3d96d5c28332fef5617dc17cf"></a><!-- doxytag: member="ObjectNode::hitTest" ref="a07e51ab3d96d5c28332fef5617dc17cf" args="(int x, int y)" -->
+<a class="anchor" id="a13fdcf09dd354e7f386a377fa5707185"></a><!-- doxytag: member="ObjectNode::hitTest" ref="a13fdcf09dd354e7f386a377fa5707185" args="(const QPoint &amp;point)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">bool ObjectNode::hitTest </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>y</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [virtual]</code></td>
+          <td class="paramtype">const QPoint &amp;&#160;</td>
+          <td class="paramname"><em>point</em></td><td>)</td>
+          <td><code> [virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+<p>This function performs a simple hittest by test whether the specified point is inside the box defined by the </p>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>, </dd>
+<dd>
+<a class="el" href="classObjectNode.html#af42a4d16af0fe77206181b796e4f09b4" title="The length (i.e. width) of the bounding box for this object.">length</a>, and </dd>
+<dd>
+<a class="el" href="classObjectNode.html#a17ac726d3e93ee71e10ef5bb26900e58" title="The height of the bounding box for this object.">height</a>. </dd></dl>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">point</td><td>The point to hittest at, relative to the canvas widget.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>NOT YET IMPLEMENTED</p>
 <p>This is the default implementation of the hitTest function. It simply checks if (x,y) is inside the box defined by length, length and position. This is a virtual function, so it can be reimplemented by children classes as needed. </p>
 
-<p>Implements <a class="el" href="classBaseNode.html#a1e0deac88a0ef9a65d436faef1bc3012">BaseNode</a>.</p>
-<div class="fragment"><pre class="fragment">                                     {
-    <span class="keywordflow">if</span> ((x &gt;= (<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()-<a class="code" href="classObjectNode.html#af42a4d16af0fe77206181b796e4f09b4">length</a>/2)) &amp;&amp;
-        (x &lt;= (<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()+<a class="code" href="classObjectNode.html#af42a4d16af0fe77206181b796e4f09b4">length</a>/2))) {
-        <span class="keywordflow">if</span> ((y &gt;= <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()-<a class="code" href="classObjectNode.html#af42a4d16af0fe77206181b796e4f09b4">length</a>/2) &amp;&amp;
-            (y &lt;= <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()+<a class="code" href="classObjectNode.html#a17ac726d3e93ee71e10ef5bb26900e58">height</a>/2)) {
+<p>Implements <a class="el" href="classBaseNode.html#a6ba6b3ac267709d4d4d8bed400d7a47b">BaseNode</a>.</p>
+<div class="fragment"><pre class="fragment">                                            {
+    <span class="keywordflow">if</span> ((point.x() &gt;= (this-&gt;<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()-this-&gt;<a class="code" href="classObjectNode.html#af42a4d16af0fe77206181b796e4f09b4" title="The length (i.e. width) of the bounding box for this object.">length</a>/2)) &amp;&amp;
+        (point.x() &lt;= (this-&gt;<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()+this-&gt;<a class="code" href="classObjectNode.html#af42a4d16af0fe77206181b796e4f09b4" title="The length (i.e. width) of the bounding box for this object.">length</a>/2))) {
+        <span class="keywordflow">if</span> ((point.y() &gt;= this-&gt;<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()-this-&gt;<a class="code" href="classObjectNode.html#af42a4d16af0fe77206181b796e4f09b4" title="The length (i.e. width) of the bounding box for this object.">length</a>/2) &amp;&amp;
+            (point.y() &lt;= this-&gt;<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()+this-&gt;<a class="code" href="classObjectNode.html#a17ac726d3e93ee71e10ef5bb26900e58" title="The height of the bounding box for this object.">height</a>/2)) {
             <span class="keywordflow">return</span> <span class="keyword">true</span>;
         }
     }
@@ -258,46 +235,26 @@ Protected Attributes</h2></td></tr>
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="ae19d7c1626becb65e5f4bca48fa02ccf"></a><!-- doxytag: member="ObjectNode::translateConnectionPoint" ref="ae19d7c1626becb65e5f4bca48fa02ccf" args="(int pointIndex)" -->
+<a class="anchor" id="aabcfb753d1453d305c132143ff387a0a"></a><!-- doxytag: member="ObjectNode::isConnector" ref="aabcfb753d1453d305c132143ff387a0a" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">QPoint ObjectNode::translateConnectionPoint </td>
+          <td class="memname">bool ObjectNode::isConnector </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>pointIndex</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>NYI </p>
-<div class="fragment"><pre class="fragment">{
-    <span class="keywordflow">if</span> (pointIndex &lt; 0 || pointIndex &gt; (<span class="keywordtype">int</span>)<a class="code" href="classObjectNode.html#a67f172337d81d3637f867f07d0488ce5">connectionPoints</a>.size()-1) {
-        <span class="comment">//ERROR, index out of bounds</span>
-        <span class="keywordflow">return</span> QPoint(0,0);
-    } <span class="keywordflow">else</span> {
-        <span class="keywordflow">return</span> <a class="code" href="classObjectNode.html#a67f172337d81d3637f867f07d0488ce5">connectionPoints</a>[pointIndex];
-    }
-}
-</pre></div>
-</div>
-</div>
-<hr/><h2>Member Data Documentation</h2>
-<a class="anchor" id="a67f172337d81d3637f867f07d0488ce5"></a><!-- doxytag: member="ObjectNode::connectionPoints" ref="a67f172337d81d3637f867f07d0488ce5" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">vector&lt;QPoint&gt; <a class="el" href="classObjectNode.html#a67f172337d81d3637f867f07d0488ce5">ObjectNode::connectionPoints</a><code> [protected]</code></td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
+<p>Implements <a class="el" href="classBaseNode.html#a7f1ca77b551e9d5320fb08512c9f3d47">BaseNode</a>.</p>
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> <span class="keyword">false</span>; }
+</pre></div>
 </div>
 </div>
+<hr/><h2>Member Data Documentation</h2>
 <a class="anchor" id="a17ac726d3e93ee71e10ef5bb26900e58"></a><!-- doxytag: member="ObjectNode::height" ref="a17ac726d3e93ee71e10ef5bb26900e58" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -308,6 +265,8 @@ Protected Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>The height of the bounding box for this object. </p>
 
 </div>
 </div>
@@ -322,18 +281,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="a0db64c5c13734ce53ce049514de3776b"></a><!-- doxytag: member="ObjectNode::my_shape" ref="a0db64c5c13734ce53ce049514de3776b" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">QRect <a class="el" href="classObjectNode.html#a0db64c5c13734ce53ce049514de3776b">ObjectNode::my_shape</a><code> [protected]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>The length (i.e. width) of the bounding box for this object. </p>
 
 </div>
 </div>
@@ -356,7 +304,7 @@ Protected Attributes</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 12:24:48 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed Feb 15 2012 13:33:53 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
