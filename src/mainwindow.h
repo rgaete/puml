@@ -17,6 +17,7 @@
 #include <QFileDialog>
 #include <QPrinter>
 #include <QPrintDialog>
+#include <QDialog>
 #include <QMessageBox>
 #include <QCloseEvent>
 #include <QGroupBox>
@@ -28,6 +29,7 @@
 #include "document.h"
 #include "assert.h"
 #include "nodeaction.h"
+#include "dialog.h"
 
 class MainWindow : public QMainWindow
 {
