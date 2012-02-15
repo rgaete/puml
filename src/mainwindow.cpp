@@ -104,6 +104,9 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex)
     disconnect(canvas, 0, documents.at(canvas->getDocumentIndex()), 0);
     disconnect(document, 0, canvases.at(document->getCanvasIndex()), 0);
 
+    //create shortcuts for signals/slots
+    QShortcut *delObject = new QShortcut(QKeySequence(QKeySequence::Delete),this);
+
     //Then connect the canvas to the document
     connect(canvas, SIGNAL(createObject(const QPoint &)), document, SLOT(createObject(const QPoint &)));
     connect(canvas, SIGNAL(moveSelectedObject(const QPoint &)), document, SLOT(moveSelectedObject(const QPoint &)));
@@ -112,6 +115,7 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex)
     connect(canvas, SIGNAL(redraw(QPainter&)), document, SLOT(drawList(QPainter&)));
     connect(canvas, SIGNAL(showPropertiesDialog()), document, SLOT(showPropertiesDialog()));
     connect(canvas, SIGNAL(removeObject()), document, SLOT(removeObject()));
+    connect(delObject, SIGNAL(activated()), document, SLOT(removeObject()));
     connect(canvas, SIGNAL(createConnectionPoint1(const QPoint &)), document, SLOT(createConnectionPoint1(const QPoint &)));
     connect(canvas, SIGNAL(createConnectionPoint2(const QPoint &)), document, SLOT(createConnectionPoint2(const QPoint &)));
 
@@ -264,7 +268,7 @@ void MainWindow::createWidgets()
     MainWindow's slots.
 */
 void MainWindow::connectSignalsSlots()
-{
+{    
     //manually connect the slots
     connect(actionNew, SIGNAL(triggered()), this, SLOT(on_actionNew_triggered()));
     connect(actionOpen, SIGNAL(triggered()), this, SLOT(on_actionOpen_triggered()));

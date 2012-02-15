@@ -28,7 +28,6 @@ Canvas::Canvas(QWidget *parent) :
     //Create the actions
     actionDelete = new QAction(this);
     actionDelete->setText("Delete");
-    actionDelete->setShortcut(QKeySequence::Delete);
     actionCut = new QAction(this);
     actionCut->setText("Cut");
     actionCopy = new QAction(this);
