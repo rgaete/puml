@@ -17,9 +17,9 @@ SOURCES += main.cpp\
     nodefactory.cpp \
     UMLnodes.cpp \
     document.cpp \
-    dialogue.cpp \
-    dialog.cpp \
-    dialogpages.cpp
+   # dialogue.cpp \
+   # dialog.cpp \
+   # dialogpages.cpp
 
 HEADERS  += mainwindow.h \
     canvas.h \
@@ -28,9 +28,9 @@ HEADERS  += mainwindow.h \
     UMLnodes.h \
     document.h \
     nodeaction.h \
-    dialogue.h \
-    dialog.h \
-    dialogpages.h
+   # dialogue.h \
+  #  dialog.h \
+ #   dialogpages.h
 
 OTHER_FILES +=
 
