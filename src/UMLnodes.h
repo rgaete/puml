@@ -123,6 +123,18 @@ public:
     void draw(QPainter& painter);
 };
 
+class ClassConnection : public ConnectionNode
+{
+public:
+    BaseNode* clone() { return new ClassConnection; }
+    bool hitTest(const QPoint &point) {return false;}
+    QDialog* getDialog() { return new InteractionConnectionDialog; }
+    QString getIconPath() { return QString(":/Images/interaction.png"); }
+    QString getText() { return "Class Line"; }
+    void draw(QPainter& painter);
+
+};
+
 /* !
  *  This concrete class is the ClassRectangle node.
  *  @sa ObjectNode

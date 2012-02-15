@@ -221,7 +221,7 @@ void Canvas::contextMenuEvent(QContextMenuEvent *event)
 
 void Canvas::on_actionDelete_triggered()
 {
-    //
+    emit removeObject();
 }
 
 void Canvas::on_actionCut_triggered()

@@ -7,4 +7,4 @@ PDF: ssrs.pdf
 	xpdf ssrs.pdf
 
 clean: 
-	rm *.aux *.log *.out *.toc *.pdf
+	rm *.aux *.log *.out *.toc

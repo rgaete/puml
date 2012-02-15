@@ -60,6 +60,7 @@ signals:
     void createConnectionPoint2(const QPoint &point);
     void redraw(QPainter &painter);
     void showPropertiesDialog();
+    void removeObject();
 
 public slots:
     void on_actionDelete_triggered();
