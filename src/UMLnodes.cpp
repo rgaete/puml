@@ -85,7 +85,7 @@ void StickPersonObject::draw(QPainter &painter)
     //animation
     time(&end);
     dif = difftime(end, start);
-    if(dif >= 1)
+    if(dif >= 0.5)
     {
         start = end;
         punchhand = 1 - punchhand;

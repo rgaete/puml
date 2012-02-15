@@ -357,7 +357,11 @@ void MainWindow::on_actionNew_triggered()
     //dialog of UML types
     //dialogNew = new DialogNew;
     //dialogNew->show();
-    QMessageBox::information(this, "pUML", "Creating a new generic diagram", QMessageBox::Ok);
+    //QMessageBox::information(this, "pUML", "Creating a new generic diagram", QMessageBox::Ok);
+
+    // this is the new dialogue, hopefully
+    ConfigDialog dialog;
+    dialog.exec();
 
     //Create the new document and canvas
     Document* newdoc = new Document;
@@ -379,6 +383,16 @@ void MainWindow::on_actionNew_triggered()
     //Connect the new canvas with the new document.
     connectCanvasWithDocument(canvases.size()-1, documents.size()-1);
 }
+
+
+
+
+
+
+
+
+
+
 
 /*! This slot receives the currentChanged signal from the tabWidget.
  *  It should reupdate the toolbar with the previously selected tool
