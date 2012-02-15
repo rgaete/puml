@@ -6,6 +6,7 @@
 #include "nodefactory.h"
 #include "assert.h"
 
+
 class Document : public QObject
 {
     Q_OBJECT
@@ -19,6 +20,8 @@ public:
     int getCanvasIndex() { return canvasIndex; }
     void setCanvasIndex(int index) { canvasIndex = index; }
 private:
+    int getIndexAt(const QPoint &point);
+
     //! The main vector of nodes
     vector<BaseNode*> nodes;
     //! The index of the selected object, -1 if nothing's selected
@@ -31,8 +34,8 @@ private:
     //! A member variable that could be used to store the index
     //! the currently connected canvas (Not used yet - 2/13/12)
     int canvasIndex;
-    //! This is first click when creating a connection node
-    QPoint tempPoint1;
+    //! This is the first object when creating a connection node
+    int firstConnectionIndex;
 signals:
     void modelChanged();
 
@@ -44,5 +47,6 @@ public slots:
     void createConnectionPoint1(const QPoint &point);
     void createConnectionPoint2(const QPoint &point);
     void showPropertiesDialog();
+    void removeObject();
 };
 #endif // DOCUMENT_H

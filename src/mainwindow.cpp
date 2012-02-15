@@ -19,8 +19,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     //register the objects
     registerObject(new OvalObject);
-    registerObject(new InteractionConnection);
     registerObject(new StickPersonObject);
+    registerObject(new InteractionConnection);
+    registerObject(new ClassConnection);
 
     this->resize(700,500);
     this->setWindowTitle(tr("Phunctional UML Editor"));
@@ -103,6 +104,9 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex)
     disconnect(canvas, 0, documents.at(canvas->getDocumentIndex()), 0);
     disconnect(document, 0, canvases.at(document->getCanvasIndex()), 0);
 
+    //create shortcuts for signals/slots
+    QShortcut *delObject = new QShortcut(QKeySequence(QKeySequence::Delete),this);
+
     //Then connect the canvas to the document
     connect(canvas, SIGNAL(createObject(const QPoint &)), document, SLOT(createObject(const QPoint &)));
     connect(canvas, SIGNAL(moveSelectedObject(const QPoint &)), document, SLOT(moveSelectedObject(const QPoint &)));
@@ -110,6 +114,8 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex)
     connect(document, SIGNAL(modelChanged()), canvas, SLOT(update()));
     connect(canvas, SIGNAL(redraw(QPainter&)), document, SLOT(drawList(QPainter&)));
     connect(canvas, SIGNAL(showPropertiesDialog()), document, SLOT(showPropertiesDialog()));
+    connect(canvas, SIGNAL(removeObject()), document, SLOT(removeObject()));
+    connect(delObject, SIGNAL(activated()), document, SLOT(removeObject()));
     connect(canvas, SIGNAL(createConnectionPoint1(const QPoint &)), document, SLOT(createConnectionPoint1(const QPoint &)));
     connect(canvas, SIGNAL(createConnectionPoint2(const QPoint &)), document, SLOT(createConnectionPoint2(const QPoint &)));
 
@@ -262,7 +268,7 @@ void MainWindow::createWidgets()
     MainWindow's slots.
 */
 void MainWindow::connectSignalsSlots()
-{
+{    
     //manually connect the slots
     connect(actionNew, SIGNAL(triggered()), this, SLOT(on_actionNew_triggered()));
     connect(actionOpen, SIGNAL(triggered()), this, SLOT(on_actionOpen_triggered()));
@@ -356,7 +362,11 @@ void MainWindow::on_actionNew_triggered()
     //dialog of UML types
     //dialogNew = new DialogNew;
     //dialogNew->show();
-    QMessageBox::information(this, "pUML", "Creating a new generic diagram", QMessageBox::Ok);
+    //QMessageBox::information(this, "pUML", "Creating a new generic diagram", QMessageBox::Ok);
+
+    // this is the new dialogue, hopefully
+    ConfigDialog dialog;
+    dialog.exec();
 
     //Create the new document and canvas
     Document* newdoc = new Document;
@@ -378,6 +388,16 @@ void MainWindow::on_actionNew_triggered()
     //Connect the new canvas with the new document.
     connectCanvasWithDocument(canvases.size()-1, documents.size()-1);
 }
+
+
+
+
+
+
+
+
+
+
 
 /*! This slot receives the currentChanged signal from the tabWidget.
  *  It should reupdate the toolbar with the previously selected tool

@@ -4,6 +4,7 @@
  */
 
 #include "nodes.h"
+#include <QMessageBox>
 
 /**********************************/
 /* BaseNode functions *************/
@@ -15,7 +16,66 @@
 BaseNode::BaseNode()
 {
     selected = false;
+    setUpConnectionPoints();
+
 }
+
+void BaseNode::addConnnectionPoint(const QPoint &newpoint)
+{
+    connectionPoints.push_back(newpoint);
+}
+
+void BaseNode::addConnectedNode(BaseNode *newObject)
+{
+    connectedObjects.push_back(newObject);
+}
+
+void BaseNode::removeConnectedNode(BaseNode *object)
+{
+    connectedObjects.remove(object);
+
+}
+
+QPoint BaseNode::getClosestConnectionPoint(const QPoint &point)
+{
+
+    double minlength, testlength;
+    int minindex;
+    minlength = sqrt((double)(point.x() - connectionPoints.at(0).x()) * (point.x() - connectionPoints.at(0).x()) +
+                     (point.y() - connectionPoints.at(0).y()) * (point.y() - connectionPoints.at(0).y()));
+    minindex = 0;
+
+    for (int i=1; i<(int)connectionPoints.size(); i++) {
+        testlength = sqrt((double)(point.x() - connectionPoints.at(i).x()) * (point.x() - connectionPoints.at(i).x()) +
+                          (point.y() - connectionPoints.at(i).y()) * (point.y() - connectionPoints.at(i).y()));
+        if (testlength < minlength) {
+            minlength = testlength;
+            minindex = i;
+        }
+    }
+
+    return connectionPoints.at(minindex);
+}
+
+list<BaseNode*> BaseNode::getConnectedNodes()
+{
+    return list<BaseNode*>(connectedObjects);
+}
+
+void BaseNode::setUpConnectionPoints()
+{
+    connectionPoints.clear();
+
+    //north
+    connectionPoints.push_back(QPoint(position.x(), position.y()-height/2));
+    //east
+    connectionPoints.push_back(QPoint(position.x()+length/2, position.y()));
+    //south
+    connectionPoints.push_back(QPoint(position.x(), position.y()+height/2));
+    //west
+    connectionPoints.push_back(QPoint(position.x()-length/2, position.y()));
+}
+
 
 /**********************************/
 /* ObjectNode functions ***********/
@@ -87,6 +147,7 @@ void ObjectNode::draw(QPainter &painter)
                          handleHeight);
     }
 }
+
 
 /*! NYI
 */
