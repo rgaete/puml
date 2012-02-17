@@ -222,7 +222,7 @@ void Document::removeObject()
                 }
 
                 //delete this connection node
-                for (int i=0; i<nodes.size(); i++) {
+                for (int i=0; i<(int)nodes.size(); i++) {
                     if (nodes.at(i) == (*it)) {
                         nodes.erase(nodes.begin()+i);
                     }

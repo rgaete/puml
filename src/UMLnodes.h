@@ -54,6 +54,7 @@ public:
     QDialog* getDialog();
     QString getIconPath() { return QString(":/Images/stickman.png"); }
     QString getText() { return "Stick Person"; }
+    DiagramType getDiagramType() { return UseCase; }
 
     void draw(QPainter &painter);
 public slots:
@@ -93,6 +94,7 @@ public:
     QDialog* getDialog();
     QString getIconPath() { return QString(":/Images/oval.png"); }
     QString getText() { return "Oval"; }
+    DiagramType getDiagramType() { return UseCase; }
 
     void draw(QPainter &painter);
 public slots:
@@ -121,6 +123,7 @@ public:
     QString getIconPath() { return QString(":/Images/interaction.png"); }
     QString getText() { return "Interaction Line"; }
     void draw(QPainter& painter);
+    DiagramType getDiagramType() { return UseCase; }
 };
 
 class ClassConnection : public ConnectionNode
@@ -132,6 +135,7 @@ public:
     QString getIconPath() { return QString(":/Images/interaction.png"); }
     QString getText() { return "Class Line"; }
     void draw(QPainter& painter);
+    DiagramType getDiagramType() { return Class; }
 
 };
 

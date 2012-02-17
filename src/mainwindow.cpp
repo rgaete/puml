@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     //register the objects
     registerObject(new OvalObject);
     registerObject(new StickPersonObject);
+    //register connections
     registerObject(new InteractionConnection);
     registerObject(new ClassConnection);
 
@@ -44,6 +45,7 @@ void MainWindow::registerObject(BaseNode* newPrototype)
     int newID;
     NodeAction *newAction;
     Canvas::DrawingMode drawingMode;
+    BaseNode::DiagramType diagramType;
 
     //register the prototype with the factory
     newID = NodeFactory::getInstance()->registerPrototype(newPrototype);
@@ -55,8 +57,11 @@ void MainWindow::registerObject(BaseNode* newPrototype)
         drawingMode = Canvas::Object;
     }
 
+    //get the diagram the node is in
+    diagramType = newPrototype->getDiagramType();
+
     //create the action with the mode, prototypeid, and parent
-    newAction = new NodeAction(drawingMode, newID, this);
+    newAction = new NodeAction(drawingMode, newID, diagramType, this);
 
     //set up the action with the right icon, text
     newAction->setText(newPrototype->getText());
@@ -73,10 +78,11 @@ void MainWindow::registerObject(BaseNode* newPrototype)
     } else {
         menuShapes->addAction(newAction);
     }
+
     toolsActionGroup->addAction(newAction);
     mainToolBar->addAction(newAction);
 
-    //push the action back so we can access it later (we don't actually access it later?)
+    //push the action back so we can access it later
     actions.push_back(newAction);
 }
 
@@ -92,9 +98,9 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex)
     assert(documentIndex >= 0);
     assert(documentIndex < (int)documents.size());
     assert(canvases.at(canvasIndex)->getDocumentIndex() >= 0);
-    assert(canvases.at(canvasIndex)->getDocumentIndex() < documents.size());
+    assert(canvases.at(canvasIndex)->getDocumentIndex() < (int)documents.size());
     assert(documents.at(documentIndex)->getCanvasIndex() >= 0);
-    assert(documents.at(documentIndex)->getCanvasIndex() < canvases.size());
+    assert(documents.at(documentIndex)->getCanvasIndex() < (int)canvases.size());
 
     //get the canvas and document to connect
     Canvas* canvas = canvases.at(canvasIndex);
@@ -121,7 +127,11 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex)
 
     //Go into selection mode
     actionSelect->trigger();
+
+    setDiagramType(BaseNode::UseCase);
 }
+
+
 
 /*! This deconstructor frees up the memory held in any vectors that
     hold objects which don't have parents (basically any non-Qt objects)
@@ -174,6 +184,7 @@ void MainWindow::createActions()
     actionDocument->setText(tr("Help Document"));
     actionAbout = new QAction(this);
     actionAbout->setText(tr("About"));
+
     toolsActionGroup = new QActionGroup(this);
     toolsActionGroup->setExclusive(true);
     connectorsActionGroup = new QActionGroup(this);
@@ -187,6 +198,8 @@ void MainWindow::createActions()
     actionSelect->setText(tr("Select"));
     mainToolBar->addAction(actionSelect);
     toolsActionGroup->addAction(actionSelect);
+    //diagram_UseCaseActionGroup->addAction(actionSelect);
+    //diagram_ClassActionGroup->addAction(actionSelect);
 }
 
 /*! Helps the constructor create the menus.
@@ -309,6 +322,17 @@ void MainWindow::connectSignalsSlots()
     */
 }
 
+void MainWindow::setDiagramType(BaseNode::DiagramType type)
+{
+    for (int i=0; i<actions.size(); ++i) {
+        if (actions.at(i)->getDiagramType() == type) {
+            actions.at(i)->setVisible(true);
+        } else {
+            actions.at(i)->setVisible(false);
+        }
+    }
+}
+
 /*! This slot gets triggered whenever one of the NodeActions are triggered,
     which could be from the toolbar or menu. Those NodeActions hold
     the drawingMode and prototypeID. This slot then puts the canvas and
@@ -388,16 +412,6 @@ void MainWindow::on_actionNew_triggered()
     //Connect the new canvas with the new document.
     connectCanvasWithDocument(canvases.size()-1, documents.size()-1);
 }
-
-
-
-
-
-
-
-
-
-
 
 /*! This slot receives the currentChanged signal from the tabWidget.
  *  It should reupdate the toolbar with the previously selected tool

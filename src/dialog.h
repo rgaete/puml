@@ -19,9 +19,11 @@ public:
 public slots:
     void changePage(QListWidgetItem *current, QListWidgetItem *previous);
     void CloseDialog();
+    void accepted();
 
 private:
     void createIcons();
+
 
     QListWidget *contentsWidget;
     QStackedWidget *pagesWidget;

@@ -46,6 +46,11 @@ void ConfigDialog::CloseDialog()
 
 }
 
+void ConfigDialog::accepted()
+{
+    //emit newDiagramType(BaseNode::UseCase);
+}
+
 void ConfigDialog::createIcons()
 {
     QListWidgetItem *newbutton = new QListWidgetItem(contentsWidget);

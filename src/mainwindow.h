@@ -73,12 +73,13 @@ private:
     void connectSignalsSlots();
     void registerObject(BaseNode* newPrototype);
     void connectCanvasWithDocument(int canvasIndex, int documentIndex);
+    void setDiagramType(BaseNode::DiagramType type);
 
 private:
     //! The main document tabs
     QTabWidget *tabWidget;
     //This vector could probably be safely removed.
-    vector<QAction*> actions;
+    vector<NodeAction*> actions;
     //! The list of open documents
     vector<Document*> documents;
     //! The canvases in all the tabs
@@ -108,7 +109,6 @@ private:
     QAction *actionPaste;
     QAction *actionSelect_All;
     QAction *actionInverse_Select;
-    //QActionGroup *Shapes_Connectors;
     QAction *actionDocument;
     QAction *actionAbout;
     QAction *actionDelete;
