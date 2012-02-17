@@ -31,6 +31,14 @@ class BaseNode;
  */
 class BaseNode : public QObject {
     public:
+        enum DiagramType {
+            Class,
+            Interaction,
+            UseCase,
+            StateChart,
+            Collaboration
+        };
+
         BaseNode();
         //~BaseNode() {}
 
@@ -46,6 +54,7 @@ class BaseNode : public QObject {
         virtual QString getText() =0;
         virtual bool hitTest(const QPoint &point) =0;
         virtual bool isConnector() =0;
+        virtual DiagramType getDiagramType() =0;
 
 
         void addConnnectionPoint(const QPoint &newpoint);

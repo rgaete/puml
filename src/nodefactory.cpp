@@ -9,7 +9,7 @@ vector<BaseNode*> NodeFactory::prototypes;
 NodeFactory::~NodeFactory()
 {
     //delete the pointers
-    for (int i=0; i<prototypes.size(); i++) {
+    for (int i=0; i<(int)prototypes.size(); i++) {
         delete prototypes.at(i);
     }
 }

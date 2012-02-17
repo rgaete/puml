@@ -8,11 +8,16 @@
 class NodeAction : public QAction {
     Q_OBJECT
 public:
-    NodeAction(Canvas::DrawingMode mode, int prototypeID, QObject *parent)
-        : m_drawingMode(mode), m_prototypeID(prototypeID), QAction(parent)
+    NodeAction(Canvas::DrawingMode mode, int prototypeID, BaseNode::DiagramType diagramType, QObject *parent)
+        : m_drawingMode(mode), m_prototypeID(prototypeID), m_diagramType(diagramType), QAction(parent)
     {
         connect(this, SIGNAL(triggered()), this, SLOT(onTriggered()));
     }
+    BaseNode::DiagramType getDiagramType()
+    {
+        return m_diagramType;
+    }
+
 signals:
     void triggered(Canvas::DrawingMode mode, int prototypeID);
 
@@ -25,6 +30,7 @@ public slots:
 private:
     Canvas::DrawingMode m_drawingMode;
     int m_prototypeID;
+    BaseNode::DiagramType m_diagramType;
 };
 
 #endif // NODEACTION_H
