@@ -15,11 +15,13 @@ public:
 
     QListWidgetItem *usecaseItem;
     QListWidgetItem *classItem;
+    QListWidgetItem *statechartItem;
     QListWidgetItem *collaborationItem;
 
 signals:
 
-    void return_to_parent();
+    // the return_to_parent function should be changed to send whatever we want back to the parent
+    void return_to_parent(int);
 
 private slots:
     void ButtonClicked();
@@ -37,7 +39,7 @@ public slots:
 
 signals:
 
-    void return_to_parent();
+    void return_to_parent(int);
 
 private:
     QAction *Open_Dialog;
