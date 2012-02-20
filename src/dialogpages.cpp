@@ -12,6 +12,7 @@ CreateNewPage::CreateNewPage(QWidget *parent)
 
     QGroupBox *doctypeGroup = new QGroupBox(tr("Choose Diagram Type"));
 //List of widgets
+    // There should be one for each diagram type
     QListWidget *doctypeList = new QListWidget;
 
     usecaseItem = new QListWidgetItem(doctypeList);
@@ -19,6 +20,9 @@ CreateNewPage::CreateNewPage(QWidget *parent)
 
     classItem = new QListWidgetItem(doctypeList);
     classItem->setText(tr("Class"));
+
+    statechartItem = new QListWidgetItem(doctypeList);
+    statechartItem->setText(tr("State Chart"));
 
     collaborationItem = new QListWidgetItem(doctypeList);
     collaborationItem->setText(tr("Collaboration"));
@@ -29,9 +33,7 @@ CreateNewPage::CreateNewPage(QWidget *parent)
     connect(choosedoctypeButton, SIGNAL(clicked()), SLOT(ButtonClicked()));
 
 
-
-    QVBoxLayout *updateLayout = new QVBoxLayout;
-
+// default layout stuff
     QVBoxLayout *doctypeLayout = new QVBoxLayout;
     doctypeLayout->addWidget(doctypeList);
     doctypeGroup->setLayout(doctypeLayout);
@@ -46,6 +48,7 @@ CreateNewPage::CreateNewPage(QWidget *parent)
 }
 
 
+// What the program does when the "OK" button is clicked
 void CreateNewPage::ButtonClicked()
 {
     cout << "here\n";
@@ -53,7 +56,7 @@ void CreateNewPage::ButtonClicked()
     {
         cout <<"usecase\n";
         diagramenum = 1;
-        emit return_to_parent();
+        emit return_to_parent(diagramenum);
         close();
     }
 
@@ -61,15 +64,23 @@ void CreateNewPage::ButtonClicked()
     {
         cout <<"class\n";
         diagramenum = 2;
-        emit return_to_parent();
+        emit return_to_parent(diagramenum);
+        close();
+    }
+
+    if(statechartItem->isSelected())
+    {
+        cout <<"state chart\n";
+        diagramenum = 3;
+        emit return_to_parent(diagramenum);
         close();
     }
 
     if(collaborationItem->isSelected())
     {
         cout <<"collaboration\n";
-        diagramenum = 3;
-        emit return_to_parent();
+        diagramenum = 4;
+        emit return_to_parent(diagramenum);
         close();
 
     }
@@ -112,6 +123,7 @@ void CreateOpenPage::OpenFileInit()
     // write the loading file function here with the fileName
 
 
-    //
-    //parent.close();
+    // returning to parent
+    emit return_to_parent(0);
+
 }
