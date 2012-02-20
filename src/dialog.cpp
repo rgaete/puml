@@ -39,11 +39,16 @@ ConfigDialog::ConfigDialog()
     setLayout(mainLayout);
 
     setWindowTitle(tr("Intro Program Options"));
+
+    //under construction
+    //connect(pagesWidget, SIGNAL(return_to_parent()), this, SLOT(CloseDialog()));
+
+    connect(pagesWidget,SIGNAL(widgetRemoved(int)), this, SLOT(CloseDialog()));
 }
 
 void ConfigDialog::CloseDialog()
 {
-
+    close();
 }
 
 void ConfigDialog::accepted()
