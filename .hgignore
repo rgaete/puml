@@ -7,6 +7,9 @@ latex.*
 ^pUML$
 \.hg.*$
 .*\.lock\..*
+src/Makefile$
+.*pUML\.pro\.user$
+src\.Makefile$
 
 .*log$
 .*aux$
