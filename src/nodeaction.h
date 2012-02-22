@@ -9,7 +9,7 @@ class NodeAction : public QAction {
     Q_OBJECT
 public:
     NodeAction(Canvas::DrawingMode mode, int prototypeID, BaseNode::DiagramType diagramType, QObject *parent)
-        : m_drawingMode(mode), m_prototypeID(prototypeID), m_diagramType(diagramType), QAction(parent)
+        : QAction(parent), m_drawingMode(mode), m_prototypeID(prototypeID), m_diagramType(diagramType)
     {
         connect(this, SIGNAL(triggered()), this, SLOT(onTriggered()));
     }

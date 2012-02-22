@@ -6,7 +6,7 @@
 
 QT       += core gui
 
-TARGET = pUMLTest2
+TARGET = pUML
 TEMPLATE = app
 
 

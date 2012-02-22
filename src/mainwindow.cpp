@@ -327,7 +327,7 @@ void MainWindow::connectSignalsSlots()
 
 void MainWindow::setDiagramType(BaseNode::DiagramType type)
 {
-    for (int i=0; i<actions.size(); ++i) {
+    for (int i=0; i<(int)actions.size(); ++i) {
         if (actions.at(i)->getDiagramType() == type) {
             actions.at(i)->setVisible(true);
         } else {
