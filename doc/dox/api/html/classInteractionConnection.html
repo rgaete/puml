@@ -131,8 +131,20 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classBaseNode.html#a79627d9a052108d60082dddbd60dfb02">BaseNode</a>.</p>
 <div class="fragment"><pre class="fragment">{
+
+    QPoint pt1, pt2;
+    <a class="code" href="classBaseNode.html">BaseNode</a> *obj1, *obj2;
+    list&lt;BaseNode*&gt;::iterator it = <a class="code" href="classBaseNode.html#a0477b85b623dfb8e7ac8631472b17ef1">connectedObjects</a>.begin();
+    obj1 = *(it);
+    it++;
+    obj2 = *(it);
+
+    pt1 = obj1-&gt;<a class="code" href="classBaseNode.html#ac0a992931fa5e310251c25e28acd210c">getClosestConnectionPoint</a>(obj2-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>());
+    pt2 = obj2-&gt;<a class="code" href="classBaseNode.html#ac0a992931fa5e310251c25e28acd210c">getClosestConnectionPoint</a>(obj1-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>());
+
     painter.setPen(Qt::black);
-    painter.drawLine(<a class="code" href="classBaseNode.html#a66ba0ffc241873792fbc076750d94037">point1</a>, <a class="code" href="classBaseNode.html#a147ecf80895c62e7df284d2af5825cfc">point2</a>);
+    painter.drawLine(pt1, pt2);
+
 }
 </pre></div>
 </div>
@@ -233,7 +245,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Feb 15 2012 13:33:53 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Feb 16 2012 18:39:47 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

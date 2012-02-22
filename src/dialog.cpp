@@ -3,6 +3,10 @@
 #include "dialog.h"
 #include "dialogpages.h"
 
+#include <iostream>
+
+using namespace std;
+
 ConfigDialog::ConfigDialog()
 {
     contentsWidget = new QListWidget;
@@ -12,9 +16,12 @@ ConfigDialog::ConfigDialog()
     contentsWidget->setMaximumWidth(128);
     contentsWidget->setSpacing(12);
 
+    Newpage = new CreateNewPage;
+    Openpage = new CreateOpenPage;
+
     pagesWidget = new QStackedWidget;
-    pagesWidget->addWidget(new CreateNewPage);
-    pagesWidget->addWidget(new CreateOpenPage);
+    pagesWidget->addWidget(Newpage);
+    pagesWidget->addWidget(Openpage);
 
     QPushButton *closeButton = new QPushButton(tr("Cancel"));
 
@@ -39,11 +46,24 @@ ConfigDialog::ConfigDialog()
     setLayout(mainLayout);
 
     setWindowTitle(tr("Intro Program Options"));
+
+    //under construction
+    // the connection between the parent and the children
+    connect(Newpage,SIGNAL(return_to_parent(int)), this, SLOT(AcceptValue(int)));
+    connect(Openpage,SIGNAL(return_to_parent(int)), this, SLOT(AcceptValue(int)));
 }
 
+// this function is for anything else that should be done prior to closing the dialog
 void ConfigDialog::CloseDialog()
 {
+    close();
+}
 
+// this function is a slot that takes in a value from the children
+void ConfigDialog::AcceptValue(int diagramenum)
+{
+    cout << diagramenum <<endl;
+    CloseDialog();
 }
 
 void ConfigDialog::accepted()
@@ -54,13 +74,13 @@ void ConfigDialog::accepted()
 void ConfigDialog::createIcons()
 {
     QListWidgetItem *newbutton = new QListWidgetItem(contentsWidget);
-    newbutton->setIcon(QIcon(":/Images/stickman.png"));
+    newbutton->setIcon(QIcon(":/Images/New.png"));
     newbutton->setText(tr("New"));
     newbutton->setTextAlignment(Qt::AlignHCenter);
     newbutton->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 
     QListWidgetItem *openbutton = new QListWidgetItem(contentsWidget);
-    openbutton->setIcon(QIcon(":/Images/diamond.png"));
+    openbutton->setIcon(QIcon(":/Images/Open.png"));
     openbutton->setText(tr("Open"));
     openbutton->setTextAlignment(Qt::AlignHCenter);
     openbutton->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);

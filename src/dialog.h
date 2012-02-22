@@ -3,6 +3,9 @@
 
 #include <QDialog>
 
+#include "dialog.h"
+#include "dialogpages.h"
+
 QT_BEGIN_NAMESPACE
 class QListWidget;
 class QListWidgetItem;
@@ -15,10 +18,13 @@ class ConfigDialog : public QDialog
 
 public:
     ConfigDialog();
+    CreateNewPage *Newpage;
+    CreateOpenPage *Openpage;
 
 public slots:
     void changePage(QListWidgetItem *current, QListWidgetItem *previous);
     void CloseDialog();
+    void AcceptValue(int diagramenum);
     void accepted();
 
 private:

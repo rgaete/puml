@@ -113,8 +113,8 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">     :<a class="code" href="classObjectNode.html#a9a66f6f6af4296a650d06f98a8a181d5">ObjectNode</a>() {
-    this-&gt;<a class="code" href="classObjectNode.html#af42a4d16af0fe77206181b796e4f09b4" title="The length (i.e. width) of the bounding box for this object.">length</a> = 100;
-    this-&gt;<a class="code" href="classObjectNode.html#a17ac726d3e93ee71e10ef5bb26900e58" title="The height of the bounding box for this object.">height</a> = 50;
+    this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a> = 100;
+    this-&gt;<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a> = 50;
 }
 </pre></div>
 </div>
@@ -154,9 +154,9 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <p>This function draws selection boxes at the corners defined by </p>
-<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="classObjectNode.html#af42a4d16af0fe77206181b796e4f09b4" title="The length (i.e. width) of the bounding box for this object.">length</a> and </dd>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a> and </dd>
 <dd>
-<a class="el" href="classObjectNode.html#a17ac726d3e93ee71e10ef5bb26900e58" title="The height of the bounding box for this object.">height</a>. </dd></dl>
+<a class="el" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>. </dd></dl>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">painter</td><td>A valid QPainter passed by the containing widget.</td></tr>
@@ -175,13 +175,13 @@ Public Member Functions</h2></td></tr>
     painter.setPen(Qt::NoPen);
     painter.setBrush(Qt::white);
 
-    painter.drawEllipse(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>,<a class="code" href="classObjectNode.html#af42a4d16af0fe77206181b796e4f09b4" title="The length (i.e. width) of the bounding box for this object.">length</a>/2,<a class="code" href="classObjectNode.html#a17ac726d3e93ee71e10ef5bb26900e58" title="The height of the bounding box for this object.">height</a>/2);
+    painter.drawEllipse(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>,<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>/2,<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>/2);
     <span class="comment">//edge</span>
     painter.setPen(Qt::black);
     painter.setBrush(Qt::NoBrush);
-    painter.drawEllipse(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>,<a class="code" href="classObjectNode.html#af42a4d16af0fe77206181b796e4f09b4" title="The length (i.e. width) of the bounding box for this object.">length</a>/2,<a class="code" href="classObjectNode.html#a17ac726d3e93ee71e10ef5bb26900e58" title="The height of the bounding box for this object.">height</a>/2);
+    painter.drawEllipse(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>,<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>/2,<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>/2);
     <span class="comment">//painter.drawText(position.x(),position.y(), this-&gt;name);</span>
-    painter.drawText(QRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()-<a class="code" href="classObjectNode.html#af42a4d16af0fe77206181b796e4f09b4" title="The length (i.e. width) of the bounding box for this object.">length</a>/2, <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()-<a class="code" href="classObjectNode.html#a17ac726d3e93ee71e10ef5bb26900e58" title="The height of the bounding box for this object.">height</a>/2, <a class="code" href="classObjectNode.html#af42a4d16af0fe77206181b796e4f09b4" title="The length (i.e. width) of the bounding box for this object.">length</a>, <a class="code" href="classObjectNode.html#a17ac726d3e93ee71e10ef5bb26900e58" title="The height of the bounding box for this object.">height</a>),
+    painter.drawText(QRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()-<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>/2, <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()-<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>/2, <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>, <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>),
                      Qt::AlignCenter | Qt::AlignHCenter | Qt::TextDontClip,
                      this-&gt;name);
 }
@@ -287,7 +287,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Feb 15 2012 13:33:53 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Feb 16 2012 18:39:47 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
