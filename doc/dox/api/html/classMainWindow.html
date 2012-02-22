@@ -132,8 +132,9 @@ Protected Member Functions</h2></td></tr>
 
     <span class="comment">//register the objects</span>
     registerObject(<span class="keyword">new</span> <a class="code" href="classOvalObject.html">OvalObject</a>);
-    registerObject(<span class="keyword">new</span> <a class="code" href="classInteractionConnection.html">InteractionConnection</a>);
     registerObject(<span class="keyword">new</span> <a class="code" href="classStickPersonObject.html">StickPersonObject</a>);
+    registerObject(<span class="keyword">new</span> <a class="code" href="classInteractionConnection.html">InteractionConnection</a>);
+    registerObject(<span class="keyword">new</span> <a class="code" href="classClassConnection.html">ClassConnection</a>);
 
     this-&gt;resize(700,500);
     this-&gt;setWindowTitle(tr(<span class="stringliteral">&quot;Phunctional UML Editor&quot;</span>));
@@ -366,7 +367,11 @@ Protected Member Functions</h2></td></tr>
     <span class="comment">//dialog of UML types</span>
     <span class="comment">//dialogNew = new DialogNew;</span>
     <span class="comment">//dialogNew-&gt;show();</span>
-    QMessageBox::information(<span class="keyword">this</span>, <span class="stringliteral">&quot;pUML&quot;</span>, <span class="stringliteral">&quot;Creating a new generic diagram&quot;</span>, QMessageBox::Ok);
+    <span class="comment">//QMessageBox::information(this, &quot;pUML&quot;, &quot;Creating a new generic diagram&quot;, QMessageBox::Ok);</span>
+
+    <span class="comment">// this is the new dialogue, hopefully</span>
+    <a class="code" href="classConfigDialog.html">ConfigDialog</a> dialog;
+    dialog.exec();
 
     <span class="comment">//Create the new document and canvas</span>
     <a class="code" href="classDocument.html">Document</a>* newdoc = <span class="keyword">new</span> <a class="code" href="classDocument.html">Document</a>;
@@ -701,7 +706,7 @@ Protected Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Feb 15 2012 13:33:53 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Feb 16 2012 18:39:47 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
