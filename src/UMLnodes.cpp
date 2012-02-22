@@ -220,6 +220,56 @@ void ClassConnection::draw(QPainter& painter)
     painter.drawLine(pt3, pt4);
 }
 
+void ExtendsConnection::draw(QPainter &painter)
+{
+    QPoint pt1, pt2;
+    BaseNode *obj1, *obj2;
+    list<BaseNode*>::iterator it = connectedObjects.begin();
+    obj1 = *(it);
+    it++;
+    obj2 = *(it);
+
+    pt1 = obj1->getClosestConnectionPoint(obj2->getPosition());
+    pt2 = obj2->getClosestConnectionPoint(obj1->getPosition());
+
+    painter.setPen(Qt::black);
+    painter.drawLine(pt1, pt2);
+
+    //draw the text
+    painter.save();
+    QPoint middle = QPoint((pt1.x()+pt2.x())/2, (pt1.y()+pt2.y())/2);
+    painter.translate(middle);
+    //double angle = acos((pt1.y() - pt2.y())/(hypot(pt1.x()-pt2.x(),pt1.y()-pt2.y())));
+    //painter.rotate(angle*(180.0/(atan(1)*4)));
+    painter.drawText(0,0,"<<extends>>");
+    painter.restore();
+}
+
+void IncludesConnection::draw(QPainter &painter)
+{
+    QPoint pt1, pt2;
+    BaseNode *obj1, *obj2;
+    list<BaseNode*>::iterator it = connectedObjects.begin();
+    obj1 = *(it);
+    it++;
+    obj2 = *(it);
+
+    pt1 = obj1->getClosestConnectionPoint(obj2->getPosition());
+    pt2 = obj2->getClosestConnectionPoint(obj1->getPosition());
+
+    painter.setPen(Qt::black);
+    painter.drawLine(pt1, pt2);
+
+    //draw the text
+    painter.save();
+    QPoint middle = QPoint((pt1.x()+pt2.x())/2, (pt1.y()+pt2.y())/2);
+    painter.translate(middle);
+    //double angle = acos((pt1.y() - pt2.y())/(hypot(pt1.x()-pt2.x(),pt1.y()-pt2.y())));
+    //painter.rotate(angle*(180.0/(atan(1)*4)));
+    painter.drawText(0,0,"<<includes>>");
+    painter.restore();
+}
+
 /*******************************/
 /*** ClassRectangle Functions **/
 /*******************************/
