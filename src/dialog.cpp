@@ -74,13 +74,13 @@ void ConfigDialog::accepted()
 void ConfigDialog::createIcons()
 {
     QListWidgetItem *newbutton = new QListWidgetItem(contentsWidget);
-    newbutton->setIcon(QIcon(":/Images/oval.png"));
+    newbutton->setIcon(QIcon(":/Images/New.png"));
     newbutton->setText(tr("New"));
     newbutton->setTextAlignment(Qt::AlignHCenter);
     newbutton->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
 
     QListWidgetItem *openbutton = new QListWidgetItem(contentsWidget);
-    openbutton->setIcon(QIcon(":/Images/oval.png"));
+    openbutton->setIcon(QIcon(":/Images/Open.png"));
     openbutton->setText(tr("Open"));
     openbutton->setTextAlignment(Qt::AlignHCenter);
     openbutton->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
