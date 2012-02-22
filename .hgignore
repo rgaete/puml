@@ -9,8 +9,9 @@ latex.*
 .*\.lock\..*
 src/Makefile$
 .*pUML\.pro\.user$
-src\.Makefile$
+src/Makefile$
 src/moc.*\.cpp$
+src/pUMLTest2$
 
 .*log$
 .*aux$
