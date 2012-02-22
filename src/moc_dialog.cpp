@@ -1,8 +1,8 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'dialog.h'
 **
-** Created: Thu Feb 16 18:42:53 2012
-**      by: The Qt Meta Object Compiler version 62 (Qt 4.7.4)
+** Created: Tue Feb 21 19:52:14 2012
+**      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -11,7 +11,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'dialog.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 62
-#error "This file was generated using the moc from 4.7.4. It"
+#error "This file was generated using the moc from 4.7.3. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -23,7 +23,7 @@ static const uint qt_meta_data_ConfigDialog[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -33,6 +33,8 @@ static const uint qt_meta_data_ConfigDialog[] = {
  // slots: signature, parameters, type, tag, flags
       31,   14,   13,   13, 0x0a,
       77,   13,   13,   13, 0x0a,
+     103,   91,   13,   13, 0x0a,
+     120,   13,   13,   13, 0x0a,
 
        0        // eod
 };
@@ -40,7 +42,8 @@ static const uint qt_meta_data_ConfigDialog[] = {
 static const char qt_meta_stringdata_ConfigDialog[] = {
     "ConfigDialog\0\0current,previous\0"
     "changePage(QListWidgetItem*,QListWidgetItem*)\0"
-    "CloseDialog()\0"
+    "CloseDialog()\0diagramenum\0AcceptValue(int)\0"
+    "accepted()\0"
 };
 
 const QMetaObject ConfigDialog::staticMetaObject = {
@@ -74,9 +77,11 @@ int ConfigDialog::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         switch (_id) {
         case 0: changePage((*reinterpret_cast< QListWidgetItem*(*)>(_a[1])),(*reinterpret_cast< QListWidgetItem*(*)>(_a[2]))); break;
         case 1: CloseDialog(); break;
+        case 2: AcceptValue((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 3: accepted(); break;
         default: ;
         }
-        _id -= 2;
+        _id -= 4;
     }
     return _id;
 }
