@@ -32,14 +32,6 @@ class StickPersonObjectDialog : public QInputDialog {
     Q_OBJECT
 public:
     StickPersonObjectDialog(QWidget *parent = 0);
-
-signals:
-
-private:
-    QLabel *label;
-    QLineEdit *lineEdit;
-    QPushButton *acceptButton;
-    QPushButton *closeButton;
 };
 
 /*!
@@ -93,7 +85,7 @@ public:
     BaseNode* clone() { return new OvalObject; }
     QDialog* getDialog();
     QString getIconPath() { return QString(":/Images/oval.png"); }
-    QString getText() { return "Oval"; }
+    QString getText() { return "Use Case"; }
     DiagramType getDiagramType() { return UseCase; }
 
     void draw(QPainter &painter);
@@ -118,7 +110,7 @@ class InteractionConnection : public ConnectionNode
 {
 public:
     BaseNode* clone() { return new InteractionConnection; }
-    bool hitTest(const QPoint &point) {return false;}
+    bool hitTest(const QPoint &point) {point.y(); return false;}
     QDialog* getDialog() { return new InteractionConnectionDialog; }
     QString getIconPath() { return QString(":/Images/interaction.png"); }
     QString getText() { return "Interaction Line"; }
@@ -133,7 +125,7 @@ class ClassConnection : public ConnectionNode
 {
 public:
     BaseNode* clone() { return new ClassConnection; }
-    bool hitTest(const QPoint &point) {return false;}
+    bool hitTest(const QPoint &point) {point.x(); return false;}
     QDialog* getDialog() { return new InteractionConnectionDialog; }
     QString getIconPath() { return QString(":/Images/interaction.png"); }
     QString getText() { return "Class Line"; }
@@ -144,7 +136,7 @@ public:
 
 /*! This class provides a custom dialog for an extendsLineNode.
 */
-class ExtendsConnectionDialog : public QDialog
+class ExtendsConnectionDialog : public QInputDialog
 {
 
 };
@@ -158,7 +150,7 @@ private:
 
 public:
     BaseNode* clone() { return new ExtendsConnection; }
-    bool hitTest(const QPoint &point) {return false;}
+    bool hitTest(const QPoint &point) {point.x(); return false;}
     QDialog* getDialog() { return new ExtendsConnectionDialog; }
     QString getIconPath() { return QString(":/Images/interaction.png"); }
     QString getText() { return "Extends Line"; }
@@ -182,7 +174,7 @@ private:
 
 public:
     BaseNode* clone() { return new IncludesConnection; }
-    bool hitTest(const QPoint &point) {return false;}
+    bool hitTest(const QPoint &point) {point.x(); return false;}
     QDialog* getDialog() { return new IncludesConnectionDialog; }
     QString getIconPath() { return QString(":/Images/interaction.png"); }
     QString getText() { return "Includes Line"; }

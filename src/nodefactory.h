@@ -22,7 +22,7 @@ private:
     //! Copy Constructor is private so the class cannot be coppied.
     NodeFactory(NodeFactory const &) {}
     //! Assignment operated is private so the class cannot be assigned.
-    NodeFactory& operator=(NodeFactory const&) {}
+    NodeFactory& operator=(NodeFactory const&) { return *this; }
 
     //! The vector of prototypes. This is static so the lifetime is
     //! the entire execution time of the program.
