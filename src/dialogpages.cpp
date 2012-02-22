@@ -2,7 +2,9 @@
 
 #include "dialogpages.h"
 #include "dialog.h"
+#include <iostream>
 
+using namespace std;
 
 CreateNewPage::CreateNewPage(QWidget *parent)
     : QWidget(parent)
@@ -10,23 +12,28 @@ CreateNewPage::CreateNewPage(QWidget *parent)
 
     QGroupBox *doctypeGroup = new QGroupBox(tr("Choose Diagram Type"));
 //List of widgets
+    // There should be one for each diagram type
     QListWidget *doctypeList = new QListWidget;
 
-    QListWidgetItem *usecaseItem = new QListWidgetItem(doctypeList);
+    usecaseItem = new QListWidgetItem(doctypeList);
     usecaseItem->setText(tr("Use Case"));
 
-    QListWidgetItem *classItem = new QListWidgetItem(doctypeList);
+    classItem = new QListWidgetItem(doctypeList);
     classItem->setText(tr("Class"));
 
-    QListWidgetItem *collaborationItem = new QListWidgetItem(doctypeList);
+    statechartItem = new QListWidgetItem(doctypeList);
+    statechartItem->setText(tr("State Chart"));
+
+    collaborationItem = new QListWidgetItem(doctypeList);
     collaborationItem->setText(tr("Collaboration"));
 //end of list of widgets
 
-    QPushButton *choosedoctypeButton = new QPushButton(tr("Ok"));
-    connect(choosedoctypeButton, SIGNAL(clicked()), this, SLOT(close()));
+    QPushButton *choosedoctypeButton;
+    choosedoctypeButton = new QPushButton(tr("Ok"));
+    connect(choosedoctypeButton, SIGNAL(clicked()), SLOT(ButtonClicked()));
 
-    QVBoxLayout *updateLayout = new QVBoxLayout;
 
+// default layout stuff
     QVBoxLayout *doctypeLayout = new QVBoxLayout;
     doctypeLayout->addWidget(doctypeList);
     doctypeGroup->setLayout(doctypeLayout);
@@ -37,6 +44,47 @@ CreateNewPage::CreateNewPage(QWidget *parent)
     mainLayout->addWidget(choosedoctypeButton);
     mainLayout->addStretch(1);
     setLayout(mainLayout);
+
+}
+
+
+// What the program does when the "OK" button is clicked
+void CreateNewPage::ButtonClicked()
+{
+    cout << "here\n";
+    if(usecaseItem->isSelected())
+    {
+        cout <<"usecase\n";
+        diagramenum = 1;
+        emit return_to_parent(diagramenum);
+        close();
+    }
+
+    if(classItem->isSelected())
+    {
+        cout <<"class\n";
+        diagramenum = 2;
+        emit return_to_parent(diagramenum);
+        close();
+    }
+
+    if(statechartItem->isSelected())
+    {
+        cout <<"state chart\n";
+        diagramenum = 3;
+        emit return_to_parent(diagramenum);
+        close();
+    }
+
+    if(collaborationItem->isSelected())
+    {
+        cout <<"collaboration\n";
+        diagramenum = 4;
+        emit return_to_parent(diagramenum);
+        close();
+
+    }
+
 }
 
 
@@ -44,8 +92,11 @@ CreateOpenPage::CreateOpenPage(QWidget *parent)
     : QWidget(parent)
 {
 
+    setParent(parent);
+
     QPushButton *openButton = new QPushButton(tr("Open File"));
-    connect(openButton, SIGNAL(clicked()), this, SLOT(Open_file_init()));
+    connect(openButton, SIGNAL(clicked()), this, SLOT(OpenFileInit()));
+
 
     QGroupBox *packagesGroup = new QGroupBox(tr("Open File"));
 
@@ -58,9 +109,11 @@ CreateOpenPage::CreateOpenPage(QWidget *parent)
     mainLayout->addWidget(openButton);
     mainLayout->addStretch(1);
     setLayout(mainLayout);
+
+
 }
 
-void CreateOpenPage::Open_file_init()
+void CreateOpenPage::OpenFileInit()
 {
     QString fileName;
 
@@ -70,5 +123,7 @@ void CreateOpenPage::Open_file_init()
     // write the loading file function here with the fileName
 
 
-}
+    // returning to parent
+    emit return_to_parent(0);
 
+}
