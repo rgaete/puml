@@ -22,7 +22,10 @@ MainWindow::MainWindow(QWidget *parent)
     registerObject(new StickPersonObject);
     //register connections
     registerObject(new InteractionConnection);
+    registerObject(new ExtendsConnection);
+    registerObject(new IncludesConnection);
     registerObject(new ClassConnection);
+
 
     this->resize(700,500);
     this->setWindowTitle(tr("Phunctional UML Editor"));

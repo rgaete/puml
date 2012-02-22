@@ -126,6 +126,9 @@ public:
     DiagramType getDiagramType() { return UseCase; }
 };
 
+/*! This concrete class defines an Interaction line in a Use
+    Case diagram (line from the actor to the use case)
+*/
 class ClassConnection : public ConnectionNode
 {
 public:
@@ -137,6 +140,54 @@ public:
     void draw(QPainter& painter);
     DiagramType getDiagramType() { return Class; }
 
+};
+
+/*! This class provides a custom dialog for an extendsLineNode.
+*/
+class ExtendsConnectionDialog : public QDialog
+{
+
+};
+
+/*! This concrete class defines an Extends line in a Use
+    Case diagram (line from the actor to the use case)
+*/
+class ExtendsConnection : public ConnectionNode
+{
+private:
+
+public:
+    BaseNode* clone() { return new ExtendsConnection; }
+    bool hitTest(const QPoint &point) {return false;}
+    QDialog* getDialog() { return new ExtendsConnectionDialog; }
+    QString getIconPath() { return QString(":/Images/interaction.png"); }
+    QString getText() { return "Extends Line"; }
+    void draw(QPainter& painter);
+    DiagramType getDiagramType() { return UseCase; }
+};
+
+/*! This class provides a custom dialog for an extendsLineNode.
+*/
+class IncludesConnectionDialog : public QDialog
+{
+
+};
+
+/*! This concrete class defines an Extends line in a Use
+    Case diagram (line from the actor to the use case)
+*/
+class IncludesConnection : public ConnectionNode
+{
+private:
+
+public:
+    BaseNode* clone() { return new IncludesConnection; }
+    bool hitTest(const QPoint &point) {return false;}
+    QDialog* getDialog() { return new IncludesConnectionDialog; }
+    QString getIconPath() { return QString(":/Images/interaction.png"); }
+    QString getText() { return "Includes Line"; }
+    void draw(QPainter& painter);
+    DiagramType getDiagramType() { return UseCase; }
 };
 
 /* !
