@@ -8,7 +8,5 @@
         <file>Images/square.png</file>
         <file>Images/stickman.png</file>
         <file>Images/interaction.png</file>
-        <file>Images/New.png</file>
-        <file>Images/Open.png</file>
     </qresource>
 </RCC>
