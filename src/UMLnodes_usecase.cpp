@@ -1,5 +1,5 @@
 #include "UMLnodes_usecase.h"
-
+#include "mathfunctions.h"
 /*******************************/
 /* Stickperson Functions *******/
 /*******************************/
@@ -159,8 +159,6 @@ QDialog * OvalObject::getDialog()
 
 void InteractionConnection::draw(QPainter& painter)
 {
-
-    QPoint pt1, pt2;
     BaseNode *obj1, *obj2;
     list<BaseNode*>::iterator it = connectedObjects.begin();
     obj1 = *(it);
@@ -170,17 +168,41 @@ void InteractionConnection::draw(QPainter& painter)
     pt1 = obj1->getClosestConnectionPoint(obj2->getPosition());
     pt2 = obj2->getClosestConnectionPoint(obj1->getPosition());
 
-    painter.setPen(Qt::black);
+    if(selected == true)
+    {
+        QPen selectPen;
+        selectPen.setWidth(2);
+        selectPen.setColor(Qt::blue);
+        painter.setPen(selectPen);
+    }
+    else
+    {
+        painter.setPen(Qt::black);
+    }
     painter.drawLine(pt1, pt2);
-
 }
 
+bool InteractionConnection::hitTest(const QPoint &point)
+{
+    double lineAngle=mathfunctions::computeAngle(pt1, pt2);
+    double clickAngle=mathfunctions::computeAngle(pt1, point);
+    double lineAngle2=mathfunctions::computeAngle(pt2, pt1);
+    double clickAngle2=mathfunctions::computeAngle(pt2, point);
+    double hypot1=mathfunctions::normalize(pt1, point);
+    double hypot2=mathfunctions::normalize(pt2, point);
+
+    if(((fabs(hypot1*sin(lineAngle-clickAngle)))<15.0) && (fabs((hypot1*(cos(lineAngle-clickAngle))))<mathfunctions::normalize(pt1,pt2)) && (fabs((hypot2*(cos(lineAngle2-clickAngle2))))<mathfunctions::normalize(pt1,pt2)))
+    {
+       return true;
+    }
+    return false;
+}
 /********************************/
 /* Extends Line Functions *******/
 /********************************/
 void ExtendsConnection::draw(QPainter &painter)
 {
-    QPoint pt1, pt2;
+    double lineangle=mathfunctions::computeAngle(pt1, pt2);
     BaseNode *obj1, *obj2;
     list<BaseNode*>::iterator it = connectedObjects.begin();
     obj1 = *(it);
@@ -190,17 +212,58 @@ void ExtendsConnection::draw(QPainter &painter)
     pt1 = obj1->getClosestConnectionPoint(obj2->getPosition());
     pt2 = obj2->getClosestConnectionPoint(obj1->getPosition());
 
-    painter.setPen(Qt::black);
+    if(selected == true)
+    {
+        QPen selectPen;
+        selectPen.setWidth(2);
+        selectPen.setColor(Qt::blue);
+        painter.setPen(selectPen);
+    }
+    else
+    {
+        painter.setPen(Qt::black);
+    }
     painter.drawLine(pt1, pt2);
 
     //draw the text
     painter.save();
     QPoint middle = QPoint((pt1.x()+pt2.x())/2, (pt1.y()+pt2.y())/2);
     painter.translate(middle);
-    //double angle = acos((pt1.y() - pt2.y())/(hypot(pt1.x()-pt2.x(),pt1.y()-pt2.y())));
-    //painter.rotate(angle*(180.0/(atan(1)*4)));
+
+    if(lineangle>PI)
+    {
+        lineangle-=PI;
+    }
+    if(mathfunctions::toRadians(lineangle)>90.0 && mathfunctions::toRadians(lineangle)<180.0)
+    {
+        lineangle+=PI;
+    }
+    else if(mathfunctions::toRadians(lineangle)>180.0)
+    {
+        lineangle+=PI;
+    }
+    painter.rotate(mathfunctions::toRadians(-lineangle));
     painter.drawText(0,0,"<<extends>>");
     painter.restore();
+    const double arrowAngle=0.75;
+    lineangle=mathfunctions::computeAngle(pt1, pt2);
+    painter.drawLine(pt2.x(),pt2.y(),pt2.x()+10*sin(lineangle-arrowAngle),pt2.y()+10*cos(lineangle-arrowAngle));
+    painter.drawLine(pt2.x(),pt2.y(),pt2.x()-10*sin(lineangle+arrowAngle),pt2.y()-10*cos(lineangle+arrowAngle));
+}
+bool ExtendsConnection::hitTest(const QPoint &point)
+{
+    double lineAngle=mathfunctions::computeAngle(pt1, pt2);
+    double clickAngle=mathfunctions::computeAngle(pt1, point);
+    double lineAngle2=mathfunctions::computeAngle(pt2, pt1);
+    double clickAngle2=mathfunctions::computeAngle(pt2, point);
+    double hypot1=mathfunctions::normalize(pt1, point);
+    double hypot2=mathfunctions::normalize(pt2, point);
+
+    if(((fabs(hypot1*sin(lineAngle-clickAngle)))<15.0) && (fabs((hypot1*(cos(lineAngle-clickAngle))))<mathfunctions::normalize(pt1,pt2)) && (fabs((hypot2*(cos(lineAngle2-clickAngle2))))<mathfunctions::normalize(pt1,pt2)))
+    {
+       return true;
+    }
+    return false;
 }
 
 /********************************/
@@ -208,7 +271,7 @@ void ExtendsConnection::draw(QPainter &painter)
 /********************************/
 void IncludesConnection::draw(QPainter &painter)
 {
-    QPoint pt1, pt2;
+    double lineangle=mathfunctions::computeAngle(pt1, pt2);
     BaseNode *obj1, *obj2;
     list<BaseNode*>::iterator it = connectedObjects.begin();
     obj1 = *(it);
@@ -218,15 +281,56 @@ void IncludesConnection::draw(QPainter &painter)
     pt1 = obj1->getClosestConnectionPoint(obj2->getPosition());
     pt2 = obj2->getClosestConnectionPoint(obj1->getPosition());
 
-    painter.setPen(Qt::black);
+    if(selected == true)
+    {
+        QPen selectPen;
+        selectPen.setWidth(2);
+        selectPen.setColor(Qt::blue);
+        painter.setPen(selectPen);
+    }
+    else
+    {
+        painter.setPen(Qt::black);
+    }
     painter.drawLine(pt1, pt2);
 
     //draw the text
     painter.save();
     QPoint middle = QPoint((pt1.x()+pt2.x())/2, (pt1.y()+pt2.y())/2);
     painter.translate(middle);
-    //double angle = acos((pt1.y() - pt2.y())/(hypot(pt1.x()-pt2.x(),pt1.y()-pt2.y())));
-    //painter.rotate(angle*(180.0/(atan(1)*4)));
+
+    if(lineangle>PI)
+    {
+        lineangle-=PI;
+    }
+    if(mathfunctions::toRadians(lineangle)>90.0 && mathfunctions::toRadians(lineangle)<180.0)
+    {
+        lineangle+=PI;
+    }
+    else if(mathfunctions::toRadians(lineangle)>180.0)
+    {
+        lineangle+=PI;
+    }
+    painter.rotate(mathfunctions::toRadians(-lineangle));
     painter.drawText(0,0,"<<includes>>");
     painter.restore();
+    const double arrowAngle=0.75;
+    lineangle=mathfunctions::computeAngle(pt1, pt2);
+    painter.drawLine(pt2.x(),pt2.y(),pt2.x()+10*sin(lineangle-arrowAngle),pt2.y()+10*cos(lineangle-arrowAngle));
+    painter.drawLine(pt2.x(),pt2.y(),pt2.x()-10*sin(lineangle+arrowAngle),pt2.y()-10*cos(lineangle+arrowAngle));
+}
+bool IncludesConnection::hitTest(const QPoint &point)
+{
+    double lineAngle=mathfunctions::computeAngle(pt1, pt2);
+    double clickAngle=mathfunctions::computeAngle(pt1, point);
+    double lineAngle2=mathfunctions::computeAngle(pt2, pt1);
+    double clickAngle2=mathfunctions::computeAngle(pt2, point);
+    double hypot1=mathfunctions::normalize(pt1, point);
+    double hypot2=mathfunctions::normalize(pt2, point);
+
+    if(((fabs(hypot1*sin(lineAngle-clickAngle)))<15.0) && (fabs((hypot1*(cos(lineAngle-clickAngle))))<mathfunctions::normalize(pt1,pt2)) && (fabs((hypot2*(cos(lineAngle2-clickAngle2))))<mathfunctions::normalize(pt1,pt2)))
+    {
+       return true;
+    }
+    return false;
 }
