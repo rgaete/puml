@@ -6,7 +6,7 @@
 
 QT       += core gui
 
-TARGET = pUMLTest2
+TARGET = pUML
 TEMPLATE = app
 
 
@@ -15,11 +15,12 @@ SOURCES += main.cpp\
     canvas.cpp \
     nodes.cpp \
     nodefactory.cpp \
-    UMLnodes.cpp \
     document.cpp \
-   # dialogue.cpp \
-   # dialog.cpp \
-   # dialogpages.cpp
+    dialog.cpp \
+    dialogpages.cpp \
+    UMLnodes_class.cpp \
+    UMLnodes_usecase.cpp \
+    mathfunctions.cpp
 
 HEADERS  += mainwindow.h \
     canvas.h \
@@ -28,14 +29,18 @@ HEADERS  += mainwindow.h \
     UMLnodes.h \
     document.h \
     nodeaction.h \
-   # dialogue.h \
-  #  dialog.h \
- #   dialogpages.h
+    dialog.h \
+    dialogpages.h \
+    UMLnodes_usecase.h \
+    UMLnodes_class.h \
+    mathfunctions.h
 
 OTHER_FILES +=
 
 RESOURCES += \
     icons.qrc
+
+
 
 
 
