@@ -108,6 +108,10 @@ class InteractionConnectionDialog : public QDialog
 {
 
 };
+class ArrowConnectionDialog : public QDialog
+{
+
+};
 
 /*! This concrete class defines an Interaction line in a Use
     Case diagram (line from the actor to the use case)
@@ -116,24 +120,42 @@ class InteractionConnection : public ConnectionNode
 {
 public:
     BaseNode* clone() { return new InteractionConnection; }
-    bool hitTest(const QPoint &point) {return false;}
+    bool hitTest(const QPoint &point);
     QDialog* getDialog() { return new InteractionConnectionDialog; }
     QString getIconPath() { return QString(":/Images/interaction.png"); }
     QString getText() { return "Interaction Line"; }
     void draw(QPainter& painter);
+private:
+     QPoint pt1, pt2;
+};
+
+class ArrowConnection : public ConnectionNode
+{
+public:
+    BaseNode* clone() { return new ArrowConnection; }
+    bool hitTest(const QPoint &point);
+    QDialog* getDialog() { return new ArrowConnectionDialog; }
+    QString getIconPath() { return QString(":/Images/interaction.png"); }
+    QString getText() { return "Arrow Line"; }
+    void draw(QPainter& painter);
+private:
+     QPoint pt1, pt2;
 };
 
 class ClassConnection : public ConnectionNode
 {
 public:
     BaseNode* clone() { return new ClassConnection; }
-    bool hitTest(const QPoint &point) {return false;}
+    bool hitTest(const QPoint &point);
     QDialog* getDialog() { return new InteractionConnectionDialog; }
     QString getIconPath() { return QString(":/Images/interaction.png"); }
     QString getText() { return "Class Line"; }
     void draw(QPainter& painter);
-
+private:
+    QPoint pt1, pt2, pt3, pt4;
 };
+
+
 
 /* !
  *  This concrete class is the ClassRectangle node.

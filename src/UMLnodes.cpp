@@ -1,5 +1,6 @@
 #include "nodes.h"
 #include "UMLnodes.h"
+#include "mathfunctions.h"
 
 /*******************************/
 /* Stickperson Functions *******/
@@ -171,8 +172,6 @@ QDialog * OvalObject::getDialog()
 
 void InteractionConnection::draw(QPainter& painter)
 {
-
-    QPoint pt1, pt2;
     BaseNode *obj1, *obj2;
     list<BaseNode*>::iterator it = connectedObjects.begin();
     obj1 = *(it);
@@ -182,14 +181,116 @@ void InteractionConnection::draw(QPainter& painter)
     pt1 = obj1->getClosestConnectionPoint(obj2->getPosition());
     pt2 = obj2->getClosestConnectionPoint(obj1->getPosition());
 
-    painter.setPen(Qt::black);
-    painter.drawLine(pt1, pt2);
 
+    if(selected == true)
+    {
+        QPen selectPen;
+        selectPen.setWidth(2);
+        selectPen.setColor(Qt::blue);
+        painter.setPen(selectPen);
+        painter.drawLine(pt1, pt2);
+    }
+    else
+    {
+        painter.setPen(Qt::black);
+        painter.drawLine(pt1, pt2);
+    }
+}
+
+bool InteractionConnection::hitTest(const QPoint &point)
+{
+    double lineAngle=mathfunctions::computeAngle(pt1, pt2);
+    double clickAngle=mathfunctions::computeAngle(pt1, point);
+    double lineAngle2=mathfunctions::computeAngle(pt2, pt1);
+    double clickAngle2=mathfunctions::computeAngle(pt2, point);
+    double hypot1=mathfunctions::normalize(pt1, point);
+    double hypot2=mathfunctions::normalize(pt2, point);
+
+    if(((fabs(hypot1*sin(lineAngle-clickAngle)))<15.0) && (fabs((hypot1*(cos(lineAngle-clickAngle))))<mathfunctions::normalize(pt1,pt2)) && (fabs((hypot2*(cos(lineAngle2-clickAngle2))))<mathfunctions::normalize(pt1,pt2)))
+    {
+       return true;
+    }
+    return false;
+}
+
+void ArrowConnection::draw(QPainter& painter)
+{
+    BaseNode *obj1, *obj2;
+    list<BaseNode*>::iterator it = connectedObjects.begin();
+    obj1 = *(it);
+    it++;
+    obj2 = *(it);
+
+    pt1 = obj1->getClosestConnectionPoint(obj2->getPosition());
+    pt2 = obj2->getClosestConnectionPoint(obj1->getPosition());
+
+
+    if(selected == true)
+    {
+        QPen selectPen;
+        selectPen.setWidth(2);
+        selectPen.setColor(Qt::blue);
+        painter.setPen(selectPen);
+        painter.drawLine(pt1, pt2);
+    }
+    else
+    {
+        painter.setPen(Qt::black);
+        painter.drawLine(pt1, pt2);
+    }
+    const double arrowAngle=0.75;
+    double lineangle=mathfunctions::computeAngle(pt1, pt2);
+    painter.drawLine(pt2.x(),pt2.y(),pt2.x()+10*sin(lineangle-arrowAngle),pt2.y()+10*cos(lineangle-arrowAngle));
+    painter.drawLine(pt2.x(),pt2.y(),pt2.x()-10*sin(lineangle+arrowAngle),pt2.y()-10*cos(lineangle+arrowAngle));
+}
+bool ArrowConnection::hitTest(const QPoint &point)
+{
+    double lineAngle=mathfunctions::computeAngle(pt1, pt2);
+    double clickAngle=mathfunctions::computeAngle(pt1, point);
+    double lineAngle2=mathfunctions::computeAngle(pt2, pt1);
+    double clickAngle2=mathfunctions::computeAngle(pt2, point);
+    double hypot1=mathfunctions::normalize(pt1, point);
+    double hypot2=mathfunctions::normalize(pt2, point);
+
+    if(((fabs(hypot1*sin(lineAngle-clickAngle)))<15.0) && (fabs((hypot1*(cos(lineAngle-clickAngle))))<mathfunctions::normalize(pt1,pt2)) && (fabs((hypot2*(cos(lineAngle2-clickAngle2))))<mathfunctions::normalize(pt1,pt2)))
+    {
+       return true;
+    }
+    return false;
+}
+
+
+bool ClassConnection::hitTest(const QPoint &point)
+{
+    BaseNode *obj1, *obj2;
+    list<BaseNode*>::iterator it = connectedObjects.begin();
+    obj1 = *(it);
+    it++;
+    obj2 = *(it);
+
+    if(pt1.x()!=obj1->getPosition().x()) //East or West connection
+    {
+        if((fabs(point.x()-((pt1.x()+pt4.x())/2))<15.0) && ((point.y()<pt1.y() && point.y()>pt4.y()) || (point.y()>pt1.y() && point.y()<pt4.y())))
+            return true;
+        if((fabs(point.y()-pt1.y())<15.0) && ( (point.x()<pt1.x() && point.x()>pt2.x()) || point.x()>pt1.x() && point.x()<pt2.x()))
+            return true;
+        if((fabs(point.y()-pt4.y())<15.0) && ( (point.x()<pt3.x() && point.x()>pt4.x()) || point.x()>pt3.x() && point.x()<pt4.x()))
+            return true;
+    }
+    else if(pt1.x()==obj1->getPosition().x()) //North or South connection
+    {
+        if((fabs(point.y()-((pt1.y()+pt4.y())/2))<15.0) && ((point.x()<pt1.x() && point.x()>pt4.x()) || (point.x()>pt1.x() && point.x()<pt4.x())))
+            return true;
+        if((fabs(point.x()-pt1.x())<15.0) && ( (point.y()<pt1.y() && point.y()>pt2.y()) || point.y()>pt1.y() && point.y()<pt2.y()))
+            return true;
+        if((fabs(point.x()-pt4.x())<15.0) && ( (point.y()<pt3.y() && point.y()>pt4.y()) || point.y()>pt3.y() && point.y()<pt4.y()))
+            return true;
+    }
+    return false;
 }
 
 void ClassConnection::draw(QPainter& painter)
 {
-    QPoint pt1, pt2, pt3, pt4;
     BaseNode *obj1, *obj2;
     list<BaseNode*>::iterator it = connectedObjects.begin();
     obj1 = *(it);
@@ -198,10 +299,9 @@ void ClassConnection::draw(QPainter& painter)
 
     pt1 = obj1->getClosestConnectionPoint(obj2->getPosition());
     pt4 = obj2->getClosestConnectionPoint(obj1->getPosition());
-
+    painter.setPen(Qt::black);
     if(pt1.x()==obj1->getPosition().x()) //North or South connection
     {
-
         pt2.setY((pt4.y()+pt1.y())/2);
         pt2.setX(pt1.x());
         pt3.setX(pt4.x());
@@ -214,7 +314,14 @@ void ClassConnection::draw(QPainter& painter)
         pt3.setX(pt2.x());
         pt3.setY(pt4.y());
     }
-    painter.setPen(Qt::black);
+    if(selected == true)
+    {
+        QPen selectPen;
+        selectPen.setWidth(2);
+        selectPen.setColor(Qt::blue);
+        painter.setPen(selectPen);
+        painter.drawLine(pt1, pt2);
+    }
     painter.drawLine(pt1, pt2);
     painter.drawLine(pt2, pt3);
     painter.drawLine(pt3, pt4);
