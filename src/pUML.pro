@@ -15,10 +15,11 @@ SOURCES += main.cpp\
     canvas.cpp \
     nodes.cpp \
     nodefactory.cpp \
-    UMLnodes.cpp \
     document.cpp \
     dialog.cpp \
-    dialogpages.cpp
+    dialogpages.cpp \
+    UMLnodes_class.cpp \
+    UMLnodes_usecase.cpp
 
 HEADERS  += mainwindow.h \
     canvas.h \
@@ -28,7 +29,9 @@ HEADERS  += mainwindow.h \
     document.h \
     nodeaction.h \
     dialog.h \
-    dialogpages.h
+    dialogpages.h \
+    UMLnodes_usecase.h \
+    UMLnodes_class.h
 
 OTHER_FILES +=
 
