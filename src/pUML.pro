@@ -18,7 +18,8 @@ SOURCES += main.cpp\
     UMLnodes.cpp \
     document.cpp \
     dialog.cpp \
-    dialogpages.cpp
+    dialogpages.cpp \
+    mathfunctions.cpp
 
 HEADERS  += mainwindow.h \
     canvas.h \
@@ -28,12 +29,15 @@ HEADERS  += mainwindow.h \
     document.h \
     nodeaction.h \
     dialog.h \
-    dialogpages.h
+    dialogpages.h \
+    mathfunctions.h
 
 OTHER_FILES +=
 
 RESOURCES += \
     icons.qrc
+
+
 
 
 
