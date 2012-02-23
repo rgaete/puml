@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     dialog.cpp \
     dialogpages.cpp \
     UMLnodes_class.cpp \
-    UMLnodes_usecase.cpp
+    UMLnodes_usecase.cpp \
+    mathfunctions.cpp
 
 HEADERS  += mainwindow.h \
     canvas.h \
@@ -31,12 +32,15 @@ HEADERS  += mainwindow.h \
     dialog.h \
     dialogpages.h \
     UMLnodes_usecase.h \
-    UMLnodes_class.h
+    UMLnodes_class.h \
+    mathfunctions.h
 
 OTHER_FILES +=
 
 RESOURCES += \
     icons.qrc
+
+
 
 
 

@@ -98,12 +98,14 @@ class InteractionConnection : public ConnectionNode
 {
 public:
     BaseNode* clone() { return new InteractionConnection; }
-    bool hitTest(const QPoint &point) {point.y(); return false;}
+    bool hitTest(const QPoint &point);
     QDialog* getDialog() { return new InteractionConnectionDialog; }
     QString getIconPath() { return QString(":/Images/interaction.png"); }
     QString getText() { return "Interaction Line"; }
     void draw(QPainter& painter);
     DiagramType getDiagramType() { return UseCase; }
+private:
+    QPoint pt1, pt2;
 };
 
 
@@ -123,12 +125,14 @@ private:
 
 public:
     BaseNode* clone() { return new ExtendsConnection; }
-    bool hitTest(const QPoint &point) {point.x(); return false;}
+    bool hitTest(const QPoint &point);
     QDialog* getDialog() { return new ExtendsConnectionDialog; }
     QString getIconPath() { return QString(":/Images/interaction.png"); }
     QString getText() { return "Extends Line"; }
     void draw(QPainter& painter);
     DiagramType getDiagramType() { return UseCase; }
+private:
+     QPoint pt1, pt2;
 };
 
 /*! This class provides a custom dialog for an extendsLineNode.
@@ -147,12 +151,14 @@ private:
 
 public:
     BaseNode* clone() { return new IncludesConnection; }
-    bool hitTest(const QPoint &point) {point.x(); return false;}
+    bool hitTest(const QPoint &point);
     QDialog* getDialog() { return new IncludesConnectionDialog; }
     QString getIconPath() { return QString(":/Images/interaction.png"); }
     QString getText() { return "Includes Line"; }
     void draw(QPainter& painter);
     DiagramType getDiagramType() { return UseCase; }
+private:
+     QPoint pt1, pt2;
 };
 
 #endif // UMLNODES_USECASE_H
