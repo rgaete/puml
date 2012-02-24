@@ -1,16 +1,11 @@
-
-
-SetCompressor lzma
-
-
-;--------------------------------
+ShowInstDetails show
 
 ; The name of the installer
 Name "pUML Windows Installer"
-
 ; The file to write
 OutFile "pUMLsetup.exe"
-
+; Set compression method (lzma is most compressed)
+SetCompressor lzma
 ; The default installation directory
 InstallDir $PROGRAMFILES\pUML\
 
@@ -18,7 +13,6 @@ InstallDir $PROGRAMFILES\pUML\
 DirText "This will install pUML on your computer. Choose a directory"
 
 ;--------------------------------
-
 ; The stuff to install
 Section "" ;No components page, name is not important
 
@@ -39,7 +33,6 @@ WriteUninstaller $INSTDIR\Uninstall.exe
 ; Now create shortcuts
 CreateShortCut "$SMPROGRAMS\pUML.lnk" "$INSTDIR\pUML.exe" "" "$INSTDIR\pUML.ico" 0
 
-
 SectionEnd ; end the section
 
 ; The uninstall section
@@ -54,7 +47,7 @@ Delete $INSTDIR\QtCore4.dll
 Delete $INSTDIR\QtGui4.dll
 RMDir $INSTDIR
 
-; Now remove shortcuts too
+; Now remove shortcuts too (seems to be broken on Win 7)
 Delete "$SMPROGRAMS\pUML.lnk"
 
 SectionEnd 
