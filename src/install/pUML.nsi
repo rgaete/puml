@@ -37,7 +37,7 @@ File QtGui4.dll
 WriteUninstaller $INSTDIR\Uninstall.exe
 
 ; Now create shortcuts
-CreateShortCut "$SMPROGRAMS\pUML.lnk" "$INSTDIR\pUML.exe" "$INSTDIR\pUML.ico" 0
+CreateShortCut "$SMPROGRAMS\pUML.lnk" "$INSTDIR\pUML.exe" "" "$INSTDIR\pUML.ico" 0
 
 
 SectionEnd ; end the section
@@ -47,6 +47,7 @@ Section "Uninstall"
 
 Delete $INSTDIR\Uninstall.exe
 Delete $INSTDIR\pUML.exe
+Delete $INSTDIR\pUML.ico
 Delete $INSTDIR\libgcc_s_dw2-1.dll
 Delete $INSTDIR\mingwm10.dll
 Delete $INSTDIR\QtCore4.dll
