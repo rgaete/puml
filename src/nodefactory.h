@@ -2,7 +2,7 @@
 #define NODEFACTORY_H
 
 #include <vector>
-#include <nodes.h>
+#include "nodes.h"
 #include "assert.h"
 
 //Singleton
