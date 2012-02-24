@@ -48,20 +48,20 @@ bool ClassConnection::hitTest(const QPoint &point)
 
     if(pt1.x()!=obj1->getPosition().x()) //East or West connection
     {
-        if((fabs(point.x()-((pt1.x()+pt4.x())/2))<15.0) && ((point.y()<pt1.y() && point.y()>pt4.y()) || (point.y()>pt1.y() && point.y()<pt4.y())))
+        if((fabs(point.x()-((pt1.x()+pt4.x())/2.0))<15.0) && ((point.y()<pt1.y() && point.y()>pt4.y()) || (point.y()>pt1.y() && point.y()<pt4.y())))
             return true;
-        if((fabs(point.y()-pt1.y())<15.0) && ( (point.x()<pt1.x() && point.x()>pt2.x()) || point.x()>pt1.x() && point.x()<pt2.x()))
+        if((fabs(point.y()-(double)pt1.y())<15.0) && ( (point.x()<pt1.x() && point.x()>pt2.x()) || point.x()>pt1.x() && point.x()<pt2.x()))
             return true;
-        if((fabs(point.y()-pt4.y())<15.0) && ( (point.x()<pt3.x() && point.x()>pt4.x()) || point.x()>pt3.x() && point.x()<pt4.x()))
+        if((fabs(point.y()-(double)pt4.y())<15.0) && ( (point.x()<pt3.x() && point.x()>pt4.x()) || point.x()>pt3.x() && point.x()<pt4.x()))
             return true;
     }
     else if(pt1.x()==obj1->getPosition().x()) //North or South connection
     {
-        if((fabs(point.y()-((pt1.y()+pt4.y())/2))<15.0) && ((point.x()<pt1.x() && point.x()>pt4.x()) || (point.x()>pt1.x() && point.x()<pt4.x())))
+        if((fabs(point.y()-((pt1.y()+pt4.y())/2.0))<15.0) && ((point.x()<pt1.x() && point.x()>pt4.x()) || (point.x()>pt1.x() && point.x()<pt4.x())))
             return true;
-        if((fabs(point.x()-pt1.x())<15.0) && ( (point.y()<pt1.y() && point.y()>pt2.y()) || point.y()>pt1.y() && point.y()<pt2.y()))
+        if((fabs(point.x()-(double)pt1.x())<15.0) && ( (point.y()<pt1.y() && point.y()>pt2.y()) || point.y()>pt1.y() && point.y()<pt2.y()))
             return true;
-        if((fabs(point.x()-pt4.x())<15.0) && ( (point.y()<pt3.y() && point.y()>pt4.y()) || point.y()>pt3.y() && point.y()<pt4.y()))
+        if((fabs(point.x()-(double)pt4.x())<15.0) && ( (point.y()<pt3.y() && point.y()>pt4.y()) || point.y()>pt3.y() && point.y()<pt4.y()))
             return true;
     }
     return false;

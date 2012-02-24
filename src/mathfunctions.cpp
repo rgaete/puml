@@ -24,7 +24,7 @@ double mathfunctions::computeAngle(QPoint p1, QPoint p2)
 
 double mathfunctions::normalize(QPoint p1, QPoint p2)
 {
-    return pow((pow(p2.x()-p1.x(), 2)+pow(p2.y()-p1.y(), 2)),0.5);
+    return pow((pow((double)p2.x()-p1.x(), 2)+pow((double)p2.y()-p1.y(), 2)),0.5);
 }
 
 double mathfunctions::toRadians(double angle)
