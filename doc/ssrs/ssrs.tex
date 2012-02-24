@@ -48,6 +48,15 @@
   \renewcommand\@evenfoot{\@oddfoot}
   \renewcommand\thepage{\arabic{page}}
 }
+
+%% ENVIRONMENT TO SINGLE-SPACE ENUMERATION LINES
+\newenvironment{my_enumerate}{
+\begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
 \newcommand\ps@Convertviii{
   \renewcommand\@oddhead{}
   \renewcommand\@evenhead{\@oddhead}
@@ -150,7 +159,7 @@ Version 0.0
 \par}
 
 {\centering\bfseries
-February 13, 2012
+February 23, 2012
 \par}
 
 
@@ -266,8 +275,24 @@ pUML SSRS
 \centering 3
 & 02/01/2012
 & ~
-& \centering A
+& \centering M
 & Updated SSRS and SSDD
+& MM
+
+\\\hline
+\centering 4
+& 02/15/2012
+& ~
+& \centering M
+& Use cases expanded and descriptions added
+& MM
+
+\\\hline
+\centering 4
+& 02/23/2012
+& ~
+& \centering M
+& Use case descriptions completed
 & MM
 
 \\\hline
@@ -613,27 +638,12 @@ Other Communication Interfaces}
 
 
 
-\bigskip
-
-
-\bigskip
-
-\bigskip
-
-
-
-
-
-
-
 
 
 \clearpage\setcounter{page}{1}\pagestyle{Convertv}
+
 \subsection[SYSTEM FEATURES]{\rmfamily\bfseries
 SYSTEM FEATURES}
-
-
-
 
 
 \subsubsection{Use Cases and Descriptions}
@@ -660,26 +670,59 @@ SYSTEM FEATURES}
 \begin{tabular}{|m{2.0in} m{5.0in}|}
 \hline
 {\bfseries\emph{Use Case Name}}
-& {\bfseries
-Create New Project}
+& {\bfseries Create New Project}
 \\\hline
-\emph{Details}
-& TBD
+\emph{Participating Actor}
+& User
+\\\hline
+\emph{Flow of Events}
+& \begin{my_enumerate}
+  \item User opens File menu and selects ``Create New Project'' 
+  \item A dialog appears asking the user to enter the project name and save location. 
+    \item User clicks ``OK'' 
+\item Program creates a new project for the user at the specified location, and opens the project in pUML.
+\end{my_enumerate}
+\\\hline
+\emph{Entry Condition}
+&
+User opens File menu and selects ``Create New Project.''
+\\\hline
+\emph{Exit Condition}
+& Project has been created and is open for modification in pUML.
+\\\hline
+\emph{Quality Requirements}
+& Project name may not be the same as another project at the specified location. Project creation may only occur at program launch, and not while a project has been loaded into pUML.
 \\\hline
 \end{tabular}
 \end{flushleft}
 \bigskip
 
-%%% OPEN PROJECT USE CASE DESCRIPTION
+%%% OPEN EXISTING PROJECT USE CASE DESCRIPTION
 \begin{flushleft}
 \tablehead{}
 \begin{tabular}{|m{2.0in} m{5.0in}|}
 \hline
 {\bfseries\emph{Use Case Name}}
-& {\bfseries Open Project}
+& {\bfseries Open Existing Project}
 \\\hline
-\emph{Details}
-& TBD
+\emph{Participating Actor}
+& User
+\\\hline
+\emph{Flow of Events}
+& \begin{my_enumerate}
+\item User opens File menu and selects ``Open Project.''
+\item User browses to desired directory and selects an existing pUML project file.
+\item The program loads the specified project.
+\end{my_enumerate}
+\\\hline
+\emph{Entry Condition}
+& User opens File menu and selects ``Open Project.''
+\\\hline
+\emph{Exit Condition}
+& Project has been loaded and is open for modification in pUML.
+\\\hline
+\emph{Quality Requirements}
+& Project must be of pUML file type.
 \\\hline
 \end{tabular}
 \end{flushleft}
@@ -696,19 +739,22 @@ Create New Project}
 \emph{Participating Actor}
 & User
 \\\hline
-\multirow{2}{*}{\emph{Flow of Events}}
-& 1. User clicks X \\
-& 2. If file is not saved, include Save File As use case \\
-& 3. Program Exits \\\hline
+\emph{Flow of Events}
+& \begin{my_enumerate}
+\item User clicks X.
+\item If file is not saved, include ``Save File As'' use case.
+\item Program Exits.
+\end{my_enumerate}
+\\\hline
 \emph{Entry Condition}
 &
-User initiates File menu option Close Program or clicks X in the corner of the window.
+User initiates File menu option ``Close Program'' or clicks X in the corner of the window.
 \\\hline
 \emph{Exit Condition}
 & File is successfully saved and the program exits.
 \\\hline
 \emph{Quality Requirements}
-& TBD
+& File must be saved prior to exiting, or changes must be discarded prior to exiting.
 \\\hline
 \end{tabular}
 \end{flushleft}
@@ -735,16 +781,18 @@ User initiates File menu option Close Program or clicks X in the corner of the w
 \begin{tabular}{|m{2.0in} m{5.0in}|}
 \hline
 {\bfseries\emph{Use Case Name}}
-& {\bfseries New Diagram }
+& {\bfseries Create New Diagram }
 \\\hline
 \emph{Participating Actor}
 & User
 \\\hline
-\multirow{2}{*}{\emph{Flow of Events}}
-& 1.  The user selects new file from menu \\
-& 2.  Program requests user select a diagram type
-(includes ChooseDiagramType use case) \\
-& 3.  The program responds by creating a new file with a blank drawing canvas
+\emph{Flow of Events}
+& \begin{my_enumerate}
+\item The user selects new file from menu.
+\item Program requests user select a diagram type
+(includes ChooseDiagramType use case).
+\item The program responds by creating a new file with a blank drawing canvas.
+\end{my_enumerate}
 \\\hline
 \emph{Entry Condition}
 & User selects New File from commands
@@ -770,9 +818,11 @@ User initiates File menu option Close Program or clicks X in the corner of the w
 \emph{Participating Actor}
 & User 
 \\\hline
-\multirow{2}{*}{\emph{Flow of Events}}
-& 1.  User selects a diagram type \\
-& 2.  Program loads and displays only objects for the selected diagram type
+\emph{Flow of Events}
+& \begin{my_enumerate}
+\item User selects a diagram type.
+\item Program loads and displays only objects for the selected diagram type.
+\end{my_enumerate}
 \\\hline
 \emph{Entry Condition}
 & Included from New Diagram use case
@@ -781,7 +831,7 @@ User initiates File menu option Close Program or clicks X in the corner of the w
 & Included from New Diagram use case
 \\\hline
 \emph{Quality Requirements}
-& TBD
+& Toolbar loads only diagram specific objects and connectors.
 \\\hline
 \end{tabular}
 \end{flushleft}
@@ -808,16 +858,19 @@ User initiates File menu option Close Program or clicks X in the corner of the w
 \begin{tabular}{|m{2.0in} m{5.0in}|}
 \hline
 {\bfseries\emph{Use Case Name}}
-& {\bfseries Open Diagram}
+& {\bfseries Open Existing Diagram}
 \\\hline
 \emph{Participating Actor}
 & User
 \\\hline
-\multirow{2}{*}{\emph{Flow of Events}}
-& 1. User selects Open File from menu \\
-& 2. Program opens an explorer window \\
-& 3. User selects a file \\
-& 4. Program loads selected file into program \\\hline
+\emph{Flow of Events}
+& \begin{my_enumerate}
+\item User selects Open File from menu.
+\item Program opens an explorer window.
+\item User selects a file.
+\item Program loads selected file into program
+\end{my_enumerate}
+\\\hline
 \emph{Entry Condition}
 & User selects Open File from menu.
 \\\hline
@@ -856,14 +909,18 @@ User initiates File menu option Close Program or clicks X in the corner of the w
 \emph{Participating Actor}
 & User
 \\\hline
-\multirow{2}{*}{\emph{Flow of Events}}
-& 1. The user selects save file \\
-& 2. Program saves file \\
-& a. If file has not been previously saved, ask user where to save \\
-& b. If file has been previously saved, ask user where to save
+\emph{Flow of Events}
+& \begin{my_enumerate}
+  \item The user opens the File menu and selects ``Save.''
+  \item Program saves file under current file name 
+\begin{my_enumerate}
+\item If file has not been previously saved, program initiates Save As use case. 
+\item If file has been previously saved, the program saves the file at its existing location under its existing name.
+\end{my_enumerate}
+\end{my_enumerate}
 \\\hline
 \emph{Entry Condition}
-& User selects Save File from main menu or clicks save button.
+& User selects ``Save File'' from main menu or clicks Save button.
 \\\hline
 \emph{Exit Condition}
 & File is successfully saved
@@ -882,14 +939,36 @@ User initiates File menu option Close Program or clicks X in the corner of the w
 \begin{tabular}{|m{2.0in} m{5.0in}|}
 \hline
 {\bfseries\emph{Use Case Name}}
-& {\bfseries Save As}
+& {\bfseries Save Diagram As}
 \\\hline
-\emph{Details}
-& TBD
+\emph{Participating Actor}
+& User
+\\\hline
+\emph{Flow of Events}
+& \begin{my_enumerate}
+\item User opens File menu and selects ``Save As...''
+\end{my_enumerate}
+\ ~ or
+\begin{my_enumerate}
+\item User selects ``Save'' from File menu, but the program has not been previously saved.
+\item Program displays a dialog box requesting the user to enter a diagram name.
+\item User enters a diagram name and clicks ``Ok.''
+\item Program saves diagram within existing project.
+\end{my_enumerate}
+\\\hline
+\emph{Entry Condition}
+& User clicks ``Save As'' or clicks ``Save'' with a previously unsaved diagram. 
+\\\hline
+\emph{Exit Condition}
+& The diagram has been saved under the current working project.
+\\\hline
+\emph{Quality Requirements}
+& Diagram name may not be the same as another diagram within the project. Diagram may not be saved outside of the project.
 \\\hline
 \end{tabular}
 \end{flushleft}
 \bigskip
+
 
 
 %%% PRINT DIAGRAM USE CASE DESCRIPTION
@@ -903,15 +982,17 @@ User initiates File menu option Close Program or clicks X in the corner of the w
 \emph{Participating Actor}
 & User
 \\\hline
-\multirow{2}{*}{\emph{Flow of Events}}
-& 1.  User initiates print. \\
-& 2.  Program sends to printer
+\emph{Flow of Events}
+& \begin{my_enumerate}
+\item User initiates print. 
+\item Program sends to printer
+\end{my_enumerate}
 \\\hline
 \emph{Entry Condition}
 & User initiates Print
 \\\hline
 \emph{Exit Condition}
-& Diagram successfully sent to printer
+& Diagram successfully sent to default printer
 \\\hline
 \emph{Quality Requirements}
 & TBD
@@ -928,12 +1009,33 @@ User initiates File menu option Close Program or clicks X in the corner of the w
 {\bfseries\emph{Use Case Name}}
 & {\bfseries Close Diagram}
 \\\hline
-\emph{Details}
-& TBD
+\emph{Participating Actor}
+& User
+\\\hline
+\emph{Flow of Events}
+& \begin{my_enumerate}
+\item User clicks the `X' on the diagram tab.
+\item If the diagram is saved, the program closes the diagram tab.
+\end{my_enumerate}
+\ ~or
+\begin{my_enumerate}
+\item User clicks the `X' on the diagram tab.
+\item If the program is not saved, the program issues a warning.
+\end{my_enumerate}
+\\\hline
+\emph{Entry Condition}
+& User clicks the ``X'' on the diagram tab.
+\\\hline
+\emph{Exit Condition}
+& Diagram tab is closed.
+\\\hline
+\emph{Quality Requirements}
+& Diagram must be saved for the tab to close. Else the user must either choose to save the diagram or discard changes.
 \\\hline
 \end{tabular}
 \end{flushleft}
 \bigskip
+
 
 %%% UNDO USE CASE DESCRIPTION
 \begin{flushleft}
@@ -943,12 +1045,28 @@ User initiates File menu option Close Program or clicks X in the corner of the w
 {\bfseries\emph{Use Case Name}}
 & {\bfseries Undo}
 \\\hline
-\emph{Details}
-& TBD
+\emph{Participating Actor}
+& User
+\\\hline
+\emph{Flow of Events}
+& \begin{my_enumerate}
+\item User clicks ``Undo''
+\item Program reverts to the state of the diagram prior to the last change made.
+\end{my_enumerate}
+\\\hline
+\emph{Entry Condition}
+& User clicks ``Undo.''
+\\\hline
+\emph{Exit Condition}
+& The state of the diagram prior to the most recent change is now the active state.
+\\\hline
+\emph{Quality Requirements}
+& Undo will not work if there are no changes made to the diagram during the current open state.
 \\\hline
 \end{tabular}
 \end{flushleft}
 \bigskip
+
 
 %%% REDO USE CASE DESCRIPTION
 \begin{flushleft}
@@ -958,12 +1076,28 @@ User initiates File menu option Close Program or clicks X in the corner of the w
 {\bfseries\emph{Use Case Name}}
 & {\bfseries Redo}
 \\\hline
-\emph{Details}
-& TBD
+\emph{Participating Actor}
+& User
+\\\hline
+\emph{Flow of Events}
+& \begin{my_enumerate}
+\item User clicks ``Redo.''
+\item Program advances to the state from which the user had previously clicked ``Undo.''
+\end{my_enumerate}
+\\\hline
+\emph{Entry Condition}
+&  User clicks ``Redo.''
+\\\hline
+\emph{Exit Condition}
+& Current diagram loaded is now a state more current than the one from which the user had clicked ``Undo.''
+\\\hline
+\emph{Quality Requirements}
+& Redo will not work if there are no changes made to the diagram during the current open state. The user must have previously clicked ``Undo'' in order for a  state to exist to redo.
 \\\hline
 \end{tabular}
 \end{flushleft}
 \bigskip
+
 
 
 \clearpage
@@ -991,33 +1125,21 @@ User initiates File menu option Close Program or clicks X in the corner of the w
 \emph{Participating Actor}
 & User
 \\\hline
-\multirow{2}{*}{\emph{Flow of Events}}
-& 1.  User selects an object from a valid list of objects \\
-& 2.  User places object on canvas.
+\emph{Flow of Events}
+& \begin{my_enumerate}
+\item User selects an object from toolbar.
+\item User clicks the canvas.
+\item Program places an object at that location on the canvas.
+\end{my_enumerate}
 \\\hline
 \emph{Entry Condition}
-& Toolbar is loaded with valid objects for diagram type
+& Toolbar is loaded with valid objects for diagram type.
 \\\hline
 \emph{Exit Condition}
 & Object has been successfully placed on drawing canvas.
 \\\hline
 \emph{Quality Requirements}
-& TBD
-\\\hline
-\end{tabular}
-\end{flushleft}
-\bigskip
-
-%%% MOVE OBJECT USE CASE DESCRIPTION
-\begin{flushleft}
-\tablehead{}
-\begin{tabular}{|m{2.0in} m{5.0in}|}
-\hline
-{\bfseries\emph{Use Case Name}}
-& {\bfseries Edit Object}
-\\\hline
-\emph{Details}
-& TBD
+& Object may not occupy the same space on the canvas as any other object.
 \\\hline
 \end{tabular}
 \end{flushleft}
@@ -1029,14 +1151,67 @@ User initiates File menu option Close Program or clicks X in the corner of the w
 \begin{tabular}{|m{2.0in} m{5.0in}|}
 \hline
 {\bfseries\emph{Use Case Name}}
-& {\bfseries Move Object}
+& {\bfseries Edit Object Description}
 \\\hline
-\emph{Details}
-& TBD
+\emph{Participating Actor}
+& User
+\\\hline
+\emph{Flow of Events}
+& \begin{my_enumerate}
+\item User selects an object by clicking on it.
+\item User right-clicks on the object.
+\item User selects ``Properties'' from the drop-down menu.
+\item User types the desired description in the text box presented.
+\item User clicks ``OK.''
+\item Program displays new description.
+\end{my_enumerate}
+\\\hline
+\emph{Entry Condition}
+& User clicks on an object.
+\\\hline
+\emph{Exit Condition}
+& Program is now showing all user-made changes.
+\\\hline
+\emph{Quality Requirements}
+& There are limitations as to the number of characters a user may enter in the object description text field.
 \\\hline
 \end{tabular}
 \end{flushleft}
 \bigskip
+
+
+%%% MOVE OBJECT USE CASE DESCRIPTION
+\begin{flushleft}
+\tablehead{}
+\begin{tabular}{|m{2.0in} m{5.0in}|}
+\hline
+{\bfseries\emph{Use Case Name}}
+& {\bfseries Move Object}
+\\\hline
+\emph{Participating Actor}
+& User
+\\\hline
+\emph{Flow of Events}
+& \begin{my_enumerate}
+\item User clicks on object, selecting it.
+\item User holds down the left mouse button, and moves the mouse to the new location of the object.
+\item User releases the left mouse button.
+\item Program draws the object at the new location, with all attached connectors. 
+\end{my_enumerate}
+\\\hline
+\emph{Entry Condition}
+& User selects an object with the left mouse button held down.
+\\\hline
+\emph{Exit Condition}
+& Program has drawn the object at the new location.
+\\\hline
+\emph{Quality Requirements}
+& User may not move an object to a location already occupied by another object. 
+\\\hline
+\end{tabular}
+\end{flushleft}
+\bigskip
+
 
 \clearpage
 
@@ -1059,27 +1234,69 @@ User initiates File menu option Close Program or clicks X in the corner of the w
 \hline {\bfseries\emph{Use Case Name}}
 & {\bfseries Place New Connector}
 \\\hline
-\emph{Details}
-& TBD
+\emph{Participating Actor}
+& User
+\\\hline
+\emph{Flow of Events}
+& \begin{my_enumerate}
+\item User clicks on desired connector in toolbar.
+\item User clicks on the object the connection is coming from, holding down the left mouse button.
+\item User drags the mouse toward the object to be connected to.
+\item User releases the mouse button.
+\item Program draws the connection line between the first and second object.
+\end{my_enumerate}
+\\\hline
+\emph{Entry Condition}
+& User has selected a connector from the toolbar.
+\\\hline
+\emph{Exit Condition}
+& The connector is successfully drawn between two objects. 
+\\\hline
+\emph{Quality Requirements}
+& Only one connector may be placed between any two objects. Some objects may not be able to be connected with certain types of connectors.
 \\\hline
 \end{tabular}
 \end{flushleft}
 \bigskip
-	
 
-%%% EDIT CONNECTOR DESCRIPTION USE CASE DESCRIPTION
+
+%%% EDIT CONNECTOR PROPERTIES USE CASE DESCRIPTION
 \begin{flushleft}
 \tablehead{}
 \begin{tabular}{|m{2.0in} m{5.0in}|}
 \hline {\bfseries\emph{Use Case Name}}
-& {\bfseries Edit Connector Description}
+& {\bfseries Edit Connector Properties}
 \\\hline
-\emph{Details}
-& TBD
+\emph{Participating Actor}
+& User
+\\\hline
+\emph{Flow of Events}
+& \begin{my_enumerate}
+\item User selects a connector by clicking on it.
+\item User right-clicks on the connector.
+\item User selects ``Properties'' from the drop-down menu.
+\item User edits propertes: 
+	\begin{my_enumerate}
+\item User types the desired description in the text box presented.
+\item User selects desired arrowhead.
+\end{my_enumerate}
+\item User clicks ``OK.''
+\item Program displays new description or arrowhead.
+\end{my_enumerate}
+\\\hline
+\emph{Entry Condition}
+& User right clicks on a connector.
+\\\hline
+\emph{Exit Condition}
+& Program has updated the connector with the new properties.
+\\\hline
+\emph{Quality Requirements}
+& Not all connectors will have the same property options.
 \\\hline
 \end{tabular}
 \end{flushleft}
 \bigskip
+
 
 %%% DELETE CONNECTOR USE CASE DESCRIPTION
 \begin{flushleft}
@@ -1088,12 +1305,29 @@ User initiates File menu option Close Program or clicks X in the corner of the w
 \hline {\bfseries\emph{Use Case Name}}
 & {\bfseries Delete Connector}
 \\\hline
-\emph{Details}
+\emph{Participating Actor}
+& User
+\\\hline
+\emph{Flow of Events}
+& \begin{my_enumerate}
+\item User right clicks on a connector.
+\item User selects ``Delete'' from the drop-down menu.
+\item Program deletes the connector.
+\end{my_enumerate}
+\\\hline
+\emph{Entry Condition}
+& User right clicks on the connector.
+\\\hline
+\emph{Exit Condition}
+& Connector has been deleted.
+\\\hline
+\emph{Quality Requirements}
 & TBD
 \\\hline
 \end{tabular}
 \end{flushleft}
 \bigskip
+
 
 
 \clearpage
@@ -1117,7 +1351,7 @@ Several processes are required to manage projects. These include the saving of f
 \paragraph[Input/Output sequence for this feature]{\rmfamily\bfseries
 Input/Output sequence for this feature}
 {
-The user selects the "File" pull down menu at the top left corner of his or her screen. The options currently supported are "New", "Open", "Revert", "Copy As", "Save", "Save As", and "Delete Project". }
+The user selects the ``File'' pull down menu at the top left corner of his or her screen. The options currently supported are ``New'', ``Open'', ``Revert'', ``Copy As'', ``Save'', ``Save As'', and ``Delete Project''. }
 
 \subparagraph{New}
 {
@@ -1137,11 +1371,11 @@ This creates a new project space. First, the program will be saved. Then the use
 
 \subparagraph{Save}
 {
-This saves the current state of the project into an XML that can later be used to recreate the project state. If the current project does not have a name, the "Save" option will be an alias for the "Save As" option.}
+This saves the current state of the project into an XML that can later be used to recreate the project state. If the current project does not have a name, the ``Save'' option will be an alias for the ``Save As'' option.}
 
 \subparagraph{Save As}
 {
-This creates a new project space and then saves the project state into the new project. In contrast with "Copy As", this option does not affect the previous project. }
+This creates a new project space and then saves the project state into the new project. In contrast with ``Copy As'', this option does not affect the previous project. }
 
 \subparagraph{Delete Project}
 {
