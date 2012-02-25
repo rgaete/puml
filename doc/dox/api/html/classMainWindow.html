@@ -31,6 +31,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -131,10 +132,14 @@ Protected Member Functions</h2></td></tr>
     currentDocument = -1;
 
     <span class="comment">//register the objects</span>
-    registerObject(<span class="keyword">new</span> <a class="code" href="classOvalObject.html">OvalObject</a>);
-    registerObject(<span class="keyword">new</span> <a class="code" href="classStickPersonObject.html">StickPersonObject</a>);
-    registerObject(<span class="keyword">new</span> <a class="code" href="classInteractionConnection.html">InteractionConnection</a>);
-    registerObject(<span class="keyword">new</span> <a class="code" href="classClassConnection.html">ClassConnection</a>);
+    registerObject(<span class="keyword">new</span> <a class="code" href="classOvalObject.html" title="This concrete class is the Oval node.">OvalObject</a>);
+    registerObject(<span class="keyword">new</span> <a class="code" href="classStickPersonObject.html" title="This concrete class is the StickPerson node.">StickPersonObject</a>);
+    <span class="comment">//register connections</span>
+    registerObject(<span class="keyword">new</span> <a class="code" href="classInteractionConnection.html" title="This concrete class defines an Interaction line in a Use Case diagram (line from the actor to the use...">InteractionConnection</a>);
+    registerObject(<span class="keyword">new</span> <a class="code" href="classExtendsConnection.html" title="This concrete class defines an Extends line in a Use Case diagram (line from the actor to the use cas...">ExtendsConnection</a>);
+    registerObject(<span class="keyword">new</span> <a class="code" href="classIncludesConnection.html">IncludesConnection</a>);
+    registerObject(<span class="keyword">new</span> <a class="code" href="classClassConnection.html" title="This concrete class defines ...">ClassConnection</a>);
+
 
     this-&gt;resize(700,500);
     this-&gt;setWindowTitle(tr(<span class="stringliteral">&quot;Phunctional UML Editor&quot;</span>));
@@ -697,7 +702,7 @@ Protected Member Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -706,7 +711,7 @@ Protected Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Feb 16 2012 18:39:47 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 25 2012 11:31:47 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

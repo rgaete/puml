@@ -31,6 +31,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -63,7 +64,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-slots">Public Slots</a> &#124;
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a>  </div>
   <div class="headertitle">
 <div class="title">ConfigDialog Class Reference</div>  </div>
 </div>
@@ -77,9 +79,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Public Slots</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigDialog.html#ac88e5d2ba749853b5cdefde1914a47cf">changePage</a> (QListWidgetItem *current, QListWidgetItem *previous)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigDialog.html#a15477897b7600f2d6ff58ffc9da8f5c1">CloseDialog</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigDialog.html#afd916f44acad42dbb71427214d202d2d">AcceptValue</a> (int diagramenum)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigDialog.html#a2137bab1fa3abcb80782953ff4735e72">accepted</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigDialog.html#a28fcaf732c9f363b30b2fc4a9abd9251">ConfigDialog</a> ()</td></tr>
+<tr><td colspan="2"><h2><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCreateNewPage.html">CreateNewPage</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigDialog.html#acc7fecb5699c8705f166e7019dd96924">Newpage</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCreateOpenPage.html">CreateOpenPage</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigDialog.html#a80b9d2fac9bc78a5d5f7b0b356a64a23">Openpage</a></td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a28fcaf732c9f363b30b2fc4a9abd9251"></a><!-- doxytag: member="ConfigDialog::ConfigDialog" ref="a28fcaf732c9f363b30b2fc4a9abd9251" args="()" -->
@@ -95,46 +103,96 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{
-    contentsWidget = <span class="keyword">new</span> QListWidget;
-    contentsWidget-&gt;setViewMode(QListView::IconMode);
-    contentsWidget-&gt;setIconSize(QSize(96, 84));
-    contentsWidget-&gt;setMovement(QListView::Static);
-    contentsWidget-&gt;setMaximumWidth(128);
-    contentsWidget-&gt;setSpacing(12);
+<div class="fragment"><pre class="fragment">                           {
+  contentsWidget = <span class="keyword">new</span> QListWidget;
+  contentsWidget-&gt;setViewMode(QListView::IconMode);
+  contentsWidget-&gt;setIconSize(QSize(96, 84));
+  contentsWidget-&gt;setMovement(QListView::Static);
+  contentsWidget-&gt;setMaximumWidth(128);
+  contentsWidget-&gt;setSpacing(12);
 
-    pagesWidget = <span class="keyword">new</span> QStackedWidget;
-    pagesWidget-&gt;addWidget(<span class="keyword">new</span> <a class="code" href="classCreateNewPage.html">CreateNewPage</a>);
-    pagesWidget-&gt;addWidget(<span class="keyword">new</span> <a class="code" href="classCreateOpenPage.html">CreateOpenPage</a>);
+  <a class="code" href="classConfigDialog.html#acc7fecb5699c8705f166e7019dd96924">Newpage</a> = <span class="keyword">new</span> <a class="code" href="classCreateNewPage.html">CreateNewPage</a>;
+  <a class="code" href="classConfigDialog.html#a80b9d2fac9bc78a5d5f7b0b356a64a23">Openpage</a> = <span class="keyword">new</span> <a class="code" href="classCreateOpenPage.html">CreateOpenPage</a>;
 
-    QPushButton *closeButton = <span class="keyword">new</span> QPushButton(tr(<span class="stringliteral">&quot;Cancel&quot;</span>));
+  pagesWidget = <span class="keyword">new</span> QStackedWidget;
+  pagesWidget-&gt;addWidget(<a class="code" href="classConfigDialog.html#acc7fecb5699c8705f166e7019dd96924">Newpage</a>);
+  pagesWidget-&gt;addWidget(<a class="code" href="classConfigDialog.html#a80b9d2fac9bc78a5d5f7b0b356a64a23">Openpage</a>);
 
-    createIcons();
-    contentsWidget-&gt;setCurrentRow(0);
+  QPushButton *closeButton = <span class="keyword">new</span> QPushButton(tr(<span class="stringliteral">&quot;Cancel&quot;</span>));
 
-    connect(closeButton, SIGNAL(clicked()), <span class="keyword">this</span>, SLOT(close()));
+  createIcons();
+  contentsWidget-&gt;setCurrentRow(0);
 
-    QHBoxLayout *horizontalLayout = <span class="keyword">new</span> QHBoxLayout;
-    horizontalLayout-&gt;addWidget(contentsWidget);
-    horizontalLayout-&gt;addWidget(pagesWidget, 1);
+  connect(closeButton, SIGNAL(clicked()), <span class="keyword">this</span>, SLOT(close()));
 
-    QHBoxLayout *buttonsLayout = <span class="keyword">new</span> QHBoxLayout;
-    buttonsLayout-&gt;addStretch(1);
-    buttonsLayout-&gt;addWidget(closeButton);
+  QHBoxLayout *horizontalLayout = <span class="keyword">new</span> QHBoxLayout;
+  horizontalLayout-&gt;addWidget(contentsWidget);
+  horizontalLayout-&gt;addWidget(pagesWidget, 1);
 
-    QVBoxLayout *mainLayout = <span class="keyword">new</span> QVBoxLayout;
-    mainLayout-&gt;addLayout(horizontalLayout);
-    mainLayout-&gt;addStretch(1);
-    mainLayout-&gt;addSpacing(12);
-    mainLayout-&gt;addLayout(buttonsLayout);
-    setLayout(mainLayout);
+  QHBoxLayout *buttonsLayout = <span class="keyword">new</span> QHBoxLayout;
+  buttonsLayout-&gt;addStretch(1);
+  buttonsLayout-&gt;addWidget(closeButton);
 
-    setWindowTitle(tr(<span class="stringliteral">&quot;Intro Program Options&quot;</span>));
+  QVBoxLayout *mainLayout = <span class="keyword">new</span> QVBoxLayout;
+  mainLayout-&gt;addLayout(horizontalLayout);
+  mainLayout-&gt;addStretch(1);
+  mainLayout-&gt;addSpacing(12);
+  mainLayout-&gt;addLayout(buttonsLayout);
+  setLayout(mainLayout);
+
+  setWindowTitle(tr(<span class="stringliteral">&quot;Intro Program Options&quot;</span>));
+
+  <span class="comment">// under construction</span>
+  <span class="comment">// the connection between the parent and the children</span>
+  connect(<a class="code" href="classConfigDialog.html#acc7fecb5699c8705f166e7019dd96924">Newpage</a>,SIGNAL(return_to_parent(<span class="keywordtype">int</span>)),  <span class="comment">// NOLINT</span>
+          <span class="keyword">this</span>, SLOT(<a class="code" href="classConfigDialog.html#afd916f44acad42dbb71427214d202d2d">AcceptValue</a>(<span class="keywordtype">int</span>)));  <span class="comment">// NOLINT</span>
+  connect(<a class="code" href="classConfigDialog.html#a80b9d2fac9bc78a5d5f7b0b356a64a23">Openpage</a>,SIGNAL(return_to_parent(<span class="keywordtype">int</span>)),  <span class="comment">// NOLINT</span>
+          <span class="keyword">this</span>, SLOT(<a class="code" href="classConfigDialog.html#afd916f44acad42dbb71427214d202d2d">AcceptValue</a>(<span class="keywordtype">int</span>)));  <span class="comment">// NOLINT</span>
 }
 </pre></div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a2137bab1fa3abcb80782953ff4735e72"></a><!-- doxytag: member="ConfigDialog::accepted" ref="a2137bab1fa3abcb80782953ff4735e72" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ConfigDialog::accepted </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [slot]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                            {
+  <span class="comment">// emit newDiagramType(BaseNode::UseCase);</span>
+}
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="afd916f44acad42dbb71427214d202d2d"></a><!-- doxytag: member="ConfigDialog::AcceptValue" ref="afd916f44acad42dbb71427214d202d2d" args="(int diagramenum)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ConfigDialog::AcceptValue </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>diagramenum</em></td><td>)</td>
+          <td><code> [slot]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                              {
+  cout &lt;&lt; diagramenum &lt;&lt;endl;
+  <a class="code" href="classConfigDialog.html#a15477897b7600f2d6ff58ffc9da8f5c1">CloseDialog</a>();
+}
+</pre></div>
+</div>
+</div>
 <a class="anchor" id="ac88e5d2ba749853b5cdefde1914a47cf"></a><!-- doxytag: member="ConfigDialog::changePage" ref="ac88e5d2ba749853b5cdefde1914a47cf" args="(QListWidgetItem *current, QListWidgetItem *previous)" -->
 <div class="memitem">
 <div class="memproto">
@@ -159,11 +217,11 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{
-    <span class="keywordflow">if</span> (!current)
-        current = previous;
+<div class="fragment"><pre class="fragment">                                                         {
+  <span class="keywordflow">if</span> (!current)
+    current = previous;
 
-    pagesWidget-&gt;setCurrentIndex(contentsWidget-&gt;row(current));
+  pagesWidget-&gt;setCurrentIndex(contentsWidget-&gt;row(current));
 }
 </pre></div>
 </div>
@@ -181,10 +239,37 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{
-
+<div class="fragment"><pre class="fragment">                               {
+  close();
 }
 </pre></div>
+</div>
+</div>
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="acc7fecb5699c8705f166e7019dd96924"></a><!-- doxytag: member="ConfigDialog::Newpage" ref="acc7fecb5699c8705f166e7019dd96924" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classCreateNewPage.html">CreateNewPage</a>* <a class="el" href="classConfigDialog.html#acc7fecb5699c8705f166e7019dd96924">ConfigDialog::Newpage</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a80b9d2fac9bc78a5d5f7b0b356a64a23"></a><!-- doxytag: member="ConfigDialog::Openpage" ref="a80b9d2fac9bc78a5d5f7b0b356a64a23" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classCreateOpenPage.html">CreateOpenPage</a>* <a class="el" href="classConfigDialog.html#a80b9d2fac9bc78a5d5f7b0b356a64a23">ConfigDialog::Openpage</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
@@ -197,7 +282,7 @@ Public Member Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -206,7 +291,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Feb 16 2012 18:39:47 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 25 2012 11:31:47 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -31,6 +31,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -69,7 +70,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="OvalObject" --><!-- doxytag: inherits="ObjectNode" -->
-<p><code>#include &lt;<a class="el" href="UMLnodes_8h_source.html">UMLnodes.h</a>&gt;</code></p>
+<p>This concrete class is the Oval node.  
+ <a href="classOvalObject.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="UMLnodes__usecase_8h_source.html">UMLnodes_usecase.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for OvalObject:</div>
 <div class="dyncontent">
@@ -93,6 +97,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QDialog *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOvalObject.html#a29f690a35240ec93437cbfb483343ee5">getDialog</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOvalObject.html#a8fe7f02bdd2ebe2b649d130f0de42ad4">getIconPath</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOvalObject.html#ae3ad4cdff1ebf931d136bdcd974878d2">getText</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">DiagramType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOvalObject.html#ab97624ddcc91bf45a8bdf2f207f1dca0">getDiagramType</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOvalObject.html#aa60cb82c3c78097ca70dc7242b120f87">draw</a> (QPainter &amp;painter)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
@@ -188,6 +193,25 @@ Public Member Functions</h2></td></tr>
 </pre></div>
 </div>
 </div>
+<a class="anchor" id="ab97624ddcc91bf45a8bdf2f207f1dca0"></a><!-- doxytag: member="OvalObject::getDiagramType" ref="ab97624ddcc91bf45a8bdf2f207f1dca0" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">DiagramType</a> OvalObject::getDiagramType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Implements <a class="el" href="classBaseNode.html#aa525a20992c4179349a1812b0b9dacd6">BaseNode</a>.</p>
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda8c7df3c6e052df3f1ab6f0025a348a7a">UseCase</a>; }
+</pre></div>
+</div>
+</div>
 <a class="anchor" id="a29f690a35240ec93437cbfb483343ee5"></a><!-- doxytag: member="OvalObject::getDialog" ref="a29f690a35240ec93437cbfb483343ee5" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -204,7 +228,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classBaseNode.html#a990ffea58e51f55cfa8c6862b79fd880">BaseNode</a>.</p>
 <div class="fragment"><pre class="fragment">{
-    <a class="code" href="classOvalObjectDialog.html">OvalObjectDialog</a> *dialog = <span class="keyword">new</span> <a class="code" href="classOvalObjectDialog.html">OvalObjectDialog</a>;
+    <a class="code" href="classOvalObjectDialog.html" title="This defines a custom dialog for a OvalObject.">OvalObjectDialog</a> *dialog = <span class="keyword">new</span> <a class="code" href="classOvalObjectDialog.html" title="This defines a custom dialog for a OvalObject.">OvalObjectDialog</a>;
     dialog-&gt;setTextValue(name);
     connect(dialog,SIGNAL(textValueSelected(QString)),<span class="keyword">this</span>,SLOT(<a class="code" href="classOvalObject.html#ac5324b5a29d4399a68a484a1275fe8b7">setName</a>(QString)));
     <span class="keywordflow">return</span> dialog;
@@ -246,7 +270,7 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Implements <a class="el" href="classBaseNode.html#a86bd186e3435098add1b9bdd79e25cdb">BaseNode</a>.</p>
-<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;Oval&quot;</span>; }
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;Use Case&quot;</span>; }
 </pre></div>
 </div>
 </div>
@@ -269,8 +293,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/logan/Programming/puml/src/<a class="el" href="UMLnodes_8h_source.html">UMLnodes.h</a></li>
-<li>/home/logan/Programming/puml/src/<a class="el" href="UMLnodes_8cpp.html">UMLnodes.cpp</a></li>
+<li>/home/logan/Programming/puml/src/<a class="el" href="UMLnodes__usecase_8h_source.html">UMLnodes_usecase.h</a></li>
+<li>/home/logan/Programming/puml/src/<a class="el" href="UMLnodes__usecase_8cpp.html">UMLnodes_usecase.cpp</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -278,7 +302,7 @@ Public Member Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -287,7 +311,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Feb 16 2012 18:39:47 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 25 2012 11:31:47 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

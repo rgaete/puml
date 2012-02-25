@@ -31,6 +31,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -62,37 +63,43 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">/home/logan/Programming/puml/src/dialog.h</div>  </div>
 </div>
 <div class="contents">
-<a href="dialog_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef DIALOGUE_H</span>
-<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define DIALOGUE_H</span>
-<a name="l00003"></a>00003 <span class="preprocessor"></span>
-<a name="l00004"></a>00004 <span class="preprocessor">#include &lt;QDialog&gt;</span>
-<a name="l00005"></a>00005 
-<a name="l00006"></a>00006 QT_BEGIN_NAMESPACE
-<a name="l00007"></a>00007 <span class="keyword">class </span>QListWidget;
-<a name="l00008"></a>00008 <span class="keyword">class </span>QListWidgetItem;
-<a name="l00009"></a>00009 <span class="keyword">class </span>QStackedWidget;
-<a name="l00010"></a>00010 QT_END_NAMESPACE
-<a name="l00011"></a>00011 
-<a name="l00012"></a><a class="code" href="classConfigDialog.html">00012</a> <span class="keyword">class </span><a class="code" href="classConfigDialog.html">ConfigDialog</a> : <span class="keyword">public</span> QDialog
-<a name="l00013"></a>00013 {
-<a name="l00014"></a>00014     Q_OBJECT
-<a name="l00015"></a>00015 
-<a name="l00016"></a>00016 <span class="keyword">public</span>:
-<a name="l00017"></a>00017     <a class="code" href="classConfigDialog.html#a28fcaf732c9f363b30b2fc4a9abd9251">ConfigDialog</a>();
-<a name="l00018"></a>00018 
-<a name="l00019"></a>00019 <span class="keyword">public</span> slots:
-<a name="l00020"></a>00020     <span class="keywordtype">void</span> <a class="code" href="classConfigDialog.html#ac88e5d2ba749853b5cdefde1914a47cf">changePage</a>(QListWidgetItem *current, QListWidgetItem *previous);
-<a name="l00021"></a>00021     <span class="keywordtype">void</span> <a class="code" href="classConfigDialog.html#a15477897b7600f2d6ff58ffc9da8f5c1">CloseDialog</a>();
-<a name="l00022"></a>00022 
-<a name="l00023"></a>00023 <span class="keyword">private</span>:
-<a name="l00024"></a>00024     <span class="keywordtype">void</span> createIcons();
-<a name="l00025"></a>00025 
-<a name="l00026"></a>00026     QListWidget *contentsWidget;
-<a name="l00027"></a>00027     QStackedWidget *pagesWidget;
-<a name="l00028"></a>00028 };
-<a name="l00029"></a>00029 
-<a name="l00030"></a>00030 <span class="preprocessor">#endif // DIALOGUE_H</span>
-<a name="l00031"></a>00031 <span class="preprocessor"></span>
+<a href="dialog_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">// Copyright (C) 2011-2012 pUML Group</span>
+<a name="l00002"></a>00002 
+<a name="l00003"></a>00003 <span class="preprocessor">#ifndef SRC_DIALOG_H_</span>
+<a name="l00004"></a>00004 <span class="preprocessor"></span><span class="preprocessor">#define SRC_DIALOG_H_</span>
+<a name="l00005"></a>00005 <span class="preprocessor"></span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;QDialog&gt;</span>
+<a name="l00007"></a>00007 
+<a name="l00008"></a>00008 <span class="preprocessor">#include &quot;<a class="code" href="dialog_8h.html">./dialog.h</a>&quot;</span>
+<a name="l00009"></a>00009 <span class="preprocessor">#include &quot;<a class="code" href="dialogpages_8h.html">./dialogpages.h</a>&quot;</span>
+<a name="l00010"></a>00010 
+<a name="l00011"></a>00011 QT_BEGIN_NAMESPACE
+<a name="l00012"></a>00012 <span class="keyword">class </span>QListWidget;
+<a name="l00013"></a>00013 <span class="keyword">class </span>QListWidgetItem;
+<a name="l00014"></a>00014 <span class="keyword">class </span>QStackedWidget;
+<a name="l00015"></a>00015 QT_END_NAMESPACE
+<a name="l00016"></a>00016 
+<a name="l00017"></a><a class="code" href="classConfigDialog.html">00017</a> <span class="keyword">class </span><a class="code" href="classConfigDialog.html">ConfigDialog</a> : <span class="keyword">public</span> QDialog {
+<a name="l00018"></a>00018   Q_OBJECT
+<a name="l00019"></a>00019 
+<a name="l00020"></a>00020   <span class="keyword">public</span>:
+<a name="l00021"></a>00021     <a class="code" href="classConfigDialog.html#a28fcaf732c9f363b30b2fc4a9abd9251">ConfigDialog</a>();
+<a name="l00022"></a><a class="code" href="classConfigDialog.html#acc7fecb5699c8705f166e7019dd96924">00022</a>     <a class="code" href="classCreateNewPage.html">CreateNewPage</a> *<a class="code" href="classConfigDialog.html#acc7fecb5699c8705f166e7019dd96924">Newpage</a>;
+<a name="l00023"></a><a class="code" href="classConfigDialog.html#a80b9d2fac9bc78a5d5f7b0b356a64a23">00023</a>     <a class="code" href="classCreateOpenPage.html">CreateOpenPage</a> *<a class="code" href="classConfigDialog.html#a80b9d2fac9bc78a5d5f7b0b356a64a23">Openpage</a>;
+<a name="l00024"></a>00024 
+<a name="l00025"></a>00025   <span class="keyword">public</span> slots:
+<a name="l00026"></a>00026     <span class="keywordtype">void</span> <a class="code" href="classConfigDialog.html#ac88e5d2ba749853b5cdefde1914a47cf">changePage</a>(QListWidgetItem *current, QListWidgetItem *previous);
+<a name="l00027"></a>00027     <span class="keywordtype">void</span> <a class="code" href="classConfigDialog.html#a15477897b7600f2d6ff58ffc9da8f5c1">CloseDialog</a>();
+<a name="l00028"></a>00028     <span class="keywordtype">void</span> <a class="code" href="classConfigDialog.html#afd916f44acad42dbb71427214d202d2d">AcceptValue</a>(<span class="keywordtype">int</span> diagramenum);
+<a name="l00029"></a>00029     <span class="keywordtype">void</span> <a class="code" href="classConfigDialog.html#a2137bab1fa3abcb80782953ff4735e72">accepted</a>();
+<a name="l00030"></a>00030 
+<a name="l00031"></a>00031   <span class="keyword">private</span>:
+<a name="l00032"></a>00032     <span class="keywordtype">void</span> createIcons();
+<a name="l00033"></a>00033     QListWidget *contentsWidget;
+<a name="l00034"></a>00034     QStackedWidget *pagesWidget;
+<a name="l00035"></a>00035 };
+<a name="l00036"></a>00036 
+<a name="l00037"></a>00037 <span class="preprocessor">#endif  // SRC_DIALOG_H_</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -100,7 +107,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -109,7 +116,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Feb 16 2012 18:39:46 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 25 2012 11:31:46 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

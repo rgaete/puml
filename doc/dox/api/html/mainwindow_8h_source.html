@@ -31,6 +31,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -88,7 +89,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00024"></a>00024 <span class="preprocessor">#include &lt;QGroupBox&gt;</span>
 <a name="l00025"></a>00025 <span class="preprocessor">#include &lt;QButtonGroup&gt;</span>
 <a name="l00026"></a>00026 <span class="preprocessor">#include &lt;map&gt;</span>
-<a name="l00027"></a>00027 <span class="preprocessor">#include &quot;<a class="code" href="UMLnodes_8h.html">UMLnodes.h</a>&quot;</span>
+<a name="l00027"></a>00027 <span class="preprocessor">#include &quot;<a class="code" href="UMLnodes_8h.html" title="Includes all the different types of UML nodes.">UMLnodes.h</a>&quot;</span>
 <a name="l00028"></a>00028 <span class="preprocessor">#include &quot;<a class="code" href="canvas_8h.html">canvas.h</a>&quot;</span>
 <a name="l00029"></a>00029 <span class="preprocessor">#include &quot;<a class="code" href="nodefactory_8h.html">nodefactory.h</a>&quot;</span>
 <a name="l00030"></a>00030 <span class="preprocessor">#include &quot;<a class="code" href="document_8h.html">document.h</a>&quot;</span>
@@ -137,35 +138,35 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00073"></a>00073     <span class="keywordtype">void</span> connectSignalsSlots();
 <a name="l00074"></a>00074     <span class="keywordtype">void</span> registerObject(<a class="code" href="classBaseNode.html">BaseNode</a>* newPrototype);
 <a name="l00075"></a>00075     <span class="keywordtype">void</span> connectCanvasWithDocument(<span class="keywordtype">int</span> canvasIndex, <span class="keywordtype">int</span> documentIndex);
-<a name="l00076"></a>00076 
-<a name="l00077"></a>00077 <span class="keyword">private</span>:
-<a name="l00079"></a>00079     QTabWidget *tabWidget;
-<a name="l00080"></a>00080     <span class="comment">//This vector could probably be safely removed.</span>
-<a name="l00081"></a>00081     vector&lt;QAction*&gt; actions;
-<a name="l00083"></a>00083     vector&lt;Document*&gt; documents;
-<a name="l00085"></a>00085     vector&lt;Canvas*&gt; canvases;
-<a name="l00087"></a>00087     <span class="keywordtype">int</span> currentDocument;
-<a name="l00089"></a>00089     QStatusBar *statusBar;
-<a name="l00092"></a>00092     map&lt;int,int&gt; tabToCanvasMappings;
-<a name="l00093"></a>00093 
-<a name="l00094"></a>00094     QToolBar *mainToolBar;
-<a name="l00095"></a>00095     QLabel *toolbarLabel;
-<a name="l00096"></a>00096 
-<a name="l00097"></a>00097     QActionGroup *toolsActionGroup;
-<a name="l00098"></a>00098     QActionGroup *connectorsActionGroup;
-<a name="l00099"></a>00099     QAction *actionNew;
-<a name="l00100"></a>00100     QAction *actionOpen;
-<a name="l00101"></a>00101     QAction *actionSave;
-<a name="l00102"></a>00102     QAction *actionSave_As;
-<a name="l00103"></a>00103     QAction *actionPrint;
-<a name="l00104"></a>00104     QAction *actionImport_Export;
-<a name="l00105"></a>00105     QAction *actionExit;
-<a name="l00106"></a>00106     QAction *actionCopy;
-<a name="l00107"></a>00107     QAction *actionCut;
-<a name="l00108"></a>00108     QAction *actionPaste;
-<a name="l00109"></a>00109     QAction *actionSelect_All;
-<a name="l00110"></a>00110     QAction *actionInverse_Select;
-<a name="l00111"></a>00111     <span class="comment">//QActionGroup *Shapes_Connectors;</span>
+<a name="l00076"></a>00076     <span class="keywordtype">void</span> setDiagramType(<a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">BaseNode::DiagramType</a> type);
+<a name="l00077"></a>00077 
+<a name="l00078"></a>00078 <span class="keyword">private</span>:
+<a name="l00080"></a>00080     QTabWidget *tabWidget;
+<a name="l00081"></a>00081     <span class="comment">//This vector could probably be safely removed.</span>
+<a name="l00082"></a>00082     vector&lt;NodeAction*&gt; actions;
+<a name="l00084"></a>00084     vector&lt;Document*&gt; documents;
+<a name="l00086"></a>00086     vector&lt;Canvas*&gt; canvases;
+<a name="l00088"></a>00088     <span class="keywordtype">int</span> currentDocument;
+<a name="l00090"></a>00090     QStatusBar *statusBar;
+<a name="l00093"></a>00093     map&lt;int,int&gt; tabToCanvasMappings;
+<a name="l00094"></a>00094 
+<a name="l00095"></a>00095     QToolBar *mainToolBar;
+<a name="l00096"></a>00096     QLabel *toolbarLabel;
+<a name="l00097"></a>00097 
+<a name="l00098"></a>00098     QActionGroup *toolsActionGroup;
+<a name="l00099"></a>00099     QActionGroup *connectorsActionGroup;
+<a name="l00100"></a>00100     QAction *actionNew;
+<a name="l00101"></a>00101     QAction *actionOpen;
+<a name="l00102"></a>00102     QAction *actionSave;
+<a name="l00103"></a>00103     QAction *actionSave_As;
+<a name="l00104"></a>00104     QAction *actionPrint;
+<a name="l00105"></a>00105     QAction *actionImport_Export;
+<a name="l00106"></a>00106     QAction *actionExit;
+<a name="l00107"></a>00107     QAction *actionCopy;
+<a name="l00108"></a>00108     QAction *actionCut;
+<a name="l00109"></a>00109     QAction *actionPaste;
+<a name="l00110"></a>00110     QAction *actionSelect_All;
+<a name="l00111"></a>00111     QAction *actionInverse_Select;
 <a name="l00112"></a>00112     QAction *actionDocument;
 <a name="l00113"></a>00113     QAction *actionAbout;
 <a name="l00114"></a>00114     QAction *actionDelete;
@@ -194,7 +195,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -203,7 +204,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Feb 16 2012 18:39:46 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 25 2012 11:31:46 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -31,6 +31,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -68,7 +69,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="ClassConnection" --><!-- doxytag: inherits="ConnectionNode" -->
-<p><code>#include &lt;<a class="el" href="UMLnodes_8h_source.html">UMLnodes.h</a>&gt;</code></p>
+<p>This concrete class defines ...  
+ <a href="classClassConnection.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="UMLnodes__class_8h_source.html">UMLnodes_class.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for ClassConnection:</div>
 <div class="dyncontent">
@@ -90,8 +94,11 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassConnection.html#a184ce5f8a22bc86f2ccdaaacebab56af">getIconPath</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassConnection.html#a9f0bbaf7cd96b2795a70a35a38c7218e">getText</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassConnection.html#a75aedc5d6fe145418adb22022330d1af">draw</a> (QPainter &amp;painter)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">DiagramType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassConnection.html#aebb0eeacd4af5359e488e8fc518c21de">getDiagramType</a> ()</td></tr>
 </table>
-<hr/><h2>Member Function Documentation</h2>
+<hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
+<div class="textblock"><p>This concrete class defines ... </p>
+</div><hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a187afc5a2a1089c579511170c331653a"></a><!-- doxytag: member="ClassConnection::clone" ref="a187afc5a2a1089c579511170c331653a" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -107,7 +114,7 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Implements <a class="el" href="classBaseNode.html#a78866f78aa92c207f9d0ea1861e15b13">BaseNode</a>.</p>
-<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classClassConnection.html">ClassConnection</a>; }
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classClassConnection.html" title="This concrete class defines ...">ClassConnection</a>; }
 </pre></div>
 </div>
 </div>
@@ -127,37 +134,57 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Implements <a class="el" href="classBaseNode.html#a79627d9a052108d60082dddbd60dfb02">BaseNode</a>.</p>
-<div class="fragment"><pre class="fragment">{
-    QPoint pt1, pt2, pt3, pt4;
-    <a class="code" href="classBaseNode.html">BaseNode</a> *obj1, *obj2;
-    list&lt;BaseNode*&gt;::iterator it = <a class="code" href="classBaseNode.html#a0477b85b623dfb8e7ac8631472b17ef1">connectedObjects</a>.begin();
-    obj1 = *(it);
-    it++;
-    obj2 = *(it);
+<div class="fragment"><pre class="fragment">                                            {  <span class="comment">// NOLINT</span>
+  <a class="code" href="classBaseNode.html">BaseNode</a> *obj1, *obj2;
+  list&lt;BaseNode*&gt;::iterator it = <a class="code" href="classBaseNode.html#a0477b85b623dfb8e7ac8631472b17ef1">connectedObjects</a>.begin();
+  obj1 = *(it);
+  it++;
+  obj2 = *(it);
 
-    pt1 = obj1-&gt;<a class="code" href="classBaseNode.html#ac0a992931fa5e310251c25e28acd210c">getClosestConnectionPoint</a>(obj2-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>());
-    pt4 = obj2-&gt;<a class="code" href="classBaseNode.html#ac0a992931fa5e310251c25e28acd210c">getClosestConnectionPoint</a>(obj1-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>());
-
-    <span class="keywordflow">if</span>(pt1.x()==obj1-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>().x()) <span class="comment">//North or South connection</span>
-    {
-
-        pt2.setY((pt4.y()+pt1.y())/2);
-        pt2.setX(pt1.x());
-        pt3.setX(pt4.x());
-        pt3.setY(pt2.y());
-    }
-    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(pt1.x()!=obj1-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>().x()) <span class="comment">//East or West connection</span>
-    {
-        pt2.setY(pt1.y());
-        pt2.setX((pt1.x()+pt4.x())/2);
-        pt3.setX(pt2.x());
-        pt3.setY(pt4.y());
-    }
-    painter.setPen(Qt::black);
+  pt1 = obj1-&gt;<a class="code" href="classBaseNode.html#ac0a992931fa5e310251c25e28acd210c">getClosestConnectionPoint</a>(obj2-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>());
+  pt4 = obj2-&gt;<a class="code" href="classBaseNode.html#ac0a992931fa5e310251c25e28acd210c">getClosestConnectionPoint</a>(obj1-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>());
+  painter.setPen(Qt::black);
+  <span class="keywordflow">if</span> (pt1.x() == obj1 -&gt; <a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>().x()) {  <span class="comment">// North or South connection</span>
+    pt2.setY((pt4.y() + pt1.y()) / 2);
+    pt2.setX(pt1.x());
+    pt3.setX(pt4.x());
+    pt3.setY(pt2.y());
+  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (pt1.x() != obj1-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>().x()) {  <span class="comment">// East or West connection</span>
+    pt2.setY(pt1.y());
+    pt2.setX((pt1.x() + pt4.x()) / 2);
+    pt3.setX(pt2.x());
+    pt3.setY(pt4.y());
+  }
+  <span class="keywordflow">if</span> (<a class="code" href="classBaseNode.html#a321a3231c6688686d5ee779ab169b741">selected</a> == <span class="keyword">true</span>) {
+    QPen selectPen;
+    selectPen.setWidth(2);
+    selectPen.setColor(Qt::blue);
+    painter.setPen(selectPen);
     painter.drawLine(pt1, pt2);
-    painter.drawLine(pt2, pt3);
-    painter.drawLine(pt3, pt4);
+  }
+  painter.drawLine(pt1, pt2);
+  painter.drawLine(pt2, pt3);
+  painter.drawLine(pt3, pt4);
 }
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="aebb0eeacd4af5359e488e8fc518c21de"></a><!-- doxytag: member="ClassConnection::getDiagramType" ref="aebb0eeacd4af5359e488e8fc518c21de" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">DiagramType</a> ClassConnection::getDiagramType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Implements <a class="el" href="classBaseNode.html#aa525a20992c4179349a1812b0b9dacd6">BaseNode</a>.</p>
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda8de03f85f228905b24b6ced5f8037a69">Class</a>; }
 </pre></div>
 </div>
 </div>
@@ -176,7 +203,7 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Implements <a class="el" href="classBaseNode.html#a990ffea58e51f55cfa8c6862b79fd880">BaseNode</a>.</p>
-<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classInteractionConnectionDialog.html">InteractionConnectionDialog</a>; }
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classClassConnectionDialog.html" title="The properties dialog for class connections.">ClassConnectionDialog</a>; }
 </pre></div>
 </div>
 </div>
@@ -227,20 +254,62 @@ Public Member Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">const QPoint &amp;&#160;</td>
           <td class="paramname"><em>point</em></td><td>)</td>
-          <td><code> [inline, virtual]</code></td>
+          <td><code> [virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
 <p>Implements <a class="el" href="classBaseNode.html#a6ba6b3ac267709d4d4d8bed400d7a47b">BaseNode</a>.</p>
-<div class="fragment"><pre class="fragment">{<span class="keywordflow">return</span> <span class="keyword">false</span>;}
+<div class="fragment"><pre class="fragment">                                                 {
+  <a class="code" href="classBaseNode.html">BaseNode</a> *obj1, *obj2;
+  list&lt;BaseNode*&gt;::iterator it = <a class="code" href="classBaseNode.html#a0477b85b623dfb8e7ac8631472b17ef1">connectedObjects</a>.begin();
+  obj1 = *(it);
+  it++;
+  obj2 = *(it);
+
+  <span class="keywordflow">if</span> (pt1.x() != obj1-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>().x()) {  <span class="comment">// East or West connection</span>
+    <span class="keywordflow">if</span> ((fabs(point.x() - ((pt1.x() + pt4.x()) / 2.0)) &lt; 15.0) &amp;&amp;
+      ((point.y() &lt; pt1.y() &amp;&amp; point.y() &gt; pt4.y()) ||
+       (point.y() &gt; pt1.y() &amp;&amp; point.y() &lt; pt4.y()))) {
+      <span class="keywordflow">return</span> <span class="keyword">true</span>;
+    }
+    <span class="keywordflow">if</span> ((fabs(point.y() - <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>pt1.y()) &lt; 15.0) &amp;&amp;
+        ((point.x() &lt; pt1.x() &amp;&amp; point.x() &gt; pt2.x()) ||
+         (point.x() &gt; pt1.x() &amp;&amp; point.x() &lt; pt2.x()))) {
+      <span class="keywordflow">return</span> <span class="keyword">true</span>;
+    }
+    <span class="keywordflow">if</span> ((fabs(point.y() - <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>pt4.y()) &lt; 15.0) &amp;&amp;
+        ((point.x() &lt; pt3.x() &amp;&amp; point.x() &gt; pt4.x()) ||
+         (point.x() &gt; pt3.x() &amp;&amp; point.x() &lt; pt4.x()))) {
+      <span class="keywordflow">return</span> <span class="keyword">true</span>;
+    }
+  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (pt1.x() == obj1-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>().x()) {  <span class="comment">// North or South</span>
+                                                    <span class="comment">// connection</span>
+    <span class="keywordflow">if</span> ((fabs(point.y()-((pt1.y() + pt4.y()) / 2.0)) &lt; 15.0) &amp;&amp;
+        ((point.x() &lt; pt1.x() &amp;&amp; point.x() &gt; pt4.x()) ||
+         (point.x() &gt; pt1.x() &amp;&amp; point.x() &lt; pt4.x()))) {
+      <span class="keywordflow">return</span> <span class="keyword">true</span>;
+    }
+    <span class="keywordflow">if</span> ((fabs(point.x() - <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>pt1.x()) &lt; 15.0) &amp;&amp;
+        ((point.y() &lt; pt1.y() &amp;&amp; point.y() &gt; pt2.y()) ||
+         (point.y() &gt; pt1.y() &amp;&amp; point.y() &lt; pt2.y()))) {
+      <span class="keywordflow">return</span> <span class="keyword">true</span>;
+    }
+    <span class="keywordflow">if</span> ((fabs(point.x() - <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>pt4.x()) &lt; 15.0) &amp;&amp;
+        ((point.y() &lt; pt3.y() &amp;&amp; point.y() &gt; pt4.y()) ||
+         (point.y() &gt; pt3.y() &amp;&amp; point.y() &lt; pt4.y()))) {
+      <span class="keywordflow">return</span> <span class="keyword">true</span>;
+    }
+  }
+  <span class="keywordflow">return</span> <span class="keyword">false</span>;
+}
 </pre></div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/logan/Programming/puml/src/<a class="el" href="UMLnodes_8h_source.html">UMLnodes.h</a></li>
-<li>/home/logan/Programming/puml/src/<a class="el" href="UMLnodes_8cpp.html">UMLnodes.cpp</a></li>
+<li>/home/logan/Programming/puml/src/<a class="el" href="UMLnodes__class_8h_source.html">UMLnodes_class.h</a></li>
+<li>/home/logan/Programming/puml/src/<a class="el" href="UMLnodes__class_8cpp.html">UMLnodes_class.cpp</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -248,7 +317,7 @@ Public Member Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -257,7 +326,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Feb 16 2012 18:39:47 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 25 2012 11:31:47 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

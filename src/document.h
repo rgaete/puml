@@ -1,17 +1,17 @@
+// Copyright (C) 2011-2012 pUML Group
 
-#ifndef DOCUMENT_H
-#define DOCUMENT_H
+#ifndef SRC_DOCUMENT_H_
+#define SRC_DOCUMENT_H_
 
-#include "nodes.h"
-#include "nodefactory.h"
-#include "assert.h"
+#include <assert.h>
+#include <vector>
+#include "./nodes.h"
+#include "./nodefactory.h"
 
+class Document : public QObject {
+  Q_OBJECT
 
-class Document : public QObject
-{
-    Q_OBJECT
-
-public:
+  public:
     Document();
     ~Document();
     void addNode(BaseNode *newNode) { nodes.push_back(newNode); }
@@ -19,28 +19,30 @@ public:
     int getNewObjectID() { return newObjectID; }
     int getCanvasIndex() { return canvasIndex; }
     void setCanvasIndex(int index) { canvasIndex = index; }
-private:
+
+  private:
     int getIndexAt(const QPoint &point);
 
-    //! The main vector of nodes
+    // The main vector of nodes
     vector<BaseNode*> nodes;
-    //! The index of the selected object, -1 if nothing's selected
+    // The index of the selected object, -1 if nothing's selected
     int indexOfSelectedObject;
-    //! The prototypeID of the next object to create
+    // The prototypeID of the next object to create
     int newObjectID;
-    //! The difference between where a user clicked on the
-    //! object and the actual position of that object
+    // The difference between where a user clicked on the
+    // object and the actual position of that object
     QPoint positionDelta;
-    //! A member variable that could be used to store the index
-    //! the currently connected canvas (Not used yet - 2/13/12)
+    // A member variable that could be used to store the index
+    // the currently connected canvas (Not used yet - 2/13/12)
     int canvasIndex;
-    //! This is the first object when creating a connection node
+    // This is the first object when creating a connection node
     int firstConnectionIndex;
-signals:
+
+  signals:
     void modelChanged();
 
-public slots:
-    void drawList(QPainter &painter);
+  public slots:
+    void drawList(QPainter &painter);  // NOLINT
     void setSelectedObject(const QPoint &point);
     void moveSelectedObject(const QPoint &point);
     void createObject(const QPoint &position);
@@ -49,4 +51,5 @@ public slots:
     void showPropertiesDialog();
     void removeObject();
 };
-#endif // DOCUMENT_H
+
+#endif  // SRC_DOCUMENT_H_
