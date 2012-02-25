@@ -1,43 +1,48 @@
-#ifndef CANVAS_H
-#define CANVAS_H
+// Copyright (C) 2011-2012 pUML Group
+
+#ifndef SRC_CANVAS_H_
+#define SRC_CANVAS_H_
 
 #include <QWidget>
 #include <QTableWidget>
-#include <vector>
-#include <QMouseEvent>
 #include <QMenu>
-#include "nodes.h"
+#include <QMouseEvent>
 
-class Canvas : public QWidget
-{
-    Q_OBJECT
-public:
+#include <vector>
+
+#include "./nodes.h"
+
+class Canvas : public QWidget {
+  Q_OBJECT
+
+  public:
     enum DrawingMode {
         Object,
         Connection,
         Nothing
     };
 
-private:
-    //! The mode the canvas is in, which determines what happens at mouse events
+  private:
+    // The mode the canvas is in, which determines what happens at mouse events
     DrawingMode drawingMode;
-    //! The index of the currently connected document
+    // The index of the currently connected document
     int documentIndex;
-    //! The first point of the line hint
+    // The first point of the line hint
     QPoint lineHint1;
-    //! The second point of the line hint
+    // The second point of the line hint
     QPoint lineHint2;
-    //! True -> draw the line hint, false -> don't draw it.
+    // True -> draw the line hint, false -> don't draw it.
     bool drawLineHint;
 
-    //! The context menu
+    // The context menu
     QMenu *menuPopup;
     QAction *actionDelete;
     QAction *actionCut;
     QAction *actionCopy;
     QAction *actionPaste;
     QAction *actionProperties;
-public:
+
+  public:
     explicit Canvas(QWidget *parent = 0);
     QSize sizeHint() const;
     void setMode(DrawingMode mode);
@@ -45,24 +50,24 @@ public:
     int getDocumentIndex() { return documentIndex; }
     void setDocumentIndex(int docIndex) { documentIndex = docIndex; }
 
-protected:
+  protected:
     void mouseReleaseEvent(QMouseEvent *event);
     void mousePressEvent(QMouseEvent *event);
     void paintEvent(QPaintEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
     void contextMenuEvent(QContextMenuEvent *event);
 
-signals:
+  signals:
     void objectSelectionChange(const QPoint &point);
     void moveSelectedObject(const QPoint &point);
     void createObject(const QPoint &point);
     void createConnectionPoint1(const QPoint &point);
     void createConnectionPoint2(const QPoint &point);
-    void redraw(QPainter &painter);
+    void redraw(QPainter &painter);  // NOLINT
     void showPropertiesDialog();
     void removeObject();
 
-public slots:
+  public slots:
     void on_actionDelete_triggered();
     void on_actionCut_triggered();
     void on_actionCopy_triggered();
@@ -70,4 +75,4 @@ public slots:
     void on_actionProperties_triggered();
 };
 
-#endif // CANVAS_H
+#endif  // SRC_CANVAS_H_
