@@ -20,8 +20,8 @@ double mathfunctions::computeAngle(QPoint p1, QPoint p2) {
 }
 
 double mathfunctions::normalize(QPoint p1, QPoint p2) {
-  double x_length_squared = pow(static_cast<double>p2.x() - p1.x(), 2);
-  double y_length_squared = pow(static_cast<double>p2.y() - p1.y(), 2);
+  double x_length_squared = pow(static_cast<double>(p2.x()) - p1.x(), 2);
+  double y_length_squared = pow(static_cast<double>(p2.y()) - p1.y(), 2);
   return pow((x_length_squared + y_length_squared), 0.5);
 }
 

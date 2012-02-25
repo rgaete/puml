@@ -192,7 +192,7 @@ QDialog * OvalObject::getDialog() {
 
 void InteractionConnection::draw(QPainter& painter) {  // NOLINT
   BaseNode *obj1, *obj2;
-  list<BaseNode*>::iterator it = connectedObjects.begin();
+  std::list<BaseNode*>::iterator it = connectedObjects.begin();
   obj1 = *(it);
   it++;
   obj2 = *(it);
@@ -218,7 +218,7 @@ bool InteractionConnection::hitTest(const QPoint &point) {
   double clickAngle2 = mathfunctions::computeAngle(pt2, point);
   double hypot1 = mathfunctions::normalize(pt1, point);
   double hypot2 = mathfunctions::normalize(pt2, point);
-  double length_of_line = mathfunction::normalize(pt1, pt2);
+  double length_of_line = mathfunctions::normalize(pt1, pt2);
 
   if (((fabs(hypot1 * sin(lineAngle - clickAngle))) < 15.0) &&
       (fabs((hypot1 * (cos(lineAngle - clickAngle)))) < length_of_line) &&
@@ -233,7 +233,7 @@ bool InteractionConnection::hitTest(const QPoint &point) {
 void ExtendsConnection::draw(QPainter &painter) {  // NOLINT
   double lineangle = mathfunctions::computeAngle(pt1, pt2);
   BaseNode *obj1, *obj2;
-  list<BaseNode*>::iterator it = connectedObjects.begin();
+  std::list<BaseNode*>::iterator it = connectedObjects.begin();
   obj1 = *(it);
   it++;
   obj2 = *(it);
@@ -284,7 +284,7 @@ bool ExtendsConnection::hitTest(const QPoint &point) {
   double clickAngle2 = mathfunctions::computeAngle(pt2, point);
   double hypot1 = mathfunctions::normalize(pt1, point);
   double hypot2 = mathfunctions::normalize(pt2, point);
-  double length_of_line = mathfunctions::nomralize(pt1, pt2);
+  double length_of_line = mathfunctions::normalize(pt1, pt2);
 
   if (((fabs(hypot1 * sin(lineAngle - clickAngle))) < 15.0) &&
       (fabs((hypot1 * (cos(lineAngle - clickAngle)))) < length_of_line) &&
@@ -300,7 +300,7 @@ bool ExtendsConnection::hitTest(const QPoint &point) {
 void IncludesConnection::draw(QPainter &painter) {  // NOLINT
   double lineangle = mathfunctions::computeAngle(pt1, pt2);
   BaseNode *obj1, *obj2;
-  list<BaseNode*>::iterator it = connectedObjects.begin();
+  std::list<BaseNode*>::iterator it = connectedObjects.begin();
   obj1 = *(it);
   it++;
   obj2 = *(it);

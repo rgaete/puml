@@ -81,18 +81,18 @@ class MainWindow : public QMainWindow {
     // The main document tabs
     QTabWidget *tabWidget;
     // This vector could probably be safely removed.
-    vector<NodeAction*> actions;
+    std::vector<NodeAction*> actions;
     // The list of open documents
-    vector<Document*> documents;
+    std::vector<Document*> documents;
     // The canvases in all the tabs
-    vector<Canvas*> canvases;
+    std::vector<Canvas*> canvases;
     // Index pointing to the current document
     int currentDocument;
     // The status bar
     QStatusBar *statusBar;
     // A 1-to-1 mapping from the tabs to the canvases.
     // There might be a better way to store this data directly in the tabs.
-    map<int, int> tabToCanvasMappings;
+    std::map<int, int> tabToCanvasMappings;
 
     QToolBar *mainToolBar;
     QLabel *toolbarLabel;
