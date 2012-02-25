@@ -70,10 +70,10 @@ class BaseNode : public QObject {
     void addConnectedNode(BaseNode *newObject);
     void removeConnectedNode(BaseNode *object);
     QPoint getClosestConnectionPoint(const QPoint& point);
-    list<BaseNode*> getConnectedNodes();
+    std::list<BaseNode*> getConnectedNodes();
 
   private:
-    vector<QPoint> connectionPoints;
+    std::vector<QPoint> connectionPoints;
 
   protected:
     virtual void setUpConnectionPoints();
@@ -86,7 +86,7 @@ class BaseNode : public QObject {
     int length;
     // The height of the bounding box for this object
     int height;
-    list<BaseNode*> connectedObjects;
+    std::list<BaseNode*> connectedObjects;
 };
 
 /*!

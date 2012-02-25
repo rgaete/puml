@@ -6,7 +6,7 @@
 
 void ClassConnection::draw(QPainter& painter) {  // NOLINT
   BaseNode *obj1, *obj2;
-  list<BaseNode*>::iterator it = connectedObjects.begin();
+  std::list<BaseNode*>::iterator it = connectedObjects.begin();
   obj1 = *(it);
   it++;
   obj2 = *(it);
@@ -39,7 +39,7 @@ void ClassConnection::draw(QPainter& painter) {  // NOLINT
 
 bool ClassConnection::hitTest(const QPoint &point) {
   BaseNode *obj1, *obj2;
-  list<BaseNode*>::iterator it = connectedObjects.begin();
+  std::list<BaseNode*>::iterator it = connectedObjects.begin();
   obj1 = *(it);
   it++;
   obj2 = *(it);
@@ -50,12 +50,12 @@ bool ClassConnection::hitTest(const QPoint &point) {
        (point.y() > pt1.y() && point.y() < pt4.y()))) {
       return true;
     }
-    if ((fabs(point.y() - static_cast<double>pt1.y()) < 15.0) &&
+    if ((fabs(point.y() - static_cast<double>(pt1.y())) < 15.0) &&
         ((point.x() < pt1.x() && point.x() > pt2.x()) ||
          (point.x() > pt1.x() && point.x() < pt2.x()))) {
       return true;
     }
-    if ((fabs(point.y() - static_cast<double>pt4.y()) < 15.0) &&
+    if ((fabs(point.y() - static_cast<double>(pt4.y())) < 15.0) &&
         ((point.x() < pt3.x() && point.x() > pt4.x()) ||
          (point.x() > pt3.x() && point.x() < pt4.x()))) {
       return true;
@@ -67,12 +67,12 @@ bool ClassConnection::hitTest(const QPoint &point) {
          (point.x() > pt1.x() && point.x() < pt4.x()))) {
       return true;
     }
-    if ((fabs(point.x() - static_cast<double>pt1.x()) < 15.0) &&
+    if ((fabs(point.x() - static_cast<double>(pt1.x())) < 15.0) &&
         ((point.y() < pt1.y() && point.y() > pt2.y()) ||
          (point.y() > pt1.y() && point.y() < pt2.y()))) {
       return true;
     }
-    if ((fabs(point.x() - static_cast<double>pt4.x()) < 15.0) &&
+    if ((fabs(point.x() - static_cast<double>(pt4.x())) < 15.0) &&
         ((point.y() < pt3.y() && point.y() > pt4.y()) ||
          (point.y() > pt3.y() && point.y() < pt4.y()))) {
       return true;

@@ -96,13 +96,13 @@ void MainWindow::registerObject(BaseNode* newPrototype) {
 */
 void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex) {
   assert(canvasIndex >= 0);
-  assert(canvasIndex < static_cast<int>canvases.size());
+  assert(canvasIndex < static_cast<int>(canvases.size()));
   assert(documentIndex >= 0);
-  assert(documentIndex < static_cast<int>documents.size());
+  assert(documentIndex < static_cast<int>(documents.size()));
   assert(canvases.at(canvasIndex)->getDocumentIndex() >= 0);
-  assert(canvases.at(canvasIndex)->getDocumentIndex() < static_cast<int>documents.size());  // NOLINT
+  assert(canvases.at(canvasIndex)->getDocumentIndex() < static_cast<int>(documents.size()));  // NOLINT
   assert(documents.at(documentIndex)->getCanvasIndex() >= 0);
-  assert(documents.at(documentIndex)->getCanvasIndex() < static_cast<int>canvases.size());  // NOLINT
+  assert(documents.at(documentIndex)->getCanvasIndex() < static_cast<int>(canvases.size()));  // NOLINT
 
   // get the canvas and document to connect
   Canvas* canvas = canvases.at(canvasIndex);
@@ -150,7 +150,7 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex) {
 MainWindow::~MainWindow() {
   // Since we have a vector of pointers, we need to make sure
   // to free all of them manually.
-  for (int i = 0; i < static_cast<int>documents.size(); i++) {
+  for (int i = 0; i < static_cast<int>(documents.size()); i++) {
     assert(actions.at(i) != 0);
     delete documents.at(i);
   }
@@ -340,7 +340,7 @@ void MainWindow::connectSignalsSlots() {
 }
 
 void MainWindow::setDiagramType(BaseNode::DiagramType type) {
-  for (int i = 0; i < static_cast<int>actions.size(); ++i) {
+  for (int i = 0; i < static_cast<int>(actions.size()); ++i) {
     if (actions.at(i)->getDiagramType() == type) {
       actions.at(i)->setVisible(true);
     } else {
@@ -423,7 +423,7 @@ void MainWindow::on_actionNew_triggered() {
 
   // add the tab and update the map.
   int newTabIndex = tabWidget->addTab(newcanvas, "New Diagram");
-  tabToCanvasMappings.insert(pair<int, int>(newTabIndex, canvases.size() - 1));
+  tabToCanvasMappings.insert(std::pair<int, int>(newTabIndex, canvases.size() - 1));
   tabWidget->setCurrentIndex(newTabIndex);
 
   // Connect the new canvas with the new document.

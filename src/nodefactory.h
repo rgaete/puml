@@ -26,7 +26,7 @@ class NodeFactory {
 
     // The vector of prototypes. This is static so the lifetime is
     // the entire execution time of the program.
-    static vector<BaseNode*> prototypes;
+    static std::vector<BaseNode*> prototypes;
     // The single instance of the class. Static so the lifetime is
     // the entire lifetime of the program.
     static NodeFactory* instance;

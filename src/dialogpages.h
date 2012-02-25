@@ -13,7 +13,7 @@ class CreateNewPage : public QWidget {
 
   public:
     explicit CreateNewPage(QWidget *parent = 0);
-    int diagramenum;
+    int diagram_enum;
 
     QListWidgetItem *usecaseItem;
     QListWidgetItem *classItem;

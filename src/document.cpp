@@ -15,7 +15,7 @@ Document::Document() {
      by .at()!
 */
 Document::~Document() {
-  for (int i = 0; i < static_cast<int>nodes.size(); i++) {
+  for (int i = 0; i < static_cast<int>(nodes.size()); i++) {
     assert(nodes.at(i) != 0);
     // QMessageBox::information(0, "node text", nodes.at(i)->getText(),
     //                          QMessageBox::Ok, QMessageBox::Ok);
@@ -29,7 +29,7 @@ Document::~Document() {
 */
 void Document::setSelectedObject(const QPoint &point) {
   assert(indexOfSelectedObject >= -1);
-  assert(indexOfSelectedObject < static_cast<int>nodes.size());
+  assert(indexOfSelectedObject < static_cast<int>(nodes.size()));
 
   // reset the selected property of previously
   // selected node
@@ -81,7 +81,7 @@ int Document::getIndexAt(const QPoint &point) {
 */
 void Document::moveSelectedObject(const QPoint &point) {
   assert(indexOfSelectedObject >= -1);
-  assert(indexOfSelectedObject < static_cast<int>nodes.size());
+  assert(indexOfSelectedObject < static_cast<int>(nodes.size()));
 
   if (indexOfSelectedObject != -1) {
     nodes.at(indexOfSelectedObject)->setPosition(point + positionDelta);
@@ -96,7 +96,7 @@ void Document::moveSelectedObject(const QPoint &point) {
 */
 void Document::createObject(const QPoint &position) {
   assert(indexOfSelectedObject >= -1);
-  assert(indexOfSelectedObject < static_cast<int>nodes.size());
+  assert(indexOfSelectedObject < static_cast<int>(nodes.size()));
 
   // create a new node using the factory
   BaseNode* newNode;
@@ -165,7 +165,7 @@ void Document::createConnectionPoint2(const QPoint &point) {
 */
 void Document::showPropertiesDialog() {
   assert(indexOfSelectedObject >= -1);
-  assert(indexOfSelectedObject < static_cast<int>nodes.size());
+  assert(indexOfSelectedObject < static_cast<int>(nodes.size()));
 
   if (indexOfSelectedObject != -1) {
     QDialog *properties;
@@ -182,38 +182,38 @@ void Document::showPropertiesDialog() {
   that painter is a valid painter, and uses BaseNode.draw().
 */
 void Document::drawList(QPainter &painter) {  // NOLINT
-  for (int i = 0; i < static_cast<int>nodes.size(); i++) {
+  for (int i = 0; i < static_cast<int>(nodes.size()); i++) {
     nodes[i]->draw(painter);
   }
 }
 
 void Document::removeObject() {
   assert(indexOfSelectedObject >= -1);
-  assert(indexOfSelectedObject < static_cast<int>nodes.size());
+  assert(indexOfSelectedObject < static_cast<int>(nodes.size()));
 
   if (indexOfSelectedObject != -1) {
     BaseNode* obj = nodes.at(indexOfSelectedObject);
     if (obj->isConnector() == false) {
       // erase all the connected connectionnodes
       // get the list of connected nodes, which are all connections
-      list<BaseNode*> objs;
+      std::list<BaseNode*> objs;
       objs = obj->getConnectedNodes();
 
       // iterator through that list and delete the connection nodes
       // as well as remove the pointers to this node from all objects
       // that are connected to the connection node
-      list<BaseNode*>::iterator it;
+      std::list<BaseNode*>::iterator it;
       for (it = objs.begin(); it != objs.end(); ++it) {
         // for each of the objects that are connected to this connection,
-        list<BaseNode*> secondaryObject;
-        list<BaseNode*>::iterator it2;
+        std::list<BaseNode*> secondaryObject;
+        std::list<BaseNode*>::iterator it2;
         for (it2 = secondaryObject.begin(); it2 != secondaryObject.end(); ++it) {  // NOLINT
           // remove the connection back to the connectionode we are deleting
           (*it2)->removeConnectedNode(*it);
         }
 
         // delete this connection node
-        for (int i = 0; i < static_cast<int>nodes.size(); i++) {
+        for (int i = 0; i < static_cast<int>(nodes.size()); i++) {
           if (nodes.at(i) == (*it)) {
             nodes.erase(nodes.begin()+i);
           }
@@ -223,12 +223,12 @@ void Document::removeObject() {
       nodes.erase(nodes.begin()+indexOfSelectedObject);
     } else {
       // get the list of connected objects (should only be two objects)
-      list<BaseNode*> secondaryObjects;
+      std::list<BaseNode*> secondaryObjects;
       secondaryObjects = obj->getConnectedNodes();
 
       // iterate through the list and disconnect the connectionnode we
       // are deleting from the objects.
-      list<BaseNode*>::iterator it;
+      std::list<BaseNode*>::iterator it;
       for (it = secondaryObjects.begin(); it != secondaryObjects.end(); ++it) {
         (*it)->removeConnectedNode(obj);
       }

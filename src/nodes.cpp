@@ -37,19 +37,19 @@ QPoint BaseNode::getClosestConnectionPoint(const QPoint &point) {
   double minlength, testlength;
   int minindex;
   // Why not use pow()?
-  minlength = sqrt(static_cast<double>
+  minlength = sqrt(static_cast<double>(
                    ((point.x() - connectionPoints.at(0).x()) *
                     (point.x() - connectionPoints.at(0).x())) +
                    ((point.y() - connectionPoints.at(0).y()) *
-                    (point.y() - connectionPoints.at(0).y())));
+                    (point.y() - connectionPoints.at(0).y()))));
   minindex = 0;
 
-  for (int i = 1; i < static_cast<int>connectionPoints.size(); i++) {
-    testlength = sqrt(static_cast<double>
+  for (int i = 1; i < static_cast<int>(connectionPoints.size()); i++) {
+    testlength = sqrt(static_cast<double>(
                       ((point.x() - connectionPoints.at(i).x()) *
                        (point.x() - connectionPoints.at(i).x())) +
                       ((point.y() - connectionPoints.at(i).y()) *
-                       (point.y() - connectionPoints.at(i).y())));
+                       (point.y() - connectionPoints.at(i).y()))));
     if (testlength < minlength) {
       minlength = testlength;
       minindex = i;
@@ -59,8 +59,8 @@ QPoint BaseNode::getClosestConnectionPoint(const QPoint &point) {
   return connectionPoints.at(minindex);
 }
 
-list<BaseNode*> BaseNode::getConnectedNodes() {
-  return list<BaseNode*>(connectedObjects);
+std::list<BaseNode*> BaseNode::getConnectedNodes() {
+  return std::list<BaseNode*>(connectedObjects);
 }
 
 void BaseNode::setUpConnectionPoints() {

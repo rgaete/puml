@@ -5,13 +5,13 @@
 
 // Initialize the static variables
 NodeFactory* NodeFactory::instance = 0;      // (Note initially null)
-vector<BaseNode*> NodeFactory::prototypes;
+std::vector<BaseNode*> NodeFactory::prototypes;
 
 /*! The destructor frees up the prototypes
 */
 NodeFactory::~NodeFactory() {
   // delete the pointers
-  for (int i = 0; i < static_cast<int>prototypes.size(); i++) {
+  for (int i = 0; i < static_cast<int>(prototypes.size()); i++) {
     delete prototypes.at(i);
   }
 }
@@ -30,7 +30,7 @@ int NodeFactory::registerPrototype(BaseNode *newPrototype) {
 */
 BaseNode *NodeFactory::produce(int prototype_id) {
   assert(prototype_id >= 0);
-  assert(prototype_id < static_cast<int>prototypes.size());
+  assert(prototype_id < static_cast<int>(prototypes.size()));
   return prototypes.at(prototype_id)->clone();
 }
 

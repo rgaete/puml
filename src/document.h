@@ -24,7 +24,7 @@ class Document : public QObject {
     int getIndexAt(const QPoint &point);
 
     // The main vector of nodes
-    vector<BaseNode*> nodes;
+    std::vector<BaseNode*> nodes;
     // The index of the selected object, -1 if nothing's selected
     int indexOfSelectedObject;
     // The prototypeID of the next object to create
