@@ -1,85 +1,92 @@
+// Copyright (C) 2011-2012 pUML Group
+
 /*!
  * @file nodes.h
- *      @brief describes the heirarchy and structure of the node classes.
-               This is a copy put into the main Creator project, to be
-               updated with the current class diagrams. -Josh 12/4
+ *    @brief describes the heirarchy and structure of the node classes.
+         This is a copy put into the main Creator project, to be
+         updated with the current class diagrams. -Josh 12/4
  */
 
-#ifndef pUML_NODES
-#define pUML_NODES
+#ifndef SRC_NODES_H_
+#define SRC_NODES_H_
 
-#include <iostream>
+// #include <iostream>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 #include <QRect>
 #include <QPainter>
 #include <QAction>
 #include <list>
-#include "math.h"
+#include <vector>
 
-//#include "utilities.h"
-//#include "diagrams.h"
+// #include "utilities.h"
+// #include "diagrams.h"
 
-using namespace std;
+// using namespace std;
 
 class BaseNode;
 
-
 /*!
- * This defines the generic drawable object, which includes connectors (arrows and the like)
- * and objects (such as a stick person or a state oval).
+ * This defines the generic drawable object, which includes connectors
+ * (arrows and the like) and objects (such as a stick person or a state oval).
  */
 class BaseNode : public QObject {
-    public:
-        enum DiagramType {
-            Class,
-            Interaction,
-            UseCase,
-            StateChart,
-            Collaboration
-        };
+  public:
+    enum DiagramType {
+      Class,
+      Interaction,
+      UseCase,
+      StateChart,
+      Collaboration
+    };
 
-        BaseNode();
-        //~BaseNode() {}
+    BaseNode();
+    // ~BaseNode() {}
 
-        void setSelected(bool newState) { selected = newState; }
-        void setPosition(const QPoint &pos) { position = pos; setUpConnectionPoints();}
-        void setPoints(const QPoint &p1, const QPoint &p2) { point1=p1; point2=p2; }
-        QPoint getPosition() { return position; }
+    void setSelected(bool newState) { selected = newState; }
+    void setPosition(const QPoint &pos) {
+      position = pos;
+      setUpConnectionPoints();
+    }
+    void setPoints(const QPoint &p1, const QPoint &p2) {
+      point1 = p1;
+      point2 = p2;
+    }
+    QPoint getPosition() {
+      return position;
+    }
 
-        virtual void draw(QPainter &painter) =0;
-        virtual BaseNode* clone() =0;
-        virtual QDialog* getDialog() =0;
-        virtual QString getIconPath() =0;
-        virtual QString getText() =0;
-        virtual bool hitTest(const QPoint &point) =0;
-        virtual bool isConnector() =0;
-        virtual DiagramType getDiagramType() =0;
+    virtual void draw(QPainter &painter) = 0;  // NOLINT
+    virtual BaseNode* clone() = 0;
+    virtual QDialog* getDialog() = 0;
+    virtual QString getIconPath() = 0;
+    virtual QString getText() = 0;
+    virtual bool hitTest(const QPoint &point) = 0;
+    virtual bool isConnector() = 0;
+    virtual DiagramType getDiagramType() = 0;
 
+    void addConnnectionPoint(const QPoint &newpoint);
+    void addConnectedNode(BaseNode *newObject);
+    void removeConnectedNode(BaseNode *object);
+    QPoint getClosestConnectionPoint(const QPoint& point);
+    list<BaseNode*> getConnectedNodes();
 
-        void addConnnectionPoint(const QPoint &newpoint);
-        void addConnectedNode(BaseNode *newObject);
-        void removeConnectedNode(BaseNode *object);
-        QPoint getClosestConnectionPoint(const QPoint& point);
-        list<BaseNode*> getConnectedNodes();
+  private:
+    vector<QPoint> connectionPoints;
 
+  protected:
+    virtual void setUpConnectionPoints();
 
-
-    private:
-        vector<QPoint> connectionPoints;
-
-    protected:
-        virtual void setUpConnectionPoints();
-
-        bool selected;
-        QPoint position;
-        QPoint point1;
-        QPoint point2;
-        //! The length (i.e. width) of the bounding box for this object
-        int length;
-        //! The height of the bounding box for this object
-        int height;
-        list<BaseNode*> connectedObjects;
+    bool selected;
+    QPoint position;
+    QPoint point1;
+    QPoint point2;
+    // The length (i.e. width) of the bounding box for this object
+    int length;
+    // The height of the bounding box for this object
+    int height;
+    list<BaseNode*> connectedObjects;
 };
 
 /*!
@@ -94,8 +101,9 @@ class BaseNode : public QObject {
  * derived classes.
  */
 class ObjectNode: public BaseNode {
-    Q_OBJECT
-public:
+  Q_OBJECT
+
+  public:
     /*! ObjectNode constructor, set the position.
      *  @param position The center of the object, relative to the containing widget.
      */
@@ -112,35 +120,33 @@ public:
      *  defined by @see length and @see height.
      *  @param painter A valid QPainter passed by the containing widget.
      */
-    void draw(QPainter &painter);
+    void draw(QPainter &painter);  // NOLINT
 
     /*!
      *
      */
     bool isConnector() { return false; }
 
-protected:
-
-
+  protected:
 };
 
-/*!
- * This abstract base class describes the connection nodes.
- * Note that even though this class has pointer members,
- * it does not a special copy constructor, assignment operator or
- * destructor for them.
- * @sa BaseNode
- */
+  /*!
+   * This abstract base class describes the connection nodes.
+   * Note that even though this class has pointer members,
+   * it does not a special copy constructor, assignment operator or
+   * destructor for them.
+   * @sa BaseNode
+   */
 
-class ConnectionNode: public BaseNode {
-public:
-    //void setPoints(const QPoint &point1, const QPoint &point2);
+  class ConnectionNode: public BaseNode {
+  public:
+    // void setPoints(const QPoint &point1, const QPoint &point2);
 
-    //virtual BaseNode* factory();
-    //bool hitTest(int x, int y);
+    // virtual BaseNode* factory();
+    // bool hitTest(int x, int y);
     bool isConnector() { return true; }
 
-protected:
+  protected:
 };
 
-#endif
+#endif  // SRC_NODES_H_
