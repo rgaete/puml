@@ -1,3 +1,5 @@
+// Copyright (C) 2011-2012 pUML Group
+
 /*! @file UMLnodes.h
     @brief Includes all the different types of UML nodes.
 
@@ -10,11 +12,10 @@
 
 */
 
-#ifndef UMLNODES_H
-#define UMLNODES_H
+#ifndef SRC_UMLNODES_H_
+#define SRC_UMLNODES_H_
 
-#include "UMLnodes_usecase.h"
-#include "UMLnodes_class.h"
+#include "./UMLnodes_usecase.h"
+#include "./UMLnodes_class.h"
 
-
-#endif // UMLNODES_H
+#endif  // SRC_UMLNODES_H_
