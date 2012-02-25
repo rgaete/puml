@@ -1,6 +1,8 @@
+// Copyright (C) 2011-2012 pUML Group
+
 #include <QtGui/QApplication>
 #include <QMessageBox>
-#include "mainwindow.h"
+#include "./mainwindow.h"
 
 /* //This application class can catch exceptions thrown by signals.
 class MyApplication : public QApplication {
@@ -26,9 +28,8 @@ public:
  * @param argc
  * @param *argv
  */
-int main(int argc, char *argv[])
-{
-    //MyApplication a(argc, argv);
+int main(int argc, char *argv[]) {
+    // MyApplication a(argc, argv);
     QApplication a(argc, argv);
     a.setStyleSheet("QToolButton { min-width: 150px }");
     MainWindow w;

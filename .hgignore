@@ -13,6 +13,8 @@ src/Makefile$
 src/moc.*\.cpp$
 src/pUMLTest2$
 src/pUML$
+~$
+\.orig$
 
 .*log$
 .*aux$

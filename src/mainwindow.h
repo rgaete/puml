@@ -1,5 +1,7 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+// Copyright (C) 2011-2012 pUML Group
+
+#ifndef SRC_MAINWINDOW_H_
+#define SRC_MAINWINDOW_H_
 
 #include <QShortcut>
 #include <QMainWindow>
@@ -24,26 +26,26 @@
 #include <QGroupBox>
 #include <QButtonGroup>
 #include <map>
-#include "UMLnodes.h"
-#include "canvas.h"
-#include "nodefactory.h"
-#include "document.h"
-#include "assert.h"
-#include "nodeaction.h"
-#include "dialog.h"
+#include <vector>
+#include "./UMLnodes.h"
+#include "./canvas.h"
+#include "./nodefactory.h"
+#include "./document.h"
+#include "./assert.h"
+#include "./nodeaction.h"
+#include "./dialog.h"
 
-class MainWindow : public QMainWindow
-{
-    Q_OBJECT
+class MainWindow : public QMainWindow {
+  Q_OBJECT
 
-public:
-    MainWindow(QWidget *parent = 0);
+  public:
+    explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-protected:
+  protected:
     void closeEvent(QCloseEvent *event);
 
-public slots:
+  public slots:
     void on_actionNew_triggered();
     void on_actionOpen_triggered();
     void on_actionSave_triggered();
@@ -63,10 +65,10 @@ public slots:
     void on_actionAbout_triggered();
     void on_actionSelect_triggered();
     void on_tabWidget_currentChanged(int newIndex);
+    void on_NodeAction_triggered(Canvas::DrawingMode drawingMode,
+                                 int prototypeID);
 
-    void on_NodeAction_triggered(Canvas::DrawingMode drawingMode, int prototypeID);
-
-private:
+  private:
     void createActions();
     void createMenus();
     void createWidgets();
@@ -75,22 +77,22 @@ private:
     void connectCanvasWithDocument(int canvasIndex, int documentIndex);
     void setDiagramType(BaseNode::DiagramType type);
 
-private:
-    //! The main document tabs
+  private:
+    // The main document tabs
     QTabWidget *tabWidget;
-    //This vector could probably be safely removed.
+    // This vector could probably be safely removed.
     vector<NodeAction*> actions;
-    //! The list of open documents
+    // The list of open documents
     vector<Document*> documents;
-    //! The canvases in all the tabs
+    // The canvases in all the tabs
     vector<Canvas*> canvases;
-    //! Index pointing to the current document
+    // Index pointing to the current document
     int currentDocument;
-    //! The status bar
+    // The status bar
     QStatusBar *statusBar;
-    //! A 1-to-1 mapping from the tabs to the canvases.
-    //! There might be a better way to store this data directly in the tabs.
-    map<int,int> tabToCanvasMappings;
+    // A 1-to-1 mapping from the tabs to the canvases.
+    // There might be a better way to store this data directly in the tabs.
+    map<int, int> tabToCanvasMappings;
 
     QToolBar *mainToolBar;
     QLabel *toolbarLabel;
@@ -125,8 +127,6 @@ private:
     QMenu *menuConnectors;
     QMenu *menuHelp;
     QMenu *menuPopup;
-
-
 };
 
-#endif // MAINWINDOW_H
+#endif  // SRC_MAINWINDOW_H_

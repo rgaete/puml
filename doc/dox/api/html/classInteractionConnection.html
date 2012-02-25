@@ -31,6 +31,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -68,7 +69,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="InteractionConnection" --><!-- doxytag: inherits="ConnectionNode" -->
-<p><code>#include &lt;<a class="el" href="UMLnodes_8h_source.html">UMLnodes.h</a>&gt;</code></p>
+<p>This concrete class defines an Interaction line in a Use Case diagram (line from the actor to the use case)  
+ <a href="classInteractionConnection.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="UMLnodes__usecase_8h_source.html">UMLnodes_usecase.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for InteractionConnection:</div>
 <div class="dyncontent">
@@ -90,6 +94,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInteractionConnection.html#a5fbef912f8cf6453e0f3f100bc738413">getIconPath</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInteractionConnection.html#a5000603d44579d0f464c461cb34c1c55">getText</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInteractionConnection.html#a235c5a54a3fbc8a2d39867e66c707337">draw</a> (QPainter &amp;painter)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">DiagramType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInteractionConnection.html#affbd4460835a272e850553b965cb749e">getDiagramType</a> ()</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This concrete class defines an Interaction line in a Use Case diagram (line from the actor to the use case) </p>
@@ -109,7 +114,7 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Implements <a class="el" href="classBaseNode.html#a78866f78aa92c207f9d0ea1861e15b13">BaseNode</a>.</p>
-<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classInteractionConnection.html">InteractionConnection</a>; }
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classInteractionConnection.html" title="This concrete class defines an Interaction line in a Use Case diagram (line from the actor to the use...">InteractionConnection</a>; }
 </pre></div>
 </div>
 </div>
@@ -127,12 +132,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Interaction Line Functions </p>
 
 <p>Implements <a class="el" href="classBaseNode.html#a79627d9a052108d60082dddbd60dfb02">BaseNode</a>.</p>
 <div class="fragment"><pre class="fragment">{
-
-    QPoint pt1, pt2;
     <a class="code" href="classBaseNode.html">BaseNode</a> *obj1, *obj2;
     list&lt;BaseNode*&gt;::iterator it = <a class="code" href="classBaseNode.html#a0477b85b623dfb8e7ac8631472b17ef1">connectedObjects</a>.begin();
     obj1 = *(it);
@@ -142,10 +144,38 @@ Public Member Functions</h2></td></tr>
     pt1 = obj1-&gt;<a class="code" href="classBaseNode.html#ac0a992931fa5e310251c25e28acd210c">getClosestConnectionPoint</a>(obj2-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>());
     pt2 = obj2-&gt;<a class="code" href="classBaseNode.html#ac0a992931fa5e310251c25e28acd210c">getClosestConnectionPoint</a>(obj1-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>());
 
-    painter.setPen(Qt::black);
+    <span class="keywordflow">if</span>(<a class="code" href="classBaseNode.html#a321a3231c6688686d5ee779ab169b741">selected</a> == <span class="keyword">true</span>)
+    {
+        QPen selectPen;
+        selectPen.setWidth(2);
+        selectPen.setColor(Qt::blue);
+        painter.setPen(selectPen);
+    }
+    <span class="keywordflow">else</span>
+    {
+        painter.setPen(Qt::black);
+    }
     painter.drawLine(pt1, pt2);
-
 }
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="affbd4460835a272e850553b965cb749e"></a><!-- doxytag: member="InteractionConnection::getDiagramType" ref="affbd4460835a272e850553b965cb749e" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">DiagramType</a> InteractionConnection::getDiagramType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Implements <a class="el" href="classBaseNode.html#aa525a20992c4179349a1812b0b9dacd6">BaseNode</a>.</p>
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda8c7df3c6e052df3f1ab6f0025a348a7a">UseCase</a>; }
 </pre></div>
 </div>
 </div>
@@ -164,7 +194,7 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Implements <a class="el" href="classBaseNode.html#a990ffea58e51f55cfa8c6862b79fd880">BaseNode</a>.</p>
-<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classInteractionConnectionDialog.html">InteractionConnectionDialog</a>; }
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classInteractionConnectionDialog.html" title="This class provides a custom dialog for an InteractionLineNode.">InteractionConnectionDialog</a>; }
 </pre></div>
 </div>
 </div>
@@ -215,20 +245,33 @@ Public Member Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">const QPoint &amp;&#160;</td>
           <td class="paramname"><em>point</em></td><td>)</td>
-          <td><code> [inline, virtual]</code></td>
+          <td><code> [virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
 <p>Implements <a class="el" href="classBaseNode.html#a6ba6b3ac267709d4d4d8bed400d7a47b">BaseNode</a>.</p>
-<div class="fragment"><pre class="fragment">{<span class="keywordflow">return</span> <span class="keyword">false</span>;}
+<div class="fragment"><pre class="fragment">{
+    <span class="keywordtype">double</span> lineAngle=<a class="code" href="namespacemathfunctions.html#a81da99f6fba502c574e986245c78a94f">mathfunctions::computeAngle</a>(pt1, pt2);
+    <span class="keywordtype">double</span> clickAngle=<a class="code" href="namespacemathfunctions.html#a81da99f6fba502c574e986245c78a94f">mathfunctions::computeAngle</a>(pt1, point);
+    <span class="keywordtype">double</span> lineAngle2=<a class="code" href="namespacemathfunctions.html#a81da99f6fba502c574e986245c78a94f">mathfunctions::computeAngle</a>(pt2, pt1);
+    <span class="keywordtype">double</span> clickAngle2=<a class="code" href="namespacemathfunctions.html#a81da99f6fba502c574e986245c78a94f">mathfunctions::computeAngle</a>(pt2, point);
+    <span class="keywordtype">double</span> hypot1=<a class="code" href="namespacemathfunctions.html#a9432dbcc77de8004cd36c909aca1cc4f">mathfunctions::normalize</a>(pt1, point);
+    <span class="keywordtype">double</span> hypot2=<a class="code" href="namespacemathfunctions.html#a9432dbcc77de8004cd36c909aca1cc4f">mathfunctions::normalize</a>(pt2, point);
+
+    <span class="keywordflow">if</span>(((fabs(hypot1*sin(lineAngle-clickAngle)))&lt;15.0) &amp;&amp; (fabs((hypot1*(cos(lineAngle-clickAngle))))&lt;<a class="code" href="namespacemathfunctions.html#a9432dbcc77de8004cd36c909aca1cc4f">mathfunctions::normalize</a>(pt1,pt2)) &amp;&amp; (fabs((hypot2*(cos(lineAngle2-clickAngle2))))&lt;<a class="code" href="namespacemathfunctions.html#a9432dbcc77de8004cd36c909aca1cc4f">mathfunctions::normalize</a>(pt1,pt2)))
+    {
+       <span class="keywordflow">return</span> <span class="keyword">true</span>;
+    }
+    <span class="keywordflow">return</span> <span class="keyword">false</span>;
+}
 </pre></div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/logan/Programming/puml/src/<a class="el" href="UMLnodes_8h_source.html">UMLnodes.h</a></li>
-<li>/home/logan/Programming/puml/src/<a class="el" href="UMLnodes_8cpp.html">UMLnodes.cpp</a></li>
+<li>/home/logan/Programming/puml/src/<a class="el" href="UMLnodes__usecase_8h_source.html">UMLnodes_usecase.h</a></li>
+<li>/home/logan/Programming/puml/src/<a class="el" href="UMLnodes__usecase_8cpp.html">UMLnodes_usecase.cpp</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -236,7 +279,7 @@ Public Member Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -245,7 +288,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Feb 16 2012 18:39:47 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 25 2012 11:31:47 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

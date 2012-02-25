@@ -51,29 +51,29 @@ void CreateNewPage::ButtonClicked() {
   fprintf(stderr, "here\n");
   if (usecaseItem->isSelected()) {
     fprintf(stderr, "usecase\n");
-    diagramenum = 1;
-    emit return_to_parent(diagramenum);
+    diagram_enum = 1;
+    emit return_to_parent(diagram_enum);
     close();
   }
 
   if (classItem->isSelected()) {
     fprintf(stderr, "class\n");
-    diagramenum = 2;
-    emit return_to_parent(diagramenum);
+    diagram_enum = 2;
+    emit return_to_parent(diagram_enum);
     close();
   }
 
   if (statechartItem->isSelected()) {
     fprintf(stderr, "state chart\n");
-    diagramenum = 3;
-    emit return_to_parent(diagramenum);
+    diagram_enum = 3;
+    emit return_to_parent(diagram_enum);
     close();
   }
 
   if (collaborationItem->isSelected()) {
     fprintf(stderr, "collaboration\n");
-    diagramenum = 4;
-    emit return_to_parent(diagramenum);
+    diagram_enum = 4;
+    emit return_to_parent(diagram_enum);
     close();
   }
 }

@@ -31,6 +31,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -62,7 +63,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#signals">Signals</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a>  </div>
   <div class="headertitle">
 <div class="title">CreateNewPage Class Reference</div>  </div>
 </div>
@@ -72,9 +75,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p><a href="classCreateNewPage-members.html">List of all members.</a></p>
 <table class="memberdecls">
+<tr><td colspan="2"><h2><a name="signals"></a>
+Signals</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreateNewPage.html#a2bc9412438300865134a676eaf803463">return_to_parent</a> (int diagram_enum)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreateNewPage.html#af493e52205107f3f51690bf28ec68c64">CreateNewPage</a> (QWidget *parent=0)</td></tr>
+<tr><td colspan="2"><h2><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreateNewPage.html#a97a7c5d6eab546deabc50cddc64e95ef">diagramenum</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QListWidgetItem *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreateNewPage.html#a14dc387f4fc990673d68b3c8e39fde0f">usecaseItem</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QListWidgetItem *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreateNewPage.html#a7279ce1a660ed5710d6fb597d7859a4c">classItem</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QListWidgetItem *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreateNewPage.html#aabb6ea8208d4fa22ce4e24b190800f97">statechartItem</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QListWidgetItem *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCreateNewPage.html#a48acc5f43af9a9c430a9a2b3e8c6bf2a">collaborationItem</a></td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="af493e52205107f3f51690bf28ec68c64"></a><!-- doxytag: member="CreateNewPage::CreateNewPage" ref="af493e52205107f3f51690bf28ec68c64" args="(QWidget *parent=0)" -->
@@ -86,45 +99,131 @@ Public Member Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">QWidget *&#160;</td>
           <td class="paramname"><em>parent</em> = <code>0</code></td><td>)</td>
-          <td></td>
+          <td><code> [explicit]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">    : QWidget(parent)
-{
+<div class="fragment"><pre class="fragment">              :QWidget(parent) {
+  QGroupBox *doctypeGroup = <span class="keyword">new</span> QGroupBox(tr(<span class="stringliteral">&quot;Choose Diagram Type&quot;</span>));
+<span class="comment">// List of widgets</span>
+  <span class="comment">// There should be one for each diagram type</span>
+  QListWidget *doctypeList = <span class="keyword">new</span> QListWidget;
 
-    QGroupBox *doctypeGroup = <span class="keyword">new</span> QGroupBox(tr(<span class="stringliteral">&quot;Choose Diagram Type&quot;</span>));
-<span class="comment">//List of widgets</span>
-    QListWidget *doctypeList = <span class="keyword">new</span> QListWidget;
+  <a class="code" href="classCreateNewPage.html#a14dc387f4fc990673d68b3c8e39fde0f">usecaseItem</a> = <span class="keyword">new</span> QListWidgetItem(doctypeList);
+  <a class="code" href="classCreateNewPage.html#a14dc387f4fc990673d68b3c8e39fde0f">usecaseItem</a>-&gt;setText(tr(<span class="stringliteral">&quot;Use Case&quot;</span>));
 
-    QListWidgetItem *usecaseItem = <span class="keyword">new</span> QListWidgetItem(doctypeList);
-    usecaseItem-&gt;setText(tr(<span class="stringliteral">&quot;Use Case&quot;</span>));
+  <a class="code" href="classCreateNewPage.html#a7279ce1a660ed5710d6fb597d7859a4c">classItem</a> = <span class="keyword">new</span> QListWidgetItem(doctypeList);
+  <a class="code" href="classCreateNewPage.html#a7279ce1a660ed5710d6fb597d7859a4c">classItem</a>-&gt;setText(tr(<span class="stringliteral">&quot;Class&quot;</span>));
 
-    QListWidgetItem *classItem = <span class="keyword">new</span> QListWidgetItem(doctypeList);
-    classItem-&gt;setText(tr(<span class="stringliteral">&quot;Class&quot;</span>));
+  <a class="code" href="classCreateNewPage.html#aabb6ea8208d4fa22ce4e24b190800f97">statechartItem</a> = <span class="keyword">new</span> QListWidgetItem(doctypeList);
+  <a class="code" href="classCreateNewPage.html#aabb6ea8208d4fa22ce4e24b190800f97">statechartItem</a>-&gt;setText(tr(<span class="stringliteral">&quot;State Chart&quot;</span>));
 
-    QListWidgetItem *collaborationItem = <span class="keyword">new</span> QListWidgetItem(doctypeList);
-    collaborationItem-&gt;setText(tr(<span class="stringliteral">&quot;Collaboration&quot;</span>));
-<span class="comment">//end of list of widgets</span>
+  <a class="code" href="classCreateNewPage.html#a48acc5f43af9a9c430a9a2b3e8c6bf2a">collaborationItem</a> = <span class="keyword">new</span> QListWidgetItem(doctypeList);
+  <a class="code" href="classCreateNewPage.html#a48acc5f43af9a9c430a9a2b3e8c6bf2a">collaborationItem</a>-&gt;setText(tr(<span class="stringliteral">&quot;Collaboration&quot;</span>));
+<span class="comment">// end of list of widgets</span>
 
-    QPushButton *choosedoctypeButton = <span class="keyword">new</span> QPushButton(tr(<span class="stringliteral">&quot;Ok&quot;</span>));
-    connect(choosedoctypeButton, SIGNAL(clicked()), <span class="keyword">this</span>, SLOT(close()));
+  QPushButton *choosedoctypeButton;
+  choosedoctypeButton = <span class="keyword">new</span> QPushButton(tr(<span class="stringliteral">&quot;Ok&quot;</span>));
+  connect(choosedoctypeButton, SIGNAL(clicked()), SLOT(ButtonClicked()));
 
-    QVBoxLayout *updateLayout = <span class="keyword">new</span> QVBoxLayout;
+<span class="comment">// default layout stuff</span>
+  QVBoxLayout *doctypeLayout = <span class="keyword">new</span> QVBoxLayout;
+  doctypeLayout-&gt;addWidget(doctypeList);
+  doctypeGroup-&gt;setLayout(doctypeLayout);
 
-    QVBoxLayout *doctypeLayout = <span class="keyword">new</span> QVBoxLayout;
-    doctypeLayout-&gt;addWidget(doctypeList);
-    doctypeGroup-&gt;setLayout(doctypeLayout);
-
-    QVBoxLayout *mainLayout = <span class="keyword">new</span> QVBoxLayout;
-    mainLayout-&gt;addWidget(doctypeGroup);
-    mainLayout-&gt;addSpacing(12);
-    mainLayout-&gt;addWidget(choosedoctypeButton);
-    mainLayout-&gt;addStretch(1);
-    setLayout(mainLayout);
+  QVBoxLayout *mainLayout = <span class="keyword">new</span> QVBoxLayout;
+  mainLayout-&gt;addWidget(doctypeGroup);
+  mainLayout-&gt;addSpacing(12);
+  mainLayout-&gt;addWidget(choosedoctypeButton);
+  mainLayout-&gt;addStretch(1);
+  setLayout(mainLayout);
 }
 </pre></div>
+</div>
+</div>
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a2bc9412438300865134a676eaf803463"></a><!-- doxytag: member="CreateNewPage::return_to_parent" ref="a2bc9412438300865134a676eaf803463" args="(int diagram_enum)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CreateNewPage::return_to_parent </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>diagram_enum</em></td><td>)</td>
+          <td><code> [signal]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="a7279ce1a660ed5710d6fb597d7859a4c"></a><!-- doxytag: member="CreateNewPage::classItem" ref="a7279ce1a660ed5710d6fb597d7859a4c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QListWidgetItem* <a class="el" href="classCreateNewPage.html#a7279ce1a660ed5710d6fb597d7859a4c">CreateNewPage::classItem</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a48acc5f43af9a9c430a9a2b3e8c6bf2a"></a><!-- doxytag: member="CreateNewPage::collaborationItem" ref="a48acc5f43af9a9c430a9a2b3e8c6bf2a" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QListWidgetItem* <a class="el" href="classCreateNewPage.html#a48acc5f43af9a9c430a9a2b3e8c6bf2a">CreateNewPage::collaborationItem</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a97a7c5d6eab546deabc50cddc64e95ef"></a><!-- doxytag: member="CreateNewPage::diagramenum" ref="a97a7c5d6eab546deabc50cddc64e95ef" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="classCreateNewPage.html#a97a7c5d6eab546deabc50cddc64e95ef">CreateNewPage::diagramenum</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aabb6ea8208d4fa22ce4e24b190800f97"></a><!-- doxytag: member="CreateNewPage::statechartItem" ref="aabb6ea8208d4fa22ce4e24b190800f97" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QListWidgetItem* <a class="el" href="classCreateNewPage.html#aabb6ea8208d4fa22ce4e24b190800f97">CreateNewPage::statechartItem</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a14dc387f4fc990673d68b3c8e39fde0f"></a><!-- doxytag: member="CreateNewPage::usecaseItem" ref="a14dc387f4fc990673d68b3c8e39fde0f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QListWidgetItem* <a class="el" href="classCreateNewPage.html#a14dc387f4fc990673d68b3c8e39fde0f">CreateNewPage::usecaseItem</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
@@ -137,7 +236,7 @@ Public Member Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -146,7 +245,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Feb 16 2012 18:39:47 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 25 2012 11:31:47 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
