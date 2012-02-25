@@ -1,0 +1,24 @@
+This is the UseCase XML template
+
+
+<object>
+
+	<object name>
+	</object name>
+
+	<object id>
+    	</object id>
+
+	<connections>
+
+		<connecter type>
+		
+			<connecter text>
+			</connecter text>
+
+		</connecter type>
+
+	</connections>
+
+
+</object>

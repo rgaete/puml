@@ -1,0 +1,37 @@
+<object>
+
+	<object name>
+	</object name>
+
+	<object id>
+	</object id>
+
+	<object location>
+	</object location>
+
+	<variables>
+		<variable 1>
+		</variable 1>
+
+	</variables>
+
+	<fucntion names>
+	
+		<function 1>
+		</function 1>
+	
+	</function names>
+
+	<connecters>
+		
+		<connecter type>
+
+			   <connecter text>
+			   </connecter text>
+
+		</connecter type>
+
+	</connecters>
+
+	
+</object>
