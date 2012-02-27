@@ -10,7 +10,6 @@
 #ifndef SRC_NODES_H_
 #define SRC_NODES_H_
 
-// #include <iostream>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
@@ -19,11 +18,6 @@
 #include <QAction>
 #include <list>
 #include <vector>
-
-// #include "utilities.h"
-// #include "diagrams.h"
-
-// using namespace std;
 
 class BaseNode;
 
@@ -125,7 +119,7 @@ class ObjectNode: public BaseNode {
     /*!
      *
      */
-    bool isConnector() { return false; }
+    bool isConnector() {return false;}
 
   protected:
 };
@@ -137,16 +131,17 @@ class ObjectNode: public BaseNode {
    * destructor for them.
    * @sa BaseNode
    */
-
-  class ConnectionNode: public BaseNode {
+class ConnectionNode: public BaseNode {
   public:
     // void setPoints(const QPoint &point1, const QPoint &point2);
 
     // virtual BaseNode* factory();
-    // bool hitTest(int x, int y);
-    bool isConnector() { return true; }
+    bool isConnector() {return true;}
+    bool hitTest(const QPoint &point);
 
   protected:
+    QPoint pt1, pt2, pt3, pt4;
+  private:
 };
 
 #endif  // SRC_NODES_H_

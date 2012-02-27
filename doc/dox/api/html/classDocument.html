@@ -135,7 +135,7 @@ Public Member Functions</h2></td></tr>
 <p>Destructor: frees up the memory used up by the vector of nodes. </p>
 <dl class="bug"><dt><b><a class="el" href="bug.html#_bug000001">Bug:</a></b></dt><dd>There is an intermitten bug where an exception will be thrown by .at()! </dd></dl>
 <div class="fragment"><pre class="fragment">                    {
-  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; static_cast&lt;int&gt;nodes.size(); i++) {
+  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; static_cast&lt;int&gt;(nodes.size()); i++) {
     assert(nodes.at(i) != 0);
     <span class="comment">// QMessageBox::information(0, &quot;node text&quot;, nodes.at(i)-&gt;getText(),</span>
     <span class="comment">//                          QMessageBox::Ok, QMessageBox::Ok);</span>
@@ -248,7 +248,7 @@ Public Member Functions</h2></td></tr>
 <p>Slot. This will create a new object at the specified position. The prototypeID of the new object will have been set by a previous signal to setNewObjectID. Uses <a class="el" href="classNodeFactory.html">NodeFactory</a>. </p>
 <div class="fragment"><pre class="fragment">                                                  {
   assert(indexOfSelectedObject &gt;= -1);
-  assert(indexOfSelectedObject &lt; static_cast&lt;int&gt;nodes.size());
+  assert(indexOfSelectedObject &lt; static_cast&lt;int&gt;(nodes.size()));
 
   <span class="comment">// create a new node using the factory</span>
   <a class="code" href="classBaseNode.html">BaseNode</a>* newNode;
@@ -288,7 +288,7 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 <p>Slot. This will draw the nodes using painter. It assumes that painter is a valid painter, and uses <a class="el" href="classBaseNode.html#a79627d9a052108d60082dddbd60dfb02">BaseNode.draw()</a>. </p>
 <div class="fragment"><pre class="fragment">                                         {  <span class="comment">// NOLINT</span>
-  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; static_cast&lt;int&gt;nodes.size(); i++) {
+  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; static_cast&lt;int&gt;(nodes.size()); i++) {
     nodes[i]-&gt;draw(painter);
   }
 }
@@ -342,7 +342,10 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-
+<div class="fragment"><pre class="fragment">{
+    QMetaObject::activate(<span class="keyword">this</span>, &amp;staticMetaObject, 0, 0);
+}
+</pre></div>
 </div>
 </div>
 <a class="anchor" id="a4601ce8219b1c44ae4dcef2d51d9e2ee"></a><!-- doxytag: member="Document::moveSelectedObject" ref="a4601ce8219b1c44ae4dcef2d51d9e2ee" args="(const QPoint &amp;point)" -->
@@ -362,7 +365,7 @@ Public Member Functions</h2></td></tr>
 <p>Slot. This will move whatever object is selected to the new point, while adding in the delta that was saved by a previous call to setSelectedObject. </p>
 <div class="fragment"><pre class="fragment">                                                     {
   assert(indexOfSelectedObject &gt;= -1);
-  assert(indexOfSelectedObject &lt; static_cast&lt;int&gt;nodes.size());
+  assert(indexOfSelectedObject &lt; static_cast&lt;int&gt;(nodes.size()));
 
   <span class="keywordflow">if</span> (indexOfSelectedObject != -1) {
     nodes.at(indexOfSelectedObject)-&gt;setPosition(point + positionDelta);
@@ -388,31 +391,31 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                            {
   assert(indexOfSelectedObject &gt;= -1);
-  assert(indexOfSelectedObject &lt; static_cast&lt;int&gt;nodes.size());
+  assert(indexOfSelectedObject &lt; static_cast&lt;int&gt;(nodes.size()));
 
   <span class="keywordflow">if</span> (indexOfSelectedObject != -1) {
     <a class="code" href="classBaseNode.html">BaseNode</a>* obj = nodes.at(indexOfSelectedObject);
     <span class="keywordflow">if</span> (obj-&gt;<a class="code" href="classBaseNode.html#a7f1ca77b551e9d5320fb08512c9f3d47">isConnector</a>() == <span class="keyword">false</span>) {
       <span class="comment">// erase all the connected connectionnodes</span>
       <span class="comment">// get the list of connected nodes, which are all connections</span>
-      list&lt;BaseNode*&gt; objs;
-      objs = obj-&gt;<a class="code" href="classBaseNode.html#a4e3aa7a89518f66230ef70d259768579">getConnectedNodes</a>();
+      std::list&lt;BaseNode*&gt; objs;
+      objs = obj-&gt;<a class="code" href="classBaseNode.html#a675cf32e2fc48b0a8cf2697b56488721">getConnectedNodes</a>();
 
       <span class="comment">// iterator through that list and delete the connection nodes</span>
       <span class="comment">// as well as remove the pointers to this node from all objects</span>
       <span class="comment">// that are connected to the connection node</span>
-      list&lt;BaseNode*&gt;::iterator it;
+      std::list&lt;BaseNode*&gt;::iterator it;
       <span class="keywordflow">for</span> (it = objs.begin(); it != objs.end(); ++it) {
         <span class="comment">// for each of the objects that are connected to this connection,</span>
-        list&lt;BaseNode*&gt; secondaryObject;
-        list&lt;BaseNode*&gt;::iterator it2;
+        std::list&lt;BaseNode*&gt; secondaryObject;
+        std::list&lt;BaseNode*&gt;::iterator it2;
         <span class="keywordflow">for</span> (it2 = secondaryObject.begin(); it2 != secondaryObject.end(); ++it) {  <span class="comment">// NOLINT</span>
           <span class="comment">// remove the connection back to the connectionode we are deleting</span>
           (*it2)-&gt;removeConnectedNode(*it);
         }
 
         <span class="comment">// delete this connection node</span>
-        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; static_cast&lt;int&gt;nodes.size(); i++) {
+        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; static_cast&lt;int&gt;(nodes.size()); i++) {
           <span class="keywordflow">if</span> (nodes.at(i) == (*it)) {
             nodes.erase(nodes.begin()+i);
           }
@@ -422,12 +425,12 @@ Public Member Functions</h2></td></tr>
       nodes.erase(nodes.begin()+indexOfSelectedObject);
     } <span class="keywordflow">else</span> {
       <span class="comment">// get the list of connected objects (should only be two objects)</span>
-      list&lt;BaseNode*&gt; secondaryObjects;
-      secondaryObjects = obj-&gt;<a class="code" href="classBaseNode.html#a4e3aa7a89518f66230ef70d259768579">getConnectedNodes</a>();
+      std::list&lt;BaseNode*&gt; secondaryObjects;
+      secondaryObjects = obj-&gt;<a class="code" href="classBaseNode.html#a675cf32e2fc48b0a8cf2697b56488721">getConnectedNodes</a>();
 
       <span class="comment">// iterate through the list and disconnect the connectionnode we</span>
       <span class="comment">// are deleting from the objects.</span>
-      list&lt;BaseNode*&gt;::iterator it;
+      std::list&lt;BaseNode*&gt;::iterator it;
       <span class="keywordflow">for</span> (it = secondaryObjects.begin(); it != secondaryObjects.end(); ++it) {
         (*it)-&gt;removeConnectedNode(obj);
       }
@@ -499,7 +502,7 @@ Public Member Functions</h2></td></tr>
 <p>Slot. Updates indexOfSelectedObject based on point. Uses the hitTest function of <a class="el" href="classBaseNode.html">BaseNode</a>. Sets to -1 if no hitTests return true. </p>
 <div class="fragment"><pre class="fragment">                                                    {
   assert(indexOfSelectedObject &gt;= -1);
-  assert(indexOfSelectedObject &lt; static_cast&lt;int&gt;nodes.size());
+  assert(indexOfSelectedObject &lt; static_cast&lt;int&gt;(nodes.size()));
 
   <span class="comment">// reset the selected property of previously</span>
   <span class="comment">// selected node</span>
@@ -544,7 +547,7 @@ Public Member Functions</h2></td></tr>
 <p>Slot. This will ask for a new dialog with <a class="el" href="classBaseNode.html#a990ffea58e51f55cfa8c6862b79fd880">BaseNode.getDialog</a> and show it modally. It is the dialog's responsibility to make whatever changes are necessary to the node. </p>
 <div class="fragment"><pre class="fragment">                                    {
   assert(indexOfSelectedObject &gt;= -1);
-  assert(indexOfSelectedObject &lt; static_cast&lt;int&gt;nodes.size());
+  assert(indexOfSelectedObject &lt; static_cast&lt;int&gt;(nodes.size()));
 
   <span class="keywordflow">if</span> (indexOfSelectedObject != -1) {
     QDialog *properties;
@@ -562,6 +565,7 @@ Public Member Functions</h2></td></tr>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/logan/Programming/puml/src/<a class="el" href="document_8h_source.html">document.h</a></li>
 <li>/home/logan/Programming/puml/src/<a class="el" href="document_8cpp.html">document.cpp</a></li>
+<li>/home/logan/Programming/puml/src/<a class="el" href="moc__document_8cpp.html">moc_document.cpp</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -578,7 +582,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 25 2012 11:31:47 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Feb 26 2012 18:12:38 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

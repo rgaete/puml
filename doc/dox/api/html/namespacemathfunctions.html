@@ -98,23 +98,19 @@ Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{
-    <span class="keywordtype">double</span> angle=0;
-    <span class="keywordtype">double</span> opposite=p1.y()-p2.y();
-    <span class="keywordtype">double</span> adjacent=p2.x()-p1.x();
-    <span class="keywordflow">if</span>(opposite&lt;0)
-    {
-        angle+=<a class="code" href="mathfunctions_8h.html#a598a3330b3c21701223ee0ca14316eca">PI</a>;
-    }
-    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(adjacent&lt;0)
-    {
-        angle+=<a class="code" href="mathfunctions_8h.html#a598a3330b3c21701223ee0ca14316eca">PI</a>;
-    }
-    <span class="keywordflow">if</span>(opposite&lt;0 &amp;&amp; adjacent&gt;0)
-    {
-        angle+=<a class="code" href="mathfunctions_8h.html#a598a3330b3c21701223ee0ca14316eca">PI</a>;
-    }
-    <span class="keywordflow">return</span> angle+(atan(opposite/adjacent));
+<div class="fragment"><pre class="fragment">                                                       {
+  <span class="keywordtype">double</span> angle = 0;
+  <span class="keywordtype">double</span> opposite = p1.y() - p2.y();
+  <span class="keywordtype">double</span> adjacent = p2.x() - p1.x();
+  <span class="keywordflow">if</span> (opposite &lt; 0) {
+    angle+=<a class="code" href="mathfunctions_8h.html#a598a3330b3c21701223ee0ca14316eca">PI</a>;
+  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (adjacent &lt; 0) {
+    angle+=<a class="code" href="mathfunctions_8h.html#a598a3330b3c21701223ee0ca14316eca">PI</a>;
+  }
+  <span class="keywordflow">if</span> (opposite &lt; 0 &amp;&amp; adjacent &gt; 0) {
+    angle+=<a class="code" href="mathfunctions_8h.html#a598a3330b3c21701223ee0ca14316eca">PI</a>;
+  }
+  <span class="keywordflow">return</span> angle + (atan(opposite / adjacent));
 }
 </pre></div>
 </div>
@@ -143,8 +139,10 @@ Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{
-    <span class="keywordflow">return</span> pow((pow((<span class="keywordtype">double</span>)p2.x()-p1.x(), 2)+pow((<span class="keywordtype">double</span>)p2.y()-p1.y(), 2)),0.5);
+<div class="fragment"><pre class="fragment">                                                    {
+  <span class="keywordtype">double</span> x_length_squared = pow(static_cast&lt;double&gt;(p2.x()) - p1.x(), 2);
+  <span class="keywordtype">double</span> y_length_squared = pow(static_cast&lt;double&gt;(p2.y()) - p1.y(), 2);
+  <span class="keywordflow">return</span> pow((x_length_squared + y_length_squared), 0.5);
 }
 </pre></div>
 </div>
@@ -163,8 +161,8 @@ Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{
-    <span class="keywordflow">return</span> angle*180.0/<a class="code" href="mathfunctions_8h.html#a598a3330b3c21701223ee0ca14316eca">PI</a>;
+<div class="fragment"><pre class="fragment">                                            {
+  <span class="keywordflow">return</span> angle*180.0/<a class="code" href="mathfunctions_8h.html#a598a3330b3c21701223ee0ca14316eca">PI</a>;
 }
 </pre></div>
 </div>
@@ -184,7 +182,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 25 2012 11:31:47 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Feb 26 2012 18:12:39 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

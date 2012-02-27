@@ -63,21 +63,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">/home/logan/Programming/puml/src/mathfunctions.h</div>  </div>
 </div>
 <div class="contents">
-<a href="mathfunctions_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef MATHFUNCTIONS_H</span>
-<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define MATHFUNCTIONS_H</span>
-<a name="l00003"></a>00003 <span class="preprocessor"></span><span class="preprocessor">#include &lt;QRect&gt;</span>
-<a name="l00004"></a>00004 <span class="preprocessor">#include &quot;math.h&quot;</span>
-<a name="l00005"></a><a class="code" href="mathfunctions_8h.html#a598a3330b3c21701223ee0ca14316eca">00005</a> <span class="preprocessor">#define PI 3.14159</span>
-<a name="l00006"></a>00006 <span class="preprocessor"></span>
-<a name="l00007"></a><a class="code" href="namespacemathfunctions.html">00007</a> <span class="keyword">namespace </span>mathfunctions
-<a name="l00008"></a>00008 {
-<a name="l00009"></a>00009     <span class="keywordtype">double</span> <a class="code" href="namespacemathfunctions.html#a81da99f6fba502c574e986245c78a94f">computeAngle</a>(QPoint p1, QPoint p2);
-<a name="l00010"></a>00010     <span class="keywordtype">double</span> <a class="code" href="namespacemathfunctions.html#a9432dbcc77de8004cd36c909aca1cc4f">normalize</a>(QPoint p1, QPoint p2);
-<a name="l00011"></a>00011     <span class="keywordtype">double</span> <a class="code" href="namespacemathfunctions.html#ace5e55369ed8c05f318f344ac8e9ae9e">toRadians</a>(<span class="keywordtype">double</span> angle);
-<a name="l00012"></a>00012 }
-<a name="l00013"></a>00013 
-<a name="l00014"></a>00014 <span class="preprocessor">#endif // MATHFUNCTIONS_H</span>
-<a name="l00015"></a>00015 <span class="preprocessor"></span>
+<a href="mathfunctions_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">// Copyright (C) 2011-2012 pUML Group</span>
+<a name="l00002"></a>00002 
+<a name="l00003"></a>00003 <span class="preprocessor">#ifndef SRC_MATHFUNCTIONS_H_</span>
+<a name="l00004"></a>00004 <span class="preprocessor"></span><span class="preprocessor">#define SRC_MATHFUNCTIONS_H_</span>
+<a name="l00005"></a>00005 <span class="preprocessor"></span><span class="preprocessor">#include &lt;QRect&gt;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &quot;./math.h&quot;</span>
+<a name="l00007"></a>00007 
+<a name="l00008"></a><a class="code" href="mathfunctions_8h.html#a598a3330b3c21701223ee0ca14316eca">00008</a> <span class="preprocessor">#define PI 3.14159</span>
+<a name="l00009"></a>00009 <span class="preprocessor"></span>
+<a name="l00010"></a><a class="code" href="namespacemathfunctions.html">00010</a> <span class="keyword">namespace </span>mathfunctions {
+<a name="l00011"></a>00011   <span class="keywordtype">double</span> <a class="code" href="namespacemathfunctions.html#a81da99f6fba502c574e986245c78a94f">computeAngle</a>(QPoint p1, QPoint p2);
+<a name="l00012"></a>00012   <span class="keywordtype">double</span> <a class="code" href="namespacemathfunctions.html#a9432dbcc77de8004cd36c909aca1cc4f">normalize</a>(QPoint p1, QPoint p2);
+<a name="l00013"></a>00013   <span class="keywordtype">double</span> <a class="code" href="namespacemathfunctions.html#ace5e55369ed8c05f318f344ac8e9ae9e">toRadians</a>(<span class="keywordtype">double</span> angle);
+<a name="l00014"></a>00014 }
+<a name="l00015"></a>00015 
+<a name="l00016"></a>00016 <span class="preprocessor">#endif  // SRC_MATHFUNCTIONS_H_</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -94,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 25 2012 11:31:46 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Feb 26 2012 18:12:37 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -117,9 +117,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">     :<a class="code" href="classObjectNode.html#a9a66f6f6af4296a650d06f98a8a181d5">ObjectNode</a>() {
-    this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a> = 100;
-    this-&gt;<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a> = 50;
+<div class="fragment"><pre class="fragment">           :<a class="code" href="classObjectNode.html#a9a66f6f6af4296a650d06f98a8a181d5">ObjectNode</a>() {
+  this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> = 100;
+  this-&gt;<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> = 50;
 }
 </pre></div>
 </div>
@@ -159,9 +159,9 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <p>This function draws selection boxes at the corners defined by </p>
-<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a> and </dd>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> and </dd>
 <dd>
-<a class="el" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>. </dd></dl>
+<a class="el" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>. </dd></dl>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">painter</td><td>A valid QPainter passed by the containing widget.</td></tr>
@@ -171,24 +171,25 @@ Public Member Functions</h2></td></tr>
 <p>Draws the selection boxes as needed with painter. Assumes painter is a valid QPainter. </p>
 
 <p>Reimplemented from <a class="el" href="classObjectNode.html#ae0422bfde3bfb8554826dfbe4806fb08">ObjectNode</a>.</p>
-<div class="fragment"><pre class="fragment">{
-    <span class="comment">//Always call this ObjectNode&#39;s draw function because it</span>
-    <span class="comment">//draws the selection boxes as needed.</span>
-    <a class="code" href="classOvalObject.html#aa60cb82c3c78097ca70dc7242b120f87">ObjectNode::draw</a>(painter);
+<div class="fragment"><pre class="fragment">                                       {  <span class="comment">// NOLINT</span>
+  <span class="comment">// Always call this ObjectNode&#39;s draw function because it</span>
+  <span class="comment">// draws the selection boxes as needed.</span>
+  <a class="code" href="classOvalObject.html#aa60cb82c3c78097ca70dc7242b120f87">ObjectNode::draw</a>(painter);
 
-    <span class="comment">//background</span>
-    painter.setPen(Qt::NoPen);
-    painter.setBrush(Qt::white);
+  <span class="comment">// background</span>
+  painter.setPen(Qt::NoPen);
+  painter.setBrush(Qt::white);
 
-    painter.drawEllipse(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>,<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>/2,<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>/2);
-    <span class="comment">//edge</span>
-    painter.setPen(Qt::black);
-    painter.setBrush(Qt::NoBrush);
-    painter.drawEllipse(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>,<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>/2,<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>/2);
-    <span class="comment">//painter.drawText(position.x(),position.y(), this-&gt;name);</span>
-    painter.drawText(QRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()-<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>/2, <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()-<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>/2, <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>, <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>),
-                     Qt::AlignCenter | Qt::AlignHCenter | Qt::TextDontClip,
-                     this-&gt;name);
+  painter.drawEllipse(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>, <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2, <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> / 2);
+  <span class="comment">// edge</span>
+  painter.setPen(Qt::black);
+  painter.setBrush(Qt::NoBrush);
+  painter.drawEllipse(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>, <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2, <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> / 2);
+  <span class="comment">// painter.drawText(position.x(),position.y(), this-&gt;name);</span>
+  painter.drawText(QRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x() - <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2, <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y() - <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>/2,
+                         <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>),
+                   Qt::AlignCenter | Qt::AlignHCenter | Qt::TextDontClip,
+                   this-&gt;name);
 }
 </pre></div>
 </div>
@@ -227,11 +228,12 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Implements <a class="el" href="classBaseNode.html#a990ffea58e51f55cfa8c6862b79fd880">BaseNode</a>.</p>
-<div class="fragment"><pre class="fragment">{
-    <a class="code" href="classOvalObjectDialog.html" title="This defines a custom dialog for a OvalObject.">OvalObjectDialog</a> *dialog = <span class="keyword">new</span> <a class="code" href="classOvalObjectDialog.html" title="This defines a custom dialog for a OvalObject.">OvalObjectDialog</a>;
-    dialog-&gt;setTextValue(name);
-    connect(dialog,SIGNAL(textValueSelected(QString)),<span class="keyword">this</span>,SLOT(<a class="code" href="classOvalObject.html#ac5324b5a29d4399a68a484a1275fe8b7">setName</a>(QString)));
-    <span class="keywordflow">return</span> dialog;
+<div class="fragment"><pre class="fragment">                                {
+  <a class="code" href="classOvalObjectDialog.html" title="This defines a custom dialog for a OvalObject.">OvalObjectDialog</a> *dialog = <span class="keyword">new</span> <a class="code" href="classOvalObjectDialog.html" title="This defines a custom dialog for a OvalObject.">OvalObjectDialog</a>;
+  dialog-&gt;setTextValue(name);
+  connect(dialog, SIGNAL(textValueSelected(QString)),
+          <span class="keyword">this</span>, SLOT(<a class="code" href="classOvalObject.html#ac5324b5a29d4399a68a484a1275fe8b7">setName</a>(QString)));
+  <span class="keywordflow">return</span> dialog;
 }
 </pre></div>
 </div>
@@ -311,7 +313,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 25 2012 11:31:47 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Feb 26 2012 18:12:39 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
