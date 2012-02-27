@@ -95,7 +95,6 @@ class InteractionConnectionDialog : public QDialog {
 class InteractionConnection : public ConnectionNode {
   public:
     BaseNode* clone() { return new InteractionConnection; }
-    bool hitTest(const QPoint &point);
     QDialog* getDialog() { return new InteractionConnectionDialog; }
     QString getIconPath() { return QString(":/Images/interaction.png"); }
     QString getText() { return "Interaction Line"; }
@@ -118,7 +117,6 @@ class ExtendsConnection : public ConnectionNode {
   private:
   public:
     BaseNode* clone() { return new ExtendsConnection; }
-    bool hitTest(const QPoint &point);
     QDialog* getDialog() { return new ExtendsConnectionDialog; }
     QString getIconPath() { return QString(":/Images/interaction.png"); }
     QString getText() { return "Extends Line"; }
@@ -140,7 +138,6 @@ class IncludesConnection : public ConnectionNode {
   private:
   public:
     BaseNode* clone() { return new IncludesConnection; }
-    bool hitTest(const QPoint &point);
     QDialog* getDialog() { return new IncludesConnectionDialog; }
     QString getIconPath() { return QString(":/Images/interaction.png"); }
     QString getText() { return "Includes Line"; }

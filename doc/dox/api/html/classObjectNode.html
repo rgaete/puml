@@ -121,9 +121,8 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <p>The <a class="el" href="classObjectNode.html" title="This is the base class for all object nodes.">ObjectNode</a> constructor sets the position variable </p>
-<div class="fragment"><pre class="fragment">    : <a class="code" href="classBaseNode.html#a8707f8359c128d58e81a6c61fea432f7">BaseNode</a>()
-{
-    this-&gt;<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a> = <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>;
+<div class="fragment"><pre class="fragment">  : <a class="code" href="classBaseNode.html#a8707f8359c128d58e81a6c61fea432f7">BaseNode</a>() {
+  this-&gt;<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a> = <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>;
 }
 </pre></div>
 </div>
@@ -144,9 +143,9 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <p>This function draws selection boxes at the corners defined by </p>
-<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a> and </dd>
+<dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> and </dd>
 <dd>
-<a class="el" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>. </dd></dl>
+<a class="el" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>. </dd></dl>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">painter</td><td>A valid QPainter passed by the containing widget.</td></tr>
@@ -158,30 +157,30 @@ Public Member Functions</h2></td></tr>
 <p>Implements <a class="el" href="classBaseNode.html#a79627d9a052108d60082dddbd60dfb02">BaseNode</a>.</p>
 
 <p>Reimplemented in <a class="el" href="classStickPersonObject.html#abd84d82f09b25b71bb8e033a140708de">StickPersonObject</a>, and <a class="el" href="classOvalObject.html#aa60cb82c3c78097ca70dc7242b120f87">OvalObject</a>.</p>
-<div class="fragment"><pre class="fragment">{
-    <span class="keywordflow">if</span> (<a class="code" href="classBaseNode.html#a321a3231c6688686d5ee779ab169b741">selected</a> == <span class="keyword">true</span>) {
-        <span class="keywordtype">int</span> handleWidth = 5;
-        <span class="keywordtype">int</span> handleHeight = 5;
+<div class="fragment"><pre class="fragment">                                       {  <span class="comment">// NOLINT</span>
+  <span class="keywordflow">if</span> (<a class="code" href="classBaseNode.html#a321a3231c6688686d5ee779ab169b741">selected</a> == <span class="keyword">true</span>) {
+    <span class="keywordtype">int</span> handleWidth = 5;
+    <span class="keywordtype">int</span> handleHeight = 5;
 
-        painter.setPen(Qt::NoPen);
-        painter.setBrush(Qt::blue);
-        painter.drawRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()-<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>/2-handleWidth,
-                         <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()-<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>/2-handleHeight,
-                         handleWidth,
-                         handleHeight);
-        painter.drawRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()+<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>/2,
-                         <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()+<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>/2,
-                         handleWidth,
-                         handleHeight);
-        painter.drawRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()+<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>/2,
-                         <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()-<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>/2-handleHeight,
-                         handleWidth,
-                         handleHeight);
-        painter.drawRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()-<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>/2-handleWidth,
-                         <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()+<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>/2,
-                         handleWidth,
-                         handleHeight);
-    }
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(Qt::blue);
+    painter.drawRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()-<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>/2-handleWidth,
+             <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()-<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>/2-handleHeight,
+             handleWidth,
+             handleHeight);
+    painter.drawRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()+<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>/2,
+             <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()+<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>/2,
+             handleWidth,
+             handleHeight);
+    painter.drawRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()+<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>/2,
+             <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()-<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>/2-handleHeight,
+             handleWidth,
+             handleHeight);
+    painter.drawRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()-<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>/2-handleWidth,
+             <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()+<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>/2,
+             handleWidth,
+             handleHeight);
+  }
 }
 </pre></div>
 </div>
@@ -203,9 +202,9 @@ Public Member Functions</h2></td></tr>
 <p>This function performs a simple hittest by test whether the specified point is inside the box defined by the </p>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>, </dd>
 <dd>
-<a class="el" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>, and </dd>
+<a class="el" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, and </dd>
 <dd>
-<a class="el" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>. </dd></dl>
+<a class="el" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>. </dd></dl>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">point</td><td>The point to hittest at, relative to the canvas widget.</td></tr>
@@ -217,14 +216,14 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classBaseNode.html#a6ba6b3ac267709d4d4d8bed400d7a47b">BaseNode</a>.</p>
 <div class="fragment"><pre class="fragment">                                            {
-    <span class="keywordflow">if</span> ((point.x() &gt;= (this-&gt;<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()-this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>/2)) &amp;&amp;
-        (point.x() &lt;= (this-&gt;<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()+this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>/2))) {
-        <span class="keywordflow">if</span> ((point.y() &gt;= this-&gt;<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()-this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>/2) &amp;&amp;
-            (point.y() &lt;= this-&gt;<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()+this-&gt;<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>/2)) {
-            <span class="keywordflow">return</span> <span class="keyword">true</span>;
-        }
+  <span class="keywordflow">if</span> ((point.x() &gt;= (this-&gt;<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()-this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>/2)) &amp;&amp;
+    (point.x() &lt;= (this-&gt;<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()+this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>/2))) {
+    <span class="keywordflow">if</span> ((point.y() &gt;= this-&gt;<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()-this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>/2) &amp;&amp;
+      (point.y() &lt;= this-&gt;<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()+this-&gt;<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>/2)) {
+      <span class="keywordflow">return</span> <span class="keyword">true</span>;
     }
-    <span class="keywordflow">return</span> <span class="keyword">false</span>;
+  }
+  <span class="keywordflow">return</span> <span class="keyword">false</span>;
 }
 </pre></div>
 </div>
@@ -267,7 +266,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 25 2012 11:31:47 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Feb 26 2012 18:12:39 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

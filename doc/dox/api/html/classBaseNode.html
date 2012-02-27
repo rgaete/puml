@@ -122,7 +122,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a50e8039bbf239e7add38be6c667cf9da">addConnectedNode</a> (<a class="el" href="classBaseNode.html">BaseNode</a> *newObject)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#ab5dc770bf1c1108c2e32fc5fcec92d90">removeConnectedNode</a> (<a class="el" href="classBaseNode.html">BaseNode</a> *object)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QPoint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#ac0a992931fa5e310251c25e28acd210c">getClosestConnectionPoint</a> (const QPoint &amp;point)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">list&lt; <a class="el" href="classBaseNode.html">BaseNode</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a4e3aa7a89518f66230ef70d259768579">getConnectedNodes</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::list&lt; <a class="el" href="classBaseNode.html">BaseNode</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a675cf32e2fc48b0a8cf2697b56488721">getConnectedNodes</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#aa1dae1798643a47349b94c4ba006fbcd">setUpConnectionPoints</a> ()</td></tr>
@@ -133,10 +133,8 @@ Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QPoint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a66ba0ffc241873792fbc076750d94037">point1</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QPoint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a147ecf80895c62e7df284d2af5825cfc">point2</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The length (i.e. width) of the bounding box for this object.  <a href="#a2e686d989009618a6ae55dc8e3a485ab"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The height of the bounding box for this object.  <a href="#a34e5023ae303a870511332c54799cb06"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">list&lt; <a class="el" href="classBaseNode.html">BaseNode</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a0477b85b623dfb8e7ac8631472b17ef1">connectedObjects</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::list&lt; <a class="el" href="classBaseNode.html">BaseNode</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a6589606c2f8b588e7e27199803cfb2c8">connectedObjects</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This defines the generic drawable object, which includes connectors (arrows and the like) and objects (such as a stick person or a state oval). </p>
@@ -165,13 +163,13 @@ Protected Attributes</h2></td></tr>
 </table>
 </dd>
 </dl>
-<div class="fragment"><pre class="fragment">                         {
-            <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda8de03f85f228905b24b6ced5f8037a69">Class</a>,
-            <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda72e2c162c0ffc08495e5ca91381923db">Interaction</a>,
-            <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda8c7df3c6e052df3f1ab6f0025a348a7a">UseCase</a>,
-            <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda73297813304e7f1c4f94d5651e800639">StateChart</a>,
-            <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcdac7772d1045a9dad07f5fe029a36fcf50">Collaboration</a>
-        };
+<div class="fragment"><pre class="fragment">                     {
+      <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda8de03f85f228905b24b6ced5f8037a69">Class</a>,
+      <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda72e2c162c0ffc08495e5ca91381923db">Interaction</a>,
+      <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda8c7df3c6e052df3f1ab6f0025a348a7a">UseCase</a>,
+      <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda73297813304e7f1c4f94d5651e800639">StateChart</a>,
+      <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcdac7772d1045a9dad07f5fe029a36fcf50">Collaboration</a>
+    };
 </pre></div>
 </div>
 </div>
@@ -190,10 +188,9 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 <p>The <a class="el" href="classBaseNode.html">BaseNode</a> constructor initializes data and sets a unique id. </p>
-<div class="fragment"><pre class="fragment">{
-    <a class="code" href="classBaseNode.html#a321a3231c6688686d5ee779ab169b741">selected</a> = <span class="keyword">false</span>;
-    <a class="code" href="classBaseNode.html#aa1dae1798643a47349b94c4ba006fbcd">setUpConnectionPoints</a>();
-
+<div class="fragment"><pre class="fragment">                   {
+  <a class="code" href="classBaseNode.html#a321a3231c6688686d5ee779ab169b741">selected</a> = <span class="keyword">false</span>;
+  <a class="code" href="classBaseNode.html#aa1dae1798643a47349b94c4ba006fbcd">setUpConnectionPoints</a>();
 }
 </pre></div>
 </div>
@@ -213,8 +210,8 @@ Protected Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{
-    <a class="code" href="classBaseNode.html#a0477b85b623dfb8e7ac8631472b17ef1">connectedObjects</a>.push_back(newObject);
+<div class="fragment"><pre class="fragment">                                                   {
+  <a class="code" href="classBaseNode.html#a6589606c2f8b588e7e27199803cfb2c8">connectedObjects</a>.push_back(newObject);
 }
 </pre></div>
 </div>
@@ -233,8 +230,8 @@ Protected Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{
-    connectionPoints.push_back(newpoint);
+<div class="fragment"><pre class="fragment">                                                         {
+  connectionPoints.push_back(newpoint);
 }
 </pre></div>
 </div>
@@ -290,34 +287,40 @@ Protected Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{
+<div class="fragment"><pre class="fragment">                                                              {
+  <span class="keywordtype">double</span> minlength, testlength;
+  <span class="keywordtype">int</span> minindex;
+  <span class="comment">// Why not use pow()?</span>
+  minlength = sqrt(static_cast&lt;double&gt;(
+                   ((point.x() - connectionPoints.at(0).x()) *
+                    (point.x() - connectionPoints.at(0).x())) +
+                   ((point.y() - connectionPoints.at(0).y()) *
+                    (point.y() - connectionPoints.at(0).y()))));
+  minindex = 0;
 
-    <span class="keywordtype">double</span> minlength, testlength;
-    <span class="keywordtype">int</span> minindex;
-    minlength = sqrt((<span class="keywordtype">double</span>)(point.x() - connectionPoints.at(0).x()) * (point.x() - connectionPoints.at(0).x()) +
-                     (point.y() - connectionPoints.at(0).y()) * (point.y() - connectionPoints.at(0).y()));
-    minindex = 0;
-
-    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=1; i&lt;(int)connectionPoints.size(); i++) {
-        testlength = sqrt((<span class="keywordtype">double</span>)(point.x() - connectionPoints.at(i).x()) * (point.x() - connectionPoints.at(i).x()) +
-                          (point.y() - connectionPoints.at(i).y()) * (point.y() - connectionPoints.at(i).y()));
-        <span class="keywordflow">if</span> (testlength &lt; minlength) {
-            minlength = testlength;
-            minindex = i;
-        }
+  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; static_cast&lt;int&gt;(connectionPoints.size()); i++) {
+    testlength = sqrt(static_cast&lt;double&gt;(
+                      ((point.x() - connectionPoints.at(i).x()) *
+                       (point.x() - connectionPoints.at(i).x())) +
+                      ((point.y() - connectionPoints.at(i).y()) *
+                       (point.y() - connectionPoints.at(i).y()))));
+    <span class="keywordflow">if</span> (testlength &lt; minlength) {
+      minlength = testlength;
+      minindex = i;
     }
+  }
 
-    <span class="keywordflow">return</span> connectionPoints.at(minindex);
+  <span class="keywordflow">return</span> connectionPoints.at(minindex);
 }
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="a4e3aa7a89518f66230ef70d259768579"></a><!-- doxytag: member="BaseNode::getConnectedNodes" ref="a4e3aa7a89518f66230ef70d259768579" args="()" -->
+<a class="anchor" id="a675cf32e2fc48b0a8cf2697b56488721"></a><!-- doxytag: member="BaseNode::getConnectedNodes" ref="a675cf32e2fc48b0a8cf2697b56488721" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">list&lt; <a class="el" href="classBaseNode.html">BaseNode</a> * &gt; BaseNode::getConnectedNodes </td>
+          <td class="memname">std::list&lt; <a class="el" href="classBaseNode.html">BaseNode</a> * &gt; BaseNode::getConnectedNodes </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -325,8 +328,8 @@ Protected Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{
-    <span class="keywordflow">return</span> list&lt;BaseNode*&gt;(<a class="code" href="classBaseNode.html#a0477b85b623dfb8e7ac8631472b17ef1">connectedObjects</a>);
+<div class="fragment"><pre class="fragment">                                               {
+  <span class="keywordflow">return</span> std::list&lt;BaseNode*&gt;(<a class="code" href="classBaseNode.html#a6589606c2f8b588e7e27199803cfb2c8">connectedObjects</a>);
 }
 </pre></div>
 </div>
@@ -398,7 +401,9 @@ Protected Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>; }
+<div class="fragment"><pre class="fragment">                         {
+      <span class="keywordflow">return</span> <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>;
+    }
 </pre></div>
 </div>
 </div>
@@ -435,7 +440,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Implemented in <a class="el" href="classObjectNode.html#a13fdcf09dd354e7f386a377fa5707185">ObjectNode</a>, <a class="el" href="classClassConnection.html#ac33db4a71fc46aa212fa5e06a41e0362">ClassConnection</a>, <a class="el" href="classInteractionConnection.html#a2c123d44bff9ac1aa1ea2e49e2f696ed">InteractionConnection</a>, <a class="el" href="classExtendsConnection.html#aac7cac496369e02f73801825563af87b">ExtendsConnection</a>, and <a class="el" href="classIncludesConnection.html#a202cf6086ea74622fbe0532e04e870be">IncludesConnection</a>.</p>
+<p>Implemented in <a class="el" href="classObjectNode.html#a13fdcf09dd354e7f386a377fa5707185">ObjectNode</a>, <a class="el" href="classConnectionNode.html#ad9c094f022ac68148183c8d58a0873da">ConnectionNode</a>, <a class="el" href="classInteractionConnection.html#a2c123d44bff9ac1aa1ea2e49e2f696ed">InteractionConnection</a>, <a class="el" href="classExtendsConnection.html#aac7cac496369e02f73801825563af87b">ExtendsConnection</a>, and <a class="el" href="classIncludesConnection.html#a202cf6086ea74622fbe0532e04e870be">IncludesConnection</a>.</p>
 
 </div>
 </div>
@@ -471,9 +476,8 @@ Protected Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{
-    <a class="code" href="classBaseNode.html#a0477b85b623dfb8e7ac8631472b17ef1">connectedObjects</a>.remove(<span class="keywordtype">object</span>);
-
+<div class="fragment"><pre class="fragment">                                                   {
+  <a class="code" href="classBaseNode.html#a6589606c2f8b588e7e27199803cfb2c8">connectedObjects</a>.remove(<span class="keywordtype">object</span>);
 }
 </pre></div>
 </div>
@@ -502,7 +506,10 @@ Protected Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{ <a class="code" href="classBaseNode.html#a66ba0ffc241873792fbc076750d94037">point1</a>=p1; <a class="code" href="classBaseNode.html#a147ecf80895c62e7df284d2af5825cfc">point2</a>=p2; }
+<div class="fragment"><pre class="fragment">                                                       {
+      <a class="code" href="classBaseNode.html#a66ba0ffc241873792fbc076750d94037">point1</a> = p1;
+      <a class="code" href="classBaseNode.html#a147ecf80895c62e7df284d2af5825cfc">point2</a> = p2;
+    }
 </pre></div>
 </div>
 </div>
@@ -520,7 +527,10 @@ Protected Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{ <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a> = pos; <a class="code" href="classBaseNode.html#aa1dae1798643a47349b94c4ba006fbcd">setUpConnectionPoints</a>();}
+<div class="fragment"><pre class="fragment">                                        {
+      <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a> = pos;
+      <a class="code" href="classBaseNode.html#aa1dae1798643a47349b94c4ba006fbcd">setUpConnectionPoints</a>();
+    }
 </pre></div>
 </div>
 </div>
@@ -555,28 +565,28 @@ Protected Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{
-    connectionPoints.clear();
+<div class="fragment"><pre class="fragment">                                     {
+  connectionPoints.clear();
 
-    <span class="comment">//north</span>
-    connectionPoints.push_back(QPoint(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x(), <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()-<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>/2));
-    <span class="comment">//east</span>
-    connectionPoints.push_back(QPoint(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()+<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>/2, <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()));
-    <span class="comment">//south</span>
-    connectionPoints.push_back(QPoint(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x(), <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()+<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>/2));
-    <span class="comment">//west</span>
-    connectionPoints.push_back(QPoint(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()-<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>/2, <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()));
+  <span class="comment">// north</span>
+  connectionPoints.push_back(QPoint(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x(), <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()-<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>/2));
+  <span class="comment">// east</span>
+  connectionPoints.push_back(QPoint(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()+<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>/2, <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()));
+  <span class="comment">// south</span>
+  connectionPoints.push_back(QPoint(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x(), <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()+<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>/2));
+  <span class="comment">// west</span>
+  connectionPoints.push_back(QPoint(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()-<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>/2, <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()));
 }
 </pre></div>
 </div>
 </div>
 <hr/><h2>Member Data Documentation</h2>
-<a class="anchor" id="a0477b85b623dfb8e7ac8631472b17ef1"></a><!-- doxytag: member="BaseNode::connectedObjects" ref="a0477b85b623dfb8e7ac8631472b17ef1" args="" -->
+<a class="anchor" id="a6589606c2f8b588e7e27199803cfb2c8"></a><!-- doxytag: member="BaseNode::connectedObjects" ref="a6589606c2f8b588e7e27199803cfb2c8" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">list&lt;<a class="el" href="classBaseNode.html">BaseNode</a>*&gt; <a class="el" href="classBaseNode.html#a0477b85b623dfb8e7ac8631472b17ef1">BaseNode::connectedObjects</a><code> [protected]</code></td>
+          <td class="memname">std::list&lt;<a class="el" href="classBaseNode.html">BaseNode</a>*&gt; <a class="el" href="classBaseNode.html#a6589606c2f8b588e7e27199803cfb2c8">BaseNode::connectedObjects</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -595,8 +605,6 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>The height of the bounding box for this object. </p>
-
 </div>
 </div>
 <a class="anchor" id="a2e686d989009618a6ae55dc8e3a485ab"></a><!-- doxytag: member="BaseNode::length" ref="a2e686d989009618a6ae55dc8e3a485ab" args="" -->
@@ -609,8 +617,6 @@ Protected Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-
-<p>The length (i.e. width) of the bounding box for this object. </p>
 
 </div>
 </div>
@@ -685,7 +691,7 @@ Protected Attributes</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 25 2012 11:31:46 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Feb 26 2012 18:12:38 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

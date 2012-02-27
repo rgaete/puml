@@ -211,22 +211,7 @@ void InteractionConnection::draw(QPainter& painter) {  // NOLINT
   painter.drawLine(pt1, pt2);
 }
 
-bool InteractionConnection::hitTest(const QPoint &point) {
-  double lineAngle = mathfunctions::computeAngle(pt1, pt2);
-  double clickAngle = mathfunctions::computeAngle(pt1, point);
-  double lineAngle2 = mathfunctions::computeAngle(pt2, pt1);
-  double clickAngle2 = mathfunctions::computeAngle(pt2, point);
-  double hypot1 = mathfunctions::normalize(pt1, point);
-  double hypot2 = mathfunctions::normalize(pt2, point);
-  double length_of_line = mathfunctions::normalize(pt1, pt2);
 
-  if (((fabs(hypot1 * sin(lineAngle - clickAngle))) < 15.0) &&
-      (fabs((hypot1 * (cos(lineAngle - clickAngle)))) < length_of_line) &&
-      (fabs((hypot2 * (cos(lineAngle2 - clickAngle2)))) < length_of_line)) {
-    return true;
-  }
-  return false;
-}
 /********************************/
 /* Extends Line Functions *******/
 /********************************/
@@ -277,22 +262,7 @@ void ExtendsConnection::draw(QPainter &painter) {  // NOLINT
                    pt2.x() - 10 * sin(lineangle + arrowAngle),
                    pt2.y() - 10 * cos(lineangle + arrowAngle));
 }
-bool ExtendsConnection::hitTest(const QPoint &point) {
-  double lineAngle = mathfunctions::computeAngle(pt1, pt2);
-  double clickAngle = mathfunctions::computeAngle(pt1, point);
-  double lineAngle2 = mathfunctions::computeAngle(pt2, pt1);
-  double clickAngle2 = mathfunctions::computeAngle(pt2, point);
-  double hypot1 = mathfunctions::normalize(pt1, point);
-  double hypot2 = mathfunctions::normalize(pt2, point);
-  double length_of_line = mathfunctions::normalize(pt1, pt2);
 
-  if (((fabs(hypot1 * sin(lineAngle - clickAngle))) < 15.0) &&
-      (fabs((hypot1 * (cos(lineAngle - clickAngle)))) < length_of_line) &&
-      (fabs((hypot2 * (cos(lineAngle2 - clickAngle2)))) < length_of_line)) {
-     return true;
-  }
-  return false;
-}
 
 /********************************/
 /* Includes Line Functions ******/
@@ -343,20 +313,4 @@ void IncludesConnection::draw(QPainter &painter) {  // NOLINT
   painter.drawLine(pt2.x(), pt2.y(),
                    pt2.x() - 10 * sin(lineangle + arrowAngle),
                    pt2.y() - 10 * cos(lineangle + arrowAngle));
-}
-bool IncludesConnection::hitTest(const QPoint &point) {
-  double lineAngle = mathfunctions::computeAngle(pt1, pt2);
-  double clickAngle = mathfunctions::computeAngle(pt1, point);
-  double lineAngle2 = mathfunctions::computeAngle(pt2, pt1);
-  double clickAngle2 = mathfunctions::computeAngle(pt2, point);
-  double hypot1 = mathfunctions::normalize(pt1, point);
-  double hypot2 = mathfunctions::normalize(pt2, point);
-  double length_of_line = mathfunctions::normalize(pt1, pt2);
-
-  if (((fabs(hypot1  * sin(lineAngle - clickAngle))) < 15.0) &&
-      (fabs((hypot1 * (cos(lineAngle - clickAngle)))) < length_of_line) &&
-      (fabs((hypot2 * (cos(lineAngle2 - clickAngle2)))) < length_of_line)) {
-    return true;
-  }
-  return false;
 }

@@ -164,11 +164,45 @@ QPoint ObjectNode::translateConnectionPoint(int pointIndex)
 /* ConnectionNode Functions ****/
 /*******************************/
 
-/*! NOT YET IMPLEMENTED */
-/*
-bool ConnectionNode::hitTest(int x, int y) {
-  //functionality for hit testing on lines has
-  //not yet been defined.
+bool ConnectionNode::hitTest(const QPoint &point) {
+  BaseNode *obj1, *obj2;
+  std::list<BaseNode*>::iterator it = connectedObjects.begin();
+  obj1 = *(it);
+  it++;
+  obj2 = *(it);
+
+  if (pt1.x() != obj1->getPosition().x()) {  // East or West connection
+    if ((fabs(point.x() - ((pt1.x() + pt4.x()) / 2.0)) < 15.0) &&
+      ((point.y() < pt1.y() && point.y() > pt4.y()) ||
+       (point.y() > pt1.y() && point.y() < pt4.y()))) {
+      return true;
+    }
+    if ((fabs(point.y() - static_cast<double>(pt1.y())) < 15.0) &&
+        ((point.x() < pt1.x() && point.x() > pt2.x()) ||
+         (point.x() > pt1.x() && point.x() < pt2.x()))) {
+      return true;
+    }
+    if ((fabs(point.y() - static_cast<double>(pt4.y())) < 15.0) &&
+        ((point.x() < pt3.x() && point.x() > pt4.x()) ||
+         (point.x() > pt3.x() && point.x() < pt4.x()))) { return true;
+    }
+  } else if (pt1.x() == obj1->getPosition().x()) {  // North or South
+                                                    // connection
+    if ((fabs(point.y()-((pt1.y() + pt4.y()) / 2.0)) < 15.0) &&
+        ((point.x() < pt1.x() && point.x() > pt4.x()) ||
+         (point.x() > pt1.x() && point.x() < pt4.x()))) {
+      return true;
+    }
+    if ((fabs(point.x() - static_cast<double>(pt1.x())) < 15.0) &&
+        ((point.y() < pt1.y() && point.y() > pt2.y()) ||
+         (point.y() > pt1.y() && point.y() < pt2.y()))) {
+      return true;
+    }
+    if ((fabs(point.x() - static_cast<double>(pt4.x())) < 15.0) &&
+        ((point.y() < pt3.y() && point.y() > pt4.y()) ||
+         (point.y() > pt3.y() && point.y() < pt4.y()))) {
+      return true;
+    }
+  }
   return false;
 }
-*/

@@ -98,11 +98,11 @@ Static Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <p>The destructor frees up the prototypes </p>
-<div class="fragment"><pre class="fragment">{
-    <span class="comment">//delete the pointers</span>
-    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i&lt;(int)prototypes.size(); i++) {
-        <span class="keyword">delete</span> prototypes.at(i);
-    }
+<div class="fragment"><pre class="fragment">                          {
+  <span class="comment">// delete the pointers</span>
+  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; static_cast&lt;int&gt;(prototypes.size()); i++) {
+    <span class="keyword">delete</span> prototypes.at(i);
+  }
 }
 </pre></div>
 </div>
@@ -122,12 +122,12 @@ Static Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <p>Returns the one instance of the class. Functions should call produce and registerPrototype with this instance. </p>
-<div class="fragment"><pre class="fragment">{
-    <span class="keywordflow">if</span> (instance == 0) {
-        instance = <span class="keyword">new</span> <a class="code" href="classNodeFactory.html">NodeFactory</a>;
-    }
+<div class="fragment"><pre class="fragment">                                      {
+  <span class="keywordflow">if</span> (instance == 0) {
+    instance = <span class="keyword">new</span> <a class="code" href="classNodeFactory.html">NodeFactory</a>;
+  }
 
-    <span class="keywordflow">return</span> instance;
+  <span class="keywordflow">return</span> instance;
 }
 </pre></div>
 </div>
@@ -147,10 +147,10 @@ Static Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <p>Returns a new copy of the prototype specified by prototype_id. Assumes that the id is valid. Functions should use the id returned by registoryPrototype. </p>
-<div class="fragment"><pre class="fragment">{
-    assert(prototype_id &gt;= 0);
-    assert(prototype_id &lt; (<span class="keywordtype">int</span>)prototypes.size());
-    <span class="keywordflow">return</span> prototypes.at(prototype_id)-&gt;clone();
+<div class="fragment"><pre class="fragment">                                               {
+  assert(prototype_id &gt;= 0);
+  assert(prototype_id &lt; static_cast&lt;int&gt;(prototypes.size()));
+  <span class="keywordflow">return</span> prototypes.at(prototype_id)-&gt;clone();
 }
 </pre></div>
 </div>
@@ -170,9 +170,9 @@ Static Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <p>Registers a new prototype with the factor and returns the unique ID of the prototype. </p>
-<div class="fragment"><pre class="fragment">{
-   prototypes.push_back(newPrototype);
-   <span class="keywordflow">return</span> prototypes.size()-1;
+<div class="fragment"><pre class="fragment">                                                         {
+  prototypes.push_back(newPrototype);
+  <span class="keywordflow">return</span> prototypes.size()-1;
 }
 </pre></div>
 </div>
@@ -196,7 +196,7 @@ Static Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 25 2012 11:31:47 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Feb 26 2012 18:12:39 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

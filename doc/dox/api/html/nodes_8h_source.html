@@ -63,106 +63,108 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">/home/logan/Programming/puml/src/nodes.h</div>  </div>
 </div>
 <div class="contents">
-<a href="nodes_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
-<a name="l00008"></a>00008 <span class="preprocessor">#ifndef pUML_NODES</span>
-<a name="l00009"></a>00009 <span class="preprocessor"></span><span class="preprocessor">#define pUML_NODES</span>
-<a name="l00010"></a>00010 <span class="preprocessor"></span>
-<a name="l00011"></a>00011 <span class="preprocessor">#include &lt;iostream&gt;</span>
-<a name="l00012"></a>00012 <span class="preprocessor">#include &lt;stdlib.h&gt;</span>
-<a name="l00013"></a>00013 <span class="preprocessor">#include &lt;string.h&gt;</span>
-<a name="l00014"></a>00014 <span class="preprocessor">#include &lt;QRect&gt;</span>
-<a name="l00015"></a>00015 <span class="preprocessor">#include &lt;QPainter&gt;</span>
-<a name="l00016"></a>00016 <span class="preprocessor">#include &lt;QAction&gt;</span>
-<a name="l00017"></a>00017 <span class="preprocessor">#include &lt;list&gt;</span>
-<a name="l00018"></a>00018 <span class="preprocessor">#include &quot;math.h&quot;</span>
-<a name="l00019"></a>00019 
-<a name="l00020"></a>00020 <span class="comment">//#include &quot;utilities.h&quot;</span>
-<a name="l00021"></a>00021 <span class="comment">//#include &quot;diagrams.h&quot;</span>
-<a name="l00022"></a>00022 
-<a name="l00023"></a>00023 <span class="keyword">using namespace </span>std;
-<a name="l00024"></a>00024 
-<a name="l00025"></a>00025 <span class="keyword">class </span><a class="code" href="classBaseNode.html">BaseNode</a>;
-<a name="l00026"></a>00026 
-<a name="l00027"></a>00027 
-<a name="l00032"></a><a class="code" href="classBaseNode.html">00032</a> <span class="keyword">class </span><a class="code" href="classBaseNode.html">BaseNode</a> : <span class="keyword">public</span> QObject {
-<a name="l00033"></a>00033     <span class="keyword">public</span>:
-<a name="l00034"></a><a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">00034</a>         <span class="keyword">enum</span> <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">DiagramType</a> {
-<a name="l00035"></a><a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda8de03f85f228905b24b6ced5f8037a69">00035</a>             <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda8de03f85f228905b24b6ced5f8037a69">Class</a>,
-<a name="l00036"></a><a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda72e2c162c0ffc08495e5ca91381923db">00036</a>             <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda72e2c162c0ffc08495e5ca91381923db">Interaction</a>,
-<a name="l00037"></a><a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda8c7df3c6e052df3f1ab6f0025a348a7a">00037</a>             <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda8c7df3c6e052df3f1ab6f0025a348a7a">UseCase</a>,
-<a name="l00038"></a><a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda73297813304e7f1c4f94d5651e800639">00038</a>             <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda73297813304e7f1c4f94d5651e800639">StateChart</a>,
-<a name="l00039"></a><a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcdac7772d1045a9dad07f5fe029a36fcf50">00039</a>             Collaboration
-<a name="l00040"></a>00040         };
-<a name="l00041"></a>00041 
-<a name="l00042"></a>00042         <a class="code" href="classBaseNode.html">BaseNode</a>();
-<a name="l00043"></a>00043         <span class="comment">//~BaseNode() {}</span>
-<a name="l00044"></a>00044 
-<a name="l00045"></a><a class="code" href="classBaseNode.html#a4f1b5df25d1033cadefbfe2336fff505">00045</a>         <span class="keywordtype">void</span> <a class="code" href="classBaseNode.html#a4f1b5df25d1033cadefbfe2336fff505">setSelected</a>(<span class="keywordtype">bool</span> newState) { selected = newState; }
-<a name="l00046"></a><a class="code" href="classBaseNode.html#aa6675efee5af9fc0e9b2e19c98e4b7dc">00046</a>         <span class="keywordtype">void</span> <a class="code" href="classBaseNode.html#aa6675efee5af9fc0e9b2e19c98e4b7dc">setPosition</a>(<span class="keyword">const</span> QPoint &amp;pos) { position = pos; setUpConnectionPoints();}
-<a name="l00047"></a><a class="code" href="classBaseNode.html#a8b51b88f62243368d3d7cb3804636864">00047</a>         <span class="keywordtype">void</span> <a class="code" href="classBaseNode.html#a8b51b88f62243368d3d7cb3804636864">setPoints</a>(<span class="keyword">const</span> QPoint &amp;p1, <span class="keyword">const</span> QPoint &amp;p2) { point1=p1; point2=p2; }
-<a name="l00048"></a><a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">00048</a>         QPoint <a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>() { <span class="keywordflow">return</span> position; }
-<a name="l00049"></a>00049 
-<a name="l00050"></a>00050         <span class="keyword">virtual</span> <span class="keywordtype">void</span> draw(QPainter &amp;painter) =0;
-<a name="l00051"></a>00051         <span class="keyword">virtual</span> <a class="code" href="classBaseNode.html">BaseNode</a>* clone() =0;
-<a name="l00052"></a>00052         <span class="keyword">virtual</span> QDialog* getDialog() =0;
-<a name="l00053"></a>00053         <span class="keyword">virtual</span> QString getIconPath() =0;
-<a name="l00054"></a>00054         <span class="keyword">virtual</span> QString getText() =0;
-<a name="l00055"></a>00055         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> hitTest(<span class="keyword">const</span> QPoint &amp;point) =0;
-<a name="l00056"></a>00056         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> isConnector() =0;
-<a name="l00057"></a>00057         <span class="keyword">virtual</span> DiagramType getDiagramType() =0;
-<a name="l00058"></a>00058 
-<a name="l00059"></a>00059 
-<a name="l00060"></a>00060         <span class="keywordtype">void</span> addConnnectionPoint(<span class="keyword">const</span> QPoint &amp;newpoint);
-<a name="l00061"></a>00061         <span class="keywordtype">void</span> addConnectedNode(<a class="code" href="classBaseNode.html">BaseNode</a> *newObject);
-<a name="l00062"></a>00062         <span class="keywordtype">void</span> removeConnectedNode(<a class="code" href="classBaseNode.html">BaseNode</a> *<span class="keywordtype">object</span>);
-<a name="l00063"></a>00063         QPoint getClosestConnectionPoint(<span class="keyword">const</span> QPoint&amp; point);
-<a name="l00064"></a>00064         list&lt;BaseNode*&gt; getConnectedNodes();
-<a name="l00065"></a>00065 
-<a name="l00066"></a>00066 
-<a name="l00067"></a>00067 
-<a name="l00068"></a>00068     <span class="keyword">private</span>:
-<a name="l00069"></a>00069         vector&lt;QPoint&gt; connectionPoints;
-<a name="l00070"></a>00070 
-<a name="l00071"></a>00071     <span class="keyword">protected</span>:
-<a name="l00072"></a>00072         <span class="keyword">virtual</span> <span class="keywordtype">void</span> setUpConnectionPoints();
-<a name="l00073"></a>00073 
-<a name="l00074"></a><a class="code" href="classBaseNode.html#a321a3231c6688686d5ee779ab169b741">00074</a>         <span class="keywordtype">bool</span> <a class="code" href="classBaseNode.html#a321a3231c6688686d5ee779ab169b741">selected</a>;
-<a name="l00075"></a><a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">00075</a>         QPoint <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>;
-<a name="l00076"></a><a class="code" href="classBaseNode.html#a66ba0ffc241873792fbc076750d94037">00076</a>         QPoint <a class="code" href="classBaseNode.html#a66ba0ffc241873792fbc076750d94037">point1</a>;
-<a name="l00077"></a><a class="code" href="classBaseNode.html#a147ecf80895c62e7df284d2af5825cfc">00077</a>         QPoint <a class="code" href="classBaseNode.html#a147ecf80895c62e7df284d2af5825cfc">point2</a>;
-<a name="l00079"></a><a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">00079</a>         <span class="keywordtype">int</span> <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>;
-<a name="l00081"></a><a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">00081</a>         <span class="keywordtype">int</span> <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>;
-<a name="l00082"></a><a class="code" href="classBaseNode.html#a0477b85b623dfb8e7ac8631472b17ef1">00082</a>         list&lt;BaseNode*&gt; <a class="code" href="classBaseNode.html#a0477b85b623dfb8e7ac8631472b17ef1">connectedObjects</a>;
-<a name="l00083"></a>00083 };
-<a name="l00084"></a>00084 
-<a name="l00096"></a><a class="code" href="classObjectNode.html">00096</a> <span class="keyword">class </span><a class="code" href="classObjectNode.html" title="This is the base class for all object nodes.">ObjectNode</a>: <span class="keyword">public</span> <a class="code" href="classBaseNode.html">BaseNode</a> {
-<a name="l00097"></a>00097     Q_OBJECT
-<a name="l00098"></a>00098 <span class="keyword">public</span>:
-<a name="l00102"></a>00102     <a class="code" href="classObjectNode.html" title="This is the base class for all object nodes.">ObjectNode</a>();
-<a name="l00103"></a>00103 
-<a name="l00109"></a>00109     <span class="keywordtype">bool</span> hitTest(<span class="keyword">const</span> QPoint &amp;point);
-<a name="l00110"></a>00110 
-<a name="l00115"></a>00115     <span class="keywordtype">void</span> draw(QPainter &amp;painter);
-<a name="l00116"></a>00116 
-<a name="l00120"></a><a class="code" href="classObjectNode.html#aabcfb753d1453d305c132143ff387a0a">00120</a>     <span class="keywordtype">bool</span> <a class="code" href="classObjectNode.html#aabcfb753d1453d305c132143ff387a0a">isConnector</a>() { <span class="keywordflow">return</span> <span class="keyword">false</span>; }
-<a name="l00121"></a>00121 
-<a name="l00122"></a>00122 <span class="keyword">protected</span>:
+<a href="nodes_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">// Copyright (C) 2011-2012 pUML Group</span>
+<a name="l00002"></a>00002 
+<a name="l00010"></a>00010 <span class="preprocessor">#ifndef SRC_NODES_H_</span>
+<a name="l00011"></a>00011 <span class="preprocessor"></span><span class="preprocessor">#define SRC_NODES_H_</span>
+<a name="l00012"></a>00012 <span class="preprocessor"></span>
+<a name="l00013"></a>00013 <span class="preprocessor">#include &lt;stdlib.h&gt;</span>
+<a name="l00014"></a>00014 <span class="preprocessor">#include &lt;string.h&gt;</span>
+<a name="l00015"></a>00015 <span class="preprocessor">#include &lt;math.h&gt;</span>
+<a name="l00016"></a>00016 <span class="preprocessor">#include &lt;QRect&gt;</span>
+<a name="l00017"></a>00017 <span class="preprocessor">#include &lt;QPainter&gt;</span>
+<a name="l00018"></a>00018 <span class="preprocessor">#include &lt;QAction&gt;</span>
+<a name="l00019"></a>00019 <span class="preprocessor">#include &lt;list&gt;</span>
+<a name="l00020"></a>00020 <span class="preprocessor">#include &lt;vector&gt;</span>
+<a name="l00021"></a>00021 
+<a name="l00022"></a>00022 <span class="keyword">class </span><a class="code" href="classBaseNode.html">BaseNode</a>;
+<a name="l00023"></a>00023 
+<a name="l00028"></a><a class="code" href="classBaseNode.html">00028</a> <span class="keyword">class </span><a class="code" href="classBaseNode.html">BaseNode</a> : <span class="keyword">public</span> QObject {
+<a name="l00029"></a>00029   <span class="keyword">public</span>:
+<a name="l00030"></a><a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">00030</a>     <span class="keyword">enum</span> <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">DiagramType</a> {
+<a name="l00031"></a><a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda8de03f85f228905b24b6ced5f8037a69">00031</a>       <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda8de03f85f228905b24b6ced5f8037a69">Class</a>,
+<a name="l00032"></a><a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda72e2c162c0ffc08495e5ca91381923db">00032</a>       <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda72e2c162c0ffc08495e5ca91381923db">Interaction</a>,
+<a name="l00033"></a><a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda8c7df3c6e052df3f1ab6f0025a348a7a">00033</a>       <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda8c7df3c6e052df3f1ab6f0025a348a7a">UseCase</a>,
+<a name="l00034"></a><a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda73297813304e7f1c4f94d5651e800639">00034</a>       <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda73297813304e7f1c4f94d5651e800639">StateChart</a>,
+<a name="l00035"></a><a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcdac7772d1045a9dad07f5fe029a36fcf50">00035</a>       <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcdac7772d1045a9dad07f5fe029a36fcf50">Collaboration</a>
+<a name="l00036"></a>00036     };
+<a name="l00037"></a>00037 
+<a name="l00038"></a>00038     <a class="code" href="classBaseNode.html#a8707f8359c128d58e81a6c61fea432f7">BaseNode</a>();
+<a name="l00039"></a>00039     <span class="comment">// ~BaseNode() {}</span>
+<a name="l00040"></a>00040 
+<a name="l00041"></a><a class="code" href="classBaseNode.html#a4f1b5df25d1033cadefbfe2336fff505">00041</a>     <span class="keywordtype">void</span> <a class="code" href="classBaseNode.html#a4f1b5df25d1033cadefbfe2336fff505">setSelected</a>(<span class="keywordtype">bool</span> newState) { <a class="code" href="classBaseNode.html#a321a3231c6688686d5ee779ab169b741">selected</a> = newState; }
+<a name="l00042"></a><a class="code" href="classBaseNode.html#aa6675efee5af9fc0e9b2e19c98e4b7dc">00042</a>     <span class="keywordtype">void</span> <a class="code" href="classBaseNode.html#aa6675efee5af9fc0e9b2e19c98e4b7dc">setPosition</a>(<span class="keyword">const</span> QPoint &amp;pos) {
+<a name="l00043"></a>00043       <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a> = pos;
+<a name="l00044"></a>00044       <a class="code" href="classBaseNode.html#aa1dae1798643a47349b94c4ba006fbcd">setUpConnectionPoints</a>();
+<a name="l00045"></a>00045     }
+<a name="l00046"></a><a class="code" href="classBaseNode.html#a8b51b88f62243368d3d7cb3804636864">00046</a>     <span class="keywordtype">void</span> <a class="code" href="classBaseNode.html#a8b51b88f62243368d3d7cb3804636864">setPoints</a>(<span class="keyword">const</span> QPoint &amp;p1, <span class="keyword">const</span> QPoint &amp;p2) {
+<a name="l00047"></a>00047       <a class="code" href="classBaseNode.html#a66ba0ffc241873792fbc076750d94037">point1</a> = p1;
+<a name="l00048"></a>00048       <a class="code" href="classBaseNode.html#a147ecf80895c62e7df284d2af5825cfc">point2</a> = p2;
+<a name="l00049"></a>00049     }
+<a name="l00050"></a><a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">00050</a>     QPoint <a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>() {
+<a name="l00051"></a>00051       <span class="keywordflow">return</span> <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>;
+<a name="l00052"></a>00052     }
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classBaseNode.html#a79627d9a052108d60082dddbd60dfb02">draw</a>(QPainter &amp;painter) = 0;  <span class="comment">// NOLINT</span>
+<a name="l00055"></a>00055     <span class="keyword">virtual</span> <a class="code" href="classBaseNode.html">BaseNode</a>* <a class="code" href="classBaseNode.html#a78866f78aa92c207f9d0ea1861e15b13">clone</a>() = 0;
+<a name="l00056"></a>00056     <span class="keyword">virtual</span> QDialog* <a class="code" href="classBaseNode.html#a990ffea58e51f55cfa8c6862b79fd880">getDialog</a>() = 0;
+<a name="l00057"></a>00057     <span class="keyword">virtual</span> QString <a class="code" href="classBaseNode.html#a681bcfe2beced6d0a3bf0051faeb608e">getIconPath</a>() = 0;
+<a name="l00058"></a>00058     <span class="keyword">virtual</span> QString <a class="code" href="classBaseNode.html#a86bd186e3435098add1b9bdd79e25cdb">getText</a>() = 0;
+<a name="l00059"></a>00059     <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classBaseNode.html#a6ba6b3ac267709d4d4d8bed400d7a47b">hitTest</a>(<span class="keyword">const</span> QPoint &amp;point) = 0;
+<a name="l00060"></a>00060     <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classBaseNode.html#a7f1ca77b551e9d5320fb08512c9f3d47">isConnector</a>() = 0;
+<a name="l00061"></a>00061     <span class="keyword">virtual</span> <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">DiagramType</a> <a class="code" href="classBaseNode.html#aa525a20992c4179349a1812b0b9dacd6">getDiagramType</a>() = 0;
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063     <span class="keywordtype">void</span> <a class="code" href="classBaseNode.html#a9464f7da4d1d8278289d1b65f680565b">addConnnectionPoint</a>(<span class="keyword">const</span> QPoint &amp;newpoint);
+<a name="l00064"></a>00064     <span class="keywordtype">void</span> <a class="code" href="classBaseNode.html#a50e8039bbf239e7add38be6c667cf9da">addConnectedNode</a>(<a class="code" href="classBaseNode.html">BaseNode</a> *newObject);
+<a name="l00065"></a>00065     <span class="keywordtype">void</span> <a class="code" href="classBaseNode.html#ab5dc770bf1c1108c2e32fc5fcec92d90">removeConnectedNode</a>(<a class="code" href="classBaseNode.html">BaseNode</a> *<span class="keywordtype">object</span>);
+<a name="l00066"></a>00066     QPoint <a class="code" href="classBaseNode.html#ac0a992931fa5e310251c25e28acd210c">getClosestConnectionPoint</a>(<span class="keyword">const</span> QPoint&amp; point);
+<a name="l00067"></a>00067     std::list&lt;BaseNode*&gt; <a class="code" href="classBaseNode.html#a675cf32e2fc48b0a8cf2697b56488721">getConnectedNodes</a>();
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069   <span class="keyword">private</span>:
+<a name="l00070"></a>00070     std::vector&lt;QPoint&gt; connectionPoints;
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072   <span class="keyword">protected</span>:
+<a name="l00073"></a>00073     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classBaseNode.html#aa1dae1798643a47349b94c4ba006fbcd">setUpConnectionPoints</a>();
+<a name="l00074"></a>00074 
+<a name="l00075"></a><a class="code" href="classBaseNode.html#a321a3231c6688686d5ee779ab169b741">00075</a>     <span class="keywordtype">bool</span> <a class="code" href="classBaseNode.html#a321a3231c6688686d5ee779ab169b741">selected</a>;
+<a name="l00076"></a><a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">00076</a>     QPoint <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>;
+<a name="l00077"></a><a class="code" href="classBaseNode.html#a66ba0ffc241873792fbc076750d94037">00077</a>     QPoint <a class="code" href="classBaseNode.html#a66ba0ffc241873792fbc076750d94037">point1</a>;
+<a name="l00078"></a><a class="code" href="classBaseNode.html#a147ecf80895c62e7df284d2af5825cfc">00078</a>     QPoint <a class="code" href="classBaseNode.html#a147ecf80895c62e7df284d2af5825cfc">point2</a>;
+<a name="l00079"></a>00079     <span class="comment">// The length (i.e. width) of the bounding box for this object</span>
+<a name="l00080"></a><a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">00080</a>     <span class="keywordtype">int</span> <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>;
+<a name="l00081"></a>00081     <span class="comment">// The height of the bounding box for this object</span>
+<a name="l00082"></a><a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">00082</a>     <span class="keywordtype">int</span> <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>;
+<a name="l00083"></a><a class="code" href="classBaseNode.html#a6589606c2f8b588e7e27199803cfb2c8">00083</a>     std::list&lt;BaseNode*&gt; <a class="code" href="classBaseNode.html#a6589606c2f8b588e7e27199803cfb2c8">connectedObjects</a>;
+<a name="l00084"></a>00084 };
+<a name="l00085"></a>00085 
+<a name="l00097"></a><a class="code" href="classObjectNode.html">00097</a> <span class="keyword">class </span><a class="code" href="classObjectNode.html" title="This is the base class for all object nodes.">ObjectNode</a>: <span class="keyword">public</span> <a class="code" href="classBaseNode.html">BaseNode</a> {
+<a name="l00098"></a>00098   Q_OBJECT
+<a name="l00099"></a>00099 
+<a name="l00100"></a>00100   <span class="keyword">public</span>:
+<a name="l00104"></a>00104     <a class="code" href="classObjectNode.html#a9a66f6f6af4296a650d06f98a8a181d5">ObjectNode</a>();
+<a name="l00105"></a>00105 
+<a name="l00111"></a>00111     <span class="keywordtype">bool</span> <a class="code" href="classObjectNode.html#a13fdcf09dd354e7f386a377fa5707185">hitTest</a>(<span class="keyword">const</span> QPoint &amp;point);
+<a name="l00112"></a>00112 
+<a name="l00117"></a>00117     <span class="keywordtype">void</span> <a class="code" href="classObjectNode.html#ae0422bfde3bfb8554826dfbe4806fb08">draw</a>(QPainter &amp;painter);  <span class="comment">// NOLINT</span>
+<a name="l00118"></a>00118 
+<a name="l00122"></a><a class="code" href="classObjectNode.html#aabcfb753d1453d305c132143ff387a0a">00122</a>     <span class="keywordtype">bool</span> <a class="code" href="classObjectNode.html#aabcfb753d1453d305c132143ff387a0a">isConnector</a>() { <span class="keywordflow">return</span> <span class="keyword">false</span>; }
 <a name="l00123"></a>00123 
-<a name="l00124"></a>00124 
+<a name="l00124"></a>00124   <span class="keyword">protected</span>:
 <a name="l00125"></a>00125 };
 <a name="l00126"></a>00126 
-<a name="l00135"></a><a class="code" href="classConnectionNode.html">00135</a> <span class="keyword">class </span><a class="code" href="classConnectionNode.html">ConnectionNode</a>: <span class="keyword">public</span> <a class="code" href="classBaseNode.html">BaseNode</a> {
-<a name="l00136"></a>00136 <span class="keyword">public</span>:
-<a name="l00137"></a>00137     <span class="comment">//void setPoints(const QPoint &amp;point1, const QPoint &amp;point2);</span>
-<a name="l00138"></a>00138 
-<a name="l00139"></a>00139     <span class="comment">//virtual BaseNode* factory();</span>
-<a name="l00140"></a>00140     <span class="comment">//bool hitTest(int x, int y);</span>
-<a name="l00141"></a><a class="code" href="classConnectionNode.html#a5ada624151c7259a23e5273f79db60a2">00141</a>     <span class="keywordtype">bool</span> <a class="code" href="classConnectionNode.html#a5ada624151c7259a23e5273f79db60a2">isConnector</a>() { <span class="keywordflow">return</span> <span class="keyword">true</span>; }
+<a name="l00134"></a><a class="code" href="classConnectionNode.html">00134</a> <span class="keyword">class </span><a class="code" href="classConnectionNode.html">ConnectionNode</a>: <span class="keyword">public</span> <a class="code" href="classBaseNode.html">BaseNode</a> {
+<a name="l00135"></a>00135   <span class="keyword">public</span>:
+<a name="l00136"></a>00136     <span class="comment">// void setPoints(const QPoint &amp;point1, const QPoint &amp;point2);</span>
+<a name="l00137"></a>00137 
+<a name="l00138"></a>00138     <span class="comment">// virtual BaseNode* factory();</span>
+<a name="l00139"></a>00139     <span class="comment">// bool hitTest(int x, int y);</span>
+<a name="l00140"></a><a class="code" href="classConnectionNode.html#a5ada624151c7259a23e5273f79db60a2">00140</a>     <span class="keywordtype">bool</span> <a class="code" href="classConnectionNode.html#a5ada624151c7259a23e5273f79db60a2">isConnector</a>() { <span class="keywordflow">return</span> <span class="keyword">true</span>; }
+<a name="l00141"></a>00141     <span class="keywordtype">bool</span> <a class="code" href="classConnectionNode.html#ad9c094f022ac68148183c8d58a0873da">hitTest</a>(<span class="keyword">const</span> QPoint &amp;point);
 <a name="l00142"></a>00142 
-<a name="l00143"></a>00143 <span class="keyword">protected</span>:
+<a name="l00143"></a>00143   <span class="keyword">protected</span>:
 <a name="l00144"></a>00144 };
 <a name="l00145"></a>00145 
-<a name="l00146"></a>00146 <span class="preprocessor">#endif</span>
+<a name="l00146"></a>00146 <span class="preprocessor">#endif  // SRC_NODES_H_</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -179,7 +181,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 25 2012 11:31:46 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Feb 26 2012 18:12:38 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

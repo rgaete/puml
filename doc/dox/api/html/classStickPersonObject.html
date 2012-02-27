@@ -118,14 +118,14 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <p>In the stickperson constructor we set the initial length and height and add any connection points. </p>
-<div class="fragment"><pre class="fragment">            :<a class="code" href="classObjectNode.html#a9a66f6f6af4296a650d06f98a8a181d5">ObjectNode</a>() {
-    this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a> = 50;
-    this-&gt;<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a> = 70;
-    QPoint pos;
-    pos.setX(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x() + <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>/2);
-    pos.setY(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y() + <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>);
-    time(&amp;start);
-    punchhand = 0;
+<div class="fragment"><pre class="fragment">                  :<a class="code" href="classObjectNode.html#a9a66f6f6af4296a650d06f98a8a181d5">ObjectNode</a>() {
+  this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> = 50;
+  this-&gt;<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> = 70;
+  QPoint pos;
+  pos.setX(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x() + <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2);
+  pos.setY(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y() + <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);
+  time(&amp;start);
+  punchhand = 0;
 }
 </pre></div>
 </div>
@@ -166,62 +166,97 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 <p>Draws a stickperson on the given painter at position. Extends Objectnode.draw(). </p>
 
+<p><p>This needs parenthesis or else needs to be fixed. // NOLINT </p>
+</p>
+
 <p>Reimplemented from <a class="el" href="classObjectNode.html#ae0422bfde3bfb8554826dfbe4806fb08">ObjectNode</a>.</p>
-<div class="fragment"><pre class="fragment">{
-    <span class="comment">//Always call this ObjectNode&#39;s draw function because it</span>
-    <span class="comment">//draws the selection boxes as needed.</span>
-    <a class="code" href="classStickPersonObject.html#abd84d82f09b25b71bb8e033a140708de">ObjectNode::draw</a>(painter);
+<div class="fragment"><pre class="fragment">                                              {  <span class="comment">// NOLINT</span>
+  <span class="comment">// Always call this ObjectNode&#39;s draw function because it</span>
+  <span class="comment">// draws the selection boxes as needed.</span>
+  <a class="code" href="classStickPersonObject.html#abd84d82f09b25b71bb8e033a140708de">ObjectNode::draw</a>(painter);
 
-    QPen pen;
-    pen.setWidth(2);
+  QPen pen;
+  pen.setWidth(2);
 
-    <span class="comment">//drawing a stickperson</span>
-    <span class="keywordtype">int</span> tempx = <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x();
-    <span class="keywordtype">int</span> tempy = <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y();
+  <span class="comment">// drawing a stickperson</span>
+  <span class="keywordtype">int</span> tempx = <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x();
+  <span class="keywordtype">int</span> tempy = <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y();
 
-    <span class="comment">//background</span>
-    painter.setPen(Qt::NoPen);
-    painter.setBrush(Qt::white);
-    painter.drawEllipse(tempx-16/2/50.0*<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>, tempy-(10+16)/70.0*<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>,16/50.0*<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>,16/70.0*<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>); <span class="comment">//head</span>
+  <span class="comment">// background</span>
+  painter.setPen(Qt::NoPen);
+  painter.setBrush(Qt::white);
+  painter.drawEllipse(tempx - 16 / 2 / 50.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>,
+                      tempy - (10 + 16) / 70.0 * <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>,
+                      16 / 50.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>,
+                      16 / 70.0 * <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);  <span class="comment">// head</span>
 
-    <span class="comment">//glove background</span>
-    painter.setBrush(Qt::red);
-    painter.drawEllipse(tempx+10/50.0*<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>*punchhand,tempy-(300)/70,
-                        16/50.0*((<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>/2)+(<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>*(1 - punchhand)/2)),
-                        16/70.0*((<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>/2)+(<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>*(1 - punchhand)/2))); <span class="comment">//right glove</span>
-    painter.drawEllipse(tempx-20/50.0*<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>,tempy-(300)/70, 16/50.0*<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>/2,16/70.0*<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>/2); <span class="comment">//left glove</span>
+  <span class="comment">// glove background</span>
+  painter.setBrush(Qt::red);
+  <span class="comment">// right glove</span>
+  painter.drawEllipse(
+      tempx + 10 / 50.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> * punchhand,
+      tempy-(300)/70,
+      16 / 50.0 * ((<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2) + (<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> * (1 - punchhand) / 2)),
+      16 / 70.0 * ((<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> / 2) + (<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> * (1 - punchhand) / 2)));
+  <span class="comment">// left glove</span>
+  painter.drawEllipse(
+      tempx - 20 / 50.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>,
+      tempy - (300) / 70,
+      16 / 50.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2,
+      16 / 70.0 * <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> / 2);
 
-    <span class="comment">//edge</span>
-    painter.setPen(pen);
-    painter.setBrush(Qt::NoBrush);
-    painter.drawLine(tempx,tempy,tempx,tempy-10/70.0*<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>);<span class="comment">//neck</span>
-    painter.drawLine(tempx,tempy,tempx,tempy+20/70.0*<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>); <span class="comment">//body</span>
-    painter.drawLine(tempx,tempy,tempx-10/50.0*<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>,tempy); <span class="comment">//left arm</span>
-    painter.drawLine(tempx,tempy,tempx+10/50.0*<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>*punchhand,tempy); <span class="comment">//right arm</span>
-    painter.drawLine(tempx,tempy+20/70.0*<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>,tempx-10/50.0*<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>,tempy+(20+15)/70.0*<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>); <span class="comment">//left leg</span>
-    painter.drawLine(tempx,tempy+20/70.0*<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>,tempx+10/50.0*<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>,tempy+(20+15)/70.0*<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>); <span class="comment">//right leg</span>
-    painter.drawEllipse(tempx-16/2/50.0*<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>, tempy-(10+16)/70.0*<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>,16/50.0*<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>,16/70.0*<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>); <span class="comment">//head</span>
+  <span class="comment">// edge</span>
+  painter.setPen(pen);
+  painter.setBrush(Qt::NoBrush);
+  <span class="comment">// neck</span>
+  painter.drawLine(tempx, tempy, tempx, tempy - 10 / 70.0 * <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);
+  <span class="comment">// body</span>
+  painter.drawLine(tempx, tempy, tempx, tempy + 20 / 70.0 * <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);
+  <span class="comment">// left arm</span>
+  painter.drawLine(tempx, tempy, tempx - 10 / 50.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, tempy);
+  <span class="comment">// right arm</span>
+  painter.drawLine(tempx, tempy, tempx + 10 / 50.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> * punchhand, tempy);
+  <span class="comment">// left leg</span>
+  painter.drawLine(tempx, tempy+20/70.0*<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>,
+                   tempx - 10 / 50.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>,
+                   tempy + (20 + 15) / 70.0 * <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);
+  <span class="comment">// right leg</span>
+  painter.drawLine(tempx, tempy + 20 / 70.0 * <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>,
+                   tempx + 10 / 50.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>,
+                   tempy + (20 + 15) / 70.0 * <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);
+  <span class="comment">// head</span>
+  painter.drawEllipse(tempx - 16 / 2/50.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>,
+                      tempy - (10 + 16) / 70.0 * <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>,
+                      16 / 50.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>,
+                      16 / 70.0 * <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);
 
-    <span class="comment">// gloves</span>
-    painter.setBrush(Qt::red);
+  <span class="comment">//  gloves</span>
+  painter.setBrush(Qt::red);
 
-    painter.drawEllipse(tempx+10/50.0*<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>*punchhand,
-                        tempy-(300)/70, 16/50.0*((<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>/2)+(<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>*(1 - punchhand)/2)),
-                        16/70.0*((<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>/2)+(<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>*(1 - punchhand)/2))); <span class="comment">//right glove</span>
-    painter.drawEllipse(tempx-20/50.0*<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>,tempy-(300)/70, 16/50.0*<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>/2,16/70.0*<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>/2); <span class="comment">//left glove</span>
+  <span class="comment">// right glove</span>
+  painter.drawEllipse(
+      tempx + 10 / 50.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> * punchhand,
+      tempy-(300)/70,
+      16 / 50.0 * ((<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2) + (<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> * (1 - punchhand) / 2)),
+      16 / 70.0 * ((<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> / 2) + (<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> * (1 - punchhand) / 2)));
+  <span class="comment">// left glove</span>
+  painter.drawEllipse(tempx - 20 / 50.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>,
+                      tempy - (300) / 70,
+                      16 / 50.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2,
+                      16 / 70.0 * <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> / 2);
 
-    <span class="comment">//painter.drawText(tempx-10,tempy+50,this-&gt;name);</span>
-    painter.drawText(QRect(tempx-<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>/2, tempy+<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06" title="The height of the bounding box for this object.">height</a>/2, <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab" title="The length (i.e. width) of the bounding box for this object.">length</a>, 50), Qt::AlignCenter | Qt::AlignTop | Qt::TextDontClip, this-&gt;name);
+  <span class="comment">// painter.drawText(tempx-10,tempy+50,this-&gt;name);</span>
+  painter.drawText(QRect(tempx - <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2, tempy + <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> / 2, <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, 50),
+                   Qt::AlignCenter | Qt::AlignTop | Qt::TextDontClip,
+                   this-&gt;name);
 
-    <span class="comment">//animation</span>
-    time(&amp;end);
-    dif = difftime(end, start);
-    <span class="keywordflow">if</span>(dif &gt;= 0.5)
-    {
-        start = end;
-        punchhand = 1 - punchhand;
-    }
-
+  <span class="comment">// animation</span>
+  time(&amp;end);
+  dif = difftime(end, start);
+  <span class="keywordflow">if</span> (dif &gt;= 0.5) {
+    start = end;
+    punchhand = 1 - punchhand;
+  }
 }
 </pre></div>
 </div>
@@ -261,11 +296,12 @@ Public Member Functions</h2></td></tr>
 <p>Returns a new StickDialog. The dialog is hooked up to the setname slot so that it can store any changes made. </p>
 
 <p>Implements <a class="el" href="classBaseNode.html#a990ffea58e51f55cfa8c6862b79fd880">BaseNode</a>.</p>
-<div class="fragment"><pre class="fragment">{
-    <a class="code" href="classStickPersonObjectDialog.html" title="This concrete class defines the input dialog for a StickPerson.">StickPersonObjectDialog</a> *dialog = <span class="keyword">new</span> <a class="code" href="classStickPersonObjectDialog.html" title="This concrete class defines the input dialog for a StickPerson.">StickPersonObjectDialog</a>;
-    dialog-&gt;setTextValue(name);
-    connect(dialog,SIGNAL(textValueSelected(QString)),<span class="keyword">this</span>,SLOT(<a class="code" href="classStickPersonObject.html#a5b9ea0131ab2fbca1c2577e073f69563">setName</a>(QString)));
-    <span class="keywordflow">return</span> dialog;
+<div class="fragment"><pre class="fragment">                                      {
+  <a class="code" href="classStickPersonObjectDialog.html" title="This concrete class defines the input dialog for a StickPerson.">StickPersonObjectDialog</a> *dialog = <span class="keyword">new</span> <a class="code" href="classStickPersonObjectDialog.html" title="This concrete class defines the input dialog for a StickPerson.">StickPersonObjectDialog</a>;
+  dialog-&gt;setTextValue(name);
+  connect(dialog, SIGNAL(textValueSelected(QString)),
+          <span class="keyword">this</span>, SLOT(<a class="code" href="classStickPersonObject.html#a5b9ea0131ab2fbca1c2577e073f69563">setName</a>(QString)));
+  <span class="keywordflow">return</span> dialog;
 }
 </pre></div>
 </div>
@@ -345,7 +381,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 25 2012 11:31:47 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Feb 26 2012 18:12:39 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

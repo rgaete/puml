@@ -123,9 +123,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">        : QAction(parent), m_drawingMode(mode), m_prototypeID(prototypeID), m_diagramType(diagramType)
-    {
-        connect(<span class="keyword">this</span>, SIGNAL(<a class="code" href="classNodeAction.html#ac4c250fe7c9501c120452b2d5d9bad23">triggered</a>()), <span class="keyword">this</span>, SLOT(<a class="code" href="classNodeAction.html#a2398bb625a6a5ab115f63695ec120d11">onTriggered</a>()));
+<div class="fragment"><pre class="fragment">        :QAction(parent), m_drawingMode(mode),
+         m_prototypeID(prototypeID), m_diagramType(diagramType) {
+      connect(<span class="keyword">this</span>, SIGNAL(<a class="code" href="classNodeAction.html#ac4c250fe7c9501c120452b2d5d9bad23">triggered</a>()), <span class="keyword">this</span>, SLOT(<a class="code" href="classNodeAction.html#a2398bb625a6a5ab115f63695ec120d11">onTriggered</a>()));
     }
 </pre></div>
 </div>
@@ -144,8 +144,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">    {
-        <span class="keywordflow">return</span> m_diagramType;
+<div class="fragment"><pre class="fragment">                                         {
+      <span class="keywordflow">return</span> m_diagramType;
     }
 </pre></div>
 </div>
@@ -163,8 +163,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">    {
-        emit <a class="code" href="classNodeAction.html#ac4c250fe7c9501c120452b2d5d9bad23">triggered</a>(m_drawingMode, m_prototypeID);
+<div class="fragment"><pre class="fragment">                       {
+      emit <a class="code" href="classNodeAction.html#ac4c250fe7c9501c120452b2d5d9bad23">triggered</a>(m_drawingMode, m_prototypeID);
     }
 </pre></div>
 </div>
@@ -193,11 +193,16 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-
+<div class="fragment"><pre class="fragment">{
+    <span class="keywordtype">void</span> *_a[] = { 0, <span class="keyword">const_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(<span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(&amp;_t1)), <span class="keyword">const_cast&lt;</span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(<span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span><span class="keywordtype">void</span>*<span class="keyword">&gt;</span>(&amp;_t2)) };
+    QMetaObject::activate(<span class="keyword">this</span>, &amp;staticMetaObject, 0, _a);
+}
+</pre></div>
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/logan/Programming/puml/src/<a class="el" href="nodeaction_8h_source.html">nodeaction.h</a></li>
+<li>/home/logan/Programming/puml/src/<a class="el" href="moc__nodeaction_8cpp.html">moc_nodeaction.cpp</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -214,7 +219,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 25 2012 11:31:47 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Feb 26 2012 18:12:39 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

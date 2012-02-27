@@ -134,28 +134,25 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Implements <a class="el" href="classBaseNode.html#a79627d9a052108d60082dddbd60dfb02">BaseNode</a>.</p>
-<div class="fragment"><pre class="fragment">{
-    <a class="code" href="classBaseNode.html">BaseNode</a> *obj1, *obj2;
-    list&lt;BaseNode*&gt;::iterator it = <a class="code" href="classBaseNode.html#a0477b85b623dfb8e7ac8631472b17ef1">connectedObjects</a>.begin();
-    obj1 = *(it);
-    it++;
-    obj2 = *(it);
+<div class="fragment"><pre class="fragment">                                                  {  <span class="comment">// NOLINT</span>
+  <a class="code" href="classBaseNode.html">BaseNode</a> *obj1, *obj2;
+  std::list&lt;BaseNode*&gt;::iterator it = <a class="code" href="classBaseNode.html#a6589606c2f8b588e7e27199803cfb2c8">connectedObjects</a>.begin();
+  obj1 = *(it);
+  it++;
+  obj2 = *(it);
 
-    pt1 = obj1-&gt;<a class="code" href="classBaseNode.html#ac0a992931fa5e310251c25e28acd210c">getClosestConnectionPoint</a>(obj2-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>());
-    pt2 = obj2-&gt;<a class="code" href="classBaseNode.html#ac0a992931fa5e310251c25e28acd210c">getClosestConnectionPoint</a>(obj1-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>());
+  pt1 = obj1-&gt;<a class="code" href="classBaseNode.html#ac0a992931fa5e310251c25e28acd210c">getClosestConnectionPoint</a>(obj2-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>());
+  pt2 = obj2-&gt;<a class="code" href="classBaseNode.html#ac0a992931fa5e310251c25e28acd210c">getClosestConnectionPoint</a>(obj1-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>());
 
-    <span class="keywordflow">if</span>(<a class="code" href="classBaseNode.html#a321a3231c6688686d5ee779ab169b741">selected</a> == <span class="keyword">true</span>)
-    {
-        QPen selectPen;
-        selectPen.setWidth(2);
-        selectPen.setColor(Qt::blue);
-        painter.setPen(selectPen);
-    }
-    <span class="keywordflow">else</span>
-    {
-        painter.setPen(Qt::black);
-    }
-    painter.drawLine(pt1, pt2);
+  <span class="keywordflow">if</span> (<a class="code" href="classBaseNode.html#a321a3231c6688686d5ee779ab169b741">selected</a> == <span class="keyword">true</span>) {
+    QPen selectPen;
+    selectPen.setWidth(2);
+    selectPen.setColor(Qt::blue);
+    painter.setPen(selectPen);
+  } <span class="keywordflow">else</span> {
+    painter.setPen(Qt::black);
+  }
+  painter.drawLine(pt1, pt2);
 }
 </pre></div>
 </div>
@@ -251,20 +248,22 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Implements <a class="el" href="classBaseNode.html#a6ba6b3ac267709d4d4d8bed400d7a47b">BaseNode</a>.</p>
-<div class="fragment"><pre class="fragment">{
-    <span class="keywordtype">double</span> lineAngle=<a class="code" href="namespacemathfunctions.html#a81da99f6fba502c574e986245c78a94f">mathfunctions::computeAngle</a>(pt1, pt2);
-    <span class="keywordtype">double</span> clickAngle=<a class="code" href="namespacemathfunctions.html#a81da99f6fba502c574e986245c78a94f">mathfunctions::computeAngle</a>(pt1, point);
-    <span class="keywordtype">double</span> lineAngle2=<a class="code" href="namespacemathfunctions.html#a81da99f6fba502c574e986245c78a94f">mathfunctions::computeAngle</a>(pt2, pt1);
-    <span class="keywordtype">double</span> clickAngle2=<a class="code" href="namespacemathfunctions.html#a81da99f6fba502c574e986245c78a94f">mathfunctions::computeAngle</a>(pt2, point);
-    <span class="keywordtype">double</span> hypot1=<a class="code" href="namespacemathfunctions.html#a9432dbcc77de8004cd36c909aca1cc4f">mathfunctions::normalize</a>(pt1, point);
-    <span class="keywordtype">double</span> hypot2=<a class="code" href="namespacemathfunctions.html#a9432dbcc77de8004cd36c909aca1cc4f">mathfunctions::normalize</a>(pt2, point);
+<p>Reimplemented from <a class="el" href="classConnectionNode.html#ad9c094f022ac68148183c8d58a0873da">ConnectionNode</a>.</p>
+<div class="fragment"><pre class="fragment">                                                       {
+  <span class="keywordtype">double</span> lineAngle = <a class="code" href="namespacemathfunctions.html#a81da99f6fba502c574e986245c78a94f">mathfunctions::computeAngle</a>(pt1, pt2);
+  <span class="keywordtype">double</span> clickAngle = <a class="code" href="namespacemathfunctions.html#a81da99f6fba502c574e986245c78a94f">mathfunctions::computeAngle</a>(pt1, point);
+  <span class="keywordtype">double</span> lineAngle2 = <a class="code" href="namespacemathfunctions.html#a81da99f6fba502c574e986245c78a94f">mathfunctions::computeAngle</a>(pt2, pt1);
+  <span class="keywordtype">double</span> clickAngle2 = <a class="code" href="namespacemathfunctions.html#a81da99f6fba502c574e986245c78a94f">mathfunctions::computeAngle</a>(pt2, point);
+  <span class="keywordtype">double</span> hypot1 = <a class="code" href="namespacemathfunctions.html#a9432dbcc77de8004cd36c909aca1cc4f">mathfunctions::normalize</a>(pt1, point);
+  <span class="keywordtype">double</span> hypot2 = <a class="code" href="namespacemathfunctions.html#a9432dbcc77de8004cd36c909aca1cc4f">mathfunctions::normalize</a>(pt2, point);
+  <span class="keywordtype">double</span> length_of_line = <a class="code" href="namespacemathfunctions.html#a9432dbcc77de8004cd36c909aca1cc4f">mathfunctions::normalize</a>(pt1, pt2);
 
-    <span class="keywordflow">if</span>(((fabs(hypot1*sin(lineAngle-clickAngle)))&lt;15.0) &amp;&amp; (fabs((hypot1*(cos(lineAngle-clickAngle))))&lt;<a class="code" href="namespacemathfunctions.html#a9432dbcc77de8004cd36c909aca1cc4f">mathfunctions::normalize</a>(pt1,pt2)) &amp;&amp; (fabs((hypot2*(cos(lineAngle2-clickAngle2))))&lt;<a class="code" href="namespacemathfunctions.html#a9432dbcc77de8004cd36c909aca1cc4f">mathfunctions::normalize</a>(pt1,pt2)))
-    {
-       <span class="keywordflow">return</span> <span class="keyword">true</span>;
-    }
-    <span class="keywordflow">return</span> <span class="keyword">false</span>;
+  <span class="keywordflow">if</span> (((fabs(hypot1 * sin(lineAngle - clickAngle))) &lt; 15.0) &amp;&amp;
+      (fabs((hypot1 * (cos(lineAngle - clickAngle)))) &lt; length_of_line) &amp;&amp;
+      (fabs((hypot2 * (cos(lineAngle2 - clickAngle2)))) &lt; length_of_line)) {
+    <span class="keywordflow">return</span> <span class="keyword">true</span>;
+  }
+  <span class="keywordflow">return</span> <span class="keyword">false</span>;
 }
 </pre></div>
 </div>
@@ -288,7 +287,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 25 2012 11:31:47 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Feb 26 2012 18:12:39 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

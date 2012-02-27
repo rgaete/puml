@@ -89,7 +89,6 @@ Inheritance diagram for ClassConnection:</div>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBaseNode.html">BaseNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassConnection.html#a187afc5a2a1089c579511170c331653a">clone</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassConnection.html#ac33db4a71fc46aa212fa5e06a41e0362">hitTest</a> (const QPoint &amp;point)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QDialog *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassConnection.html#ae97a64660be20835e9f686b50aecba2b">getDialog</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassConnection.html#a184ce5f8a22bc86f2ccdaaacebab56af">getIconPath</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassConnection.html#a9f0bbaf7cd96b2795a70a35a38c7218e">getText</a> ()</td></tr>
@@ -136,7 +135,7 @@ Public Member Functions</h2></td></tr>
 <p>Implements <a class="el" href="classBaseNode.html#a79627d9a052108d60082dddbd60dfb02">BaseNode</a>.</p>
 <div class="fragment"><pre class="fragment">                                            {  <span class="comment">// NOLINT</span>
   <a class="code" href="classBaseNode.html">BaseNode</a> *obj1, *obj2;
-  list&lt;BaseNode*&gt;::iterator it = <a class="code" href="classBaseNode.html#a0477b85b623dfb8e7ac8631472b17ef1">connectedObjects</a>.begin();
+  std::list&lt;BaseNode*&gt;::iterator it = <a class="code" href="classBaseNode.html#a6589606c2f8b588e7e27199803cfb2c8">connectedObjects</a>.begin();
   obj1 = *(it);
   it++;
   obj2 = *(it);
@@ -245,68 +244,6 @@ Public Member Functions</h2></td></tr>
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="ac33db4a71fc46aa212fa5e06a41e0362"></a><!-- doxytag: member="ClassConnection::hitTest" ref="ac33db4a71fc46aa212fa5e06a41e0362" args="(const QPoint &amp;point)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool ClassConnection::hitTest </td>
-          <td>(</td>
-          <td class="paramtype">const QPoint &amp;&#160;</td>
-          <td class="paramname"><em>point</em></td><td>)</td>
-          <td><code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Implements <a class="el" href="classBaseNode.html#a6ba6b3ac267709d4d4d8bed400d7a47b">BaseNode</a>.</p>
-<div class="fragment"><pre class="fragment">                                                 {
-  <a class="code" href="classBaseNode.html">BaseNode</a> *obj1, *obj2;
-  list&lt;BaseNode*&gt;::iterator it = <a class="code" href="classBaseNode.html#a0477b85b623dfb8e7ac8631472b17ef1">connectedObjects</a>.begin();
-  obj1 = *(it);
-  it++;
-  obj2 = *(it);
-
-  <span class="keywordflow">if</span> (pt1.x() != obj1-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>().x()) {  <span class="comment">// East or West connection</span>
-    <span class="keywordflow">if</span> ((fabs(point.x() - ((pt1.x() + pt4.x()) / 2.0)) &lt; 15.0) &amp;&amp;
-      ((point.y() &lt; pt1.y() &amp;&amp; point.y() &gt; pt4.y()) ||
-       (point.y() &gt; pt1.y() &amp;&amp; point.y() &lt; pt4.y()))) {
-      <span class="keywordflow">return</span> <span class="keyword">true</span>;
-    }
-    <span class="keywordflow">if</span> ((fabs(point.y() - <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>pt1.y()) &lt; 15.0) &amp;&amp;
-        ((point.x() &lt; pt1.x() &amp;&amp; point.x() &gt; pt2.x()) ||
-         (point.x() &gt; pt1.x() &amp;&amp; point.x() &lt; pt2.x()))) {
-      <span class="keywordflow">return</span> <span class="keyword">true</span>;
-    }
-    <span class="keywordflow">if</span> ((fabs(point.y() - <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>pt4.y()) &lt; 15.0) &amp;&amp;
-        ((point.x() &lt; pt3.x() &amp;&amp; point.x() &gt; pt4.x()) ||
-         (point.x() &gt; pt3.x() &amp;&amp; point.x() &lt; pt4.x()))) {
-      <span class="keywordflow">return</span> <span class="keyword">true</span>;
-    }
-  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (pt1.x() == obj1-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>().x()) {  <span class="comment">// North or South</span>
-                                                    <span class="comment">// connection</span>
-    <span class="keywordflow">if</span> ((fabs(point.y()-((pt1.y() + pt4.y()) / 2.0)) &lt; 15.0) &amp;&amp;
-        ((point.x() &lt; pt1.x() &amp;&amp; point.x() &gt; pt4.x()) ||
-         (point.x() &gt; pt1.x() &amp;&amp; point.x() &lt; pt4.x()))) {
-      <span class="keywordflow">return</span> <span class="keyword">true</span>;
-    }
-    <span class="keywordflow">if</span> ((fabs(point.x() - <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>pt1.x()) &lt; 15.0) &amp;&amp;
-        ((point.y() &lt; pt1.y() &amp;&amp; point.y() &gt; pt2.y()) ||
-         (point.y() &gt; pt1.y() &amp;&amp; point.y() &lt; pt2.y()))) {
-      <span class="keywordflow">return</span> <span class="keyword">true</span>;
-    }
-    <span class="keywordflow">if</span> ((fabs(point.x() - <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>pt4.x()) &lt; 15.0) &amp;&amp;
-        ((point.y() &lt; pt3.y() &amp;&amp; point.y() &gt; pt4.y()) ||
-         (point.y() &gt; pt3.y() &amp;&amp; point.y() &lt; pt4.y()))) {
-      <span class="keywordflow">return</span> <span class="keyword">true</span>;
-    }
-  }
-  <span class="keywordflow">return</span> <span class="keyword">false</span>;
-}
-</pre></div>
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/logan/Programming/puml/src/<a class="el" href="UMLnodes__class_8h_source.html">UMLnodes_class.h</a></li>
 <li>/home/logan/Programming/puml/src/<a class="el" href="UMLnodes__class_8cpp.html">UMLnodes_class.cpp</a></li>
@@ -326,7 +263,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 25 2012 11:31:47 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Feb 26 2012 18:12:38 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

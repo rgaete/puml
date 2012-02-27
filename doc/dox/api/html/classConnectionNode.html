@@ -89,11 +89,33 @@ Inheritance diagram for ConnectionNode:</div>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConnectionNode.html#a5ada624151c7259a23e5273f79db60a2">isConnector</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConnectionNode.html#ad9c094f022ac68148183c8d58a0873da">hitTest</a> (const QPoint &amp;point)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This abstract base class describes the connection nodes. Note that even though this class has pointer members, it does not a special copy constructor, assignment operator or destructor for them. </p>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="classBaseNode.html">BaseNode</a> </dd></dl>
 </div><hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="ad9c094f022ac68148183c8d58a0873da"></a><!-- doxytag: member="ConnectionNode::hitTest" ref="ad9c094f022ac68148183c8d58a0873da" args="(const QPoint &amp;point)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ConnectionNode::hitTest </td>
+          <td>(</td>
+          <td class="paramtype">const QPoint &amp;&#160;</td>
+          <td class="paramname"><em>point</em></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Implements <a class="el" href="classBaseNode.html#a6ba6b3ac267709d4d4d8bed400d7a47b">BaseNode</a>.</p>
+
+<p>Reimplemented in <a class="el" href="classInteractionConnection.html#a2c123d44bff9ac1aa1ea2e49e2f696ed">InteractionConnection</a>, <a class="el" href="classExtendsConnection.html#aac7cac496369e02f73801825563af87b">ExtendsConnection</a>, and <a class="el" href="classIncludesConnection.html#a202cf6086ea74622fbe0532e04e870be">IncludesConnection</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a5ada624151c7259a23e5273f79db60a2"></a><!-- doxytag: member="ConnectionNode::isConnector" ref="a5ada624151c7259a23e5273f79db60a2" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -131,7 +153,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Feb 25 2012 11:31:47 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Feb 26 2012 18:12:38 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
