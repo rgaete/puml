@@ -216,12 +216,15 @@ void InteractionConnection::draw(QPainter& painter) {  // NOLINT
 /* Extends Line Functions *******/
 /********************************/
 void ExtendsConnection::draw(QPainter &painter) {  // NOLINT
-  double lineangle = mathfunctions::computeAngle(pt1, pt2);
+  lineangle = mathfunctions::computeAngle(pt1, pt2);
   BaseNode *obj1, *obj2;
   std::list<BaseNode*>::iterator it = connectedObjects.begin();
   obj1 = *(it);
   it++;
   obj2 = *(it);
+
+  painter.setRenderHint(QPainter::Antialiasing);
+  painter.setRenderHint(QPainter::NonCosmeticDefaultPen);
 
   pt1 = obj1->getClosestConnectionPoint(obj2->getPosition());
   pt2 = obj2->getClosestConnectionPoint(obj1->getPosition());
@@ -238,37 +241,67 @@ void ExtendsConnection::draw(QPainter &painter) {  // NOLINT
 
   // draw the text
   painter.save();
-  QPoint middle = QPoint((pt1.x()+pt2.x())/2, (pt1.y()+pt2.y())/2);
-  painter.translate(middle);
 
-  if (lineangle>PI) {
-    lineangle -= PI;
-  }
-  if (mathfunctions::toRadians(lineangle) > 90.0 &&
-      mathfunctions::toRadians(lineangle) < 180.0) {
-    lineangle += PI;
-  } else if (mathfunctions::toRadians(lineangle) > 180.0) {
-    lineangle += PI;
-  }
-  painter.rotate(mathfunctions::toRadians(-lineangle));
+  QPoint textPos=calculateTextPosition();
+
+  painter.translate(textPos);
+  painter.rotate(mathfunctions::toDegrees(-lineangle));
   painter.drawText(0, 0, "<<extends>>");
+
   painter.restore();
-  const double arrowAngle = 0.75;
-  lineangle = mathfunctions::computeAngle(pt1, pt2);
-  painter.drawLine(pt2.x(), pt2.y(),
-                   pt2.x() + 10 * sin(lineangle - arrowAngle),
-                   pt2.y() + 10 * cos(lineangle - arrowAngle));
-  painter.drawLine(pt2.x(), pt2.y(),
-                   pt2.x() - 10 * sin(lineangle + arrowAngle),
-                   pt2.y() - 10 * cos(lineangle + arrowAngle));
+  addArrow(painter);
 }
 
+void ExtendsConnection::addArrow(QPainter &painter)
+{
+    const double arrowAngle = 0.75;
+    lineangle = mathfunctions::computeAngle(pt1, pt2);
+    painter.drawLine(pt2.x(), pt2.y(),
+                     pt2.x() + 10 * sin(lineangle - arrowAngle),
+                     pt2.y() + 10 * cos(lineangle - arrowAngle));
+    painter.drawLine(pt2.x(), pt2.y(),
+                     pt2.x() - 10 * sin(lineangle + arrowAngle),
+                     pt2.y() - 10 * cos(lineangle + arrowAngle));
+}
+
+QPoint ExtendsConnection::calculateTextPosition()
+{
+    double hypot;
+    QPoint middle;
+    const double textOffset=35.0;
+
+    if(mathfunctions::toDegrees(lineangle) < 90.0 )
+    {
+        hypot=(mathfunctions::calculateHypot(pt1, pt2)/2)-textOffset;
+        middle.setX(hypot*cos(-lineangle)+pt1.x());
+        middle.setY(hypot*sin(-lineangle)+pt1.y());
+    }
+    else if (mathfunctions::toDegrees(lineangle) > 90.0 && mathfunctions::toDegrees(lineangle) <= 180.0 ) {
+        hypot=(mathfunctions::calculateHypot(pt1, pt2)/2)+textOffset;
+        middle.setX(hypot*cos(-lineangle)+pt1.x());
+        middle.setY(hypot*sin(-lineangle)+pt1.y());
+        lineangle -= PI;
+    }
+    else if (mathfunctions::toDegrees(lineangle)>180.0 && mathfunctions::toDegrees(lineangle)<=270.0) {
+      hypot=(mathfunctions::calculateHypot(pt1, pt2)/2)+textOffset;
+      middle.setX(hypot*cos(-lineangle)+pt1.x());
+      middle.setY(hypot*sin(-lineangle)+pt1.y());
+      lineangle -= PI;
+    }
+    else if(mathfunctions::toDegrees(lineangle)>270.0)
+    {
+      hypot=(mathfunctions::calculateHypot(pt1, pt2)/2)-textOffset;
+      middle.setX(hypot*cos(-lineangle)+pt1.x());
+      middle.setY(hypot*sin(-lineangle)+pt1.y());
+    }
+    return middle;
+}
 
 /********************************/
 /* Includes Line Functions ******/
 /********************************/
 void IncludesConnection::draw(QPainter &painter) {  // NOLINT
-  double lineangle = mathfunctions::computeAngle(pt1, pt2);
+  lineangle = mathfunctions::computeAngle(pt1, pt2);
   BaseNode *obj1, *obj2;
   std::list<BaseNode*>::iterator it = connectedObjects.begin();
   obj1 = *(it);
@@ -277,6 +310,9 @@ void IncludesConnection::draw(QPainter &painter) {  // NOLINT
 
   pt1 = obj1->getClosestConnectionPoint(obj2->getPosition());
   pt2 = obj2->getClosestConnectionPoint(obj1->getPosition());
+
+  painter.setRenderHint(QPainter::Antialiasing);
+  painter.setRenderHint(QPainter::NonCosmeticDefaultPen);
 
   if (selected == true) {
     QPen selectPen;
@@ -290,27 +326,57 @@ void IncludesConnection::draw(QPainter &painter) {  // NOLINT
 
   // draw the text
   painter.save();
-  QPoint middle = QPoint((pt1.x()+pt2.x())/2, (pt1.y()+pt2.y())/2);
-  painter.translate(middle);
 
-  if (lineangle > PI) {
-    lineangle -= PI;
-  }
-  if (mathfunctions::toRadians(lineangle) > 90.0 &&
-     mathfunctions::toRadians(lineangle) < 180.0) {
-    lineangle += PI;
-  } else if (mathfunctions::toRadians(lineangle) > 180.0) {
-    lineangle += PI;
-  }
-  painter.rotate(mathfunctions::toRadians(-lineangle));
+  QPoint textPos=calculateTextPosition();
+  painter.translate(textPos);
+
+  painter.rotate(mathfunctions::toDegrees(-lineangle));
   painter.drawText(0, 0, "<<includes>>");
   painter.restore();
-  const double arrowAngle = 0.75;
-  lineangle = mathfunctions::computeAngle(pt1, pt2);
-  painter.drawLine(pt2.x(), pt2.y(),
-                   pt2.x() + 10 * sin(lineangle - arrowAngle),
-                   pt2.y() + 10 * cos(lineangle - arrowAngle));
-  painter.drawLine(pt2.x(), pt2.y(),
-                   pt2.x() - 10 * sin(lineangle + arrowAngle),
-                   pt2.y() - 10 * cos(lineangle + arrowAngle));
+  addArrow(painter);
+}
+
+void IncludesConnection::addArrow(QPainter &painter)
+{
+    const double arrowAngle = 0.75;
+    lineangle = mathfunctions::computeAngle(pt1, pt2);
+    painter.drawLine(pt2.x(), pt2.y(),
+                     pt2.x() + 10 * sin(lineangle - arrowAngle),
+                     pt2.y() + 10 * cos(lineangle - arrowAngle));
+    painter.drawLine(pt2.x(), pt2.y(),
+                     pt2.x() - 10 * sin(lineangle + arrowAngle),
+                     pt2.y() - 10 * cos(lineangle + arrowAngle));
+}
+
+QPoint IncludesConnection::calculateTextPosition()
+{
+    double hypot;
+    QPoint middle;
+    const double textOffset=35.0;
+
+    if(mathfunctions::toDegrees(lineangle) < 90.0 )
+    {
+        hypot=(mathfunctions::calculateHypot(pt1, pt2)/2)-textOffset;
+        middle.setX(hypot*cos(-lineangle)+pt1.x());
+        middle.setY(hypot*sin(-lineangle)+pt1.y());
+    }
+    else if (mathfunctions::toDegrees(lineangle) > 90.0 && mathfunctions::toDegrees(lineangle) <= 180.0 ) {
+        hypot=(mathfunctions::calculateHypot(pt1, pt2)/2)+textOffset;
+        middle.setX(hypot*cos(-lineangle)+pt1.x());
+        middle.setY(hypot*sin(-lineangle)+pt1.y());
+        lineangle -= PI;
+    }
+    else if (mathfunctions::toDegrees(lineangle)>180.0 && mathfunctions::toDegrees(lineangle)<=270.0) {
+      hypot=(mathfunctions::calculateHypot(pt1, pt2)/2)+textOffset;
+      middle.setX(hypot*cos(-lineangle)+pt1.x());
+      middle.setY(hypot*sin(-lineangle)+pt1.y());
+      lineangle -= PI;
+    }
+    else if(mathfunctions::toDegrees(lineangle)>270.0)
+    {
+      hypot=(mathfunctions::calculateHypot(pt1, pt2)/2)-textOffset;
+      middle.setX(hypot*cos(-lineangle)+pt1.x());
+      middle.setY(hypot*sin(-lineangle)+pt1.y());
+    }
+    return middle;
 }

@@ -140,6 +140,20 @@ class ConnectionNode: public BaseNode {
     bool hitTest(const QPoint &point);
 
   protected:
+    QPoint pt1, pt2;
+    double lineangle;
+  private:
+};
+
+class SquareConnectionNode: public BaseNode {
+  public:
+    // void setPoints(const QPoint &point1, const QPoint &point2);
+
+    // virtual BaseNode* factory();
+    bool isConnector() {return true;}
+    bool hitTest(const QPoint &point);
+
+  protected:
     QPoint pt1, pt2, pt3, pt4;
   private:
 };

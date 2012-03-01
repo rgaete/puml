@@ -17,7 +17,7 @@ class ClassConnectionDialog : public QInputDialog {
 
 /*! @brief This concrete class defines ...
  */
-class ClassConnection : public ConnectionNode {
+class ClassConnection : public SquareConnectionNode {
   public:
     BaseNode* clone() { return new ClassConnection; }
     QDialog* getDialog() { return new ClassConnectionDialog; }
