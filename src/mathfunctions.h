@@ -9,8 +9,8 @@
 
 namespace mathfunctions {
   double computeAngle(QPoint p1, QPoint p2);
-  double normalize(QPoint p1, QPoint p2);
-  double toRadians(double angle);
+  double calculateHypot(QPoint p1, QPoint p2);
+  double toDegrees(double radians);
 }
 
 #endif  // SRC_MATHFUNCTIONS_H_

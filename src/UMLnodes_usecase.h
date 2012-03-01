@@ -100,8 +100,6 @@ class InteractionConnection : public ConnectionNode {
     QString getText() { return "Interaction Line"; }
     void draw(QPainter& painter);  // NOLINT
     DiagramType getDiagramType() { return UseCase; }
-  private:
-    QPoint pt1, pt2;
 };
 
 
@@ -114,16 +112,15 @@ class ExtendsConnectionDialog : public QInputDialog {
   Case diagram (line from the actor to the use case)
 */
 class ExtendsConnection : public ConnectionNode {
-  private:
   public:
     BaseNode* clone() { return new ExtendsConnection; }
     QDialog* getDialog() { return new ExtendsConnectionDialog; }
     QString getIconPath() { return QString(":/Images/interaction.png"); }
     QString getText() { return "Extends Line"; }
+    void addArrow(QPainter &painter);
+    QPoint calculateTextPosition();
     void draw(QPainter& painter);  // NOLINT
     DiagramType getDiagramType() { return UseCase; }
-  private:
-    QPoint pt1, pt2;
 };
 
 /*! This class provides a custom dialog for an extendsLineNode.
@@ -135,17 +132,15 @@ class IncludesConnectionDialog : public QDialog {
   Case diagram (line from the actor to the use case)
 */
 class IncludesConnection : public ConnectionNode {
-  private:
   public:
     BaseNode* clone() { return new IncludesConnection; }
     QDialog* getDialog() { return new IncludesConnectionDialog; }
     QString getIconPath() { return QString(":/Images/interaction.png"); }
     QString getText() { return "Includes Line"; }
+    void addArrow(QPainter &painter);
+    QPoint calculateTextPosition();
     void draw(QPainter& painter);  // NOLINT
     DiagramType getDiagramType() { return UseCase; }
-
-  private:
-    QPoint pt1, pt2;
 };
 
 #endif  // SRC_UMLNODES_USECASE_H_

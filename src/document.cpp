@@ -141,7 +141,7 @@ void Document::createConnectionPoint2(const QPoint &point) {
   if (firstConnectionIndex != -1) {
     int index = getIndexAt(point);
     // And the second index was found
-    if ((index != -1) && (nodes.at(index)->isConnector() == false)) {
+    if (((index != -1) && (nodes.at(index)->isConnector() == false))&& index!=firstConnectionIndex) {
       // produce the object
       BaseNode *newNode;
       newNode = NodeFactory::getInstance()->produce(newObjectID);

@@ -19,12 +19,12 @@ double mathfunctions::computeAngle(QPoint p1, QPoint p2) {
   return angle + (atan(opposite / adjacent));
 }
 
-double mathfunctions::normalize(QPoint p1, QPoint p2) {
+double mathfunctions::calculateHypot(QPoint p1, QPoint p2) {
   double x_length_squared = pow(static_cast<double>(p2.x()) - p1.x(), 2);
   double y_length_squared = pow(static_cast<double>(p2.y()) - p1.y(), 2);
   return pow((x_length_squared + y_length_squared), 0.5);
 }
 
-double mathfunctions::toRadians(double angle) {
-  return angle*180.0/PI;
+double mathfunctions::toDegrees(double radians) {
+  return radians*180.0/PI;
 }
