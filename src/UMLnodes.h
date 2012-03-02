@@ -17,5 +17,6 @@
 
 #include "./UMLnodes_usecase.h"
 #include "./UMLnodes_class.h"
+#include "./UMLnodes_state.h"
 
 #endif  // SRC_UMLNODES_H_

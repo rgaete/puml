@@ -27,6 +27,11 @@ MainWindow::MainWindow(QWidget *parent)
   registerObject(new IncludesConnection);
   registerObject(new ClassConnection);
 
+  //statechart objects
+  registerObject(new StateObject);
+  registerObject(new InitialStateObject);
+  registerObject(new FinalStateObject);
+
 
   this->resize(700, 500);
   this->setWindowTitle(tr("Phunctional UML Editor"));
@@ -139,7 +144,7 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex) {
   // Go into selection mode
   actionSelect->trigger();
 
-  setDiagramType(BaseNode::UseCase);
+  //setDiagramType(BaseNode::UseCase);
 }
 
 
@@ -406,8 +411,9 @@ void MainWindow::on_actionNew_triggered() {
   //                          QMessageBox::Ok);
 
   // this  is the new dialogue, hopefully
-  ConfigDialog dialog;
-  dialog.exec();
+  ConfigDialog *dialog = new ConfigDialog();
+  connect(dialog, SIGNAL(newDiagramType(ObjectNode::DiagramType)), this, SLOT(setDiagramType(BaseNode::DiagramType)));
+  dialog->exec();
 
   // Create the new document and canvas
   Document* newdoc = new Document;
