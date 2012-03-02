@@ -6,6 +6,7 @@
 #include <QDialog>
 
 #include "./dialogpages.h"
+#include "./nodes.h"
 
 QT_BEGIN_NAMESPACE
 class QListWidget;
@@ -26,6 +27,9 @@ class ConfigDialog : public QDialog {
     void CloseDialog();
     void AcceptValue(int diagramenum);
     void accepted();
+
+ signals:
+    void newDiagramType(ObjectNode::DiagramType diagramType);
 
   private:
     void createIcons();

@@ -69,7 +69,7 @@ void ConfigDialog::AcceptValue(int diagramenum) {
 }
 
 void ConfigDialog::accepted() {
-  // emit newDiagramType(BaseNode::UseCase);
+  emit newDiagramType(ObjectNode::StateChart);
 }
 
 void ConfigDialog::createIcons() {

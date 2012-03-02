@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     dialogpages.cpp \
     UMLnodes_class.cpp \
     UMLnodes_usecase.cpp \
-    mathfunctions.cpp
+    mathfunctions.cpp \
+    UMLnodes_state.cpp
 
 HEADERS  += mainwindow.h \
     canvas.h \
@@ -33,7 +34,8 @@ HEADERS  += mainwindow.h \
     dialogpages.h \
     UMLnodes_usecase.h \
     UMLnodes_class.h \
-    mathfunctions.h
+    mathfunctions.h \
+    UMLnodes_state.h
 
 OTHER_FILES +=
 
