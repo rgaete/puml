@@ -242,10 +242,10 @@ void ExtendsConnection::draw(QPainter &painter) {  // NOLINT
   // draw the text
   painter.save();
 
-  QPoint textPos=calculateTextPosition();
+  QPoint textPos = calculateTextPosition();
 
   painter.translate(textPos);
-  //painter.rotate(mathfunctions::toDegrees(-lineangle));
+  // painter.rotate(mathfunctions::toDegrees(-lineangle));
   painter.rotate(90);
   painter.drawText(0, 0, "<<extends>>");
 
@@ -253,49 +253,44 @@ void ExtendsConnection::draw(QPainter &painter) {  // NOLINT
   addArrow(painter);
 }
 
-void ExtendsConnection::addArrow(QPainter &painter)
-{
-    const double arrowAngle = 0.75;
-    lineangle = mathfunctions::computeAngle(pt1, pt2);
-    painter.drawLine(pt2.x(), pt2.y(),
-                     pt2.x() + 10 * sin(lineangle - arrowAngle),
-                     pt2.y() + 10 * cos(lineangle - arrowAngle));
-    painter.drawLine(pt2.x(), pt2.y(),
-                     pt2.x() - 10 * sin(lineangle + arrowAngle),
-                     pt2.y() - 10 * cos(lineangle + arrowAngle));
+void ExtendsConnection::addArrow(QPainter &painter) {  // NOLINT
+  const double arrowAngle = 0.75;
+  lineangle = mathfunctions::computeAngle(pt1, pt2);
+  painter.drawLine(pt2.x(), pt2.y(),
+                   pt2.x() + 10 * sin(lineangle - arrowAngle),
+                   pt2.y() + 10 * cos(lineangle - arrowAngle));
+  painter.drawLine(pt2.x(), pt2.y(),
+                   pt2.x() - 10 * sin(lineangle + arrowAngle),
+                   pt2.y() - 10 * cos(lineangle + arrowAngle));
 }
 
-QPoint ExtendsConnection::calculateTextPosition()
-{
-    double hypot;
-    QPoint middle;
-    const double textOffset=35.0;
+QPoint ExtendsConnection::calculateTextPosition() {
+  double hypot;
+  QPoint middle;
+  const double textOffset = 35.0;
 
-    if(mathfunctions::toDegrees(lineangle) < 90.0 )
-    {
-        hypot=(mathfunctions::calculateHypot(pt1, pt2)/2)-textOffset;
-        middle.setX(hypot*cos(-lineangle)+pt1.x());
-        middle.setY(hypot*sin(-lineangle)+pt1.y());
-    }
-    else if (mathfunctions::toDegrees(lineangle) > 90.0 && mathfunctions::toDegrees(lineangle) <= 180.0 ) {
-        hypot=(mathfunctions::calculateHypot(pt1, pt2)/2)+textOffset;
-        middle.setX(hypot*cos(-lineangle)+pt1.x());
-        middle.setY(hypot*sin(-lineangle)+pt1.y());
-        lineangle -= PI;
-    }
-    else if (mathfunctions::toDegrees(lineangle)>180.0 && mathfunctions::toDegrees(lineangle)<=270.0) {
-      hypot=(mathfunctions::calculateHypot(pt1, pt2)/2)+textOffset;
-      middle.setX(hypot*cos(-lineangle)+pt1.x());
-      middle.setY(hypot*sin(-lineangle)+pt1.y());
-      lineangle -= PI;
-    }
-    else if(mathfunctions::toDegrees(lineangle)>270.0)
-    {
-      hypot=(mathfunctions::calculateHypot(pt1, pt2)/2)-textOffset;
-      middle.setX(hypot*cos(-lineangle)+pt1.x());
-      middle.setY(hypot*sin(-lineangle)+pt1.y());
-    }
-    return middle;
+  if (mathfunctions::toDegrees(lineangle) < 90.0) {
+    hypot=(mathfunctions::calculateHypot(pt1, pt2)/2)-textOffset;
+    middle.setX(hypot*cos(-lineangle)+pt1.x());
+    middle.setY(hypot*sin(-lineangle)+pt1.y());
+  } else if (mathfunctions::toDegrees(lineangle) > 90.0 &&
+           mathfunctions::toDegrees(lineangle) <= 180.0) {
+    hypot=(mathfunctions::calculateHypot(pt1, pt2)/2)+textOffset;
+    middle.setX(hypot*cos(-lineangle)+pt1.x());
+    middle.setY(hypot*sin(-lineangle)+pt1.y());
+    lineangle -= PI;
+  } else if (mathfunctions::toDegrees(lineangle) > 180.0 &&
+           mathfunctions::toDegrees(lineangle) <= 270.0) {
+    hypot=(mathfunctions::calculateHypot(pt1, pt2) / 2) + textOffset;
+    middle.setX(hypot * cos(-lineangle) + pt1.x());
+    middle.setY(hypot * sin(-lineangle) + pt1.y());
+    lineangle -= PI;
+  } else if (mathfunctions::toDegrees(lineangle) > 270.0) {
+    hypot=(mathfunctions::calculateHypot(pt1, pt2) / 2) - textOffset;
+    middle.setX(hypot * cos(-lineangle) + pt1.x());
+    middle.setY(hypot * sin(-lineangle) + pt1.y());
+  }
+  return middle;
 }
 
 /********************************/
@@ -328,7 +323,7 @@ void IncludesConnection::draw(QPainter &painter) {  // NOLINT
   // draw the text
   painter.save();
 
-  QPoint textPos=calculateTextPosition();
+  QPoint textPos = calculateTextPosition();
   painter.translate(textPos);
 
   painter.rotate(mathfunctions::toDegrees(-lineangle));
@@ -337,47 +332,42 @@ void IncludesConnection::draw(QPainter &painter) {  // NOLINT
   addArrow(painter);
 }
 
-void IncludesConnection::addArrow(QPainter &painter)
-{
-    const double arrowAngle = 0.75;
-    lineangle = mathfunctions::computeAngle(pt1, pt2);
-    painter.drawLine(pt2.x(), pt2.y(),
-                     pt2.x() + 10 * sin(lineangle - arrowAngle),
-                     pt2.y() + 10 * cos(lineangle - arrowAngle));
-    painter.drawLine(pt2.x(), pt2.y(),
-                     pt2.x() - 10 * sin(lineangle + arrowAngle),
-                     pt2.y() - 10 * cos(lineangle + arrowAngle));
+void IncludesConnection::addArrow(QPainter &painter) {  // NOLINT
+  const double arrowAngle = 0.75;
+  lineangle = mathfunctions::computeAngle(pt1, pt2);
+  painter.drawLine(pt2.x(), pt2.y(),
+                   pt2.x() + 10 * sin(lineangle - arrowAngle),
+                   pt2.y() + 10 * cos(lineangle - arrowAngle));
+  painter.drawLine(pt2.x(), pt2.y(),
+                   pt2.x() - 10 * sin(lineangle + arrowAngle),
+                   pt2.y() - 10 * cos(lineangle + arrowAngle));
 }
 
-QPoint IncludesConnection::calculateTextPosition()
-{
-    double hypot;
-    QPoint middle;
-    const double textOffset=35.0;
+QPoint IncludesConnection::calculateTextPosition() {
+  double hypot;
+  QPoint middle;
+  const double textOffset = 35.0;
 
-    if(mathfunctions::toDegrees(lineangle) < 90.0 )
-    {
-        hypot=(mathfunctions::calculateHypot(pt1, pt2)/2)-textOffset;
-        middle.setX(hypot*cos(-lineangle)+pt1.x());
-        middle.setY(hypot*sin(-lineangle)+pt1.y());
-    }
-    else if (mathfunctions::toDegrees(lineangle) > 90.0 && mathfunctions::toDegrees(lineangle) <= 180.0 ) {
-        hypot=(mathfunctions::calculateHypot(pt1, pt2)/2)+textOffset;
-        middle.setX(hypot*cos(-lineangle)+pt1.x());
-        middle.setY(hypot*sin(-lineangle)+pt1.y());
-        lineangle -= PI;
-    }
-    else if (mathfunctions::toDegrees(lineangle)>180.0 && mathfunctions::toDegrees(lineangle)<=270.0) {
-      hypot=(mathfunctions::calculateHypot(pt1, pt2)/2)+textOffset;
-      middle.setX(hypot*cos(-lineangle)+pt1.x());
-      middle.setY(hypot*sin(-lineangle)+pt1.y());
-      lineangle -= PI;
-    }
-    else if(mathfunctions::toDegrees(lineangle)>270.0)
-    {
-      hypot=(mathfunctions::calculateHypot(pt1, pt2)/2)-textOffset;
-      middle.setX(hypot*cos(-lineangle)+pt1.x());
-      middle.setY(hypot*sin(-lineangle)+pt1.y());
-    }
-    return middle;
+  if (mathfunctions::toDegrees(lineangle) < 90.0) {
+    hypot=(mathfunctions::calculateHypot(pt1, pt2) / 2) - textOffset;
+    middle.setX(hypot * cos(-lineangle) + pt1.x());
+    middle.setY(hypot * sin(-lineangle) + pt1.y());
+  } else if (mathfunctions::toDegrees(lineangle) > 90.0 &&
+             mathfunctions::toDegrees(lineangle) <= 180.0) {
+    hypot=(mathfunctions::calculateHypot(pt1, pt2) / 2) + textOffset;
+    middle.setX(hypot * cos(-lineangle) + pt1.x());
+    middle.setY(hypot * sin(-lineangle) + pt1.y());
+    lineangle -= PI;
+  } else if (mathfunctions::toDegrees(lineangle) > 180.0 &&
+             mathfunctions::toDegrees(lineangle) <= 270.0) {
+    hypot=(mathfunctions::calculateHypot(pt1, pt2) / 2) + textOffset;
+    middle.setX(hypot * cos(-lineangle) + pt1.x());
+    middle.setY(hypot * sin(-lineangle) + pt1.y());
+    lineangle -= PI;
+  } else if (mathfunctions::toDegrees(lineangle) > 270.0) {
+    hypot=(mathfunctions::calculateHypot(pt1, pt2) / 2) - textOffset;
+    middle.setX(hypot * cos(-lineangle) + pt1.x());
+    middle.setY(hypot * sin(-lineangle) + pt1.y());
+  }
+  return middle;
 }
