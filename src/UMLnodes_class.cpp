@@ -6,8 +6,8 @@
 
 
 ClassBoxObject::ClassBoxObject() {
-    this->length = 50;
-    this->height = 50;
+    this->length = 60;
+    this->height = 40;
 }
 
 void ClassBoxObject::draw(QPainter &painter) {
@@ -15,20 +15,11 @@ void ClassBoxObject::draw(QPainter &painter) {
     // draws the selection boxes as needed.
     ObjectNode::draw(painter);
 
-    // background
-    painter.setPen(Qt::NoPen);
-    painter.setBrush(Qt::white);
-    painter.drawEllipse(position, length / 2, height / 2);
-
     // edge
     painter.setPen(Qt::black);
     painter.setBrush(Qt::NoBrush);
-    painter.drawEllipse(position, length / 2, height / 2);
+    painter.drawRect(position.x()-length/2,position.y()-height/2,length,height);
 
-    painter.drawText(QRect(position.x() - length / 2, position.y() - height/2,
-                           length, height),
-                     Qt::AlignCenter | Qt::AlignHCenter | Qt::TextDontClip,
-                     this->name);
 }
 
 ClassBoxObjectDialog::ClassBoxObjectDialog(QWidget *parent)
@@ -46,9 +37,6 @@ QDialog * ClassBoxObject::getDialog() {
           this, SLOT(setName(QString)));
   return dialog;
 }
-
-
-//Already here
 
 void ClassConnection::draw(QPainter& painter) {  // NOLINT
   BaseNode *obj1, *obj2;

@@ -42,22 +42,6 @@ private:
     QString name;
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Already here before adding
-
 /*! @brief The properties dialog for class connections
  */
 class ClassConnectionDialog : public QInputDialog {
