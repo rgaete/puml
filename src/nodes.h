@@ -124,13 +124,13 @@ class ObjectNode: public BaseNode {
   protected:
 };
 
-  /*!
-   * This abstract base class describes the connection nodes.
-   * Note that even though this class has pointer members,
-   * it does not a special copy constructor, assignment operator or
-   * destructor for them.
-   * @sa BaseNode
-   */
+/*!
+ * This abstract base class describes the connection nodes.
+ * Note that even though this class has pointer members,
+ * it does not a special copy constructor, assignment operator or
+ * destructor for them.
+ * @sa BaseNode
+ */
 class ConnectionNode: public BaseNode {
   public:
     // void setPoints(const QPoint &point1, const QPoint &point2);

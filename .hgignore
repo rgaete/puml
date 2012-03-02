@@ -15,6 +15,8 @@ src/pUMLTest2$
 src/pUML$
 ~$
 \.orig$
+qrc_icons.*
+pUML-build-desktop
 
 .*log$
 .*aux$
