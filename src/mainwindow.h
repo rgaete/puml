@@ -71,6 +71,7 @@ class MainWindow : public QMainWindow {
     void on_tabWidget_currentChanged(int newIndex);
     void on_NodeAction_triggered(Canvas::DrawingMode drawingMode,
                                  int prototypeID);
+    void setDiagramType(BaseNode::DiagramType type);
 
   private:
     void createActions();
@@ -79,7 +80,7 @@ class MainWindow : public QMainWindow {
     void connectSignalsSlots();
     void registerObject(BaseNode* newPrototype);
     void connectCanvasWithDocument(int canvasIndex, int documentIndex);
-    void setDiagramType(BaseNode::DiagramType type);
+
 
   private:
     // The main document tabs

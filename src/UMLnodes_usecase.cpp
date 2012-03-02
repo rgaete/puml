@@ -245,7 +245,8 @@ void ExtendsConnection::draw(QPainter &painter) {  // NOLINT
   QPoint textPos=calculateTextPosition();
 
   painter.translate(textPos);
-  painter.rotate(mathfunctions::toDegrees(-lineangle));
+  //painter.rotate(mathfunctions::toDegrees(-lineangle));
+  painter.rotate(90);
   painter.drawText(0, 0, "<<extends>>");
 
   painter.restore();
