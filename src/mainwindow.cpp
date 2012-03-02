@@ -2,6 +2,10 @@
 
 #include "./mainwindow.h"
 #include <utility>
+#include <iostream>
+#include <fstream>
+
+using std::ofstream;
 
 /*! In the MainWindow constructor, we need to create
   all the actions, menus and widgets. registerObject is
@@ -470,17 +474,46 @@ void MainWindow::on_actionOpen_triggered() {
 }
 
 void MainWindow::on_actionSave_triggered() {
+  documents.at(currentDocument)->saveDocument();
+
   QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
              tr("XML files (*.xml)"));
+
 
   //  write the saving file function here with the fileName
 }
 
 void MainWindow::on_actionSave_As_triggered() {
+
+  documents.at(currentDocument)->saveAsDocument();
+
+
+
+// MOVE ALL OF THIS TO DOCUMENTS
   QString fileName = QFileDialog::getSaveFileName(this, tr("Save As File"),
              tr("XML files (*.xml)"));
 
-  //  write the saving as file function here with the fileName
+  fprintf(stderr, "We go here\n");
+  fprintf(stderr, "We go here\n");
+  fprintf(stderr, "%s\n", fileName.toStdString().c_str());
+
+//  printf("%s\n", fileName.toStdString());
+  if (fileName.isEmpty()) {
+      return;
+  } else {
+      QFile file(fileName);
+  if (!file.open(QIODevice::WriteOnly)) {
+      QMessageBox::information(this,
+                              tr("Unable to open file"), file.errorString());
+      return;
+  }
+
+  ofstream myfile;
+  myfile.open(fileName.toStdString().c_str());
+  myfile << "Rawr";
+  myfile.close();
+  }
+//  write the saving as file function here with the fileName
 }
 
 void MainWindow::on_actionPrint_triggered() {

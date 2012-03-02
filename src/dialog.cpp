@@ -64,7 +64,7 @@ void ConfigDialog::CloseDialog() {
 
 // this function is a slot that takes in a value from the children
 void ConfigDialog::AcceptValue(int diagramenum) {
-  cout << diagramenum <<endl;
+  //cout << diagramenum <<endl;
   CloseDialog();
 }
 

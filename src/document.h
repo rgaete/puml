@@ -7,8 +7,15 @@
 #include <vector>
 #include "./nodes.h"
 #include "./nodefactory.h"
+#include <QFileDialog>
+#include <QFile>
+#include <QIODevice>
+#include <QMessageBox>
+#include <list>
+#include <string>
 
-class Document : public QObject {
+
+class Document : public QWidget {
   Q_OBJECT
 
   public:
@@ -19,6 +26,8 @@ class Document : public QObject {
     int getNewObjectID() { return newObjectID; }
     int getCanvasIndex() { return canvasIndex; }
     void setCanvasIndex(int index) { canvasIndex = index; }
+    void saveDocument();
+    void saveAsDocument();
 
   private:
     int getIndexAt(const QPoint &point);
@@ -37,6 +46,7 @@ class Document : public QObject {
     int canvasIndex;
     // This is the first object when creating a connection node
     int firstConnectionIndex;
+    std::string filename;
 
   signals:
     void modelChanged();

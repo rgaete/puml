@@ -1,7 +1,6 @@
 // Copyright (C) 2011-2012 pUML Group
 
-#include <QMessageBox>
-#include <list>
+
 #include "./document.h"
 
 /*! Constructor: simply initializes indexOfSelectedObject.
@@ -141,7 +140,9 @@ void Document::createConnectionPoint2(const QPoint &point) {
   if (firstConnectionIndex != -1) {
     int index = getIndexAt(point);
     // And the second index was found
-    if (((index != -1) && (nodes.at(index)->isConnector() == false))&& index!=firstConnectionIndex) {
+    if (((index != -1) &&
+         (nodes.at(index)->isConnector() == false)) &&
+            index != firstConnectionIndex) {
       // produce the object
       BaseNode *newNode;
       newNode = NodeFactory::getInstance()->produce(newObjectID);
@@ -228,7 +229,7 @@ void Document::removeObject() {
 
       // iterate through the list and disconnect the connectionnode we
       // are deleting from the objects.
-      std::list<BaseNode*>::iterator it;
+      std::list<BaseNode*>::iterator it;  // NOLINT
       for (it = secondaryObjects.begin(); it != secondaryObjects.end(); ++it) {
         (*it)->removeConnectedNode(obj);
       }
@@ -240,4 +241,13 @@ void Document::removeObject() {
 
   indexOfSelectedObject = -1;
   emit modelChanged();
+}
+
+void Document::saveDocument() {
+   // if (filename.empty)
+
+}
+
+void Document::saveAsDocument() {
+
 }

@@ -27,6 +27,8 @@
 #include <QButtonGroup>
 #include <map>
 #include <vector>
+#include <QFile>
+#include <QIODevice>
 #include "./UMLnodes.h"
 #include "./canvas.h"
 #include "./nodefactory.h"
@@ -34,6 +36,8 @@
 #include "./assert.h"
 #include "./nodeaction.h"
 #include "./dialog.h"
+
+#include <iostream>
 
 class MainWindow : public QMainWindow {
   Q_OBJECT
