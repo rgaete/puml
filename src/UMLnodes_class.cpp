@@ -2,7 +2,53 @@
 
 #include <list>
 
-#include "./UMLnodes_class.h"
+#include "UMLnodes_class.h"
+
+
+ClassBoxObject::ClassBoxObject() {
+    this->length = 50;
+    this->height = 50;
+}
+
+void ClassBoxObject::draw(QPainter &painter) {
+    // Always call this ObjectNode's draw function because it
+    // draws the selection boxes as needed.
+    ObjectNode::draw(painter);
+
+    // background
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(Qt::white);
+    painter.drawEllipse(position, length / 2, height / 2);
+
+    // edge
+    painter.setPen(Qt::black);
+    painter.setBrush(Qt::NoBrush);
+    painter.drawEllipse(position, length / 2, height / 2);
+
+    painter.drawText(QRect(position.x() - length / 2, position.y() - height/2,
+                           length, height),
+                     Qt::AlignCenter | Qt::AlignHCenter | Qt::TextDontClip,
+                     this->name);
+}
+
+ClassBoxObjectDialog::ClassBoxObjectDialog(QWidget *parent)
+                 :QInputDialog(parent) {
+  setWindowTitle("ClassBox Properties");
+  setOkButtonText("Ok");
+  setCancelButtonText("Cancel");
+  setLabelText("ClassBox Name:");
+}
+
+QDialog * ClassBoxObject::getDialog() {
+  ClassBoxObjectDialog *dialog = new ClassBoxObjectDialog;
+  dialog->setTextValue(name);
+  connect(dialog, SIGNAL(textValueSelected(QString)),
+          this, SLOT(setName(QString)));
+  return dialog;
+}
+
+
+//Already here
 
 void ClassConnection::draw(QPainter& painter) {  // NOLINT
   BaseNode *obj1, *obj2;

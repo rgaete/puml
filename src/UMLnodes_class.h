@@ -10,6 +10,54 @@
 #include <QInputDialog>
 #include "./nodes.h"
 
+/*! @brief This defines a custom dialog for a ClassBoxObject
+*/
+class ClassBoxObjectDialog : public QInputDialog {
+  Q_OBJECT
+public:
+  explicit ClassBoxObjectDialog(QWidget *parent = 0);
+};
+
+/*!
+ * @brief This concrete class is the ClassBox node.
+ * @sa ObjectNode
+ */
+class ClassBoxObject: public ObjectNode {
+  Q_OBJECT
+    public:
+    ClassBoxObject();
+    BaseNode* clone() { return new ClassBoxObject; }
+    QDialog* getDialog();
+    QString getIconPath() { return QString(":/Images/oval.png"); }
+    QString getText() { return "ClassBox"; }
+    DiagramType getDiagramType() { return Class; }
+
+    void draw(QPainter &painter);  // NOLINT
+
+
+public slots:
+    void setName(QString newName) { this->name = newName; }
+private:
+    int radius;
+    QString name;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Already here before adding
+
 /*! @brief The properties dialog for class connections
  */
 class ClassConnectionDialog : public QInputDialog {

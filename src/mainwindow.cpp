@@ -36,6 +36,9 @@ MainWindow::MainWindow(QWidget *parent)
   registerObject(new InitialStateObject);
   registerObject(new FinalStateObject);
 
+  //register classbox
+  registerObject(new ClassBoxObject);
+
 
   this->resize(700, 500);
   this->setWindowTitle(tr("Phunctional UML Editor"));
