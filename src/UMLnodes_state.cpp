@@ -1,80 +1,80 @@
-#include "UMLnodes_state.h"
+// Copyright (C) 2011-2012 pUML Group
+
+#include "./UMLnodes_state.h"
 
 StateObject::StateObject() {
-    this->length = 50;
-    this->height = 50;
+  this->length = 50;
+  this->height = 50;
 }
 
-void StateObject::draw(QPainter &painter) {
-    // Always call this ObjectNode's draw function because it
-    // draws the selection boxes as needed.
-    ObjectNode::draw(painter);
+void StateObject::draw(QPainter &painter) {  // NOLINT
+  // Always call this ObjectNode's draw function because it
+  // draws the selection boxes as needed.
+  ObjectNode::draw(painter);
 
-    // background
-    painter.setPen(Qt::NoPen);
-    painter.setBrush(Qt::white);
-    painter.drawEllipse(position, length / 2, height / 2);
+  // background
+  painter.setPen(Qt::NoPen);
+  painter.setBrush(Qt::white);
+  painter.drawEllipse(position, length / 2, height / 2);
 
-    // edge
-    painter.setPen(Qt::black);
-    painter.setBrush(Qt::NoBrush);
-    painter.drawEllipse(position, length / 2, height / 2);
+  // edge
+  painter.setPen(Qt::black);
+  painter.setBrush(Qt::NoBrush);
+  painter.drawEllipse(position, length / 2, height / 2);
 
-    painter.drawText(QRect(position.x() - length / 2, position.y() - height/2,
-                           length, height),
-                     Qt::AlignCenter | Qt::AlignHCenter | Qt::TextDontClip,
-                     this->name);
+  painter.drawText(QRect(position.x() - length / 2, position.y() - height / 2,
+                         length, height),
+                   Qt::AlignCenter | Qt::AlignHCenter | Qt::TextDontClip,
+                   this->name);
 }
 
 InitialStateObject::InitialStateObject() {
-    this->length = 15;
-    this->height = 15;
+  this->length = 15;
+  this->height = 15;
 }
 
 
-void InitialStateObject::draw(QPainter &painter) {
-    // Always call this ObjectNode's draw function because it
-    // draws the selection boxes as needed.
-    ObjectNode::draw(painter);
+void InitialStateObject::draw(QPainter &painter) {  // NOLINT
+  // Always call this ObjectNode's draw function because it
+  // draws the selection boxes as needed.
+  ObjectNode::draw(painter);
 
-    // background
-    painter.setPen(Qt::NoPen);
-    painter.setBrush(Qt::black);
-    painter.drawEllipse(position, length / 2, height / 2);
-
-
+  // background
+  painter.setPen(Qt::NoPen);
+  painter.setBrush(Qt::black);
+  painter.drawEllipse(position, length / 2, height / 2);
 }
 
 FinalStateObject::FinalStateObject() {
-    this->length = 30;
-    this->height = 30;
+  this->length = 30;
+  this->height = 30;
 }
 
 
-void FinalStateObject::draw(QPainter &painter) {
-    // Always call this ObjectNode's draw function because it
-    // draws the selection boxes as needed.
-    ObjectNode::draw(painter);
+void FinalStateObject::draw(QPainter &painter) {  // NOLINT
+  // Always call this ObjectNode's draw function because it
+  // draws the selection boxes as needed.
+  ObjectNode::draw(painter);
 
-    // background
-    painter.setPen(Qt::NoPen);
-    painter.setBrush(Qt::white);
-    painter.drawEllipse(position, length / 2, height / 2);
+  // background
+  painter.setPen(Qt::NoPen);
+  painter.setBrush(Qt::white);
+  painter.drawEllipse(position, length / 2, height / 2);
 
-    //edge
-    painter.setPen(Qt::black);
-    painter.setBrush(Qt::NoBrush);
-    painter.drawEllipse(position, length / 2, height / 2);
+  // edge
+  painter.setPen(Qt::black);
+  painter.setBrush(Qt::NoBrush);
+  painter.drawEllipse(position, length / 2, height / 2);
 
 
-    //interior
-    painter.setPen(Qt::NoPen);
-    painter.setBrush(Qt::black);
-    painter.drawEllipse(position, (length-15) / 2, (height-15) / 2);
+  // interior
+  painter.setPen(Qt::NoPen);
+  painter.setBrush(Qt::black);
+  painter.drawEllipse(position, (length-15) / 2, (height-15) / 2);
 }
 
 StateObjectDialog::StateObjectDialog(QWidget *parent)
-                 :QInputDialog(parent) {
+                  :QInputDialog(parent) {
   setWindowTitle("State Properties");
   setOkButtonText("Ok");
   setCancelButtonText("Cancel");
@@ -90,7 +90,7 @@ QDialog * StateObject::getDialog() {
 }
 
 InitialStateObjectDialog::InitialStateObjectDialog(QWidget *parent)
-                 :QInputDialog(parent) {
+                         :QInputDialog(parent) {
   setWindowTitle("State Properties");
   setOkButtonText("Ok");
   setCancelButtonText("Cancel");
@@ -102,7 +102,6 @@ QDialog * InitialStateObject::getDialog() {
   connect(dialog, SIGNAL(textValueSelected(QString)),
           this, SLOT(setName(QString)));
   return dialog;
-
 }
 
 FinalStateObjectDialog::FinalStateObjectDialog(QWidget *parent)

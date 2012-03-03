@@ -8,7 +8,7 @@
 #include <QMessageBox>
 #include <list>
 #include "./nodes.h"
-#include "mathfunctions.h"
+#include "./mathfunctions.h"
 
 /**********************************/
 /* BaseNode functions *************/
@@ -166,66 +166,67 @@ QPoint ObjectNode::translateConnectionPoint(int pointIndex)
 /*******************************/
 
 bool ConnectionNode::hitTest(const QPoint &point) {
-    double lineAngle=mathfunctions::computeAngle(pt1, pt2);
-    double clickAngle=mathfunctions::computeAngle(pt1, point);
-    double lineAngle2=mathfunctions::computeAngle(pt2, pt1);
-    double clickAngle2=mathfunctions::computeAngle(pt2, point);
-    double hypot1=mathfunctions::calculateHypot(pt1, point);
-    double hypot2=mathfunctions::calculateHypot(pt2, point);
+  double lineAngle = mathfunctions::computeAngle(pt1, pt2);
+  double clickAngle = mathfunctions::computeAngle(pt1, point);
+  double lineAngle2 = mathfunctions::computeAngle(pt2, pt1);
+  double clickAngle2 = mathfunctions::computeAngle(pt2, point);
+  double hypot1 = mathfunctions::calculateHypot(pt1, point);
+  double hypot2 = mathfunctions::calculateHypot(pt2, point);
 
-    double clickDistance=fabs(hypot1*sin(lineAngle-clickAngle));
-    double boundary1=fabs((hypot1*(cos(lineAngle-clickAngle))));
-    double boundary2=fabs((hypot2*(cos(lineAngle2-clickAngle2))));
+  double clickDistance = fabs(hypot1 * sin(lineAngle - clickAngle));
+  double boundary1 = fabs((hypot1 * (cos(lineAngle - clickAngle))));
+  double boundary2 = fabs((hypot2 * (cos(lineAngle2 - clickAngle2))));
 
-    if(((clickDistance<15.0) && (boundary1<mathfunctions::calculateHypot(pt1,pt2)) && (boundary2<mathfunctions::calculateHypot(pt1,pt2))))
-    {
-       return true;
-    }
-    return false;
+  if (clickDistance < 15.0 &&
+      boundary1 < mathfunctions::calculateHypot(pt1, pt2) &&
+      boundary2 < mathfunctions::calculateHypot(pt1, pt2)) {
+     return true;
+  }
+  return false;
 }
 
 /*************************************/
 /* SquareConnectionNode Functions ****/
 /*************************************/
 bool SquareConnectionNode::hitTest(const QPoint &point) {
-    BaseNode *obj1, *obj2;
-    std::list<BaseNode*>::iterator it = connectedObjects.begin();
-    obj1 = *(it);
-    it++;
-    obj2 = *(it);
+  BaseNode *obj1, *obj2;
+  std::list<BaseNode*>::iterator it = connectedObjects.begin();
+  obj1 = *(it);
+  it++;
+  obj2 = *(it);
 
-    if (pt1.x() != obj1->getPosition().x()) {  // East or West connection
-      if ((fabs(point.x() - ((pt1.x() + pt4.x()) / 2.0)) < 15.0) &&
-        ((point.y() < pt1.y() && point.y() > pt4.y()) ||
-         (point.y() > pt1.y() && point.y() < pt4.y()))) {
-        return true;
-      }
-      if ((fabs(point.y() - static_cast<double>(pt1.y())) < 15.0) &&
-          ((point.x() < pt1.x() && point.x() > pt2.x()) ||
-           (point.x() > pt1.x() && point.x() < pt2.x()))) {
-        return true;
-      }
-      if ((fabs(point.y() - static_cast<double>(pt4.y())) < 15.0) &&
-          ((point.x() < pt3.x() && point.x() > pt4.x()) ||
-           (point.x() > pt3.x() && point.x() < pt4.x()))) { return true;
-      }
-    } else if (pt1.x() == obj1->getPosition().x()) {  // North or South
-                                                      // connection
-      if ((fabs(point.y()-((pt1.y() + pt4.y()) / 2.0)) < 15.0) &&
-          ((point.x() < pt1.x() && point.x() > pt4.x()) ||
-           (point.x() > pt1.x() && point.x() < pt4.x()))) {
-        return true;
-      }
-      if ((fabs(point.x() - static_cast<double>(pt1.x())) < 15.0) &&
-          ((point.y() < pt1.y() && point.y() > pt2.y()) ||
-           (point.y() > pt1.y() && point.y() < pt2.y()))) {
-        return true;
-      }
-      if ((fabs(point.x() - static_cast<double>(pt4.x())) < 15.0) &&
-          ((point.y() < pt3.y() && point.y() > pt4.y()) ||
-           (point.y() > pt3.y() && point.y() < pt4.y()))) {
-        return true;
-      }
+  if (pt1.x() != obj1->getPosition().x()) {  // East or West connection
+    if ((fabs(point.x() - ((pt1.x() + pt4.x()) / 2.0)) < 15.0) &&
+      ((point.y() < pt1.y() && point.y() > pt4.y()) ||
+       (point.y() > pt1.y() && point.y() < pt4.y()))) {
+      return true;
     }
-    return false;
+    if ((fabs(point.y() - static_cast<double>(pt1.y())) < 15.0) &&
+        ((point.x() < pt1.x() && point.x() > pt2.x()) ||
+         (point.x() > pt1.x() && point.x() < pt2.x()))) {
+      return true;
+    }
+    if ((fabs(point.y() - static_cast<double>(pt4.y())) < 15.0) &&
+        ((point.x() < pt3.x() && point.x() > pt4.x()) ||
+         (point.x() > pt3.x() && point.x() < pt4.x()))) { return true;
+    }
+  } else if (pt1.x() == obj1->getPosition().x()) {  // North or South
+                                                    // connection
+    if ((fabs(point.y()-((pt1.y() + pt4.y()) / 2.0)) < 15.0) &&
+        ((point.x() < pt1.x() && point.x() > pt4.x()) ||
+         (point.x() > pt1.x() && point.x() < pt4.x()))) {
+      return true;
+    }
+    if ((fabs(point.x() - static_cast<double>(pt1.x())) < 15.0) &&
+        ((point.y() < pt1.y() && point.y() > pt2.y()) ||
+         (point.y() > pt1.y() && point.y() < pt2.y()))) {
+      return true;
+    }
+    if ((fabs(point.x() - static_cast<double>(pt4.x())) < 15.0) &&
+        ((point.y() < pt3.y() && point.y() > pt4.y()) ||
+         (point.y() > pt3.y() && point.y() < pt4.y()))) {
+      return true;
+    }
+  }
+  return false;
 }

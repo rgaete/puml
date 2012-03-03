@@ -3,16 +3,18 @@
 #ifndef SRC_DOCUMENT_H_
 #define SRC_DOCUMENT_H_
 
-#include <assert.h>
-#include <vector>
-#include "./nodes.h"
-#include "./nodefactory.h"
-#include <QFileDialog>
 #include <QFile>
+#include <QFileDialog>
 #include <QIODevice>
 #include <QMessageBox>
+
+#include <assert.h>
 #include <list>
 #include <string>
+#include <vector>
+
+#include "./nodefactory.h"
+#include "./nodes.h"
 
 
 class Document : public QWidget {

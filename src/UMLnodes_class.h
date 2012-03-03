@@ -14,8 +14,9 @@
 */
 class ClassBoxObjectDialog : public QInputDialog {
   Q_OBJECT
-public:
-  explicit ClassBoxObjectDialog(QWidget *parent = 0);
+
+  public:
+    explicit ClassBoxObjectDialog(QWidget *parent = 0);
 };
 
 /*!
@@ -24,7 +25,8 @@ public:
  */
 class ClassBoxObject: public ObjectNode {
   Q_OBJECT
-    public:
+
+  public:
     ClassBoxObject();
     BaseNode* clone() { return new ClassBoxObject; }
     QDialog* getDialog();
@@ -35,9 +37,10 @@ class ClassBoxObject: public ObjectNode {
     void draw(QPainter &painter);  // NOLINT
 
 
-public slots:
+  public slots:
     void setName(QString newName) { this->name = newName; }
-private:
+
+  private:
     int radius;
     QString name;
 };
