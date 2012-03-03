@@ -244,10 +244,8 @@ void Document::removeObject() {
 }
 
 void Document::saveDocument() {
-   // if (filename.empty)
-
+  // if (filename.empty)
 }
 
 void Document::saveAsDocument() {
-
 }

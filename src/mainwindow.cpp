@@ -2,10 +2,10 @@
 
 #include "./mainwindow.h"
 #include <utility>
-#include <iostream>
-#include <fstream>
+#include <fstream>  // NOLINT
 
-using std::ofstream;
+// In the future, we might want to consider something other than a stream?
+using std::ofstream;  // NOLINT
 
 /*! In the MainWindow constructor, we need to create
   all the actions, menus and widgets. registerObject is
@@ -31,14 +31,13 @@ MainWindow::MainWindow(QWidget *parent)
   registerObject(new IncludesConnection);
   registerObject(new ClassConnection);
 
-  //statechart objects
+  // statechart objects
   registerObject(new StateObject);
   registerObject(new InitialStateObject);
   registerObject(new FinalStateObject);
 
-  //register classbox
+  // register classbox
   registerObject(new ClassBoxObject);
-
 
   this->resize(700, 500);
   this->setWindowTitle(tr("Phunctional UML Editor"));
@@ -53,9 +52,10 @@ MainWindow::MainWindow(QWidget *parent)
 // actions.
 // This function would be part of MainWindow, and actions and signalmapper
 // would be both be member variables.
-/*! Registers a protoype BaseNode* into NodeFactory, and creates a NodeAction from
-  the prototype. It also adds the NodeAction into the menus and the toolbar.
-*/
+/*! Registers a protoype BaseNode* into NodeFactory, and creates a NodeAction
+ * from the prototype. It also adds the NodeAction into the menus and the
+ * toolbar.
+ */
 void MainWindow::registerObject(BaseNode* newPrototype) {
   int newID;
   NodeAction *newAction;
@@ -151,7 +151,7 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex) {
   // Go into selection mode
   actionSelect->trigger();
 
-  //setDiagramType(BaseNode::UseCase);
+  // setDiagramType(BaseNode::UseCase);
 }
 
 
@@ -419,7 +419,8 @@ void MainWindow::on_actionNew_triggered() {
 
   // this  is the new dialogue, hopefully
   ConfigDialog *dialog = new ConfigDialog();
-  connect(dialog, SIGNAL(newDiagramType(ObjectNode::DiagramType)), this, SLOT(setDiagramType(BaseNode::DiagramType)));
+  connect(dialog, SIGNAL(newDiagramType(ObjectNode::DiagramType)),
+          this, SLOT(setDiagramType(BaseNode::DiagramType)));
   dialog->exec();
 
   // Create the new document and canvas
@@ -436,11 +437,12 @@ void MainWindow::on_actionNew_triggered() {
 
   // add the tab and update the map.
   int newTabIndex = tabWidget->addTab(newcanvas, "New Diagram");
-  tabToCanvasMappings.insert(std::pair<int, int>(newTabIndex, canvases.size() - 1));
+  tabToCanvasMappings.insert(
+        std::pair<int, int>(newTabIndex, canvases.size() - 1));
   tabWidget->setCurrentIndex(newTabIndex);
 
   // Connect the new canvas with the new document.
-  connectCanvasWithDocument(canvases.size()-1, documents.size()-1);
+  connectCanvasWithDocument(canvases.size() - 1, documents.size() - 1);
 }
 
 /*! This slot receives the currentChanged signal from the tabWidget.
@@ -493,12 +495,9 @@ void MainWindow::on_actionSave_triggered() {
 }
 
 void MainWindow::on_actionSave_As_triggered() {
-
   documents.at(currentDocument)->saveAsDocument();
 
-
-
-// MOVE ALL OF THIS TO DOCUMENTS
+  // MOVE ALL OF THIS TO DOCUMENTS
   QString fileName = QFileDialog::getSaveFileName(this, tr("Save As File"),
              tr("XML files (*.xml)"));
 

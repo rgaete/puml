@@ -1,5 +1,7 @@
-#ifndef UMLNODES_STATE_H
-#define UMLNODES_STATE_H
+// Copyright (C) 2011-2012 pUML Group
+
+#ifndef SRC_UMLNODES_STATE_H_
+#define SRC_UMLNODES_STATE_H_
 
 #include <QInputDialog>
 #include "./nodes.h"
@@ -8,8 +10,9 @@
 */
 class StateObjectDialog : public QInputDialog {
   Q_OBJECT
-public:
-  explicit StateObjectDialog(QWidget *parent = 0);
+
+  public:
+    explicit StateObjectDialog(QWidget *parent = 0);
 };
 
 /*!
@@ -18,7 +21,8 @@ public:
  */
 class StateObject: public ObjectNode {
   Q_OBJECT
-    public:
+
+  public:
     StateObject();
     BaseNode* clone() { return new StateObject; }
     QDialog* getDialog();
@@ -28,10 +32,10 @@ class StateObject: public ObjectNode {
 
     void draw(QPainter &painter);  // NOLINT
 
-
-public slots:
+  public slots:
     void setName(QString newName) { this->name = newName; }
-private:
+
+  private:
     int radius;
     QString name;
 };
@@ -40,8 +44,9 @@ private:
 */
 class InitialStateObjectDialog : public QInputDialog {
   Q_OBJECT
-public:
-  explicit InitialStateObjectDialog(QWidget *parent = 0);
+
+  public:
+    explicit InitialStateObjectDialog(QWidget *parent = 0);
 };
 
 /*!
@@ -50,7 +55,8 @@ public:
  */
 class InitialStateObject: public ObjectNode {
   Q_OBJECT
-    public:
+
+  public:
     InitialStateObject();
     BaseNode* clone() { return new InitialStateObject; }
     QDialog* getDialog();
@@ -59,16 +65,15 @@ class InitialStateObject: public ObjectNode {
     DiagramType getDiagramType() { return StateChart; }
 
     void draw(QPainter &painter);  // NOLINT
-
-
 };
 
 /*! @brief This defines a custom dialog for a OvalObject
 */
 class FinalStateObjectDialog : public QInputDialog {
   Q_OBJECT
-public:
-  explicit FinalStateObjectDialog(QWidget *parent = 0);
+
+  public:
+    explicit FinalStateObjectDialog(QWidget *parent = 0);
 };
 
 /*!
@@ -77,7 +82,8 @@ public:
  */
 class FinalStateObject: public ObjectNode {
   Q_OBJECT
-    public:
+
+  public:
     FinalStateObject();
     BaseNode* clone() { return new FinalStateObject; }
     QDialog* getDialog();
@@ -86,9 +92,6 @@ class FinalStateObject: public ObjectNode {
     DiagramType getDiagramType() { return StateChart; }
 
     void draw(QPainter &painter);  // NOLINT
-
-
 };
 
-
-#endif // UMLNODES_STATE_H
+#endif  // SRC_UMLNODES_STATE_H_

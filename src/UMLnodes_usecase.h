@@ -117,7 +117,7 @@ class ExtendsConnection : public ConnectionNode {
     QDialog* getDialog() { return new ExtendsConnectionDialog; }
     QString getIconPath() { return QString(":/Images/interaction.png"); }
     QString getText() { return "Extends Line"; }
-    void addArrow(QPainter &painter);
+    void addArrow(QPainter &painter);  // NOLINT
     QPoint calculateTextPosition();
     void draw(QPainter& painter);  // NOLINT
     DiagramType getDiagramType() { return UseCase; }
@@ -137,7 +137,7 @@ class IncludesConnection : public ConnectionNode {
     QDialog* getDialog() { return new IncludesConnectionDialog; }
     QString getIconPath() { return QString(":/Images/interaction.png"); }
     QString getText() { return "Includes Line"; }
-    void addArrow(QPainter &painter);
+    void addArrow(QPainter &painter);  // NOLINT
     QPoint calculateTextPosition();
     void draw(QPainter& painter);  // NOLINT
     DiagramType getDiagramType() { return UseCase; }

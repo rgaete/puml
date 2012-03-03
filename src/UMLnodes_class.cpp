@@ -2,28 +2,29 @@
 
 #include <list>
 
-#include "UMLnodes_class.h"
+#include "./UMLnodes_class.h"
 
 
 ClassBoxObject::ClassBoxObject() {
-    this->length = 60;
-    this->height = 40;
+  this->length = 60;
+  this->height = 40;
 }
 
-void ClassBoxObject::draw(QPainter &painter) {
-    // Always call this ObjectNode's draw function because it
-    // draws the selection boxes as needed.
-    ObjectNode::draw(painter);
+void ClassBoxObject::draw(QPainter &painter) {  // NOLINT
+  // Always call this ObjectNode's draw function because it
+  // draws the selection boxes as needed.
+  ObjectNode::draw(painter);
 
-    // edge
-    painter.setPen(Qt::black);
-    painter.setBrush(Qt::NoBrush);
-    painter.drawRect(position.x()-length/2,position.y()-height/2,length,height);
-
+  // edge
+  painter.setPen(Qt::black);
+  painter.setBrush(Qt::NoBrush);
+  painter.drawRect(position.x() - length / 2,
+                   position.y() - height / 2,
+                   length, height);
 }
 
 ClassBoxObjectDialog::ClassBoxObjectDialog(QWidget *parent)
-                 :QInputDialog(parent) {
+                     :QInputDialog(parent) {
   setWindowTitle("ClassBox Properties");
   setOkButtonText("Ok");
   setCancelButtonText("Cancel");
@@ -41,9 +42,9 @@ QDialog * ClassBoxObject::getDialog() {
 void ClassConnection::draw(QPainter& painter) {  // NOLINT
   BaseNode *obj1, *obj2;
   std::list<BaseNode*>::iterator it = connectedObjects.begin();
-  obj1 = *(it);
+  obj1 = *it;
   it++;
-  obj2 = *(it);
+  obj2 = *it;
 
   pt1 = obj1->getClosestConnectionPoint(obj2->getPosition());
   pt4 = obj2->getClosestConnectionPoint(obj1->getPosition());
