@@ -26,7 +26,7 @@ class StateObject: public ObjectNode {
     StateObject();
     BaseNode* clone() { return new StateObject; }
     QDialog* getDialog();
-    QString getIconPath() { return QString(":/Images/oval.png"); }
+    QString getIconPath() { return QString(":/Images/circle.png"); }
     QString getText() { return "State"; }
     DiagramType getDiagramType() { return StateChart; }
 
@@ -60,7 +60,7 @@ class InitialStateObject: public ObjectNode {
     InitialStateObject();
     BaseNode* clone() { return new InitialStateObject; }
     QDialog* getDialog();
-    QString getIconPath() { return QString(":/Images/oval.png"); }
+    QString getIconPath() { return QString(":/Images/initialstate.png"); }
     QString getText() { return "Initial State"; }
     DiagramType getDiagramType() { return StateChart; }
 
@@ -87,7 +87,7 @@ class FinalStateObject: public ObjectNode {
     FinalStateObject();
     BaseNode* clone() { return new FinalStateObject; }
     QDialog* getDialog();
-    QString getIconPath() { return QString(":/Images/oval.png"); }
+    QString getIconPath() { return QString(":/Images/finalstate.png"); }
     QString getText() { return "Final State"; }
     DiagramType getDiagramType() { return StateChart; }
 
