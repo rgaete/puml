@@ -31,6 +31,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -112,7 +113,7 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                                   {  <span class="comment">// NOLINT</span>
   <span class="keyword">const</span> <span class="keywordtype">double</span> arrowAngle = 0.75;
-  <a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a> = mathfunctions::computeAngle(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>, <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>);
+  <a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a> = <a class="code" href="namespacemathfunctions.html#a81da99f6fba502c574e986245c78a94f">mathfunctions::computeAngle</a>(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>, <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>);
   painter.drawLine(<a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>.x(), <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>.y(),
                    <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>.x() + 10 * sin(<a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a> - arrowAngle),
                    <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>.y() + 10 * cos(<a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a> - arrowAngle));
@@ -141,24 +142,24 @@ Public Member Functions</h2></td></tr>
   QPoint middle;
   <span class="keyword">const</span> <span class="keywordtype">double</span> textOffset = 35.0;
 
-  <span class="keywordflow">if</span> (mathfunctions::toDegrees(<a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a>) &lt; 90.0) {
-    hypot=(mathfunctions::calculateHypot(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>, <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>) / 2) - textOffset;
+  <span class="keywordflow">if</span> (<a class="code" href="namespacemathfunctions.html#af925d1822d94fdd8199ec01d1635f6ad">mathfunctions::toDegrees</a>(<a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a>) &lt; 90.0) {
+    hypot=(<a class="code" href="namespacemathfunctions.html#afa7105e5d49f87d11b18d7713370686d">mathfunctions::calculateHypot</a>(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>, <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>) / 2) - textOffset;
     middle.setX(hypot * cos(-<a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a>) + <a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.x());
     middle.setY(hypot * sin(-<a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a>) + <a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.y());
-  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (mathfunctions::toDegrees(<a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a>) &gt; 90.0 &amp;&amp;
-             mathfunctions::toDegrees(<a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a>) &lt;= 180.0) {
-    hypot=(mathfunctions::calculateHypot(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>, <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>) / 2) + textOffset;
+  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="namespacemathfunctions.html#af925d1822d94fdd8199ec01d1635f6ad">mathfunctions::toDegrees</a>(<a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a>) &gt; 90.0 &amp;&amp;
+             <a class="code" href="namespacemathfunctions.html#af925d1822d94fdd8199ec01d1635f6ad">mathfunctions::toDegrees</a>(<a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a>) &lt;= 180.0) {
+    hypot=(<a class="code" href="namespacemathfunctions.html#afa7105e5d49f87d11b18d7713370686d">mathfunctions::calculateHypot</a>(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>, <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>) / 2) + textOffset;
     middle.setX(hypot * cos(-<a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a>) + <a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.x());
     middle.setY(hypot * sin(-<a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a>) + <a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.y());
-    <a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a> -= PI;
-  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (mathfunctions::toDegrees(<a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a>) &gt; 180.0 &amp;&amp;
-             mathfunctions::toDegrees(<a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a>) &lt;= 270.0) {
-    hypot=(mathfunctions::calculateHypot(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>, <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>) / 2) + textOffset;
+    <a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a> -= <a class="code" href="mathfunctions_8h.html#a598a3330b3c21701223ee0ca14316eca">PI</a>;
+  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="namespacemathfunctions.html#af925d1822d94fdd8199ec01d1635f6ad">mathfunctions::toDegrees</a>(<a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a>) &gt; 180.0 &amp;&amp;
+             <a class="code" href="namespacemathfunctions.html#af925d1822d94fdd8199ec01d1635f6ad">mathfunctions::toDegrees</a>(<a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a>) &lt;= 270.0) {
+    hypot=(<a class="code" href="namespacemathfunctions.html#afa7105e5d49f87d11b18d7713370686d">mathfunctions::calculateHypot</a>(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>, <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>) / 2) + textOffset;
     middle.setX(hypot * cos(-<a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a>) + <a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.x());
     middle.setY(hypot * sin(-<a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a>) + <a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.y());
-    <a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a> -= PI;
-  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (mathfunctions::toDegrees(<a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a>) &gt; 270.0) {
-    hypot=(mathfunctions::calculateHypot(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>, <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>) / 2) - textOffset;
+    <a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a> -= <a class="code" href="mathfunctions_8h.html#a598a3330b3c21701223ee0ca14316eca">PI</a>;
+  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="namespacemathfunctions.html#af925d1822d94fdd8199ec01d1635f6ad">mathfunctions::toDegrees</a>(<a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a>) &gt; 270.0) {
+    hypot=(<a class="code" href="namespacemathfunctions.html#afa7105e5d49f87d11b18d7713370686d">mathfunctions::calculateHypot</a>(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>, <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>) / 2) - textOffset;
     middle.setX(hypot * cos(-<a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a>) + <a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.x());
     middle.setY(hypot * sin(-<a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a>) + <a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.y());
   }
@@ -203,7 +204,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classBaseNode.html#a79627d9a052108d60082dddbd60dfb02">BaseNode</a>.</p>
 <div class="fragment"><pre class="fragment">                                               {  <span class="comment">// NOLINT</span>
-  <a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a> = mathfunctions::computeAngle(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>, <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>);
+  <a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a> = <a class="code" href="namespacemathfunctions.html#a81da99f6fba502c574e986245c78a94f">mathfunctions::computeAngle</a>(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>, <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>);
   <a class="code" href="classBaseNode.html">BaseNode</a> *obj1, *obj2;
   std::list&lt;BaseNode*&gt;::iterator it = <a class="code" href="classBaseNode.html#a6589606c2f8b588e7e27199803cfb2c8">connectedObjects</a>.begin();
   obj1 = *(it);
@@ -232,7 +233,7 @@ Public Member Functions</h2></td></tr>
   QPoint textPos = <a class="code" href="classIncludesConnection.html#acc0074a57e2233144afcca545bded7a8">calculateTextPosition</a>();
   painter.translate(textPos);
 
-  painter.rotate(mathfunctions::toDegrees(-<a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a>));
+  painter.rotate(<a class="code" href="namespacemathfunctions.html#af925d1822d94fdd8199ec01d1635f6ad">mathfunctions::toDegrees</a>(-<a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a>));
   painter.drawText(0, 0, <span class="stringliteral">&quot;&lt;&lt;includes&gt;&gt;&quot;</span>);
   painter.restore();
   <a class="code" href="classIncludesConnection.html#ab938b61da56e5e268c2b8985edb7b860">addArrow</a>(painter);
@@ -326,7 +327,7 @@ Public Member Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -335,7 +336,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 20:41:44 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 21:11:38 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

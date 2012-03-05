@@ -31,6 +31,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -89,8 +90,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigDialog.html#a28fcaf732c9f363b30b2fc4a9abd9251">ConfigDialog</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">CreateNewPage *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigDialog.html#acc7fecb5699c8705f166e7019dd96924">Newpage</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">CreateOpenPage *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigDialog.html#a80b9d2fac9bc78a5d5f7b0b356a64a23">Openpage</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCreateNewPage.html">CreateNewPage</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigDialog.html#acc7fecb5699c8705f166e7019dd96924">Newpage</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCreateOpenPage.html">CreateOpenPage</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigDialog.html#a80b9d2fac9bc78a5d5f7b0b356a64a23">Openpage</a></td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a28fcaf732c9f363b30b2fc4a9abd9251"></a><!-- doxytag: member="ConfigDialog::ConfigDialog" ref="a28fcaf732c9f363b30b2fc4a9abd9251" args="()" -->
@@ -114,8 +115,8 @@ Public Attributes</h2></td></tr>
   contentsWidget-&gt;setMaximumWidth(128);
   contentsWidget-&gt;setSpacing(12);
 
-  <a class="code" href="classConfigDialog.html#acc7fecb5699c8705f166e7019dd96924">Newpage</a> = <span class="keyword">new</span> CreateNewPage;
-  <a class="code" href="classConfigDialog.html#a80b9d2fac9bc78a5d5f7b0b356a64a23">Openpage</a> = <span class="keyword">new</span> CreateOpenPage;
+  <a class="code" href="classConfigDialog.html#acc7fecb5699c8705f166e7019dd96924">Newpage</a> = <span class="keyword">new</span> <a class="code" href="classCreateNewPage.html">CreateNewPage</a>;
+  <a class="code" href="classConfigDialog.html#a80b9d2fac9bc78a5d5f7b0b356a64a23">Openpage</a> = <span class="keyword">new</span> <a class="code" href="classCreateOpenPage.html">CreateOpenPage</a>;
 
   pagesWidget = <span class="keyword">new</span> QStackedWidget;
   pagesWidget-&gt;addWidget(<a class="code" href="classConfigDialog.html#acc7fecb5699c8705f166e7019dd96924">Newpage</a>);
@@ -271,7 +272,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">CreateNewPage* <a class="el" href="classConfigDialog.html#acc7fecb5699c8705f166e7019dd96924">ConfigDialog::Newpage</a></td>
+          <td class="memname"><a class="el" href="classCreateNewPage.html">CreateNewPage</a>* <a class="el" href="classConfigDialog.html#acc7fecb5699c8705f166e7019dd96924">ConfigDialog::Newpage</a></td>
         </tr>
       </table>
 </div>
@@ -284,7 +285,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">CreateOpenPage* <a class="el" href="classConfigDialog.html#a80b9d2fac9bc78a5d5f7b0b356a64a23">ConfigDialog::Openpage</a></td>
+          <td class="memname"><a class="el" href="classCreateOpenPage.html">CreateOpenPage</a>* <a class="el" href="classConfigDialog.html#a80b9d2fac9bc78a5d5f7b0b356a64a23">ConfigDialog::Openpage</a></td>
         </tr>
       </table>
 </div>
@@ -302,7 +303,7 @@ Public Attributes</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -311,7 +312,7 @@ Public Attributes</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 20:41:44 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 21:11:38 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
