@@ -31,6 +31,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -85,6 +86,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_0x70.html#index_p"><span>p</span></a></li>
       <li><a href="functions_0x72.html#index_r"><span>r</span></a></li>
       <li><a href="functions_0x73.html#index_s"><span>s</span></a></li>
+      <li><a href="functions_0x74.html#index_t"><span>t</span></a></li>
       <li><a href="functions_0x75.html#index_u"><span>u</span></a></li>
       <li><a href="functions_0x7e.html#index_0x7e"><span>~</span></a></li>
     </ul>
@@ -94,8 +96,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="textblock">Here is a list of all class members with links to the classes they belong to:</div>
 
 <h3><a class="anchor" id="index_o"></a>- o -</h3><ul>
+<li>Object
+: <a class="el" href="classCanvas.html#af2fe83ddca6a5fccac7896a7ecb1be84accddfa7d7f8fdfe6419b2df713f5026d">Canvas</a>
+</li>
 <li>ObjectNode()
 : <a class="el" href="classObjectNode.html#a9a66f6f6af4296a650d06f98a8a181d5">ObjectNode</a>
+</li>
+<li>objectSelectionChange()
+: <a class="el" href="classCanvas.html#aee2522d5bb1a8cc049a4109946f59ad2">Canvas</a>
 </li>
 <li>on_actionAbout_triggered()
 : <a class="el" href="classMainWindow.html#a4f3ebda1ba39e0ef4d678b44893c9c7f">MainWindow</a>
@@ -104,10 +112,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classMainWindow.html#acfada59ef1f79adcc4c1ae3898869c69">MainWindow</a>
 </li>
 <li>on_actionCopy_triggered()
-: <a class="el" href="classMainWindow.html#ad961df58a2f20f09dd16c856b1f3040a">MainWindow</a>
+: <a class="el" href="classCanvas.html#ad31a2c6bf464e5eeb0d655ce1006ae7b">Canvas</a>
+, <a class="el" href="classMainWindow.html#ad961df58a2f20f09dd16c856b1f3040a">MainWindow</a>
 </li>
 <li>on_actionCut_triggered()
-: <a class="el" href="classMainWindow.html#a02df09004a7752e6f1bd3355a19999d3">MainWindow</a>
+: <a class="el" href="classCanvas.html#a2fa86758f4fd6a013c5578ef2db0bd70">Canvas</a>
+, <a class="el" href="classMainWindow.html#a02df09004a7752e6f1bd3355a19999d3">MainWindow</a>
+</li>
+<li>on_actionDelete_triggered()
+: <a class="el" href="classCanvas.html#a0a27a449b95938b06f94a155842b6d4f">Canvas</a>
 </li>
 <li>on_actionDocument_triggered()
 : <a class="el" href="classMainWindow.html#a31b755085ba6efb58cac20c8e5274582">MainWindow</a>
@@ -128,10 +141,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classMainWindow.html#a48ed0a16f674e38e0e2a24274852a9af">MainWindow</a>
 </li>
 <li>on_actionPaste_triggered()
-: <a class="el" href="classMainWindow.html#a0e835b057aadd7902e431132e9d842cb">MainWindow</a>
+: <a class="el" href="classCanvas.html#a0c87406505f31a8d86cd4a44b5f3c92b">Canvas</a>
+, <a class="el" href="classMainWindow.html#a0e835b057aadd7902e431132e9d842cb">MainWindow</a>
 </li>
 <li>on_actionPrint_triggered()
 : <a class="el" href="classMainWindow.html#a214a1a535fdbf35b0ed12e26231eef56">MainWindow</a>
+</li>
+<li>on_actionProperties_triggered()
+: <a class="el" href="classCanvas.html#afd632b3d287fa79c6aa4c5d6283cdf60">Canvas</a>
 </li>
 <li>on_actionSave_As_triggered()
 : <a class="el" href="classMainWindow.html#a98e86ef6104b6e2910328af2f878438d">MainWindow</a>
@@ -157,6 +174,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>on_tabWidget_currentChanged()
 : <a class="el" href="classMainWindow.html#a0148d929d5a42d11abc8e383942ae41d">MainWindow</a>
 </li>
+<li>onTriggered()
+: <a class="el" href="classNodeAction.html#a2398bb625a6a5ab115f63695ec120d11">NodeAction</a>
+</li>
+<li>OpenFileInit()
+: <a class="el" href="classCreateOpenPage.html#a3297410d5e21cf2e0ad655d94c5d99d0">CreateOpenPage</a>
+</li>
 <li>Openpage
 : <a class="el" href="classConfigDialog.html#a80b9d2fac9bc78a5d5f7b0b356a64a23">ConfigDialog</a>
 </li>
@@ -173,7 +196,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -182,7 +205,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 20:41:43 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 21:11:38 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

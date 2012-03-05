@@ -31,6 +31,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -206,7 +207,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Slot. Sets the second point in a new connection node. This function actually creates the node using the NodeFactory. It doesn't create the node if the first or second point is invalid. </p>
+<p>Slot. Sets the second point in a new connection node. This function actually creates the node using the <a class="el" href="classNodeFactory.html">NodeFactory</a>. It doesn't create the node if the first or second point is invalid. </p>
 <div class="fragment"><pre class="fragment">                                                         {
   <span class="comment">// Create the object only if a valid first object was found</span>
   <span class="keywordflow">if</span> (firstConnectionIndex != -1) {
@@ -217,7 +218,7 @@ Public Member Functions</h2></td></tr>
             index != firstConnectionIndex) {
       <span class="comment">// produce the object</span>
       <a class="code" href="classBaseNode.html">BaseNode</a> *newNode;
-      newNode = NodeFactory::getInstance()-&gt;produce(newObjectID);
+      newNode = <a class="code" href="classNodeFactory.html#a4d54b734a6928d59d8aeff971d091a7b">NodeFactory::getInstance</a>()-&gt;<a class="code" href="classNodeFactory.html#a781f3a67f9bf486c741de69ce8a58f4b">produce</a>(newObjectID);
 
       <span class="comment">// now connect the connection to both objects, and connect the</span>
       <span class="comment">// objects to the connections</span>
@@ -248,14 +249,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Slot. This will create a new object at the specified position. The prototypeID of the new object will have been set by a previous signal to setNewObjectID. Uses NodeFactory. </p>
+<p>Slot. This will create a new object at the specified position. The prototypeID of the new object will have been set by a previous signal to setNewObjectID. Uses <a class="el" href="classNodeFactory.html">NodeFactory</a>. </p>
 <div class="fragment"><pre class="fragment">                                                  {
   assert(indexOfSelectedObject &gt;= -1);
   assert(indexOfSelectedObject &lt; static_cast&lt;int&gt;(nodes.size()));
 
   <span class="comment">// create a new node using the factory</span>
   <a class="code" href="classBaseNode.html">BaseNode</a>* newNode;
-  newNode = NodeFactory::getInstance()-&gt;produce(newObjectID);
+  newNode = <a class="code" href="classNodeFactory.html#a4d54b734a6928d59d8aeff971d091a7b">NodeFactory::getInstance</a>()-&gt;<a class="code" href="classNodeFactory.html#a781f3a67f9bf486c741de69ce8a58f4b">produce</a>(newObjectID);
   newNode-&gt;<a class="code" href="classBaseNode.html#aa6675efee5af9fc0e9b2e19c98e4b7dc">setPosition</a>(position);
 
   <span class="comment">// add newnode to a vector of nodes.</span>
@@ -515,7 +516,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Slot. Updates the prototypeID for the next object to be created. The signal with the ID should come from the <a class="el" href="classMainWindow.html">MainWindow</a> with the ID being stored in a NodeAction created by MainWindow.registerPrototype() </p>
+<p>Slot. Updates the prototypeID for the next object to be created. The signal with the ID should come from the <a class="el" href="classMainWindow.html">MainWindow</a> with the ID being stored in a <a class="el" href="classNodeAction.html">NodeAction</a> created by MainWindow.registerPrototype() </p>
 <div class="fragment"><pre class="fragment">                                             {
   newObjectID = prototypeID;
 }
@@ -609,7 +610,7 @@ Public Member Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -618,7 +619,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 20:41:44 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 21:11:38 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

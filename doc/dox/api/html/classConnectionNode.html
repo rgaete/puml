@@ -31,6 +31,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -117,20 +118,20 @@ Protected Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classBaseNode.html#a6ba6b3ac267709d4d4d8bed400d7a47b">BaseNode</a>.</p>
 <div class="fragment"><pre class="fragment">                                                {
-  <span class="keywordtype">double</span> lineAngle = mathfunctions::computeAngle(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>, <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>);
-  <span class="keywordtype">double</span> clickAngle = mathfunctions::computeAngle(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>, point);
-  <span class="keywordtype">double</span> lineAngle2 = mathfunctions::computeAngle(<a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>, <a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>);
-  <span class="keywordtype">double</span> clickAngle2 = mathfunctions::computeAngle(<a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>, point);
-  <span class="keywordtype">double</span> hypot1 = mathfunctions::calculateHypot(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>, point);
-  <span class="keywordtype">double</span> hypot2 = mathfunctions::calculateHypot(<a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>, point);
+  <span class="keywordtype">double</span> lineAngle = <a class="code" href="namespacemathfunctions.html#a81da99f6fba502c574e986245c78a94f">mathfunctions::computeAngle</a>(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>, <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>);
+  <span class="keywordtype">double</span> clickAngle = <a class="code" href="namespacemathfunctions.html#a81da99f6fba502c574e986245c78a94f">mathfunctions::computeAngle</a>(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>, point);
+  <span class="keywordtype">double</span> lineAngle2 = <a class="code" href="namespacemathfunctions.html#a81da99f6fba502c574e986245c78a94f">mathfunctions::computeAngle</a>(<a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>, <a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>);
+  <span class="keywordtype">double</span> clickAngle2 = <a class="code" href="namespacemathfunctions.html#a81da99f6fba502c574e986245c78a94f">mathfunctions::computeAngle</a>(<a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>, point);
+  <span class="keywordtype">double</span> hypot1 = <a class="code" href="namespacemathfunctions.html#afa7105e5d49f87d11b18d7713370686d">mathfunctions::calculateHypot</a>(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>, point);
+  <span class="keywordtype">double</span> hypot2 = <a class="code" href="namespacemathfunctions.html#afa7105e5d49f87d11b18d7713370686d">mathfunctions::calculateHypot</a>(<a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>, point);
 
   <span class="keywordtype">double</span> clickDistance = fabs(hypot1 * sin(lineAngle - clickAngle));
   <span class="keywordtype">double</span> boundary1 = fabs((hypot1 * (cos(lineAngle - clickAngle))));
   <span class="keywordtype">double</span> boundary2 = fabs((hypot2 * (cos(lineAngle2 - clickAngle2))));
 
   <span class="keywordflow">if</span> (clickDistance &lt; 15.0 &amp;&amp;
-      boundary1 &lt; mathfunctions::calculateHypot(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>, <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>) &amp;&amp;
-      boundary2 &lt; mathfunctions::calculateHypot(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>, <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>)) {
+      boundary1 &lt; <a class="code" href="namespacemathfunctions.html#afa7105e5d49f87d11b18d7713370686d">mathfunctions::calculateHypot</a>(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>, <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>) &amp;&amp;
+      boundary2 &lt; <a class="code" href="namespacemathfunctions.html#afa7105e5d49f87d11b18d7713370686d">mathfunctions::calculateHypot</a>(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>, <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>)) {
      <span class="keywordflow">return</span> <span class="keyword">true</span>;
   }
   <span class="keywordflow">return</span> <span class="keyword">false</span>;
@@ -207,7 +208,7 @@ Protected Attributes</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -216,7 +217,7 @@ Protected Attributes</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 20:41:44 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 21:11:38 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
