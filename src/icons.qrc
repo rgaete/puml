@@ -10,5 +10,7 @@
         <file>Images/interaction.png</file>
         <file>Images/New.png</file>
         <file>Images/Open.png</file>
+        <file>Images/initialstate.png</file>
+        <file>Images/finalstate.png</file>
     </qresource>
 </RCC>

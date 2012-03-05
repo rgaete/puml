@@ -30,7 +30,7 @@ class ClassBoxObject: public ObjectNode {
     ClassBoxObject();
     BaseNode* clone() { return new ClassBoxObject; }
     QDialog* getDialog();
-    QString getIconPath() { return QString(":/Images/oval.png"); }
+    QString getIconPath() { return QString(":/Images/rectangle.png"); }
     QString getText() { return "ClassBox"; }
     DiagramType getDiagramType() { return Class; }
 
