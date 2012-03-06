@@ -5,7 +5,6 @@
 
 #include <QDialog>
 
-#include "./dialogpages.h"
 #include "./nodes.h"
 
 QT_BEGIN_NAMESPACE
