@@ -14,27 +14,35 @@ class QListWidgetItem;
 class QStackedWidget;
 QT_END_NAMESPACE
 
+
 class ConfigDialog : public QDialog {
   Q_OBJECT
 
   public:
     ConfigDialog();
-    CreateNewPage *Newpage;
-    CreateOpenPage *Openpage;
+
 
   public slots:
     void changePage(QListWidgetItem *current, QListWidgetItem *previous);
-    void CloseDialog();
-    void AcceptValue(int diagramenum);
-    void accepted();
+    void browseForFile();
+    void accept();
 
  signals:
-    void newDiagramType(ObjectNode::DiagramType diagramType);
+    void newDiagramType(BaseNode::DiagramType diagramType);
+    void openDiagramFile(QString filename);
 
   private:
     void createIcons();
+    void createNewPage();
+    void createOpenPage();
+
+
     QListWidget *contentsWidget;
     QStackedWidget *pagesWidget;
+    QListWidget *doctypeList;
+    QWidget *newPage;
+    QWidget *openPage;
+    QString fileName;
 };
 
 #endif  // SRC_DIALOG_H_
