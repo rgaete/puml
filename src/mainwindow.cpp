@@ -150,8 +150,6 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex) {
 
   // Go into selection mode
   actionSelect->trigger();
-
-  // setDiagramType(BaseNode::UseCase);
 }
 
 
@@ -419,7 +417,7 @@ void MainWindow::on_actionNew_triggered() {
 
   // this  is the new dialogue, hopefully
   ConfigDialog *dialog = new ConfigDialog();
-  connect(dialog, SIGNAL(newDiagramType(ObjectNode::DiagramType)),
+  connect(dialog, SIGNAL(newDiagramType(BaseNode::DiagramType)),
           this, SLOT(setDiagramType(BaseNode::DiagramType)));
   dialog->exec();
 
@@ -553,15 +551,6 @@ void MainWindow::on_actionSelect_All_triggered() {
 }
 
 void MainWindow::on_actionInverse_Select_triggered() {
-}
-
-void MainWindow::on_actionTile_Horizontally_toggled(bool arg1) {
-}
-
-void MainWindow::on_actionTile_Vertically_toggled(bool arg1) {
-}
-
-void MainWindow::on_actionCascade_toggled(bool arg1) {
 }
 
 void MainWindow::on_actionDocument_triggered() {

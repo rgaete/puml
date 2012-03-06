@@ -62,9 +62,6 @@ class MainWindow : public QMainWindow {
     void on_actionPaste_triggered();
     void on_actionSelect_All_triggered();
     void on_actionInverse_Select_triggered();
-    void on_actionTile_Horizontally_toggled(bool arg1);
-    void on_actionTile_Vertically_toggled(bool arg1);
-    void on_actionCascade_toggled(bool arg1);
     void on_actionDocument_triggered();
     void on_actionAbout_triggered();
     void on_actionSelect_triggered();

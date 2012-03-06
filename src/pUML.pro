@@ -17,7 +17,6 @@ SOURCES += main.cpp\
     nodefactory.cpp \
     document.cpp \
     dialog.cpp \
-    dialogpages.cpp \
     UMLnodes_class.cpp \
     UMLnodes_usecase.cpp \
     mathfunctions.cpp \
@@ -31,7 +30,6 @@ HEADERS  += mainwindow.h \
     document.h \
     nodeaction.h \
     dialog.h \
-    dialogpages.h \
     UMLnodes_usecase.h \
     UMLnodes_class.h \
     mathfunctions.h \

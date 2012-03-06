@@ -11,7 +11,7 @@ How to compile on Linux:
  - Delete any Makefile in the src directory
  - run "qmake pUML.pro"
  - run "make"
- - run "./pUMLTest2"
+ - run "./pUML"
  - ???
  - Profit
 
@@ -28,6 +28,8 @@ How to compile on Windows:
 
 Don't add your Makefile, pUML.pro.user file, or your build directory 
 to the repository, they are specific to your computer. And remember 
-to run "make --clean" on linux clean up the src folder after compiling.
+to run "make --clean" on linux to clean up the src folder after compiling.
 
+General Troubleshooting:
+ - If you run into any undefined reference to vtable errors, try running qmake again. This happens when all the moc files aren't properly generated.
 

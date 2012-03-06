@@ -99,7 +99,6 @@ class ObjectNode: public BaseNode {
 
   public:
     /*! ObjectNode constructor, set the position.
-     *  @param position The center of the object, relative to the containing widget.
      */
     ObjectNode();
 
