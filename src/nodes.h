@@ -32,7 +32,8 @@ class BaseNode : public QObject {
       Interaction,
       UseCase,
       StateChart,
-      Collaboration
+      Collaboration,
+      Nothing
     };
 
     BaseNode();

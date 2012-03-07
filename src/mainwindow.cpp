@@ -42,8 +42,8 @@ MainWindow::MainWindow(QWidget *parent)
   this->resize(700, 500);
   this->setWindowTitle(tr("Phunctional UML Editor"));
 
-  // create a new document on launch
-  on_actionNew_triggered();
+  // Show the Open/New dialog
+  openFileNewDialog(ConfigDialog::OpenAndNew);
 }
 
 // This is a helper function that registers an arbitrary Node* as a
@@ -365,7 +365,24 @@ void MainWindow::connectSignalsSlots() {
   */
 }
 
+void MainWindow::openFileNewDialog(ConfigDialog::ConfigDialogType type)
+{
+  // Create the dialog with the configuration it should be in
+  ConfigDialog *dialog = new ConfigDialog(type);
+  // Connect the dialog to the mainwindow
+  connect(dialog, SIGNAL(newDiagramType(BaseNode::DiagramType)),
+          this, SLOT(createNewDiagram(BaseNode::DiagramType)));
+  connect(dialog, SIGNAL(openDiagramFile(const QString &)),
+          this, SLOT(openDiagram(const QString &)));
+  dialog->exec();
+}
+
+/*! This slot refilters the node actions based on a diagram type. This
+    will effectively hide and show menu items and toolbar items.
+    @param type The new diagram type
+*/
 void MainWindow::updateDiagramType(BaseNode::DiagramType type) {
+  // Loop through the actions and set their visibility.
   for (int i = 0; i < static_cast<int>(actions.size()); ++i) {
     if (actions.at(i)->getDiagramType() == type) {
       actions.at(i)->setVisible(true);
@@ -375,17 +392,88 @@ void MainWindow::updateDiagramType(BaseNode::DiagramType type) {
   }
 }
 
+/*! This slot creates a new Canvas, Document and Tab with the
+    given diagram type.
+    @param type The new diagram type
+*/
+void MainWindow::createNewDiagram(BaseNode::DiagramType type)
+{
+  if (type != BaseNode::Nothing) {
+    // Create the new document and canvas
+    Document *newdoc = new Document;
+    documents.push_back(newdoc);
+    Canvas* newcanvas = new Canvas;
+    canvases.push_back(newcanvas);
+
+    //set the diagram type
+    newdoc->setDiagramType(type);
+
+    // set the parent to this so that they get automically deleted
+    // when the program shuts down
+    //newdoc->setParent(this);
+    //newcanvas->setParent(this);
+
+    // Update the canvas and document index on the canvas and document
+    newdoc->setCanvasIndex(canvases.size()-1);
+    newcanvas->setDocumentIndex(documents.size()-1);
+
+    // add the tab and update the map.
+    // Notice that the mapping is inserted before the tab is created. This
+    // is so that the mapping is already there when the on_tabWidget_currentChanged
+    // slot is called, the mapping is already there. Note that this assumes
+    // (which is a valid assumption) that newTabIndex returned by addTab is
+    // always equal to the number of tabs.
+    // NOTE: Because the tabs can be reordered, tabToCanvasMappings is unused.
+    tabToCanvasMappings.insert(
+          std::pair<int, int>(tabWidget->count(), canvases.size() - 1));
+    int newTabIndex = tabWidget->addTab(newcanvas, "New Diagram");
+
+    // Connect the new canvas with the new document.
+    connectCanvasWithDocument(canvases.size() - 1, documents.size() - 1);
+
+    // Change to the new tab
+    tabWidget->setCurrentIndex(newTabIndex);
+
+    // Update the toolbars
+    updateDiagramType(type);
+  } else {
+    // If the diagram type is nothing and there is no tabs,
+    // update the toolbar to reflect it
+    if (tabWidget->count() == 0) {
+      updateDiagramType(type);
+    }
+  }
+
+
+}
+
+/*! This slot opens an existing diagram. It creates a new Canvas, Document
+    and tab, then recreates the diagram in the Document.
+    @param filename The filename to open.
+*/
+void MainWindow::openDiagram(const QString &filename)
+{
+  // This function should be similar to the createNewDiagram function, except
+  // loads in a diagram after creating the document and canvas. This probably
+  // done by calling a slot in the document class with the filename
+  QMessageBox::information(this, "pUML", "Opening an existing diagram is not yet implemented.\n\n" + filename);
+}
+
 /*! This slot gets triggered whenever one of the NodeActions are triggered,
   which could be from the toolbar or menu. Those NodeActions hold
   the drawingMode and prototypeID. This slot then puts the canvas and
   document into the right modes and sets the right id's.
+  @param drawingMode The drawing mode of the node action. Can be Object,
+         Connection, or Nothing
+  @param prototypeID The id of the prototype in the NodeFactory. This is
+         irrelevant for a drawing mode of Nothing.
 */
 void MainWindow::on_NodeAction_triggered(Canvas::DrawingMode drawingMode,
                                          int prototypeID) {
   // QMessageBox::information(this, "setPrototypeID: prototypeID",
   //                          QString::number(prototypeID), QMessageBox::Ok);
 
-  if (tabWidget->currentIndex() >= 0 && tabWidget->currentIndex() < tabToCanvasMappings.size()) {
+  if (tabWidget->count() != 0 && tabWidget->currentIndex() >= 0 && tabWidget->currentIndex() < tabToCanvasMappings.size()) {
     Canvas* currentCanvas;
     //int canvasIndex;
 
@@ -411,10 +499,12 @@ void MainWindow::on_NodeAction_triggered(Canvas::DrawingMode drawingMode,
       to eleminate the need for a map.
  */
 void MainWindow::on_actionSelect_triggered() {
-  // The old way with a dynamic cast
-  Canvas* canvas;
-  canvas = dynamic_cast<Canvas*>(tabWidget->currentWidget());
-  canvas->setMode(Canvas::Nothing);
+  if (tabWidget->count() != 0) {
+    // The old way with a dynamic cast
+    Canvas* canvas;
+    canvas = dynamic_cast<Canvas*>(tabWidget->currentWidget());
+    canvas->setMode(Canvas::Nothing);
+  }
 
 
   /* The new way with the map :) */
@@ -424,57 +514,13 @@ void MainWindow::on_actionSelect_triggered() {
 }
 
 /*! Creates a new diagram file.
- *  This slot first asks the user what type of diagram to create with a dialog.
- *  Then it create a new canvas and document, then connects them together.
- *  The canvas is added to a new tab and the tab-to-canvas map is updated.
- *  @todo This should also add the diagram to the current project.
+ *  This slot first uses the openFileNewDialog function open the Open/NEw
+    dialog with only new diagram options available. That function connects
+    signals from the dialog to the createNewDiagram slot in the MainWindow.
+    That slot creates a new diagram, if a new diagram type was chosen.
  */
 void MainWindow::on_actionNew_triggered() {
-  // create the new document, it will be deleted if the user cancels.
-  Document* newdoc = new Document;
-
-  // create the dialog and connect the result signal to the
-  // mainwindow and the new document
-  ConfigDialog *dialog = new ConfigDialog();
-  connect(dialog, SIGNAL(newDiagramType(BaseNode::DiagramType)),
-          this, SLOT(updateDiagramType(BaseNode::DiagramType)));
-  connect(dialog, SIGNAL(newDiagramType(BaseNode::DiagramType)),
-          newdoc, SLOT(setDiagramType(BaseNode::DiagramType)));
-
-  if (dialog->exec() == QDialog::Rejected) {
-    // don't create anything new.
-    delete dialog;
-    delete newdoc;
-  } else {
-    delete dialog;
-    // Create the new document and canvas
-    documents.push_back(newdoc);
-    Canvas* newcanvas = new Canvas;
-    canvases.push_back(newcanvas);
-    // set the parent to this so that they get automically deleted
-    // when the program shuts down
-    //newdoc->setParent(this);
-    //newcanvas->setParent(this);
-
-    // Update the canvas and document index on the canvas and document
-    newdoc->setCanvasIndex(canvases.size()-1);
-    newcanvas->setDocumentIndex(documents.size()-1);
-
-    // add the tab and update the map.
-    // Notice that the mapping is inserter before the tab is created. This
-    // is so that the mapping is already there when the on_tabWidget_currentChanged
-    // slot is called, the mapping is already there. Note that this assumes
-    // (which is a valid assumption) that newTabIndex returned by addTab is
-    // always equal to the number of tabs.
-    tabToCanvasMappings.insert(
-          std::pair<int, int>(tabWidget->count(), canvases.size() - 1));
-    int newTabIndex = tabWidget->addTab(newcanvas, "New Diagram");
-    tabWidget->setCurrentIndex(newTabIndex);
-
-    // Connect the new canvas with the new document.
-    connectCanvasWithDocument(canvases.size() - 1, documents.size() - 1);
-  }
-
+  openFileNewDialog(ConfigDialog::NewOnly);
 }
 
 /*! This slot receives the currentChanged signal from the tabWidget.

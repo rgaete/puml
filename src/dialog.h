@@ -11,6 +11,7 @@ QT_BEGIN_NAMESPACE
 class QListWidget;
 class QListWidgetItem;
 class QStackedWidget;
+class QLineEdit;
 QT_END_NAMESPACE
 
 
@@ -18,20 +19,26 @@ class ConfigDialog : public QDialog {
   Q_OBJECT
 
   public:
-    ConfigDialog();
+    enum ConfigDialogType {
+        OpenAndNew,
+        NewOnly
+    };
+
+    ConfigDialog(ConfigDialogType type);
 
 
   public slots:
     void changePage(QListWidgetItem *current, QListWidgetItem *previous);
     void browseForFile();
     void accept();
+    void reject();
 
  signals:
     void newDiagramType(BaseNode::DiagramType diagramType);
-    void openDiagramFile(QString filename);
+    void openDiagramFile(const QString &filename);
 
   private:
-    void createIcons();
+    void createIcons(ConfigDialogType type);
     void createNewPage();
     void createOpenPage();
 
@@ -41,6 +48,7 @@ class ConfigDialog : public QDialog {
     QListWidget *doctypeList;
     QWidget *newPage;
     QWidget *openPage;
+    QLineEdit *filenameBox;
     QString fileName;
 };
 
