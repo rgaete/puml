@@ -35,9 +35,10 @@ class Document : public QWidget {
     int getIndexAt(const QPoint &point);
 
     // The main vector of nodes
-    std::vector<BaseNode*> nodes;
+    QList<BaseNode*> nodes;
     // The index of the selected object, -1 if nothing's selected
     int indexOfSelectedObject;
+    BaseNode* selectedObject;
     // The prototypeID of the next object to create
     int newObjectID;
     // The difference between where a user clicked on the
@@ -48,6 +49,7 @@ class Document : public QWidget {
     int canvasIndex;
     // This is the first object when creating a connection node
     int firstConnectionIndex;
+    BaseNode* firstConnectionObject;
     std::string filename;
 
   signals:

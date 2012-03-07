@@ -6,49 +6,61 @@
 /*! Constructor: simply initializes indexOfSelectedObject.
 */
 Document::Document() {
-  indexOfSelectedObject = -1;
+  //indexOfSelectedObject = -1;
 }
 
 /*! Destructor: frees up the memory used up by the vector of nodes.
   @bug There is an intermitten bug where an exception will be thrown
-     by .at()!
+     by .at()! (3-6-12: This hasn't happened in a long time now)
 */
 Document::~Document() {
-  for (int i = 0; i < static_cast<int>(nodes.size()); i++) {
-    assert(nodes.at(i) != 0);
+  //for (int i = 0; i < static_cast<int>(nodes.size()); i++) {
+    //assert(nodes.at(i) != 0);
     // QMessageBox::information(0, "node text", nodes.at(i)->getText(),
     //                          QMessageBox::Ok, QMessageBox::Ok);
-    delete nodes.at(i);
-  }
+    //delete nodes.at(i);
+  //}
 }
 
-/*! Slot. Updates indexOfSelectedObject based on point. Uses the
+/*! Slot. Updates selectedObject based on point. Uses the
   hitTest function of BaseNode. Sets to -1 if no hitTests return
-  true.
+  true. Also rearranges the nodes QList so that the selected object is
+  the last item in the list, making it have the highest positioning order.
+  @param point The point where the object should be under. Usually a mouse coordinate.
 */
 void Document::setSelectedObject(const QPoint &point) {
-  assert(indexOfSelectedObject >= -1);
-  assert(indexOfSelectedObject < static_cast<int>(nodes.size()));
+  //assert(indexOfSelectedObject >= -1);
+  //assert(indexOfSelectedObject < static_cast<int>(nodes.size()));
 
-  // reset the selected property of previously
-  // selected node
-  if (indexOfSelectedObject != -1) {
-    nodes.at(indexOfSelectedObject)->setSelected(false);
+  // reset the selected property of previously selected node
+  if (selectedObject != 0) {
+    selectedObject->setSelected(false);
   }
 
-  // start at the end of the vector and find the
-  // first object with a positive hittest.
-  indexOfSelectedObject = getIndexAt(point);
-  if (indexOfSelectedObject != -1) {
-    nodes.at(indexOfSelectedObject)->setSelected(true);
+  // find the first object with a positive hittest.
+  int index = getIndexAt(point);
+  if (index != -1) {
+    selectedObject = nodes.at(getIndexAt(point));
+  } else {
+    selectedObject = 0;
   }
 
-  // Save the difference between where the mouse click was (point) and
-  // where the actual middle of the object is. This will be used to
-  // acurately move and drag the object.
-  if (indexOfSelectedObject != -1) {
-    positionDelta = nodes.at(indexOfSelectedObject)->getPosition() - point;
+  if (selectedObject != 0) {
+    //set the node's selected property to true
+    selectedObject->setSelected(true);
+
+    // Save the difference between where the mouse click was (point) and
+    // where the actual middle of the object is. This will be used to
+    // acurately move and drag the object.
+    positionDelta = selectedObject->getPosition() - point;
+
+    //move the selected object to the end of the QList so that it's order
+    //is set to be on top
+    //nodes.removeAll(selectedObject);
+    //nodes.append(selectedObject);
   }
+
+
 
   // at this point a redraw is needed to show the new
   // highlighted object.
@@ -58,11 +70,17 @@ void Document::setSelectedObject(const QPoint &point) {
 /*! Slot. Updates the prototypeID for the next object to be created.
   The signal with the ID should come from the MainWindow with the
   ID being stored in a NodeAction created by MainWindow.registerPrototype()
+  @param prototypeID The ID for the prototype when it was registered with the NodeFactory.
 */
 void Document::setNewObjectID(int prototypeID) {
   newObjectID = prototypeID;
 }
 
+/*! This function returns an index into the nodes vector of the topmost object
+    under the point.
+    @param point The point the object should be under. Usually a mouse coordinate.
+    @return The index of the node under the point, -1 if no object is under the point.
+*/
 int Document::getIndexAt(const QPoint &point) {
   int index = -1;
   for (int i = nodes.size() - 1; i >= 0; i--) {
@@ -77,13 +95,14 @@ int Document::getIndexAt(const QPoint &point) {
 
 /*! Slot. This will move whatever object is selected to the new point, while
   adding in the delta that was saved by a previous call to setSelectedObject.
+  @param point The point to move the currently selected object to.
 */
 void Document::moveSelectedObject(const QPoint &point) {
-  assert(indexOfSelectedObject >= -1);
-  assert(indexOfSelectedObject < static_cast<int>(nodes.size()));
+  //assert(indexOfSelectedObject >= -1);
+  //assert(indexOfSelectedObject < static_cast<int>(nodes.size()));
 
-  if (indexOfSelectedObject != -1) {
-    nodes.at(indexOfSelectedObject)->setPosition(point + positionDelta);
+  if (selectedObject != 0) {
+    selectedObject->setPosition(point + positionDelta);
   }
 
   emit modelChanged();
@@ -94,8 +113,8 @@ void Document::moveSelectedObject(const QPoint &point) {
   to setNewObjectID. Uses NodeFactory.
 */
 void Document::createObject(const QPoint &position) {
-  assert(indexOfSelectedObject >= -1);
-  assert(indexOfSelectedObject < static_cast<int>(nodes.size()));
+  //assert(indexOfSelectedObject >= -1);
+  //assert(indexOfSelectedObject < static_cast<int>(nodes.size()));
 
   // create a new node using the factory
   BaseNode* newNode;
@@ -106,13 +125,15 @@ void Document::createObject(const QPoint &position) {
   addNode(newNode);
 
   // reset the selected property of previously selected node
-  if (indexOfSelectedObject != -1) {
-    nodes.at(indexOfSelectedObject)->setSelected(false);
+  if (selectedObject != 0) {
+    selectedObject->setSelected(false);
   }
 
   // set the selected index to be the created object
-  indexOfSelectedObject = nodes.size()-1;
-  nodes.at(indexOfSelectedObject)->setSelected(true);
+  // (the node list will never be empty because we have at least
+  //  added one item to it, so we don't have to check isEmpty(). )
+  selectedObject = nodes.back();
+  selectedObject->setSelected(true);
 
   emit modelChanged();
 }
@@ -165,12 +186,12 @@ void Document::createConnectionPoint2(const QPoint &point) {
   whatever changes are necessary to the node.
 */
 void Document::showPropertiesDialog() {
-  assert(indexOfSelectedObject >= -1);
-  assert(indexOfSelectedObject < static_cast<int>(nodes.size()));
+  //assert(indexOfSelectedObject >= -1);
+  //assert(indexOfSelectedObject < static_cast<int>(nodes.size()));
 
-  if (indexOfSelectedObject != -1) {
+  if (selectedObject != 0) {
     QDialog *properties;
-    properties = nodes.at(indexOfSelectedObject)->getDialog();
+    properties = selectedObject->getDialog();
 
     properties->exec();
     delete properties;
@@ -189,18 +210,18 @@ void Document::drawList(QPainter &painter) {  // NOLINT
 }
 
 void Document::removeObject() {
-  assert(indexOfSelectedObject >= -1);
-  assert(indexOfSelectedObject < static_cast<int>(nodes.size()));
+  //assert(indexOfSelectedObject >= -1);
+  //assert(indexOfSelectedObject < static_cast<int>(nodes.size()));
 
-  if (indexOfSelectedObject != -1) {
-    BaseNode* obj = nodes.at(indexOfSelectedObject);
+  if (selectedObject != 0) {
+    BaseNode* obj = selectedObject;
     if (obj->isConnector() == false) {
       // erase all the connected connectionnodes
       // get the list of connected nodes, which are all connections
       std::list<BaseNode*> objs;
       objs = obj->getConnectedNodes();
 
-      // iterator through that list and delete the connection nodes
+      // iterate through that list and delete the connection nodes
       // as well as remove the pointers to this node from all objects
       // that are connected to the connection node
       std::list<BaseNode*>::iterator it;
@@ -216,12 +237,15 @@ void Document::removeObject() {
         // delete this connection node
         for (int i = 0; i < static_cast<int>(nodes.size()); i++) {
           if (nodes.at(i) == (*it)) {
+
             nodes.erase(nodes.begin()+i);
           }
         }
       }
       // now actually erase the object
-      nodes.erase(nodes.begin()+indexOfSelectedObject);
+      //nodes.erase(nodes.begin()+indexOfSelectedObject);
+      nodes.removeAll(selectedObject);
+      QMessageBox::information(0, "selected boject", selectedObject->getText());
     } else {
       // get the list of connected objects (should only be two objects)
       std::list<BaseNode*> secondaryObjects;
@@ -235,11 +259,12 @@ void Document::removeObject() {
       }
 
       // now delete the actual node
-      nodes.erase(nodes.begin()+indexOfSelectedObject);
+      //nodes.erase(nodes.begin()+indexOfSelectedObject);
+      nodes.removeAll(selectedObject);
     }
   }
 
-  indexOfSelectedObject = -1;
+  selectedObject = 0;
   emit modelChanged();
 }
 
