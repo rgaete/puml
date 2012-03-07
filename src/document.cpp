@@ -75,6 +75,24 @@ int Document::getIndexAt(const QPoint &point) {
   return index;
 }
 
+/*! This helper function removes the specified index from the
+    ordering, ensuring that all indexes in the ordering
+    remain valid.
+    @param index The index value to remove
+*/
+void Document::removeFromOrdering(int index)
+{
+  if (index > -1 && index < nodes.size()) {
+    ordering.removeAll(index);
+    for (int i=0; i<ordering.size(); i++) {
+      if (ordering.at(i) > index) {
+        //ordering.at(i) = ordering.at(i) - 1;
+        ordering.replace(i, ordering.at(i) - 1);
+      }
+    }
+  }
+}
+
 /*! Slot. This will move whatever object is selected to the new point, while
   adding in the delta that was saved by a previous call to setSelectedObject.
 */
@@ -244,13 +262,13 @@ void Document::removeObject() {
         for (int i = 0; i < static_cast<int>(nodes.size()); i++) {
           if (nodes.at(i) == (*it)) {
             nodes.erase(nodes.begin()+i);
-            ordering.removeAll(i);
+            removeFromOrdering(i);
           }
         }
       }
       // now actually erase the object
       nodes.erase(nodes.begin()+indexOfSelectedObject);
-      ordering.removeAll(indexOfSelectedObject);
+      removeFromOrdering(indexOfSelectedObject);
     } else {
       // get the list of connected objects (should only be two objects)
       std::list<BaseNode*> secondaryObjects;
@@ -265,10 +283,9 @@ void Document::removeObject() {
 
       // now delete the actual nodecount
       nodes.erase(nodes.begin()+indexOfSelectedObject);
-      ordering.removeAll(indexOfSelectedObject);
+      removeFromOrdering(indexOfSelectedObject);
     }
   }
-
   indexOfSelectedObject = -1;
   emit modelChanged();
 }

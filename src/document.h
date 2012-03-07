@@ -34,6 +34,7 @@ class Document : public QWidget {
 
   private:
     int getIndexAt(const QPoint &point);
+    void removeFromOrdering(int index);
 
     // The main vector of nodes
     std::vector<BaseNode*> nodes;

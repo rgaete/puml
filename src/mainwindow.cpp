@@ -387,11 +387,12 @@ void MainWindow::on_NodeAction_triggered(Canvas::DrawingMode drawingMode,
 
   if (tabWidget->currentIndex() >= 0 && tabWidget->currentIndex() < tabToCanvasMappings.size()) {
     Canvas* currentCanvas;
-    int canvasIndex;
+    //int canvasIndex;
 
     // Find the current canvas with the map
-    canvasIndex = tabToCanvasMappings[tabWidget->currentIndex()];
-    currentCanvas = canvases.at(canvasIndex);
+    // canvasIndex = tabToCanvasMappings[tabWidget->currentIndex()];
+    // currentCanvas = canvases.at(canvasIndex);
+    currentCanvas = dynamic_cast<Canvas*>(tabWidget->currentWidget());
 
     // notify the canvas that it should be in object mode
     currentCanvas->setMode(drawingMode);
@@ -410,16 +411,16 @@ void MainWindow::on_NodeAction_triggered(Canvas::DrawingMode drawingMode,
       to eleminate the need for a map.
  */
 void MainWindow::on_actionSelect_triggered() {
-  /* The old way with a static cast (...shiver...)
+  // The old way with a dynamic cast
   Canvas* canvas;
-  canvas = static_cast<Canvas*>(tabWidget->currentWidget());
+  canvas = dynamic_cast<Canvas*>(tabWidget->currentWidget());
   canvas->setMode(Canvas::Nothing);
-  */
+
 
   /* The new way with the map :) */
-  int canvasIndex;
-  canvasIndex = tabToCanvasMappings[tabWidget->currentIndex()];
-  canvases.at(canvasIndex)->setMode(Canvas::Nothing);
+  //int canvasIndex;
+  //canvasIndex = tabToCanvasMappings[tabWidget->currentIndex()];
+  //canvases.at(canvasIndex)->setMode(Canvas::Nothing);
 }
 
 /*! Creates a new diagram file.
@@ -484,7 +485,8 @@ void MainWindow::on_actionNew_triggered() {
 void MainWindow::on_tabWidget_currentChanged(int newIndex) {
   if (newIndex > -1 && newIndex < static_cast<int>(tabToCanvasMappings.size())) {
     // Get the current doc from the current canvas from the current tab
-    Canvas* currentCanvas = canvases.at(tabToCanvasMappings[newIndex]);
+    //Canvas* currentCanvas = canvases.at(tabToCanvasMappings[newIndex]);
+    Canvas* currentCanvas = dynamic_cast<Canvas*>(tabWidget->currentWidget());
     Document* currentDoc = documents.at(currentCanvas->getDocumentIndex());
     // and update the toolbar with that document's diagram type.
     updateDiagramType(currentDoc->getDiagramType());
