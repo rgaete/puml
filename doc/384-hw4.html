@@ -37,6 +37,14 @@ Morgan Weir
 <li>       We switched off depending on the tasks because some people knew more about different parts of the prograam more in-depth than others, which allowed us to quickle and efficiently create the graphics for the diagram (although we are still working on curved connecting arrows). Paired programming is a useful tool particularly for "coder's" block, and allows for much faster debugging! 
     </p>
 
+<p>
+Logan Evans
+<li>    I worked with Nate on saving diagrams. We reviewed the roadmap for this task, and then we worked on creating a hook that can initiate the saving process.
+<li>    The general setup was that we used QT creator on Nate's laptop. About half of the time we were looking for ways to bring up the QT save dialog. We had some problems with this dialog because it is a method in QtWidget. We finally discovered that our Document class inherited from QtObject. Once we revised the inheritance, this dialog worked. We spent most of our remaining time trying to code a proof of conecpt save event. We eventually were able to save a dummy text file. This is where we stopped for the night.
+<li>    The experience was interesting for a number of reasons. First of all, Nate and I were able to glimpe the other's work flow. The actual amount of code written was relatively small, but we were trying to demonstrate a proof of concept, so most of our solutions were of the form of kludges. We wanted to know if we could retreive a file path string, or if we were looking at the wrong function. We wanted to know if we could save a plaintext file, and only later will we want to know if we can save a plaintext file using Qt builtins.
+<li>    We were also able to introduce each other to some coding tools. I demonstrated the cpplint.py script, and Nate demonstrated the glorious mechanism of Qt Creator.
+</p>
+
 
 </body>
 </html>
