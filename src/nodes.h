@@ -43,13 +43,7 @@ class BaseNode : public QObject {
       position = pos;
       setUpConnectionPoints();
     }
-    void setPoints(const QPoint &p1, const QPoint &p2) {
-      point1 = p1;
-      point2 = p2;
-    }
-    QPoint getPosition() {
-      return position;
-    }
+    QPoint getPosition() { return position; }
 
     virtual void draw(QPainter &painter) = 0;  // NOLINT
     virtual BaseNode* clone() = 0;
@@ -66,20 +60,25 @@ class BaseNode : public QObject {
     QPoint getClosestConnectionPoint(const QPoint& point);
     std::list<BaseNode*> getConnectedNodes();
 
+    void setSelectedForConnectionPoint(bool state) { cpSelected = state; }
+
   private:
     std::vector<QPoint> connectionPoints;
 
   protected:
     virtual void setUpConnectionPoints();
 
+    // whether the object is selected or not
     bool selected;
+    // whether the object is selected for creating a connection or not
+    bool cpSelected;
+    // the center of the object (not relevant for connections)
     QPoint position;
-    QPoint point1;
-    QPoint point2;
     // The length (i.e. width) of the bounding box for this object
     int length;
     // The height of the bounding box for this object
     int height;
+    // A linked list of pointers to the connected objects
     std::list<BaseNode*> connectedObjects;
 };
 
@@ -144,6 +143,7 @@ class ConnectionNode: public BaseNode {
   private:
 };
 
+
 class SquareConnectionNode: public BaseNode {
   public:
     // void setPoints(const QPoint &point1, const QPoint &point2);
@@ -156,5 +156,6 @@ class SquareConnectionNode: public BaseNode {
     QPoint pt1, pt2, pt3, pt4;
   private:
 };
+
 
 #endif  // SRC_NODES_H_

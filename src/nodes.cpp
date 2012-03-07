@@ -19,6 +19,7 @@
 */
 BaseNode::BaseNode() {
   selected = false;
+  cpSelected = false;
   setUpConnectionPoints();
 }
 
@@ -121,12 +122,16 @@ bool ObjectNode::hitTest(const QPoint &point) {
   painter is a valid QPainter.
 */
 void ObjectNode::draw(QPainter &painter) {  // NOLINT
-  if (selected == true) {
+  if (selected == true || cpSelected == true) {
     int handleWidth = 5;
     int handleHeight = 5;
 
     painter.setPen(Qt::NoPen);
-    painter.setBrush(Qt::blue);
+    if (cpSelected == true) {
+      painter.setBrush(Qt::red);
+    } else {
+      painter.setBrush(Qt::blue);
+    }
     painter.drawRect(position.x()-length/2-handleWidth,
              position.y()-height/2-handleHeight,
              handleWidth,

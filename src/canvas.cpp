@@ -174,6 +174,7 @@ void Canvas::mouseMoveEvent(QMouseEvent *event) {
     case Connection:
       // update the second line hint point
       lineHint2 = this->mapFromGlobal(event->globalPos());
+      emit changeSecondConnectionPointHint(this->mapFromGlobal(event->globalPos()));
       update();
       break;
     }
