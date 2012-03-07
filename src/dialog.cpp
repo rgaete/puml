@@ -12,7 +12,7 @@
     the Ok and Cancel buttons with the accept and reject slots. Uses
     createIcons, createNewPage and createOpenPage helper functions.
 */
-ConfigDialog::ConfigDialog() {
+ConfigDialog::ConfigDialog(ConfigDialogType type) {
   //contentsWidget is the sidebar navigation widget
   contentsWidget = new QListWidget;
   contentsWidget->setViewMode(QListView::IconMode);
@@ -20,7 +20,7 @@ ConfigDialog::ConfigDialog() {
   contentsWidget->setMovement(QListView::Static);
   contentsWidget->setMaximumWidth(128);
   contentsWidget->setSpacing(12);
-  createIcons();
+  createIcons(type);
 
 
   //create our two pages
@@ -52,24 +52,38 @@ ConfigDialog::ConfigDialog() {
   mainLayout->addWidget(buttonBox);
   setLayout(mainLayout);
 
-  setWindowTitle(tr("Intro Program Options"));
+  setWindowTitle(tr("pUML - Open a new or existing diagram"));
 }
 
 /*! This is a helper function for ConfigDialog that creates the items in
     the sidebar widget.
 */
-void ConfigDialog::createIcons() {
-  QListWidgetItem *newbutton = new QListWidgetItem(contentsWidget);
-  newbutton->setIcon(QIcon(":/Images/New.png"));
-  newbutton->setText(tr("New"));
-  newbutton->setTextAlignment(Qt::AlignHCenter);
-  newbutton->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+void ConfigDialog::createIcons(ConfigDialogType type) {
+  QListWidgetItem *newbutton;
+  QListWidgetItem *openbutton;
 
-  QListWidgetItem *openbutton = new QListWidgetItem(contentsWidget);
-  openbutton->setIcon(QIcon(":/Images/Open.png"));
-  openbutton->setText(tr("Open"));
-  openbutton->setTextAlignment(Qt::AlignHCenter);
-  openbutton->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+  switch (type) {
+  case NewOnly:
+    newbutton = new QListWidgetItem(contentsWidget);
+    newbutton->setIcon(QIcon(":/Images/New.png"));
+    newbutton->setText(tr("New"));
+    newbutton->setTextAlignment(Qt::AlignHCenter);
+    newbutton->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+    break;
+  case OpenAndNew:
+    newbutton = new QListWidgetItem(contentsWidget);
+    newbutton->setIcon(QIcon(":/Images/New.png"));
+    newbutton->setText(tr("New"));
+    newbutton->setTextAlignment(Qt::AlignHCenter);
+    newbutton->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+
+    openbutton = new QListWidgetItem(contentsWidget);
+    openbutton->setIcon(QIcon(":/Images/Open.png"));
+    openbutton->setText(tr("Open"));
+    openbutton->setTextAlignment(Qt::AlignHCenter);
+    openbutton->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+    break;
+  }
 
   connect(contentsWidget,
           SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)),
@@ -87,6 +101,7 @@ void ConfigDialog::createNewPage()
 
   QListWidgetItem *usecaseItem = new QListWidgetItem(doctypeList);
   usecaseItem->setText(tr("Use Case"));
+  usecaseItem->setSelected(true);
 
   QListWidgetItem *classItem = new QListWidgetItem(doctypeList);
   classItem->setText(tr("Class"));
@@ -118,13 +133,16 @@ void ConfigDialog::createNewPage()
 */
 void ConfigDialog::createOpenPage()
 {
-  //create the browse button
-  QPushButton *openButton = new QPushButton(tr("Open File"), openPage);
+  // create the browse button
+  QPushButton *openButton = new QPushButton(tr("Browse"), openPage);
   connect(openButton, SIGNAL(clicked()), this, SLOT(browseForFile()));
+  // create the box to show the filename
+  filenameBox = new QLineEdit(openPage);
+  filenameBox->setReadOnly(true);
 
   QGroupBox *packagesGroup = new QGroupBox(tr("Open File"));
-
   QGridLayout *packagesLayout = new QGridLayout(openPage);
+  packagesLayout->addWidget(filenameBox);
   packagesGroup->setLayout(packagesLayout);
 
   QVBoxLayout *mainLayout = new QVBoxLayout(openPage);
@@ -152,6 +170,7 @@ void ConfigDialog::browseForFile()
 {
   fileName = QFileDialog::getOpenFileName(this,
      tr("Open Document"),  tr("XML files (*.xml)"));
+  filenameBox->setText(fileName);
 }
 
 /*! This overriden slot emits various signals so that the
@@ -161,11 +180,10 @@ void ConfigDialog::browseForFile()
 */
 void ConfigDialog::accept()
 {
-  QDialog::accept();
-
   QListWidgetItem *operation = contentsWidget->currentItem();
   if (operation->text() == "New") {
-    QListWidgetItem *selected = doctypeList->currentItem();
+
+    QListWidgetItem *selected = doctypeList->selectedItems().at(0);
     if (selected->text() == "State Chart") {
       emit newDiagramType(BaseNode::StateChart);
     } else if (selected->text() == "Collaboration") {
@@ -178,10 +196,16 @@ void ConfigDialog::accept()
       QMessageBox::information(this, "pUML", "Not a valid diagram type!");
     }
   } else if (operation->text() == "Open") {
-    QMessageBox::information(this, "pUML", "File opening is not yet implemented (3-6-12)");
     emit openDiagramFile(fileName);
   } else {
     QMessageBox::information(this, "pUML", "Not a valid operation!");
+    emit newDiagramType(BaseNode::Nothing);
   }
+  QDialog::accept();
+}
 
+void ConfigDialog::reject()
+{
+    QDialog::reject();
+    emit newDiagramType(BaseNode::Nothing);
 }

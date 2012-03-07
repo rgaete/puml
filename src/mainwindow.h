@@ -69,12 +69,15 @@ class MainWindow : public QMainWindow {
     void on_NodeAction_triggered(Canvas::DrawingMode drawingMode,
                                  int prototypeID);
     void updateDiagramType(BaseNode::DiagramType type);
+    void createNewDiagram(BaseNode::DiagramType type);
+    void openDiagram(const QString &filename);
 
   private:
     void createActions();
     void createMenus();
     void createWidgets();
     void connectSignalsSlots();
+    void openFileNewDialog(ConfigDialog::ConfigDialogType type);
     void registerObject(BaseNode* newPrototype);
     void connectCanvasWithDocument(int canvasIndex, int documentIndex);
 
