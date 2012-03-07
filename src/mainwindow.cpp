@@ -484,7 +484,7 @@ void MainWindow::on_actionNew_triggered() {
 void MainWindow::on_tabWidget_currentChanged(int newIndex) {
   if (newIndex > -1 && newIndex < static_cast<int>(tabToCanvasMappings.size())) {
     // Get the current doc from the current canvas from the current tab
-    Canvas* currentCanvas = canvases.at(tabToCanvasMappings.at(newIndex));
+    Canvas* currentCanvas = canvases.at(tabToCanvasMappings[newIndex]);
     Document* currentDoc = documents.at(currentCanvas->getDocumentIndex());
     // and update the toolbar with that document's diagram type.
     updateDiagramType(currentDoc->getDiagramType());
