@@ -6,15 +6,6 @@
 #include <QInputDialog>
 #include "./nodes.h"
 
-/*! @brief This defines a custom dialog for a OvalObject
-*/
-class StateObjectDialog : public QInputDialog {
-  Q_OBJECT
-
-  public:
-    explicit StateObjectDialog(QWidget *parent = 0);
-};
-
 /*!
  * @brief This concrete class is the State node.
  * @sa ObjectNode
@@ -25,7 +16,7 @@ class StateObject: public ObjectNode {
   public:
     StateObject();
     BaseNode* clone() { return new StateObject; }
-    QDialog* getDialog();
+    QDialog* getDialog() { return 0; }
     QString getIconPath() { return QString(":/Images/circle.png"); }
     QString getText() { return "State"; }
     DiagramType getDiagramType() { return StateChart; }
@@ -40,15 +31,6 @@ class StateObject: public ObjectNode {
     QString name;
 };
 
-/*! @brief This defines a custom dialog for a OvalObject
-*/
-class InitialStateObjectDialog : public QInputDialog {
-  Q_OBJECT
-
-  public:
-    explicit InitialStateObjectDialog(QWidget *parent = 0);
-};
-
 /*!
  * @brief This concrete class is the State node.
  * @sa ObjectNode
@@ -59,7 +41,7 @@ class InitialStateObject: public ObjectNode {
   public:
     InitialStateObject();
     BaseNode* clone() { return new InitialStateObject; }
-    QDialog* getDialog();
+    QDialog* getDialog() { return 0; }
     QString getIconPath() { return QString(":/Images/initialstate.png"); }
     QString getText() { return "Initial State"; }
     DiagramType getDiagramType() { return StateChart; }
@@ -67,17 +49,9 @@ class InitialStateObject: public ObjectNode {
     void draw(QPainter &painter);  // NOLINT
 };
 
-/*! @brief This defines a custom dialog for a OvalObject
-*/
-class FinalStateObjectDialog : public QInputDialog {
-  Q_OBJECT
-
-  public:
-    explicit FinalStateObjectDialog(QWidget *parent = 0);
-};
 
 /*!
- * @brief This concrete class is the State node.
+ * @brief This concrete class is the Final State node.
  * @sa ObjectNode
  */
 class FinalStateObject: public ObjectNode {
@@ -86,7 +60,7 @@ class FinalStateObject: public ObjectNode {
   public:
     FinalStateObject();
     BaseNode* clone() { return new FinalStateObject; }
-    QDialog* getDialog();
+    QDialog* getDialog() { return 0; }
     QString getIconPath() { return QString(":/Images/finalstate.png"); }
     QString getText() { return "Final State"; }
     DiagramType getDiagramType() { return StateChart; }

@@ -53,7 +53,7 @@ class Canvas : public QWidget {
   protected:
     void mouseReleaseEvent(QMouseEvent *event);
     void mousePressEvent(QMouseEvent *event);
-    void paintEvent(QPaintEvent *event);
+    void paintEvent(QPaintEvent *);
     void mouseMoveEvent(QMouseEvent *event);
     void contextMenuEvent(QContextMenuEvent *event);
 

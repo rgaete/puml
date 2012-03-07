@@ -80,13 +80,11 @@ int Document::getIndexAt(const QPoint &point) {
     remain valid.
     @param index The index value to remove
 */
-void Document::removeFromOrdering(int index)
-{
-  if (index > -1 && index < nodes.size()) {
+void Document::removeFromOrdering(int index) {
+  if (index > -1 && index < static_cast<int>(nodes.size())) {
     ordering.removeAll(index);
-    for (int i=0; i<ordering.size(); i++) {
+    for (int i = 0; i < ordering.size(); i++) {
       if (ordering.at(i) > index) {
-        //ordering.at(i) = ordering.at(i) - 1;
         ordering.replace(i, ordering.at(i) - 1);
       }
     }
@@ -211,8 +209,10 @@ void Document::showPropertiesDialog() {
     QDialog *properties;
     properties = nodes.at(indexOfSelectedObject)->getDialog();
 
-    properties->exec();
-    delete properties;
+    if (properties != 0) {
+      properties->exec();
+      delete properties;
+    }
   }
 
   emit modelChanged();
@@ -294,9 +294,9 @@ void Document::removeObject() {
     ordering to the front of everything. Nothing will happen if
     it's at the front of everything.
 */
-void Document::sendSelectedToFront()
-{
-  if (indexOfSelectedObject > -1 && indexOfSelectedObject < nodes.size()) {
+void Document::sendSelectedToFront() {
+  if ((indexOfSelectedObject > -1 )
+      && (indexOfSelectedObject < static_cast<int>(nodes.size()))) {
     ordering.removeAll(indexOfSelectedObject);
     ordering.append(indexOfSelectedObject);
   }
@@ -307,9 +307,9 @@ void Document::sendSelectedToFront()
     ordering up on position. Nothing will happen if that object is
     already at the top of the ordering.
 */
-void Document::sendSelectedForward()
-{
-  if (indexOfSelectedObject > -1 && indexOfSelectedObject < nodes.size()) {
+void Document::sendSelectedForward() {
+  if ((indexOfSelectedObject > -1)
+      && (indexOfSelectedObject < static_cast<int>(nodes.size()))) {
     int orderingindex = ordering.indexOf(indexOfSelectedObject);
     if (orderingindex < ordering.size()-1) {
       ordering.move(orderingindex, orderingindex+1);
@@ -322,9 +322,9 @@ void Document::sendSelectedForward()
     ordering to the back of everything. Nothing will happen if it's already
     at the back.
 */
-void Document::sendSelectedToBack()
-{
-  if (indexOfSelectedObject > -1 && indexOfSelectedObject < nodes.size()) {
+void Document::sendSelectedToBack() {
+  if ((indexOfSelectedObject > -1)
+      && (indexOfSelectedObject < static_cast<int>(nodes.size()))) {
     ordering.removeAll(indexOfSelectedObject);
     ordering.prepend(indexOfSelectedObject);
   }
@@ -334,9 +334,9 @@ void Document::sendSelectedToBack()
 /*! If an object is selected, this slot will move that object's
     ordering back one spot. Nothing will happen if it's already at the back.
 */
-void Document::sendSelectedBackwards()
-{
-  if (indexOfSelectedObject > -1 && indexOfSelectedObject < nodes.size()) {
+void Document::sendSelectedBackwards() {
+  if ((indexOfSelectedObject > -1)
+      && (indexOfSelectedObject < static_cast<int>(nodes.size()))) {
     int orderingindex = ordering.indexOf(indexOfSelectedObject);
     if (orderingindex > 0) {
       ordering.move(orderingindex, orderingindex-1);
@@ -345,17 +345,17 @@ void Document::sendSelectedBackwards()
   emit modelChanged();
 }
 
-void Document::changeSecondConnectionPointHint(const QPoint &point)
-{
+void Document::changeSecondConnectionPointHint(const QPoint &point) {
   // reset the cpSelection for the previous selected node
-  if (secondConnectionIndex > -1 && secondConnectionIndex < nodes.size()) {
+  if ((secondConnectionIndex > -1)
+      && (secondConnectionIndex < static_cast<int>(nodes.size()))) {
     if (secondConnectionIndex != firstConnectionIndex) {
       nodes.at(secondConnectionIndex)->setSelectedForConnectionPoint(false);
     }
   }
 
   if (firstConnectionIndex != -1) {
-    //find the new node, if any
+    // find the new node, if any
     secondConnectionIndex = getIndexAt(point);
     if (secondConnectionIndex != -1) {
       nodes.at(secondConnectionIndex)->setSelectedForConnectionPoint(true);

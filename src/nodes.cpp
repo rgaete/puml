@@ -193,12 +193,13 @@ bool ConnectionNode::hitTest(const QPoint &point) {
 /*************************************/
 /* SquareConnectionNode Functions ****/
 /*************************************/
-bool SquareConnectionNode::hitTest(const QPoint &point) {
-  BaseNode *obj1, *obj2;
+bool SquareConnectionNode::hitTest(const QPoint & point) {
+  BaseNode *obj1;
+  // BaseNode *obj2;
   std::list<BaseNode*>::iterator it = connectedObjects.begin();
   obj1 = *(it);
-  it++;
-  obj2 = *(it);
+  // it++;
+  // obj2 = *(it);
 
   if (pt1.x() != obj1->getPosition().x()) {  // East or West connection
     if ((fabs(point.x() - ((pt1.x() + pt4.x()) / 2.0)) < 15.0) &&

@@ -84,18 +84,13 @@ class OvalObject: public ObjectNode {
     QString name;
 };
 
-/*! @brief This class provides a custom dialog for an InteractionLineNode.
-*/
-class InteractionConnectionDialog : public QDialog {
-};
-
 /*! @brief This concrete class defines an Interaction line in a Use
   Case diagram (line from the actor to the use case)
 */
 class InteractionConnection : public ConnectionNode {
   public:
     BaseNode* clone() { return new InteractionConnection; }
-    QDialog* getDialog() { return new InteractionConnectionDialog; }
+    QDialog* getDialog() { return 0; }
     QString getIconPath() { return QString(":/Images/interaction.png"); }
     QString getText() { return "Interaction Line"; }
     void draw(QPainter& painter);  // NOLINT
@@ -103,18 +98,13 @@ class InteractionConnection : public ConnectionNode {
 };
 
 
-/*! @brief This class provides a custom dialog for an extendsLineNode.
-*/
-class ExtendsConnectionDialog : public QInputDialog {
-};
-
 /*! @brief This concrete class defines an Extends line in a Use
   Case diagram (line from the actor to the use case)
 */
 class ExtendsConnection : public ConnectionNode {
   public:
     BaseNode* clone() { return new ExtendsConnection; }
-    QDialog* getDialog() { return new ExtendsConnectionDialog; }
+    QDialog* getDialog() { return 0; }
     QString getIconPath() { return QString(":/Images/interaction.png"); }
     QString getText() { return "Extends Line"; }
     void addArrow(QPainter &painter);  // NOLINT
@@ -123,18 +113,13 @@ class ExtendsConnection : public ConnectionNode {
     DiagramType getDiagramType() { return UseCase; }
 };
 
-/*! This class provides a custom dialog for an extendsLineNode.
-*/
-class IncludesConnectionDialog : public QDialog {
-};
-
 /*! This concrete class defines an Extends line in a Use
   Case diagram (line from the actor to the use case)
 */
 class IncludesConnection : public ConnectionNode {
   public:
     BaseNode* clone() { return new IncludesConnection; }
-    QDialog* getDialog() { return new IncludesConnectionDialog; }
+    QDialog* getDialog() { return 0; }
     QString getIconPath() { return QString(":/Images/interaction.png"); }
     QString getText() { return "Includes Line"; }
     void addArrow(QPainter &painter);  // NOLINT

@@ -365,8 +365,7 @@ void MainWindow::connectSignalsSlots() {
   */
 }
 
-void MainWindow::openFileNewDialog(ConfigDialog::ConfigDialogType type)
-{
+void MainWindow::openFileNewDialog(ConfigDialog::ConfigDialogType type) {
   // Create the dialog with the configuration it should be in
   ConfigDialog *dialog = new ConfigDialog(type);
   // Connect the dialog to the mainwindow
@@ -396,8 +395,7 @@ void MainWindow::updateDiagramType(BaseNode::DiagramType type) {
     given diagram type.
     @param type The new diagram type
 */
-void MainWindow::createNewDiagram(BaseNode::DiagramType type)
-{
+void MainWindow::createNewDiagram(BaseNode::DiagramType type) {
   if (type != BaseNode::Nothing) {
     // Create the new document and canvas
     Document *newdoc = new Document;
@@ -405,13 +403,13 @@ void MainWindow::createNewDiagram(BaseNode::DiagramType type)
     Canvas* newcanvas = new Canvas;
     canvases.push_back(newcanvas);
 
-    //set the diagram type
+    // set the diagram type
     newdoc->setDiagramType(type);
 
     // set the parent to this so that they get automically deleted
     // when the program shuts down
-    //newdoc->setParent(this);
-    //newcanvas->setParent(this);
+    // newdoc->setParent(this);
+    // newcanvas->setParent(this);
 
     // Update the canvas and document index on the canvas and document
     newdoc->setCanvasIndex(canvases.size()-1);
@@ -419,10 +417,10 @@ void MainWindow::createNewDiagram(BaseNode::DiagramType type)
 
     // add the tab and update the map.
     // Notice that the mapping is inserted before the tab is created. This
-    // is so that the mapping is already there when the on_tabWidget_currentChanged
-    // slot is called, the mapping is already there. Note that this assumes
-    // (which is a valid assumption) that newTabIndex returned by addTab is
-    // always equal to the number of tabs.
+    // is so that the mapping is already there when the
+    // on_tabWidget_currentChanged slot is called, the mapping is already there.
+    // Note that this assumes (which is a valid assumption) that newTabIndex
+    // returned by addTab is always equal to the number of tabs.
     // NOTE: Because the tabs can be reordered, tabToCanvasMappings is unused.
     tabToCanvasMappings.insert(
           std::pair<int, int>(tabWidget->count(), canvases.size() - 1));
@@ -443,20 +441,18 @@ void MainWindow::createNewDiagram(BaseNode::DiagramType type)
       updateDiagramType(type);
     }
   }
-
-
 }
 
 /*! This slot opens an existing diagram. It creates a new Canvas, Document
     and tab, then recreates the diagram in the Document.
     @param filename The filename to open.
 */
-void MainWindow::openDiagram(const QString &filename)
-{
+void MainWindow::openDiagram(const QString &filename) {
   // This function should be similar to the createNewDiagram function, except
   // loads in a diagram after creating the document and canvas. This probably
   // done by calling a slot in the document class with the filename
-  QMessageBox::information(this, "pUML", "Opening an existing diagram is not yet implemented.\n\n" + filename);
+  QMessageBox::information(this, "pUML",
+    "Opening an existing diagram is not yet implemented.\n\n" + filename);
 }
 
 /*! This slot gets triggered whenever one of the NodeActions are triggered,
@@ -473,21 +469,24 @@ void MainWindow::on_NodeAction_triggered(Canvas::DrawingMode drawingMode,
   // QMessageBox::information(this, "setPrototypeID: prototypeID",
   //                          QString::number(prototypeID), QMessageBox::Ok);
 
-  if (tabWidget->count() != 0 && tabWidget->currentIndex() >= 0 && tabWidget->currentIndex() < tabToCanvasMappings.size()) {
+  // if (tabWidget->count() != 0 && tabWidget->currentIndex() >= 0
+  //     && tabWidget->currentIndex() < tabToCanvasMappings.size()) {
+  if (tabWidget->count() != 0 && tabWidget->currentIndex() >= 0) {
     Canvas* currentCanvas;
-    //int canvasIndex;
+    // int canvasIndex;
 
     // Find the current canvas with the map
     // canvasIndex = tabToCanvasMappings[tabWidget->currentIndex()];
     // currentCanvas = canvases.at(canvasIndex);
-    currentCanvas = dynamic_cast<Canvas*>(tabWidget->currentWidget());
+    currentCanvas = static_cast<Canvas*>(tabWidget->currentWidget());
 
     // notify the canvas that it should be in object mode
     currentCanvas->setMode(drawingMode);
 
     // we need to set the prototype id in currently
     // active document, so it knows what to create.
-    documents.at(currentCanvas->getDocumentIndex())->setNewObjectID(prototypeID);
+    documents.at(currentCanvas->getDocumentIndex())
+            ->setNewObjectID(prototypeID);
   } else {
     qDebug("Node action when there are no canvases created!");
   }
@@ -502,15 +501,15 @@ void MainWindow::on_actionSelect_triggered() {
   if (tabWidget->count() != 0) {
     // The old way with a dynamic cast
     Canvas* canvas;
-    canvas = dynamic_cast<Canvas*>(tabWidget->currentWidget());
+    canvas = static_cast<Canvas*>(tabWidget->currentWidget());
     canvas->setMode(Canvas::Nothing);
   }
 
 
   /* The new way with the map :) */
-  //int canvasIndex;
-  //canvasIndex = tabToCanvasMappings[tabWidget->currentIndex()];
-  //canvases.at(canvasIndex)->setMode(Canvas::Nothing);
+  // int canvasIndex;
+  // canvasIndex = tabToCanvasMappings[tabWidget->currentIndex()];
+  // canvases.at(canvasIndex)->setMode(Canvas::Nothing);
 }
 
 /*! Creates a new diagram file.
@@ -529,10 +528,11 @@ void MainWindow::on_actionNew_triggered() {
  *  actions in the menu to the current document/canvas.
  */
 void MainWindow::on_tabWidget_currentChanged(int newIndex) {
-  if (newIndex > -1 && newIndex < static_cast<int>(tabToCanvasMappings.size())) {
+  if (newIndex > -1 && newIndex
+          < static_cast<int>(tabToCanvasMappings.size())) {
     // Get the current doc from the current canvas from the current tab
-    //Canvas* currentCanvas = canvases.at(tabToCanvasMappings[newIndex]);
-    Canvas* currentCanvas = dynamic_cast<Canvas*>(tabWidget->currentWidget());
+    // Canvas* currentCanvas = canvases.at(tabToCanvasMappings[newIndex]);
+    Canvas* currentCanvas = static_cast<Canvas*>(tabWidget->currentWidget());
     Document* currentDoc = documents.at(currentCanvas->getDocumentIndex());
     // and update the toolbar with that document's diagram type.
     updateDiagramType(currentDoc->getDiagramType());
@@ -544,14 +544,16 @@ void MainWindow::on_tabWidget_currentChanged(int newIndex) {
     disconnect(actionSendToBack, SIGNAL(triggered()), 0, 0);
 
     // connect thos signals to the current document
-    connect(actionSendForwards, SIGNAL(triggered()), currentDoc, SLOT(sendSelectedForward()));
-    connect(actionSendBackwards, SIGNAL(triggered()), currentDoc, SLOT(sendSelectedBackwards()));
-    connect(actionSendToFront, SIGNAL(triggered()), currentDoc, SLOT(sendSelectedToFront()));
-    connect(actionSendToBack, SIGNAL(triggered()), currentDoc, SLOT(sendSelectedToBack()));
-
+    connect(actionSendForwards, SIGNAL(triggered()),
+            currentDoc, SLOT(sendSelectedForward()));
+    connect(actionSendBackwards, SIGNAL(triggered()),
+            currentDoc, SLOT(sendSelectedBackwards()));
+    connect(actionSendToFront, SIGNAL(triggered()),
+            currentDoc, SLOT(sendSelectedToFront()));
+    connect(actionSendToBack, SIGNAL(triggered()),
+            currentDoc, SLOT(sendSelectedToBack()));
   }
   actionSelect->trigger();
-
   /*
   // An attempt at making the toolbar update with the last selected tool...
   Canvas* canvas;

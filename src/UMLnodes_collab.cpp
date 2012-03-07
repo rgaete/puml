@@ -1,7 +1,7 @@
 // Copyright (C) 2011-2012 pUML Group
 #include "./UMLnodes_collab.h"
 #include <list>
-//#include "./UMLnodes_usecase.h"
+// #include "./UMLnodes_usecase.h"
 #include "./mathfunctions.h"
 /*******************************/
 /* StickPersonCollab Functions *******/
@@ -188,8 +188,6 @@ void BoxCollabObject::draw(QPainter &painter) {  // NOLINT
   painter.drawText(QRect(tempx - length / 2, tempy + height / 2, length, 50),
                    Qt::AlignCenter | Qt::AlignTop | Qt::TextDontClip,
                    this->name);
-
-
 }
 
 BoxCollabObjectDialog::BoxCollabObjectDialog(QWidget *parent)
@@ -256,8 +254,6 @@ void ArrowCollabObject::draw(QPainter &painter) {  // NOLINT
   painter.drawText(QRect(tempx - length / 2, tempy + height / 2, length, 50),
                    Qt::AlignCenter | Qt::AlignTop | Qt::TextDontClip,
                    this->name);
-
-
 }
 
 ArrowCollabObjectDialog::ArrowCollabObjectDialog(QWidget *parent)

@@ -78,7 +78,7 @@ void Canvas::setMode(DrawingMode mode) {
   draws the background grid and then calls drawList.
   @todo Update the grid settings using some sort of user preference
 */
-void Canvas::paintEvent(QPaintEvent *event) {
+void Canvas::paintEvent(QPaintEvent */*event*/) {
   QPainter painter(this);
 
   /* Draw a grid. Shamelessly stolen from a previous
@@ -174,8 +174,12 @@ void Canvas::mouseMoveEvent(QMouseEvent *event) {
     case Connection:
       // update the second line hint point
       lineHint2 = this->mapFromGlobal(event->globalPos());
-      emit changeSecondConnectionPointHint(this->mapFromGlobal(event->globalPos()));
+      emit changeSecondConnectionPointHint(
+            this->mapFromGlobal(event->globalPos()));
       update();
+      break;
+    case Object:
+      // no defined behavior
       break;
     }
   }
