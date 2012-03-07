@@ -39,18 +39,18 @@ void Document::setSelectedObject(const QPoint &point) {
   // start at the end of the vector and find the
   // first object with a positive hittest.
   indexOfSelectedObject = getIndexAt(point);
-  if (indexOfSelectedObject != -1) {
-    nodes.at(indexOfSelectedObject)->setSelected(true);
-  }
 
-  // Save the difference between where the mouse click was (point) and
-  // where the actual middle of the object is. This will be used to
-  // acurately move and drag the object.
   if (indexOfSelectedObject != -1) {
+    // set the selection of on the object
+    nodes.at(indexOfSelectedObject)->setSelected(true);
+
+    // Save the difference between where the mouse click was (point) and
+    // where the actual middle of the object is. This will be used to
+    // acurately move and drag the object.
     positionDelta = nodes.at(indexOfSelectedObject)->getPosition() - point;
   }
 
-  // at this point a redraw is needed to show the new
+  // at this point a redraw is needed to outputshow the new
   // highlighted object.
   emit modelChanged();
 }
@@ -65,9 +65,9 @@ void Document::setNewObjectID(int prototypeID) {
 
 int Document::getIndexAt(const QPoint &point) {
   int index = -1;
-  for (int i = nodes.size() - 1; i >= 0; i--) {
-    if (nodes.at(i)->hitTest(point) == true) {
-      index = i;
+  for (int i = ordering.size()-1; i >= 0; i--) {
+    if (nodes.at(ordering.at(i))->hitTest(point) == true) {
+      index = ordering.at(i);
       break;
     }
   }
@@ -103,7 +103,10 @@ void Document::createObject(const QPoint &position) {
   newNode->setPosition(position);
 
   // add newnode to a vector of nodes.
-  addNode(newNode);
+  addNodeToList(newNode);
+
+  // add the node to the ordering
+  ordering.append(nodes.size()-1);
 
   // reset the selected property of previously selected node
   if (indexOfSelectedObject != -1) {
@@ -129,6 +132,12 @@ void Document::createConnectionPoint1(const QPoint &point) {
       (nodes.at(firstConnectionIndex)->isConnector() == true)) {
     firstConnectionIndex = -1;
   }
+  // set the connection point selection property, so a visual
+  // aid will be drawn for the object that is selected for the
+  // connection
+  if (firstConnectionIndex != -1) {
+    nodes.at(firstConnectionIndex)->setSelectedForConnectionPoint(true);
+  }
 }
 
 /*! Slot. Sets the second point in a new connection node.
@@ -137,8 +146,9 @@ void Document::createConnectionPoint1(const QPoint &point) {
 */
 void Document::createConnectionPoint2(const QPoint &point) {
   // Create the object only if a valid first object was found
+  int index;
   if (firstConnectionIndex != -1) {
-    int index = getIndexAt(point);
+    index = getIndexAt(point);
     // And the second index was found
     if (((index != -1) &&
          (nodes.at(index)->isConnector() == false)) &&
@@ -154,9 +164,20 @@ void Document::createConnectionPoint2(const QPoint &point) {
       nodes.at(firstConnectionIndex)->addConnectedNode(newNode);
       nodes.at(index)->addConnectedNode(newNode);
 
-      addNode(newNode);
+      addNodeToList(newNode);
+      ordering.append(nodes.size()-1);
+
       emit modelChanged();
+    } else {
+      QMessageBox::information(0, "pUML", "No second object selected");
     }
+  }
+
+  if (firstConnectionIndex != -1) {
+    nodes.at(firstConnectionIndex)->setSelectedForConnectionPoint(false);
+  }
+  if (index != -1) {
+    nodes.at(index)->setSelectedForConnectionPoint(false);
   }
 }
 
@@ -183,11 +204,17 @@ void Document::showPropertiesDialog() {
   that painter is a valid painter, and uses BaseNode.draw().
 */
 void Document::drawList(QPainter &painter) {  // NOLINT
-  for (int i = 0; i < static_cast<int>(nodes.size()); i++) {
-    nodes[i]->draw(painter);
+  for (int i = 0; i < ordering.size(); i++) {
+    nodes.at(ordering.at(i))->draw(painter);
   }
 }
 
+/*! Slot. Removes the currently selected node. If the node is
+    an object, it for (int i=0; i<nodes.size(); i++) {
+
+  }also removes all connections connected to that
+    node.
+*/
 void Document::removeObject() {
   assert(indexOfSelectedObject >= -1);
   assert(indexOfSelectedObject < static_cast<int>(nodes.size()));
@@ -217,11 +244,13 @@ void Document::removeObject() {
         for (int i = 0; i < static_cast<int>(nodes.size()); i++) {
           if (nodes.at(i) == (*it)) {
             nodes.erase(nodes.begin()+i);
+            ordering.removeAll(i);
           }
         }
       }
       // now actually erase the object
       nodes.erase(nodes.begin()+indexOfSelectedObject);
+      ordering.removeAll(indexOfSelectedObject);
     } else {
       // get the list of connected objects (should only be two objects)
       std::list<BaseNode*> secondaryObjects;
@@ -234,13 +263,87 @@ void Document::removeObject() {
         (*it)->removeConnectedNode(obj);
       }
 
-      // now delete the actual node
+      // now delete the actual nodecount
       nodes.erase(nodes.begin()+indexOfSelectedObject);
+      ordering.removeAll(indexOfSelectedObject);
     }
   }
 
   indexOfSelectedObject = -1;
   emit modelChanged();
+}
+
+/*! If an object is selected, this slot will move that object's
+    ordering to the front of everything. Nothing will happen if
+    it's at the front of everything.
+*/
+void Document::sendSelectedToFront()
+{
+  if (indexOfSelectedObject > -1 && indexOfSelectedObject < nodes.size()) {
+    ordering.removeAll(indexOfSelectedObject);
+    ordering.append(indexOfSelectedObject);
+  }
+  emit modelChanged();
+}
+
+/*! If an object is selected, this slot will move that object's
+    ordering up on position. Nothing will happen if that object is
+    already at the top of the ordering.
+*/
+void Document::sendSelectedForward()
+{
+  if (indexOfSelectedObject > -1 && indexOfSelectedObject < nodes.size()) {
+    int orderingindex = ordering.indexOf(indexOfSelectedObject);
+    if (orderingindex < ordering.size()-1) {
+      ordering.move(orderingindex, orderingindex+1);
+    }
+  }
+  emit modelChanged();
+}
+
+/*! If an object is selected, this slot will move that object's
+    ordering to the back of everything. Nothing will happen if it's already
+    at the back.
+*/
+void Document::sendSelectedToBack()
+{
+  if (indexOfSelectedObject > -1 && indexOfSelectedObject < nodes.size()) {
+    ordering.removeAll(indexOfSelectedObject);
+    ordering.prepend(indexOfSelectedObject);
+  }
+  emit modelChanged();
+}
+
+/*! If an object is selected, this slot will move that object's
+    ordering back one spot. Nothing will happen if it's already at the back.
+*/
+void Document::sendSelectedBackwards()
+{
+  if (indexOfSelectedObject > -1 && indexOfSelectedObject < nodes.size()) {
+    int orderingindex = ordering.indexOf(indexOfSelectedObject);
+    if (orderingindex > 0) {
+      ordering.move(orderingindex, orderingindex-1);
+    }
+  }
+  emit modelChanged();
+}
+
+void Document::changeSecondConnectionPointHint(const QPoint &point)
+{
+  // reset the cpSelection for the previous selected node
+  if (secondConnectionIndex > -1 && secondConnectionIndex < nodes.size()) {
+    if (secondConnectionIndex != firstConnectionIndex) {
+      nodes.at(secondConnectionIndex)->setSelectedForConnectionPoint(false);
+    }
+  }
+
+  if (firstConnectionIndex != -1) {
+    //find the new node, if any
+    secondConnectionIndex = getIndexAt(point);
+    if (secondConnectionIndex != -1) {
+      nodes.at(secondConnectionIndex)->setSelectedForConnectionPoint(true);
+    }
+  }
 }
 
 void Document::saveDocument() {

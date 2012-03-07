@@ -66,6 +66,7 @@ class Canvas : public QWidget {
     void redraw(QPainter &painter);  // NOLINT
     void showPropertiesDialog();
     void removeObject();
+    void changeSecondConnectionPointHint(const QPoint &point);
 
   public slots:
     void on_actionDelete_triggered();

@@ -116,7 +116,7 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex) {
   assert(documents.at(documentIndex)->getCanvasIndex() >= 0);
   assert(documents.at(documentIndex)->getCanvasIndex() < static_cast<int>(canvases.size()));  // NOLINT
 
-  // get the canvas and document to connect
+  // save some convenience variables
   Canvas* canvas = canvases.at(canvasIndex);
   Document* document = documents.at(documentIndex);
 
@@ -147,6 +147,9 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex) {
           document, SLOT(createConnectionPoint1(const QPoint &)));
   connect(canvas, SIGNAL(createConnectionPoint2(const QPoint &)),
           document, SLOT(createConnectionPoint2(const QPoint &)));
+  connect(canvas, SIGNAL(changeSecondConnectionPointHint(const QPoint &)),
+          document, SLOT(changeSecondConnectionPointHint(const QPoint &)));
+
 
   // Go into selection mode
   actionSelect->trigger();
@@ -204,6 +207,14 @@ void MainWindow::createActions() {
   actionDocument->setText(tr("Help Document"));
   actionAbout = new QAction(this);
   actionAbout->setText(tr("About"));
+  actionSendForwards = new QAction(this);
+  actionSendForwards->setText("Send Forwards");
+  actionSendBackwards = new QAction(this);
+  actionSendBackwards->setText("Send Backwards");
+  actionSendToBack = new QAction(this);
+  actionSendToBack->setText("Send To Back");
+  actionSendToFront = new QAction(this);
+  actionSendToFront->setText("Send To Front");
 
   toolsActionGroup = new QActionGroup(this);
   toolsActionGroup->setExclusive(true);
@@ -251,6 +262,11 @@ void MainWindow::createMenus() {
   menuEdit->addAction(actionCopy);
   menuEdit->addAction(actionCut);
   menuEdit->addAction(actionPaste);
+  menuEdit->addSeparator();
+  menuEdit->addAction(actionSendForwards);
+  menuEdit->addAction(actionSendBackwards);
+  menuEdit->addAction(actionSendToBack);
+  menuEdit->addAction(actionSendToFront);
   menuEdit->addSeparator();
   menuEdit->addAction(actionSelect_All);
   menuEdit->addAction(actionInverse_Select);
@@ -349,7 +365,7 @@ void MainWindow::connectSignalsSlots() {
   */
 }
 
-void MainWindow::setDiagramType(BaseNode::DiagramType type) {
+void MainWindow::updateDiagramType(BaseNode::DiagramType type) {
   for (int i = 0; i < static_cast<int>(actions.size()); ++i) {
     if (actions.at(i)->getDiagramType() == type) {
       actions.at(i)->setVisible(true);
@@ -369,19 +385,23 @@ void MainWindow::on_NodeAction_triggered(Canvas::DrawingMode drawingMode,
   // QMessageBox::information(this, "setPrototypeID: prototypeID",
   //                          QString::number(prototypeID), QMessageBox::Ok);
 
-  Canvas* currentCanvas;
-  int canvasIndex;
+  if (tabWidget->currentIndex() >= 0 && tabWidget->currentIndex() < tabToCanvasMappings.size()) {
+    Canvas* currentCanvas;
+    int canvasIndex;
 
-  // Find the current canvas with the map
-  canvasIndex = tabToCanvasMappings[tabWidget->currentIndex()];
-  currentCanvas = canvases.at(canvasIndex);
+    // Find the current canvas with the map
+    canvasIndex = tabToCanvasMappings[tabWidget->currentIndex()];
+    currentCanvas = canvases.at(canvasIndex);
 
-  // notify the canvas that it should be in object mode
-  currentCanvas->setMode(drawingMode);
+    // notify the canvas that it should be in object mode
+    currentCanvas->setMode(drawingMode);
 
-  // we need to set the prototype id in currently
-  // active document, so it knows what to create.
-  documents.at(currentCanvas->getDocumentIndex())->setNewObjectID(prototypeID);
+    // we need to set the prototype id in currently
+    // active document, so it knows what to create.
+    documents.at(currentCanvas->getDocumentIndex())->setNewObjectID(prototypeID);
+  } else {
+    qDebug("Node action when there are no canvases created!");
+  }
 }
 
 /*! This slot updates the currently active canvas's mode to Nothing. It
@@ -409,46 +429,81 @@ void MainWindow::on_actionSelect_triggered() {
  *  @todo This should also add the diagram to the current project.
  */
 void MainWindow::on_actionNew_triggered() {
-  // dialog of UML types
-  // dialogNew = new DialogNew;
-  // dialogNew->show();
-  // QMessageBox::information(this, "pUML", "Creating a new generic diagram",
-  //                          QMessageBox::Ok);
+  // create the new document, it will be deleted if the user cancels.
+  Document* newdoc = new Document;
 
-  // this  is the new dialogue, hopefully
+  // create the dialog and connect the result signal to the
+  // mainwindow and the new document
   ConfigDialog *dialog = new ConfigDialog();
   connect(dialog, SIGNAL(newDiagramType(BaseNode::DiagramType)),
-          this, SLOT(setDiagramType(BaseNode::DiagramType)));
-  dialog->exec();
+          this, SLOT(updateDiagramType(BaseNode::DiagramType)));
+  connect(dialog, SIGNAL(newDiagramType(BaseNode::DiagramType)),
+          newdoc, SLOT(setDiagramType(BaseNode::DiagramType)));
 
-  // Create the new document and canvas
-  Document* newdoc = new Document;
-  documents.push_back(newdoc);
-  Canvas* newcanvas = new Canvas;
-  canvases.push_back(newcanvas);
+  if (dialog->exec() == QDialog::Rejected) {
+    // don't create anything new.
+    delete dialog;
+    delete newdoc;
+  } else {
+    delete dialog;
+    // Create the new document and canvas
+    documents.push_back(newdoc);
+    Canvas* newcanvas = new Canvas;
+    canvases.push_back(newcanvas);
+    // set the parent to this so that they get automically deleted
+    // when the program shuts down
+    //newdoc->setParent(this);
+    //newcanvas->setParent(this);
 
-  // These member variables aren't used in any other function
-  // they should either be removed or the map should be removed
-  // and something like this should take it's place.
-  newdoc->setCanvasIndex(canvases.size()-1);
-  newcanvas->setDocumentIndex(documents.size()-1);
+    // Update the canvas and document index on the canvas and document
+    newdoc->setCanvasIndex(canvases.size()-1);
+    newcanvas->setDocumentIndex(documents.size()-1);
 
-  // add the tab and update the map.
-  int newTabIndex = tabWidget->addTab(newcanvas, "New Diagram");
-  tabToCanvasMappings.insert(
-        std::pair<int, int>(newTabIndex, canvases.size() - 1));
-  tabWidget->setCurrentIndex(newTabIndex);
+    // add the tab and update the map.
+    // Notice that the mapping is inserter before the tab is created. This
+    // is so that the mapping is already there when the on_tabWidget_currentChanged
+    // slot is called, the mapping is already there. Note that this assumes
+    // (which is a valid assumption) that newTabIndex returned by addTab is
+    // always equal to the number of tabs.
+    tabToCanvasMappings.insert(
+          std::pair<int, int>(tabWidget->count(), canvases.size() - 1));
+    int newTabIndex = tabWidget->addTab(newcanvas, "New Diagram");
+    tabWidget->setCurrentIndex(newTabIndex);
 
-  // Connect the new canvas with the new document.
-  connectCanvasWithDocument(canvases.size() - 1, documents.size() - 1);
+    // Connect the new canvas with the new document.
+    connectCanvasWithDocument(canvases.size() - 1, documents.size() - 1);
+  }
+
 }
 
 /*! This slot receives the currentChanged signal from the tabWidget.
  *  It should reupdate the toolbar with the previously selected tool
- *  and only the legal buttons for the diagram.
+ *  and only the legal buttons for the diagram. It should also connect
+ *  actions in the menu to the current document/canvas.
  */
 void MainWindow::on_tabWidget_currentChanged(int newIndex) {
+  if (newIndex > -1 && newIndex < static_cast<int>(tabToCanvasMappings.size())) {
+    // Get the current doc from the current canvas from the current tab
+    Canvas* currentCanvas = canvases.at(tabToCanvasMappings.at(newIndex));
+    Document* currentDoc = documents.at(currentCanvas->getDocumentIndex());
+    // and update the toolbar with that document's diagram type.
+    updateDiagramType(currentDoc->getDiagramType());
+
+    // disconnect signals that are going to documents
+    disconnect(actionSendForwards, SIGNAL(triggered()), 0, 0);
+    disconnect(actionSendBackwards, SIGNAL(triggered()), 0, 0);
+    disconnect(actionSendToFront, SIGNAL(triggered()), 0, 0);
+    disconnect(actionSendToBack, SIGNAL(triggered()), 0, 0);
+
+    // connect thos signals to the current document
+    connect(actionSendForwards, SIGNAL(triggered()), currentDoc, SLOT(sendSelectedForward()));
+    connect(actionSendBackwards, SIGNAL(triggered()), currentDoc, SLOT(sendSelectedBackwards()));
+    connect(actionSendToFront, SIGNAL(triggered()), currentDoc, SLOT(sendSelectedToFront()));
+    connect(actionSendToBack, SIGNAL(triggered()), currentDoc, SLOT(sendSelectedToBack()));
+
+  }
   actionSelect->trigger();
+
   /*
   // An attempt at making the toolbar update with the last selected tool...
   Canvas* canvas;

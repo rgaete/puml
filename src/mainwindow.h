@@ -68,7 +68,7 @@ class MainWindow : public QMainWindow {
     void on_tabWidget_currentChanged(int newIndex);
     void on_NodeAction_triggered(Canvas::DrawingMode drawingMode,
                                  int prototypeID);
-    void setDiagramType(BaseNode::DiagramType type);
+    void updateDiagramType(BaseNode::DiagramType type);
 
   private:
     void createActions();
@@ -92,7 +92,7 @@ class MainWindow : public QMainWindow {
     int currentDocument;
     // The status bar
     QStatusBar *statusBar;
-    // A 1-to-1 mapping from the tabs to the canvases.
+    // A 1-to-1 mapping from the tab indexes to the canvas indexes.
     // There might be a better way to store this data directly in the tabs.
     std::map<int, int> tabToCanvasMappings;
 
@@ -115,8 +115,10 @@ class MainWindow : public QMainWindow {
     QAction *actionInverse_Select;
     QAction *actionDocument;
     QAction *actionAbout;
-    QAction *actionDelete;
-    QAction *actionEdit;
+    QAction *actionSendForwards;
+    QAction *actionSendBackwards;
+    QAction *actionSendToBack;
+    QAction *actionSendToFront;
 
     QAction *actionSelect;
     QPushButton *buttonSelect;

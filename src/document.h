@@ -23,11 +23,12 @@ class Document : public QWidget {
   public:
     Document();
     ~Document();
-    void addNode(BaseNode *newNode) { nodes.push_back(newNode); }
+    void addNodeToList(BaseNode *newNode) { nodes.push_back(newNode); }
     void setNewObjectID(int prototypeID);
     int getNewObjectID() { return newObjectID; }
-    int getCanvasIndex() { return canvasIndex; }
     void setCanvasIndex(int index) { canvasIndex = index; }
+    int getCanvasIndex() { return canvasIndex; }
+    BaseNode::DiagramType getDiagramType() { return diagramType; }
     void saveDocument();
     void saveAsDocument();
 
@@ -48,7 +49,15 @@ class Document : public QWidget {
     int canvasIndex;
     // This is the first object when creating a connection node
     int firstConnectionIndex;
+    // The index of the second connection point hint, i.e., objects
+    // that the mouse moves over when drawing a connection
+    int secondConnectionIndex;
+    // the list of indexes to objects to draw.
+    QList<int> ordering;
+    //
     std::string filename;
+    // the type of diagram that this canvas has
+    BaseNode::DiagramType diagramType;
 
   signals:
     void modelChanged();
@@ -62,6 +71,12 @@ class Document : public QWidget {
     void createConnectionPoint2(const QPoint &point);
     void showPropertiesDialog();
     void removeObject();
+    void sendSelectedToFront();
+    void sendSelectedForward();
+    void sendSelectedToBack();
+    void sendSelectedBackwards();
+    void setDiagramType(BaseNode::DiagramType type) { diagramType = type; }
+    void changeSecondConnectionPointHint(const QPoint &point);
 };
 
 #endif  // SRC_DOCUMENT_H_
