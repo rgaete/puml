@@ -15,6 +15,7 @@ class NodeFactory {
     static int registerPrototype(BaseNode* newPrototype);
     static BaseNode* produce(int prototype_id);
     static NodeFactory* getInstance();
+    static void setParent(QObject *parent);
 
   private:
     // Constructor is private so the class cannot be instantiated.
@@ -30,6 +31,8 @@ class NodeFactory {
     // The single instance of the class. Static so the lifetime is
     // the entire lifetime of the program.
     static NodeFactory* instance;
+    // The parent of all the clonable objects
+    static QObject *m_parent;
 };
 
 #endif  // SRC_NODEFACTORY_H_

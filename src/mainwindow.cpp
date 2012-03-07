@@ -22,6 +22,8 @@ MainWindow::MainWindow(QWidget *parent)
   // signalMapper = new QSignalMapper(this);
   currentDocument = -1;
 
+  NodeFactory::getInstance()->setParent(this);
+
   // register the objects
   registerObject(new OvalObject);
   registerObject(new StickPersonObject);
@@ -158,12 +160,7 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex) {
   hold objects which don't have parents (basically any non-Qt objects)
 */
 MainWindow::~MainWindow() {
-  // Since we have a vector of pointers, we need to make sure
-  // to free all of them manually.
-  for (int i = 0; i < static_cast<int>(documents.size()); i++) {
-    assert(actions.at(i) != 0);
-    delete documents.at(i);
-  }
+
 }
 
 /*! Helps the constructor create the menu actions.
@@ -423,8 +420,10 @@ void MainWindow::on_actionNew_triggered() {
 
   // Create the new document and canvas
   Document* newdoc = new Document;
+  newdoc->setParent(this);
   documents.push_back(newdoc);
   Canvas* newcanvas = new Canvas;
+  newcanvas->setParent(this);
   canvases.push_back(newcanvas);
 
   // These member variables aren't used in any other function
@@ -529,6 +528,8 @@ void MainWindow::on_actionPrint_triggered() {
     //  print ...
   }
   delete printer;
+
+  this->dumpObjectTree();
 }
 
 void MainWindow::on_actionImport_Export_triggered() {

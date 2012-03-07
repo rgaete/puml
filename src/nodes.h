@@ -36,7 +36,7 @@ class BaseNode : public QObject {
     };
 
     BaseNode();
-    // ~BaseNode() {}
+    ~BaseNode() { qDebug("BaseNode Destructor"); }
 
     void setSelected(bool newState) { selected = newState; }
     void setPosition(const QPoint &pos) {
