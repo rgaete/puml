@@ -8,15 +8,34 @@
 #define SRC_UMLNODES_CLASS_H_
 
 #include <QInputDialog>
+#include <QPushButton>
+#include <qlayout.h>
 #include "./nodes.h"
+#include "ui_ClassBoxdialog.h"
 
 /*! @brief This defines a custom dialog for a ClassBoxObject
 */
-class ClassBoxObjectDialog : public QInputDialog {
-  Q_OBJECT
-
-  public:
+class ClassBoxObjectDialog : public QDialog {
+Q_OBJECT
+public:
     explicit ClassBoxObjectDialog(QWidget *parent = 0);
+    void setClassName(QString newClassName);
+    void setAttributes(QString newAttributes);
+    void setMethods(QString newMethods);
+private slots:
+    void okButtonClicked();
+signals:
+    void classNameSet(QString newClassName);
+    void attributesSet(QString newAttributes);
+    void methodsSet(QString newMethods);
+private:
+    QLabel *ClassNameLabel;
+    QLabel *AttributesLabel;
+    QLabel *MethodsLabel;
+    QTextEdit *ClassNameLineEdit;
+    QTextEdit *AttributesLineEdit;
+    QTextEdit *MethodsLineEdit;
+    QPushButton *okButton;
 };
 
 /*!
@@ -33,16 +52,17 @@ class ClassBoxObject: public ObjectNode {
     QString getIconPath() { return QString(":/Images/rectangle.png"); }
     QString getText() { return "ClassBox"; }
     DiagramType getDiagramType() { return Class; }
-
     void draw(QPainter &painter);  // NOLINT
 
-
-  public slots:
-    void setName(QString newName) { this->name = newName; }
-
-  private:
+public slots:
+    void setClassName(QString newClassName) { this->className = newClassName; }
+    void setAttributes(QString newAttributes) { this->attributes = newAttributes; }
+    void setMethods(QString newMethods) { this->methods = newMethods; }
+private:
     int radius;
-    QString name;
+    QString className;
+    QString attributes;
+    QString methods;
 };
 
 /*! @brief The properties dialog for class connections
