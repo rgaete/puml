@@ -175,6 +175,8 @@ void ConfigDialog::browseForFile() {
 void ConfigDialog::accept() {
   QListWidgetItem *operation = contentsWidget->currentItem();
 
+  // Maybe change this to a switch statement?
+
   if (operation->text() == "New") {
     QListWidgetItem *selected = doctypeList->selectedItems().at(0);
     if (selected->text() == "State Chart") {

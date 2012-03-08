@@ -39,6 +39,11 @@ MainWindow::MainWindow(QWidget *parent)
   // register classbox
   registerObject(new ClassBoxObject);
 
+  // register collab objects
+  registerObject(new StickPersonCollabObject);
+//  registerObject(new BoxCollabObject);
+//  registerObject(new ArrowCollabObject);
+
   this->resize(700, 500);
   this->setWindowTitle(tr("Phunctional UML Editor"));
 

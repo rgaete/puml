@@ -1,7 +1,7 @@
 // Copyright (C) 2011-2012 pUML Group
 #include "./UMLnodes_collab.h"
 #include <list>
-// #include "./UMLnodes_usecase.h"
+
 #include "./mathfunctions.h"
 /*******************************/
 /* StickPersonCollab Functions *******/

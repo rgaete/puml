@@ -38,6 +38,8 @@
 #include "./assert.h"
 #include "./nodeaction.h"
 #include "./dialog.h"
+#include "UMLnodes_collab.h"
+
 
 class MainWindow : public QMainWindow {
   Q_OBJECT

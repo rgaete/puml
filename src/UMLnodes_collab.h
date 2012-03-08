@@ -9,7 +9,7 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-#include <time.h>
+//#include <time.h>
 #include "./nodes.h"
 
 
@@ -35,7 +35,7 @@ class StickPersonCollabObject : public ObjectNode {
     QDialog* getDialog();
     QString getIconPath() { return QString(":/Images/stickman.png"); }
     QString getText() { return "Stick Person"; }
-    DiagramType getDiagramType() { return UseCase; }
+    DiagramType getDiagramType() { return Collaboration; }
 
     void draw(QPainter &painter);  // NOLINT
   public slots:
@@ -68,7 +68,7 @@ class BoxCollabObject : public ObjectNode {
     QDialog* getDialog();
     QString getIconPath() { return QString(":/Images/square.png"); }
     QString getText() { return "Stick Person"; }
-    DiagramType getDiagramType() { return UseCase; }
+    DiagramType getDiagramType() { return Collaboration; }
 //change above line!!!!!!!!!
     void draw(QPainter &painter);  // NOLINT
   public slots:
@@ -93,7 +93,7 @@ class ArrowCollabObject : public ObjectNode {
     QDialog* getDialog();
     QString getIconPath() { return QString(":/Images/new.png"); }
     QString getText() { return "Arrow"; }
-    DiagramType getDiagramType() { return UseCase; }
+    DiagramType getDiagramType() { return Collaboration; }
 //change above line!!!!!!!!!
     void draw(QPainter &painter);  // NOLINT
   public slots:
