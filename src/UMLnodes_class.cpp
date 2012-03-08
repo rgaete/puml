@@ -2,6 +2,7 @@
 
 #include <list>
 
+#include "UMLnodes_class.h"
 #include "./UMLnodes_class.h"
 
 

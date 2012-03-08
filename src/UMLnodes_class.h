@@ -9,9 +9,10 @@
 
 #include <QInputDialog>
 #include <QPushButton>
-#include <qlayout.h>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QTextEdit>
 #include "./nodes.h"
-#include "ui_ClassBoxdialog.h"
 
 /*! @brief This defines a custom dialog for a ClassBoxObject
 */
