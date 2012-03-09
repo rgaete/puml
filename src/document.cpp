@@ -183,6 +183,8 @@ void Document::createConnectionPoint2(const QPoint &point) {
       addNodeToList(newNode);
       ordering.append(nodes.size()-1);
 
+      nodes.at(index)->setSelectedForConnectionPoint(false);
+
       emit modelChanged();
     } else {
       QMessageBox::information(0, "pUML", "No second object selected");
@@ -191,9 +193,6 @@ void Document::createConnectionPoint2(const QPoint &point) {
 
   if (firstConnectionIndex != -1) {
     nodes.at(firstConnectionIndex)->setSelectedForConnectionPoint(false);
-  }
-  if (index != -1) {
-    nodes.at(index)->setSelectedForConnectionPoint(false);
   }
 }
 
