@@ -2,7 +2,6 @@
 
 #include <list>
 
-#include "UMLnodes_class.h"
 #include "./UMLnodes_class.h"
 
 
@@ -24,40 +23,39 @@ void ClassBoxObject::draw(QPainter &painter) {  // NOLINT
   painter.setBackground(Qt::white);
   painter.drawRect(frame);
 
-  //Class section
+  // Class section
   int nameLength = className.size();
-  QRect classSection(position.x() - nameLength*5,   //center ClassName text
+  QRect classSection(position.x() - nameLength*5,   // center ClassName text
                      position.y() - height / 2,
                      length, height);
 
-  const QFont boldFont("Arial",10, QFont::Bold);
-  painter.setFont(boldFont);                        //className set to Bold
+  const QFont boldFont("Arial", 10, QFont::Bold);
+  painter.setFont(boldFont);                        // className set to Bold
   painter.drawText(classSection, className);
 
-  //Attributes section
-  const QFont normalFont("Arial",10,QFont::Normal);
+  // Attributes section
+  const QFont normalFont("Arial", 10, QFont::Normal);
   painter.setFont(normalFont);
 
   QRect attributesSection(position.x() - length / 2,
                           position.y() - height / 5,
                           length, height);
-  painter.drawLine(position.x()-length / 2,position.y() - height / 5,
-                   position.x()+length / 2, position.y() - height / 5);
+  painter.drawLine(position.x() - length / 2, position.y() - height / 5,
+                   position.x() + length / 2, position.y() - height / 5);
   painter.drawText(attributesSection, attributes);
 
-  //Methods section
+  // Methods section
   QRect methodsSection(position.x() - length / 2,
                        position.y() + height / 5,
                        length, height);
-  painter.drawLine(position.x()-length / 2,position.y() + height / 5,
-                   position.x()+length / 2, position.y() + height / 5);
+  painter.drawLine(position.x() - length / 2, position.y() + height / 5,
+                   position.x() + length / 2, position.y() + height / 5);
   painter.drawText(methodsSection, methods);
 }
 
 ClassBoxObjectDialog::ClassBoxObjectDialog(QWidget *parent)
                      :QDialog(parent) {
-
-    okButton = new QPushButton(tr("Ok"),this);
+    okButton = new QPushButton(tr("Ok"), this);
 
     ClassNameLabel = new QLabel(tr("Class Name:"), this);
     AttributesLabel = new QLabel(tr("Attributes:"), this);
@@ -74,43 +72,42 @@ ClassBoxObjectDialog::ClassBoxObjectDialog(QWidget *parent)
     QVBoxLayout *ClassName = new QVBoxLayout;
     ClassName->addWidget(ClassNameLabel);
     ClassName->addWidget(ClassNameLineEdit);
-    ClassName->setAlignment(ClassName,Qt::AlignTop);
+    ClassName->setAlignment(ClassName, Qt::AlignTop);
 
     QVBoxLayout *Attributes = new QVBoxLayout;
     Attributes->addWidget(AttributesLabel);
     Attributes->addWidget(AttributesLineEdit);
-    Attributes->setAlignment(Attributes,Qt::AlignCenter);
+    Attributes->setAlignment(Attributes, Qt::AlignCenter);
 
     QVBoxLayout *Methods = new QVBoxLayout;
     Methods->addWidget(MethodsLabel);
     Methods->addWidget(MethodsLineEdit);
-    Methods->setAlignment(Methods,Qt::AlignBottom);
+    Methods->setAlignment(Methods, Qt::AlignBottom);
 
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
     mainLayout->addLayout(ClassName);
     mainLayout->addLayout(Attributes);
     mainLayout->addLayout(Methods);
     mainLayout->addWidget(okButton, 0, Qt::AlignBottom);
-    connect(okButton, SIGNAL(clicked()),this, SLOT(okButtonClicked()));
+    connect(okButton, SIGNAL(clicked()), this, SLOT(okButtonClicked()));
 }
 
-void ClassBoxObjectDialog::okButtonClicked()
-{
+void ClassBoxObjectDialog::okButtonClicked() {
     emit classNameSet(ClassNameLineEdit->toPlainText());
     emit attributesSet(AttributesLineEdit->toPlainText());
     emit methodsSet(MethodsLineEdit->toPlainText());
     this->close();
 }
-void ClassBoxObjectDialog::setClassName(QString newClassName)
-{
+
+void ClassBoxObjectDialog::setClassName(QString newClassName) {
     ClassNameLineEdit->setText(newClassName);
 }
-void ClassBoxObjectDialog::setAttributes(QString newAttributes)
-{
+
+void ClassBoxObjectDialog::setAttributes(QString newAttributes) {
     AttributesLineEdit->setText(newAttributes);
 }
-void ClassBoxObjectDialog::setMethods(QString newMethods)
-{
+
+void ClassBoxObjectDialog::setMethods(QString newMethods) {
     MethodsLineEdit->setText(newMethods);
 }
 

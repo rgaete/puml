@@ -283,7 +283,6 @@ void Document::removeObject() {
       // now delete the actual nodecount
       removeFromOrdering(indexOfSelectedObject);
       nodes.erase(nodes.begin()+indexOfSelectedObject);
-
     }
   }
   indexOfSelectedObject = -1;
