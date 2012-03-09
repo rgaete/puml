@@ -13,6 +13,8 @@
 #include <QLabel>
 #include <QTextEdit>
 #include "./nodes.h"
+//#include "ui_ClassBoxdialog.h"
+
 
 /*! @brief This defines a custom dialog for a ClassBoxObject
 */
