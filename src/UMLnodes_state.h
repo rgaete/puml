@@ -68,4 +68,29 @@ class FinalStateObject: public ObjectNode {
     void draw(QPainter &painter);  // NOLINT
 };
 
+/*! @brief This class provides a custom dialog for an InteractionLineNode.
+*/
+class TransitionConnectionDialog : public QDialog {
+
+};
+
+/*! @brief This concrete class defines an Interaction line in a Use
+  Case diagram (line from the actor to the use case)
+*/
+class TransitionConnection : public ConnectionNode {
+  public:
+    TransitionConnection();
+    BaseNode* clone() { return new TransitionConnection; }
+    QDialog* getDialog() { return new TransitionConnectionDialog; }
+    QString getIconPath() { return QString(":/Images/interaction.png"); }
+    QString getText() { return "Transition Line"; }
+    void draw(QPainter& painter);  // NOLINT
+    DiagramType getDiagramType() { return StateChart; }
+  private:
+    int startAngle;
+    int spanAngle;
+    QPainterPath arc;
+};
+
+
 #endif  // SRC_UMLNODES_STATE_H_

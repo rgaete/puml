@@ -261,14 +261,14 @@ void Document::removeObject() {
         // delete this connection node
         for (int i = 0; i < static_cast<int>(nodes.size()); i++) {
           if (nodes.at(i) == (*it)) {
-            nodes.erase(nodes.begin()+i);
             removeFromOrdering(i);
+            nodes.erase(nodes.begin()+i);
           }
         }
       }
       // now actually erase the object
-      nodes.erase(nodes.begin()+indexOfSelectedObject);
       removeFromOrdering(indexOfSelectedObject);
+      nodes.erase(nodes.begin()+indexOfSelectedObject);
     } else {
       // get the list of connected objects (should only be two objects)
       std::list<BaseNode*> secondaryObjects;
@@ -282,8 +282,9 @@ void Document::removeObject() {
       }
 
       // now delete the actual nodecount
-      nodes.erase(nodes.begin()+indexOfSelectedObject);
       removeFromOrdering(indexOfSelectedObject);
+      nodes.erase(nodes.begin()+indexOfSelectedObject);
+
     }
   }
   indexOfSelectedObject = -1;

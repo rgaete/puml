@@ -72,3 +72,36 @@ void FinalStateObject::draw(QPainter &painter) {  // NOLINT
   painter.setBrush(Qt::black);
   painter.drawEllipse(position, (length-15) / 2, (height-15) / 2);
 }
+
+
+TransitionConnection::TransitionConnection()
+{
+  startAngle = 90 * 16;
+  spanAngle = 120 * 16;
+}
+
+void TransitionConnection::draw(QPainter &painter)
+{
+  BaseNode *obj1, *obj2;
+  std::list<BaseNode*>::iterator it = connectedObjects.begin();
+  obj1 = *(it);
+  it++;
+  obj2 = *(it);
+
+  pt1 = obj1->getClosestConnectionPoint(obj2->getPosition());
+  pt2 = obj2->getClosestConnectionPoint(obj1->getPosition());
+
+  if (selected == true) {
+    QPen selectPen;
+    selectPen.setWidth(2);
+    selectPen.setColor(Qt::blue);
+    painter.setPen(selectPen);
+  } else {
+    painter.setPen(Qt::black);
+  }
+
+  QPainterPath path;
+  path.moveTo(pt1);
+  path.quadTo(QPoint((pt1.x()-pt1.x())/2, pt1.y()-30), pt2);
+  painter.drawPath(path);
+}
