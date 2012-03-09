@@ -22,22 +22,22 @@ MainWindow::MainWindow(QWidget *parent)
   // signalMapper = new QSignalMapper(this);
   currentDocument = -1;
 
-  // register the objects
+  // Use case objects
   registerObject(new OvalObject);
   registerObject(new StickPersonObject);
-  // register connections
   registerObject(new InteractionConnection);
   registerObject(new ExtendsConnection);
   registerObject(new IncludesConnection);
-  registerObject(new ClassConnection);
 
   // statechart objects
   registerObject(new StateObject);
   registerObject(new InitialStateObject);
   registerObject(new FinalStateObject);
+  registerObject(new TransitionConnection);
 
-  // register classbox
+  // class objects
   registerObject(new ClassBoxObject);
+  registerObject(new ClassConnection);
 
   // register collab objects
   //  registerObject(new StickPersonCollabObject);
