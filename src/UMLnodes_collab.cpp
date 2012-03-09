@@ -10,7 +10,8 @@
 /*! In the StickPersonCollab constructor we set
   the initial length and height and add
   any connection points.
-*/StickPersonCollabObject::StickPersonCollabObject()
+*/
+StickPersonCollabObject::StickPersonCollabObject()
                   :ObjectNode() {
   this->length = 50;
   this->height = 70;
