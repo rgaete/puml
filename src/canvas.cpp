@@ -78,7 +78,7 @@ void Canvas::setMode(DrawingMode mode) {
   draws the background grid and then calls drawList.
   @todo Update the grid settings using some sort of user preference
 */
-void Canvas::paintEvent(QPaintEvent */*event*/) {
+void Canvas::paintEvent(QPaintEvent * /*event*/) {  // NOLINT
   QPainter painter(this);
 
   /* Draw a grid. Shamelessly stolen from a previous

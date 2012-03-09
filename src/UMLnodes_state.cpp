@@ -74,14 +74,12 @@ void FinalStateObject::draw(QPainter &painter) {  // NOLINT
 }
 
 
-TransitionConnection::TransitionConnection()
-{
+TransitionConnection::TransitionConnection() {
   startAngle = 90 * 16;
   spanAngle = 120 * 16;
 }
 
-void TransitionConnection::draw(QPainter &painter)
-{
+void TransitionConnection::draw(QPainter &painter) {
   BaseNode *obj1, *obj2;
   std::list<BaseNode*>::iterator it = connectedObjects.begin();
   obj1 = *(it);
