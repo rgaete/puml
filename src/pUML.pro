@@ -5,10 +5,10 @@
 #------------------------------------------------
 
 QT       += core gui
+QT       += xml
 
 TARGET = pUML
 TEMPLATE = app
-
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -41,15 +41,3 @@ OTHER_FILES +=
 
 RESOURCES += \
     icons.qrc
-
-
-
-
-
-
-
-
-
-
-
-

@@ -31,13 +31,15 @@ class Document : public QWidget {
     BaseNode::DiagramType getDiagramType() { return diagramType; }
     void saveDocument();
     void saveAsDocument();
+    // @TODO Once the saveAs functionality is moved into this class from
+    // mainwindow, move nodes back to private.
+    // The main vector of nodes
+    std::vector<BaseNode*> nodes;
 
   private:
     int getIndexAt(const QPoint &point);
     void removeFromOrdering(int index);
 
-    // The main vector of nodes
-    std::vector<BaseNode*> nodes;
     // The index of the selected object, -1 if nothing's selected
     int indexOfSelectedObject;
     // The prototypeID of the next object to create
