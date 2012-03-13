@@ -155,6 +155,9 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex) {
   connect(canvas, SIGNAL(changeSecondConnectionPointHint(const QPoint &)),
           document, SLOT(changeSecondConnectionPointHint(const QPoint &)));
 
+  // Set the currentDocument flag
+  currentDocument = documentIndex;
+
 
   // Go into selection mode
   actionSelect->trigger();
@@ -533,8 +536,8 @@ void MainWindow::on_actionNew_triggered() {
  *  actions in the menu to the current document/canvas.
  */
 void MainWindow::on_tabWidget_currentChanged(int newIndex) {
-  if (newIndex > -1 && newIndex
-          < static_cast<int>(tabToCanvasMappings.size())) {
+  if (newIndex > -1 &&
+      newIndex < static_cast<int>(tabToCanvasMappings.size())) {
     // Get the current doc from the current canvas from the current tab
     // Canvas* currentCanvas = canvases.at(tabToCanvasMappings[newIndex]);
     Canvas* currentCanvas = static_cast<Canvas*>(tabWidget->currentWidget());
@@ -603,30 +606,47 @@ void MainWindow::on_actionSave_triggered() {
 }
 
 void MainWindow::on_actionSave_As_triggered() {
-  documents.at(currentDocument)->saveAsDocument();
+  // FUTURE: This is currently rigged to save only the current document.
+  // It will need to iterate over all Document objects and save the nodes
+  // vector in each of them.
+
+  // Convenience variable
+  Document* doc = documents.at(currentDocument);
+  doc->saveAsDocument();
 
   // MOVE ALL OF THIS TO DOCUMENTS
   QString fileName = QFileDialog::getSaveFileName(this, tr("Save As File"),
-             tr("XML files (*.xml)"));
+                                                  tr("XML files (*.xml)"));
 
-  fprintf(stderr, "We go here\n");
-  fprintf(stderr, "We go here\n");
-  fprintf(stderr, "%s\n", fileName.toStdString().c_str());
+  QDomDocument test("nodes_vector_xml");
+  QDomElement root = test.createElement("nodes_vector_xml");
+  test.appendChild(root);
 
-//  printf("%s\n", fileName.toStdString());
+  for (std::vector<BaseNode*>::iterator it = doc->nodes.begin();
+       it != doc->nodes.end(); ++it) {
+    (*it)->to_xml(test, root);
+  }
+
+  /*
+  fprintf(stderr, "Test xml document for the node vector:\n%s\n",
+          test.toString().toStdString().c_str());
+  */
+
+  // fprintf(stderr, "%s\n", fileName.toStdString().c_str());
+
   if (fileName.isEmpty()) {
       return;
   } else {
       QFile file(fileName);
   if (!file.open(QIODevice::WriteOnly)) {
-      QMessageBox::information(this,
-                              tr("Unable to open file"), file.errorString());
+      QMessageBox::information(this, tr("Unable to open file"),
+                               file.errorString());
       return;
   }
 
   ofstream myfile;
   myfile.open(fileName.toStdString().c_str());
-  myfile << "Rawr";
+  myfile << test.toString().toStdString() << flush;
   myfile.close();
   }
 //  write the saving as file function here with the fileName
