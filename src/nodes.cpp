@@ -23,7 +23,7 @@ BaseNode::BaseNode() {
   setUpConnectionPoints();
 }
 
-void set_xml_attr(QDomDocument &doc, QDomElement &node,
+void set_xml_attr(QDomDocument &doc, QDomElement &node,  // NOLINT
                   QString label, QString val) {
   QDomElement el = doc.createElement(label);
   node.appendChild(el);
@@ -31,7 +31,8 @@ void set_xml_attr(QDomDocument &doc, QDomElement &node,
   el.appendChild(text);
 }
 
-QDomElement BaseNode::to_xml(QDomDocument &doc, QDomElement &doc_root) {
+QDomElement BaseNode::to_xml(QDomDocument &doc,  // NOLINT
+                             QDomElement &doc_root) {  // NOLINT
   QDomElement node = doc.createElement("Node");
   doc_root.appendChild(node);
 
