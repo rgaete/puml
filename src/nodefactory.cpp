@@ -21,12 +21,12 @@ NodeFactory::~NodeFactory() {
 */
 int NodeFactory::registerPrototype(BaseNode *newPrototype) {
   prototypes.push_back(newPrototype);
-  return prototypes.size()-1;
+  return prototypes.size() - 1;
 }
 
 /*! Returns a new copy of the prototype specified by prototype_id.
   Assumes that the id is valid. Functions should use the id
-  returned by registoryPrototype.
+  returned by registerPrototype.
 */
 BaseNode *NodeFactory::produce(int prototype_id) {
   assert(prototype_id >= 0);

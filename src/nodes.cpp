@@ -23,6 +23,29 @@ BaseNode::BaseNode() {
   setUpConnectionPoints();
 }
 
+void set_xml_attr(QDomDocument &doc, QDomElement &node,
+                  QString label, QString val) {
+  QDomElement el = doc.createElement(label);
+  node.appendChild(el);
+  QDomText text = doc.createTextNode(val);
+  el.appendChild(text);
+}
+
+QDomElement BaseNode::to_xml(QDomDocument &doc, QDomElement &doc_root) {
+  QDomElement node = doc.createElement("Node");
+  doc_root.appendChild(node);
+
+  set_xml_attr(doc, node, QString("selected"), QString::number(selected, 10));
+  set_xml_attr(doc, node, QString("length"), QString::number(length));
+  set_xml_attr(doc, node, QString("cpSelected"), QString::number(cpSelected));
+  set_xml_attr(doc, node, QString("pos_x"), QString::number(position.x()));
+  set_xml_attr(doc, node, QString("pos_y"), QString::number(position.y()));
+  set_xml_attr(doc, node, QString("length"), QString::number(length));
+  set_xml_attr(doc, node, QString("height"), QString::number(height));
+
+  return node;
+}
+
 void BaseNode::addConnnectionPoint(const QPoint &newpoint) {
   connectionPoints.push_back(newpoint);
 }
