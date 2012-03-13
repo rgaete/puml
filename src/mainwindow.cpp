@@ -2,10 +2,14 @@
 
 #include "./mainwindow.h"
 #include <utility>
+#include <vector>
 #include <fstream>  // NOLINT
+// I'm not sure why cpplint.py is insisting that <vector> be included
+// when it exists in mainwindow.h...
 
 // In the future, we might want to consider something other than a stream?
 using std::ofstream;  // NOLINT
+using std::vector;
 
 /*! In the MainWindow constructor, we need to create
   all the actions, menus and widgets. registerObject is
@@ -622,7 +626,7 @@ void MainWindow::on_actionSave_As_triggered() {
   QDomElement root = test.createElement("nodes_vector_xml");
   test.appendChild(root);
 
-  for (std::vector<BaseNode*>::iterator it = doc->nodes.begin();
+  for (vector<BaseNode*>::iterator it = doc->nodes.begin();
        it != doc->nodes.end(); ++it) {
     (*it)->to_xml(test, root);
   }
@@ -646,7 +650,7 @@ void MainWindow::on_actionSave_As_triggered() {
 
   ofstream myfile;
   myfile.open(fileName.toStdString().c_str());
-  myfile << test.toString().toStdString() << flush;
+  myfile << test.toString().toStdString();
   myfile.close();
   }
 //  write the saving as file function here with the fileName
