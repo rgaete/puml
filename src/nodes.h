@@ -13,9 +13,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+
 #include <QRect>
 #include <QPainter>
 #include <QAction>
+#include <QtXml>
+
 #include <list>
 #include <vector>
 
@@ -39,6 +42,7 @@ class BaseNode : public QObject {
     BaseNode();
     // ~BaseNode() {}
 
+    QDomElement to_xml(QDomDocument &doc, QDomElement &doc_root);
     void setSelected(bool newState) { selected = newState; }
     void setPosition(const QPoint &pos) {
       position = pos;
