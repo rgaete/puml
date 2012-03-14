@@ -83,52 +83,36 @@ class BoxCollabObject : public ObjectNode {
     // void setName(QString newName) { name = newName; }
 };
 
-class ArrowCollabObjectDialog : public QInputDialog {
-  Q_OBJECT
-  public:
-    explicit ArrowCollabObjectDialog(QWidget *parent = 0);
-};
-class ArrowCollabObject : public ObjectNode {
-  Q_OBJECT
-  public:
-    ArrowCollabObject();
-    BaseNode* clone() { return new ArrowCollabObject; }
-    QDialog* getDialog();
-    QString getIconPath() { return QString(":/Images/new.png"); }
-    QString getText() { return "Arrow"; }
-    DiagramType getDiagramType() { return Collaboration; }
-//change above line!!!!!!!!!
-    void draw(QPainter &painter);  // NOLINT
-    void DrawArrow(QPainter &painter);
-  public slots:
-    void setName(QString newName) { this->name = newName; }
-  private:
-    QString name;
-    // animation vars
-  private slots:
-    // void setName(QString newName) { name = newName; }
-};
-
-
 
 /*! @brief The properties dialog for square connections
  */
 class CollabConnectionDialog : public QInputDialog {
+    Q_OBJECT
+public:
+    explicit CollabConnectionDialog(QWidget *parent = 0);
 };
 
 /*! @brief This concrete class defines ...
  */
 class CollabConnection : public SquareConnectionNode {
+    Q_OBJECT
   public:
     BaseNode* clone() { return new CollabConnection; }
-    QDialog* getDialog() { return new CollabConnectionDialog; }
+    QDialog* getDialog();// { return new CollabConnectionDialog; }
     QString getIconPath() { return QString(":/Images/interaction.png"); }
-    QString getText() { return "Class Line"; }
+    QString getText() { return "Collaboration Line"; }
     void draw(QPainter& painter);  // NOLINT
     DiagramType getDiagramType() { return Collaboration; }
     QPoint FindMidPoint(QPoint point1, QPoint point2);
     int FindDirection(QPoint point1, QPoint point2, QPoint temppoint1, QPoint temppoint2);
     void DrawArrow(QPainter &painter, QPoint point, QPoint point2, QPoint temppoint1, QPoint temppoint2);
+
+   private:
+    QString text;
+    QPoint textpos;
+public slots:
+    void setName(QString newName) { this->text = newName; }
+
 };
 
 #endif // UMLNODES_COLLAB_H
