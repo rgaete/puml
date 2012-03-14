@@ -209,85 +209,7 @@ QDialog *BoxCollabObject::getDialog() {
 }
 
 
-/*******************************/
-/* ArrowCollab Functions *******/
-/*******************************/
-ArrowCollabObject::ArrowCollabObject()
-                  :ObjectNode() {
-    this->length = 70;
-    this->height = 50;
-    QPoint pos;
-    pos.setX(position.x() + length / 2);
-    pos.setY(position.y() + height);
-}
-
-void ArrowCollabObject::draw(QPainter &painter) {  // NOLINT
-  // Always call this ObjectNode's draw function because it
-  // draws the selection boxes as needed.
-  ObjectNode::draw(painter);
-
-  QPen pen;
-  pen.setWidth(2);
-
-  // drawing a StickPersonCollab
-  //int tempx = position.x();
-  //int tempy = position.y();
-
-
- // edge
-  painter.setPen(pen);
-  painter.setBrush(Qt::NoBrush);
-  // head
-  DrawArrow(painter);
-  // painter.drawText(tempx-10,tempy+50,this->name);
-  /*painter.drawText(QRect(tempx - length / 2, tempy + height / 2, length, 50),
-                   Qt::AlignCenter | Qt::AlignTop | Qt::TextDontClip,
-                   this->name);
-*/
-}
-
-void ArrowCollabObject::DrawArrow(QPainter &painter)
-{
-    int tempx = position.x();
-    int tempy = position.y();
-    int headx = tempx + length/2;
-    int heady = tempy;
-
-    painter.drawLine(tempx - length/2,
-                     tempy,
-                     headx,
-                     heady);
-
-
-    // Bottom arrow
-    painter.drawLine(headx,
-                     tempy,
-                     tempx + length/4,
-                     heady + height/4);
-    //Top Arrow
-    painter.drawLine(headx,
-                     tempy,
-                     tempx + length/4,
-                     heady - height/4);
-}
-
-ArrowCollabObjectDialog::ArrowCollabObjectDialog(QWidget *parent)
-                        :QInputDialog(parent) {
-  setCancelButtonText("Cancel");
-  setLabelText("Actor Name:");
-  setWindowTitle("Actor Properties");
-  setOkButtonText("Ok");
-}
-
-QDialog *ArrowCollabObject::getDialog() {
-  ArrowCollabObjectDialog *dialog = new  ArrowCollabObjectDialog;
-  dialog->setTextValue(name);
-  connect(dialog, SIGNAL(textValueSelected(QString)),
-          this, SLOT(setName(QString)));
-  return dialog;
-}
-
-//square connector
+//square connectors
 
 void CollabConnection::draw(QPainter& painter) {  // NOLINT
     QPoint temppoint1;
@@ -335,7 +257,12 @@ void CollabConnection::draw(QPainter& painter) {  // NOLINT
   temppoint3.setY(pt1.y());
   temppoint4.setX(pt4.x());
   temppoint4.setY(pt4.y());
-    DrawArrow(painter, temppoint1, temppoint2, temppoint3, temppoint4);
+
+  // Draws the arrow and computes its direction
+  DrawArrow(painter, temppoint1, temppoint2, temppoint3, temppoint4);
+
+  // Draws the text
+  painter.drawText(textpos,this->text);
 }
 
 QPoint CollabConnection::FindMidPoint(QPoint point1, QPoint point2)
@@ -427,10 +354,29 @@ void CollabConnection::DrawArrow(QPainter &painter, QPoint point1, QPoint point2
     length *= dir;
 
     int tempx = point1.x()+15;
-    int tempy = point1.y()+15;
+    int tempy = point1.y()-15;
     int headx = tempx + length/2;
     int heady = tempy;
 
+    // Sets the position of the text
+    if(tempx > headx)
+    {
+        textpos.setX(tempx+5);
+        textpos.setY(tempy+5);
+    }
+    else
+    {
+        textpos.setX(headx+5);
+        textpos.setY(heady+5);
+    }
+
+    //sets up the pen
+    QPen pen;
+    pen.setWidth(2);
+    painter.setPen(pen);
+    painter.setBrush(Qt::NoBrush);
+
+  //Draws the body of arrow
     painter.drawLine(tempx,
                      tempy,
                      headx,
@@ -449,4 +395,24 @@ void CollabConnection::DrawArrow(QPainter &painter, QPoint point1, QPoint point2
                      heady - height/6);
 
 
+}
+
+CollabConnectionDialog::CollabConnectionDialog(QWidget *parent)
+                        :QInputDialog(parent) {
+  setCancelButtonText("Cancel");
+  setLabelText("Conmnector Name:");
+  setWindowTitle("Connector Properties");
+  setOkButtonText("Ok");
+}
+
+/*! Returns a new CollabConnectionDialog. The dialog is hooked up to
+  the setname slot so that it can store any changes made.
+*/
+
+QDialog *CollabConnection::getDialog() {
+  CollabConnectionDialog *dialog = new CollabConnectionDialog;
+  dialog->setTextValue(text);
+  connect(dialog, SIGNAL(textValueSelected(QString)),
+          this, SLOT(setName(QString)));
+  return dialog;
 }
