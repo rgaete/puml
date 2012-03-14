@@ -9,7 +9,9 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-//#include <time.h>
+#include <QPoint>
+#include <time.h>
+#include <cmath>
 #include "./nodes.h"
 
 
@@ -38,6 +40,7 @@ class StickPersonCollabObject : public ObjectNode {
     DiagramType getDiagramType() { return Collaboration; }
 
     void draw(QPainter &painter);  // NOLINT
+
   public slots:
     void setName(QString newName) { this->name = newName; }
   private:
@@ -96,6 +99,7 @@ class ArrowCollabObject : public ObjectNode {
     DiagramType getDiagramType() { return Collaboration; }
 //change above line!!!!!!!!!
     void draw(QPainter &painter);  // NOLINT
+    void DrawArrow(QPainter &painter);
   public slots:
     void setName(QString newName) { this->name = newName; }
   private:
@@ -105,5 +109,26 @@ class ArrowCollabObject : public ObjectNode {
     // void setName(QString newName) { name = newName; }
 };
 
+
+
+/*! @brief The properties dialog for square connections
+ */
+class CollabConnectionDialog : public QInputDialog {
+};
+
+/*! @brief This concrete class defines ...
+ */
+class CollabConnection : public SquareConnectionNode {
+  public:
+    BaseNode* clone() { return new CollabConnection; }
+    QDialog* getDialog() { return new CollabConnectionDialog; }
+    QString getIconPath() { return QString(":/Images/interaction.png"); }
+    QString getText() { return "Class Line"; }
+    void draw(QPainter& painter);  // NOLINT
+    DiagramType getDiagramType() { return Collaboration; }
+    QPoint FindMidPoint(QPoint point1, QPoint point2);
+    int FindDirection(QPoint point1, QPoint point2, QPoint temppoint1, QPoint temppoint2);
+    void DrawArrow(QPainter &painter, QPoint point, QPoint point2, QPoint temppoint1, QPoint temppoint2);
+};
 
 #endif // UMLNODES_COLLAB_H
