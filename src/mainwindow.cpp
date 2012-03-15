@@ -46,8 +46,8 @@ MainWindow::MainWindow(QWidget *parent)
   // register collab objects
     registerObject(new StickPersonCollabObject);
     registerObject(new BoxCollabObject);
- //   registerObject(new ArrowCollabObject);
     registerObject(new CollabConnection);
+    registerObject(new CollabSelfConnection);
 
 
   this->resize(700, 500);
