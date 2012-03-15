@@ -1,6 +1,7 @@
 // Copyright (C) 2011-2012 pUML Group
 
 #include "./UMLnodes_state.h"
+#include <algorithm>
 
 StateObject::StateObject() {
   this->length = 50;
@@ -75,8 +76,7 @@ void FinalStateObject::draw(QPainter &painter) {  // NOLINT
 
 
 TransitionConnection::TransitionConnection() {
-  startAngle = 90 * 16;
-  spanAngle = 120 * 16;
+  extensionLength = -30.0;
 }
 
 void TransitionConnection::draw(QPainter &painter) {
@@ -100,6 +100,84 @@ void TransitionConnection::draw(QPainter &painter) {
 
   QPainterPath path;
   path.moveTo(pt1);
-  path.quadTo(QPoint((pt1.x()-pt1.x())/2, pt1.y()-30), pt2);
-  painter.drawPath(path);
+  calcExtensionPoint();
+  path.quadTo(extensionPoint, pt2);
+  painter.strokePath(path, painter.pen());
+}
+
+void TransitionConnection::calcExtensionPoint()
+{
+  double a, b, c;
+  double x1, x2, y1, y2;
+  double x, y;
+  int quadrant;
+
+  if (pt1 == pt2) {
+    quadrant = 1;
+  } else if (pt1.x() == pt2.x()) {
+    if (pt2.y() > pt1.y()) {
+      quadrant = 2;
+    } else {
+      quadrant = 4;
+    }
+  } else if (pt1.y() == pt2.y()) {
+    if (pt2.x() < pt1.x()) {
+      quadrant = 2;
+    } else {
+      quadrant = 4;
+    }
+  } else {
+    bool upperhalf, righthalf, lowerhalf, lefthalf;
+    upperhalf = (pt2.y() > pt1.y());
+    lowerhalf = (pt2.y() < pt1.y());
+    righthalf = (pt2.x() > pt1.x());
+    lefthalf = (pt2.x() < pt1.x());
+
+    if (upperhalf && righthalf) {
+      quadrant = 1;
+    }
+    if (upperhalf && lefthalf) {
+      quadrant = 2;
+    }
+    if (lowerhalf && righthalf) {
+      quadrant = 4;
+    }
+    if (lowerhalf && lefthalf) {
+      quadrant = 3;
+    }
+
+  }
+
+  a = abs(pt2.x() - pt1.x());
+  b = abs(pt2.y() - pt1.y());
+
+  if (a == 0 && b == 0) {
+    extensionPoint = QPoint(pt1.x(), pt1.y()+extensionLength);
+  } else {
+    if (quadrant == 1 || quadrant == 3) {
+      std::swap(a,b);
+    }
+
+    c = sqrt(a*a + b*b);
+    x1 = a/2.0;
+    x2 = extensionLength * (b/c);
+    y1 = b/2.0;
+    y2 = extensionLength * (a/c);
+    x = x1 + x2;
+    y = y1 - y2;
+
+    if (quadrant == 1) {
+      std::swap(x,y);
+    } else if (quadrant == 2) {
+      x = -x;
+    } else if (quadrant == 3) {
+      std::swap(x,y);
+      x = -x;
+      y = -y;
+    } else if (quadrant == 4) {
+      y = -y;
+    }
+
+    extensionPoint = QPoint(pt1.x() + x,pt1.y() + y);
+  }
 }

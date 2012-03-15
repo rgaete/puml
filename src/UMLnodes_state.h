@@ -87,8 +87,10 @@ class TransitionConnection : public ConnectionNode {
     void draw(QPainter& painter);  // NOLINT
     DiagramType getDiagramType() { return StateChart; }
   private:
-    int startAngle;
-    int spanAngle;
+    void calcExtensionPoint();
+    QPoint extensionPoint;
+    double extensionLength;
+
     QPainterPath arc;
 };
 
