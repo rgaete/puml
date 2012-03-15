@@ -66,6 +66,7 @@ class BaseNode : public QObject {
     std::list<BaseNode*> getConnectedNodes();
 
     void setSelectedForConnectionPoint(bool state) { cpSelected = state; }
+    QPoint returnConnectionPoint(int value);
 
   private:
     std::vector<QPoint> connectionPoints;

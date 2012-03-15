@@ -86,7 +86,13 @@ QPoint BaseNode::getClosestConnectionPoint(const QPoint &point) {
 }
 
 std::list<BaseNode*> BaseNode::getConnectedNodes() {
-  return std::list<BaseNode*>(connectedObjects);
+    return std::list<BaseNode*>(connectedObjects);
+}
+
+// gives access to specified connection points
+QPoint BaseNode::returnConnectionPoint(int value)
+{
+    return connectionPoints.at(value);
 }
 
 void BaseNode::setUpConnectionPoints() {

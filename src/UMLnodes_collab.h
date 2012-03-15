@@ -115,4 +115,38 @@ public slots:
 
 };
 
+
+/*! @brief The properties dialog for self connections
+ */
+class CollabSelfConnectionDialog : public QInputDialog {
+    Q_OBJECT
+public:
+    explicit CollabSelfConnectionDialog(QWidget *parent = 0);
+};
+
+
+/*! @brief This concrete class defines ...
+ */
+class CollabSelfConnection : public SquareConnectionNode {
+    Q_OBJECT
+  public:
+    BaseNode* clone() { return new CollabSelfConnection; }
+    QDialog* getDialog();// { return new CollabConnectionDialog; }
+    QString getIconPath() { return QString(":/Images/interaction.png"); }
+    QString getText() { return "Collaboration Self Line"; }
+    void draw(QPainter& painter);  // NOLINT
+    DiagramType getDiagramType() { return Collaboration; }
+    int FindDirection(QPoint point1, QPoint point2, QPoint temppoint1, QPoint temppoint2);
+    void DrawArrow(QPainter &painter, QPoint point, QPoint point2, QPoint temppoint1, QPoint temppoint2);
+
+   private:
+    QString text;
+    QPoint textpos;
+public slots:
+    void setName(QString newName) { this->text = newName; }
+
+};
+
+
+
 #endif // UMLNODES_COLLAB_H

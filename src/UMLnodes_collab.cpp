@@ -162,7 +162,7 @@ void BoxCollabObject::draw(QPainter &painter) {  // NOLINT
   QPen pen;
   pen.setWidth(2);
 
-  // drawing a StickPersonCollab
+  // drawing a BoxCollab
   int tempx = position.x();
   int tempy = position.y();
 
@@ -178,15 +178,13 @@ void BoxCollabObject::draw(QPainter &painter) {  // NOLINT
   // edge
   painter.setPen(pen);
   painter.setBrush(Qt::NoBrush);
-  // head
+
     painter.drawRect(tempx - 1/2.0 * length,
                      tempy - 1/2.0 * height,
                      length,
                      height);
 
 
-
-  // painter.drawText(tempx-10,tempy+50,this->name);
   painter.drawText(QRect(tempx - length / 2, tempy + height / 2, length, 50),
                    Qt::AlignCenter | Qt::AlignTop | Qt::TextDontClip,
                    this->name);
@@ -209,7 +207,9 @@ QDialog *BoxCollabObject::getDialog() {
 }
 
 
-//square connectors
+/***********************************/
+/* Square Connectors Collab *******/
+/*********************************/
 
 void CollabConnection::draw(QPainter& painter) {  // NOLINT
     QPoint temppoint1;
@@ -247,12 +247,14 @@ void CollabConnection::draw(QPainter& painter) {  // NOLINT
   painter.drawLine(pt2, pt3);
   painter.drawLine(pt3, pt4);
 
-  //These are the initial values i chose to use
+  //These temp values are needed in order to compute the direction of the arrow
+  // This is so that the pt values dont get changed
+  //These are the initial values i chose to use // inner points
   temppoint1.setX(pt2.x());
   temppoint1.setY(pt2.y());
   temppoint2.setX(pt3.x());
   temppoint2.setY(pt3.y());
-// these ones were required for a bug fix
+// these ones were required for a bug fix // outer points
   temppoint3.setX(pt1.x());
   temppoint3.setY(pt1.y());
   temppoint4.setX(pt4.x());
@@ -265,6 +267,8 @@ void CollabConnection::draw(QPainter& painter) {  // NOLINT
   painter.drawText(textpos,this->text);
 }
 
+//This function finds the midpoint between two points returns a Qpoint
+//I dont think it ever got used
 QPoint CollabConnection::FindMidPoint(QPoint point1, QPoint point2)
 {
     QPoint result;
@@ -285,6 +289,8 @@ QPoint CollabConnection::FindMidPoint(QPoint point1, QPoint point2)
     return result;
 }
 
+//This function determins the direction of the arrow it returns a 1 to keep the arrow
+// facing the same direction or a -1 to make it point backwards
 int CollabConnection::FindDirection(QPoint point1, QPoint point2, QPoint temppoint1, QPoint temppoint2)
 {
     QPoint result;
@@ -342,23 +348,28 @@ int CollabConnection::FindDirection(QPoint point1, QPoint point2, QPoint temppoi
 
 }
 
+// This function is dedicated to the drawing of the arrow
 void CollabConnection::DrawArrow(QPainter &painter, QPoint point1, QPoint point2, QPoint temppoint1,
                                  QPoint temppoint2)
 {
-    int dir = 1;
-    int length = 50;
+    int dir = 1; //direction pointing, left or right, initialized to right
+    int length = 50; // length and height variables
     int height = 50;
-
+    int offset = 15; // offset off of the initial point value on the connection line
+    // finds the direction of the arrow and then sets it to dir
     dir = FindDirection(point1, point2, temppoint1, temppoint2);
 
+    // resets length to either be positive or negative
     length *= dir;
 
-    int tempx = point1.x()+15;
-    int tempy = point1.y()-15;
+    //computes starting and ending values for the arrow
+    int tempx = point1.x() + offset;
+    int tempy = point1.y() - offset;
     int headx = tempx + length/2;
     int heady = tempy;
 
     // Sets the position of the text
+    // Initializes the text position relative to the location of the leftmost point of the arrow
     if(tempx > headx)
     {
         textpos.setX(tempx+5);
@@ -397,6 +408,7 @@ void CollabConnection::DrawArrow(QPainter &painter, QPoint point1, QPoint point2
 
 }
 
+//Dialog for the arrow
 CollabConnectionDialog::CollabConnectionDialog(QWidget *parent)
                         :QInputDialog(parent) {
   setCancelButtonText("Cancel");
@@ -416,3 +428,197 @@ QDialog *CollabConnection::getDialog() {
           this, SLOT(setName(QString)));
   return dialog;
 }
+
+
+/***********************************/
+/* Self Connectors Collab *********/
+/*********************************/
+
+void CollabSelfConnection::draw(QPainter& painter) {  // NOLINT
+// temporary points so as to not mess up the pt values
+    QPoint temppoint1;
+    QPoint temppoint2;
+    QPoint temppoint3;
+    QPoint temppoint4;
+    int offset = 15;
+  BaseNode *obj1, *obj2;
+  std::list<BaseNode*>::iterator it = connectedObjects.begin();
+  obj1 = *it;
+  obj2 = *it;
+  it++;
+
+//  pt1 = obj1->getClosestConnectionPoint(obj2->getPosition());
+//  pt4 = obj2->getClosestConnectionPoint(obj1->getPosition());
+
+//  pt1 = obj1->connectionPoints.at(1);
+//  pt4 = obj2->connectionPoints.at(2);
+
+  pt1 = obj1->returnConnectionPoint(1);
+  pt4 = obj2->returnConnectionPoint(2);
+
+
+  painter.setPen(Qt::black);
+  // East connection
+    pt2.setY(pt4.y());
+    pt2.setX(pt1.x() + offset);
+    pt3.setX(pt1.x());
+    pt3.setY(pt4.y() + offset);
+
+  if (selected == true) {
+    QPen selectPen;
+    selectPen.setWidth(2);
+    selectPen.setColor(Qt::blue);
+    painter.setPen(selectPen);
+    painter.drawLine(pt1, pt2);
+  }
+  painter.drawLine(pt1, pt2);
+  painter.drawLine(pt2, pt3);
+  painter.drawLine(pt3, pt4);
+
+  //These temp values are needed in order to compute the direction of the arrow
+  // This is so that the pt values dont get changed
+  //These are the initial values i chose to use // inner points
+  temppoint1.setX(pt2.x());
+  temppoint1.setY(pt2.y());
+  temppoint2.setX(pt3.x());
+  temppoint2.setY(pt3.y());
+// these ones were required for a bug fix // outer points
+  temppoint3.setX(pt1.x());
+  temppoint3.setY(pt1.y());
+  temppoint4.setX(pt4.x());
+  temppoint4.setY(pt4.y());
+
+  // Draws the arrow and computes its direction
+  DrawArrow(painter, temppoint1, temppoint2, temppoint3, temppoint4);
+
+  // Draws the text
+  painter.drawText(textpos,this->text);
+}
+
+// This function is dedicated to the drawing of the arrow
+void CollabSelfConnection::DrawArrow(QPainter &painter, QPoint point1, QPoint point2, QPoint temppoint1,
+                                 QPoint temppoint2)
+{
+    int length = -50; // length and height variables // needs to negative to point the right way
+    int height = 50;
+    int offset = 10; // offset off of the initial point value on the connection line
+
+    //computes starting and ending values for the arrow
+    int tempx = point2.x() - length/2;
+    int tempy = point2.y() + offset;
+    int headx = tempx + length/2;
+    int heady = tempy;
+
+    //sets up the pen
+    QPen pen;
+    pen.setWidth(2);
+    painter.setPen(pen);
+    painter.setBrush(Qt::NoBrush);
+
+  //Draws the body of arrow
+    painter.drawLine(tempx,
+                     tempy,
+                     headx,
+                     heady);
+
+
+    // Bottom arrow
+    painter.drawLine(headx,
+                     tempy,
+                     tempx + length/3,
+                     heady + height/6);
+    //Top Arrow
+    painter.drawLine(headx,
+                     tempy,
+                     tempx + length/3,
+                     heady - height/6);
+
+    // Sets the position of the text
+    // Initializes the text position right under the arrow
+        textpos.setX(headx);
+        textpos.setY((heady + height/6 )+ offset);
+
+
+}
+
+//This function determins the direction of the arrow it returns a 1 to keep the arrow
+// facing the same direction or a -1 to make it point backwards
+int CollabSelfConnection::FindDirection(QPoint point1, QPoint point2, QPoint temppoint1, QPoint temppoint2)
+{
+    QPoint result;
+// inner points
+    int temp1x = point1.x();
+    int temp1y = point1.y();
+    int temp2x = point2.x();
+    int temp2y = point2.y();
+
+// Outer points
+    int temp3x = temppoint1.x();
+    int temp3y = temppoint1.y();
+    int temp4x = temppoint2.x();
+    int temp4y = temppoint2.y();
+
+
+//extra variables
+    int fx;
+    int fy;
+    int gx;
+    int gy;
+    int absfx;
+    int absfy;
+
+    // find differences
+    fx = temp1x - temp2x;
+    fy = temp1y - temp2y;
+
+    gx = temp3x - temp4x;
+    gy = temp3y - temp4y;
+
+
+    // find absolute values
+    absfx = abs(fx);
+    absfy = abs(fy);
+
+    //if point2 is to the right or
+    if((fx > 0))// || (fy < 0))
+    {
+        return -1;
+    }
+    else if(fx == 0)
+    {
+        if(gx > 0)
+        {
+            return -1;
+        }
+        else
+        {
+            return 1;
+        }
+    }
+    else
+        return 1;
+
+}
+
+
+//Dialog for the arrow
+CollabSelfConnectionDialog::CollabSelfConnectionDialog(QWidget *parent)
+                        :QInputDialog(parent) {
+  setCancelButtonText("Cancel");
+  setLabelText("Conmnector Name:");
+  setWindowTitle("Connector Properties");
+  setOkButtonText("Ok");
+}
+
+/*! Returns a new CollabSelfConnectionDialog. The dialog is hooked up to
+  the setname slot so that it can store any changes made.
+*/
+
+QDialog *CollabSelfConnection::getDialog() {
+  CollabSelfConnectionDialog *dialog = new CollabSelfConnectionDialog;
+  dialog->setTextValue(text);
+  connect(dialog, SIGNAL(textValueSelected(QString)),
+          this, SLOT(setName(QString)));
+  return dialog;
+}
+
