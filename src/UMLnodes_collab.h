@@ -70,7 +70,7 @@ class BoxCollabObject : public ObjectNode {
     BaseNode* clone() { return new BoxCollabObject; }
     QDialog* getDialog();
     QString getIconPath() { return QString(":/Images/square.png"); }
-    QString getText() { return "Stick Person"; }
+    QString getText() { return "Collaboration Object"; }
     DiagramType getDiagramType() { return Collaboration; }
 //change above line!!!!!!!!!
     void draw(QPainter &painter);  // NOLINT

@@ -185,16 +185,16 @@ void BoxCollabObject::draw(QPainter &painter) {  // NOLINT
                      height);
 
 
-  painter.drawText(QRect(tempx - length / 2, tempy + height / 2, length, 50),
-                   Qt::AlignCenter | Qt::AlignTop | Qt::TextDontClip,
+  painter.drawText(QRect(tempx - length / 2, tempy - height / 2, length, 50),
+                   Qt::AlignCenter | Qt::AlignVCenter,
                    this->name);
 }
 
 BoxCollabObjectDialog::BoxCollabObjectDialog(QWidget *parent)
                         :QInputDialog(parent) {
   setCancelButtonText("Cancel");
-  setLabelText("Actor Name:");
-  setWindowTitle("Actor Properties");
+  setLabelText("Object Name:");
+  setWindowTitle("Object Properties");
   setOkButtonText("Ok");
 }
 
@@ -412,7 +412,7 @@ void CollabConnection::DrawArrow(QPainter &painter, QPoint point1, QPoint point2
 CollabConnectionDialog::CollabConnectionDialog(QWidget *parent)
                         :QInputDialog(parent) {
   setCancelButtonText("Cancel");
-  setLabelText("Conmnector Name:");
+  setLabelText("Connnector Name:");
   setWindowTitle("Connector Properties");
   setOkButtonText("Ok");
 }
