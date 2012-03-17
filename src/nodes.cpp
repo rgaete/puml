@@ -36,6 +36,11 @@ QDomElement BaseNode::to_xml(QDomDocument &doc,  // NOLINT
   QDomElement node = doc.createElement("Node");
   doc_root.appendChild(node);
 
+  // NOTE: Access to the metaObject *appears* to be contingent on the Q_OBJECT
+  // macro being present in THIS class. Thus, if you need to overwrite this method
+  // in a derivative class, that derivative class will need the Q_OBJECT macro
+  // added.
+  set_xml_attr(doc, node, QString("class_name"), this->metaObject()->className());
   set_xml_attr(doc, node, QString("selected"), QString::number(selected, 10));
   set_xml_attr(doc, node, QString("length"), QString::number(length));
   set_xml_attr(doc, node, QString("cpSelected"), QString::number(cpSelected));

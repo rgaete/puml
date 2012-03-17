@@ -29,6 +29,8 @@ class BaseNode;
  * (arrows and the like) and objects (such as a stick person or a state oval).
  */
 class BaseNode : public QObject {
+  Q_OBJECT
+
   public:
     enum DiagramType {
       Class,
