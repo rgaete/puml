@@ -23,6 +23,20 @@ BaseNode::BaseNode() {
   setUpConnectionPoints();
 }
 
+/*!
+ * This is a helper method for to_xml that sets an attribute in an XML node.
+ *
+ * @param doc
+ *  This is the document we are creating. Whatever intiates the save will
+ *  create this object and will need to make it available in all delegations.
+ * @param node
+ *  This is the node of the document. For example, when saving the nodes
+ *  vector, we create a "Node" element.
+ * @param label
+ *  This is the name of the attribute we are saving.
+ * @param val
+ *  This is the value associated with label.
+ */
 void set_xml_attr(QDomDocument &doc, QDomElement &node,  // NOLINT
                   QString label, QString val) {
   QDomElement el = doc.createElement(label);
@@ -31,15 +45,33 @@ void set_xml_attr(QDomDocument &doc, QDomElement &node,  // NOLINT
   el.appendChild(text);
 }
 
+/*!
+ * This records the data associated with a node into an XML format.
+ *
+ * This is used for saving and restoring from save.
+ * NOTE: Access to the metaObject *appears* to be contingent on the Q_OBJECT
+ * macro being present in THIS class. Thus, if you need to overwrite this
+ * method in a derivative class, that derivative class will need the Q_OBJECT
+ * macro added.
+ *
+ * @param doc
+ *  This is the document we are creating. Whatever intiates the save will
+ *  create this object and will need to make it available in all delegations.
+ * @param doc_root
+ *  This is the element that will contain this element. The initial design
+ *  uses the top level element as the container, hence the name doc_root.
+ * @return QDomElement
+ *  Based on current implementation, nothing will be done with this return
+ *  value. However, in the future, it might be possible to disassociate this
+ *  method call from doc.
+ */
 QDomElement BaseNode::to_xml(QDomDocument &doc,  // NOLINT
                              QDomElement &doc_root) {  // NOLINT
   QDomElement node = doc.createElement("Node");
   doc_root.appendChild(node);
 
-  // NOTE: Access to the metaObject *appears* to be contingent on the Q_OBJECT
-  // macro being present in THIS class. Thus, if you need to overwrite this method
-  // in a derivative class, that derivative class will need the Q_OBJECT macro
-  // added.
+  // Reminder: metaObject depends on the Q_OBJECT macro existing in the class
+  // that uses it.
   set_xml_attr(doc, node, QString("class_name"), this->metaObject()->className());
   set_xml_attr(doc, node, QString("selected"), QString::number(selected, 10));
   set_xml_attr(doc, node, QString("length"), QString::number(length));

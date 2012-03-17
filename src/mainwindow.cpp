@@ -44,12 +44,11 @@ MainWindow::MainWindow(QWidget *parent)
   registerObject(new ClassConnection);
 
   // register collab objects
-    registerObject(new StickPersonCollabObject);
-    registerObject(new BoxCollabObject);
-    registerObject(new MultiBoxCollabObject);
-    registerObject(new CollabConnection);
-    registerObject(new CollabSelfConnection);
-
+  registerObject(new StickPersonCollabObject);
+  registerObject(new BoxCollabObject);
+  registerObject(new MultiBoxCollabObject);
+  registerObject(new CollabConnection);
+  registerObject(new CollabSelfConnection);
 
   this->resize(700, 500);
   this->setWindowTitle(tr("Phunctional UML Editor"));
@@ -164,7 +163,6 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex) {
 
   // Set the currentDocument flag
   currentDocument = documentIndex;
-
 
   // Go into selection mode
   actionSelect->trigger();
