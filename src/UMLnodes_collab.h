@@ -2,6 +2,7 @@
 #define UMLNODES_COLLAB_H
 
 
+#include <QComboBox>
 #include <QDialog>
 #include <QInputDialog>
 #include <QLabel>
@@ -57,20 +58,16 @@ class StickPersonCollabObject : public ObjectNode {
 };
 
 
-class BoxCollabObjectDialog : public QInputDialog {
-  Q_OBJECT
-  public:
-    explicit BoxCollabObjectDialog(QWidget *parent = 0);
-};
-
+/*! @brief This concrete class is the BoxCollabObject node
+ */
 class BoxCollabObject : public ObjectNode {
   Q_OBJECT
   public:
     BoxCollabObject();
     BaseNode* clone() { return new BoxCollabObject; }
     QDialog* getDialog();
-    QString getIconPath() { return QString(":/Images/square.png"); }
-    QString getText() { return "Collaboration Object"; }
+    QString getIconPath() { return QString(":/Images/rectangle.png"); }
+    QString getText() { return "Collaboration Box"; }
     DiagramType getDiagramType() { return Collaboration; }
 //change above line!!!!!!!!!
     void draw(QPainter &painter);  // NOLINT
@@ -82,6 +79,47 @@ class BoxCollabObject : public ObjectNode {
   private slots:
     // void setName(QString newName) { name = newName; }
 };
+
+/*! @brief The properties dialog for collaboration boxes
+ */
+class BoxCollabObjectDialog : public QInputDialog {
+  Q_OBJECT
+  public:
+    explicit BoxCollabObjectDialog(QWidget *parent = 0);
+};
+
+
+/*! @brief This concrete class is the MultiBoxCollabObject node
+ */
+
+class MultiBoxCollabObject : public ObjectNode {
+  Q_OBJECT
+  public:
+    MultiBoxCollabObject();
+    BaseNode* clone() { return new MultiBoxCollabObject; }
+    QDialog* getDialog();
+    QString getIconPath() { return QString(":/Images/multibox.png"); }
+    QString getText() { return "Collaboration Multibox"; }
+    DiagramType getDiagramType() { return Collaboration; }
+//change above line!!!!!!!!!
+    void draw(QPainter &painter);  // NOLINT
+  public slots:
+    void setName(QString newName) { this->name = newName; }
+  private:
+    QString name;
+    // animation vars
+  private slots:
+    // void setName(QString newName) { name = newName; }
+};
+
+/*! @brief The properties dialog for collaboration multiboxes
+ */
+class MultiBoxCollabObjectDialog : public QInputDialog {
+  Q_OBJECT
+  public:
+    explicit MultiBoxCollabObjectDialog(QWidget *parent = 0);
+};
+
 
 
 /*! @brief The properties dialog for square connections

@@ -87,7 +87,7 @@ void ConfigDialog::createIcons(ConfigDialogType type) {
           this, SLOT(changePage(QListWidgetItem*, QListWidgetItem*)));
 }
 
-/*! Helper functino for ConfigDialog that creates the new diagram type
+/*! Helper function for ConfigDialog that creates the new diagram type
     list widget items.
 */
 void ConfigDialog::createNewPage() {
