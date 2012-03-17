@@ -1,10 +1,12 @@
 // Copyright (C) 2011-2012 pUML Group
 #include "./UMLnodes_collab.h"
 #include <list>
+#include <QComboBox>
 
 #include "./mathfunctions.h"
+
 /*******************************/
-/* StickPersonCollab Functions *******/
+/* StickPersonCollab Functions */
 /*******************************/
 
 /*! In the StickPersonCollab constructor we set
@@ -143,11 +145,11 @@ QDialog *StickPersonCollabObject::getDialog() {
 }
 
 /*******************************/
-/* BoxCollab Functions *******/
+/* BoxCollab Functions   *******/
 /*******************************/
 BoxCollabObject::BoxCollabObject()
                   :ObjectNode() {
-    this->length = 70;
+    this->length = 90;
     this->height = 50;
     QPoint pos;
     pos.setX(position.x() + length / 2);
@@ -200,6 +202,108 @@ BoxCollabObjectDialog::BoxCollabObjectDialog(QWidget *parent)
 
 QDialog *BoxCollabObject::getDialog() {
   BoxCollabObjectDialog *dialog = new  BoxCollabObjectDialog;
+  dialog->setTextValue(name);
+  connect(dialog, SIGNAL(textValueSelected(QString)),
+          this, SLOT(setName(QString)));
+  return dialog;
+}
+
+
+/*******************************/
+/* MultiBoxCollab Functions   **/
+/*******************************/
+MultiBoxCollabObject::MultiBoxCollabObject()
+                  :ObjectNode() {
+    this->length = 90;
+    this->height = 50;
+    QPoint pos;
+    pos.setX(position.x() + length / 2);
+    pos.setY(position.y() + height);
+}
+
+void MultiBoxCollabObject::draw(QPainter &painter) {  // NOLINT
+  // Always call this ObjectNode's draw function because it
+  // draws the selection boxes as needed.
+  ObjectNode::draw(painter);
+
+  QPen pen;
+  pen.setWidth(2);
+
+  // drawing a MultiBoxCollab
+  int tempx = position.x();
+  int tempy = position.y();
+
+  // back box  x,y values
+  int backtempx = tempx+10;
+  int backtempy = tempy-10;
+
+  // back box background
+  painter.setPen(Qt::NoPen);
+  painter.setBrush(Qt::white);
+  painter.drawRect(backtempx - 1/2.0 * length,
+                   backtempy - 1/2.0 * height,
+                   length,
+                   height);
+
+  // back box edge
+  painter.setPen(pen);
+  painter.setBrush(Qt::NoBrush);
+  painter.drawRect(backtempx - 1/2.0 * length,
+                   backtempy - 1/2.0 * height,
+                   length,
+                   height);
+
+  // middle box x,y values
+  int midtempx = tempx+5;
+  int midtempy = tempy-5;
+
+  // middle box background
+  painter.setPen(Qt::NoPen);
+  painter.setBrush(Qt::white);
+  painter.drawRect(midtempx - 1/2.0 * length,
+                   midtempy - 1/2.0 * height,
+                   length,
+                   height);
+
+  // middle box edge
+  painter.setPen(pen);
+  painter.setBrush(Qt::NoBrush);
+  painter.drawRect(midtempx - 1/2.0 * length,
+                   midtempy - 1/2.0 * height,
+                   length,
+                     height);
+
+  // front box background
+  painter.setPen(Qt::NoPen);
+  painter.setBrush(Qt::white);
+  painter.drawRect(tempx - 1/2.0 * length,
+                   tempy - 1/2.0 * height,
+                   length,
+                   height);
+
+  // front box edge
+  painter.setPen(pen);
+  painter.setBrush(Qt::NoBrush);
+  painter.drawRect(tempx - 1/2.0 * length,
+                   tempy - 1/2.0 * height,
+                   length,
+                   height);
+
+  painter.drawText(QRect(tempx - length / 2, tempy - height / 2, length, 50),
+                   Qt::AlignCenter | Qt::AlignVCenter,
+                   this->name);
+}
+
+MultiBoxCollabObjectDialog::MultiBoxCollabObjectDialog(QWidget *parent)
+                        :QInputDialog(parent) {
+  setCancelButtonText("Cancel");
+  setLabelText("Object Name:");
+  setWindowTitle("Object Properties");
+  setOkButtonText("Ok");
+}
+
+QDialog *MultiBoxCollabObject::getDialog() {
+  MultiBoxCollabObjectDialog *dialog = new  MultiBoxCollabObjectDialog;
   dialog->setTextValue(name);
   connect(dialog, SIGNAL(textValueSelected(QString)),
           this, SLOT(setName(QString)));
@@ -393,7 +497,6 @@ void CollabConnection::DrawArrow(QPainter &painter, QPoint point1, QPoint point2
                      headx,
                      heady);
 
-
     // Bottom arrow
     painter.drawLine(headx,
                      tempy,
@@ -404,17 +507,15 @@ void CollabConnection::DrawArrow(QPainter &painter, QPoint point1, QPoint point2
                      tempy,
                      tempx + length/3,
                      heady - height/6);
-
-
 }
 
 //Dialog for the arrow
 CollabConnectionDialog::CollabConnectionDialog(QWidget *parent)
                         :QInputDialog(parent) {
-  setCancelButtonText("Cancel");
-  setLabelText("Connnector Name:");
   setWindowTitle("Connector Properties");
   setOkButtonText("Ok");
+  setCancelButtonText("Cancel");
+  setLabelText("Message 1:");
 }
 
 /*! Returns a new CollabConnectionDialog. The dialog is hooked up to

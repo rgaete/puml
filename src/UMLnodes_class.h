@@ -53,7 +53,7 @@ class ClassBoxObject: public ObjectNode {
     ClassBoxObject();
     BaseNode* clone() { return new ClassBoxObject; }
     QDialog* getDialog();
-    QString getIconPath() { return QString(":/Images/rectangle.png"); }
+    QString getIconPath() { return QString(":/Images/class.png"); }
     QString getText() { return "ClassBox"; }
     DiagramType getDiagramType() { return Class; }
     void draw(QPainter &painter);  // NOLINT
