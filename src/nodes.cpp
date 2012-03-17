@@ -71,7 +71,7 @@ QDomElement BaseNode::to_xml(QDomDocument &doc,  // NOLINT
   doc_root.appendChild(node);
 
   // Reminder: metaObject depends on the Q_OBJECT macro existing in the class
-  // that uses it.
+  // that uses it. Otherwise, the class_name will come out as BaseNode.
   set_xml_attr(doc, node, QString("class_name"), this->metaObject()->className());
   set_xml_attr(doc, node, QString("selected"), QString::number(selected, 10));
   set_xml_attr(doc, node, QString("length"), QString::number(length));

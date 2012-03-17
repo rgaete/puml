@@ -30,6 +30,7 @@
 
 #include <map>
 #include <vector>
+#include <algorithm>
 
 #include "./UMLnodes.h"
 #include "./canvas.h"

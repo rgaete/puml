@@ -627,10 +627,10 @@ void MainWindow::on_actionSave_As_triggered() {
   QDomElement root = test.createElement("nodes_vector_xml");
   test.appendChild(root);
 
-  for (vector<BaseNode*>::iterator it = doc->nodes.begin();
-       it != doc->nodes.end(); ++it) {
-    (*it)->to_xml(test, root);
-  }
+  for_each(doc->nodes.begin(), doc->nodes.end(),
+           [&test, &root] (BaseNode* each_node) {
+    each_node->to_xml(test, root);
+  });
 
   /*
   fprintf(stderr, "Test xml document for the node vector:\n%s\n",
