@@ -103,7 +103,7 @@ void StickPersonObject::draw(QPainter &painter) {  // NOLINT
                       16 / 70.0 * height / 2);
 
   // painter.drawText(tempx-10,tempy+50,this->name);
-  painter.drawText(QRect(tempx - length / 2, tempy + height / 2, length, 50),
+  painter.drawText(QRect(tempx - length / 2, tempy + (height-25) / 2, length, 50),
                    Qt::AlignCenter | Qt::AlignTop | Qt::TextDontClip,
                    this->name);
 
@@ -153,6 +153,17 @@ void OvalObject::draw(QPainter &painter) {  // NOLINT
   // draws the selection boxes as needed.
   ObjectNode::draw(painter);
 
+  //for resizing the oval appropriately
+  QFontMetrics fm = painter.fontMetrics();
+  int temp = fm.width(this->name);
+  if(temp >= length-20){
+      temp = temp - (length-20);
+      temp = temp + length;
+      this->length = temp;
+  }
+  else{
+      this->length = 100;
+  }
   // background
   painter.setPen(Qt::NoPen);
   painter.setBrush(Qt::white);
@@ -163,8 +174,7 @@ void OvalObject::draw(QPainter &painter) {  // NOLINT
   painter.setBrush(Qt::NoBrush);
   painter.drawEllipse(position, length / 2, height / 2);
   // painter.drawText(position.x(),position.y(), this->name);
-  painter.drawText(QRect(position.x() - length / 2, position.y() - height/2,
-                         length, height),
+  painter.drawText(QRect(position.x() - length / 2, position.y() - height/2,length, height),
                    Qt::AlignCenter | Qt::AlignHCenter | Qt::TextDontClip,
                    this->name);
 }
