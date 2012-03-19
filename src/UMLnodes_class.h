@@ -36,7 +36,7 @@ class ClassBoxObjectDialog : public QDialog {
     QLabel *ClassNameLabel;
     QLabel *AttributesLabel;
     QLabel *MethodsLabel;
-    QTextEdit *ClassNameLineEdit;
+    QLineEdit *ClassNameLineEdit;
     QTextEdit *AttributesLineEdit;
     QTextEdit *MethodsLineEdit;
     QPushButton *okButton;
@@ -66,6 +66,9 @@ class ClassBoxObject: public ObjectNode {
     void setMethods(QString newMethods) { this->methods = newMethods; }
 
   private:
+    int classHeight;
+    int attributeHeight;
+    int methodHeight;
     int radius;
     QString className;
     QString attributes;
