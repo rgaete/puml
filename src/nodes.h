@@ -70,6 +70,9 @@ class BaseNode : public QObject {
     void setSelectedForConnectionPoint(bool state) { cpSelected = state; }
     QPoint returnConnectionPoint(int value);
 
+    int stringLength(const QString &string);
+    int stringHeight(const QString &string);
+
   private:
     std::vector<QPoint> connectionPoints;
 

@@ -106,7 +106,7 @@ void StickPersonCollabObject::draw(QPainter &painter) {  // NOLINT
                       16 / 70.0 * height / 2);
 
   // painter.drawText(tempx-10,tempy+50,this->name);
-  painter.drawText(QRect(tempx - length / 2, tempy + height / 2, length, 50),
+  painter.drawText(QRect(tempx - length / 2, tempy + (height-25) / 2, length, 50),
                    Qt::AlignCenter | Qt::AlignTop | Qt::TextDontClip,
                    this->name);
 
@@ -157,9 +157,19 @@ BoxCollabObject::BoxCollabObject()
 }
 
 void BoxCollabObject::draw(QPainter &painter) {  // NOLINT
-  // Always call this ObjectNode's draw function because it
-  // draws the selection boxes as needed.
-  ObjectNode::draw(painter);
+  //grabs the length of the string and updates the box
+  //to make everything fit properly
+  QFontMetrics fm = painter.fontMetrics();
+  int temp = fm.width(this->name);
+
+  if(temp >= length-20){
+      temp = temp - (length-20);
+      temp = temp + length;
+      this->length = temp;
+  }
+  else{
+      this->length = 90;
+  }
 
   QPen pen;
   pen.setWidth(2);
@@ -190,6 +200,10 @@ void BoxCollabObject::draw(QPainter &painter) {  // NOLINT
   painter.drawText(QRect(tempx - length / 2, tempy - height / 2, length, 50),
                    Qt::AlignCenter | Qt::AlignVCenter,
                    this->name);
+
+  // Always call this ObjectNode's draw function because it
+  // draws the selection boxes as needed.
+  ObjectNode::draw(painter);
 }
 
 BoxCollabObjectDialog::BoxCollabObjectDialog(QWidget *parent)
@@ -222,9 +236,20 @@ MultiBoxCollabObject::MultiBoxCollabObject()
 }
 
 void MultiBoxCollabObject::draw(QPainter &painter) {  // NOLINT
-  // Always call this ObjectNode's draw function because it
-  // draws the selection boxes as needed.
-  ObjectNode::draw(painter);
+  //grabs the length of the string and updates the box
+  //to make everything fit properly
+  QFontMetrics fm = painter.fontMetrics();
+  int temp = fm.width(this->name);
+
+  if(temp >= length-20){
+      temp = temp - (length-20);
+      temp = temp + length;
+      this->length = temp;
+  }
+  else{
+      this->length = 90;
+  }
+
 
   QPen pen;
   pen.setWidth(2);
@@ -292,6 +317,10 @@ void MultiBoxCollabObject::draw(QPainter &painter) {  // NOLINT
   painter.drawText(QRect(tempx - length / 2, tempy - height / 2, length, 50),
                    Qt::AlignCenter | Qt::AlignVCenter,
                    this->name);
+
+  // Always call this ObjectNode's draw function because it
+  // draws the selection boxes as needed.
+  ObjectNode::draw(painter);
 }
 
 MultiBoxCollabObjectDialog::MultiBoxCollabObjectDialog(QWidget *parent)

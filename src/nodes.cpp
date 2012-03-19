@@ -132,6 +132,38 @@ QPoint BaseNode::returnConnectionPoint(int value) {
     return connectionPoints.at(value);
 }
 
+int BaseNode::stringLength(const QString &string)
+{
+    int len=0, max=0, height=0;
+
+    for(int i=0; i < string.length(); i++){
+        if(string[i] == '\n' || i == string.length()-1){
+            if(max < len)
+                max = len;
+            len=0;
+            height += 1;
+        }
+        else
+            len += 1;
+    }
+
+    max = max * 6;
+    return max;
+}
+
+int BaseNode::stringHeight(const QString &string)
+{
+    int height=0;
+
+    for(int i=0; i < string.length(); i++){
+        if(string[i] == '\n' || i == string.length()-1){
+            height += 1;
+        }
+    }
+
+    return height * 15;
+}
+
 void BaseNode::setUpConnectionPoints() {
   connectionPoints.clear();
 
