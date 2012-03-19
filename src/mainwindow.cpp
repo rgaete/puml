@@ -603,62 +603,13 @@ void MainWindow::on_actionOpen_triggered() {
 void MainWindow::on_actionSave_triggered() {
   documents.at(currentDocument)->saveDocument();
 
-  /*
-  QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
-             tr("XML files (*.xml)"));
-*/
-
-  //  write the saving file function here with the fileName
 }
 
 void MainWindow::on_actionSave_As_triggered() {
   // FUTURE: This is currently rigged to save only the current document.
   // It will need to iterate over all Document objects and save the nodes
   // vector in each of them.
-
-  // Convenience variable
-  Document* doc = documents.at(currentDocument);
-  doc->saveAsDocument();
-
-  // MOVE ALL OF THIS TO DOCUMENTS
-/*
-  QString fileName = QFileDialog::getSaveFileName(this, tr("Save As File"),
-                                                  tr("XML files (*.xml)"));
-
-  QDomDocument test("nodes_vector_xml");
-  QDomElement root = test.createElement("nodes_vector_xml");
-  test.appendChild(root);
-
-  for_each(doc->nodes.begin(), doc->nodes.end(),
-           [&test, &root] (BaseNode* each_node) {
-    each_node->to_xml(test, root);
-  });
-
-
-  //fprintf(stderr, "Test xml document for the node vector:\n%s\n",
-    //      test.toString().toStdString().c_str());
-
-
-  // fprintf(stderr, "%s\n", fileName.toStdString().c_str());
-
-  if (fileName.isEmpty()) {
-      return;
-  } else {
-      QFile file(fileName);
-  if (!file.open(QIODevice::WriteOnly)) {
-      QMessageBox::information(this, tr("Unable to open file"),
-                               file.errorString());
-      return;
-  }
-
-  ofstream myfile;
-  myfile.open(fileName.toStdString().c_str());
-  myfile << test.toString().toStdString();
-  myfile.close();
-  }
-  */
-
-  //  write the saving as file function here with the fileName
+  documents.at(currentDocument)->saveAsDocument();
 }
 
 void MainWindow::on_actionPrint_triggered() {

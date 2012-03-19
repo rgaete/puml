@@ -372,20 +372,28 @@ void Document::changeSecondConnectionPointHint(const QPoint &point) {
 
 void Document::saveDocument() {
     string documentName;
+
+    // Simple converstion for C string check.
     documentName = fileName.toStdString().c_str();
+    // Verifies that the filename specified is a valid one.
   if (documentName.empty()) {
+      // If a filename and path doesn't exist it forces it to the saveas routine to get the filename.
       Document::saveAsDocument();
   } else {
       QFile file(fileName);
       QDomDocument test("nodes_vector_xml");
       QDomElement root = test.createElement("nodes_vector_xml");
       test.appendChild(root);
- /*
+
+
+      // Am not quite sure what this is for, and couldn't get it to compile, so commented out for now.
+      // I'm assuming this has to do with the QTXML function you added, but wasn't sure.
+      /*
       for_each(doc->nodes.begin(), doc->nodes.end(),
                [&test, &root] (BaseNode* each_node) {
         each_node->to_xml(test, root);
       });
-*/
+      */
       /*
       fprintf(stderr, "Test xml document for the node vector:\n%s\n",
               test.toString().toStdString().c_str());
@@ -393,6 +401,7 @@ void Document::saveDocument() {
 
       // fprintf(sttoStdString().c_str()derr, "%s\n", fileName.toStdString().c_str());
 
+      // Checks to make sure that the file is writable.
       if (!file.open(QIODevice::WriteOnly)) {
           QMessageBox::information(this, tr("Unable to open file"),
                                    file.errorString());
@@ -409,7 +418,9 @@ void Document::saveDocument() {
 
 
 void Document::saveAsDocument() {
+    // Saves file name to current document only accesible variable.
     fileName = QFileDialog::getSaveFileName(this, tr("Save As File"),
                                                     tr("XML files (*.xml)"));
+    // Need to add if canceled saving a name it will stop the loop, as its currently infinite.
     Document::saveDocument();
 }
