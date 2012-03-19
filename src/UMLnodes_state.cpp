@@ -9,10 +9,21 @@ StateObject::StateObject() {
 }
 
 void StateObject::draw(QPainter &painter) {  // NOLINT
-  // Always call this ObjectNode's draw function because it
-  // draws the selection boxes as needed.
-  ObjectNode::draw(painter);
-
+    //The font metrics gets the width of the string and
+    //then checks the length of the string against the
+    //length of the oval and changes the size accordingly
+    QFontMetrics fm = painter.fontMetrics();
+    int temp = fm.width(this->name);
+    if(temp >= length-10){
+        temp = temp - (length-10);
+        temp = temp + length;
+        this->length = temp;
+        this->height = temp;
+    }
+    else{
+        this->length = 50;
+        this->height = 50;
+    }
   // background
   painter.setPen(Qt::NoPen);
   painter.setBrush(Qt::white);
@@ -27,8 +38,27 @@ void StateObject::draw(QPainter &painter) {  // NOLINT
                          length, height),
                    Qt::AlignCenter | Qt::AlignHCenter | Qt::TextDontClip,
                    this->name);
+
+  // Always call this ObjectNode's draw function because it
+  // draws the selection boxes as needed.
+  ObjectNode::draw(painter);
 }
 
+StateObjectDialog::StateObjectDialog(QWidget *parent)
+                 :QInputDialog(parent) {
+  setWindowTitle("State Properties");
+  setOkButtonText("Ok");
+  setCancelButtonText("Cancel");
+  setLabelText("State Name:");
+}
+
+QDialog * StateObject::getDialog() {
+  StateObjectDialog *dialog = new StateObjectDialog;
+  dialog->setTextValue(name);
+  connect(dialog, SIGNAL(textValueSelected(QString)),
+          this, SLOT(setName(QString)));
+  return dialog;
+}
 InitialStateObject::InitialStateObject() {
   this->length = 15;
   this->height = 15;
