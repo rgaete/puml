@@ -16,7 +16,7 @@ class StateObject: public ObjectNode {
   public:
     StateObject();
     BaseNode* clone() { return new StateObject; }
-    QDialog* getDialog() { return 0; }
+    QDialog* getDialog();
     QString getIconPath() { return QString(":/Images/circle.png"); }
     QString getText() { return "State"; }
     DiagramType getDiagramType() { return StateChart; }
@@ -30,6 +30,13 @@ class StateObject: public ObjectNode {
     int radius;
     QString name;
 };
+
+class StateObjectDialog : public QInputDialog {
+  Q_OBJECT
+  public:
+    explicit StateObjectDialog(QWidget *parent = 0);
+};
+
 
 /*!
  * @brief This concrete class is the State node.
