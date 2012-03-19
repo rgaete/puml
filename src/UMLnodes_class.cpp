@@ -1,8 +1,7 @@
 // Copyright (C) 2011-2012 pUML Group
 
 #include <list>
-#include <iostream>
-using namespace std;
+
 #include "./UMLnodes_class.h"
 
 
@@ -15,50 +14,33 @@ ClassBoxObject::ClassBoxObject() {
 }
 
 void ClassBoxObject::draw(QPainter &painter) {  // NOLINT
-    //for resizing the ClassBoxObject
+    //This is for resizing the ClassBoxObject
+    //The variables being created here hold the height and length
+    //in pixels of the strings
     QFontMetrics fm = painter.fontMetrics();
+
     int temp = fm.width(this->className);
+    int alength,aheight,mlength,mheight,max=0;
 
-    //finding length and heights of attributes/methods strings
-    //first loop specifically for attributes
-    int alength=0,aheight=0,mlength=0,mheight=0,max=0, len=0;
-    for(int i=0; i < attributes.length(); i++){
-        if(attributes[i] == '\n' || i == attributes.length()-1){
-            if(max < len)
-                max = len;
-            len=0;
-            aheight += 1;
-        }
-        else
-            len += 1;
-    }
-    alength = max;
-    max = 0; len = 0;
-    //this loop for length and height of methods
-    for(int i=0; i < methods.length(); i++){
-        if(methods[i] == '\n' || i == methods.length()-1){
-            if(max < len)
-                max = len;
-            len=0;
-            mheight += 1;
-        }
-        else
-            len += 1;
-    }
-    mlength = max;
-    max = 0; len = 0;
+    alength = stringLength(this->attributes);
+    mlength = stringLength(this->methods);
 
-    //changes the lengths appropriately if need be.
+    aheight = stringHeight(this->attributes);
+    mheight = stringHeight(this->methods);
+
+    //figures out if the new strings inputed into the dialog
+    //are bigger or smaller than before and resizes the objects
+    //height and lengths accordingly, first checks the lengths
     if(temp >= length-40){
         temp = temp - (length-40);
         temp = temp + length;
         this->length = temp;
     }
-    else if((alength*10) >= length-5 || (mlength*10) >= length-5){
+    else if( alength+10 >= length-10 || mlength+10 >= length-10){
         if(mlength > alength)
-            temp = mlength*6;
+            temp = mlength;
         else
-            temp = alength*6;
+            temp = alength;
         temp = temp - (length-5);
         temp = temp + length;
         this->length = temp;
@@ -67,14 +49,14 @@ void ClassBoxObject::draw(QPainter &painter) {  // NOLINT
         this->length = 60;
     }
 
-    //changes the height of the boxes if need be.
+    //here is the checks to see if the height needs adjustment
     temp = max = 15;
-    if(attributeHeight <= (aheight*15)){
-        temp = aheight*15;
+    if(attributeHeight <= aheight){
+        temp = aheight;
         this->attributeHeight = temp;
     }
-    if(methodHeight <= (mheight*15)){
-        max = mheight*15;
+    if(methodHeight <= mheight){
+        max = mheight;
         this->methodHeight = max;
     }
     temp = temp + max + classHeight;
@@ -87,32 +69,32 @@ void ClassBoxObject::draw(QPainter &painter) {  // NOLINT
         this->height = 45;
     }
 
-    QRect classFrame(position.x() - length / 2,
-                position.y() - height / 2,
-                length, height);
-      // box fill
-      painter.setPen(Qt::black);
-      painter.setBrush(Qt::white);
-      painter.setBackground(Qt::white);
-      painter.drawRect(classFrame);
+  QRect classFrame(position.x() - length / 2,
+                   position.y() - height / 2,
+                   length, height);
+  // box fill
+  painter.setPen(Qt::black);
+  painter.setBrush(Qt::white);
+  painter.setBackground(Qt::white);
+  painter.drawRect(classFrame);
 
-      // Class section
-      QRect classSection(position.x() - length/2 , position.y() - (height/2),
-                         length, classHeight);
+  // Class section
+  QRect classSection(position.x() - length/2 , position.y() - (height/2),
+                     length, classHeight);
 
-      QFont boldFont;
-      boldFont.setBold(true);
-      painter.setFont(boldFont);       // className set to Bold
-      painter.drawText(classSection,
-                       Qt::AlignCenter | Qt::AlignHCenter | Qt::TextDontClip,
-                       className);
+  QFont boldFont;
+  boldFont.setBold(true);
+  painter.setFont(boldFont);       // className set to Bold
+  painter.drawText(classSection,
+                   Qt::AlignCenter | Qt::AlignHCenter | Qt::TextDontClip,
+                   className);
 
-      // Attributes section
-      const QFont normalFont;
-      painter.setFont(normalFont);
+  // Attributes section
+  const QFont normalFont;
+  painter.setFont(normalFont);
 
   QRect attributesSection(position.x() - (length / 2) + 4,
-                          position.y() - (height / 2) + classHeight,
+                          position.y() - (height / 2) + classHeight + 2,
                           length, height);
   painter.drawLine(position.x() - length / 2, position.y() - (height / 2) + classHeight,
                    position.x() + length / 2, position.y() - (height / 2) + classHeight);
@@ -121,7 +103,7 @@ void ClassBoxObject::draw(QPainter &painter) {  // NOLINT
 
   // Methods section
   QRect methodsSection(position.x() - (length / 2) + 4,
-                       position.y() - (height / 2) + classHeight + attributeHeight,
+                       position.y() - (height / 2) + classHeight + attributeHeight + 2,
                        length, height);
   painter.drawLine(position.x() - length / 2, position.y() - (height / 2) + classHeight + attributeHeight,
                    position.x() + length / 2, position.y() - (height / 2) + classHeight + attributeHeight);

@@ -149,7 +149,9 @@ OvalObject::OvalObject()
 }
 
 void OvalObject::draw(QPainter &painter) {  // NOLINT
-  //for resizing the oval appropriately
+  //The font metrics gets the width of the string and
+  //then checks the length of the string against the
+  //length of the oval and changes the size accordingly
   QFontMetrics fm = painter.fontMetrics();
   int temp = fm.width(this->name);
   if(temp >= length-20){
