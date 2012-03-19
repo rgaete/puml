@@ -149,10 +149,6 @@ OvalObject::OvalObject()
 }
 
 void OvalObject::draw(QPainter &painter) {  // NOLINT
-  // Always call this ObjectNode's draw function because it
-  // draws the selection boxes as needed.
-  ObjectNode::draw(painter);
-
   //for resizing the oval appropriately
   QFontMetrics fm = painter.fontMetrics();
   int temp = fm.width(this->name);
@@ -164,6 +160,7 @@ void OvalObject::draw(QPainter &painter) {  // NOLINT
   else{
       this->length = 100;
   }
+
   // background
   painter.setPen(Qt::NoPen);
   painter.setBrush(Qt::white);
@@ -177,6 +174,10 @@ void OvalObject::draw(QPainter &painter) {  // NOLINT
   painter.drawText(QRect(position.x() - length / 2, position.y() - height/2,length, height),
                    Qt::AlignCenter | Qt::AlignHCenter | Qt::TextDontClip,
                    this->name);
+
+  // Always call this ObjectNode's draw function because it
+  // draws the selection boxes as needed.
+  ObjectNode::draw(painter);
 }
 
 OvalObjectDialog::OvalObjectDialog(QWidget *parent)
