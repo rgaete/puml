@@ -603,9 +603,10 @@ void MainWindow::on_actionOpen_triggered() {
 void MainWindow::on_actionSave_triggered() {
   documents.at(currentDocument)->saveDocument();
 
+  /*
   QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
              tr("XML files (*.xml)"));
-
+*/
 
   //  write the saving file function here with the fileName
 }
@@ -620,6 +621,7 @@ void MainWindow::on_actionSave_As_triggered() {
   doc->saveAsDocument();
 
   // MOVE ALL OF THIS TO DOCUMENTS
+/*
   QString fileName = QFileDialog::getSaveFileName(this, tr("Save As File"),
                                                   tr("XML files (*.xml)"));
 
@@ -632,10 +634,10 @@ void MainWindow::on_actionSave_As_triggered() {
     each_node->to_xml(test, root);
   });
 
-  /*
-  fprintf(stderr, "Test xml document for the node vector:\n%s\n",
-          test.toString().toStdString().c_str());
-  */
+
+  //fprintf(stderr, "Test xml document for the node vector:\n%s\n",
+    //      test.toString().toStdString().c_str());
+
 
   // fprintf(stderr, "%s\n", fileName.toStdString().c_str());
 
@@ -654,7 +656,9 @@ void MainWindow::on_actionSave_As_triggered() {
   myfile << test.toString().toStdString();
   myfile.close();
   }
-//  write the saving as file function here with the fileName
+  */
+
+  //  write the saving as file function here with the fileName
 }
 
 void MainWindow::on_actionPrint_triggered() {

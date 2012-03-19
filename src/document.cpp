@@ -2,6 +2,14 @@
 
 
 #include "./document.h"
+#include <utility>
+#include <vector>
+#include <fstream>  // NOLINT
+#include <string>
+
+using std::ofstream;  // NOLINT
+using std::vector;
+using std::string;
 
 /*! Constructor: simply initializes indexOfSelectedObject.
 */
@@ -363,8 +371,45 @@ void Document::changeSecondConnectionPointHint(const QPoint &point) {
 }
 
 void Document::saveDocument() {
-  // if (filename.empty)
-}
+    string documentName;
+    documentName = fileName.toStdString().c_str();
+  if (documentName.empty()) {
+      Document::saveAsDocument();
+  } else {
+      QFile file(fileName);
+      QDomDocument test("nodes_vector_xml");
+      QDomElement root = test.createElement("nodes_vector_xml");
+      test.appendChild(root);
+ /*
+      for_each(doc->nodes.begin(), doc->nodes.end(),
+               [&test, &root] (BaseNode* each_node) {
+        each_node->to_xml(test, root);
+      });
+*/
+      /*
+      fprintf(stderr, "Test xml document for the node vector:\n%s\n",
+              test.toString().toStdString().c_str());
+      */
+
+      // fprintf(sttoStdString().c_str()derr, "%s\n", fileName.toStdString().c_str());
+
+      if (!file.open(QIODevice::WriteOnly)) {
+          QMessageBox::information(this, tr("Unable to open file"),
+                                   file.errorString());
+          return;
+      }
+
+      ofstream myfile;
+      myfile.open(fileName.toStdString().c_str());
+      myfile << test.toString().toStdString();
+      myfile.close();
+      }
+    //  write the saving as file function here with the fileName
+  }
+
 
 void Document::saveAsDocument() {
+    fileName = QFileDialog::getSaveFileName(this, tr("Save As File"),
+                                                    tr("XML files (*.xml)"));
+    Document::saveDocument();
 }
