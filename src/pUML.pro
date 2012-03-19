@@ -7,8 +7,6 @@
 QT       += core gui
 QT       += xml
 
-QMAKE_CXXFLAGS += -std=c++0x
-
 TARGET = pUML
 TEMPLATE = app
 
