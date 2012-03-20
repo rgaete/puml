@@ -15,6 +15,7 @@
 #include <QFile>
 #include <QString>
 
+
 #include "./nodefactory.h"
 #include "./nodes.h"
 
@@ -64,6 +65,8 @@ class Document : public QWidget {
     // the type of diagram that this canvas has
     BaseNode::DiagramType diagramType;
     QString fileName;
+
+
 
   signals:
     void modelChanged();
