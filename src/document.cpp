@@ -194,7 +194,33 @@ void Document::createConnectionPoint2(const QPoint &point) {
       nodes.at(index)->setSelectedForConnectionPoint(false);
 
       emit modelChanged();
-    } else {
+    }
+    //  Self connectors
+    // And the second index was found
+    else if (((index != -1) &&
+         (nodes.at(index)->isConnector() == false)) &&
+            (index == firstConnectionIndex) &&
+            diagramType == BaseNode::Collaboration) {
+      // produce the object
+      BaseNode *newNode;
+      newNode = NodeFactory::getInstance()->produce(newObjectID);
+
+      // now connect the connection to both objects, and connect the
+      // objects to the connections
+      newNode->addConnectedNode(nodes.at(firstConnectionIndex));
+      newNode->addConnectedNode(nodes.at(index));
+      nodes.at(firstConnectionIndex)->addConnectedNode(newNode);
+      nodes.at(index)->addConnectedNode(newNode);
+
+      addNodeToList(newNode);
+      ordering.append(nodes.size()-1);
+
+      nodes.at(index)->setSelectedForConnectionPoint(false);
+
+      emit modelChanged();
+    }
+// end of  self connect
+    else {
       QMessageBox::information(0, "pUML", "No second object selected");
     }
   }
