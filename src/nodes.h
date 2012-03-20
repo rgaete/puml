@@ -18,6 +18,7 @@
 #include <QPainter>
 #include <QAction>
 #include <QtXml>
+#include <QSound>
 
 #include <list>
 #include <vector>
@@ -127,7 +128,7 @@ class ObjectNode: public BaseNode {
 
     /*!
      *
-     */
+     *///isConnector
     bool isConnector() {return false;}
 
   protected:

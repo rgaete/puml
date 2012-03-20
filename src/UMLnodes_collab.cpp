@@ -44,6 +44,7 @@ void StickPersonCollabObject::draw(QPainter &painter) {  // NOLINT
   // background
   painter.setPen(Qt::NoPen);
   painter.setBrush(Qt::white);
+
   //! @TODO This needs parenthesis or else needs to be fixed.  // NOLINT
   painter.drawEllipse(tempx - 16 / 2 / 50.0 * length,
                       tempy - (10 + 16) / 70.0 * height,
@@ -577,11 +578,6 @@ void CollabSelfConnection::draw(QPainter& painter) {  // NOLINT
   obj2 = *it;
   it++;
 
-//  pt1 = obj1->getClosestConnectionPoint(obj2->getPosition());
-//  pt4 = obj2->getClosestConnectionPoint(obj1->getPosition());
-
-//  pt1 = obj1->connectionPoints.at(1);
-//  pt4 = obj2->connectionPoints.at(2);
 
   pt1 = obj1->returnConnectionPoint(1);
   pt4 = obj2->returnConnectionPoint(2);
