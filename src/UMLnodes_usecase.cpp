@@ -154,7 +154,7 @@ void OvalObject::draw(QPainter &painter) {  // NOLINT
   //length of the oval and changes the size accordingly
   QFontMetrics fm = painter.fontMetrics();
   int temp = fm.width(this->name);
-  if(temp >= length-20){
+  if(temp >= length-20 || temp >= 80){
       temp = temp - (length-20);
       temp = temp + length;
       this->length = temp;
@@ -177,8 +177,10 @@ void OvalObject::draw(QPainter &painter) {  // NOLINT
                    Qt::AlignCenter | Qt::AlignHCenter | Qt::TextDontClip,
                    this->name);
 
+
   // Always call this ObjectNode's draw function because it
   // draws the selection boxes as needed.
+  BaseNode::setUpConnectionPoints();
   ObjectNode::draw(painter);
 }
 

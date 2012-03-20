@@ -162,7 +162,7 @@ void BoxCollabObject::draw(QPainter &painter) {  // NOLINT
   QFontMetrics fm = painter.fontMetrics();
   int temp = fm.width(this->name);
 
-  if(temp >= length-20){
+  if(temp >= length-20 || temp >= 70){
       temp = temp - (length-20);
       temp = temp + length;
       this->length = temp;
@@ -203,6 +203,7 @@ void BoxCollabObject::draw(QPainter &painter) {  // NOLINT
 
   // Always call this ObjectNode's draw function because it
   // draws the selection boxes as needed.
+  BaseNode::setUpConnectionPoints();
   ObjectNode::draw(painter);
 }
 
@@ -241,7 +242,7 @@ void MultiBoxCollabObject::draw(QPainter &painter) {  // NOLINT
   QFontMetrics fm = painter.fontMetrics();
   int temp = fm.width(this->name);
 
-  if(temp >= length-20){
+  if(temp >= length-20 || temp >= 70){
       temp = temp - (length-20);
       temp = temp + length;
       this->length = temp;
@@ -320,6 +321,7 @@ void MultiBoxCollabObject::draw(QPainter &painter) {  // NOLINT
 
   // Always call this ObjectNode's draw function because it
   // draws the selection boxes as needed.
+  BaseNode::setUpConnectionPoints();
   ObjectNode::draw(painter);
 }
 
