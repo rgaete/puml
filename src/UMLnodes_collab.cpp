@@ -196,7 +196,9 @@ void BoxCollabObject::draw(QPainter &painter) {  // NOLINT
                      length,
                      height);
 
-
+  QFont underlineFont;
+  underlineFont.setUnderline(true);
+  painter.setFont(underlineFont);
   painter.drawText(QRect(tempx - length / 2, tempy - height / 2, length, 50),
                    Qt::AlignCenter | Qt::AlignVCenter,
                    this->name);
@@ -314,6 +316,9 @@ void MultiBoxCollabObject::draw(QPainter &painter) {  // NOLINT
                    length,
                    height);
 
+  QFont underlineFont;
+  underlineFont.setUnderline(true);
+  painter.setFont(underlineFont);
   painter.drawText(QRect(tempx - length / 2, tempy - height / 2, length, 50),
                    Qt::AlignCenter | Qt::AlignVCenter,
                    this->name);
@@ -544,7 +549,7 @@ CollabConnectionDialog::CollabConnectionDialog(QWidget *parent)
   setWindowTitle("Connector Properties");
   setOkButtonText("Ok");
   setCancelButtonText("Cancel");
-  setLabelText("Message 1:");
+  setLabelText("Description:");
 }
 
 /*! Returns a new CollabConnectionDialog. The dialog is hooked up to
@@ -735,7 +740,7 @@ int CollabSelfConnection::FindDirection(QPoint point1, QPoint point2, QPoint tem
 CollabSelfConnectionDialog::CollabSelfConnectionDialog(QWidget *parent)
                         :QInputDialog(parent) {
   setCancelButtonText("Cancel");
-  setLabelText("Conmnector Name:");
+  setLabelText("Connector Name:");
   setWindowTitle("Connector Properties");
   setOkButtonText("Ok");
 }
