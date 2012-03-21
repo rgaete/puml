@@ -1,7 +1,8 @@
 // Copyright (C) 2011-2012 pUML Group
 
 #include <list>
-
+#include <iostream>
+using namespace std;
 #include "./UMLnodes_class.h"
 
 
@@ -58,21 +59,25 @@ void ClassBoxObject::draw(QPainter &painter) {  // NOLINT
 
     //here is the checks to see if the height needs adjustment
     temp = max = 15;
-    if(attributeHeight <= aheight || aheight >=15){
+    if(aheight >= attributeHeight || aheight >=15){
         temp = aheight;
         this->attributeHeight = temp;
     }
-    if(methodHeight <= mheight || mheight >=15){
+    else{
+        this->attributeHeight = 15;
+    }
+    if(mheight >= methodHeight || mheight >=15){
         max = mheight;
         this->methodHeight = max;
+    }
+    else{
+        this->methodHeight = 15;
     }
     temp = temp + max + classHeight;
     if(temp >= height || temp >= 45){
         this->height = temp;
     }
     else{
-        this->methodHeight=15;
-        this->attributeHeight=15;
         this->height = 45;
     }
 
