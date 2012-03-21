@@ -3,6 +3,8 @@
 # Project created by QtCreator 2011-12-04T23:27:29
 #
 #------------------------------------------------
+#
+# THis is a change
 
 QT       += core gui
 QT       += xml
