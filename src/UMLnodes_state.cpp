@@ -14,7 +14,7 @@ void StateObject::draw(QPainter &painter) {  // NOLINT
     //length of the oval and changes the size accordingly
     QFontMetrics fm = painter.fontMetrics();
     int temp = fm.width(this->name);
-    if(temp >= length-10){
+    if(temp >= length-10 || temp >= 40){
         temp = temp - (length-10);
         temp = temp + length;
         this->length = temp;
@@ -41,6 +41,7 @@ void StateObject::draw(QPainter &painter) {  // NOLINT
 
   // Always call this ObjectNode's draw function because it
   // draws the selection boxes as needed.
+  BaseNode::setUpConnectionPoints();
   ObjectNode::draw(painter);
 }
 
