@@ -1,0 +1,211 @@
+% This file was converted to LaTeX by Writer2LaTeX ver. 1.0.2
+% see http://writer2latex.sourceforge.net for more info
+\documentclass[twoside,letterpaper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb,amsfonts,textcomp}
+\usepackage{color}
+\usepackage{array}
+\usepackage{supertabular}
+\usepackage{hhline}
+\usepackage{hyperref}
+\hypersetup{pdftex, colorlinks=true, linkcolor=blue, citecolor=blue, filecolor=blue, urlcolor=blue, pdftitle=SYSTEMS AND SOFTWARE REQUIREMENTS SPECIFICATION (SSRS) TEMPLATE, pdfauthor=Clinton Jeffery, pdfsubject=, pdfkeywords=}
+\usepackage[pdftex]{graphicx}
+% Outline numbering
+\setcounter{secnumdepth}{5}
+\renewcommand\thesection{\arabic{section}}
+\renewcommand\thesubsection{\arabic{section}.\arabic{subsection}}
+\renewcommand\thesubsubsection{\arabic{section}.\arabic{subsection}.\arabic{subsubsection}}
+\renewcommand\theparagraph{\arabic{section}.\arabic{subsection}.\arabic{subsubsection}.\arabic{paragraph}}
+\renewcommand\thesubparagraph{\arabic{section}.\arabic{subsection}.\arabic{subsubsection}.\arabic{paragraph}.\arabic{subparagraph}}
+\makeatletter
+\newcommand\arraybslash{\let\\\@arraycr}
+\makeatother
+% Page layout (geometry)
+\setlength\voffset{-1in}
+\setlength\hoffset{-1in}
+\setlength\topmargin{0.5in}
+\setlength\oddsidemargin{1in}
+\setlength\evensidemargin{1in}
+\setlength\textheight{8.278in}
+\setlength\textwidth{6.5in}
+\setlength\footskip{0.561in}
+\setlength\headheight{0.5in}
+\setlength\headsep{0.461in}
+% Footnote rule
+\setlength{\skip\footins}{0.0469in}
+\renewcommand\footnoterule{\vspace*{-0.0071in}\setlength\leftskip{0pt}\setlength\rightskip{0pt plus 1fil}\noindent\textcolor{black}{\rule{0.25\columnwidth}{0.0071in}}\vspace*{0.0398in}}
+% Pages styles
+\makeatletter
+\newcommand\ps@Standard{
+  \renewcommand\@oddhead{\selectlanguage{english}\rmfamily\color{black} University of Idaho CS Department Instructional Use\hfill \hfill NOT FOR RELEASE}
+  \renewcommand\@evenhead{\@oddhead}
+  \renewcommand\@oddfoot{\foreignlanguage{english}{\textcolor{black}{SSRS Page }}\foreignlanguage{english}{\textcolor{black}{\thepage{}}}}
+  \renewcommand\@evenfoot{\@oddfoot}
+  \renewcommand\thepage{\arabic{page}}
+}
+\newcommand\ps@Convertviii{
+  \renewcommand\@oddhead{}
+  \renewcommand\@evenhead{\@oddhead}
+  \renewcommand\@oddfoot{}
+  \renewcommand\@evenfoot{\@oddfoot}
+  \renewcommand\thepage{\arabic{page}}
+}
+\newcommand\ps@Convertvii{
+  \renewcommand\@oddhead{}
+  \renewcommand\@evenhead{\@oddhead}
+  \renewcommand\@oddfoot{}
+  \renewcommand\@evenfoot{\@oddfoot}
+  \renewcommand\thepage{\arabic{page}}
+}
+\newcommand\ps@Convertvi{
+  \renewcommand\@oddhead{}
+  \renewcommand\@evenhead{\@oddhead}
+  \renewcommand\@oddfoot{}
+  \renewcommand\@evenfoot{\@oddfoot}
+  \renewcommand\thepage{\arabic{page}}
+}
+\newcommand\ps@Convertv{
+  \renewcommand\@oddhead{}
+  \renewcommand\@evenhead{\@oddhead}
+  \renewcommand\@oddfoot{}
+  \renewcommand\@evenfoot{\@oddfoot}
+  \renewcommand\thepage{\arabic{page}}
+}
+\newcommand\ps@Convertiv{
+  \renewcommand\@oddhead{}
+  \renewcommand\@evenhead{\@oddhead}
+  \renewcommand\@oddfoot{}
+  \renewcommand\@evenfoot{\@oddfoot}
+  \renewcommand\thepage{\arabic{page}}
+}
+\newcommand\ps@Convertii{
+  \renewcommand\@oddhead{}
+  \renewcommand\@evenhead{\@oddhead}
+  \renewcommand\@oddfoot{}
+  \renewcommand\@evenfoot{\@oddfoot}
+  \renewcommand\thepage{\arabic{page}}
+}
+\newcommand\ps@FirstPage{
+  \renewcommand\@oddhead{}
+  \renewcommand\@evenhead{\@oddhead}
+  \renewcommand\@oddfoot{}
+  \renewcommand\@evenfoot{\@oddfoot}
+  \renewcommand\thepage{\arabic{page}}
+}
+\makeatother
+\pagestyle{Standard}
+\setlength\tabcolsep{1mm}
+\renewcommand\arraystretch{1.3}
+% footnotes configuration
+\makeatletter
+\renewcommand\thefootnote{\arabic{footnote}}
+\makeatother
+\title{SYSTEMS AND SOFTWARE REQUIREMENTS SPECIFICATION (SSRS) TEMPLATE}
+\author{Clinton Jeffery}
+\date{2010-11-18T11:33:37.30}
+\begin{document}
+\clearpage\setcounter{page}{1}\pagestyle{Standard}
+\thispagestyle{FirstPage}
+
+\bigskip
+
+\clearpage\section[SPECIFIC
+REQUIREMENS]{\selectlanguage{english}\rmfamily\bfseries\color{black}
+SPECIFIC REQUIREMENTS}
+
+\subsection[EXTERNAL INTERFACE
+REQUIREMENTS]{\selectlanguage{english}\rmfamily\bfseries\color{black}
+EXTERNAL INTERFACE REQUIREMENTS}
+
+\subsubsection[Hardware
+Interfaces]{\selectlanguage{english}\rmfamily\bfseries\color{black}
+Hardware Interfaces}
+{\selectlanguage{english}\color{black}
+\foreignlanguage{english}{\ }\foreignlanguage{english}{\\--Operating system and environment capable of running QT 4.2.
+\\--Storage disk
+\\E.g., hard drive, SSD, or secondary flash. 15 MB of space on one of these storage disks will be required to execute the pUML executable. Additional space will be required to save user generated projects.}}
+
+\subsubsection[Software
+Interfaces]{\selectlanguage{english}\rmfamily\bfseries\color{black}
+Software Interfaces}
+{\selectlanguage{english}\color{black}
+\foreignlanguage{english}{\ }\foreignlanguage{english}{Note: Software interfaces are expected to change before the next release. 
+\\--QT 4.2
+\\--C++ compiler}}
+
+\subsubsection[User
+Interfaces]{\selectlanguage{english}\rmfamily\bfseries\color{black}
+User Interfaces}
+{\selectlanguage{english}\color{black}
+\foreignlanguage{english}{\ }\foreignlanguage{english}{\\--Monitor
+\\As pUML is a graphical program, a sufficiently large and bright monitor is recommended.
+\\--Keyboard
+\\The user will frequently need to fill in text fields. 
+\\--Mouse
+\\The majority of user interaction is through the mouse.}}
+
+\subsubsection[Other Communication
+Interfaces]{\selectlanguage{english}\rmfamily\bfseries\color{black}
+Other Communication Interfaces}
+{\selectlanguage{english}\color{black}
+\foreignlanguage{english}{\ }\foreignlanguage{english}{No other interfaces are required. }}
+
+\clearpage\setcounter{page}{1}\pagestyle{Convertv}
+\subsection[SYSTEM
+FEATURES]{\selectlanguage{english}\rmfamily\bfseries\color{black}
+SYSTEM FEATURES}
+
+\subsubsection[\ Use Case
+Diagrams]{\foreignlanguage{english}{\ }\foreignlanguage{english}{Use
+Case Diagrams}}
+{\selectlanguage{english}\color{black}
+[insert 1+ use case diagrams here]}
+
+\subsubsection[System feature: [Project management tasks suite]{\selectlanguage{english}\rmfamily\bfseries\color{black} System
+feature: Project management tasks suite}
+
+\paragraph[\ Introduction/Purpose of this
+feature]{\foreignlanguage{english}{\ }\foreignlanguage{english}{Introduction/Purpose
+of this feature}}
+{\selectlanguage{english}\color{black}
+Several processes are required to manage projects. These include the saving of files, loading projects from files, and deleting projects.}
+
+\paragraph[Input/Output sequence for this
+feature]{\selectlanguage{english}\rmfamily\bfseries\color{black}
+Input/Output sequence for this feature}
+{\selectlanguage{english}\color{black}
+The user selects the "File" pull down menu at the top left corner of his or her screen. The options currently supported are "New", "Open", "Revert", "Copy As", "Save", "Save As", and "Delete Project". }
+
+\subparagraph{New}
+{\selectlanguage{english}\color{black}
+This creates a new project space. The user shall be presented with a dialog option to save the previous project. Once completing this dialog, the previous project will be closed and a new project space will be created. }
+
+\subparagraph{Open}
+{\selectlanguage{english}\color{black}
+This opens a previously saved project. The user shall be presented with a dialog option to save the previous project. Once completing this dialog, the previous project will be closed and the selected project will be opened.}
+
+\subparagraph{Revert}
+{\selectlanguage{english}\color{black}
+This disregards all unsaved changes made to the project and reverts to the saved version. A confirmation dialog shall be presented to the user before this action is completed.}
+
+\subparagraph{Copy As}
+{\selectlanguage{english}\color{black}
+This creates a new project space. First, the program will be saved. Then the user shall be presented with a dialog to choose a unique name for the new project space. Once completing this dialog, a copy of the previous project will be cloned into the new project space. The previous project shall be closed and the new project shall be opened.}
+
+\subparagraph{Save}
+{\selectlanguage{english}\color{black}
+This saves the current state of the project into an XML that can later be used to recreate the project state. If the current project does not have a name, the "Save" option will be an alias for the "Save As" option.}
+
+\subparagraph{Save As}
+{\selectlanguage{english}\color{black}
+This creates a new project space and then saves the project state into the new project. In contrast with "Copy As", this option does not affect the previous project. }
+
+\subparagraph{Delete Project}
+{\selectlanguage{english}\color{black}
+This deletes the current project and all files within the project folder. The user shall be presented with a confirmation dialog before this action is completed. Upon completion, a blank and unnamed project will be active in the project window. }
+
+
+\end{document}
