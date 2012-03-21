@@ -1,0 +1,32 @@
+Tasks:
+T01 Use Case
+T02 Other diagrams
+T03 toolbar
+T04 connector hitttest
+T05 connections
+T06 snap
+T07 delete objects
+T08 resize
+T09 legality
+T10 preferences
+T11 color illegal object
+T12 xml store
+T13 xml restore
+T14 documentation (SSRS/SSDD)
+T15 installer packages (1)
+T16 code review
+T17 testing
+T18 installer packages (2)
+T19 user manual
+T20 deliverable completion
+
+Milestones:
+M1 one working diagram
+M2 all diagrams working
+M3 save / load
+M4 legality
+M5 installers
+M6 testing
+M7 completion
+M8 deploy
+
