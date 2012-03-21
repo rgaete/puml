@@ -69,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="FinalStateObject" --><!-- doxytag: inherits="ObjectNode" -->
-<p>This concrete class is the State node.  
+<p>This concrete class is the Final State node.  
  <a href="classFinalStateObject.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="UMLnodes__state_8h_source.html">UMLnodes_state.h</a>&gt;</code></p>
@@ -90,14 +90,14 @@ Inheritance diagram for FinalStateObject:</div>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFinalStateObject.html#a98008a50ccd6a4ca4875bf2f00ca1998">FinalStateObject</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBaseNode.html">BaseNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFinalStateObject.html#abc3505491e82bb5271fcf7367e2660e3">clone</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">QDialog *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFinalStateObject.html#aeef6261965a88892ec900f8fde5c04b8">getDialog</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QDialog *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFinalStateObject.html#aa073ea01e06b83f8d035d480bcb837d9">getDialog</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFinalStateObject.html#a6a58f6123ab0c71bc5b4b8cd73c1e92f">getIconPath</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFinalStateObject.html#aead3fc0a043116c9dae4406f18cbb643">getText</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">DiagramType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFinalStateObject.html#aee04e2e75ad81dc4ef4917941c86bcb0">getDiagramType</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFinalStateObject.html#a1bf69330467e12eafae476e899dceb15">draw</a> (QPainter &amp;painter)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>This concrete class is the State node. </p>
+<div class="textblock"><p>This concrete class is the Final State node. </p>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="classObjectNode.html" title="This is the base class for all object nodes.">ObjectNode</a> </dd></dl>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a98008a50ccd6a4ca4875bf2f00ca1998"></a><!-- doxytag: member="FinalStateObject::FinalStateObject" ref="a98008a50ccd6a4ca4875bf2f00ca1998" args="()" -->
@@ -210,27 +210,22 @@ Public Member Functions</h2></td></tr>
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="aeef6261965a88892ec900f8fde5c04b8"></a><!-- doxytag: member="FinalStateObject::getDialog" ref="aeef6261965a88892ec900f8fde5c04b8" args="()" -->
+<a class="anchor" id="aa073ea01e06b83f8d035d480bcb837d9"></a><!-- doxytag: member="FinalStateObject::getDialog" ref="aa073ea01e06b83f8d035d480bcb837d9" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">QDialog * FinalStateObject::getDialog </td>
+          <td class="memname">QDialog* FinalStateObject::getDialog </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [virtual]</code></td>
+          <td><code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
 <p>Implements <a class="el" href="classBaseNode.html#a990ffea58e51f55cfa8c6862b79fd880">BaseNode</a>.</p>
-<div class="fragment"><pre class="fragment">                                      {
-  <a class="code" href="classFinalStateObjectDialog.html" title="This defines a custom dialog for a OvalObject.">FinalStateObjectDialog</a> *dialog = <span class="keyword">new</span> <a class="code" href="classFinalStateObjectDialog.html" title="This defines a custom dialog for a OvalObject.">FinalStateObjectDialog</a>;
-  connect(dialog, SIGNAL(textValueSelected(QString)),
-          <span class="keyword">this</span>, SLOT(setName(QString)));
-  <span class="keywordflow">return</span> dialog;
-}
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> 0; }
 </pre></div>
 </div>
 </div>
@@ -273,8 +268,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/logan/Programming/puml/src/<a class="el" href="UMLnodes__state_8h_source.html">UMLnodes_state.h</a></li>
-<li>/home/logan/Programming/puml/src/<a class="el" href="UMLnodes__state_8cpp.html">UMLnodes_state.cpp</a></li>
+<li><a class="el" href="UMLnodes__state_8h_source.html">UMLnodes_state.h</a></li>
+<li><a class="el" href="UMLnodes__state_8cpp.html">UMLnodes_state.cpp</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -291,7 +286,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 21:11:38 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 19:21:08 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

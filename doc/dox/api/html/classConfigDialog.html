@@ -63,10 +63,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-slots">Public Slots</a> &#124;
 <a href="#signals">Signals</a> &#124;
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a>  </div>
+<a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">ConfigDialog Class Reference</div>  </div>
 </div>
@@ -76,93 +76,121 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p><a href="classConfigDialog-members.html">List of all members.</a></p>
 <table class="memberdecls">
+<tr><td colspan="2"><h2><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigDialog.html#a6b6ce45ecbffff895dcb67d15f7ea699">ConfigDialogType</a> { <a class="el" href="classConfigDialog.html#a6b6ce45ecbffff895dcb67d15f7ea699afa5d4322be3b1880ea7dc006a0242d6f">OpenAndNew</a>, 
+<a class="el" href="classConfigDialog.html#a6b6ce45ecbffff895dcb67d15f7ea699afd4f6d3aae941e9aabcd9528e6d2f806">NewOnly</a>
+ }</td></tr>
 <tr><td colspan="2"><h2><a name="pub-slots"></a>
 Public Slots</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigDialog.html#ac88e5d2ba749853b5cdefde1914a47cf">changePage</a> (QListWidgetItem *current, QListWidgetItem *previous)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigDialog.html#a15477897b7600f2d6ff58ffc9da8f5c1">CloseDialog</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigDialog.html#afd916f44acad42dbb71427214d202d2d">AcceptValue</a> (int diagramenum)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigDialog.html#a2137bab1fa3abcb80782953ff4735e72">accepted</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigDialog.html#af8f9efcc4f4845ede4b0d78e8fa1d1c0">browseForFile</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigDialog.html#a0f456bdc7c9adc0837dcdf11f5c502d7">accept</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigDialog.html#a2c1caed085772e2a57c4dffdc457c7e4">reject</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="signals"></a>
 Signals</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigDialog.html#a1e339775885072ba5f17210cfee74e82">newDiagramType</a> (<a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">ObjectNode::DiagramType</a> diagramType)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigDialog.html#ab4d801f032309f1477a25b967dc7b991">newDiagramType</a> (<a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">BaseNode::DiagramType</a> diagramType)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigDialog.html#af2cc969b6de0114878bca43bb55caedb">openDiagramFile</a> (const QString &amp;filename)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigDialog.html#a28fcaf732c9f363b30b2fc4a9abd9251">ConfigDialog</a> ()</td></tr>
-<tr><td colspan="2"><h2><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCreateNewPage.html">CreateNewPage</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigDialog.html#acc7fecb5699c8705f166e7019dd96924">Newpage</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classCreateOpenPage.html">CreateOpenPage</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigDialog.html#a80b9d2fac9bc78a5d5f7b0b356a64a23">Openpage</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConfigDialog.html#af8862a506f1fa7b86c0fcc0d2a877c50">ConfigDialog</a> (<a class="el" href="classConfigDialog.html#a6b6ce45ecbffff895dcb67d15f7ea699">ConfigDialogType</a> type)</td></tr>
 </table>
+<hr/><h2>Member Enumeration Documentation</h2>
+<a class="anchor" id="a6b6ce45ecbffff895dcb67d15f7ea699"></a><!-- doxytag: member="ConfigDialog::ConfigDialogType" ref="a6b6ce45ecbffff895dcb67d15f7ea699" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classConfigDialog.html#a6b6ce45ecbffff895dcb67d15f7ea699">ConfigDialog::ConfigDialogType</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
+<tr><td valign="top"><em><a class="anchor" id="a6b6ce45ecbffff895dcb67d15f7ea699afa5d4322be3b1880ea7dc006a0242d6f"></a><!-- doxytag: member="OpenAndNew" ref="a6b6ce45ecbffff895dcb67d15f7ea699afa5d4322be3b1880ea7dc006a0242d6f" args="" -->OpenAndNew</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a6b6ce45ecbffff895dcb67d15f7ea699afd4f6d3aae941e9aabcd9528e6d2f806"></a><!-- doxytag: member="NewOnly" ref="a6b6ce45ecbffff895dcb67d15f7ea699afd4f6d3aae941e9aabcd9528e6d2f806" args="" -->NewOnly</em>&nbsp;</td><td>
+</td></tr>
+</table>
+</dd>
+</dl>
+<div class="fragment"><pre class="fragment">                          {
+        <a class="code" href="classConfigDialog.html#a6b6ce45ecbffff895dcb67d15f7ea699afa5d4322be3b1880ea7dc006a0242d6f">OpenAndNew</a>,
+        <a class="code" href="classConfigDialog.html#a6b6ce45ecbffff895dcb67d15f7ea699afd4f6d3aae941e9aabcd9528e6d2f806">NewOnly</a>
+    };
+</pre></div>
+</div>
+</div>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a28fcaf732c9f363b30b2fc4a9abd9251"></a><!-- doxytag: member="ConfigDialog::ConfigDialog" ref="a28fcaf732c9f363b30b2fc4a9abd9251" args="()" -->
+<a class="anchor" id="af8862a506f1fa7b86c0fcc0d2a877c50"></a><!-- doxytag: member="ConfigDialog::ConfigDialog" ref="af8862a506f1fa7b86c0fcc0d2a877c50" args="(ConfigDialogType type)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">ConfigDialog::ConfigDialog </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classConfigDialog.html#a6b6ce45ecbffff895dcb67d15f7ea699">ConfigDialogType</a>&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                           {
+<p>This constructor creates the widgets for this dialog and connects the Ok and Cancel buttons with the accept and reject slots. Uses createIcons, createNewPage and createOpenPage helper functions. </p>
+<div class="fragment"><pre class="fragment">                                                {
+  <span class="comment">// contentsWidget is the sidebar navigation widget</span>
   contentsWidget = <span class="keyword">new</span> QListWidget;
   contentsWidget-&gt;setViewMode(QListView::IconMode);
   contentsWidget-&gt;setIconSize(QSize(96, 84));
   contentsWidget-&gt;setMovement(QListView::Static);
   contentsWidget-&gt;setMaximumWidth(128);
   contentsWidget-&gt;setSpacing(12);
+  createIcons(type);
 
-  <a class="code" href="classConfigDialog.html#acc7fecb5699c8705f166e7019dd96924">Newpage</a> = <span class="keyword">new</span> <a class="code" href="classCreateNewPage.html">CreateNewPage</a>;
-  <a class="code" href="classConfigDialog.html#a80b9d2fac9bc78a5d5f7b0b356a64a23">Openpage</a> = <span class="keyword">new</span> <a class="code" href="classCreateOpenPage.html">CreateOpenPage</a>;
 
+  <span class="comment">// create our two pages</span>
+  newPage = <span class="keyword">new</span> QWidget;
+  openPage = <span class="keyword">new</span> QWidget;
+  createOpenPage();
+  createNewPage();
+
+  <span class="comment">// add the pages to the stacked widget</span>
   pagesWidget = <span class="keyword">new</span> QStackedWidget;
-  pagesWidget-&gt;addWidget(<a class="code" href="classConfigDialog.html#acc7fecb5699c8705f166e7019dd96924">Newpage</a>);
-  pagesWidget-&gt;addWidget(<a class="code" href="classConfigDialog.html#a80b9d2fac9bc78a5d5f7b0b356a64a23">Openpage</a>);
+  pagesWidget-&gt;addWidget(newPage);
+  pagesWidget-&gt;addWidget(openPage);
 
-  QPushButton *closeButton = <span class="keyword">new</span> QPushButton(tr(<span class="stringliteral">&quot;Cancel&quot;</span>));
-
-  createIcons();
   contentsWidget-&gt;setCurrentRow(0);
 
-  connect(closeButton, SIGNAL(clicked()), <span class="keyword">this</span>, SLOT(close()));
+  <span class="comment">// set up the buttons using the built in dialog buttons</span>
+  QDialogButtonBox *buttonBox = <span class="keyword">new</span> QDialogButtonBox(
+        QDialogButtonBox::Ok | QDialogButtonBox::Cancel, Qt::Horizontal,
+        <span class="keyword">this</span>);
+  connect(buttonBox, SIGNAL(accepted()), <span class="keyword">this</span>, SLOT(<a class="code" href="classConfigDialog.html#a0f456bdc7c9adc0837dcdf11f5c502d7">accept</a>()));
+  connect(buttonBox, SIGNAL(rejected()), <span class="keyword">this</span>, SLOT(<a class="code" href="classConfigDialog.html#a2c1caed085772e2a57c4dffdc457c7e4">reject</a>()));
 
+  <span class="comment">// The horizontal layout is the navigation and the stacked widget</span>
   QHBoxLayout *horizontalLayout = <span class="keyword">new</span> QHBoxLayout;
   horizontalLayout-&gt;addWidget(contentsWidget);
   horizontalLayout-&gt;addWidget(pagesWidget, 1);
 
-  QHBoxLayout *buttonsLayout = <span class="keyword">new</span> QHBoxLayout;
-  buttonsLayout-&gt;addStretch(1);
-  buttonsLayout-&gt;addWidget(closeButton);
-
+  <span class="comment">// the main layout is the above layout and the buttons</span>
   QVBoxLayout *mainLayout = <span class="keyword">new</span> QVBoxLayout;
   mainLayout-&gt;addLayout(horizontalLayout);
-  mainLayout-&gt;addStretch(1);
-  mainLayout-&gt;addSpacing(12);
-  mainLayout-&gt;addLayout(buttonsLayout);
+  mainLayout-&gt;addWidget(buttonBox);
   setLayout(mainLayout);
 
-  setWindowTitle(tr(<span class="stringliteral">&quot;Intro Program Options&quot;</span>));
-
-  <span class="comment">// under construction</span>
-  <span class="comment">// the connection between the parent and the children</span>
-  connect(<a class="code" href="classConfigDialog.html#acc7fecb5699c8705f166e7019dd96924">Newpage</a>,SIGNAL(return_to_parent(<span class="keywordtype">int</span>)),  <span class="comment">// NOLINT</span>
-          <span class="keyword">this</span>, SLOT(<a class="code" href="classConfigDialog.html#afd916f44acad42dbb71427214d202d2d">AcceptValue</a>(<span class="keywordtype">int</span>)));  <span class="comment">// NOLINT</span>
-  connect(<a class="code" href="classConfigDialog.html#a80b9d2fac9bc78a5d5f7b0b356a64a23">Openpage</a>,SIGNAL(return_to_parent(<span class="keywordtype">int</span>)),  <span class="comment">// NOLINT</span>
-          <span class="keyword">this</span>, SLOT(<a class="code" href="classConfigDialog.html#afd916f44acad42dbb71427214d202d2d">AcceptValue</a>(<span class="keywordtype">int</span>)));  <span class="comment">// NOLINT</span>
+  setWindowTitle(tr(<span class="stringliteral">&quot;pUML - Open a new or existing diagram&quot;</span>));
 }
 </pre></div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a2137bab1fa3abcb80782953ff4735e72"></a><!-- doxytag: member="ConfigDialog::accepted" ref="a2137bab1fa3abcb80782953ff4735e72" args="()" -->
+<a class="anchor" id="a0f456bdc7c9adc0837dcdf11f5c502d7"></a><!-- doxytag: member="ConfigDialog::accept" ref="a0f456bdc7c9adc0837dcdf11f5c502d7" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ConfigDialog::accepted </td>
+          <td class="memname">void ConfigDialog::accept </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td><code> [slot]</code></td>
@@ -170,29 +198,55 @@ Public Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                            {
-  emit <a class="code" href="classConfigDialog.html#a1e339775885072ba5f17210cfee74e82">newDiagramType</a>(<a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda73297813304e7f1c4f94d5651e800639">ObjectNode::StateChart</a>);
+<p>This overriden slot emits various signals so that the <a class="el" href="classMainWindow.html">MainWindow</a> can pick up on what the user selected in this dialog. </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Have better abstraction on what types of diagrams there are. A developer should be be able to add different diagram types at runtime. </dd></dl>
+<div class="fragment"><pre class="fragment">                          {
+  QListWidgetItem *operation = contentsWidget-&gt;currentItem();
+
+  <span class="comment">// Maybe change this to a switch statement?</span>
+
+  <span class="keywordflow">if</span> (operation-&gt;text() == <span class="stringliteral">&quot;New&quot;</span>) {
+    QListWidgetItem *selected = doctypeList-&gt;selectedItems().at(0);
+    <span class="keywordflow">if</span> (selected-&gt;text() == <span class="stringliteral">&quot;State Chart&quot;</span>) {
+      emit <a class="code" href="classConfigDialog.html#ab4d801f032309f1477a25b967dc7b991">newDiagramType</a>(<a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda73297813304e7f1c4f94d5651e800639">BaseNode::StateChart</a>);
+    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (selected-&gt;text() == <span class="stringliteral">&quot;Collaboration&quot;</span>) {
+      emit <a class="code" href="classConfigDialog.html#ab4d801f032309f1477a25b967dc7b991">newDiagramType</a>(<a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcdac7772d1045a9dad07f5fe029a36fcf50">BaseNode::Collaboration</a>);
+    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (selected-&gt;text() == <span class="stringliteral">&quot;Class&quot;</span>) {
+      emit <a class="code" href="classConfigDialog.html#ab4d801f032309f1477a25b967dc7b991">newDiagramType</a>(<a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda8de03f85f228905b24b6ced5f8037a69">BaseNode::Class</a>);
+    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (selected-&gt;text() == <span class="stringliteral">&quot;Use Case&quot;</span>) {
+      emit <a class="code" href="classConfigDialog.html#ab4d801f032309f1477a25b967dc7b991">newDiagramType</a>(<a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda8c7df3c6e052df3f1ab6f0025a348a7a">BaseNode::UseCase</a>);
+    } <span class="keywordflow">else</span> {
+      QMessageBox::information(<span class="keyword">this</span>, <span class="stringliteral">&quot;pUML&quot;</span>, <span class="stringliteral">&quot;Not a valid diagram type!&quot;</span>);
+    }
+  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (operation-&gt;text() == <span class="stringliteral">&quot;Open&quot;</span>) {
+    emit <a class="code" href="classConfigDialog.html#af2cc969b6de0114878bca43bb55caedb">openDiagramFile</a>(fileName);
+  } <span class="keywordflow">else</span> {
+    QMessageBox::information(<span class="keyword">this</span>, <span class="stringliteral">&quot;pUML&quot;</span>, <span class="stringliteral">&quot;Not a valid operation!&quot;</span>);
+    emit <a class="code" href="classConfigDialog.html#ab4d801f032309f1477a25b967dc7b991">newDiagramType</a>(<a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda76aa2a7edeab2377d00af42cfdc4334c">BaseNode::Nothing</a>);
+  }
+  <a class="code" href="classConfigDialog.html#a0f456bdc7c9adc0837dcdf11f5c502d7">QDialog::accept</a>();
 }
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="afd916f44acad42dbb71427214d202d2d"></a><!-- doxytag: member="ConfigDialog::AcceptValue" ref="afd916f44acad42dbb71427214d202d2d" args="(int diagramenum)" -->
+<a class="anchor" id="af8f9efcc4f4845ede4b0d78e8fa1d1c0"></a><!-- doxytag: member="ConfigDialog::browseForFile" ref="af8f9efcc4f4845ede4b0d78e8fa1d1c0" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ConfigDialog::AcceptValue </td>
+          <td class="memname">void ConfigDialog::browseForFile </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>diagramenum</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td><code> [slot]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                              {
-  <span class="comment">// cout &lt;&lt; diagramenum &lt;&lt;endl;</span>
-  <a class="code" href="classConfigDialog.html#a15477897b7600f2d6ff58ffc9da8f5c1">CloseDialog</a>();
+<p>This slot opens a file browser to select a file to open. </p>
+<div class="fragment"><pre class="fragment">                                 {
+  fileName = QFileDialog::getOpenFileName(<span class="keyword">this</span>,
+     tr(<span class="stringliteral">&quot;Open Document&quot;</span>),  tr(<span class="stringliteral">&quot;XML files (*.xml)&quot;</span>));
+  filenameBox-&gt;setText(fileName);
 }
 </pre></div>
 </div>
@@ -221,6 +275,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+<p>This slot updates the currently visible widget in the widget stack. </p>
 <div class="fragment"><pre class="fragment">                                                         {
   <span class="keywordflow">if</span> (!current)
     current = previous;
@@ -230,33 +285,14 @@ Public Attributes</h2></td></tr>
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="a15477897b7600f2d6ff58ffc9da8f5c1"></a><!-- doxytag: member="ConfigDialog::CloseDialog" ref="a15477897b7600f2d6ff58ffc9da8f5c1" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ConfigDialog::CloseDialog </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td><code> [slot]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                               {
-  close();
-}
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="a1e339775885072ba5f17210cfee74e82"></a><!-- doxytag: member="ConfigDialog::newDiagramType" ref="a1e339775885072ba5f17210cfee74e82" args="(ObjectNode::DiagramType diagramType)" -->
+<a class="anchor" id="ab4d801f032309f1477a25b967dc7b991"></a><!-- doxytag: member="ConfigDialog::newDiagramType" ref="ab4d801f032309f1477a25b967dc7b991" args="(BaseNode::DiagramType diagramType)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void ConfigDialog::newDiagramType </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">ObjectNode::DiagramType</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">BaseNode::DiagramType</a>&#160;</td>
           <td class="paramname"><em>diagramType</em></td><td>)</td>
           <td><code> [signal]</code></td>
         </tr>
@@ -266,13 +302,16 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<hr/><h2>Member Data Documentation</h2>
-<a class="anchor" id="acc7fecb5699c8705f166e7019dd96924"></a><!-- doxytag: member="ConfigDialog::Newpage" ref="acc7fecb5699c8705f166e7019dd96924" args="" -->
+<a class="anchor" id="af2cc969b6de0114878bca43bb55caedb"></a><!-- doxytag: member="ConfigDialog::openDiagramFile" ref="af2cc969b6de0114878bca43bb55caedb" args="(const QString &amp;filename)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classCreateNewPage.html">CreateNewPage</a>* <a class="el" href="classConfigDialog.html#acc7fecb5699c8705f166e7019dd96924">ConfigDialog::Newpage</a></td>
+          <td class="memname">void ConfigDialog::openDiagramFile </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td><code> [signal]</code></td>
         </tr>
       </table>
 </div>
@@ -280,22 +319,29 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a80b9d2fac9bc78a5d5f7b0b356a64a23"></a><!-- doxytag: member="ConfigDialog::Openpage" ref="a80b9d2fac9bc78a5d5f7b0b356a64a23" args="" -->
+<a class="anchor" id="a2c1caed085772e2a57c4dffdc457c7e4"></a><!-- doxytag: member="ConfigDialog::reject" ref="a2c1caed085772e2a57c4dffdc457c7e4" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classCreateOpenPage.html">CreateOpenPage</a>* <a class="el" href="classConfigDialog.html#a80b9d2fac9bc78a5d5f7b0b356a64a23">ConfigDialog::Openpage</a></td>
+          <td class="memname">void ConfigDialog::reject </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [slot]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-
+<div class="fragment"><pre class="fragment">                          {
+    <a class="code" href="classConfigDialog.html#a2c1caed085772e2a57c4dffdc457c7e4">QDialog::reject</a>();
+    emit <a class="code" href="classConfigDialog.html#ab4d801f032309f1477a25b967dc7b991">newDiagramType</a>(<a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda76aa2a7edeab2377d00af42cfdc4334c">BaseNode::Nothing</a>);
+}
+</pre></div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/logan/Programming/puml/src/<a class="el" href="dialog_8h_source.html">dialog.h</a></li>
-<li>/home/logan/Programming/puml/src/<a class="el" href="dialog_8cpp.html">dialog.cpp</a></li>
+<li><a class="el" href="dialog_8h_source.html">dialog.h</a></li>
+<li><a class="el" href="dialog_8cpp.html">dialog.cpp</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -312,7 +358,7 @@ Public Attributes</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 21:11:38 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 19:21:07 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -85,16 +85,19 @@ Inheritance diagram for BaseNode:</div>
 <area href="classExtendsConnection.html" title="This concrete class defines an Extends line in a Use Case diagram (line from the actor to the use cas..." alt="ExtendsConnection" shape="rect" coords="162,112,314,136"/>
 <area href="classIncludesConnection.html" alt="IncludesConnection" shape="rect" coords="162,168,314,192"/>
 <area href="classInteractionConnection.html" title="This concrete class defines an Interaction line in a Use Case diagram (line from the actor to the use..." alt="InteractionConnection" shape="rect" coords="162,224,314,248"/>
-<area href="classArrowCollabObject.html" alt="ArrowCollabObject" shape="rect" coords="486,112,638,136"/>
-<area href="classBoxCollabObject.html" alt="BoxCollabObject" shape="rect" coords="486,168,638,192"/>
-<area href="classClassBoxObject.html" title="This concrete class is the ClassBox node." alt="ClassBoxObject" shape="rect" coords="486,224,638,248"/>
-<area href="classFinalStateObject.html" title="This concrete class is the State node." alt="FinalStateObject" shape="rect" coords="486,280,638,304"/>
-<area href="classInitialStateObject.html" title="This concrete class is the State node." alt="InitialStateObject" shape="rect" coords="486,336,638,360"/>
+<area href="classTransitionConnection.html" title="This concrete class defines an Interaction line in a Use Case diagram (line from the actor to the use..." alt="TransitionConnection" shape="rect" coords="162,280,314,304"/>
+<area href="classBoxCollabObject.html" title="This concrete class is the BoxCollabObject node." alt="BoxCollabObject" shape="rect" coords="486,112,638,136"/>
+<area href="classClassBoxObject.html" title="This concrete class is the ClassBox node." alt="ClassBoxObject" shape="rect" coords="486,168,638,192"/>
+<area href="classFinalStateObject.html" title="This concrete class is the Final State node." alt="FinalStateObject" shape="rect" coords="486,224,638,248"/>
+<area href="classInitialStateObject.html" title="This concrete class is the State node." alt="InitialStateObject" shape="rect" coords="486,280,638,304"/>
+<area href="classMultiBoxCollabObject.html" title="This concrete class is the MultiBoxCollabObject node." alt="MultiBoxCollabObject" shape="rect" coords="486,336,638,360"/>
 <area href="classOvalObject.html" title="This concrete class is the Oval node." alt="OvalObject" shape="rect" coords="486,392,638,416"/>
 <area href="classStateObject.html" title="This concrete class is the State node." alt="StateObject" shape="rect" coords="486,448,638,472"/>
 <area href="classStickPersonCollabObject.html" title="This concrete class is the StickPersonCollab node." alt="StickPersonCollabObject" shape="rect" coords="486,504,638,528"/>
 <area href="classStickPersonObject.html" title="This concrete class is the StickPerson node." alt="StickPersonObject" shape="rect" coords="486,560,638,584"/>
-<area href="classClassConnection.html" title="This concrete class defines ..." alt="ClassConnection" shape="rect" coords="648,112,800,136"/>
+<area href="classClassConnection.html" title="This concrete class defines ..." alt="ClassConnection" shape="rect" coords="810,112,962,136"/>
+<area href="classCollabConnection.html" title="This concrete class defines ..." alt="CollabConnection" shape="rect" coords="810,168,962,192"/>
+<area href="classCollabSelfConnection.html" title="This concrete class defines ..." alt="CollabSelfConnection" shape="rect" coords="810,224,962,248"/>
 </map>
  </div></div>
 
@@ -108,15 +111,16 @@ Public Types</h2></td></tr>
 <a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda8c7df3c6e052df3f1ab6f0025a348a7a">UseCase</a>, 
 <a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda73297813304e7f1c4f94d5651e800639">StateChart</a>, 
 <br/>
-&#160;&#160;<a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcdac7772d1045a9dad07f5fe029a36fcf50">Collaboration</a>
+&#160;&#160;<a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcdac7772d1045a9dad07f5fe029a36fcf50">Collaboration</a>, 
+<a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda76aa2a7edeab2377d00af42cfdc4334c">Nothing</a>
 <br/>
  }</td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a8707f8359c128d58e81a6c61fea432f7">BaseNode</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QDomElement&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#aefac1436bf0745dd3449c59212fe6763">to_xml</a> (QDomDocument &amp;doc, QDomElement &amp;doc_root)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a4f1b5df25d1033cadefbfe2336fff505">setSelected</a> (bool newState)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#aa6675efee5af9fc0e9b2e19c98e4b7dc">setPosition</a> (const QPoint &amp;pos)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a8b51b88f62243368d3d7cb3804636864">setPoints</a> (const QPoint &amp;p1, const QPoint &amp;p2)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QPoint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a79627d9a052108d60082dddbd60dfb02">draw</a> (QPainter &amp;painter)=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classBaseNode.html">BaseNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a78866f78aa92c207f9d0ea1861e15b13">clone</a> ()=0</td></tr>
@@ -131,15 +135,18 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#ab5dc770bf1c1108c2e32fc5fcec92d90">removeConnectedNode</a> (<a class="el" href="classBaseNode.html">BaseNode</a> *object)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QPoint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#ac0a992931fa5e310251c25e28acd210c">getClosestConnectionPoint</a> (const QPoint &amp;point)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::list&lt; <a class="el" href="classBaseNode.html">BaseNode</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a675cf32e2fc48b0a8cf2697b56488721">getConnectedNodes</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a8832a387d45ff0f1ead3956476217fde">setSelectedForConnectionPoint</a> (bool state)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QPoint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a79cd85fb289784e0c616515f93636fd1">returnConnectionPoint</a> (int value)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#ab76acaea5c58f6e0c8e6507568b2945c">stringLength</a> (const QString &amp;string)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#af7d8962381c0ab7e48032316b37f0208">stringHeight</a> (const QString &amp;string)</td></tr>
 <tr><td colspan="2"><h2><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#aa1dae1798643a47349b94c4ba006fbcd">setUpConnectionPoints</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a321a3231c6688686d5ee779ab169b741">selected</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a2d29e941a7519d051f130f7ffd07ecec">cpSelected</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QPoint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">QPoint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a66ba0ffc241873792fbc076750d94037">point1</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">QPoint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a147ecf80895c62e7df284d2af5825cfc">point2</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::list&lt; <a class="el" href="classBaseNode.html">BaseNode</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseNode.html#a6589606c2f8b588e7e27199803cfb2c8">connectedObjects</a></td></tr>
@@ -168,6 +175,8 @@ Protected Attributes</h2></td></tr>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="aa551aa648e877b0717bac9fa58570fcdac7772d1045a9dad07f5fe029a36fcf50"></a><!-- doxytag: member="Collaboration" ref="aa551aa648e877b0717bac9fa58570fcdac7772d1045a9dad07f5fe029a36fcf50" args="" -->Collaboration</em>&nbsp;</td><td>
 </td></tr>
+<tr><td valign="top"><em><a class="anchor" id="aa551aa648e877b0717bac9fa58570fcda76aa2a7edeab2377d00af42cfdc4334c"></a><!-- doxytag: member="Nothing" ref="aa551aa648e877b0717bac9fa58570fcda76aa2a7edeab2377d00af42cfdc4334c" args="" -->Nothing</em>&nbsp;</td><td>
+</td></tr>
 </table>
 </dd>
 </dl>
@@ -176,7 +185,8 @@ Protected Attributes</h2></td></tr>
       <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda72e2c162c0ffc08495e5ca91381923db">Interaction</a>,
       <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda8c7df3c6e052df3f1ab6f0025a348a7a">UseCase</a>,
       <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda73297813304e7f1c4f94d5651e800639">StateChart</a>,
-      <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcdac7772d1045a9dad07f5fe029a36fcf50">Collaboration</a>
+      <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcdac7772d1045a9dad07f5fe029a36fcf50">Collaboration</a>,
+      <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda76aa2a7edeab2377d00af42cfdc4334c">Nothing</a>
     };
 </pre></div>
 </div>
@@ -198,6 +208,7 @@ Protected Attributes</h2></td></tr>
 <p>The <a class="el" href="classBaseNode.html">BaseNode</a> constructor initializes data and sets a unique id. </p>
 <div class="fragment"><pre class="fragment">                   {
   <a class="code" href="classBaseNode.html#a321a3231c6688686d5ee779ab169b741">selected</a> = <span class="keyword">false</span>;
+  <a class="code" href="classBaseNode.html#a2d29e941a7519d051f130f7ffd07ecec">cpSelected</a> = <span class="keyword">false</span>;
   <a class="code" href="classBaseNode.html#aa1dae1798643a47349b94c4ba006fbcd">setUpConnectionPoints</a>();
 }
 </pre></div>
@@ -258,7 +269,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Implemented in <a class="el" href="classClassBoxObject.html#a8f3dbb7c5d882ad63a8dbabcfe1fa4c7">ClassBoxObject</a>, <a class="el" href="classClassConnection.html#a187afc5a2a1089c579511170c331653a">ClassConnection</a>, <a class="el" href="classStickPersonCollabObject.html#afc5fe93a57379f108b232bac23e612c5">StickPersonCollabObject</a>, <a class="el" href="classBoxCollabObject.html#a3495a8c0567faf7fc4914237c8cffcd4">BoxCollabObject</a>, <a class="el" href="classArrowCollabObject.html#a5522ff869b4fa69124564c0440b94d5c">ArrowCollabObject</a>, <a class="el" href="classStateObject.html#a7c9241e890a5770224b5169098065938">StateObject</a>, <a class="el" href="classInitialStateObject.html#ae29f427eb956d941d10fc5d7fbe52b79">InitialStateObject</a>, <a class="el" href="classFinalStateObject.html#abc3505491e82bb5271fcf7367e2660e3">FinalStateObject</a>, <a class="el" href="classStickPersonObject.html#a9f71b9d71b9f72c6f4f24213dc6fab8e">StickPersonObject</a>, <a class="el" href="classOvalObject.html#a32221c2b341ca074f37b181209ad000e">OvalObject</a>, <a class="el" href="classInteractionConnection.html#a609140b6f83bcbc3de6b7a8bc31d72e5">InteractionConnection</a>, <a class="el" href="classExtendsConnection.html#aa17d2148bbf8f97b3a1ba649b94c19d3">ExtendsConnection</a>, and <a class="el" href="classIncludesConnection.html#a599153c22e51ae1d5e024b7babadda92">IncludesConnection</a>.</p>
+<p>Implemented in <a class="el" href="classClassBoxObject.html#a8f3dbb7c5d882ad63a8dbabcfe1fa4c7">ClassBoxObject</a>, <a class="el" href="classClassConnection.html#a187afc5a2a1089c579511170c331653a">ClassConnection</a>, <a class="el" href="classStickPersonCollabObject.html#afc5fe93a57379f108b232bac23e612c5">StickPersonCollabObject</a>, <a class="el" href="classBoxCollabObject.html#a3495a8c0567faf7fc4914237c8cffcd4">BoxCollabObject</a>, <a class="el" href="classMultiBoxCollabObject.html#a38ce39c6c47052b1c06d0f21bc8b287a">MultiBoxCollabObject</a>, <a class="el" href="classCollabConnection.html#a5a497cae523009ac2509f85d94fd4532">CollabConnection</a>, <a class="el" href="classCollabSelfConnection.html#a095020ec1225d21e41c1bb467911d416">CollabSelfConnection</a>, <a class="el" href="classStateObject.html#a7c9241e890a5770224b5169098065938">StateObject</a>, <a class="el" href="classInitialStateObject.html#ae29f427eb956d941d10fc5d7fbe52b79">InitialStateObject</a>, <a class="el" href="classFinalStateObject.html#abc3505491e82bb5271fcf7367e2660e3">FinalStateObject</a>, <a class="el" href="classTransitionConnection.html#ac42cd8770cae95fb2d034402139cdec7">TransitionConnection</a>, <a class="el" href="classStickPersonObject.html#a9f71b9d71b9f72c6f4f24213dc6fab8e">StickPersonObject</a>, <a class="el" href="classOvalObject.html#a32221c2b341ca074f37b181209ad000e">OvalObject</a>, <a class="el" href="classInteractionConnection.html#a609140b6f83bcbc3de6b7a8bc31d72e5">InteractionConnection</a>, <a class="el" href="classExtendsConnection.html#aa17d2148bbf8f97b3a1ba649b94c19d3">ExtendsConnection</a>, and <a class="el" href="classIncludesConnection.html#a599153c22e51ae1d5e024b7babadda92">IncludesConnection</a>.</p>
 
 </div>
 </div>
@@ -277,7 +288,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Implemented in <a class="el" href="classObjectNode.html#ae0422bfde3bfb8554826dfbe4806fb08">ObjectNode</a>, <a class="el" href="classClassBoxObject.html#a909cba1dcbfecb3d401c6d34f6632876">ClassBoxObject</a>, <a class="el" href="classClassConnection.html#a75aedc5d6fe145418adb22022330d1af">ClassConnection</a>, <a class="el" href="classStickPersonCollabObject.html#aa79762f8f8f98284ddbfee0cf14920f1">StickPersonCollabObject</a>, <a class="el" href="classBoxCollabObject.html#a5df351b68872b450bed10df6b516c6a3">BoxCollabObject</a>, <a class="el" href="classArrowCollabObject.html#a0624cb3942a9e1a3cde0e964dec9c7d2">ArrowCollabObject</a>, <a class="el" href="classStateObject.html#a97fdf2b174bf32f6b9427c9cc4428bb3">StateObject</a>, <a class="el" href="classInitialStateObject.html#ad4ea4c1a50a98fd4232e4a10705e7a66">InitialStateObject</a>, <a class="el" href="classFinalStateObject.html#a1bf69330467e12eafae476e899dceb15">FinalStateObject</a>, <a class="el" href="classStickPersonObject.html#abd84d82f09b25b71bb8e033a140708de">StickPersonObject</a>, <a class="el" href="classOvalObject.html#aa60cb82c3c78097ca70dc7242b120f87">OvalObject</a>, <a class="el" href="classInteractionConnection.html#a235c5a54a3fbc8a2d39867e66c707337">InteractionConnection</a>, <a class="el" href="classExtendsConnection.html#ac1a387fe999efe30e3fa4743a739974c">ExtendsConnection</a>, and <a class="el" href="classIncludesConnection.html#ad46cc289388868d05f543d4b12a880ab">IncludesConnection</a>.</p>
+<p>Implemented in <a class="el" href="classObjectNode.html#ae0422bfde3bfb8554826dfbe4806fb08">ObjectNode</a>, <a class="el" href="classClassBoxObject.html#a909cba1dcbfecb3d401c6d34f6632876">ClassBoxObject</a>, <a class="el" href="classClassConnection.html#a75aedc5d6fe145418adb22022330d1af">ClassConnection</a>, <a class="el" href="classStickPersonCollabObject.html#aa79762f8f8f98284ddbfee0cf14920f1">StickPersonCollabObject</a>, <a class="el" href="classBoxCollabObject.html#a5df351b68872b450bed10df6b516c6a3">BoxCollabObject</a>, <a class="el" href="classMultiBoxCollabObject.html#a7758bde9a93c3e1f0a9f0dc45ecbf2ba">MultiBoxCollabObject</a>, <a class="el" href="classCollabConnection.html#aefe828ef1a1cdaebb71946854bcd5cbb">CollabConnection</a>, <a class="el" href="classCollabSelfConnection.html#a61e7a26488e3085588a2f5a35a3f3564">CollabSelfConnection</a>, <a class="el" href="classStateObject.html#a97fdf2b174bf32f6b9427c9cc4428bb3">StateObject</a>, <a class="el" href="classInitialStateObject.html#ad4ea4c1a50a98fd4232e4a10705e7a66">InitialStateObject</a>, <a class="el" href="classFinalStateObject.html#a1bf69330467e12eafae476e899dceb15">FinalStateObject</a>, <a class="el" href="classTransitionConnection.html#a019ef6570a894f59588115d2e2242aaf">TransitionConnection</a>, <a class="el" href="classStickPersonObject.html#abd84d82f09b25b71bb8e033a140708de">StickPersonObject</a>, <a class="el" href="classOvalObject.html#aa60cb82c3c78097ca70dc7242b120f87">OvalObject</a>, <a class="el" href="classInteractionConnection.html#a235c5a54a3fbc8a2d39867e66c707337">InteractionConnection</a>, <a class="el" href="classExtendsConnection.html#ac1a387fe999efe30e3fa4743a739974c">ExtendsConnection</a>, and <a class="el" href="classIncludesConnection.html#ad46cc289388868d05f543d4b12a880ab">IncludesConnection</a>.</p>
 
 </div>
 </div>
@@ -337,7 +348,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                               {
-  <span class="keywordflow">return</span> std::list&lt;BaseNode*&gt;(<a class="code" href="classBaseNode.html#a6589606c2f8b588e7e27199803cfb2c8">connectedObjects</a>);
+    <span class="keywordflow">return</span> std::list&lt;BaseNode*&gt;(<a class="code" href="classBaseNode.html#a6589606c2f8b588e7e27199803cfb2c8">connectedObjects</a>);
 }
 </pre></div>
 </div>
@@ -356,7 +367,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Implemented in <a class="el" href="classClassBoxObject.html#a180ac9a72b49c477ac698874d902e095">ClassBoxObject</a>, <a class="el" href="classClassConnection.html#aebb0eeacd4af5359e488e8fc518c21de">ClassConnection</a>, <a class="el" href="classStickPersonCollabObject.html#a14b74477729d439f20d3d4465b13caaf">StickPersonCollabObject</a>, <a class="el" href="classBoxCollabObject.html#a2e3e9647de7b07d6dfc18f79d69e095b">BoxCollabObject</a>, <a class="el" href="classArrowCollabObject.html#ab409fc99f49df8b189348064f4f3a7fd">ArrowCollabObject</a>, <a class="el" href="classStateObject.html#a1567d9f8dbaa3caf18b27f65ded02c97">StateObject</a>, <a class="el" href="classInitialStateObject.html#a233e64092156c295fb325311449d3468">InitialStateObject</a>, <a class="el" href="classFinalStateObject.html#aee04e2e75ad81dc4ef4917941c86bcb0">FinalStateObject</a>, <a class="el" href="classStickPersonObject.html#af45828cf7fdd3760b428e9fec53822ea">StickPersonObject</a>, <a class="el" href="classOvalObject.html#ab97624ddcc91bf45a8bdf2f207f1dca0">OvalObject</a>, <a class="el" href="classInteractionConnection.html#affbd4460835a272e850553b965cb749e">InteractionConnection</a>, <a class="el" href="classExtendsConnection.html#a88031d5a407592389de92e70b79fef41">ExtendsConnection</a>, and <a class="el" href="classIncludesConnection.html#a0713d2d26d7ba9103e3765386c945c85">IncludesConnection</a>.</p>
+<p>Implemented in <a class="el" href="classClassBoxObject.html#a180ac9a72b49c477ac698874d902e095">ClassBoxObject</a>, <a class="el" href="classClassConnection.html#aebb0eeacd4af5359e488e8fc518c21de">ClassConnection</a>, <a class="el" href="classStickPersonCollabObject.html#a14b74477729d439f20d3d4465b13caaf">StickPersonCollabObject</a>, <a class="el" href="classBoxCollabObject.html#a2e3e9647de7b07d6dfc18f79d69e095b">BoxCollabObject</a>, <a class="el" href="classMultiBoxCollabObject.html#ac8124b5e919e5644d46659c164647e63">MultiBoxCollabObject</a>, <a class="el" href="classCollabConnection.html#a4caf989dc7cb65865b81888f3328ca75">CollabConnection</a>, <a class="el" href="classCollabSelfConnection.html#af7c3be925731bc3171336d46cab23569">CollabSelfConnection</a>, <a class="el" href="classStateObject.html#a1567d9f8dbaa3caf18b27f65ded02c97">StateObject</a>, <a class="el" href="classInitialStateObject.html#a233e64092156c295fb325311449d3468">InitialStateObject</a>, <a class="el" href="classFinalStateObject.html#aee04e2e75ad81dc4ef4917941c86bcb0">FinalStateObject</a>, <a class="el" href="classTransitionConnection.html#a20bab4dc65d1f60138d465a7dac7004c">TransitionConnection</a>, <a class="el" href="classStickPersonObject.html#af45828cf7fdd3760b428e9fec53822ea">StickPersonObject</a>, <a class="el" href="classOvalObject.html#ab97624ddcc91bf45a8bdf2f207f1dca0">OvalObject</a>, <a class="el" href="classInteractionConnection.html#affbd4460835a272e850553b965cb749e">InteractionConnection</a>, <a class="el" href="classExtendsConnection.html#a88031d5a407592389de92e70b79fef41">ExtendsConnection</a>, and <a class="el" href="classIncludesConnection.html#a0713d2d26d7ba9103e3765386c945c85">IncludesConnection</a>.</p>
 
 </div>
 </div>
@@ -374,7 +385,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Implemented in <a class="el" href="classClassBoxObject.html#a459c7c2fecae2d55cbe97f8d205c6c9e">ClassBoxObject</a>, <a class="el" href="classClassConnection.html#ae97a64660be20835e9f686b50aecba2b">ClassConnection</a>, <a class="el" href="classStickPersonCollabObject.html#ac5588ce8f9ca2cdb27bcaa27b025bc75">StickPersonCollabObject</a>, <a class="el" href="classBoxCollabObject.html#a21fe9b72056adcd5e909371c383c178d">BoxCollabObject</a>, <a class="el" href="classArrowCollabObject.html#a71a941b8f15a758bdf0fd92dd2f32ef0">ArrowCollabObject</a>, <a class="el" href="classStateObject.html#a0daa5f41f1694e7fb756af580dfa715c">StateObject</a>, <a class="el" href="classInitialStateObject.html#ad6f9dd546e467e06fac699ac4f37e834">InitialStateObject</a>, <a class="el" href="classFinalStateObject.html#aeef6261965a88892ec900f8fde5c04b8">FinalStateObject</a>, <a class="el" href="classStickPersonObject.html#ad4ba9e63a54a7f26246c80a0c2c67120">StickPersonObject</a>, <a class="el" href="classOvalObject.html#a29f690a35240ec93437cbfb483343ee5">OvalObject</a>, <a class="el" href="classInteractionConnection.html#aa3b4b6dc1c9479e7f9725c7ce2aae413">InteractionConnection</a>, <a class="el" href="classExtendsConnection.html#a629165373b76710aa80b366f173d8393">ExtendsConnection</a>, and <a class="el" href="classIncludesConnection.html#a050c9a312212c00014eabd48ab1ada84">IncludesConnection</a>.</p>
+<p>Implemented in <a class="el" href="classClassBoxObject.html#a459c7c2fecae2d55cbe97f8d205c6c9e">ClassBoxObject</a>, <a class="el" href="classClassConnection.html#ae97a64660be20835e9f686b50aecba2b">ClassConnection</a>, <a class="el" href="classStickPersonCollabObject.html#ac5588ce8f9ca2cdb27bcaa27b025bc75">StickPersonCollabObject</a>, <a class="el" href="classBoxCollabObject.html#a21fe9b72056adcd5e909371c383c178d">BoxCollabObject</a>, <a class="el" href="classMultiBoxCollabObject.html#a1f5d5bfbfc18c26bdd7fe14f0c07f4db">MultiBoxCollabObject</a>, <a class="el" href="classCollabConnection.html#ad33e25edf6c6ef746db3d8629c9cb09c">CollabConnection</a>, <a class="el" href="classCollabSelfConnection.html#ac035ec375583e490801aa1a5f576c305">CollabSelfConnection</a>, <a class="el" href="classStateObject.html#a0daa5f41f1694e7fb756af580dfa715c">StateObject</a>, <a class="el" href="classInitialStateObject.html#a3301c772586f8022f3c4e312b4d0f1e2">InitialStateObject</a>, <a class="el" href="classFinalStateObject.html#aa073ea01e06b83f8d035d480bcb837d9">FinalStateObject</a>, <a class="el" href="classTransitionConnection.html#a876523978b93fa5a52142fd7d4ec545b">TransitionConnection</a>, <a class="el" href="classStickPersonObject.html#ad4ba9e63a54a7f26246c80a0c2c67120">StickPersonObject</a>, <a class="el" href="classOvalObject.html#a29f690a35240ec93437cbfb483343ee5">OvalObject</a>, <a class="el" href="classInteractionConnection.html#aa3b4b6dc1c9479e7f9725c7ce2aae413">InteractionConnection</a>, <a class="el" href="classExtendsConnection.html#a629165373b76710aa80b366f173d8393">ExtendsConnection</a>, and <a class="el" href="classIncludesConnection.html#a050c9a312212c00014eabd48ab1ada84">IncludesConnection</a>.</p>
 
 </div>
 </div>
@@ -392,7 +403,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Implemented in <a class="el" href="classClassBoxObject.html#a4a8dd7ee3b7bea8d315b49670b9a12ab">ClassBoxObject</a>, <a class="el" href="classClassConnection.html#a184ce5f8a22bc86f2ccdaaacebab56af">ClassConnection</a>, <a class="el" href="classStickPersonCollabObject.html#a749cbc14abcb1482eff5f8e395acc1e4">StickPersonCollabObject</a>, <a class="el" href="classBoxCollabObject.html#ad1158eee6629f213be66187a2dcabb62">BoxCollabObject</a>, <a class="el" href="classArrowCollabObject.html#aea3a2628fc4ee983f8edb1fa4a99336b">ArrowCollabObject</a>, <a class="el" href="classStateObject.html#a17f34608780fe177f8f4b312d2981f48">StateObject</a>, <a class="el" href="classInitialStateObject.html#a1fff81479827c7f366cb088e0377cb86">InitialStateObject</a>, <a class="el" href="classFinalStateObject.html#a6a58f6123ab0c71bc5b4b8cd73c1e92f">FinalStateObject</a>, <a class="el" href="classStickPersonObject.html#a0ca8491c2017a3633f10e1527d820799">StickPersonObject</a>, <a class="el" href="classOvalObject.html#a8fe7f02bdd2ebe2b649d130f0de42ad4">OvalObject</a>, <a class="el" href="classInteractionConnection.html#a5fbef912f8cf6453e0f3f100bc738413">InteractionConnection</a>, <a class="el" href="classExtendsConnection.html#a248035276699dd1dffd9e61fa173d5f8">ExtendsConnection</a>, and <a class="el" href="classIncludesConnection.html#a20d2c57d1d035d2441c5e2e9a67a42d9">IncludesConnection</a>.</p>
+<p>Implemented in <a class="el" href="classClassBoxObject.html#a4a8dd7ee3b7bea8d315b49670b9a12ab">ClassBoxObject</a>, <a class="el" href="classClassConnection.html#a184ce5f8a22bc86f2ccdaaacebab56af">ClassConnection</a>, <a class="el" href="classStickPersonCollabObject.html#a749cbc14abcb1482eff5f8e395acc1e4">StickPersonCollabObject</a>, <a class="el" href="classBoxCollabObject.html#ad1158eee6629f213be66187a2dcabb62">BoxCollabObject</a>, <a class="el" href="classMultiBoxCollabObject.html#a2ffa589d54e06769d2046f99abc3a66f">MultiBoxCollabObject</a>, <a class="el" href="classCollabConnection.html#a0a3514fd49186a9145e6a5efd38ba084">CollabConnection</a>, <a class="el" href="classCollabSelfConnection.html#aea0cbc8f4fe233134f3b065590c2fc7a">CollabSelfConnection</a>, <a class="el" href="classStateObject.html#a17f34608780fe177f8f4b312d2981f48">StateObject</a>, <a class="el" href="classInitialStateObject.html#a1fff81479827c7f366cb088e0377cb86">InitialStateObject</a>, <a class="el" href="classFinalStateObject.html#a6a58f6123ab0c71bc5b4b8cd73c1e92f">FinalStateObject</a>, <a class="el" href="classTransitionConnection.html#a84e70e1af5d2469b0a75b68cc29c6cb1">TransitionConnection</a>, <a class="el" href="classStickPersonObject.html#a0ca8491c2017a3633f10e1527d820799">StickPersonObject</a>, <a class="el" href="classOvalObject.html#a8fe7f02bdd2ebe2b649d130f0de42ad4">OvalObject</a>, <a class="el" href="classInteractionConnection.html#a5fbef912f8cf6453e0f3f100bc738413">InteractionConnection</a>, <a class="el" href="classExtendsConnection.html#a248035276699dd1dffd9e61fa173d5f8">ExtendsConnection</a>, and <a class="el" href="classIncludesConnection.html#a20d2c57d1d035d2441c5e2e9a67a42d9">IncludesConnection</a>.</p>
 
 </div>
 </div>
@@ -409,9 +420,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                         {
-      <span class="keywordflow">return</span> <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>;
-    }
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>; }
 </pre></div>
 </div>
 </div>
@@ -429,7 +438,7 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Implemented in <a class="el" href="classClassBoxObject.html#aec30d21ac9de7ebe4fc8e2aeed4e845d">ClassBoxObject</a>, <a class="el" href="classClassConnection.html#a9f0bbaf7cd96b2795a70a35a38c7218e">ClassConnection</a>, <a class="el" href="classStickPersonCollabObject.html#ad24b7b6039dcf73c19d8284a18e8e906">StickPersonCollabObject</a>, <a class="el" href="classBoxCollabObject.html#a22e624dd34e15b4c54291e5deab0e34a">BoxCollabObject</a>, <a class="el" href="classArrowCollabObject.html#a9d1a015f5067eb6f1c7f3aa9c40dd8c4">ArrowCollabObject</a>, <a class="el" href="classStateObject.html#aeb50c6f62de418c29390618d4deff762">StateObject</a>, <a class="el" href="classInitialStateObject.html#a816d82d7627252bc0bf9c0e9e20bfedc">InitialStateObject</a>, <a class="el" href="classFinalStateObject.html#aead3fc0a043116c9dae4406f18cbb643">FinalStateObject</a>, <a class="el" href="classStickPersonObject.html#a4a18a17af81e5b59a8fc2a495fcabc51">StickPersonObject</a>, <a class="el" href="classOvalObject.html#ae3ad4cdff1ebf931d136bdcd974878d2">OvalObject</a>, <a class="el" href="classInteractionConnection.html#a5000603d44579d0f464c461cb34c1c55">InteractionConnection</a>, <a class="el" href="classExtendsConnection.html#a1b41e65ccd086d897744996bb9971fc2">ExtendsConnection</a>, and <a class="el" href="classIncludesConnection.html#a889abbdac111dd3b613eaedc33db73f8">IncludesConnection</a>.</p>
+<p>Implemented in <a class="el" href="classClassBoxObject.html#aec30d21ac9de7ebe4fc8e2aeed4e845d">ClassBoxObject</a>, <a class="el" href="classClassConnection.html#a9f0bbaf7cd96b2795a70a35a38c7218e">ClassConnection</a>, <a class="el" href="classStickPersonCollabObject.html#ad24b7b6039dcf73c19d8284a18e8e906">StickPersonCollabObject</a>, <a class="el" href="classBoxCollabObject.html#a22e624dd34e15b4c54291e5deab0e34a">BoxCollabObject</a>, <a class="el" href="classMultiBoxCollabObject.html#a2eca158df83dd98e042e6af64f82fdf1">MultiBoxCollabObject</a>, <a class="el" href="classCollabConnection.html#acf679c77e19d6fa55df982f1f4fb0bc6">CollabConnection</a>, <a class="el" href="classCollabSelfConnection.html#a307930dc15288e39b929a8585d7e300d">CollabSelfConnection</a>, <a class="el" href="classStateObject.html#aeb50c6f62de418c29390618d4deff762">StateObject</a>, <a class="el" href="classInitialStateObject.html#a816d82d7627252bc0bf9c0e9e20bfedc">InitialStateObject</a>, <a class="el" href="classFinalStateObject.html#aead3fc0a043116c9dae4406f18cbb643">FinalStateObject</a>, <a class="el" href="classTransitionConnection.html#a2928bcda816dbd4da281d742bc281d16">TransitionConnection</a>, <a class="el" href="classStickPersonObject.html#a4a18a17af81e5b59a8fc2a495fcabc51">StickPersonObject</a>, <a class="el" href="classOvalObject.html#ae3ad4cdff1ebf931d136bdcd974878d2">OvalObject</a>, <a class="el" href="classInteractionConnection.html#a5000603d44579d0f464c461cb34c1c55">InteractionConnection</a>, <a class="el" href="classExtendsConnection.html#a1b41e65ccd086d897744996bb9971fc2">ExtendsConnection</a>, and <a class="el" href="classIncludesConnection.html#a889abbdac111dd3b613eaedc33db73f8">IncludesConnection</a>.</p>
 
 </div>
 </div>
@@ -490,34 +499,23 @@ Protected Attributes</h2></td></tr>
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="a8b51b88f62243368d3d7cb3804636864"></a><!-- doxytag: member="BaseNode::setPoints" ref="a8b51b88f62243368d3d7cb3804636864" args="(const QPoint &amp;p1, const QPoint &amp;p2)" -->
+<a class="anchor" id="a79cd85fb289784e0c616515f93636fd1"></a><!-- doxytag: member="BaseNode::returnConnectionPoint" ref="a79cd85fb289784e0c616515f93636fd1" args="(int value)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void BaseNode::setPoints </td>
+          <td class="memname">QPoint BaseNode::returnConnectionPoint </td>
           <td>(</td>
-          <td class="paramtype">const QPoint &amp;&#160;</td>
-          <td class="paramname"><em>p1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">const QPoint &amp;&#160;</td>
-          <td class="paramname"><em>p2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                       {
-      <a class="code" href="classBaseNode.html#a66ba0ffc241873792fbc076750d94037">point1</a> = p1;
-      <a class="code" href="classBaseNode.html#a147ecf80895c62e7df284d2af5825cfc">point2</a> = p2;
-    }
+<div class="fragment"><pre class="fragment">                                                {
+    <span class="keywordflow">return</span> connectionPoints.at(value);
+}
 </pre></div>
 </div>
 </div>
@@ -560,6 +558,24 @@ Protected Attributes</h2></td></tr>
 </pre></div>
 </div>
 </div>
+<a class="anchor" id="a8832a387d45ff0f1ead3956476217fde"></a><!-- doxytag: member="BaseNode::setSelectedForConnectionPoint" ref="a8832a387d45ff0f1ead3956476217fde" args="(bool state)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BaseNode::setSelectedForConnectionPoint </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{ <a class="code" href="classBaseNode.html#a2d29e941a7519d051f130f7ffd07ecec">cpSelected</a> = state; }
+</pre></div>
+</div>
+</div>
 <a class="anchor" id="aa1dae1798643a47349b94c4ba006fbcd"></a><!-- doxytag: member="BaseNode::setUpConnectionPoints" ref="aa1dae1798643a47349b94c4ba006fbcd" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -588,6 +604,123 @@ Protected Attributes</h2></td></tr>
 </pre></div>
 </div>
 </div>
+<a class="anchor" id="af7d8962381c0ab7e48032316b37f0208"></a><!-- doxytag: member="BaseNode::stringHeight" ref="af7d8962381c0ab7e48032316b37f0208" args="(const QString &amp;string)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int BaseNode::stringHeight </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>string</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{
+    <span class="keywordtype">int</span> <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>=0;
+
+    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0; i &lt; <span class="keywordtype">string</span>.length(); i++){
+        <span class="keywordflow">if</span>(<span class="keywordtype">string</span>[i] == <span class="charliteral">&#39;\n&#39;</span> || i == <span class="keywordtype">string</span>.<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>()-1){
+            height += 1;
+        }
+    }
+
+    <span class="keywordflow">return</span> height * 15;
+}
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="ab76acaea5c58f6e0c8e6507568b2945c"></a><!-- doxytag: member="BaseNode::stringLength" ref="ab76acaea5c58f6e0c8e6507568b2945c" args="(const QString &amp;string)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int BaseNode::stringLength </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>string</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{
+    <span class="keywordtype">int</span> len=0, max=0, <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>=0;
+
+    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0; i &lt; <span class="keywordtype">string</span>.length(); i++){
+        <span class="keywordflow">if</span>(<span class="keywordtype">string</span>[i] == <span class="charliteral">&#39;\n&#39;</span> || i == <span class="keywordtype">string</span>.<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>()-1){
+            <span class="keywordflow">if</span>(max &lt; len)
+                max = len;
+            len=0;
+            <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> += 1;
+        }
+        <span class="keywordflow">else</span>
+            len += 1;
+    }
+
+    max = max * 6;
+    <span class="keywordflow">return</span> max;
+}
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="aefac1436bf0745dd3449c59212fe6763"></a><!-- doxytag: member="BaseNode::to_xml" ref="aefac1436bf0745dd3449c59212fe6763" args="(QDomDocument &amp;doc, QDomElement &amp;doc_root)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QDomElement BaseNode::to_xml </td>
+          <td>(</td>
+          <td class="paramtype">QDomDocument &amp;&#160;</td>
+          <td class="paramname"><em>doc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QDomElement &amp;&#160;</td>
+          <td class="paramname"><em>doc_root</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>This records the data associated with a node into an XML format.</p>
+<p>This is used for saving and restoring from save. NOTE: Access to the metaObject *appears* to be contingent on the Q_OBJECT macro being present in THIS class. Thus, if you need to overwrite this method in a derivative class, that derivative class will need the Q_OBJECT macro added.</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">doc</td><td>This is the document we are creating. Whatever intiates the save will create this object and will need to make it available in all delegations. </td></tr>
+    <tr><td class="paramname">doc_root</td><td>This is the element that will contain this element. The initial design uses the top level element as the container, hence the name doc_root. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>QDomElement Based on current implementation, nothing will be done with this return value. However, in the future, it might be possible to disassociate this method call from doc. </dd></dl>
+<div class="fragment"><pre class="fragment">                                                    {  <span class="comment">// NOLINT</span>
+  QDomElement node = doc.createElement(<span class="stringliteral">&quot;Node&quot;</span>);
+  doc_root.appendChild(node);
+
+  <span class="comment">// Reminder: metaObject depends on the Q_OBJECT macro existing in the class</span>
+  <span class="comment">// that uses it. Otherwise, the class_name will come out as BaseNode.</span>
+  <a class="code" href="nodes_8cpp.html#ac9e4ac83406f3dfd742b4939a1c8e432">set_xml_attr</a>(doc, node, QString(<span class="stringliteral">&quot;class_name&quot;</span>),
+               this-&gt;metaObject()-&gt;className());
+  <a class="code" href="nodes_8cpp.html#ac9e4ac83406f3dfd742b4939a1c8e432">set_xml_attr</a>(doc, node, QString(<span class="stringliteral">&quot;selected&quot;</span>), QString::number(<a class="code" href="classBaseNode.html#a321a3231c6688686d5ee779ab169b741">selected</a>, 10));
+  <a class="code" href="nodes_8cpp.html#ac9e4ac83406f3dfd742b4939a1c8e432">set_xml_attr</a>(doc, node, QString(<span class="stringliteral">&quot;length&quot;</span>), QString::number(<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>));
+  <a class="code" href="nodes_8cpp.html#ac9e4ac83406f3dfd742b4939a1c8e432">set_xml_attr</a>(doc, node, QString(<span class="stringliteral">&quot;cpSelected&quot;</span>), QString::number(<a class="code" href="classBaseNode.html#a2d29e941a7519d051f130f7ffd07ecec">cpSelected</a>));
+  <a class="code" href="nodes_8cpp.html#ac9e4ac83406f3dfd742b4939a1c8e432">set_xml_attr</a>(doc, node, QString(<span class="stringliteral">&quot;pos_x&quot;</span>), QString::number(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()));
+  <a class="code" href="nodes_8cpp.html#ac9e4ac83406f3dfd742b4939a1c8e432">set_xml_attr</a>(doc, node, QString(<span class="stringliteral">&quot;pos_y&quot;</span>), QString::number(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()));
+  <a class="code" href="nodes_8cpp.html#ac9e4ac83406f3dfd742b4939a1c8e432">set_xml_attr</a>(doc, node, QString(<span class="stringliteral">&quot;length&quot;</span>), QString::number(<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>));
+  <a class="code" href="nodes_8cpp.html#ac9e4ac83406f3dfd742b4939a1c8e432">set_xml_attr</a>(doc, node, QString(<span class="stringliteral">&quot;height&quot;</span>), QString::number(<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>));
+
+  <span class="keywordflow">return</span> node;
+}
+</pre></div>
+</div>
+</div>
 <hr/><h2>Member Data Documentation</h2>
 <a class="anchor" id="a6589606c2f8b588e7e27199803cfb2c8"></a><!-- doxytag: member="BaseNode::connectedObjects" ref="a6589606c2f8b588e7e27199803cfb2c8" args="" -->
 <div class="memitem">
@@ -595,6 +728,19 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">std::list&lt;<a class="el" href="classBaseNode.html">BaseNode</a>*&gt; <a class="el" href="classBaseNode.html#a6589606c2f8b588e7e27199803cfb2c8">BaseNode::connectedObjects</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a2d29e941a7519d051f130f7ffd07ecec"></a><!-- doxytag: member="BaseNode::cpSelected" ref="a2d29e941a7519d051f130f7ffd07ecec" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classBaseNode.html#a2d29e941a7519d051f130f7ffd07ecec">BaseNode::cpSelected</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -621,32 +767,6 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">int <a class="el" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">BaseNode::length</a><code> [protected]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a66ba0ffc241873792fbc076750d94037"></a><!-- doxytag: member="BaseNode::point1" ref="a66ba0ffc241873792fbc076750d94037" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">QPoint <a class="el" href="classBaseNode.html#a66ba0ffc241873792fbc076750d94037">BaseNode::point1</a><code> [protected]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a147ecf80895c62e7df284d2af5825cfc"></a><!-- doxytag: member="BaseNode::point2" ref="a147ecf80895c62e7df284d2af5825cfc" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">QPoint <a class="el" href="classBaseNode.html#a147ecf80895c62e7df284d2af5825cfc">BaseNode::point2</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -681,8 +801,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/logan/Programming/puml/src/<a class="el" href="nodes_8h_source.html">nodes.h</a></li>
-<li>/home/logan/Programming/puml/src/<a class="el" href="nodes_8cpp.html">nodes.cpp</a></li>
+<li><a class="el" href="nodes_8h_source.html">nodes.h</a></li>
+<li><a class="el" href="nodes_8cpp.html">nodes.cpp</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -699,7 +819,7 @@ Protected Attributes</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 21:11:38 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 19:21:07 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
