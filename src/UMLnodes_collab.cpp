@@ -1,9 +1,9 @@
 // Copyright (C) 2011-2012 pUML Group
-#include "./UMLnodes_collab.h"
-#include <list>
 #include <QComboBox>
+#include <list>
 
 #include "./mathfunctions.h"
+#include "./UMLnodes_collab.h"
 
 /*******************************/
 /* StickPersonCollab Functions */
@@ -107,7 +107,8 @@ void StickPersonCollabObject::draw(QPainter &painter) {  // NOLINT
                       16 / 70.0 * height / 2);
 
   // painter.drawText(tempx-10,tempy+50,this->name);
-  painter.drawText(QRect(tempx - length / 2, tempy + (height-25) / 2, length, 50),
+  painter.drawText(QRect(tempx - length / 2, tempy + (height-25) / 2,
+                   length, 50),
                    Qt::AlignCenter | Qt::AlignTop | Qt::TextDontClip,
                    this->name);
 
@@ -126,7 +127,7 @@ void StickPersonCollabObject::draw(QPainter &painter) {  // NOLINT
 */
 
 StickPersonCollabObjectDialog::StickPersonCollabObjectDialog(QWidget *parent)
-                        :QInputDialog(parent) {
+                              :QInputDialog(parent) {
   setCancelButtonText("Cancel");
   setLabelText("Actor Name:");
   setWindowTitle("Actor Properties");
@@ -158,18 +159,17 @@ BoxCollabObject::BoxCollabObject()
 }
 
 void BoxCollabObject::draw(QPainter &painter) {  // NOLINT
-  //grabs the length of the string and updates the box
-  //to make everything fit properly
+  // grabs the length of the string and updates the box
+  // to make everything fit properly
   QFontMetrics fm = painter.fontMetrics();
   int temp = fm.width(this->name);
 
-  if(temp >= length-20 || temp >= 70){
-      temp = temp - (length-20);
-      temp = temp + length;
-      this->length = temp;
-  }
-  else{
-      this->length = 90;
+  if (temp >= length-20 || temp >= 70) {
+    temp = temp - (length-20);
+    temp = temp + length;
+    this->length = temp;
+  } else {
+    this->length = 90;
   }
 
   QPen pen;
@@ -184,10 +184,8 @@ void BoxCollabObject::draw(QPainter &painter) {  // NOLINT
   painter.setBrush(Qt::white);
   //! @TODO This needs parenthesis or else needs to be fixed.  // NOLINT
 
-  painter.drawRect(tempx - 1/2.0 * length,
-                     tempy - 1/2.0 * height,
-                     length,
-                     height);
+  painter.drawRect(tempx - 1/2.0 * length, tempy - 1/2.0 * height,
+                   length, height);
   // edge
   painter.setPen(pen);
   painter.setBrush(Qt::NoBrush);
@@ -211,7 +209,7 @@ void BoxCollabObject::draw(QPainter &painter) {  // NOLINT
 }
 
 BoxCollabObjectDialog::BoxCollabObjectDialog(QWidget *parent)
-                        :QInputDialog(parent) {
+                      :QInputDialog(parent) {
   setCancelButtonText("Cancel");
   setLabelText("Object Name:");
   setWindowTitle("Object Properties");
@@ -231,29 +229,27 @@ QDialog *BoxCollabObject::getDialog() {
 /* MultiBoxCollab Functions   **/
 /*******************************/
 MultiBoxCollabObject::MultiBoxCollabObject()
-                  :ObjectNode() {
-    this->length = 90;
-    this->height = 50;
-    QPoint pos;
-    pos.setX(position.x() + length / 2);
-    pos.setY(position.y() + height);
+                     :ObjectNode() {
+  this->length = 90;
+  this->height = 50;
+  QPoint pos;
+  pos.setX(position.x() + length / 2);
+  pos.setY(position.y() + height);
 }
 
 void MultiBoxCollabObject::draw(QPainter &painter) {  // NOLINT
-  //grabs the length of the string and updates the box
-  //to make everything fit properly
+  // grabs the length of the string and updates the box
+  // to make everything fit properly
   QFontMetrics fm = painter.fontMetrics();
   int temp = fm.width(this->name);
 
-  if(temp >= length-20 || temp >= 70){
-      temp = temp - (length-20);
-      temp = temp + length;
-      this->length = temp;
+  if (temp >= length-20 || temp >= 70) {
+    temp = temp - (length-20);
+    temp = temp + length;
+    this->length = temp;
+  } else {
+    this->length = 90;
   }
-  else{
-      this->length = 90;
-  }
-
 
   QPen pen;
   pen.setWidth(2);
@@ -263,67 +259,54 @@ void MultiBoxCollabObject::draw(QPainter &painter) {  // NOLINT
   int tempy = position.y();
 
   // back box  x,y values
-  int backtempx = tempx+10;
-  int backtempy = tempy-10;
+  int backtempx = tempx + 10;
+  int backtempy = tempy - 10;
 
   // back box background
   painter.setPen(Qt::NoPen);
   painter.setBrush(Qt::white);
-  painter.drawRect(backtempx - 1/2.0 * length,
-                   backtempy - 1/2.0 * height,
-                   length,
-                   height);
+  painter.drawRect(backtempx - 1 / 2.0 * length, backtempy - 1 / 2.0 * height,
+                   length, height);
 
   // back box edge
   painter.setPen(pen);
   painter.setBrush(Qt::NoBrush);
-  painter.drawRect(backtempx - 1/2.0 * length,
-                   backtempy - 1/2.0 * height,
-                   length,
-                   height);
+  painter.drawRect(backtempx - 1 / 2.0 * length, backtempy - 1 / 2.0 * height,
+                   length, height);
 
   // middle box x,y values
-  int midtempx = tempx+5;
-  int midtempy = tempy-5;
+  int midtempx = tempx + 5;
+  int midtempy = tempy - 5;
 
   // middle box background
   painter.setPen(Qt::NoPen);
   painter.setBrush(Qt::white);
-  painter.drawRect(midtempx - 1/2.0 * length,
-                   midtempy - 1/2.0 * height,
-                   length,
-                   height);
+  painter.drawRect(midtempx - 1 / 2.0 * length, midtempy - 1 / 2.0 * height,
+                   length, height);
 
   // middle box edge
   painter.setPen(pen);
   painter.setBrush(Qt::NoBrush);
-  painter.drawRect(midtempx - 1/2.0 * length,
-                   midtempy - 1/2.0 * height,
-                   length,
-                     height);
+  painter.drawRect(midtempx - 1 / 2.0 * length, midtempy - 1 / 2.0 * height,
+                   length, height);
 
   // front box background
   painter.setPen(Qt::NoPen);
   painter.setBrush(Qt::white);
-  painter.drawRect(tempx - 1/2.0 * length,
-                   tempy - 1/2.0 * height,
-                   length,
-                   height);
+  painter.drawRect(tempx - 1 / 2.0 * length, tempy - 1 / 2.0 * height,
+                   length, height);
 
   // front box edge
   painter.setPen(pen);
   painter.setBrush(Qt::NoBrush);
-  painter.drawRect(tempx - 1/2.0 * length,
-                   tempy - 1/2.0 * height,
-                   length,
-                   height);
+  painter.drawRect(tempx - 1 / 2.0 * length, tempy - 1 / 2.0 * height,
+                   length, height);
 
   QFont underlineFont;
   underlineFont.setUnderline(true);
   painter.setFont(underlineFont);
   painter.drawText(QRect(tempx - length / 2, tempy - height / 2, length, 50),
-                   Qt::AlignCenter | Qt::AlignVCenter,
-                   this->name);
+                   Qt::AlignCenter | Qt::AlignVCenter, this->name);
 
   // Always call this ObjectNode's draw function because it
   // draws the selection boxes as needed.
@@ -353,10 +336,10 @@ QDialog *MultiBoxCollabObject::getDialog() {
 /*********************************/
 
 void CollabConnection::draw(QPainter& painter) {  // NOLINT
-    QPoint temppoint1;
-    QPoint temppoint2;
-    QPoint temppoint3;
-    QPoint temppoint4;
+  QPoint temppoint1;
+  QPoint temppoint2;
+  QPoint temppoint3;
+  QPoint temppoint4;
   BaseNode *obj1, *obj2;
   std::list<BaseNode*>::iterator it = connectedObjects.begin();
   obj1 = *it;
@@ -388,14 +371,16 @@ void CollabConnection::draw(QPainter& painter) {  // NOLINT
   painter.drawLine(pt2, pt3);
   painter.drawLine(pt3, pt4);
 
-  //These temp values are needed in order to compute the direction of the arrow
+  // These temp values are needed in order to compute the direction of the arrow
   // This is so that the pt values dont get changed
-  //These are the initial values i chose to use // inner points
+  // These are the initial values i chose to use
+  // inner points
   temppoint1.setX(pt2.x());
   temppoint1.setY(pt2.y());
   temppoint2.setX(pt3.x());
   temppoint2.setY(pt3.y());
-// these ones were required for a bug fix // outer points
+  // these ones were required for a bug fix
+  // outer points
   temppoint3.setX(pt1.x());
   temppoint3.setY(pt1.y());
   temppoint4.setX(pt4.x());
@@ -405,13 +390,12 @@ void CollabConnection::draw(QPainter& painter) {  // NOLINT
   DrawArrow(painter, temppoint1, temppoint2, temppoint3, temppoint4);
 
   // Draws the text
-  painter.drawText(textpos,this->text);
+  painter.drawText(textpos, this->text);
 }
 
-//This function finds the midpoint between two points returns a Qpoint
-//I dont think it ever got used
-QPoint CollabConnection::FindMidPoint(QPoint point1, QPoint point2)
-{
+// This function finds the midpoint between two points returns a Qpoint
+// I dont think it ever got used
+QPoint CollabConnection::FindMidPoint(QPoint point1, QPoint point2) {
     QPoint result;
     int temp1x = point1.x();
     int temp1y = point1.y();
@@ -421,8 +405,8 @@ QPoint CollabConnection::FindMidPoint(QPoint point1, QPoint point2)
     int fx;
     int fy;
 
-    fx = (temp1x + temp2x)/2;
-    fy = (temp1y + temp2y)/2;
+    fx = (temp1x + temp2x) / 2;
+    fy = (temp1y + temp2y) / 2;
 
     result.setX(fx);
     result.setY(fy);
@@ -430,123 +414,104 @@ QPoint CollabConnection::FindMidPoint(QPoint point1, QPoint point2)
     return result;
 }
 
-//This function determins the direction of the arrow it returns a 1 to keep the arrow
-// facing the same direction or a -1 to make it point backwards
-int CollabConnection::FindDirection(QPoint point1, QPoint point2, QPoint temppoint1, QPoint temppoint2)
-{
-    QPoint result;
-// inner points
-    int temp1x = point1.x();
-    int temp1y = point1.y();
-    int temp2x = point2.x();
-    int temp2y = point2.y();
+// This function determins the direction of the arrow it returns a 1 to keep the
+// arrow facing the same direction or a -1 to make it point backwards
+int CollabConnection::FindDirection(QPoint point1, QPoint point2,
+                                    QPoint temppoint1, QPoint temppoint2) {
+  QPoint result;
+  // inner points
+  int temp1x = point1.x();
+  int temp1y = point1.y();
+  int temp2x = point2.x();
+  int temp2y = point2.y();
 
-// Outer points
-    int temp3x = temppoint1.x();
-    int temp3y = temppoint1.y();
-    int temp4x = temppoint2.x();
-    int temp4y = temppoint2.y();
+  // Outer points
+  int temp3x = temppoint1.x();
+  int temp3y = temppoint1.y();
+  int temp4x = temppoint2.x();
+  int temp4y = temppoint2.y();
 
+  // extra variables
+  int fx;
+  int fy;
+  int gx;
+  int gy;
+  int absfx;
+  int absfy;
 
-//extra variables
-    int fx;
-    int fy;
-    int gx;
-    int gy;
-    int absfx;
-    int absfy;
+  // find differences
+  fx = temp1x - temp2x;
+  fy = temp1y - temp2y;
 
-    // find differences
-    fx = temp1x - temp2x;
-    fy = temp1y - temp2y;
+  gx = temp3x - temp4x;
+  gy = temp3y - temp4y;
 
-    gx = temp3x - temp4x;
-    gy = temp3y - temp4y;
+  // find absolute values
+  absfx = abs(fx);
+  absfy = abs(fy);
 
-
-    // find absolute values
-    absfx = abs(fx);
-    absfy = abs(fy);
-
-    //if point2 is to the right or
-    if((fx > 0))// || (fy < 0))
-    {
-        return -1;
+  // if point2 is to the right or
+  if (fx > 0) {  // || (fy < 0))
+    return -1;
+  } else if (fx == 0) {
+    if (gx > 0) {
+      return -1;
+    } else {
+      return 1;
     }
-    else if(fx == 0)
-    {
-        if(gx > 0)
-        {
-            return -1;
-        }
-        else
-        {
-            return 1;
-        }
-    }
-    else
-        return 1;
-
+  } else {
+    return 1;
+  }
 }
 
 // This function is dedicated to the drawing of the arrow
-void CollabConnection::DrawArrow(QPainter &painter, QPoint point1, QPoint point2, QPoint temppoint1,
-                                 QPoint temppoint2)
-{
-    int dir = 1; //direction pointing, left or right, initialized to right
-    int length = 50; // length and height variables
-    int height = 50;
-    int offset = 15; // offset off of the initial point value on the connection line
-    // finds the direction of the arrow and then sets it to dir
-    dir = FindDirection(point1, point2, temppoint1, temppoint2);
+void CollabConnection::DrawArrow(QPainter &painter, QPoint point1,  // NOLINT
+                                 QPoint point2, QPoint temppoint1,
+                                 QPoint temppoint2) {
+  int dir = 1;  // direction pointing, left or right, initialized to right
+  int length = 50;  // length and height variables
+  int height = 50;
+  int offset = 15;  // offset off of the initial point value on the connection
+                    // line
+  // finds the direction of the arrow and then sets it to dir
+  dir = FindDirection(point1, point2, temppoint1, temppoint2);
 
-    // resets length to either be positive or negative
-    length *= dir;
+  // resets length to either be positive or negative
+  length *= dir;
 
-    //computes starting and ending values for the arrow
-    int tempx = point1.x() + offset;
-    int tempy = point1.y() - offset;
-    int headx = tempx + length/2;
-    int heady = tempy;
+  // computes starting and ending values for the arrow
+  int tempx = point1.x() + offset;
+  int tempy = point1.y() - offset;
+  int headx = tempx + length / 2;
+  int heady = tempy;
 
-    // Sets the position of the text
-    // Initializes the text position relative to the location of the leftmost point of the arrow
-    if(tempx > headx)
-    {
-        textpos.setX(tempx+5);
-        textpos.setY(tempy+5);
-    }
-    else
-    {
-        textpos.setX(headx+5);
-        textpos.setY(heady+5);
-    }
+  // Sets the position of the text
+  // Initializes the text position relative to the location of the leftmost
+  // point of the arrow
+  if (tempx > headx) {
+    textpos.setX(tempx + 5);
+    textpos.setY(tempy + 5);
+  } else {
+    textpos.setX(headx + 5);
+    textpos.setY(heady + 5);
+  }
 
-    //sets up the pen
-    QPen pen;
-    pen.setWidth(2);
-    painter.setPen(pen);
-    painter.setBrush(Qt::NoBrush);
+  // sets up the pen
+  QPen pen;
+  pen.setWidth(2);
+  painter.setPen(pen);
+  painter.setBrush(Qt::NoBrush);
 
-  //Draws the body of arrow
-    painter.drawLine(tempx,
-                     tempy,
-                     headx,
-                     heady);
+  // Draws the body of arrow
+  painter.drawLine(tempx, tempy, headx, heady);
 
-    // Bottom arrow
-    painter.drawLine(headx,
-                     tempy,
-                     tempx + length/3,
-                     heady + height/6);
-    //Top Arrow
-    painter.drawLine(headx,
-                     tempy,
-                     tempx + length/3,
-                     heady - height/6);
+  // Bottom arrow
+  painter.drawLine(headx, tempy, tempx + length / 3, heady + height / 6);
+  // Top Arrow
+  painter.drawLine(headx, tempy, tempx + length / 3, heady - height / 6);
 }
 
-//Dialog for the arrow
+// Dialog for the arrow
 CollabConnectionDialog::CollabConnectionDialog(QWidget *parent)
                         :QInputDialog(parent) {
   setWindowTitle("Connector Properties");
@@ -574,28 +539,26 @@ QDialog *CollabConnection::getDialog() {
 
 void CollabSelfConnection::draw(QPainter& painter) {  // NOLINT
 // temporary points so as to not mess up the pt values
-    QPoint temppoint1;
-    QPoint temppoint2;
-    QPoint temppoint3;
-    QPoint temppoint4;
-    int offset = 15;
+  QPoint temppoint1;
+  QPoint temppoint2;
+  QPoint temppoint3;
+  QPoint temppoint4;
+  int offset = 15;
   BaseNode *obj1, *obj2;
   std::list<BaseNode*>::iterator it = connectedObjects.begin();
   obj1 = *it;
   obj2 = *it;
   it++;
 
-
   pt1 = obj1->returnConnectionPoint(1);
   pt4 = obj2->returnConnectionPoint(2);
 
-
   painter.setPen(Qt::black);
   // East connection
-    pt2.setY(pt4.y());
-    pt2.setX(pt1.x() + offset);
-    pt3.setX(pt1.x());
-    pt3.setY(pt4.y() + offset);
+  pt2.setY(pt4.y());
+  pt2.setX(pt1.x() + offset);
+  pt3.setX(pt1.x());
+  pt3.setY(pt4.y() + offset);
 
   if (selected == true) {
     QPen selectPen;
@@ -608,14 +571,14 @@ void CollabSelfConnection::draw(QPainter& painter) {  // NOLINT
   painter.drawLine(pt2, pt3);
   painter.drawLine(pt3, pt4);
 
-  //These temp values are needed in order to compute the direction of the arrow
+  // These temp values are needed in order to compute the direction of the arrow
   // This is so that the pt values dont get changed
-  //These are the initial values i chose to use // inner points
+  // These are the initial values i chose to use // inner points
   temppoint1.setX(pt2.x());
   temppoint1.setY(pt2.y());
   temppoint2.setX(pt3.x());
   temppoint2.setY(pt3.y());
-// these ones were required for a bug fix // outer points
+  // these ones were required for a bug fix // outer points
   temppoint3.setX(pt1.x());
   temppoint3.setY(pt1.y());
   temppoint4.setX(pt4.x());
@@ -625,118 +588,99 @@ void CollabSelfConnection::draw(QPainter& painter) {  // NOLINT
   DrawArrow(painter, temppoint1, temppoint2, temppoint3, temppoint4);
 
   // Draws the text
-  painter.drawText(textpos,this->text);
+  painter.drawText(textpos, this->text);
 }
 
 // This function is dedicated to the drawing of the arrow
-void CollabSelfConnection::DrawArrow(QPainter &painter, QPoint point1, QPoint point2, QPoint temppoint1,
-                                 QPoint temppoint2)
-{
-    int length = -50; // length and height variables // needs to negative to point the right way
-    int height = 50;
-    int offset = 10; // offset off of the initial point value on the connection line
+void CollabSelfConnection::DrawArrow(QPainter &painter, QPoint point1, // NOLINT
+                                     QPoint point2, QPoint temppoint1,
+                                     QPoint temppoint2) {
+  int length = -50;  // length and height variables // needs to negative to
+                     // point the right way
+  int height = 50;
+  int offset = 10;  // offset off of the initial point value on the connection
+                    // line
 
-    //computes starting and ending values for the arrow
-    int tempx = point2.x() - length/2;
-    int tempy = point2.y() + offset;
-    int headx = tempx + length/2;
-    int heady = tempy;
+  // computes starting and ending values for the arrow
+  int tempx = point2.x() - length / 2;
+  int tempy = point2.y() + offset;
+  int headx = tempx + length / 2;
+  int heady = tempy;
 
-    //sets up the pen
-    QPen pen;
-    pen.setWidth(2);
-    painter.setPen(pen);
-    painter.setBrush(Qt::NoBrush);
+  // sets up the pen
+  QPen pen;
+  pen.setWidth(2);
+  painter.setPen(pen);
+  painter.setBrush(Qt::NoBrush);
 
-  //Draws the body of arrow
-    painter.drawLine(tempx,
-                     tempy,
-                     headx,
-                     heady);
+  // Draws the body of arrow
+  painter.drawLine(tempx, tempy, headx, heady);
 
+  // Bottom arrow
+  painter.drawLine(headx, tempy, tempx + length / 3, heady + height / 6);
+  // Top Arrow
+  painter.drawLine(headx, tempy, tempx + length / 3, heady - height / 6);
 
-    // Bottom arrow
-    painter.drawLine(headx,
-                     tempy,
-                     tempx + length/3,
-                     heady + height/6);
-    //Top Arrow
-    painter.drawLine(headx,
-                     tempy,
-                     tempx + length/3,
-                     heady - height/6);
-
-    // Sets the position of the text
-    // Initializes the text position right under the arrow
-        textpos.setX(headx);
-        textpos.setY((heady + height/6 )+ offset);
-
-
+  // Sets the position of the text
+  // Initializes the text position right under the arrow
+  textpos.setX(headx);
+  textpos.setY((heady + height / 6)+ offset);
 }
 
-//This function determins the direction of the arrow it returns a 1 to keep the arrow
-// facing the same direction or a -1 to make it point backwards
-int CollabSelfConnection::FindDirection(QPoint point1, QPoint point2, QPoint temppoint1, QPoint temppoint2)
-{
-    QPoint result;
-// inner points
-    int temp1x = point1.x();
-    int temp1y = point1.y();
-    int temp2x = point2.x();
-    int temp2y = point2.y();
+// This function determins the direction of the arrow it returns a 1 to keep
+// the arrow facing the same direction or a -1 to make it point backwards
+int CollabSelfConnection::FindDirection(QPoint point1, QPoint point2,
+                                        QPoint temppoint1, QPoint temppoint2) {
+  QPoint result;
+  // inner points
+  int temp1x = point1.x();
+  int temp1y = point1.y();
+  int temp2x = point2.x();
+  int temp2y = point2.y();
 
-// Outer points
-    int temp3x = temppoint1.x();
-    int temp3y = temppoint1.y();
-    int temp4x = temppoint2.x();
-    int temp4y = temppoint2.y();
+  // Outer points
+  int temp3x = temppoint1.x();
+  int temp3y = temppoint1.y();
+  int temp4x = temppoint2.x();
+  int temp4y = temppoint2.y();
 
+  // extra variables
+  int fx;
+  int fy;
+  int gx;
+  int gy;
+  int absfx;
+  int absfy;
 
-//extra variables
-    int fx;
-    int fy;
-    int gx;
-    int gy;
-    int absfx;
-    int absfy;
+  // find differences
+  fx = temp1x - temp2x;
+  fy = temp1y - temp2y;
 
-    // find differences
-    fx = temp1x - temp2x;
-    fy = temp1y - temp2y;
+  gx = temp3x - temp4x;
+  gy = temp3y - temp4y;
 
-    gx = temp3x - temp4x;
-    gy = temp3y - temp4y;
+  // find absolute values
+  absfx = abs(fx);
+  absfy = abs(fy);
 
-
-    // find absolute values
-    absfx = abs(fx);
-    absfy = abs(fy);
-
-    //if point2 is to the right or
-    if((fx > 0))// || (fy < 0))
-    {
-        return -1;
+  // if point2 is to the right or
+  if (fx > 0) {  // || (fy < 0))
+    return -1;
+  } else if (fx == 0) {
+    if (gx > 0) {
+      return -1;
+    } else {
+      return 1;
     }
-    else if(fx == 0)
-    {
-        if(gx > 0)
-        {
-            return -1;
-        }
-        else
-        {
-            return 1;
-        }
-    }
-    else
-        return 1;
-
+  } else {
+    return 1;
+  }
 }
 
 
-//Dialog for the arrow
+// Dialog for the arrow
 CollabSelfConnectionDialog::CollabSelfConnectionDialog(QWidget *parent)
-                        :QInputDialog(parent) {
+                           :QInputDialog(parent) {
   setCancelButtonText("Cancel");
   setLabelText("Connector Name:");
   setWindowTitle("Connector Properties");
@@ -754,4 +698,3 @@ QDialog *CollabSelfConnection::getDialog() {
           this, SLOT(setName(QString)));
   return dialog;
 }
-
