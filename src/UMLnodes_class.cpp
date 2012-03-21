@@ -36,19 +36,19 @@ void ClassBoxObject::draw(QPainter &painter) {  // NOLINT
     if( alength+10 >= length-10 || mlength+10 >= length-10 ||
         alength+10 >= 50 || mlength+10 >= 50 || width >= length-40 ||
         width >= 20){
-        if(mlength > alength && mlength > width){
+        if(mlength > alength && mlength > width && mlength > 60){
             temp = mlength;
             temp = temp - (length-5);
             temp = temp + length;
         }
-        else if (width > alength && width > mlength){
-            temp = width;
-            temp = temp - (length-40);
+        else if (alength > mlength && alength > width && alength > 60){
+            temp = alength;
+            temp = temp - (length-5);
             temp = temp + length;
         }
         else{
-            temp = alength;
-            temp = temp - (length-5);
+            temp = width;
+            temp = temp - (length-40);
             temp = temp + length;
         }
         this->length = temp;
