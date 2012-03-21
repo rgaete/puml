@@ -68,9 +68,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 This is the complete list of members for <a class="el" href="classMainWindow.html">MainWindow</a>, including all inherited members.<table>
   <tr class="memlist"><td><a class="el" href="classMainWindow.html#a4e20a4a065fbb0e4d3532a45a0a91425">closeEvent</a>(QCloseEvent *event)</td><td><a class="el" href="classMainWindow.html">MainWindow</a></td><td><code> [protected]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classMainWindow.html#ae66396b9e22dcd5d6e2bd81cbeab9db7">createNewDiagram</a>(BaseNode::DiagramType type)</td><td><a class="el" href="classMainWindow.html">MainWindow</a></td><td><code> [slot]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classMainWindow.html#a8b244be8b7b7db1b08de2a2acb9409db">MainWindow</a>(QWidget *parent=0)</td><td><a class="el" href="classMainWindow.html">MainWindow</a></td><td><code> [explicit]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classMainWindow.html#a4f3ebda1ba39e0ef4d678b44893c9c7f">on_actionAbout_triggered</a>()</td><td><a class="el" href="classMainWindow.html">MainWindow</a></td><td><code> [slot]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classMainWindow.html#acfada59ef1f79adcc4c1ae3898869c69">on_actionCascade_toggled</a>(bool arg1)</td><td><a class="el" href="classMainWindow.html">MainWindow</a></td><td><code> [slot]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classMainWindow.html#ad961df58a2f20f09dd16c856b1f3040a">on_actionCopy_triggered</a>()</td><td><a class="el" href="classMainWindow.html">MainWindow</a></td><td><code> [slot]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classMainWindow.html#a02df09004a7752e6f1bd3355a19999d3">on_actionCut_triggered</a>()</td><td><a class="el" href="classMainWindow.html">MainWindow</a></td><td><code> [slot]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classMainWindow.html#a31b755085ba6efb58cac20c8e5274582">on_actionDocument_triggered</a>()</td><td><a class="el" href="classMainWindow.html">MainWindow</a></td><td><code> [slot]</code></td></tr>
@@ -85,11 +85,10 @@ This is the complete list of members for <a class="el" href="classMainWindow.htm
   <tr class="memlist"><td><a class="el" href="classMainWindow.html#ad550c61cfa05c7e528dedc6cf636ed10">on_actionSave_triggered</a>()</td><td><a class="el" href="classMainWindow.html">MainWindow</a></td><td><code> [slot]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classMainWindow.html#a79d6f0d11ff29e98fbb854e0201b86b4">on_actionSelect_All_triggered</a>()</td><td><a class="el" href="classMainWindow.html">MainWindow</a></td><td><code> [slot]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classMainWindow.html#a723573a6fb06dcc3d8253587922d3a3f">on_actionSelect_triggered</a>()</td><td><a class="el" href="classMainWindow.html">MainWindow</a></td><td><code> [slot]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classMainWindow.html#a563041e21ae0459792729c0df3ea8f20">on_actionTile_Horizontally_toggled</a>(bool arg1)</td><td><a class="el" href="classMainWindow.html">MainWindow</a></td><td><code> [slot]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classMainWindow.html#aed3c876a4b55a6c7abb569d053b679ed">on_actionTile_Vertically_toggled</a>(bool arg1)</td><td><a class="el" href="classMainWindow.html">MainWindow</a></td><td><code> [slot]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classMainWindow.html#a48a3ce89fb32fcb0b1cbd5dbc9fa7624">on_NodeAction_triggered</a>(Canvas::DrawingMode drawingMode, int prototypeID)</td><td><a class="el" href="classMainWindow.html">MainWindow</a></td><td><code> [slot]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classMainWindow.html#a0148d929d5a42d11abc8e383942ae41d">on_tabWidget_currentChanged</a>(int newIndex)</td><td><a class="el" href="classMainWindow.html">MainWindow</a></td><td><code> [slot]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classMainWindow.html#a3652d9d16936a39bd6bb4609768eae4e">setDiagramType</a>(BaseNode::DiagramType type)</td><td><a class="el" href="classMainWindow.html">MainWindow</a></td><td><code> [slot]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classMainWindow.html#a36eef58482008a1adf9eea81d0a2289f">openDiagram</a>(const QString &amp;filename)</td><td><a class="el" href="classMainWindow.html">MainWindow</a></td><td><code> [slot]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classMainWindow.html#a0404333cdda871ecfa98bedd3bd3c107">updateDiagramType</a>(BaseNode::DiagramType type)</td><td><a class="el" href="classMainWindow.html">MainWindow</a></td><td><code> [slot]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classMainWindow.html#ae98d00a93bc118200eeef9f9bba1dba7">~MainWindow</a>()</td><td><a class="el" href="classMainWindow.html">MainWindow</a></td><td></td></tr>
 </table></div>
 <!-- window showing the filter options -->
@@ -106,7 +105,7 @@ This is the complete list of members for <a class="el" href="classMainWindow.htm
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 21:11:38 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 19:21:08 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

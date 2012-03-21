@@ -80,11 +80,11 @@ Inheritance diagram for ObjectNode:</div>
   <img src="classObjectNode.png" usemap="#ObjectNode_map" alt=""/>
   <map id="ObjectNode_map" name="ObjectNode_map">
 <area href="classBaseNode.html" alt="BaseNode" shape="rect" coords="0,0,152,24"/>
-<area href="classArrowCollabObject.html" alt="ArrowCollabObject" shape="rect" coords="162,112,314,136"/>
-<area href="classBoxCollabObject.html" alt="BoxCollabObject" shape="rect" coords="162,168,314,192"/>
-<area href="classClassBoxObject.html" title="This concrete class is the ClassBox node." alt="ClassBoxObject" shape="rect" coords="162,224,314,248"/>
-<area href="classFinalStateObject.html" title="This concrete class is the State node." alt="FinalStateObject" shape="rect" coords="162,280,314,304"/>
-<area href="classInitialStateObject.html" title="This concrete class is the State node." alt="InitialStateObject" shape="rect" coords="162,336,314,360"/>
+<area href="classBoxCollabObject.html" title="This concrete class is the BoxCollabObject node." alt="BoxCollabObject" shape="rect" coords="162,112,314,136"/>
+<area href="classClassBoxObject.html" title="This concrete class is the ClassBox node." alt="ClassBoxObject" shape="rect" coords="162,168,314,192"/>
+<area href="classFinalStateObject.html" title="This concrete class is the Final State node." alt="FinalStateObject" shape="rect" coords="162,224,314,248"/>
+<area href="classInitialStateObject.html" title="This concrete class is the State node." alt="InitialStateObject" shape="rect" coords="162,280,314,304"/>
+<area href="classMultiBoxCollabObject.html" title="This concrete class is the MultiBoxCollabObject node." alt="MultiBoxCollabObject" shape="rect" coords="162,336,314,360"/>
 <area href="classOvalObject.html" title="This concrete class is the Oval node." alt="OvalObject" shape="rect" coords="162,392,314,416"/>
 <area href="classStateObject.html" title="This concrete class is the State node." alt="StateObject" shape="rect" coords="162,448,314,472"/>
 <area href="classStickPersonCollabObject.html" title="This concrete class is the StickPersonCollab node." alt="StickPersonCollabObject" shape="rect" coords="162,504,314,528"/>
@@ -120,13 +120,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p><a class="el" href="classObjectNode.html" title="This is the base class for all object nodes.">ObjectNode</a> constructor, set the position. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">position</td><td>The center of the object, relative to the containing widget.</td></tr>
-  </table>
-  </dd>
-</dl>
+<p><a class="el" href="classObjectNode.html" title="This is the base class for all object nodes.">ObjectNode</a> constructor, set the position.</p>
 <p>The <a class="el" href="classObjectNode.html" title="This is the base class for all object nodes.">ObjectNode</a> constructor sets the position variable </p>
 <div class="fragment"><pre class="fragment">  : <a class="code" href="classBaseNode.html#a8707f8359c128d58e81a6c61fea432f7">BaseNode</a>() {
   this-&gt;<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a> = <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>;
@@ -163,14 +157,18 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classBaseNode.html#a79627d9a052108d60082dddbd60dfb02">BaseNode</a>.</p>
 
-<p>Reimplemented in <a class="el" href="classClassBoxObject.html#a909cba1dcbfecb3d401c6d34f6632876">ClassBoxObject</a>, <a class="el" href="classStickPersonCollabObject.html#aa79762f8f8f98284ddbfee0cf14920f1">StickPersonCollabObject</a>, <a class="el" href="classBoxCollabObject.html#a5df351b68872b450bed10df6b516c6a3">BoxCollabObject</a>, <a class="el" href="classArrowCollabObject.html#a0624cb3942a9e1a3cde0e964dec9c7d2">ArrowCollabObject</a>, <a class="el" href="classStateObject.html#a97fdf2b174bf32f6b9427c9cc4428bb3">StateObject</a>, <a class="el" href="classInitialStateObject.html#ad4ea4c1a50a98fd4232e4a10705e7a66">InitialStateObject</a>, <a class="el" href="classFinalStateObject.html#a1bf69330467e12eafae476e899dceb15">FinalStateObject</a>, <a class="el" href="classStickPersonObject.html#abd84d82f09b25b71bb8e033a140708de">StickPersonObject</a>, and <a class="el" href="classOvalObject.html#aa60cb82c3c78097ca70dc7242b120f87">OvalObject</a>.</p>
+<p>Reimplemented in <a class="el" href="classClassBoxObject.html#a909cba1dcbfecb3d401c6d34f6632876">ClassBoxObject</a>, <a class="el" href="classStickPersonCollabObject.html#aa79762f8f8f98284ddbfee0cf14920f1">StickPersonCollabObject</a>, <a class="el" href="classBoxCollabObject.html#a5df351b68872b450bed10df6b516c6a3">BoxCollabObject</a>, <a class="el" href="classMultiBoxCollabObject.html#a7758bde9a93c3e1f0a9f0dc45ecbf2ba">MultiBoxCollabObject</a>, <a class="el" href="classStateObject.html#a97fdf2b174bf32f6b9427c9cc4428bb3">StateObject</a>, <a class="el" href="classInitialStateObject.html#ad4ea4c1a50a98fd4232e4a10705e7a66">InitialStateObject</a>, <a class="el" href="classFinalStateObject.html#a1bf69330467e12eafae476e899dceb15">FinalStateObject</a>, <a class="el" href="classStickPersonObject.html#abd84d82f09b25b71bb8e033a140708de">StickPersonObject</a>, and <a class="el" href="classOvalObject.html#aa60cb82c3c78097ca70dc7242b120f87">OvalObject</a>.</p>
 <div class="fragment"><pre class="fragment">                                       {  <span class="comment">// NOLINT</span>
-  <span class="keywordflow">if</span> (<a class="code" href="classBaseNode.html#a321a3231c6688686d5ee779ab169b741">selected</a> == <span class="keyword">true</span>) {
+  <span class="keywordflow">if</span> (<a class="code" href="classBaseNode.html#a321a3231c6688686d5ee779ab169b741">selected</a> == <span class="keyword">true</span> || <a class="code" href="classBaseNode.html#a2d29e941a7519d051f130f7ffd07ecec">cpSelected</a> == <span class="keyword">true</span>) {
     <span class="keywordtype">int</span> handleWidth = 5;
     <span class="keywordtype">int</span> handleHeight = 5;
 
     painter.setPen(Qt::NoPen);
-    painter.setBrush(Qt::blue);
+    <span class="keywordflow">if</span> (<a class="code" href="classBaseNode.html#a2d29e941a7519d051f130f7ffd07ecec">cpSelected</a> == <span class="keyword">true</span>) {
+      painter.setBrush(Qt::red);
+    } <span class="keywordflow">else</span> {
+      painter.setBrush(Qt::blue);
+    }
     painter.drawRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()-<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>/2-handleWidth,
              <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()-<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>/2-handleHeight,
              handleWidth,
@@ -255,8 +253,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/logan/Programming/puml/src/<a class="el" href="nodes_8h_source.html">nodes.h</a></li>
-<li>/home/logan/Programming/puml/src/<a class="el" href="nodes_8cpp.html">nodes.cpp</a></li>
+<li><a class="el" href="nodes_8h_source.html">nodes.h</a></li>
+<li><a class="el" href="nodes_8cpp.html">nodes.cpp</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -273,7 +271,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 21:11:38 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 19:21:08 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
