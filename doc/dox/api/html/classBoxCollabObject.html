@@ -70,6 +70,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="BoxCollabObject" --><!-- doxytag: inherits="ObjectNode" -->
+<p>This concrete class is the <a class="el" href="classBoxCollabObject.html" title="This concrete class is the BoxCollabObject node.">BoxCollabObject</a> node.  
+ <a href="classBoxCollabObject.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="UMLnodes__collab_8h_source.html">UMLnodes_collab.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for BoxCollabObject:</div>
@@ -97,7 +100,9 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">DiagramType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoxCollabObject.html#a2e3e9647de7b07d6dfc18f79d69e095b">getDiagramType</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoxCollabObject.html#a5df351b68872b450bed10df6b516c6a3">draw</a> (QPainter &amp;painter)</td></tr>
 </table>
-<hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
+<div class="textblock"><p>This concrete class is the <a class="el" href="classBoxCollabObject.html" title="This concrete class is the BoxCollabObject node.">BoxCollabObject</a> node. </p>
+</div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aa09013252bd200d89f85a8fd203f05fd"></a><!-- doxytag: member="BoxCollabObject::BoxCollabObject" ref="aa09013252bd200d89f85a8fd203f05fd" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -112,7 +117,7 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                  :<a class="code" href="classObjectNode.html#a9a66f6f6af4296a650d06f98a8a181d5">ObjectNode</a>() {
-    this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> = 70;
+    this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> = 90;
     this-&gt;<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> = 50;
     QPoint pos;
     pos.setX(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x() + <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2);
@@ -172,14 +177,24 @@ Public Member Functions</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classObjectNode.html#ae0422bfde3bfb8554826dfbe4806fb08">ObjectNode</a>.</p>
 <div class="fragment"><pre class="fragment">                                            {  <span class="comment">// NOLINT</span>
-  <span class="comment">// Always call this ObjectNode&#39;s draw function because it</span>
-  <span class="comment">// draws the selection boxes as needed.</span>
-  <a class="code" href="classBoxCollabObject.html#a5df351b68872b450bed10df6b516c6a3">ObjectNode::draw</a>(painter);
+  <span class="comment">//grabs the length of the string and updates the box</span>
+  <span class="comment">//to make everything fit properly</span>
+  QFontMetrics fm = painter.fontMetrics();
+  <span class="keywordtype">int</span> temp = fm.width(this-&gt;name);
+
+  <span class="keywordflow">if</span>(temp &gt;= <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-20){
+      temp = temp - (<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-20);
+      temp = temp + <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>;
+      this-&gt;length = temp;
+  }
+  <span class="keywordflow">else</span>{
+      this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> = 90;
+  }
 
   QPen pen;
   pen.setWidth(2);
 
-  <span class="comment">// drawing a StickPersonCollab</span>
+  <span class="comment">// drawing a BoxCollab</span>
   <span class="keywordtype">int</span> tempx = <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x();
   <span class="keywordtype">int</span> tempy = <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y();
 
@@ -194,20 +209,22 @@ Public Member Functions</h2></td></tr>
   <span class="comment">// edge</span>
   painter.setPen(pen);
   painter.setBrush(Qt::NoBrush);
-  <span class="comment">// head</span>
+
     painter.drawRect(tempx - 1/2.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>,
                      tempy - 1/2.0 * <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>,
                      <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>,
                      <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);
 
-
-
-  <span class="comment">// painter.drawText(tempx-10,tempy+50,this-&gt;name);</span>
-  painter.drawText(QRect(tempx - <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2, tempy + <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> / 2, <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, 50),
-                   Qt::AlignCenter | Qt::AlignTop | Qt::TextDontClip,
+  QFont underlineFont;
+  underlineFont.setUnderline(<span class="keyword">true</span>);
+  painter.setFont(underlineFont);
+  painter.drawText(QRect(tempx - <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2, tempy - <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> / 2, <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, 50),
+                   Qt::AlignCenter | Qt::AlignVCenter,
                    this-&gt;name);
 
-
+  <span class="comment">// Always call this ObjectNode&#39;s draw function because it</span>
+  <span class="comment">// draws the selection boxes as needed.</span>
+  <a class="code" href="classBoxCollabObject.html#a5df351b68872b450bed10df6b516c6a3">ObjectNode::draw</a>(painter);
 }
 </pre></div>
 </div>
@@ -227,7 +244,7 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Implements <a class="el" href="classBaseNode.html#aa525a20992c4179349a1812b0b9dacd6">BaseNode</a>.</p>
-<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda8c7df3c6e052df3f1ab6f0025a348a7a">UseCase</a>; }
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcdac7772d1045a9dad07f5fe029a36fcf50">Collaboration</a>; }
 </pre></div>
 </div>
 </div>
@@ -247,7 +264,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classBaseNode.html#a990ffea58e51f55cfa8c6862b79fd880">BaseNode</a>.</p>
 <div class="fragment"><pre class="fragment">                                    {
-  <a class="code" href="classBoxCollabObjectDialog.html">BoxCollabObjectDialog</a> *dialog = <span class="keyword">new</span>  <a class="code" href="classBoxCollabObjectDialog.html">BoxCollabObjectDialog</a>;
+  <a class="code" href="classBoxCollabObjectDialog.html" title="The properties dialog for collaboration boxes.">BoxCollabObjectDialog</a> *dialog = <span class="keyword">new</span>  <a class="code" href="classBoxCollabObjectDialog.html" title="The properties dialog for collaboration boxes.">BoxCollabObjectDialog</a>;
   dialog-&gt;setTextValue(name);
   connect(dialog, SIGNAL(textValueSelected(QString)),
           <span class="keyword">this</span>, SLOT(<a class="code" href="classBoxCollabObject.html#a37c46c3b4020759ced16977d3ca3975a">setName</a>(QString)));
@@ -271,7 +288,7 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Implements <a class="el" href="classBaseNode.html#a681bcfe2beced6d0a3bf0051faeb608e">BaseNode</a>.</p>
-<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> QString(<span class="stringliteral">&quot;:/Images/square.png&quot;</span>); }
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> QString(<span class="stringliteral">&quot;:/Images/rectangle.png&quot;</span>); }
 </pre></div>
 </div>
 </div>
@@ -290,7 +307,7 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Implements <a class="el" href="classBaseNode.html#a86bd186e3435098add1b9bdd79e25cdb">BaseNode</a>.</p>
-<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;Stick Person&quot;</span>; }
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;Collaboration Box&quot;</span>; }
 </pre></div>
 </div>
 </div>
@@ -313,8 +330,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/logan/Programming/puml/src/<a class="el" href="UMLnodes__collab_8h_source.html">UMLnodes_collab.h</a></li>
-<li>/home/logan/Programming/puml/src/<a class="el" href="UMLnodes__collab_8cpp.html">UMLnodes_collab.cpp</a></li>
+<li><a class="el" href="UMLnodes__collab_8h_source.html">UMLnodes_collab.h</a></li>
+<li><a class="el" href="UMLnodes__collab_8cpp.html">UMLnodes_collab.cpp</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -331,7 +348,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 21:11:38 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 19:21:07 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

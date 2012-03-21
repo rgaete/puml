@@ -172,10 +172,21 @@ Public Member Functions</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classObjectNode.html#ae0422bfde3bfb8554826dfbe4806fb08">ObjectNode</a>.</p>
 <div class="fragment"><pre class="fragment">                                        {  <span class="comment">// NOLINT</span>
-  <span class="comment">// Always call this ObjectNode&#39;s draw function because it</span>
-  <span class="comment">// draws the selection boxes as needed.</span>
-  <a class="code" href="classStateObject.html#a97fdf2b174bf32f6b9427c9cc4428bb3">ObjectNode::draw</a>(painter);
-
+    <span class="comment">//The font metrics gets the width of the string and</span>
+    <span class="comment">//then checks the length of the string against the</span>
+    <span class="comment">//length of the oval and changes the size accordingly</span>
+    QFontMetrics fm = painter.fontMetrics();
+    <span class="keywordtype">int</span> temp = fm.width(this-&gt;name);
+    <span class="keywordflow">if</span>(temp &gt;= <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-10){
+        temp = temp - (<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-10);
+        temp = temp + <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>;
+        this-&gt;length = temp;
+        this-&gt;<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> = temp;
+    }
+    <span class="keywordflow">else</span>{
+        this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> = 50;
+        this-&gt;<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> = 50;
+    }
   <span class="comment">// background</span>
   painter.setPen(Qt::NoPen);
   painter.setBrush(Qt::white);
@@ -190,6 +201,10 @@ Public Member Functions</h2></td></tr>
                          <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>),
                    Qt::AlignCenter | Qt::AlignHCenter | Qt::TextDontClip,
                    this-&gt;name);
+
+  <span class="comment">// Always call this ObjectNode&#39;s draw function because it</span>
+  <span class="comment">// draws the selection boxes as needed.</span>
+  <a class="code" href="classStateObject.html#a97fdf2b174bf32f6b9427c9cc4428bb3">ObjectNode::draw</a>(painter);
 }
 </pre></div>
 </div>
@@ -229,7 +244,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classBaseNode.html#a990ffea58e51f55cfa8c6862b79fd880">BaseNode</a>.</p>
 <div class="fragment"><pre class="fragment">                                 {
-  <a class="code" href="classStateObjectDialog.html" title="This defines a custom dialog for a OvalObject.">StateObjectDialog</a> *dialog = <span class="keyword">new</span> <a class="code" href="classStateObjectDialog.html" title="This defines a custom dialog for a OvalObject.">StateObjectDialog</a>;
+  <a class="code" href="classStateObjectDialog.html">StateObjectDialog</a> *dialog = <span class="keyword">new</span> <a class="code" href="classStateObjectDialog.html">StateObjectDialog</a>;
   dialog-&gt;setTextValue(name);
   connect(dialog, SIGNAL(textValueSelected(QString)),
           <span class="keyword">this</span>, SLOT(<a class="code" href="classStateObject.html#aea66a5865faa7b53c580de7df8daddb1">setName</a>(QString)));
@@ -295,8 +310,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/logan/Programming/puml/src/<a class="el" href="UMLnodes__state_8h_source.html">UMLnodes_state.h</a></li>
-<li>/home/logan/Programming/puml/src/<a class="el" href="UMLnodes__state_8cpp.html">UMLnodes_state.cpp</a></li>
+<li><a class="el" href="UMLnodes__state_8h_source.html">UMLnodes_state.h</a></li>
+<li><a class="el" href="UMLnodes__state_8cpp.html">UMLnodes_state.cpp</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -313,7 +328,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 21:11:39 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 19:21:08 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

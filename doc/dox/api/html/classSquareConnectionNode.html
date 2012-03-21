@@ -77,8 +77,10 @@ Inheritance diagram for SquareConnectionNode:</div>
  <div class="center">
   <img src="classSquareConnectionNode.png" usemap="#SquareConnectionNode_map" alt=""/>
   <map id="SquareConnectionNode_map" name="SquareConnectionNode_map">
-<area href="classBaseNode.html" alt="BaseNode" shape="rect" coords="0,0,146,24"/>
+<area href="classBaseNode.html" alt="BaseNode" shape="rect" coords="156,0,302,24"/>
 <area href="classClassConnection.html" title="This concrete class defines ..." alt="ClassConnection" shape="rect" coords="0,112,146,136"/>
+<area href="classCollabConnection.html" title="This concrete class defines ..." alt="CollabConnection" shape="rect" coords="156,112,302,136"/>
+<area href="classCollabSelfConnection.html" title="This concrete class defines ..." alt="CollabSelfConnection" shape="rect" coords="312,112,458,136"/>
 </map>
  </div></div>
 
@@ -112,12 +114,13 @@ Protected Attributes</h2></td></tr>
 <div class="memdoc">
 
 <p>Implements <a class="el" href="classBaseNode.html#a6ba6b3ac267709d4d4d8bed400d7a47b">BaseNode</a>.</p>
-<div class="fragment"><pre class="fragment">                                                      {
-  <a class="code" href="classBaseNode.html">BaseNode</a> *obj1, *obj2;
+<div class="fragment"><pre class="fragment">                                                       {
+  <a class="code" href="classBaseNode.html">BaseNode</a> *obj1;
+  <span class="comment">// BaseNode *obj2;</span>
   std::list&lt;BaseNode*&gt;::iterator it = <a class="code" href="classBaseNode.html#a6589606c2f8b588e7e27199803cfb2c8">connectedObjects</a>.begin();
   obj1 = *(it);
-  it++;
-  obj2 = *(it);
+  <span class="comment">// it++;</span>
+  <span class="comment">// obj2 = *(it);</span>
 
   <span class="keywordflow">if</span> (<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.x() != obj1-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>().x()) {  <span class="comment">// East or West connection</span>
     <span class="keywordflow">if</span> ((fabs(point.x() - ((<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.x() + <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.x()) / 2.0)) &lt; 15.0) &amp;&amp;
@@ -230,8 +233,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/logan/Programming/puml/src/<a class="el" href="nodes_8h_source.html">nodes.h</a></li>
-<li>/home/logan/Programming/puml/src/<a class="el" href="nodes_8cpp.html">nodes.cpp</a></li>
+<li><a class="el" href="nodes_8h_source.html">nodes.h</a></li>
+<li><a class="el" href="nodes_8cpp.html">nodes.cpp</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -248,7 +251,7 @@ Protected Attributes</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 21:11:38 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 19:21:08 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
