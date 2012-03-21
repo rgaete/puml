@@ -19,7 +19,8 @@ void ClassBoxObject::draw(QPainter &painter) {  // NOLINT
     //in pixels of the strings
     QFontMetrics fm = painter.fontMetrics();
 
-    int temp = fm.width(this->className);
+    int temp;
+    int width = fm.width(this->className);
     int alength,aheight,mlength,mheight,max=0;
 
     alength = stringLength(this->attributes);
@@ -31,18 +32,24 @@ void ClassBoxObject::draw(QPainter &painter) {  // NOLINT
     //figures out if the new strings inputed into the dialog
     //are bigger or smaller than before and resizes the objects
     //height and lengths accordingly, first checks the lengths
-    if(temp >= length-40){
-        temp = temp - (length-40);
-        temp = temp + length;
-        this->length = temp;
-    }
-    else if( alength+10 >= length-10 || mlength+10 >= length-10){
-        if(mlength > alength)
+    if( alength+10 >= length-10 || mlength+10 >= length-10 ||
+        alength+10 >= 50 || mlength+10 >= 50 || width >= length-40 ||
+        width >= 20){
+        if(mlength > alength && mlength > width){
             temp = mlength;
-        else
+            temp = temp - (length-5);
+            temp = temp + length;
+        }
+        else if (width > alength && width > mlength){
+            temp = width;
+            temp = temp - (length-40);
+            temp = temp + length;
+        }
+        else{
             temp = alength;
-        temp = temp - (length-5);
-        temp = temp + length;
+            temp = temp - (length-5);
+            temp = temp + length;
+        }
         this->length = temp;
     }
     else{
@@ -51,16 +58,16 @@ void ClassBoxObject::draw(QPainter &painter) {  // NOLINT
 
     //here is the checks to see if the height needs adjustment
     temp = max = 15;
-    if(attributeHeight <= aheight){
+    if(attributeHeight <= aheight || aheight >=15){
         temp = aheight;
         this->attributeHeight = temp;
     }
-    if(methodHeight <= mheight){
+    if(methodHeight <= mheight || mheight >=15){
         max = mheight;
         this->methodHeight = max;
     }
     temp = temp + max + classHeight;
-    if(temp >= height){
+    if(temp >= height || temp >= 45){
         this->height = temp;
     }
     else{
@@ -111,6 +118,7 @@ void ClassBoxObject::draw(QPainter &painter) {  // NOLINT
 
   // Always call this ObjectNode's draw function because it
   // draws the selection boxes as needed.
+  BaseNode::setUpConnectionPoints();
   ObjectNode::draw(painter);
 }
 
