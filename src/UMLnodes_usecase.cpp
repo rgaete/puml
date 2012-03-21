@@ -253,17 +253,12 @@ void ExtendsConnection::draw(QPainter &painter) {  // NOLINT
   }
   painter.drawLine(pt1, pt2);
 
-  // draw the text
-  painter.save();
+  // calculates the midpoint between the objects
+  int x = (pt1.x() + pt2.x()) / 2;
+  int y = (pt1.y() + pt2.y()) / 2;
+  QPoint textPos(x,y);
+  painter.drawText(textPos.x()-20,textPos.y()-10,"<<extends>>");
 
-  QPoint textPos = calculateTextPosition();
-
-  painter.translate(textPos);
-  // painter.rotate(mathfunctions::toDegrees(-lineangle));
-  painter.rotate(90);
-  painter.drawText(0, 0, "<<extends>>");
-
-  painter.restore();
   addArrow(painter);
 }
 
@@ -335,14 +330,13 @@ void IncludesConnection::draw(QPainter &painter) {  // NOLINT
   painter.drawLine(pt1, pt2);
 
   // draw the text
-  painter.save();
+  // calculates the midpoint between the objects
+  int x = (pt1.x() + pt2.x()) / 2;
+  int y = (pt1.y() + pt2.y()) / 2;
+  QPoint textPos(x,y);
 
-  QPoint textPos = calculateTextPosition();
-  painter.translate(textPos);
+  painter.drawText(textPos.x()-20,textPos.y()-10,"<<includes>>");
 
-  painter.rotate(mathfunctions::toDegrees(-lineangle));
-  painter.drawText(0, 0, "<<includes>>");
-  painter.restore();
   addArrow(painter);
 }
 
