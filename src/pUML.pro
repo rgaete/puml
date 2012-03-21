@@ -40,5 +40,4 @@ HEADERS  += mainwindow.h \
 OTHER_FILES +=
 
 RESOURCES += \
-    icons.qrc \
-    sounds.qrc
+    icons.qrc
