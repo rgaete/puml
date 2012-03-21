@@ -89,15 +89,14 @@ Public Slots</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMainWindow.html#a0e835b057aadd7902e431132e9d842cb">on_actionPaste_triggered</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMainWindow.html#a79d6f0d11ff29e98fbb854e0201b86b4">on_actionSelect_All_triggered</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMainWindow.html#a84b9cea338a6bf0c0c1d4d126e253029">on_actionInverse_Select_triggered</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMainWindow.html#a563041e21ae0459792729c0df3ea8f20">on_actionTile_Horizontally_toggled</a> (bool arg1)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMainWindow.html#aed3c876a4b55a6c7abb569d053b679ed">on_actionTile_Vertically_toggled</a> (bool arg1)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMainWindow.html#acfada59ef1f79adcc4c1ae3898869c69">on_actionCascade_toggled</a> (bool arg1)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMainWindow.html#a31b755085ba6efb58cac20c8e5274582">on_actionDocument_triggered</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMainWindow.html#a4f3ebda1ba39e0ef4d678b44893c9c7f">on_actionAbout_triggered</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMainWindow.html#a723573a6fb06dcc3d8253587922d3a3f">on_actionSelect_triggered</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMainWindow.html#a0148d929d5a42d11abc8e383942ae41d">on_tabWidget_currentChanged</a> (int newIndex)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMainWindow.html#a48a3ce89fb32fcb0b1cbd5dbc9fa7624">on_NodeAction_triggered</a> (<a class="el" href="classCanvas.html#af2fe83ddca6a5fccac7896a7ecb1be84">Canvas::DrawingMode</a> drawingMode, int prototypeID)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMainWindow.html#a3652d9d16936a39bd6bb4609768eae4e">setDiagramType</a> (<a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">BaseNode::DiagramType</a> type)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMainWindow.html#a0404333cdda871ecfa98bedd3bd3c107">updateDiagramType</a> (<a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">BaseNode::DiagramType</a> type)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMainWindow.html#ae66396b9e22dcd5d6e2bd81cbeab9db7">createNewDiagram</a> (<a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">BaseNode::DiagramType</a> type)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMainWindow.html#a36eef58482008a1adf9eea81d0a2289f">openDiagram</a> (const QString &amp;filename)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMainWindow.html#a8b244be8b7b7db1b08de2a2acb9409db">MainWindow</a> (QWidget *parent=0)</td></tr>
@@ -131,28 +130,35 @@ Protected Member Functions</h2></td></tr>
   <span class="comment">// signalMapper = new QSignalMapper(this);</span>
   currentDocument = -1;
 
-  <span class="comment">// register the objects</span>
+  <span class="comment">// Use case objects</span>
   registerObject(<span class="keyword">new</span> <a class="code" href="classOvalObject.html" title="This concrete class is the Oval node.">OvalObject</a>);
   registerObject(<span class="keyword">new</span> <a class="code" href="classStickPersonObject.html" title="This concrete class is the StickPerson node.">StickPersonObject</a>);
-  <span class="comment">// register connections</span>
   registerObject(<span class="keyword">new</span> <a class="code" href="classInteractionConnection.html" title="This concrete class defines an Interaction line in a Use Case diagram (line from the actor to the use...">InteractionConnection</a>);
   registerObject(<span class="keyword">new</span> <a class="code" href="classExtendsConnection.html" title="This concrete class defines an Extends line in a Use Case diagram (line from the actor to the use cas...">ExtendsConnection</a>);
   registerObject(<span class="keyword">new</span> <a class="code" href="classIncludesConnection.html">IncludesConnection</a>);
-  registerObject(<span class="keyword">new</span> <a class="code" href="classClassConnection.html" title="This concrete class defines ...">ClassConnection</a>);
 
   <span class="comment">// statechart objects</span>
   registerObject(<span class="keyword">new</span> <a class="code" href="classStateObject.html" title="This concrete class is the State node.">StateObject</a>);
   registerObject(<span class="keyword">new</span> <a class="code" href="classInitialStateObject.html" title="This concrete class is the State node.">InitialStateObject</a>);
-  registerObject(<span class="keyword">new</span> <a class="code" href="classFinalStateObject.html" title="This concrete class is the State node.">FinalStateObject</a>);
+  registerObject(<span class="keyword">new</span> <a class="code" href="classFinalStateObject.html" title="This concrete class is the Final State node.">FinalStateObject</a>);
+  registerObject(<span class="keyword">new</span> <a class="code" href="classTransitionConnection.html" title="This concrete class defines an Interaction line in a Use Case diagram (line from the actor to the use...">TransitionConnection</a>);
 
-  <span class="comment">// register classbox</span>
+  <span class="comment">// class objects</span>
   registerObject(<span class="keyword">new</span> <a class="code" href="classClassBoxObject.html" title="This concrete class is the ClassBox node.">ClassBoxObject</a>);
+  registerObject(<span class="keyword">new</span> <a class="code" href="classClassConnection.html" title="This concrete class defines ...">ClassConnection</a>);
+
+  <span class="comment">// register collab objects</span>
+  registerObject(<span class="keyword">new</span> <a class="code" href="classStickPersonCollabObject.html" title="This concrete class is the StickPersonCollab node.">StickPersonCollabObject</a>);
+  registerObject(<span class="keyword">new</span> <a class="code" href="classBoxCollabObject.html" title="This concrete class is the BoxCollabObject node.">BoxCollabObject</a>);
+  registerObject(<span class="keyword">new</span> <a class="code" href="classMultiBoxCollabObject.html" title="This concrete class is the MultiBoxCollabObject node.">MultiBoxCollabObject</a>);
+  registerObject(<span class="keyword">new</span> <a class="code" href="classCollabConnection.html" title="This concrete class defines ...">CollabConnection</a>);
+  registerObject(<span class="keyword">new</span> <a class="code" href="classCollabSelfConnection.html" title="This concrete class defines ...">CollabSelfConnection</a>);
 
   this-&gt;resize(700, 500);
   this-&gt;setWindowTitle(tr(<span class="stringliteral">&quot;Phunctional UML Editor&quot;</span>));
 
-  <span class="comment">// create a new document on launch</span>
-  <a class="code" href="classMainWindow.html#aed8d4c16aaa87ae02a2de2edd5fc91c7">on_actionNew_triggered</a>();
+  <span class="comment">// Show the Open/New dialog</span>
+  openFileNewDialog(<a class="code" href="classConfigDialog.html#a6b6ce45ecbffff895dcb67d15f7ea699afa5d4322be3b1880ea7dc006a0242d6f">ConfigDialog::OpenAndNew</a>);
 }
 </pre></div>
 </div>
@@ -203,6 +209,77 @@ Protected Member Functions</h2></td></tr>
 </pre></div>
 </div>
 </div>
+<a class="anchor" id="ae66396b9e22dcd5d6e2bd81cbeab9db7"></a><!-- doxytag: member="MainWindow::createNewDiagram" ref="ae66396b9e22dcd5d6e2bd81cbeab9db7" args="(BaseNode::DiagramType type)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MainWindow::createNewDiagram </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">BaseNode::DiagramType</a>&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td><code> [slot]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>This slot creates a new <a class="el" href="classCanvas.html">Canvas</a>, <a class="el" href="classDocument.html">Document</a> and Tab with the given diagram type. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>The new diagram type </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><pre class="fragment">                                                          {
+  <span class="keywordflow">if</span> (type != <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcda76aa2a7edeab2377d00af42cfdc4334c">BaseNode::Nothing</a>) {
+    <span class="comment">// Create the new document and canvas</span>
+    <a class="code" href="classDocument.html">Document</a> *newdoc = <span class="keyword">new</span> <a class="code" href="classDocument.html">Document</a>;
+    documents.push_back(newdoc);
+    <a class="code" href="classCanvas.html">Canvas</a>* newcanvas = <span class="keyword">new</span> <a class="code" href="classCanvas.html">Canvas</a>;
+    canvases.push_back(newcanvas);
+
+    <span class="comment">// set the diagram type</span>
+    newdoc-&gt;<a class="code" href="classDocument.html#a44757e4a0f79b1928a9f171eef95ae2b">setDiagramType</a>(type);
+
+    <span class="comment">// set the parent to this so that they get automically deleted</span>
+    <span class="comment">// when the program shuts down</span>
+    <span class="comment">// newdoc-&gt;setParent(this);</span>
+    <span class="comment">// newcanvas-&gt;setParent(this);</span>
+
+    <span class="comment">// Update the canvas and document index on the canvas and document</span>
+    newdoc-&gt;<a class="code" href="classDocument.html#a89ec2c397b4e8ff253221928ada46a66">setCanvasIndex</a>(canvases.size()-1);
+    newcanvas-&gt;<a class="code" href="classCanvas.html#aac3a3ff62d4adece9f0b28b1ce97a330">setDocumentIndex</a>(documents.size()-1);
+
+    <span class="comment">// add the tab and update the map.</span>
+    <span class="comment">// Notice that the mapping is inserted before the tab is created. This</span>
+    <span class="comment">// is so that the mapping is already there when the</span>
+    <span class="comment">// on_tabWidget_currentChanged slot is called, the mapping is already there.</span>
+    <span class="comment">// Note that this assumes (which is a valid assumption) that newTabIndex</span>
+    <span class="comment">// returned by addTab is always equal to the number of tabs.</span>
+    <span class="comment">// NOTE: Because the tabs can be reordered, tabToCanvasMappings is unused.</span>
+    tabToCanvasMappings.insert(
+          std::pair&lt;int, int&gt;(tabWidget-&gt;count(), canvases.size() - 1));
+    <span class="keywordtype">int</span> newTabIndex = tabWidget-&gt;addTab(newcanvas, <span class="stringliteral">&quot;New Diagram&quot;</span>);
+
+    <span class="comment">// Connect the new canvas with the new document.</span>
+    connectCanvasWithDocument(canvases.size() - 1, documents.size() - 1);
+
+    <span class="comment">// Change to the new tab</span>
+    tabWidget-&gt;setCurrentIndex(newTabIndex);
+
+    <span class="comment">// Update the toolbars</span>
+    <a class="code" href="classMainWindow.html#a0404333cdda871ecfa98bedd3bd3c107">updateDiagramType</a>(type);
+  } <span class="keywordflow">else</span> {
+    <span class="comment">// If the diagram type is nothing and there is no tabs,</span>
+    <span class="comment">// update the toolbar to reflect it</span>
+    <span class="keywordflow">if</span> (tabWidget-&gt;count() == 0) {
+      <a class="code" href="classMainWindow.html#a0404333cdda871ecfa98bedd3bd3c107">updateDiagramType</a>(type);
+    }
+  }
+}
+</pre></div>
+</div>
+</div>
 <a class="anchor" id="a4f3ebda1ba39e0ef4d678b44893c9c7f"></a><!-- doxytag: member="MainWindow::on_actionAbout_triggered" ref="a4f3ebda1ba39e0ef4d678b44893c9c7f" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -222,25 +299,6 @@ Protected Member Functions</h2></td></tr>
      <span class="stringliteral">&quot; final project.&lt;/p&gt;&lt;p&gt; It was developed by seven awesome students during&quot;</span>
      <span class="stringliteral">&quot; their spare time. The development tools is provided by Nokia -- Qt&quot;</span>
      <span class="stringliteral">&quot; and Google code repository.&lt;/p&gt;&quot;</span>));
-}
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="acfada59ef1f79adcc4c1ae3898869c69"></a><!-- doxytag: member="MainWindow::on_actionCascade_toggled" ref="acfada59ef1f79adcc4c1ae3898869c69" args="(bool arg1)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void MainWindow::on_actionCascade_toggled </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>arg1</em></td><td>)</td>
-          <td><code> [slot]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                   {
 }
 </pre></div>
 </div>
@@ -367,41 +425,9 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Creates a new diagram file. This slot first asks the user what type of diagram to create with a dialog. Then it create a new canvas and document, then connects them together. The canvas is added to a new tab and the tab-to-canvas map is updated. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>This should also add the diagram to the current project. </dd></dl>
+<p>Creates a new diagram file. This slot first uses the openFileNewDialog function open the Open/NEw dialog with only new diagram options available. That function connects signals from the dialog to the createNewDiagram slot in the <a class="el" href="classMainWindow.html">MainWindow</a>. That slot creates a new diagram, if a new diagram type was chosen. </p>
 <div class="fragment"><pre class="fragment">                                        {
-  <span class="comment">// dialog of UML types</span>
-  <span class="comment">// dialogNew = new DialogNew;</span>
-  <span class="comment">// dialogNew-&gt;show();</span>
-  <span class="comment">// QMessageBox::information(this, &quot;pUML&quot;, &quot;Creating a new generic diagram&quot;,</span>
-  <span class="comment">//                          QMessageBox::Ok);</span>
-
-  <span class="comment">// this  is the new dialogue, hopefully</span>
-  <a class="code" href="classConfigDialog.html">ConfigDialog</a> *dialog = <span class="keyword">new</span> <a class="code" href="classConfigDialog.html">ConfigDialog</a>();
-  connect(dialog, SIGNAL(newDiagramType(<a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">ObjectNode::DiagramType</a>)),
-          <span class="keyword">this</span>, SLOT(<a class="code" href="classMainWindow.html#a3652d9d16936a39bd6bb4609768eae4e">setDiagramType</a>(<a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">BaseNode::DiagramType</a>)));
-  dialog-&gt;exec();
-
-  <span class="comment">// Create the new document and canvas</span>
-  <a class="code" href="classDocument.html">Document</a>* newdoc = <span class="keyword">new</span> <a class="code" href="classDocument.html">Document</a>;
-  documents.push_back(newdoc);
-  <a class="code" href="classCanvas.html">Canvas</a>* newcanvas = <span class="keyword">new</span> <a class="code" href="classCanvas.html">Canvas</a>;
-  canvases.push_back(newcanvas);
-
-  <span class="comment">// These member variables aren&#39;t used in any other function</span>
-  <span class="comment">// they should either be removed or the map should be removed</span>
-  <span class="comment">// and something like this should take it&#39;s place.</span>
-  newdoc-&gt;<a class="code" href="classDocument.html#a89ec2c397b4e8ff253221928ada46a66">setCanvasIndex</a>(canvases.size()-1);
-  newcanvas-&gt;<a class="code" href="classCanvas.html#aac3a3ff62d4adece9f0b28b1ce97a330">setDocumentIndex</a>(documents.size()-1);
-
-  <span class="comment">// add the tab and update the map.</span>
-  <span class="keywordtype">int</span> newTabIndex = tabWidget-&gt;addTab(newcanvas, <span class="stringliteral">&quot;New Diagram&quot;</span>);
-  tabToCanvasMappings.insert(
-        std::pair&lt;int, int&gt;(newTabIndex, canvases.size() - 1));
-  tabWidget-&gt;setCurrentIndex(newTabIndex);
-
-  <span class="comment">// Connect the new canvas with the new document.</span>
-  connectCanvasWithDocument(canvases.size() - 1, documents.size() - 1);
+  openFileNewDialog(<a class="code" href="classConfigDialog.html#a6b6ce45ecbffff895dcb67d15f7ea699afd4f6d3aae941e9aabcd9528e6d2f806">ConfigDialog::NewOnly</a>);
 }
 </pre></div>
 </div>
@@ -484,33 +510,10 @@ Protected Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                                            {
+  <span class="comment">// FUTURE: This is currently rigged to save only the current document.</span>
+  <span class="comment">// It will need to iterate over all Document objects and save the nodes</span>
+  <span class="comment">// vector in each of them.</span>
   documents.at(currentDocument)-&gt;saveAsDocument();
-
-  <span class="comment">// MOVE ALL OF THIS TO DOCUMENTS</span>
-  QString fileName = QFileDialog::getSaveFileName(<span class="keyword">this</span>, tr(<span class="stringliteral">&quot;Save As File&quot;</span>),
-             tr(<span class="stringliteral">&quot;XML files (*.xml)&quot;</span>));
-
-  fprintf(stderr, <span class="stringliteral">&quot;We go here\n&quot;</span>);
-  fprintf(stderr, <span class="stringliteral">&quot;We go here\n&quot;</span>);
-  fprintf(stderr, <span class="stringliteral">&quot;%s\n&quot;</span>, fileName.toStdString().c_str());
-
-<span class="comment">//  printf(&quot;%s\n&quot;, fileName.toStdString());</span>
-  <span class="keywordflow">if</span> (fileName.isEmpty()) {
-      <span class="keywordflow">return</span>;
-  } <span class="keywordflow">else</span> {
-      QFile file(fileName);
-  <span class="keywordflow">if</span> (!file.open(QIODevice::WriteOnly)) {
-      QMessageBox::information(<span class="keyword">this</span>,
-                              tr(<span class="stringliteral">&quot;Unable to open file&quot;</span>), file.errorString());
-      <span class="keywordflow">return</span>;
-  }
-
-  ofstream myfile;
-  myfile.open(fileName.toStdString().c_str());
-  myfile &lt;&lt; <span class="stringliteral">&quot;Rawr&quot;</span>;
-  myfile.close();
-  }
-<span class="comment">//  write the saving as file function here with the fileName</span>
 }
 </pre></div>
 </div>
@@ -531,11 +534,6 @@ Protected Member Functions</h2></td></tr>
 <div class="fragment"><pre class="fragment">                                         {
   documents.at(currentDocument)-&gt;saveDocument();
 
-  QString fileName = QFileDialog::getSaveFileName(<span class="keyword">this</span>, tr(<span class="stringliteral">&quot;Save File&quot;</span>),
-             tr(<span class="stringliteral">&quot;XML files (*.xml)&quot;</span>));
-
-
-  <span class="comment">//  write the saving file function here with the fileName</span>
 }
 </pre></div>
 </div>
@@ -572,56 +570,20 @@ Protected Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <p>This slot updates the currently active canvas's mode to Nothing. It uses a map of tab indices to canvas indices to find the current canvas. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Try move the mappings into the tabs themselves or into the documents to eleminate the need for a map. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>Try move the mappings into the tabs themselves or into the documents to eleminate the need for a map. </dd></dl>
 <div class="fragment"><pre class="fragment">                                           {
-  <span class="comment">/* The old way with a static cast (...shiver...)</span>
-<span class="comment">  Canvas* canvas;</span>
-<span class="comment">  canvas = static_cast&lt;Canvas*&gt;(tabWidget-&gt;currentWidget());</span>
-<span class="comment">  canvas-&gt;setMode(Canvas::Nothing);</span>
-<span class="comment">  */</span>
+  <span class="keywordflow">if</span> (tabWidget-&gt;count() != 0) {
+    <span class="comment">// The old way with a dynamic cast</span>
+    <a class="code" href="classCanvas.html">Canvas</a>* canvas;
+    canvas = <span class="keyword">static_cast&lt;</span><a class="code" href="classCanvas.html">Canvas</a>*<span class="keyword">&gt;</span>(tabWidget-&gt;currentWidget());
+    canvas-&gt;<a class="code" href="classCanvas.html#a205debe0c8b4218d7f9738a4051f80db">setMode</a>(<a class="code" href="classCanvas.html#af2fe83ddca6a5fccac7896a7ecb1be84ab5de4f651f3f55d1f7ee2ce89acf768d">Canvas::Nothing</a>);
+  }
+
 
   <span class="comment">/* The new way with the map :) */</span>
-  <span class="keywordtype">int</span> canvasIndex;
-  canvasIndex = tabToCanvasMappings[tabWidget-&gt;currentIndex()];
-  canvases.at(canvasIndex)-&gt;setMode(<a class="code" href="classCanvas.html#af2fe83ddca6a5fccac7896a7ecb1be84ab5de4f651f3f55d1f7ee2ce89acf768d">Canvas::Nothing</a>);
-}
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="a563041e21ae0459792729c0df3ea8f20"></a><!-- doxytag: member="MainWindow::on_actionTile_Horizontally_toggled" ref="a563041e21ae0459792729c0df3ea8f20" args="(bool arg1)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void MainWindow::on_actionTile_Horizontally_toggled </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>arg1</em></td><td>)</td>
-          <td><code> [slot]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                             {
-}
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="aed3c876a4b55a6c7abb569d053b679ed"></a><!-- doxytag: member="MainWindow::on_actionTile_Vertically_toggled" ref="aed3c876a4b55a6c7abb569d053b679ed" args="(bool arg1)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void MainWindow::on_actionTile_Vertically_toggled </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>arg1</em></td><td>)</td>
-          <td><code> [slot]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                           {
+  <span class="comment">// int canvasIndex;</span>
+  <span class="comment">// canvasIndex = tabToCanvasMappings[tabWidget-&gt;currentIndex()];</span>
+  <span class="comment">// canvases.at(canvasIndex)-&gt;setMode(Canvas::Nothing);</span>
 }
 </pre></div>
 </div>
@@ -651,23 +613,38 @@ Protected Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <p>This slot gets triggered whenever one of the NodeActions are triggered, which could be from the toolbar or menu. Those NodeActions hold the drawingMode and prototypeID. This slot then puts the canvas and document into the right modes and sets the right id's. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">drawingMode</td><td>The drawing mode of the node action. Can be Object, Connection, or Nothing </td></tr>
+    <tr><td class="paramname">prototypeID</td><td>The id of the prototype in the <a class="el" href="classNodeFactory.html">NodeFactory</a>. This is irrelevant for a drawing mode of Nothing. </td></tr>
+  </table>
+  </dd>
+</dl>
 <div class="fragment"><pre class="fragment">                                                          {
   <span class="comment">// QMessageBox::information(this, &quot;setPrototypeID: prototypeID&quot;,</span>
   <span class="comment">//                          QString::number(prototypeID), QMessageBox::Ok);</span>
 
-  <a class="code" href="classCanvas.html">Canvas</a>* currentCanvas;
-  <span class="keywordtype">int</span> canvasIndex;
+  <span class="comment">// if (tabWidget-&gt;count() != 0 &amp;&amp; tabWidget-&gt;currentIndex() &gt;= 0</span>
+  <span class="comment">//     &amp;&amp; tabWidget-&gt;currentIndex() &lt; tabToCanvasMappings.size()) {</span>
+  <span class="keywordflow">if</span> (tabWidget-&gt;count() != 0 &amp;&amp; tabWidget-&gt;currentIndex() &gt;= 0) {
+    <a class="code" href="classCanvas.html">Canvas</a>* currentCanvas;
+    <span class="comment">// int canvasIndex;</span>
 
-  <span class="comment">// Find the current canvas with the map</span>
-  canvasIndex = tabToCanvasMappings[tabWidget-&gt;currentIndex()];
-  currentCanvas = canvases.at(canvasIndex);
+    <span class="comment">// Find the current canvas with the map</span>
+    <span class="comment">// canvasIndex = tabToCanvasMappings[tabWidget-&gt;currentIndex()];</span>
+    <span class="comment">// currentCanvas = canvases.at(canvasIndex);</span>
+    currentCanvas = <span class="keyword">static_cast&lt;</span><a class="code" href="classCanvas.html">Canvas</a>*<span class="keyword">&gt;</span>(tabWidget-&gt;currentWidget());
 
-  <span class="comment">// notify the canvas that it should be in object mode</span>
-  currentCanvas-&gt;<a class="code" href="classCanvas.html#a205debe0c8b4218d7f9738a4051f80db">setMode</a>(drawingMode);
+    <span class="comment">// notify the canvas that it should be in object mode</span>
+    currentCanvas-&gt;<a class="code" href="classCanvas.html#a205debe0c8b4218d7f9738a4051f80db">setMode</a>(drawingMode);
 
-  <span class="comment">// we need to set the prototype id in currently</span>
-  <span class="comment">// active document, so it knows what to create.</span>
-  documents.at(currentCanvas-&gt;<a class="code" href="classCanvas.html#ab7d52f6f1fc590fc41aa55219059c9ee">getDocumentIndex</a>())-&gt;setNewObjectID(prototypeID);
+    <span class="comment">// we need to set the prototype id in currently</span>
+    <span class="comment">// active document, so it knows what to create.</span>
+    documents.at(currentCanvas-&gt;<a class="code" href="classCanvas.html#ab7d52f6f1fc590fc41aa55219059c9ee">getDocumentIndex</a>())
+            -&gt;setNewObjectID(prototypeID);
+  } <span class="keywordflow">else</span> {
+    qDebug(<span class="stringliteral">&quot;Node action when there are no canvases created!&quot;</span>);
+  }
 }
 </pre></div>
 </div>
@@ -686,8 +663,33 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>This slot receives the currentChanged signal from the tabWidget. It should reupdate the toolbar with the previously selected tool and only the legal buttons for the diagram. </p>
+<p>This slot receives the currentChanged signal from the tabWidget. It should reupdate the toolbar with the previously selected tool and only the legal buttons for the diagram. It should also connect actions in the menu to the current document/canvas. </p>
 <div class="fragment"><pre class="fragment">                                                         {
+  <span class="keywordflow">if</span> (newIndex &gt; -1 &amp;&amp;
+      newIndex &lt; static_cast&lt;int&gt;(tabToCanvasMappings.size())) {
+    <span class="comment">// Get the current doc from the current canvas from the current tab</span>
+    <span class="comment">// Canvas* currentCanvas = canvases.at(tabToCanvasMappings[newIndex]);</span>
+    <a class="code" href="classCanvas.html">Canvas</a>* currentCanvas = <span class="keyword">static_cast&lt;</span><a class="code" href="classCanvas.html">Canvas</a>*<span class="keyword">&gt;</span>(tabWidget-&gt;currentWidget());
+    <a class="code" href="classDocument.html">Document</a>* currentDoc = documents.at(currentCanvas-&gt;<a class="code" href="classCanvas.html#ab7d52f6f1fc590fc41aa55219059c9ee">getDocumentIndex</a>());
+    <span class="comment">// and update the toolbar with that document&#39;s diagram type.</span>
+    <a class="code" href="classMainWindow.html#a0404333cdda871ecfa98bedd3bd3c107">updateDiagramType</a>(currentDoc-&gt;<a class="code" href="classDocument.html#a9f71a25956993e1a3556007e82a9583d">getDiagramType</a>());
+
+    <span class="comment">// disconnect signals that are going to documents</span>
+    disconnect(actionSendForwards, SIGNAL(triggered()), 0, 0);
+    disconnect(actionSendBackwards, SIGNAL(triggered()), 0, 0);
+    disconnect(actionSendToFront, SIGNAL(triggered()), 0, 0);
+    disconnect(actionSendToBack, SIGNAL(triggered()), 0, 0);
+
+    <span class="comment">// connect thos signals to the current document</span>
+    connect(actionSendForwards, SIGNAL(triggered()),
+            currentDoc, SLOT(sendSelectedForward()));
+    connect(actionSendBackwards, SIGNAL(triggered()),
+            currentDoc, SLOT(sendSelectedBackwards()));
+    connect(actionSendToFront, SIGNAL(triggered()),
+            currentDoc, SLOT(sendSelectedToFront()));
+    connect(actionSendToBack, SIGNAL(triggered()),
+            currentDoc, SLOT(sendSelectedToBack()));
+  }
   actionSelect-&gt;trigger();
   <span class="comment">/*</span>
 <span class="comment">  // An attempt at making the toolbar update with the last selected tool...</span>
@@ -717,12 +719,43 @@ Protected Member Functions</h2></td></tr>
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="a3652d9d16936a39bd6bb4609768eae4e"></a><!-- doxytag: member="MainWindow::setDiagramType" ref="a3652d9d16936a39bd6bb4609768eae4e" args="(BaseNode::DiagramType type)" -->
+<a class="anchor" id="a36eef58482008a1adf9eea81d0a2289f"></a><!-- doxytag: member="MainWindow::openDiagram" ref="a36eef58482008a1adf9eea81d0a2289f" args="(const QString &amp;filename)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void MainWindow::setDiagramType </td>
+          <td class="memname">void MainWindow::openDiagram </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td><code> [slot]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>This slot opens an existing diagram. It creates a new <a class="el" href="classCanvas.html">Canvas</a>, <a class="el" href="classDocument.html">Document</a> and tab, then recreates the diagram in the <a class="el" href="classDocument.html">Document</a>. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>The filename to open. </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><pre class="fragment">                                                    {
+  <span class="comment">// This function should be similar to the createNewDiagram function, except</span>
+  <span class="comment">// loads in a diagram after creating the document and canvas. This probably</span>
+  <span class="comment">// done by calling a slot in the document class with the filename</span>
+  QMessageBox::information(<span class="keyword">this</span>, <span class="stringliteral">&quot;pUML&quot;</span>,
+    <span class="stringliteral">&quot;Opening an existing diagram is not yet implemented.\n\n&quot;</span> + filename);
+}
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="a0404333cdda871ecfa98bedd3bd3c107"></a><!-- doxytag: member="MainWindow::updateDiagramType" ref="a0404333cdda871ecfa98bedd3bd3c107" args="(BaseNode::DiagramType type)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MainWindow::updateDiagramType </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">BaseNode::DiagramType</a>&#160;</td>
           <td class="paramname"><em>type</em></td><td>)</td>
@@ -731,7 +764,15 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                        {
+<p>This slot refilters the node actions based on a diagram type. This will effectively hide and show menu items and toolbar items. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>The new diagram type </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><pre class="fragment">                                                           {
+  <span class="comment">// Loop through the actions and set their visibility.</span>
   <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; static_cast&lt;int&gt;(actions.size()); ++i) {
     <span class="keywordflow">if</span> (actions.at(i)-&gt;getDiagramType() == type) {
       actions.at(i)-&gt;setVisible(<span class="keyword">true</span>);
@@ -744,8 +785,8 @@ Protected Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/logan/Programming/puml/src/<a class="el" href="mainwindow_8h_source.html">mainwindow.h</a></li>
-<li>/home/logan/Programming/puml/src/<a class="el" href="mainwindow_8cpp.html">mainwindow.cpp</a></li>
+<li><a class="el" href="mainwindow_8h_source.html">mainwindow.h</a></li>
+<li><a class="el" href="mainwindow_8cpp.html">mainwindow.cpp</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -762,7 +803,7 @@ Protected Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 21:11:38 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 19:21:08 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

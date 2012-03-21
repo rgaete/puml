@@ -100,6 +100,7 @@ Signals</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvas.html#ae33c347b9e009b093f96fe5f5a0bd7cc">redraw</a> (QPainter &amp;painter)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvas.html#a3f40ff5164e2e4e3e46b9664a6fa6820">showPropertiesDialog</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvas.html#a1a9dbf7f189eeb4a273f1982a63b2d79">removeObject</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvas.html#a0f406178f13274a8e3acd0cf86f7d94d">changeSecondConnectionPointHint</a> (const QPoint &amp;point)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvas.html#a5525075d65b32480dd518d382946e0ea">Canvas</a> (QWidget *parent=0)</td></tr>
@@ -112,7 +113,7 @@ Public Member Functions</h2></td></tr>
 Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvas.html#a88731365371079103895acfd9c1e4f1e">mouseReleaseEvent</a> (QMouseEvent *event)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvas.html#abc2200972cf33fd8991d4759955eb0d8">mousePressEvent</a> (QMouseEvent *event)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvas.html#a550abe54072b8baffae3197170b979b8">paintEvent</a> (QPaintEvent *event)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvas.html#a0e5ff2b8662659da1687eb31ad41d119">paintEvent</a> (QPaintEvent *)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvas.html#a9fb4b83a1067ddc2aa04676f51dc5a47">mouseMoveEvent</a> (QMouseEvent *event)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvas.html#aad2e05730114da14b79fef251f7578e8">contextMenuEvent</a> (QContextMenuEvent *event)</td></tr>
 </table>
@@ -214,6 +215,23 @@ Protected Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a0f406178f13274a8e3acd0cf86f7d94d"></a><!-- doxytag: member="Canvas::changeSecondConnectionPointHint" ref="a0f406178f13274a8e3acd0cf86f7d94d" args="(const QPoint &amp;point)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Canvas::changeSecondConnectionPointHint </td>
+          <td>(</td>
+          <td class="paramtype">const QPoint &amp;&#160;</td>
+          <td class="paramname"><em>point</em></td><td>)</td>
+          <td><code> [signal]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="aad2e05730114da14b79fef251f7578e8"></a><!-- doxytag: member="Canvas::contextMenuEvent" ref="aad2e05730114da14b79fef251f7578e8" args="(QContextMenuEvent *event)" -->
 <div class="memitem">
 <div class="memproto">
@@ -350,7 +368,12 @@ Protected Member Functions</h2></td></tr>
     <span class="keywordflow">case</span> <a class="code" href="classCanvas.html#af2fe83ddca6a5fccac7896a7ecb1be84ae7676fce1cf0da6e2b67d71a789ba7bd">Connection</a>:
       <span class="comment">// update the second line hint point</span>
       lineHint2 = this-&gt;mapFromGlobal(event-&gt;globalPos());
+      emit <a class="code" href="classCanvas.html#a0f406178f13274a8e3acd0cf86f7d94d">changeSecondConnectionPointHint</a>(
+            this-&gt;mapFromGlobal(event-&gt;globalPos()));
       update();
+      <span class="keywordflow">break</span>;
+    <span class="keywordflow">case</span> <a class="code" href="classCanvas.html#af2fe83ddca6a5fccac7896a7ecb1be84accddfa7d7f8fdfe6419b2df713f5026d">Object</a>:
+      <span class="comment">// no defined behavior</span>
       <span class="keywordflow">break</span>;
     }
   }
@@ -571,7 +594,7 @@ Protected Member Functions</h2></td></tr>
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="a550abe54072b8baffae3197170b979b8"></a><!-- doxytag: member="Canvas::paintEvent" ref="a550abe54072b8baffae3197170b979b8" args="(QPaintEvent *event)" -->
+<a class="anchor" id="a0e5ff2b8662659da1687eb31ad41d119"></a><!-- doxytag: member="Canvas::paintEvent" ref="a0e5ff2b8662659da1687eb31ad41d119" args="(QPaintEvent *)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -579,7 +602,7 @@ Protected Member Functions</h2></td></tr>
           <td class="memname">void Canvas::paintEvent </td>
           <td>(</td>
           <td class="paramtype">QPaintEvent *&#160;</td>
-          <td class="paramname"><em>event</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td><code> [protected]</code></td>
         </tr>
       </table>
@@ -587,7 +610,7 @@ Protected Member Functions</h2></td></tr>
 <div class="memdoc">
 <p>This function paints the canvas. That means it draws the background grid and then calls drawList. </p>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Update the grid settings using some sort of user preference </dd></dl>
-<div class="fragment"><pre class="fragment">                                          {
+<div class="fragment"><pre class="fragment">                                       {  <span class="comment">// NOLINT</span>
   QPainter painter(<span class="keyword">this</span>);
 
   <span class="comment">/* Draw a grid. Shamelessly stolen from a previous</span>
@@ -751,8 +774,8 @@ Protected Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/logan/Programming/puml/src/<a class="el" href="canvas_8h_source.html">canvas.h</a></li>
-<li>/home/logan/Programming/puml/src/<a class="el" href="canvas_8cpp.html">canvas.cpp</a></li>
+<li><a class="el" href="canvas_8h_source.html">canvas.h</a></li>
+<li><a class="el" href="canvas_8cpp.html">canvas.cpp</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -769,7 +792,7 @@ Protected Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 21:11:38 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 19:21:07 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
