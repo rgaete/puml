@@ -177,7 +177,6 @@ void OvalObject::draw(QPainter &painter) {  // NOLINT
                    Qt::AlignCenter | Qt::AlignHCenter | Qt::TextDontClip,
                    this->name);
 
-
   // Always call this ObjectNode's draw function because it
   // draws the selection boxes as needed.
   BaseNode::setUpConnectionPoints();

@@ -90,7 +90,7 @@ Inheritance diagram for InitialStateObject:</div>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInitialStateObject.html#ab7d7ea5266a656454ae2859c8b12dda3">InitialStateObject</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBaseNode.html">BaseNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInitialStateObject.html#ae29f427eb956d941d10fc5d7fbe52b79">clone</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">QDialog *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInitialStateObject.html#ad6f9dd546e467e06fac699ac4f37e834">getDialog</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QDialog *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInitialStateObject.html#a3301c772586f8022f3c4e312b4d0f1e2">getDialog</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInitialStateObject.html#a1fff81479827c7f366cb088e0377cb86">getIconPath</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInitialStateObject.html#a816d82d7627252bc0bf9c0e9e20bfedc">getText</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">DiagramType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInitialStateObject.html#a233e64092156c295fb325311449d3468">getDiagramType</a> ()</td></tr>
@@ -199,27 +199,22 @@ Public Member Functions</h2></td></tr>
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="ad6f9dd546e467e06fac699ac4f37e834"></a><!-- doxytag: member="InitialStateObject::getDialog" ref="ad6f9dd546e467e06fac699ac4f37e834" args="()" -->
+<a class="anchor" id="a3301c772586f8022f3c4e312b4d0f1e2"></a><!-- doxytag: member="InitialStateObject::getDialog" ref="a3301c772586f8022f3c4e312b4d0f1e2" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">QDialog * InitialStateObject::getDialog </td>
+          <td class="memname">QDialog* InitialStateObject::getDialog </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [virtual]</code></td>
+          <td><code> [inline, virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
 <p>Implements <a class="el" href="classBaseNode.html#a990ffea58e51f55cfa8c6862b79fd880">BaseNode</a>.</p>
-<div class="fragment"><pre class="fragment">                                        {
-  <a class="code" href="classInitialStateObjectDialog.html" title="This defines a custom dialog for a OvalObject.">InitialStateObjectDialog</a> *dialog = <span class="keyword">new</span> <a class="code" href="classInitialStateObjectDialog.html" title="This defines a custom dialog for a OvalObject.">InitialStateObjectDialog</a>;
-  connect(dialog, SIGNAL(textValueSelected(QString)),
-          <span class="keyword">this</span>, SLOT(setName(QString)));
-  <span class="keywordflow">return</span> dialog;
-}
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> 0; }
 </pre></div>
 </div>
 </div>
@@ -262,8 +257,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/logan/Programming/puml/src/<a class="el" href="UMLnodes__state_8h_source.html">UMLnodes_state.h</a></li>
-<li>/home/logan/Programming/puml/src/<a class="el" href="UMLnodes__state_8cpp.html">UMLnodes_state.cpp</a></li>
+<li><a class="el" href="UMLnodes__state_8h_source.html">UMLnodes_state.h</a></li>
+<li><a class="el" href="UMLnodes__state_8cpp.html">UMLnodes_state.cpp</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -280,7 +275,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 21:11:38 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 19:21:08 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

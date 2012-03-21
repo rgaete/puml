@@ -1,7 +1,8 @@
 // Copyright (C) 2011-2012 pUML Group
 
 #include <list>
-
+#include <iostream>
+using namespace std;
 #include "./UMLnodes_class.h"
 
 
@@ -32,22 +33,15 @@ void ClassBoxObject::draw(QPainter &painter) {  // NOLINT
     //figures out if the new strings inputed into the dialog
     //are bigger or smaller than before and resizes the objects
     //height and lengths accordingly, first checks the lengths
-    /*
-    if(temp >= length-40 || temp >= 20){
-        temp = temp - (length-40);
-        temp = temp + length;
-        this->length = temp;
-    }
-    */
     if( alength+10 >= length-10 || mlength+10 >= length-10 ||
-     alength+10 >= 50 || mlength+10 >= 50 ||
-     width >= length-40 || width >= 20){
+        alength+10 >= 50 || mlength+10 >= 50 || width >= length-40 ||
+        width >= 20){
         if(mlength > alength && mlength > width){
             temp = mlength;
             temp = temp - (length-5);
             temp = temp + length;
         }
-        else if(width > alength && width > mlength){
+        else if (width > alength && width > mlength){
             temp = width;
             temp = temp - (length-40);
             temp = temp + length;
@@ -65,21 +59,25 @@ void ClassBoxObject::draw(QPainter &painter) {  // NOLINT
 
     //here is the checks to see if the height needs adjustment
     temp = max = 15;
-    if(attributeHeight <= aheight){
+    if(aheight >= attributeHeight || aheight >=15){
         temp = aheight;
         this->attributeHeight = temp;
     }
-    if(methodHeight <= mheight){
+    else{
+        this->attributeHeight = 15;
+    }
+    if(mheight >= methodHeight || mheight >=15){
         max = mheight;
         this->methodHeight = max;
     }
+    else{
+        this->methodHeight = 15;
+    }
     temp = temp + max + classHeight;
-    if(temp >= height){
+    if(temp >= height || temp >= 45){
         this->height = temp;
     }
     else{
-        this->methodHeight=15;
-        this->attributeHeight=15;
         this->height = 45;
     }
 
