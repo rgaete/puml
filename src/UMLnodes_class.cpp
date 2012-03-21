@@ -232,4 +232,3 @@ void ClassConnection::draw(QPainter& painter) {  // NOLINT
   painter.drawLine(pt2, pt3);
   painter.drawLine(pt3, pt4);
 }
-
