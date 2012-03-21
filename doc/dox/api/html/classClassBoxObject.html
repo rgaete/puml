@@ -89,7 +89,9 @@ Inheritance diagram for ClassBoxObject:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-slots"></a>
 Public Slots</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassBoxObject.html#a53841f3109b364280856854cceb222a4">setName</a> (QString newName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassBoxObject.html#a26c49a655fc1d643b45ec23a9f8c8a48">setClassName</a> (QString newClassName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassBoxObject.html#a5e31018acd507eb5ea9927fedd63629f">setAttributes</a> (QString newAttributes)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassBoxObject.html#ab73d41cd285bff27237873f994ebe834">setMethods</a> (QString newMethods)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassBoxObject.html#a277287ef51a742ac67db21acf60f1a3d">ClassBoxObject</a> ()</td></tr>
@@ -119,7 +121,10 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                               {
   this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> = 60;
-  this-&gt;<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> = 40;
+  this-&gt;<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> = 45;
+  this-&gt;classHeight = 15;
+  this-&gt;attributeHeight = 15;
+  this-&gt;methodHeight = 15;
 }
 </pre></div>
 </div>
@@ -172,16 +177,104 @@ Public Member Functions</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classObjectNode.html#ae0422bfde3bfb8554826dfbe4806fb08">ObjectNode</a>.</p>
 <div class="fragment"><pre class="fragment">                                           {  <span class="comment">// NOLINT</span>
+    <span class="comment">//This is for resizing the ClassBoxObject</span>
+    <span class="comment">//The variables being created here hold the height and length</span>
+    <span class="comment">//in pixels of the strings</span>
+    QFontMetrics fm = painter.fontMetrics();
+
+    <span class="keywordtype">int</span> temp = fm.width(this-&gt;className);
+    <span class="keywordtype">int</span> alength,aheight,mlength,mheight,max=0;
+
+    alength = <a class="code" href="classBaseNode.html#ab76acaea5c58f6e0c8e6507568b2945c">stringLength</a>(this-&gt;attributes);
+    mlength = <a class="code" href="classBaseNode.html#ab76acaea5c58f6e0c8e6507568b2945c">stringLength</a>(this-&gt;methods);
+
+    aheight = <a class="code" href="classBaseNode.html#af7d8962381c0ab7e48032316b37f0208">stringHeight</a>(this-&gt;attributes);
+    mheight = <a class="code" href="classBaseNode.html#af7d8962381c0ab7e48032316b37f0208">stringHeight</a>(this-&gt;methods);
+
+    <span class="comment">//figures out if the new strings inputed into the dialog</span>
+    <span class="comment">//are bigger or smaller than before and resizes the objects</span>
+    <span class="comment">//height and lengths accordingly, first checks the lengths</span>
+    <span class="keywordflow">if</span>(temp &gt;= <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-40){
+        temp = temp - (<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-40);
+        temp = temp + <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>;
+        this-&gt;length = temp;
+    }
+    <span class="keywordflow">else</span> <span class="keywordflow">if</span>( alength+10 &gt;= <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-10 || mlength+10 &gt;= <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-10){
+        <span class="keywordflow">if</span>(mlength &gt; alength)
+            temp = mlength;
+        <span class="keywordflow">else</span>
+            temp = alength;
+        temp = temp - (<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-5);
+        temp = temp + <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>;
+        this-&gt;length = temp;
+    }
+    <span class="keywordflow">else</span>{
+        this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> = 60;
+    }
+
+    <span class="comment">//here is the checks to see if the height needs adjustment</span>
+    temp = max = 15;
+    <span class="keywordflow">if</span>(attributeHeight &lt;= aheight){
+        temp = aheight;
+        this-&gt;attributeHeight = temp;
+    }
+    <span class="keywordflow">if</span>(methodHeight &lt;= mheight){
+        max = mheight;
+        this-&gt;methodHeight = max;
+    }
+    temp = temp + max + classHeight;
+    <span class="keywordflow">if</span>(temp &gt;= <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>){
+        this-&gt;<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> = temp;
+    }
+    <span class="keywordflow">else</span>{
+        this-&gt;methodHeight=15;
+        this-&gt;attributeHeight=15;
+        this-&gt;<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> = 45;
+    }
+
+  QRect classFrame(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x() - <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2,
+                   <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y() - <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> / 2,
+                   <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);
+  <span class="comment">// box fill</span>
+  painter.setPen(Qt::black);
+  painter.setBrush(Qt::white);
+  painter.setBackground(Qt::white);
+  painter.drawRect(classFrame);
+
+  <span class="comment">// Class section</span>
+  QRect classSection(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x() - <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>/2 , <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y() - (<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>/2),
+                     <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, classHeight);
+
+  QFont boldFont;
+  boldFont.setBold(<span class="keyword">true</span>);
+  painter.setFont(boldFont);       <span class="comment">// className set to Bold</span>
+  painter.drawText(classSection,
+                   Qt::AlignCenter | Qt::AlignHCenter | Qt::TextDontClip,
+                   className);
+
+  <span class="comment">// Attributes section</span>
+  <span class="keyword">const</span> QFont normalFont;
+  painter.setFont(normalFont);
+
+  QRect attributesSection(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x() - (<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2) + 4,
+                          <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y() - (<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> / 2) + classHeight + 2,
+                          <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);
+  painter.drawLine(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x() - <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2, <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y() - (<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> / 2) + classHeight,
+                   <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x() + <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2, <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y() - (<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> / 2) + classHeight);
+  painter.drawText(attributesSection, attributes);
+
+
+  <span class="comment">// Methods section</span>
+  QRect methodsSection(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x() - (<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2) + 4,
+                       <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y() - (<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> / 2) + classHeight + attributeHeight + 2,
+                       <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);
+  painter.drawLine(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x() - <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2, <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y() - (<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> / 2) + classHeight + attributeHeight,
+                   <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x() + <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2, <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y() - (<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> / 2) + classHeight + attributeHeight);
+  painter.drawText(methodsSection, methods);
+
   <span class="comment">// Always call this ObjectNode&#39;s draw function because it</span>
   <span class="comment">// draws the selection boxes as needed.</span>
   <a class="code" href="classClassBoxObject.html#a909cba1dcbfecb3d401c6d34f6632876">ObjectNode::draw</a>(painter);
-
-  <span class="comment">// edge</span>
-  painter.setPen(Qt::black);
-  painter.setBrush(Qt::NoBrush);
-  painter.drawRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x() - <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2,
-                   <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y() - <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> / 2,
-                   <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);
 }
 </pre></div>
 </div>
@@ -222,9 +315,16 @@ Public Member Functions</h2></td></tr>
 <p>Implements <a class="el" href="classBaseNode.html#a990ffea58e51f55cfa8c6862b79fd880">BaseNode</a>.</p>
 <div class="fragment"><pre class="fragment">                                    {
   <a class="code" href="classClassBoxObjectDialog.html" title="This defines a custom dialog for a ClassBoxObject.">ClassBoxObjectDialog</a> *dialog = <span class="keyword">new</span> <a class="code" href="classClassBoxObjectDialog.html" title="This defines a custom dialog for a ClassBoxObject.">ClassBoxObjectDialog</a>;
-  dialog-&gt;setTextValue(name);
-  connect(dialog, SIGNAL(textValueSelected(QString)),
-          <span class="keyword">this</span>, SLOT(<a class="code" href="classClassBoxObject.html#a53841f3109b364280856854cceb222a4">setName</a>(QString)));
+  dialog-&gt;setFixedSize(450, 300);
+  dialog-&gt;<a class="code" href="classClassBoxObjectDialog.html#a2e145e580a30399f318e477fd80692ec">setClassName</a>(className);
+  dialog-&gt;<a class="code" href="classClassBoxObjectDialog.html#a211ecbf5cf7bfe6ce78e4329c4dbd375">setAttributes</a>(attributes);
+  dialog-&gt;<a class="code" href="classClassBoxObjectDialog.html#ad28ca3f10f9264d892e1b6ba7fa46a72">setMethods</a>(methods);
+  connect(dialog, SIGNAL(classNameSet(QString)),
+          <span class="keyword">this</span>, SLOT(<a class="code" href="classClassBoxObject.html#a26c49a655fc1d643b45ec23a9f8c8a48">setClassName</a>(QString)));
+  connect(dialog, SIGNAL(attributesSet(QString)),
+          <span class="keyword">this</span>, SLOT(<a class="code" href="classClassBoxObject.html#a5e31018acd507eb5ea9927fedd63629f">setAttributes</a>(QString)));
+  connect(dialog, SIGNAL(methodsSet(QString)),
+          <span class="keyword">this</span>, SLOT(<a class="code" href="classClassBoxObject.html#ab73d41cd285bff27237873f994ebe834">setMethods</a>(QString)));
   <span class="keywordflow">return</span> dialog;
 }
 </pre></div>
@@ -245,7 +345,7 @@ Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Implements <a class="el" href="classBaseNode.html#a681bcfe2beced6d0a3bf0051faeb608e">BaseNode</a>.</p>
-<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> QString(<span class="stringliteral">&quot;:/Images/rectangle.png&quot;</span>); }
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> QString(<span class="stringliteral">&quot;:/Images/class.png&quot;</span>); }
 </pre></div>
 </div>
 </div>
@@ -268,27 +368,65 @@ Public Member Functions</h2></td></tr>
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="a53841f3109b364280856854cceb222a4"></a><!-- doxytag: member="ClassBoxObject::setName" ref="a53841f3109b364280856854cceb222a4" args="(QString newName)" -->
+<a class="anchor" id="a5e31018acd507eb5ea9927fedd63629f"></a><!-- doxytag: member="ClassBoxObject::setAttributes" ref="a5e31018acd507eb5ea9927fedd63629f" args="(QString newAttributes)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ClassBoxObject::setName </td>
+          <td class="memname">void ClassBoxObject::setAttributes </td>
           <td>(</td>
           <td class="paramtype">QString&#160;</td>
-          <td class="paramname"><em>newName</em></td><td>)</td>
+          <td class="paramname"><em>newAttributes</em></td><td>)</td>
           <td><code> [inline, slot]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{ this-&gt;name = newName; }
+<div class="fragment"><pre class="fragment">                                              {
+      this-&gt;attributes = newAttributes;
+    }
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="a26c49a655fc1d643b45ec23a9f8c8a48"></a><!-- doxytag: member="ClassBoxObject::setClassName" ref="a26c49a655fc1d643b45ec23a9f8c8a48" args="(QString newClassName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ClassBoxObject::setClassName </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>newClassName</em></td><td>)</td>
+          <td><code> [inline, slot]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{ this-&gt;className = newClassName; }
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="ab73d41cd285bff27237873f994ebe834"></a><!-- doxytag: member="ClassBoxObject::setMethods" ref="ab73d41cd285bff27237873f994ebe834" args="(QString newMethods)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ClassBoxObject::setMethods </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>newMethods</em></td><td>)</td>
+          <td><code> [inline, slot]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{ this-&gt;methods = newMethods; }
 </pre></div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/logan/Programming/puml/src/<a class="el" href="UMLnodes__class_8h_source.html">UMLnodes_class.h</a></li>
-<li>/home/logan/Programming/puml/src/<a class="el" href="UMLnodes__class_8cpp.html">UMLnodes_class.cpp</a></li>
+<li><a class="el" href="UMLnodes__class_8h_source.html">UMLnodes_class.h</a></li>
+<li><a class="el" href="UMLnodes__class_8cpp.html">UMLnodes_class.cpp</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -305,7 +443,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Mar 4 2012 21:11:38 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 19:21:07 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
