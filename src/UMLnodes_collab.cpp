@@ -595,8 +595,8 @@ void CollabSelfConnection::draw(QPainter& painter) {  // NOLINT
 void CollabSelfConnection::DrawArrow(QPainter &painter, QPoint point1, // NOLINT
                                      QPoint point2, QPoint temppoint1,
                                      QPoint temppoint2) {
-  int length = -50;  // length and height variables // needs to negative to
-                     // point the right way
+  int length = -50;  // length and height variables
+                     // needs to negative to point the right way
   int height = 50;
   int offset = 10;  // offset off of the initial point value on the connection
                     // line
