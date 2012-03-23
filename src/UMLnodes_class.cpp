@@ -2,6 +2,7 @@
 
 #include <list>
 #include <iostream>
+#include "mathfunctions.h"
 using namespace std;
 #include "./UMLnodes_class.h"
 
@@ -231,4 +232,81 @@ void ClassConnection::draw(QPainter& painter) {  // NOLINT
   painter.drawLine(pt1, pt2);
   painter.drawLine(pt2, pt3);
   painter.drawLine(pt3, pt4);
+}
+
+void InheritanceConnection::draw(QPainter& painter) {  // NOLINT
+  BaseNode *obj1, *obj2;
+  std::list<BaseNode*>::iterator it = connectedObjects.begin();
+  obj1 = *it;
+  it++;
+  obj2 = *it;
+
+  pt1 = obj1->getClosestConnectionPoint(obj2->getPosition());
+  pt4 = obj2->getClosestConnectionPoint(obj1->getPosition());
+  painter.setPen(Qt::black);
+  if (pt1.x() == obj1 -> getPosition().x()) {  // North or South connection
+    pt2.setY((pt4.y() + pt1.y()) / 2);
+    pt2.setX(pt1.x());
+    pt3.setX(pt4.x());
+    pt3.setY(pt2.y());
+  } else if (pt1.x() != obj1 -> getPosition().x()) {  // East or West connection
+    pt2.setY(pt1.y());
+    pt2.setX((pt1.x() + pt4.x()) / 2);
+    pt3.setX(pt2.x());
+    pt3.setY(pt4.y());
+  }
+  if (selected == true) {
+    QPen selectPen;
+    selectPen.setWidth(2);
+    selectPen.setColor(Qt::blue);
+    painter.setPen(selectPen);
+    painter.drawLine(pt1, pt2);
+  }
+  painter.drawLine(pt1, pt2);
+  painter.drawLine(pt2, pt3);
+
+  //If construct checks connection location, then trims the arrow respectively
+  if(pt1.x() < obj1 -> getPosition().x()) //East Connection
+  {
+      pt4.setX(pt4.x() + 8.0);
+      painter.drawLine(pt3, pt4);
+      pt4.setX(pt4.x() - 8.0 );
+  }
+  else if(pt1.x() > obj1 -> getPosition().x())  //West Connection
+  {
+      pt4.setX(pt4.x() - 8.0);
+      painter.drawLine(pt3, pt4);
+      pt4.setX(pt4.x() + 8.0);
+  }
+  else if(pt1.y() > obj1 -> getPosition().y())  //North Connection
+  {
+      pt4.setY(pt4.y() - 8.0);
+      painter.drawLine(pt3, pt4);
+      pt4.setY(pt4.y() + 8.0);
+  }
+  else if(pt1.y() < obj1 -> getPosition().y())  //South Connection
+  {
+      pt4.setY(pt4.y() + 8.0);
+      painter.drawLine(pt3, pt4);
+      pt4.setY(pt4.y() - 8.0);
+  }
+  addArrow(painter);
+}
+void InheritanceConnection::addArrow(QPainter &painter) {  // NOLINT
+  double arrowAngle = 0.8;
+  if(pt4.y()>pt3.y())
+  {
+      arrowAngle=-arrowAngle;   //reverse arrow point
+  }
+  lineAngle = mathfunctions::computeAngle(pt3, pt4);
+  painter.drawLine(pt4.x(), pt4.y(),
+                   pt4.x() + 10 * sin(lineAngle - arrowAngle),
+                   pt4.y() + 10 * cos(lineAngle - arrowAngle));
+  painter.drawLine(pt4.x(), pt4.y(),
+                   pt4.x() - 10 * sin(lineAngle + arrowAngle),
+                   pt4.y() - 10 * cos(lineAngle + arrowAngle));
+  painter.drawLine( pt4.x() + 10 * sin(lineAngle - arrowAngle),
+                    pt4.y() + 10 * cos(lineAngle - arrowAngle),
+                    pt4.x() - 10 * sin(lineAngle + arrowAngle),
+                    pt4.y() - 10 * cos(lineAngle + arrowAngle));
 }

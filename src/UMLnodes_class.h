@@ -79,6 +79,8 @@ class ClassBoxObject: public ObjectNode {
  */
 class ClassConnectionDialog : public QInputDialog {
 };
+class InheritanceConnectionDialog : public QInputDialog {
+};
 
 /*! @brief This concrete class defines ...
  */
@@ -90,6 +92,19 @@ class ClassConnection : public SquareConnectionNode {
     QString getText() { return "Class Line"; }
     void draw(QPainter& painter);  // NOLINT
     DiagramType getDiagramType() { return Class; }
+};
+
+class InheritanceConnection : public SquareConnectionNode {
+public:
+    BaseNode* clone() { return new InheritanceConnection; }
+    QDialog* getDialog() { return new InheritanceConnectionDialog; }
+    QString getIconPath() { return QString(":/Images/interaction.png"); }
+    QString getText() { return "Inheritance Line"; }
+    void draw(QPainter& painter);  // NOLINT
+    DiagramType getDiagramType() { return Class; }
+    void addArrow(QPainter& painter);
+private:
+    double lineAngle;
 };
 
 #endif  // SRC_UMLNODES_CLASS_H_

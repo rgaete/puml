@@ -42,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent)
   // class objects
   registerObject(new ClassBoxObject);
   registerObject(new ClassConnection);
+  registerObject(new InheritanceConnection);
 
   // register collab objects
   registerObject(new StickPersonCollabObject);
