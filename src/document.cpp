@@ -171,6 +171,10 @@ void Document::createConnectionPoint1(const QPoint &point) {
 void Document::createConnectionPoint2(const QPoint &point) {
   // Create the object only if a valid first object was found
   int index;
+  // creates a temp object node for self connectors
+  BaseNode *tempnode;
+  tempnode = NodeFactory::getInstance()->produce(newObjectID);
+
   if (firstConnectionIndex != -1) {
     index = getIndexAt(point);
     // And the second index was found
@@ -200,8 +204,9 @@ void Document::createConnectionPoint2(const QPoint &point) {
     else if (((index != -1) &&
          (nodes.at(index)->isConnector() == false)) &&
             (index == firstConnectionIndex) &&
-            diagramType == BaseNode::Collaboration) {
-      // produce the object
+             (tempnode->getText() == "Collaboration Self Line")) {
+
+        // produce the object
       BaseNode *newNode;
       newNode = NodeFactory::getInstance()->produce(newObjectID);
 

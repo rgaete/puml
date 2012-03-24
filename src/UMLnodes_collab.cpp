@@ -393,26 +393,6 @@ void CollabConnection::draw(QPainter& painter) {  // NOLINT
   painter.drawText(textpos, this->text);
 }
 
-// This function finds the midpoint between two points returns a Qpoint
-// I dont think it ever got used
-QPoint CollabConnection::FindMidPoint(QPoint point1, QPoint point2) {
-    QPoint result;
-    int temp1x = point1.x();
-    int temp1y = point1.y();
-    int temp2x = point2.x();
-    int temp2y = point2.y();
-
-    int fx;
-    int fy;
-
-    fx = (temp1x + temp2x) / 2;
-    fy = (temp1y + temp2y) / 2;
-
-    result.setX(fx);
-    result.setY(fy);
-
-    return result;
-}
 
 // This function determins the direction of the arrow it returns a 1 to keep the
 // arrow facing the same direction or a -1 to make it point backwards
