@@ -141,7 +141,6 @@ class CollabConnection : public SquareConnectionNode {
     QString getText() { return "Collaboration Line"; }
     void draw(QPainter& painter);  // NOLINT
     DiagramType getDiagramType() { return Collaboration; }
-    QPoint FindMidPoint(QPoint point1, QPoint point2);
     int FindDirection(QPoint point1, QPoint point2, QPoint temppoint1, QPoint temppoint2);
     void DrawArrow(QPainter &painter, QPoint point, QPoint point2, QPoint temppoint1, QPoint temppoint2);
 

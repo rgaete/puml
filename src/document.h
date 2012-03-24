@@ -18,6 +18,7 @@
 
 #include "./nodefactory.h"
 #include "./nodes.h"
+#include "./UMLnodes.h"
 
 
 class Document : public QWidget {
