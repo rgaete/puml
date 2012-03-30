@@ -1,9 +1,14 @@
 #include <QtTest/QtTest>
+#include "mainwindow_test.h"
 #include "nodefactorytest.h"
+#include "../mainwindow.h"
 
 int main() {
-    NodeFactoryTest nft;
-    QTest::qExec(&nft);
+  MainWindowTest mwt;
+  QTest::qExec(&mwt);
 
-    return 0;
+  NodeFactoryTest nft;
+  QTest::qExec(&nft);
+
+  return 0;
 }

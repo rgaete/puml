@@ -26,6 +26,7 @@ SOURCES += main.cpp \
     ../UMLnodes_state.cpp \
     ../UMLnodes_collab.cpp \
     nodefactorytest.cpp \
+    mainwindow_test.cpp
 
 HEADERS  += nodefactorytest.h \
     ../mainwindow.h \
@@ -40,7 +41,8 @@ HEADERS  += nodefactorytest.h \
     ../UMLnodes_class.h \
     ../mathfunctions.h \
     ../UMLnodes_state.h \
-    ../UMLnodes_collab.h
+    ../UMLnodes_collab.h \
+    mainwindow_test.h
 
 OTHER_FILES +=
 
