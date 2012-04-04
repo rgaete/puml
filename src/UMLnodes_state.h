@@ -77,28 +77,35 @@ class FinalStateObject: public ObjectNode {
 
 /*! @brief This class provides a custom dialog for an InteractionLineNode.
 */
-class TransitionConnectionDialog : public QDialog {
-
+class TransitionConnectionDialog : public QInputDialog {
+  Q_OBJECT
+  public:
+    explicit TransitionConnectionDialog(QWidget *parent = 0);
 };
 
 /*! @brief This concrete class defines an Interaction line in a Use
   Case diagram (line from the actor to the use case)
 */
 class TransitionConnection : public ConnectionNode {
+  Q_OBJECT
   public:
     TransitionConnection();
     BaseNode* clone() { return new TransitionConnection; }
-    QDialog* getDialog() { return new TransitionConnectionDialog; }
+    QDialog* getDialog();
     QString getIconPath() { return QString(":/Images/interaction.png"); }
     QString getText() { return "Transition Line"; }
     void draw(QPainter& painter);  // NOLINT
     DiagramType getDiagramType() { return StateChart; }
   private:
     void calcExtensionPoint();
+    void drawArrow(QPoint begin, QPoint end, double headLength, int radius, QPainter &painter);
     QPoint extensionPoint;
     double extensionLength;
-
+    QString text;
     QPainterPath arc;
+  public slots:
+    void setText(QString t) { text = t; }
+
 };
 
 

@@ -266,9 +266,7 @@ void Document::drawList(QPainter &painter) {  // NOLINT
 }
 
 /*! Slot. Removes the currently selected node. If the node is
-    an object, it for (int i=0; i<nodes.size(); i++) {
-
-  }also removes all connections connected to that
+    an object, it also removes all connections connected to that
     node.
 */
 void Document::removeObject() {
