@@ -4,6 +4,7 @@
 #include <utility>
 #include <vector>
 #include <fstream>  // NOLINT
+#include <algorithm>
 // I'm not sure why cpplint.py is insisting that <vector> be included
 // when it exists in mainwindow.h...
 

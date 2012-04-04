@@ -110,6 +110,15 @@ TransitionConnection::TransitionConnection() {
   extensionLength = -30.0;
 }
 
+QDialog *TransitionConnection::getDialog()
+{
+  TransitionConnectionDialog *dialog = new TransitionConnectionDialog;
+  dialog->setTextValue(text);
+  connect(dialog, SIGNAL(textValueSelected(QString)),
+          this, SLOT(setText(QString)));
+  return dialog;
+}
+
 void TransitionConnection::draw(QPainter &painter) {
   BaseNode *obj1, *obj2;
   std::list<BaseNode*>::iterator it = connectedObjects.begin();
@@ -134,6 +143,7 @@ void TransitionConnection::draw(QPainter &painter) {
   calcExtensionPoint();
   path.quadTo(extensionPoint, pt2);
   painter.strokePath(path, painter.pen());
+  //painter.drawText(QRect(), 0, QString, QRect);
 }
 
 void TransitionConnection::calcExtensionPoint()
@@ -211,4 +221,17 @@ void TransitionConnection::calcExtensionPoint()
 
     extensionPoint = QPoint(pt1.x() + x,pt1.y() + y);
   }
+}
+
+void TransitionConnection::drawArrow(QPoint begin, QPoint end, double headLength, int radius, QPainter &painter)
+{
+
+
+}
+
+TransitionConnectionDialog::TransitionConnectionDialog(QWidget *parent)
+  :QInputDialog(parent)
+{
+  setLabelText("Tansition Text:");
+  setWindowTitle("Transition Properties");
 }
