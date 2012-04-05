@@ -1,11 +1,11 @@
 Test: pUML launches successfully		Risk Level: 
 
+Test Steps (input):
+  1. Double-click or Run the pUML application icon
+
 Expected Results: 
   pUML program launches successfully.
   The user sees the pUML options dialog.
-
-Test Steps (input):
-  1. Double-click or Run the pUML application icon
 
 
 ***** TEST 01 *****
