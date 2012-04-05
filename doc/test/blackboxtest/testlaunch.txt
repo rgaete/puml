@@ -1,0 +1,34 @@
+Test: pUML launches successfully		Risk Level: 
+
+Expected Results: 
+  pUML program launches successfully.
+  The user sees the pUML options dialog.
+
+Test Steps (input):
+  1. Double-click or Run the pUML application icon
+
+
+***** TEST 01 *****
+
+Change Set#: 		Date of Test: 		Pass/Fail:
+
+Tester Name: 
+
+Log: 
+
+
+Extraneous Observations: 
+
+
+
+***** TEST 02 *****
+
+Change Set#: 		Date of Test: 		Pass/Fail:
+
+Tester Name: 
+
+Log: 
+
+
+Extraneous Observations: 
+
