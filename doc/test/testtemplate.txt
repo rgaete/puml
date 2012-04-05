@@ -1,14 +1,20 @@
-Test: pUML Installer				Risk Level: 
+Test:  						Risk Level: 
 
-Test Steps (input):
-  1.
-  2. 
-  3. 
+  Test Steps (input):
+    1. 
+    2. 
+    3. 
+    4. 
+    5. 
+    6. 
+    7. 
+    8.
+    9.  
+    10.
 
-Expected Results:
-  pUML installer successfully installs.
-  pUML installer successfully uninstalls.
-
+  Expected Results:
+    
+    
 
 ***** TEST 01 *****
 
