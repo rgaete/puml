@@ -172,12 +172,6 @@ February 23, 2012
 Prepared for:
 \par}
 {\centering\bfseries
-Bruce Bolden
-\par}
-{\centering\bfseries
-and
-\par}
-{\centering\bfseries
 Dr. Clint Jeffery
 \par}
 
@@ -200,8 +194,6 @@ Josh Armstrong
 \\Maxine Major
 \\Morgan Weir
 \\David Wells
-\\and
-\\Xiaozhe Shen
 \par}
 
 {\centering\bfseries
@@ -288,12 +280,28 @@ pUML SSRS
 & MM
 
 \\\hline
-\centering 4
+\centering 5
 & 02/23/2012
 & ~
 & \centering M
 & Use case descriptions completed
 & MM
+
+\\\hline
+\centering 6
+& 04/04/2012
+& ~
+& \centering A
+& Requirements update
+& MM
+
+\\\hline
+\centering 7
+& 04/04/2012
+& ~
+& \centering M
+& Revised use case descriptions
+& MW
 
 \\\hline
 \end{supertabular}
@@ -482,9 +490,9 @@ The program will allow the user to create new diagrams, edit existing diagrams, 
 \subsection[USER CHARACTERISTICS]{\rmfamily\bfseries
 USER CHARACTERISTICS}
 {
-The intended user for the pUML software is a software engineer, with a need to organize
-the parts of the software engineering project. This user is already familiar with
-computers and generally has some experience in programming languages.
+The intended user for the pUML software are software engineers and computer science students, 
+with a need to organize the parts of the software engineering project. This user is already 
+familiar with computers and generally has some experience in programming languages.
 }
 
 \subsection[CONSTRAINTS]{\rmfamily\bfseries
@@ -498,10 +506,10 @@ faculty overseeing this project decide that this project should to no longer con
 \subsection[ASSUMPTIONS AND DEPENDENCIES]{\rmfamily\bfseries
 ASSUMPTIONS AND DEPENDENCIES}
 {
-The requirements for the pUML software were dictated by University of Idaho Computer Science
-Department faculty, and any further direction this project may take will depend on their decisions.  
-Furthermore, should any decision be made, for example,  a new programming language must be utilized,
-or different features are to be added/removed, this project could change.
+The requirements for the pUML software were decided upon by University of Idaho Computer Science
+Department faculty.  Any further direction this project may take will depend on their decisions. 
+It is currently undecided if this project will be maintained after the corresponding course has
+concluded. 
 }
 
 
@@ -528,20 +536,20 @@ There are no safety, security or privacy requirements at this time.
 \subsubsection[Performance requirements]{\rmfamily\bfseries
 Performance requirements}
 {
-This software is to be supported on one terminal per install, and since there are no dependencies,
-it may be installed on a theoretically infinite number of terminals. This software is not designed to
-be remotely accessed, and as a result, one user per session is recommended as well.
-The software has not been tested to determine efficient transaction times as of the date of this SSRS publication.
+This software is to be supported on one terminal per install, and since there are no current
+ limitations applying to product distribution, it may be installed on a theoretically infinite 
+number of terminals. This software is not designed to be remotely accessed, and as a result, 
+one user per session is recommended as well.  The software has not been tested to determine 
+efficient transaction times as of the date of this SSRS publication.
 }
 
 \subsubsection[System and software quality]{\rmfamily\bfseries System
 and software quality}
 {
-The fully developed software should be available for use and reliably handle all requests 98 percent of the time.  
-Undo and Redo options will be available to handle errors made on the part of the user.  
-Earlier stored sessions are not a part of the software package at this time, but may be developed at a later release.
-This software is not designed for any level of flexibility at this time, but a future release may permit
-integration with other software environments. Testability has not been tested at this time.
+The fully developed software should be available for use and reliably handle all requests 98 
+percent of the time.  The software can currently handle saving, diagram selection, allow for 
+editing of multiple diagrams at a time, diagram component deletion, diagram component labeling, 
+and loading of saved diagrams.
 }
 
 \subsubsection[Packaging and delivery requirements]{\rmfamily\bfseries
@@ -550,8 +558,8 @@ Packaging and delivery requirements}
 The executable system and all associated documentation (i.e., SSRS, SDD,
 code listing, test plan (data and results), and user manual) will be
 delivered to the customer on CD{\textquoteright}s and/or via email, as
-specified by the customer at time of delivery. \ Although document
-{\textquotedblleft}drops{\textquotedblright} will occur throughout the
+specified by the customer at time of delivery. \ Although the user will be 
+kept informed of progress via hg throughout the
 system development process, the final, edited version of the above
 documents will accompany the final, accepted version of the executable
 system.}
@@ -565,22 +573,22 @@ characteristics. }
 \subsubsection[Training{}-related requirements]{\rmfamily\bfseries
 Training-related requirements}
 {
-No training materials or expectations are tied to this project other
-than the limited help screens built into the software and the
-accompanying user manual.}
+A user manual will be included in this project to aid users who have 
+difficulty intuiting the proper action to produce the corresponding outcome.}
 
 \subsubsection[Logistics{}-related requirements]{\rmfamily\bfseries
 Logistics-related requirements}
 {
 The pUML software is intended for use on University of Idaho Computer Science department computers as well as computer science students' personal computers including, at a minimum, operating systems Windows 7, Mac OSX, and Linux.
 Any minimum hardware requirements lie outside the scope of the resources available,
-and there are no software application dependencies at this time.
+and there will be no software application dependencies at the time of release.
 }
 
 \subsubsection[Precedence and criticality of requirements]{\rmfamily\bfseries
 Precedence and criticality of requirements}
 {
-All requirements have equal weight.}
+System and software quality are our main priorities, even if this implies poor 
+user experience until these priorities are accomplished.}
 
 
 
@@ -604,18 +612,13 @@ Hardware Interfaces}
 {
 \foreignlanguage{english}{\ }\foreignlanguage{english}
 {
-- Operating system and environment capable of running QT 4.2.
-\\- Storage disk
-\\  E.g., hard drive, SSD, or secondary flash. 15 MB of space on one of these storage disks will be required
-to execute the pUML executable. Additional space will be required to save user generated projects.}}
+Any computing system capable of running Linux.}}
 
 \subsubsection[Software Interfaces]{\rmfamily\bfseries
 Software Interfaces}
 { \foreignlanguage{english}{\ }\foreignlanguage{english}
 {
-- QT 4.2
-\\- C++ compiler
-\\  Note: Software interfaces are expected to change before the next release.
+Either a Linux or Windows 7 operating system to guarantee functionality.
 }}
 
 \subsubsection[User Interfaces]{\rmfamily\bfseries
@@ -624,11 +627,8 @@ User Interfaces}
 \foreignlanguage{english}{\ }\foreignlanguage{english}
 {
 - Monitor
-\\  Since pUML is a graphical program, a sufficiently large and bright monitor is recommended.
 \\- Keyboard
-\\  The user will frequently need to fill in text fields.
-\\- Mouse
-\\  The majority of user interaction is through the mouse.}}
+\\- Mouse}}
 
 \subsubsection[Other Communication
 Interfaces]{\rmfamily\bfseries
@@ -658,75 +658,7 @@ SYSTEM FEATURES}
 \paragraph[\ Use Category]
 {\ Launch} {These options will be available to the user upon the immediate launch of pUML.}
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=6.0in]{ucaseLaunch.jpg}
-\caption{Launch Use Case}
-\end{figure}
 
-%%% CREATE NEW PROJECT USE CASE DESCRIPTION
-\begin{flushleft}
-\tablehead{}
-\begin{tabular}{|m{2.0in} m{5.0in}|}
-\hline
-{\bfseries\emph{Use Case Name}}
-& {\bfseries Create New Project}
-\\\hline
-\emph{Participating Actor}
-& User
-\\\hline
-\emph{Flow of Events}
-& \begin{my_enumerate}
-  \item User opens File menu and selects ``Create New Project'' 
-  \item A dialog appears asking the user to enter the project name and save location. 
-    \item User clicks ``OK'' 
-\item Program creates a new project for the user at the specified location, and opens the project in pUML.
-\end{my_enumerate}
-\\\hline
-\emph{Entry Condition}
-&
-User opens File menu and selects ``Create New Project.''
-\\\hline
-\emph{Exit Condition}
-& Project has been created and is open for modification in pUML.
-\\\hline
-\emph{Quality Requirements}
-& Project name may not be the same as another project at the specified location. Project creation may only occur at program launch, and not while a project has been loaded into pUML.
-\\\hline
-\end{tabular}
-\end{flushleft}
-\bigskip
-
-%%% OPEN EXISTING PROJECT USE CASE DESCRIPTION
-\begin{flushleft}
-\tablehead{}
-\begin{tabular}{|m{2.0in} m{5.0in}|}
-\hline
-{\bfseries\emph{Use Case Name}}
-& {\bfseries Open Existing Project}
-\\\hline
-\emph{Participating Actor}
-& User
-\\\hline
-\emph{Flow of Events}
-& \begin{my_enumerate}
-\item User opens File menu and selects ``Open Project.''
-\item User browses to desired directory and selects an existing pUML project file.
-\item The program loads the specified project.
-\end{my_enumerate}
-\\\hline
-\emph{Entry Condition}
-& User opens File menu and selects ``Open Project.''
-\\\hline
-\emph{Exit Condition}
-& Project has been loaded and is open for modification in pUML.
-\\\hline
-\emph{Quality Requirements}
-& Project must be of pUML file type.
-\\\hline
-\end{tabular}
-\end{flushleft}
-\bigskip
 
 %%% EXIT PROGRAM USE CASE DESCRIPTION
 \begin{flushleft}
@@ -742,7 +674,7 @@ User opens File menu and selects ``Create New Project.''
 \emph{Flow of Events}
 & \begin{my_enumerate}
 \item User clicks X.
-\item If file is not saved, include ``Save File As'' use case.
+\item If a file is open, program checks to see if it is saved.  If no files are open, simply exits.
 \item Program Exits.
 \end{my_enumerate}
 \\\hline
@@ -769,11 +701,6 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 {\ New Project} 
 {The user has selected to start a new UML project.}
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=6.0in]{ucaseNewProj.jpg}
-\caption{New Project Use Case}
-\end{figure}
 
 %%% CREATE NEW DIAGRAM USE CASE DESCRIPTION
 \begin{flushleft}
@@ -846,12 +773,6 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \paragraph[\ Use Category]
 {\ Open Project} {These options will be available to the user after choosing to open an existing UML project.}
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=6.0in]{ucaseOpenProj.jpg}
-\caption{Open Project Use Case}
-\end{figure}
-
 %%% OPEN EXISTING DIAGRAM USE CASE DESCRIPTION
 \begin{flushleft}
 \tablehead{}
@@ -891,12 +812,6 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 % ************************************
 \paragraph[\ Use Category]
 {\ New Diagram} {These options will be available to the user upon choosing to create a new UML diagram.}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=6.0in]{ucaseNewOpenDiagram.jpg}
-\caption{New/Open Diagram Use Case}
-\end{figure}
 
 %%% SAVE DIAGRAM USE CASE DESCRIPTION
 \begin{flushleft}
@@ -1037,68 +952,6 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \bigskip
 
 
-%%% UNDO USE CASE DESCRIPTION
-\begin{flushleft}
-\tablehead{}
-\begin{tabular}{|m{2.0in} m{5.0in}|}
-\hline
-{\bfseries\emph{Use Case Name}}
-& {\bfseries Undo}
-\\\hline
-\emph{Participating Actor}
-& User
-\\\hline
-\emph{Flow of Events}
-& \begin{my_enumerate}
-\item User clicks ``Undo''
-\item Program reverts to the state of the diagram prior to the last change made.
-\end{my_enumerate}
-\\\hline
-\emph{Entry Condition}
-& User clicks ``Undo.''
-\\\hline
-\emph{Exit Condition}
-& The state of the diagram prior to the most recent change is now the active state.
-\\\hline
-\emph{Quality Requirements}
-& Undo will not work if there are no changes made to the diagram during the current open state.
-\\\hline
-\end{tabular}
-\end{flushleft}
-\bigskip
-
-
-%%% REDO USE CASE DESCRIPTION
-\begin{flushleft}
-\tablehead{}
-\begin{tabular}{|m{2.0in} m{5.0in}|}
-\hline
-{\bfseries\emph{Use Case Name}}
-& {\bfseries Redo}
-\\\hline
-\emph{Participating Actor}
-& User
-\\\hline
-\emph{Flow of Events}
-& \begin{my_enumerate}
-\item User clicks ``Redo.''
-\item Program advances to the state from which the user had previously clicked ``Undo.''
-\end{my_enumerate}
-\\\hline
-\emph{Entry Condition}
-&  User clicks ``Redo.''
-\\\hline
-\emph{Exit Condition}
-& Current diagram loaded is now a state more current than the one from which the user had clicked ``Undo.''
-\\\hline
-\emph{Quality Requirements}
-& Redo will not work if there are no changes made to the diagram during the current open state. The user must have previously clicked ``Undo'' in order for a  state to exist to redo.
-\\\hline
-\end{tabular}
-\end{flushleft}
-\bigskip
-
-
 
 \clearpage
 
@@ -1220,12 +1073,6 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 % ************************************
 \paragraph[\ Use Category]
 {\ Edit Connector} {These options will be available to the user with a diagram open for modification, who is choosing to take action regarding a connector.}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=6.0in]{ucaseEditConn.jpg}
-\caption{Edit a Connector Use Case}
-\end{figure}
 
 %%% PLACE NEW CONNECTOR USE CASE DESCRIPTION
 \begin{flushleft}
@@ -1355,31 +1202,27 @@ The user selects the ``File'' pull down menu at the top left corner of his or he
 
 \subparagraph{New}
 {
-This creates a new project space. The user shall be presented with a dialog option to save the previous project. Once completing this dialog, the previous project will be closed and a new project space will be created. }
+\\ This creates a new project space. }
 
 \subparagraph{Open}
 {
-This opens a previously saved project. The user shall be presented with a dialog option to save the previous project. Once completing this dialog, the previous project will be closed and the selected project will be opened.}
-
-\subparagraph{Revert}
-{
-This disregards all unsaved changes made to the project and reverts to the saved version. A confirmation dialog shall be presented to the user before this action is completed.}
+\\ This opens a previously saved project. The user shall be presented with a dialog option to save the previous project. Once completing this dialog, the previous project will be closed and the selected project will be opened.}
 
 \subparagraph{Copy As}
 {
-This creates a new project space. First, the program will be saved. Then the user shall be presented with a dialog to choose a unique name for the new project space. Once completing this dialog, a copy of the previous project will be cloned into the new project space. The previous project shall be closed and the new project shall be opened.}
+\\ This creates a new project space. First, the program will be saved. Then the user shall be presented with a dialog to choose a unique name for the new project space. Once completing this dialog, a copy of the previous project will be cloned into the new project space. The previous project shall be closed and the new project shall be opened.}
 
 \subparagraph{Save}
 {
-This saves the current state of the project into an XML that can later be used to recreate the project state. If the current project does not have a name, the ``Save'' option will be an alias for the ``Save As'' option.}
+\\ This saves the current state of the project into an XML that can later be used to recreate the project state. If the current project does not have a name, the ``Save'' option will be an alias for the ``Save As'' option.}
 
 \subparagraph{Save As}
 {
-This creates a new project space and then saves the project state into the new project. In contrast with ``Copy As'', this option does not affect the previous project. }
+\\ This creates a new project space and then saves the project state into the new project. In contrast with ``Copy As'', this option does not affect the previous project. }
 
 \subparagraph{Delete Project}
 {
-This deletes the current project and all files within the project folder. The user shall be presented with a confirmation dialog before this action is completed. Upon completion, a blank and unnamed project will be active in the project window. }
+\\ This deletes the current project and all files within the project folder. The user shall be presented with a confirmation dialog before this action is completed. Upon completion, a blank and unnamed project will be active in the project window. }
 
 
 
@@ -1393,10 +1236,7 @@ This deletes the current project and all files within the project folder. The us
 \section[REQUIREMENTS TRACEABILITY]{\rmfamily\bfseries
 REQUIREMENTS TRACEABILITY}
 {\itshape
-This section shall contain traceability information from each system
-requirement in this specification to the system (or subsystem, if
-applicable) requirements it addresses. \ A tabular form is preferred,
-but not mandatory.}
+}
 
 
 \bigskip
