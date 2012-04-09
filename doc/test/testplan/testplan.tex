@@ -156,11 +156,11 @@ Phunctional UML Editor
 
 
 {\centering\bfseries
-Version 1.0
+Version 2.0
 \par}
 
 {\centering\bfseries
-April 3, 2012
+April 9, 2012
 \par}
 
 
@@ -265,7 +265,7 @@ approved\\
 \\\hline
 01 & ~3/27/2012 & Test Plan & A & Document Created & MM & 3/27/2012
 \\\hline
-~ & ~ & ~ & ~ & ~ & ~ & ~
+02 & 4/9/2012 & Test Plan & A & Test cases added & MM &4/9/2012
 \\\hline
 ~ & ~ & ~ & ~ & ~ & ~ & ~
 \\\hline
@@ -409,141 +409,78 @@ Software risk areas include extremely complex functions and modifications made o
 {\itshape This is a listing of what is to be tested from the USERS viewpoint of what the system does. This is not a technical description of the software, but a USERS view of the functions.}
 \end{comment}
 
-Features to be tested include alll objects, connectors, and associated functionality, Open/Save/Restore functionality, and Diagram types load properly.
+Features to be tested include all objects, connectors, and associated functionality, Open/Save/Restore functionality, and ensuring that all diagram types load properly.
 
+\subsection[]{\bfseries Black Box Testing} 
 
-\subsection[MENU/OPTIONS MENU/MAINWINDOW]{\bfseries MENU/OPTIONS MENU/MAINWINDOW} 
+All black box tests will be conducted by students in the Computer Science department. 
 
-\begin{itemize}
-\item Options window appears at pUML startup.
-\item When options window is closed with no selections made, the pUML main window remains.
-\item When "New" is selected, options window appears.
-\item When "Open" is selected, an explorer window appears.
-\item When "Save" is selected ...
-\item When "Save As.." is selected...
-\item When "Print" is selected...
-\item When "Import/Export" is selected...
-\item When Exit is clicked...
-\item 
-\end{itemize}
+\begin{flushleft}
+\tablehead{}
+\begin{tabular}{|m{1.5in} m{3.0in} m{2.0in}|}
+\hline
+{\bfseries\centering Name of Test}
+& {\bfseries\centering Tests}
+& {\bfseries\centering Fulfils SSRS Req.}
+\\\hline
+testinstall & pUML installer successfully installs and uninstalls & ~
+\\\hline
+testlaunch & pUML launches correctly & ~
+\\\hline
+testsave & All save functions & ~
+\\\hline
+testopen & All open functions & ~	
+\\\hline
+testmainwindow & All main window options & ~
+\\\hline
+testobjects & All object behavior & ~
+\\\hline
+testconnectors & All connector behavior & ~
+\\\hline
 
-
-
-\subsection[OBJECTS]{\bfseries OBJECTS} 
-
-All objects should perform or have the following tasks performed on them in a consistent manner in the following cases: 
-\begin{itemize}
-	\item Objects can be created.
-	\item Objects can be deleted.
-\begin{itemize}
-\item Any associated connectors must also be deleted.
-\item All associated text and descriptions must also be deleted.
-\end{itemize}
-	\item Objects can be selected.
-	\item Objects can be de-selected.
-	\item Objects can be moved after they have been placed
-\begin{itemize}
-\item Objects moved retain the new location with the same integrity as the previous location.
-\item All text and descriptions associated with the object move with the object to the same location in relation to the object.
-\end{itemize}
-\item Objects can accept an indefinite number of connection lines.
-	\item The object's properties may be modified.
-\begin{itemize}
-\item Description or contents may be modified an indefinite number of times.
-\end{itemize}
-	\item The object's size may be modified...
-	\begin{itemize}
-		\item Manually.
-		\item Auto-fit to contents.
-\end{itemize}
-\end{itemize}
-
+\end{tabular}
+\end{flushleft}
 \bigskip
 
-\subsection[CONNECTORS]{\bfseries CONNECTORS}
+\subsection[]{\bfseries Integration Testing} 
 
-All connectors should perform or have the following tasks performed on them in a consistent manner in the following cases: 
-\begin{itemize}
-	\item Connectors can be created.
-\begin{itemize}
-\item Only one connector may exist between any two objects.
-\item Only one self connector may exist per object.
-\end{itemize}
-	\item Connectors can be deleted.
-	\item Connectors can be selected.
-	\item Connectors can be de-selected.
-\item Connectors cannnot change the objects they connect other than the two selected once they have been placed.
-\item If an object a connector is attached to moves, the connector's endpoint moves with that object. 
-\begin{itemize}
-\item Connectors moved retain the new configuration with the same integrity as the previous configuration.
-\item All text and descriptions associated with the connector move with the connector to the same location in relation to the connector as before.
-\end{itemize}
-	\item The connector's properties may be modified.
-\begin{itemize}
-\item Line description may be modified an indefinite number of times.
-\end{itemize}
-\end{itemize}
+The integration test will be conducted as a unit test, testing all signals and slots and connections within pUML.
 
+\begin{flushleft}
+\tablehead{}
+\begin{tabular}{|m{1.5in} m{3.0in} m{2.0in}|}
+\hline
+{\bfseries Name of Test}
+& {\bfseries Tests}
+& {\bfseries Fulfils SSRS Req.}
+\\\hline
+connectCanvasWithDocument & connectCanvasWithDocumentTest & ~
+\\\hline
+\end{tabular}
+\end{flushleft}
 \bigskip
 
-\subsection[OPEN]{\bfseries OPEN}
 
-Once the pUML software has been launched, files may be opened if the following criteria are met:
+\subsection[]{\bfseries Unit Testing} 
 
-\begin{itemize}
-\item The file type is of pUML type.
-\item The file name is legitimate.
-\item The file is not already open in pUML.
-\end{itemize}
+The unit tests will be conducted as part of a QT unit test project. This project will test all units.
 
-Once a file has been opened:
-
-\begin{itemize}
-\item The diagram is loaded into a new tab.
-\item Toolbar is updated with that diagram's objects and connectors.
-\item All objects and connectors in the file are in the exact same state and configuration as when the file had been previously saved.
-\item All text descriptions are preserved from previous save.
-\item All features are modifiable
-\begin{itemize}
-\item Objects may be added or removed, and retain all object functionality.
-\item Connectors may be added or removed, and retain all connector functionality.
-\end{itemize}
-\item The file may be saved.
-\item The file may be closed.
-\end{itemize}
-
+\begin{flushleft}
+\tablehead{}
+\begin{tabular}{|m{1.5in} m{3.0in} m{2.0in}|}
+\hline
+{\bfseries Name of Test}
+& {\bfseries Tests}
+& {\bfseries Fulfils SSRS Req.}
+\\\hline
+pUMLUnitTest & all pUML functions & ~
+\\\hline
+\end{tabular}
+\end{flushleft}
 \bigskip
 
-\subsection[SAVE]{\bfseries SAVE}
 
-The save function may be invoked if the following criteria are met: 
-\begin{itemize}
-\item 
-\item 
-\item 
-\end{itemize}
 
-\bigskip
-
-\subsection[RESTORE]{\bfseries RESTORE}
-
-\bigskip
-
-\subsection[DIAGRAM TYPES]{\bfseries DIAGRAM TYPES}
-
-\bigskip
-
-\subsection[TAB FUNCTIONALITY]{\bfseries TAB FUNCTIONALITY}
-
-\bigskip
-
-\subsection[]{\bfseries }
-
-\bigskip
-
-\subsection[]{\bfseries }
-
-\bigskip
 
 
 
@@ -555,7 +492,11 @@ FEATURES NOT TO BE TESTED}
 {\itshape This is a listing of what is NOT to be tested from both the Users viewpoint of what the system does and a configuration management/version control view. This is not a technical description of the software, but a USERS view of the functions.}
 \end{comment}
 
-[Insert text here.]
+\begin{itemize}
+\item We will not test invalid Save file names. QT already has implemented measures to prevent invalid file names.
+\item We will not test what the right-click function does in areas we have not assigned right-click features.
+\end{itemize}
+
 
 
 \section[APPROACH]{\bfseries APPROACH}
@@ -571,7 +512,8 @@ FEATURES NOT TO BE TESTED}
 }
 \end{comment}
 
-[Insert text here.]
+We will be utilizing QT's built in unit testing features by designing a project to test all units. 
+Black box testing will be conducted by Computer Science students per text files outlining all steps to complete the test. Failed tests will be logged as issues in Google code and will be resolved manually.
 
 
 \section[ITEM PASS/FAIL CRITERIA]
@@ -580,7 +522,7 @@ FEATURES NOT TO BE TESTED}
 {\itshape What are the Completion criteria for this plan? This is a critical aspect of any test plan and should be appropriate to the level of the plan.}
 \end{comment}
 
-[Insert text here.]
+If any test fails in any aspect, then entire test will have been assumed to have failed. A test will not be considered to pass until all steps of that test have passed successfully. If a test continues to fail and seems unresolvable given time and resources, the test may be rewritten to ensure a satisfactory pass grade may occur.
 
 
 \section[SUSPENSION CRITERIA]
@@ -591,7 +533,8 @@ FEATURES NOT TO BE TESTED}
 Specify what constitutes stoppage for a test or series of tests and what is the acceptable level of defects that will allow the testing to proceed past the defects. }
 \end{comment}
 
-[Insert text here.]
+Features and desired functionality may be suspended if it is assumed that it cannot be reasonably functional within the remaining time left to complete this project. 
+Features to be suspended at this time will not be resumed.
 
 \section[TEST DELIVERABLES]
 {\bfseries TEST DELIVERABLES}
@@ -607,14 +550,21 @@ is listed under test items and is delivered by development.
 }
 \end{comment}
 
-[Insert text here.]
+\begin{itemize}
+\item Test plan document
+\item All black box test cases with extraneous observations
+\item The integration test runs 
+\item All unit test runs 
+\item Relevant error logs and problem reports
+\end{itemize}
+
 
 \section[REMAINING TEST TASKS]{\bfseries REMAINING TEST TASKS}
 \begin{comment}
 {\itshape If this is a multi-phase process or if the application is to be released in increments there may be parts of the application that this plan does not address. These areas need to be identified to avoid any confusion should defects be reported back on those future functions. This will also allow the users and testers to avoid incomplete functions and prevent waste of resources chasing non-defects.}
 \end{comment}
 
-[Insert text here.]
+There are no remaining test tasks at this time, since further testing will not occur at the end of this semester.
 
 \section[ENVIRONMENTAL NEEDS]{\bfseries ENVIRONMENTAL NEEDS}
 \begin{comment}
@@ -626,7 +576,7 @@ is listed under test items and is delivered by development.
 }
 \end{comment}
 
-[Insert text here.]
+There are no environmental needs associated with the pUML project.
 
 
 \section[STAFFING AND TRAINING NEEDS]
@@ -636,7 +586,7 @@ is listed under test items and is delivered by development.
 Training for any test tools to be used. }
 \end{comment}
 
-[Insert text here.]
+pUML users are assumed to be familiar with UML and have a need to perform UML diagramming. As such, basic training will not be necessary.  A user guide will be provided with the pUML software to address any additional concerns. 
 
 
 \section[RESPONSIBILITIES]{\bfseries RESPONSIBILITIES}
@@ -648,7 +598,7 @@ This issue includes all areas of the plan. Here are some examples:
 \item Ensuring all required elements are in place for testing. 
 \end{itemize} }
 
-[Insert text here.]
+Specific testing responsibilities are still TBD.
 
 
 \section[SCHEDULE]{\bfseries SCHEDULE}
@@ -656,7 +606,7 @@ This issue includes all areas of the plan. Here are some examples:
 {\itshape Should be based on realistic and validated estimates. If the estimates for the development of the application are inaccurate, the entire project plan will slip and the testing is part of the overall project plan.}
 \end{comment}
 
-[Insert text here.]
+All black box tests, unit tests, and the integration test will be conducted on a weekly basis, as soon as test creation has been completed.
 
 \section[PLANNING RISKS AND CONTINGENCIES]{\bfseries PLANNING RISKS AND CONTINGENCIES}
 \begin{comment}
@@ -670,15 +620,21 @@ This issue includes all areas of the plan. Here are some examples:
 {\itshape Who can approve the process as complete and allow the project to proceed to the next level (depending on the level of the plan)? }
 \end{comment}
 
-[Insert text here.]
+Dr. Clint Jeffery is the only authorized individual to approve this project as complete.
 
+
+				\begin{comment}
 \section[GLOSSARY]
 {\bfseries GLOSSARY}
+			\end{comment}
 \begin{comment}
 {\itshape Used to define terms and acronyms used in the document, and testing in general, to eliminate confusion and promote consistent communications. }
 \end{comment}
+			
 
-[Insert text here.]
+
+
+			\begin{comment}
 
 
 \clearpage\setcounter{page}{1}\pagestyle{Convertviii}
@@ -693,15 +649,8 @@ derived from the customer. \ Appendices are labeled A, B, {\dots}n. \ \ Referenc
 
 \clearpage\setcounter{page}{1}\pagestyle{Convertix}
 
+				\end{comment}
 
-\section[APPENDIX B. \ [insert name
-here{]}]{\bfseries APPENDIX B.
-\ [insert name here]
-}
-
-\bigskip
-
-[ insert appendix B here ]
 
 
 \bigskip
