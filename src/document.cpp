@@ -11,6 +11,8 @@ using std::ofstream;  // NOLINT
 using std::vector;
 using std::string;
 
+int saveattempt;
+
 /*! Constructor: simply initializes indexOfSelectedObject.
 */
 Document::Document() {
@@ -405,10 +407,13 @@ void Document::saveDocument() {
   // Simple converstion for C string check.
   documentName = fileName.toStdString().c_str();
   // Verifies that the filename specified is a valid one.
-  if (documentName.empty()) {
+  if (documentName.empty() && saveattempt == 0) {
     // If a filename and path doesn't exist it forces it to the saveas routine to get the filename.
-    Document::saveAsDocument();
-  } else {
+      Document::saveAsDocument();
+  } else if (documentName.empty() && saveattempt >= 1){
+      saveattempt = 0;
+      return;
+  }else {
     QFile file(fileName);
     QDomDocument test("nodes_vector_xml");
     QDomElement root = test.createElement("nodes_vector_xml");
@@ -436,6 +441,7 @@ void Document::saveDocument() {
 
 
 void Document::saveAsDocument() {
+    saveattempt++;
     // Saves file name to current document only accesible variable.
     fileName = QFileDialog::getSaveFileName(this, tr("Save As File"),
                                                     tr("XML files (*.xml)"));
