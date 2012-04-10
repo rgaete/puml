@@ -603,8 +603,13 @@ void MainWindow::on_actionOpen_triggered() {
 }
 
 void MainWindow::on_actionSave_triggered() {
-  documents.at(currentDocument)->saveDocument();
+  //documents.at(currentDocument)->saveDocument();
+  fprintf(stderr, "KLUDGE! Create a proper on_actionLoad_triggered action!\n");
 
+  Document* fiddlestick;
+
+  fiddlestick = new Document(
+      QString("/home/logan/Programming/puml/experiment_save"));
 }
 
 void MainWindow::on_actionSave_As_triggered() {

@@ -19,6 +19,83 @@ Document::Document() {
   indexOfSelectedObject = -1;
 }
 
+/*vector<QXmlStreamReader::TokenType>*/ void pre_parse_nodes_vector(
+    QXmlStreamReader* xml_reader) {
+
+  while (!xml_reader->atEnd() && !xml_reader->hasError()) {
+    QXmlStreamReader::TokenType token = xml_reader->readNext();
+    fprintf(stderr, "Hey, Sponge Bob, I saw this! %s\n",
+            xml_reader->tokenString().toStdString().c_str());
+  }
+
+  //return NULL;
+}
+
+/*
+
+xmlFile = new QFile("xmlFile.xml");
+        if (!xmlFile->open(QIODevice::ReadOnly | QIODevice::Text)) {
+                QMessageBox::critical(this,"Load XML File Problem",
+                "Couldn't open xmlfile.xml to load settings for download",
+                QMessageBox::Ok);
+                return;
+        }
+xmlReader = new QXmlStreamReader(xmlFile);
+
+
+//Parse the XML until we reach end of it
+while(!xmlReader->atEnd() && !xmlReader->hasError()) {
+        // Read next element
+        QXmlStreamReader::TokenType token = xmlReader->readNext();
+        //If token is just StartDocument - go to next
+        if(token == QXmlStreamReader::StartDocument) {
+                continue;
+        }
+        //If token is StartElement - read it
+        if(token == QXmlStreamReader::StartElement) {
+
+                if(xmlReader->name() == "name") {
+                        continue;
+                }
+
+                if(xmlReader->name() == "id") {
+                    qDebug() << xmlReader->readElementText();
+                }
+        }
+}
+
+if(xmlReader->hasError()) {
+        QMessageBox::critical(this,
+        "xmlFile.xml Parse Error",xmlReader->errorString(),
+        QMessageBox::Ok);
+        return;
+}
+
+//close reader and flush file
+xmlReader->clear();
+xmlFile->close();
+*/
+
+Document::Document(QString fpath) {
+  fprintf(stderr, "> Document::Document(QString fpath)\n");
+
+  QFile* xml_file = new QFile(fpath);
+  if (!xml_file->open(QIODevice::ReadOnly | QIODevice::Text)) {
+    char msg[256];
+    sprintf(msg, "Couldn't open the file %s",
+            fpath.toStdString().c_str());
+    QMessageBox::critical(this, "Load XML File Problem", msg, QMessageBox::Ok);
+    return;
+  }
+
+  QXmlStreamReader* xml_reader = new QXmlStreamReader(xml_file);
+
+  pre_parse_nodes_vector(xml_reader);
+
+  fprintf(stderr, "< Document::Document(QString fpath)\n");
+}
+
+
 /*! Destructor: frees up the memory used up by the vector of nodes.
   @bug There is an intermitten bug where an exception will be thrown
      by .at()!
@@ -57,8 +134,7 @@ void Document::setSelectedObject(const QPoint &point) {
     // Save the difference between where the mouse click was (point) and
     // where the actual middle of the object is. This will be used to
     // acurately move and drag the object.
-    positionDelta = nodes.at(indexOfSelectedObject)->getPosition() - point;
-  }
+    positionDelta = nodes.at(indexOfSelectedObject)->getPosition() - point; }
 
   // at this point a redraw is needed to outputshow the new
   // highlighted object.
@@ -408,20 +484,21 @@ void Document::saveDocument() {
   documentName = fileName.toStdString().c_str();
   // Verifies that the filename specified is a valid one.
   if (documentName.empty() && saveattempt == 0) {
-    // If a filename and path doesn't exist it forces it to the saveas routine to get the filename.
-      Document::saveAsDocument();
-  } else if (documentName.empty() && saveattempt >= 1){
-      saveattempt = 0;
-      return;
-  }else {
+    // If a filename and path doesn't exist it forces it to the saveas routine
+    // to get the filename.
+    Document::saveAsDocument();
+  } else if (documentName.empty() && saveattempt >= 1) {
+    saveattempt = 0;
+    return;
+  } else {
     QFile file(fileName);
-    QDomDocument test("nodes_vector_xml");
-    QDomElement root = test.createElement("nodes_vector_xml");
-    test.appendChild(root);
+    QDomDocument xml_doc("nodes_vector_xml");
+    QDomElement root = xml_doc.createElement("nodes_vector_xml");
+    xml_doc.appendChild(root);
 
     for (vector<BaseNode*>::iterator it = nodes.begin();
          it != nodes.end(); ++it) {
-      (*it)->to_xml(test, root);
+      (*it)->to_xml(xml_doc, root);
     }
 
     // Checks to make sure that the file is writable.
@@ -433,7 +510,7 @@ void Document::saveDocument() {
 
     ofstream myfile;
     myfile.open(fileName.toStdString().c_str());
-    myfile << test.toString().toStdString();
+    myfile << xml_doc.toString().toStdString();
     myfile.close();
     //  write the saving as file function here with the fileName
   }
@@ -444,7 +521,7 @@ void Document::saveAsDocument() {
     saveattempt++;
     // Saves file name to current document only accesible variable.
     fileName = QFileDialog::getSaveFileName(this, tr("Save As File"),
-                                                    tr("XML files (*.xml)"));
+                                            tr("XML files (*.xml)"));
     // Need to add if canceled saving a name it will stop the loop, as its currently infinite.
     Document::saveDocument();
 }

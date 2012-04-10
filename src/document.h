@@ -14,6 +14,7 @@
 #include <vector>
 #include <QFile>
 #include <QString>
+#include <QXmlStreamReader>
 
 
 #include "./nodefactory.h"
@@ -26,6 +27,7 @@ class Document : public QWidget {
 
   public:
     Document();
+    Document(QString fpath);
     ~Document();
     void addNodeToList(BaseNode *newNode) { nodes.push_back(newNode); }
     void setNewObjectID(int prototypeID);
