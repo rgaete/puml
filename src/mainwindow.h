@@ -27,7 +27,7 @@
 #include <QStatusBar>
 #include <QString>
 #include <QToolBar>
-#include <QXmlStreamReader>
+#include <QDomDocument>
 
 #include <map>
 #include <vector>
