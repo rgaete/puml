@@ -5,12 +5,15 @@
 #include <vector>
 #include <fstream>  // NOLINT
 #include <algorithm>
+#include <string>
+#include <iostream>
 // I'm not sure why cpplint.py is insisting that <vector> be included
 // when it exists in mainwindow.h...
 
 // In the future, we might want to consider something other than a stream?
-using std::ofstream;  // NOLINT
+using std::ifstream;  // NOLINT
 using std::vector;
+using std::string;
 
 /*! In the MainWindow constructor, we need to create
   all the actions, menus and widgets. registerObject is
@@ -596,10 +599,38 @@ void MainWindow::on_tabWidget_currentChanged(int newIndex) {
 }
 
 void MainWindow::on_actionOpen_triggered() {
-  QString fileName = QFileDialog::getOpenFileName(this,
+    string fileData;
+    fileData.clear();
+  openName = QFileDialog::getOpenFileName(this,
      tr("Open Document"),  tr("XML files (*.xml)"));
 
   //  write the loading file function here with the fileName
+  QFile file(openName);
+  if (!file.open(QIODevice::ReadOnly)) {
+      QMessageBox::information(this, tr("Unable to open file"),
+                               file.errorString());
+      return;
+  }
+  ifstream myfile;
+  myfile.open(openName.toStdString().c_str());
+  // pulling out information of the file.
+  getline(myfile,fileData);
+  if (fileData == ""){
+      QMessageBox::information(this, tr("Unable to Open file as it is empty"),
+                               file.errorString());
+  }
+  fileData.clear();
+  getline(myfile, fileData);
+  if (fileData != "<nodes_vector_xml>");
+
+  while(!myfile.eof()){
+      getline(myfile, fileData);
+
+  }
+
+
+
+  myfile.close();
 }
 
 void MainWindow::on_actionSave_triggered() {

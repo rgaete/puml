@@ -136,6 +136,7 @@ class MainWindow : public QMainWindow {
     QMenu *menuConnectors;
     QMenu *menuHelp;
     QMenu *menuPopup;
+    QString openName;
 };
 
 #endif  // SRC_MAINWINDOW_H_
