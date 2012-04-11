@@ -600,6 +600,13 @@ void MainWindow::on_tabWidget_currentChanged(int newIndex) {
 
 void MainWindow::on_actionOpen_triggered() {
     string fileData;
+    string class_name;
+    int selected;
+    int cpSelected;
+    int pos_x;
+    int pos_y;
+    int length;
+    int height;
     fileData.clear();
   openName = QFileDialog::getOpenFileName(this,
      tr("Open Document"),  tr("XML files (*.xml)"));
@@ -625,9 +632,20 @@ void MainWindow::on_actionOpen_triggered() {
 
   while(!myfile.eof()){
       getline(myfile, fileData);
-
+      if (fileData == "<Node>"){
+          class_name.clear();
+          selected = 0;
+          cpSelected = 0;
+          pos_x = 0;
+          pos_y = 0;
+          length = 0;
+          height = 0;
+      }
+      if(fileData == "</Node>"){
+          //send all node data
+      }
+      // if anything else get values.
   }
-
 
 
   myfile.close();
