@@ -1,0 +1,53 @@
+Test: pUML Save As features		Risk Level: 
+
+
+  Test Steps (input):
+    1. Create a new diagram.
+    2. Place at least two objects and a connector.
+    3. Select File -> Save As..
+    4. The Save As dialog should appear.
+    5. Type a name for the diagram and click Save.
+    6. Close the diagram tab.
+    7. Select File -> Open, and open the diagram just saved.
+    8. Verify that all changes made were stored.
+    9. Modify the now-saved diagram. Add an object.
+    10. Select File-> Save As..
+    11. Type a different name for the diagram and click Save.
+    12. Close the diagram tab.
+    13. Select File -> Open, and open the diagram just saved.
+    14. Verify that all changes made were stored.
+    15. Open a new tab and choose Open.
+    16. Open the first diagram.
+    17. Verify that the first diagram was unchanged.
+
+  
+  Expected Results:
+    Save-As saves a previously unsaved diagram.
+    Save-As saves a previously saved diagram under a new name
+
+
+
+***** TEST 01 *****
+
+Change Set#: 		Date of Test: 		Pass/Fail:
+
+Tester Name: 
+
+Log: 
+
+
+Extraneous Observations: 
+
+
+
+***** TEST 02 *****
+
+Change Set#: 		Date of Test: 		Pass/Fail:
+
+Tester Name: 
+
+Log: 
+
+
+Extraneous Observations: 
+
