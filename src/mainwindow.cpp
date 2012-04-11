@@ -466,11 +466,12 @@ void MainWindow::createNewDiagram(BaseNode::DiagramType type) {
     @param filename The filename to open.
 */
 void MainWindow::openDiagram(const QString &filename) {
+  on_actionOpen_triggered();
   // This function should be similar to the createNewDiagram function, except
   // loads in a diagram after creating the document and canvas. This probably
   // done by calling a slot in the document class with the filename
-  QMessageBox::information(this, "pUML",
-    "Opening an existing diagram is not yet implemented.\n\n" + filename);
+  // QMessageBox::information(this, "pUML",
+  //    "Opening an existing diagram is not yet implemented.\n\n" + filename);
 }
 
 /*! This slot gets triggered whenever one of the NodeActions are triggered,
@@ -599,6 +600,7 @@ void MainWindow::on_tabWidget_currentChanged(int newIndex) {
 }
 
 void MainWindow::on_actionOpen_triggered() {
+  /*
     string fileData;
     string class_name;
     int selected;
@@ -608,8 +610,31 @@ void MainWindow::on_actionOpen_triggered() {
     int length;
     int height;
     fileData.clear();
-  openName = QFileDialog::getOpenFileName(this,
-     tr("Open Document"),  tr("XML files (*.xml)"));
+  */
+  openName = QFileDialog::getOpenFileName(this, tr("Open Document"),
+                                          tr("XML files (*.xml)"));
+
+  QFile* xmlFile = new QFile(openName);
+
+  if (!xmlFile->open(QIODevice::ReadOnly | QIODevice::Text)) {
+    char msg[256];
+    sprintf(msg, "Couldn't open the file %s",
+            openName.toStdString().c_str());
+    QMessageBox::critical(this, "Load XML File Problem", msg, QMessageBox::Ok);
+    return;
+  }
+
+  QXmlStreamReader* xmlReader = new QXmlStreamReader(xmlFile);
+
+  while (!xmlReader->atEnd() && !xmlReader->hasError()) {
+    QXmlStreamReader::TokenType token = xmlReader->readNext();
+    fprintf(stderr, "Hey, Sponge Bob, I saw this! %s\n",
+            xmlReader->name().toString().toStdString().c_str());
+    fprintf(stderr, "And this! %s\n",
+            xmlReader->text().toString().toStdString().c_str());
+  }
+
+/*
 
   //  write the loading file function here with the fileName
   QFile file(openName);
@@ -647,8 +672,9 @@ void MainWindow::on_actionOpen_triggered() {
       // if anything else get values.
   }
 
-
   myfile.close();
+  */
+
 }
 
 void MainWindow::on_actionSave_triggered() {
