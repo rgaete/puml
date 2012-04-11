@@ -75,7 +75,6 @@ QDomElement BaseNode::to_xml(QDomDocument &doc,  // NOLINT
   set_xml_attr(doc, node, QString("class_name"),
                this->metaObject()->className());
   set_xml_attr(doc, node, QString("selected"), QString::number(selected, 10));
-  set_xml_attr(doc, node, QString("length"), QString::number(length));
   set_xml_attr(doc, node, QString("cpSelected"), QString::number(cpSelected));
   set_xml_attr(doc, node, QString("pos_x"), QString::number(position.x()));
   set_xml_attr(doc, node, QString("pos_y"), QString::number(position.y()));
