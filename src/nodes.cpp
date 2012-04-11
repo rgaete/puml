@@ -161,7 +161,7 @@ int BaseNode::stringHeight(const QString &string)
         }
     }
 
-    return height * 15;
+    return height * 17;
 }
 
 void BaseNode::setUpConnectionPoints() {
