@@ -624,6 +624,7 @@ void MainWindow::on_actionOpen_triggered() {
     return;
   }
 
+  /*
   QXmlStreamReader* xmlReader = new QXmlStreamReader(xmlFile);
 
   while (!xmlReader->atEnd() && !xmlReader->hasError()) {
@@ -633,6 +634,7 @@ void MainWindow::on_actionOpen_triggered() {
     fprintf(stderr, "And this! %s\n",
             xmlReader->text().toString().toStdString().c_str());
   }
+  */
 
 /*
 
@@ -678,13 +680,7 @@ void MainWindow::on_actionOpen_triggered() {
 }
 
 void MainWindow::on_actionSave_triggered() {
-  //documents.at(currentDocument)->saveDocument();
-  fprintf(stderr, "KLUDGE! Create a proper on_actionLoad_triggered action!\n");
-
-  Document* fiddlestick;
-
-  fiddlestick = new Document(
-      QString("/home/logan/Programming/puml/experiment_save"));
+  documents.at(currentDocument)->saveDocument();
 }
 
 void MainWindow::on_actionSave_As_triggered() {
