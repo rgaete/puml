@@ -25,7 +25,7 @@ Document::Document() {
   while (!xml_reader->atEnd() && !xml_reader->hasError()) {
     QXmlStreamReader::TokenType token = xml_reader->readNext();
     fprintf(stderr, "Hey, Sponge Bob, I saw this! %s\n",
-            xml_reader->tokenString().toStdString().c_str());
+            xml_reader->name().toString().toStdString().c_str());
   }
 
   //return NULL;
