@@ -26,6 +26,7 @@ File libgcc_s_dw2-1.dll
 File mingwm10.dll
 File QtCore4.dll
 File QtGui4.dll
+File QtXml4.dll
 
 ; Tell the compiler to write an uninstaller and to look for a "Uninstall" section
 WriteUninstaller $INSTDIR\Uninstall.exe
@@ -45,6 +46,7 @@ Delete $INSTDIR\libgcc_s_dw2-1.dll
 Delete $INSTDIR\mingwm10.dll
 Delete $INSTDIR\QtCore4.dll
 Delete $INSTDIR\QtGui4.dll
+Delete $INSTDIR\QtXml4.dll
 RMDir $INSTDIR
 
 ; Now remove shortcuts too (seems to be broken on Win 7)
