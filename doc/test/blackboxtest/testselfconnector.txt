@@ -53,12 +53,16 @@ Extraneous Observations:
 
 ***** TEST 02 *****
 
-Change Set#: 		Date of Test: 		Pass/Fail:
+Change Set#: Rev 351		Date of Test: 4/19/2011		Pass/Fail: Pass
 
-Tester Name: 
+Tester Name: Jeremy Klas 
 
 Log: 
-
+  All of the steps were completed and worked as explained.
 
 Extraneous Observations: 
-
+  Although the test worked, there is an issue with placing multiple self connectors to an object.
+  If you accidentally click on an object twice with the self connector, two connectors are drawn,
+  this becomes an issue when adding text or when deleting. If you're deleting you are required to
+  do multiple deletions to see the desired result, and when adding text, the text of each line
+  write over each other making each unlegible.
