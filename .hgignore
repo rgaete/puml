@@ -1,0 +1,26 @@
+syntax: regexp
+\.pyc$
+\.sw[op]$
+\.o$
+\.out$
+latex.*
+^pUML$
+\.hg.*$
+.*\.lock\..*
+src/Makefile$
+.*pUML\.pro\.user$
+src/Makefile$
+src/moc.*\.cpp$
+src/pUMLTest2$
+src/pUML$
+~$
+\.orig$
+qrc_icons.*
+pUML-build-desktop*
+
+.*log$
+.*aux$
+.*toc$
+
+syntax: glob
+code/pUML-build-desktop-Qt_4_7_4_for_Desktop_-_MinGW_4_4__Qt_SDK__Debug/Makefile
