@@ -43,11 +43,11 @@ Test: pUML connector functionality		Risk Level:
 
 ***** TEST 01 *****
 
-Change Set#: 		Date of Test: 		Pass/Fail:
+Change Set#: 		Date of Test: 4/19/12		Pass/Fail: Fail
 
-Tester Name: 
+Tester Name: Morgan Weir
 
-Log: 
+Log: Use case diagram, fails at step 13, no dialog box appears
 
 
 Extraneous Observations: 
@@ -56,12 +56,34 @@ Extraneous Observations:
 
 ***** TEST 02 *****
 
-Change Set#: 		Date of Test: 		Pass/Fail:
+Change Set#: 		Date of Test: 4/19/12 		Pass/Fail: Fail
 
-Tester Name: 
+Tester Name: Morgan Weir
 
-Log: 
+Log: Class Diagram, fails at step 15, no dialogue appears next to line
 
 
 Extraneous Observations: 
 
+
+***** TEST 03 *****
+
+Change Set#: 		Date of Test: 4/19/12		Pass/Fail: Fail
+
+Tester Name: Morgan Weir
+
+Log: State diagram, fails at step 15, no dialogue appears next to line
+
+
+Extraneous Observations: 
+
+***** TEST 04 *****
+
+Change Set#: 		Date of Test: 4/19/12		Pass/Fail: Pass
+
+Tester Name: Morgan Weir
+
+Log: Collaboration diagram passes with collaboration line
+
+
+Extraneous Observations: 
