@@ -43,7 +43,7 @@ Test: pUML connector functionality		Risk Level:
 
 ***** TEST 01 *****
 
-Change Set#: 		Date of Test: 4/19/12		Pass/Fail: Fail
+Change Set#:353:4680fa360dcf Date of Test: 4/19/12		Pass/Fail: Fail
 
 Tester Name: Morgan Weir
 
@@ -56,7 +56,7 @@ Extraneous Observations:
 
 ***** TEST 02 *****
 
-Change Set#: 		Date of Test: 4/19/12 		Pass/Fail: Fail
+Change Set#: 353:4680fa360dcf Date of Test: 4/19/12 		Pass/Fail: Fail
 
 Tester Name: Morgan Weir
 
@@ -68,7 +68,7 @@ Extraneous Observations:
 
 ***** TEST 03 *****
 
-Change Set#: 		Date of Test: 4/19/12		Pass/Fail: Fail
+Change Set#: 353:4680fa360dcf  Date of Test: 4/19/12		Pass/Fail: Fail
 
 Tester Name: Morgan Weir
 
@@ -79,7 +79,7 @@ Extraneous Observations:
 
 ***** TEST 04 *****
 
-Change Set#: 		Date of Test: 4/19/12		Pass/Fail: Pass
+Change Set#: 353:4680fa360dcf Date of Test: 4/19/12		Pass/Fail: Pass
 
 Tester Name: Morgan Weir
 
