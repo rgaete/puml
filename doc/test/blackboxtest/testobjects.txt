@@ -31,16 +31,15 @@ Test: pUML object functionality			Risk Level:
 
 ***** TEST 01 *****
 
-Change Set#: 		Date of Test: 		Pass/Fail:
+Change Set#: Rev 351		Date of Test: 4/19/12		Pass/Fail: Pass
 
-Tester Name: 
+Tester Name: Jeremy Klas
 
 Log: 
-
+The object could be created, selected, modified, moved, and deleted just fine. It also accepted connectors and its data was modifiable.
 
 Extraneous Observations: 
-
-
+The test ran great, however with that many connectors going into a single object the diagram began to get cluttered around the four north, south, west, east connection points.
 
 ***** TEST 02 *****
 

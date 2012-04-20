@@ -43,15 +43,15 @@ Test: pUML connector functionality		Risk Level:
 
 ***** TEST 01 *****
 
-Change Set#: 		Date of Test: 		Pass/Fail:
+Change Set#: Rev 351		Date of Test: 4/19/12	Pass/Fail: Fail
 
-Tester Name: 
+Tester Name: Jeremy Klas
 
 Log: 
-
+On Use Cases, everything works except for the dialog box comming up in step 13... So steps 13-15 weren't tested and thus the connector test failed due to the fact that I couldn't go from step 1 through 33 continuously.
 
 Extraneous Observations: 
-
+N/A
 
 
 ***** TEST 02 *****
