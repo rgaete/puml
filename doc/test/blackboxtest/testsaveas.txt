@@ -29,14 +29,18 @@ Test: pUML Save As features		Risk Level:
 
 ***** TEST 01 *****
 
-Change Set#: 		Date of Test: 		Pass/Fail:
+Change Set#: 361		Date of Test: 4/22/12		Pass/Fail: Fail
 
-Tester Name: 
+Tester Name: Brian Bowles
 
-Log: 
+Log: Failed and stopped at step 7 because loading is broken.
 
+Extraneous Observations:
+Step 4: filename prompt comes up as "XML files (*.xml)" with "XML files (*" preselected so the extention has an extra ")".
+Step 6: Close tab does nothing.
 
-Extraneous Observations: 
+If "open" is chosen when program is launched, after the popup says opening isn't implimented yet, we get a blank canvas with all node option and connectors available.
+
 
 
 

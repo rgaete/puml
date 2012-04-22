@@ -23,14 +23,13 @@ Test: All pUML Save features		Risk Level:
 
 ***** TEST 01 *****
 
-Change Set#: 		Date of Test: 		Pass/Fail:
+Change Set#: 361		Date of Test: 4/22/12		Pass/Fail: Fail
 
-Tester Name: 
+Tester Name: Brian Bowles
 
-Log: 
+Log: Failed and stopped at step 5 because loading is broken.
 
-
-Extraneous Observations: 
+Extraneous Observations: See "saveas" test for filename bug.
 
 
 
