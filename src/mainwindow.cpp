@@ -636,70 +636,17 @@ void MainWindow::on_actionOpen_triggered() {
   // of the outermost element.
   QDomElement docElem = xmlDoc.documentElement();
 
+  fprintf(stderr, "!!!! %s\n", qPrintable(docElem.attribute(QString("node"))));
   QDomNode n = docElem.firstChild();
   while(!n.isNull()) {
     QDomElement e = n.toElement(); // try to convert the node to an element.
     if(!e.isNull()) {
-      fprintf(stderr, ">>>> %s\n", qPrintable(e.tagName()));
+      fprintf(stderr, "Should print tagName: %s\n", qPrintable(e.tagName()));
+      //fprintf(stderr, "???? %s\n", qPrintable(e.text()));
+      fprintf(stderr, "Should print class_name: %s\n", qPrintable(e.attribute(QString("class_name"))));
     }
     n = n.nextSibling();
   }
-
-
-
-  /*
-  QXmlStreamReader* xmlReader = new QXmlStreamReader(xmlFile);
-
-  while (!xmlReader->atEnd() && !xmlReader->hasError()) {
-    QXmlStreamReader::TokenType token = xmlReader->readNext();
-    fprintf(stderr, "Hey, Sponge Bob, I saw this! %s\n",
-            xmlReader->name().toString().toStdString().c_str());
-    fprintf(stderr, "And this! %s\n",
-            xmlReader->text().toString().toStdString().c_str());
-  }
-  */
-
-/*
-
-  //  write the loading file function here with the fileName
-  QFile file(openName);
-  if (!file.open(QIODevice::ReadOnly)) {
-      QMessageBox::information(this, tr("Unable to open file"),
-                               file.errorString());
-      return;
-  }
-  ifstream myfile;
-  myfile.open(openName.toStdString().c_str());
-  // pulling out information of the file.
-  getline(myfile,fileData);
-  if (fileData == ""){
-      QMessageBox::information(this, tr("Unable to Open file as it is empty"),
-                               file.errorString());
-  }
-  fileData.clear();
-  getline(myfile, fileData);
-  if (fileData != "<nodes_vector_xml>");
-
-  while(!myfile.eof()){
-      getline(myfile, fileData);
-      if (fileData == "<Node>"){
-          class_name.clear();
-          selected = 0;
-          cpSelected = 0;
-          pos_x = 0;
-          pos_y = 0;
-          length = 0;
-          height = 0;
-      }
-      if(fileData == "</Node>"){
-          //send all node data
-      }
-      // if anything else get values.
-  }
-
-  myfile.close();
-  */
-
 }
 
 void MainWindow::on_actionSave_triggered() {

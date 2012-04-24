@@ -39,10 +39,13 @@ BaseNode::BaseNode() {
  */
 void set_xml_attr(QDomDocument &doc, QDomElement &node,  // NOLINT
                   QString label, QString val) {
+  node.setAttribute(label, val);
+  /*
   QDomElement el = doc.createElement(label);
   node.appendChild(el);
   QDomText text = doc.createTextNode(val);
   el.appendChild(text);
+  */
 }
 
 /*!
