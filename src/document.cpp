@@ -13,6 +13,93 @@ using std::string;
 
 int saveattempt;
 
+QDomDocument getSavedDocument() {
+  openName = QFileDialog::getOpenFileName(this, tr("Open Document"),
+                                          tr("XML files (*.xml)"));
+  QDomDocument xmlDoc(openName);
+
+  // Make sure that this is a readable file.
+  char msg[256];
+  sprintf(msg, "Couldn't open the file %s", openName.toStdString().c_str());
+
+  QFile file(openName);
+  if (!file.open(QIODevice::ReadOnly)) {
+    QMessageBox::critical(this, "Load XML File Problem", msg, QMessageBox::Ok);
+    return;
+  }
+  if (!xmlDoc.setContent(&file)) {
+    QMessageBox::critical(this, "Load XML File Problem", msg, QMessageBox::Ok);
+    file.close();
+    return;
+  }
+  file.close();
+
+  return xmlDoc;
+}
+
+/* Goal: Each call to this function generates the next document element.
+ */
+QDomElement getNextDocumentElement(QDomDocument xmlDoc) {
+  // TODO check the tag name
+  return xmlDoc.firstChildElement(QString("document"));
+}
+
+/* Goal: Each call to this function generates the next node element.
+ */
+QDomElement getNextNodeElement(QDomElement documentElement) {
+  static QDomELement lastDocumentSeen = NULL;
+  static QDomNode nodesVectorNode = NULL;
+  if (documentElement != lastDocumentSeen) {
+    // Reset the generator on a new document.
+    lastElementSeen = documentElement;
+    nodesVectorElement = documentElement.firstChild();
+  } else {
+    // Iterate the generator to the next element if not a new document.
+    nodesVectorElement = nodesVectorElement.nextSibling();
+  }
+
+  retval = nodesVectorElement.toElement();
+  //if (
+  return nodesVectorElement.toElement();
+}
+
+/* Goal: This returns the string of an element associated with a key, or
+ * NULL if the element cannot be converted to a string, or NULL if the
+ * element doesn't exist.
+ */
+QString getAttributeByKey(QDomElement element, QString key) {
+  // TODO: Error checking.
+  return e.attribute(key);
+}
+
+void experiment() {
+  xmlDoc = getSavedDocument();
+  QDomElement docElem = getNextDocumentElement(xmlDoc);
+  while (1) {
+    n = getNextNodeElement(docElem);
+    if (n.isNull())
+      break;
+
+    fprintf(stderr, "Should print class_name: %s\n",
+            getAttributeByKey(n, QString("class_name")));
+  }
+}
+
+/* REMOVE ME! I AM SCAR CODE.
+  // print out the element names of all elements that are direct children
+  // of the outermost element.
+  QDomElement docElem = xmlDoc.documentElement();
+
+  fprintf(stderr, "!!!! %s\n", qPrintable(docElem.attribute(QString("node"))));
+  QDomNode n = docElem.firstChild();
+  while(!n.isNull()) {
+    QDomElement e = n.toElement(); // try to convert the node to an element.
+    if(!e.isNull()) {
+    }
+    n = n.nextSibling();
+  }
+*/
+
 /*! Constructor: simply initializes indexOfSelectedObject.
 */
 Document::Document() {

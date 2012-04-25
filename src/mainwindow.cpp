@@ -612,41 +612,6 @@ void MainWindow::on_actionOpen_triggered() {
     fileData.clear();
   */
   fprintf(stderr, "> on_actionOpen_triggered()\n");
-  openName = QFileDialog::getOpenFileName(this, tr("Open Document"),
-                                          tr("XML files (*.xml)"));
-  QDomDocument xmlDoc(openName);
-
-  // Make sure that this is a readable file.
-  char msg[256];
-  sprintf(msg, "Couldn't open the file %s", openName.toStdString().c_str());
-
-  QFile file(openName);
-  if (!file.open(QIODevice::ReadOnly)) {
-    QMessageBox::critical(this, "Load XML File Problem", msg, QMessageBox::Ok);
-    return;
-  }
-  if (!xmlDoc.setContent(&file)) {
-    QMessageBox::critical(this, "Load XML File Problem", msg, QMessageBox::Ok);
-    file.close();
-    return;
-  }
-  file.close();
-
-  // print out the element names of all elements that are direct children
-  // of the outermost element.
-  QDomElement docElem = xmlDoc.documentElement();
-
-  fprintf(stderr, "!!!! %s\n", qPrintable(docElem.attribute(QString("node"))));
-  QDomNode n = docElem.firstChild();
-  while(!n.isNull()) {
-    QDomElement e = n.toElement(); // try to convert the node to an element.
-    if(!e.isNull()) {
-      fprintf(stderr, "Should print tagName: %s\n", qPrintable(e.tagName()));
-      //fprintf(stderr, "???? %s\n", qPrintable(e.text()));
-      fprintf(stderr, "Should print class_name: %s\n", qPrintable(e.attribute(QString("class_name"))));
-    }
-    n = n.nextSibling();
-  }
 }
 
 void MainWindow::on_actionSave_triggered() {
