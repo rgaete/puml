@@ -612,6 +612,28 @@ void MainWindow::on_actionOpen_triggered() {
     fileData.clear();
   */
   fprintf(stderr, "> on_actionOpen_triggered()\n");
+  QString openName = QFileDialog::getOpenFileName(this, tr("Open Document"),
+                                                  tr("XML files (*.xml)"));
+  QDomDocument xmlDoc(openName);
+
+  // Make sure that this is a readable file.
+  char msg[256];
+  sprintf(msg, "Couldn't open the file %s", openName.toStdString().c_str());
+
+  QFile file(openName);
+  if (!file.open(QIODevice::ReadOnly)) {
+    QMessageBox::critical(this, "Load XML File Problem", msg, QMessageBox::Ok);
+    return;
+  }
+  if (!xmlDoc.setContent(&file)) {
+    QMessageBox::critical(this, "Load XML File Problem", msg, QMessageBox::Ok);
+    file.close();
+    return;
+  }
+  file.close();
+
+  experiment(xmlDoc);
+  fprintf(stderr, "< on_actionOpen_triggered()\n");
 }
 
 void MainWindow::on_actionSave_triggered() {

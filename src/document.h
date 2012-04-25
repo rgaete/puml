@@ -21,6 +21,7 @@
 #include "./nodes.h"
 #include "./UMLnodes.h"
 
+void experiment(QDomDocument xmlDoc);
 
 class Document : public QWidget {
   Q_OBJECT
