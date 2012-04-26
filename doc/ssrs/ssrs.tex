@@ -44,7 +44,7 @@
 \newcommand\ps@Standard{
   \renewcommand\@oddhead{\rmfamily University of Idaho CS Department Instructional Use\hfill \hfill NOT FOR RELEASE}
   \renewcommand\@evenhead{\@oddhead}
-  \renewcommand\@oddfoot{\foreignlanguage{english}{\textcolor{black}{SSRS Page }}\foreignlanguage{english}{\textcolor{black}{\thepage{}}}}
+  \renewcommand\@oddfoot{{\textcolor{black}{SSRS Page }}{\textcolor{black}{\thepage{}}}}
   \renewcommand\@evenfoot{\@oddfoot}
   \renewcommand\thepage{\arabic{page}}
 }
@@ -162,11 +162,11 @@ Phunctional UML Editor
 \bigskip
 
 {\centering\bfseries
-Version 7.0
+Version 0.8
 \par}
 
 {\centering\bfseries
-April 9, 2012
+April 23, 2012
 \par}
 
 
@@ -309,6 +309,15 @@ pUML SSRS
 & \centering A
 & Requirements update
 & MM
+
+\\\hline
+\centering 8
+& 04/23/2012
+& ~
+& \centering A
+& Incorporated Test Plan breakdown of requirements
+& MM
+
 \\\hline
 \end{supertabular}
 \end{flushleft}
@@ -323,15 +332,15 @@ pUML SSRS
 
 
 {
-\foreignlanguage{english}{*}\foreignlanguage{english}{\textbf{A}}\foreignlanguage{english}{
+{*}{\textbf{A}}{
 - ADDED
-\ }\foreignlanguage{english}{\textbf{M}}\foreignlanguage{english}{ -
+\ }{\textbf{M}}{ -
 MODIFIED
-\ }\foreignlanguage{english}{\textbf{D}}\foreignlanguage{english}{ -
+\ }{\textbf{D}}{ -
 DELETED}}
 
-\clearpage{\centering\bfseries
-\foreignlanguage{english}{\MakeUppercase{\ }}\foreignlanguage{english}{\MakeUppercase{pUML SSRS}}
+\clearpage
+{\centering\bfseries {\MakeUppercase{pUML SSRS}}
 \par}
 
 {\centering\bfseries
@@ -366,20 +375,23 @@ IDENTIFICATION}
 {
 The software system being considered for development is referred to as Phunctional UML Editor (pUML). \ The customer providing specifications
 for the system is Dr. Clint Jeffery at the University of Idaho. \ The ultimate
-customer, or end-user, of the system will be University of Idaho Computer Science students and/or faculty. \ This is a new project effort, so the version under development is version 0.0.}
+customer, or end-user, of the system will be University of Idaho Computer Science students and/or faculty. \ This is a new project effort, so the version under development is version 0.8.
+\newline Version 1.0 will be completed upon pUML release date.}
 
 \subsection[PURPOSE]{\rmfamily\bfseries
 PURPOSE}
 {
 The purpose of the system under development is to create and store UML diagrams.
-\ While the system will be used by Computer Science students at the University of Idaho,
-this document is intended to be read and understood by UICS software
-designers and coders.}
+\newline The pUML software will be used by Computer Science students at the University of Idaho, and is intended to be read and understood by the same.}
 
 \subsection[SCOPE]{\rmfamily\bfseries
 SCOPE}
 {
-The pUML software was conceptualized as a Software Engineering class project, and was launched in September 2011 .  The pUML project is as of the date of this SSRS publication, incomplete, and has yet no aquirers, users, support agencies at this time. Upon completion, the pUML software will be available only for distribution to the University of Idaho Computer Science department, and will be supported by the development team. }
+The pUML software was conceptualized as a Software Engineering class project, and following its launch in September 2011, spanned nine months and a total of ten software engineering students. The pUML project will be considered finalized as of May 7, 2012, and will not have aquirers or support agencies as of the date of release. 
+
+\bigskip
+
+Upon completion, the pUML software will be available only for distribution to the University of Idaho Computer Science department.  The pUML software will no longer be supported by the initial software development team, and will be supported only at the direction of University of Idaho Computer Science faculty. }
 
 \subsection[DEFINITIONS, ACRONYMS, AND
 ABBREVIATIONS]{\rmfamily\bfseries
@@ -420,29 +432,28 @@ Specification\\\hline
 \subsection[REFERENCES]{\rmfamily\bfseries
 REFERENCES}
 {
-The pUML requirements have been met in the following two documents: 
+The pUML requirements will be addressed in the following documents: 
 
-\begin{enumerate}
+\begin{itemize}
 \item Test Plan (TP)
 \item System and Software Design Description (SSDD)
-\end{enumerate}
+\end{itemize}
 
 }
 
 \subsection[OVERVIEW AND RESTRICTIONS]{\rmfamily\bfseries
 OVERVIEW AND RESTRICTIONS}
 {
-This document is for limited release only to UI CS personnel working on
-the project.}
+This document is for limited release only to University of Idaho Computer Science personnel assigned to the pUML project.
+}
 
 
 \bigskip
 
 {
-Section 2 of this document describes the system under development from a
-holistic point of view. \ Functions, characteristics, constraints,
-assumptions, dependencies, and overall requirements are defined from
-the system-level perspective.}
+Section 2 of this document describes the system under development from a holistic point of view. 
+\newline Functions, characteristics, constraints, assumptions, dependencies, and overall requirements are defined from the system-level perspective.
+}
 
 
 \bigskip
@@ -488,15 +499,17 @@ PRODUCT PERSPECTIVE}
 This product is independent of any other product, and as such, is self-contained.
 }
 
-\subsubsection[PRODUCT FUNCTIONS]{\rmfamily\bfseries
-PRODUCT FUNCTIONS}
+\subsubsection[PRODUCT FUNCTIONS]
+{\bfseries PRODUCT FUNCTIONS}
 
 This product's primary function is to allow the user to create UML diagrams, edit existing diagrams, and store and retrieve them.
 \newline Features to be tested include all objects, connectors, and associated functionality, Open/Save/Restore functionality, and all diagram types load properly. The specific requirements for the UML diagram editor are itemized below.
 
+\bigskip
 
-\subsubsection[MENU/OPTIONS MENU/MAINWINDOW]{\bfseries MENU/OPTIONS MENU/MAINWINDOW} 
-
+\subsubsection[MENU OPTIONS MENU MAINWINDOW]
+{\bfseries MENU OPTIONS MENU MAINWINDOW} 
+{
 \begin{itemize}
 \item Options window appears at pUML startup.
 \item When the options window is closed with no selections made, the pUML main window remains.
@@ -509,10 +522,8 @@ This product's primary function is to allow the user to create UML diagrams, edi
 \item If all currently open diagrams are saved, pUML exits.
 \item If any open diagram is not saved, refer to subsection 2.1.6.
 \end{itemize}
-
 \end{itemize}
-
-
+\bigskip
 
 \subsubsection[OBJECTS]{\bfseries OBJECTS} 
 
@@ -532,11 +543,8 @@ All objects should perform or have the following tasks performed on them in a co
 \item All text and descriptions associated with the object move with the object to the same location in relation to the object.
 \end{itemize}
 \item Objects can accept an indefinite number of connection lines.
-	\item The object's properties may be modified.
-\begin{itemize}
-\item Description or contents may be modified an indefinite number of times.
-\end{itemize}
-	\item The object will automatically resize to fit the contents.
+\item The object`s properties may be modified an indefinite number of times.
+\item The object will automatically resize to fit the contents.
 \end{itemize}
 
 \bigskip
@@ -577,7 +585,9 @@ Once the pUML software has been launched, files may be opened if the following c
 \item The file is not already open in pUML.
 \end{itemize}
 
-\newline Note: The cases listed above are ensured by QT, and will not be tested.
+\bigskip
+
+Note: The cases listed above are ensured by QT, and will not be tested.
 \newline 
 
 \begin{itemize}
@@ -596,14 +606,18 @@ Once the pUML software has been launched, files may be opened if the following c
 \bigskip
 
 \subsubsection[SAVE]{\bfseries SAVE/SAVE AS}
-
+{
 The Save and Save As functions may be invoked if the following criteria are met: 
 \begin{itemize}
 \item A diagram is open in pUML.
 \end{itemize}
+}
 
-\newline Save/Save As functionality:
+\bigskip
+
+Save/Save As functionality:
 \newline
+{
 \begin{itemize}
 \item A diagram may be saved regardless of whether it is new or previously saved.
 \item A diagram may be saved whether or not it has been modified. (e.g., a blank diagram may be saved)
@@ -615,7 +629,7 @@ The Save and Save As functions may be invoked if the following criteria are met:
 \item The diagram will be stored at the location and under the name the user has entered.
 \end{itemize}
 \end{itemize}
-
+}
 
 \bigskip
 
@@ -776,13 +790,13 @@ EXTERNAL INTERFACE REQUIREMENTS}
 \subsubsection[Hardware Interfaces]{\rmfamily\bfseries
 Hardware Interfaces}
 {
-\foreignlanguage{english}{\ }\foreignlanguage{english}
+
 {
 Any computing system capable of running Linux or Windows 7.}}
 
 \subsubsection[Software Interfaces]{\rmfamily\bfseries
 Software Interfaces}
-{ \foreignlanguage{english}{\ }\foreignlanguage{english}
+{ 
 {
 Either a Linux or Windows 7 operating system to guarantee functionality.
 }}
@@ -790,17 +804,19 @@ Either a Linux or Windows 7 operating system to guarantee functionality.
 \subsubsection[User Interfaces]{\rmfamily\bfseries
 User Interfaces}
 {
-\foreignlanguage{english}{\ }\foreignlanguage{english}
-{
-- Monitor
-\\- Keyboard
-\\- Mouse}}
+The only user interfaces required to operate the pUML software are standard computing interfaces
+\begin{itemize}
+  \item Monitor
+  \item Keyboard
+  \item Mouse
+\end{itemize}
+}
 
 \subsubsection[Other Communication
 Interfaces]{\rmfamily\bfseries
 Other Communication Interfaces}
 {
-\foreignlanguage{english}{\ }\foreignlanguage{english}{No other interfaces are required. }}
+{No other interfaces are required. }}
 
 
 
@@ -1244,11 +1260,12 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \begin{flushleft}
 \tablehead{}
 \begin{tabular}{|m{2.0in} m{5.0in}|}
-\hline {\bfseries\emph{Use Case Name}}
-& {\bfseries Place New Connector}
+\hline 
+  {\bfseries\emph{Use Case Name}} 
+  & {\bfseries Place New Connector}
 \\\hline
-\emph{Participating Actor}
-& User
+  \emph{Participating Actor} 
+  & User
 \\\hline
 \emph{Flow of Events}
 & \begin{my_enumerate}
@@ -1259,14 +1276,14 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \item Program draws the connection line between the first and second object.
 \end{my_enumerate}
 \\\hline
-\emph{Entry Condition}
-& User has selected a connector from the toolbar.
+  \emph{Entry Condition}
+  & User has selected a connector from the toolbar.
 \\\hline
-\emph{Exit Condition}
-& The connector is successfully drawn between two objects. 
+  \emph{Exit Condition}
+  & The connector is successfully drawn between two objects. 
 \\\hline
-\emph{Quality Requirements}
-& Only one connector may be placed between any two objects. Some objects may not be able to be connected with certain types of connectors.
+  \emph{Quality Requirements}
+  & Only one connector may be placed between any two objects. Some objects may not be able to be connected with certain types of connectors.
 \\\hline
 \end{tabular}
 \end{flushleft}
@@ -1284,17 +1301,14 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 & User
 \\\hline
 \emph{Flow of Events}
-& \begin{my_enumerate}
+& 
+\begin{my_enumerate}
 \item User selects a connector by clicking on it.
 \item User right-clicks on the connector.
 \item User selects ``Properties'' from the drop-down menu.
-\item User edits propertes: 
-	\begin{my_enumerate}
-\item User types the desired description in the text box presented.
-\item User selects desired arrowhead.
-\end{my_enumerate}
+\item User edits description in the text box presented.
 \item User clicks ``OK.''
-\item Program displays new description or arrowhead.
+\item Program displays new line description.
 \end{my_enumerate}
 \\\hline
 \emph{Entry Condition}
@@ -1366,23 +1380,23 @@ The user selects the ``File'' pull down menu at the top left corner of his or he
 
 \subparagraph{New}
 {
-\\ This creates a new project space. }
+This creates a new project space. }
 
 \subparagraph{Open}
 {
-\\ This opens a previously saved project. The user shall be presented with a dialog option to save the previous project. Once completing this dialog, the previous project will be closed and the selected project will be opened.}
+This opens a previously saved project. The user shall be presented with a dialog option to save the previous project. Once completing this dialog, the previous project will be closed and the selected project will be opened.}
 
 \subparagraph{Save}
 {
-\\ This saves the current state of the project into an XML that can later be used to recreate the project state. If the current project does not have a name, the ``Save'' option will be an alias for the ``Save As'' option.}
+This saves the current state of the project into an XML that can later be used to recreate the project state. If the current project does not have a name, the ``Save'' option will be an alias for the ``Save As'' option.}
 
 \subparagraph{Save As}
 {
-\\ This creates a new project space and then saves the project state into the new project. In contrast with ``Copy As'', this option does not affect the previous project. }
+This creates a new project space and then saves the project state into the new project. In contrast with ``Copy As'', this option does not affect the previous project. }
 
 \subparagraph{Delete Project}
 {
-\\ This deletes the current project and all files within the project folder. The user shall be presented with a confirmation dialog before this action is completed. Upon completion, a blank and unnamed project will be active in the project window. }
+This deletes the current project and all files within the project folder. The user shall be presented with a confirmation dialog before this action is completed. Upon completion, a blank and unnamed project will be active in the project window. }
 
 
 
@@ -1393,8 +1407,8 @@ The user selects the ``File'' pull down menu at the top left corner of his or he
 
 
 \clearpage\setcounter{page}{1}\pagestyle{Convertvi}
-\section[REQUIREMENTS TRACEABILITY]{\rmfamily\bfseries
-REQUIREMENTS TRACEABILITY}
+\section[REQUIREMENTS TRACEABILITY]
+  {\rmfamily\bfseries REQUIREMENTS TRACEABILITY}
 {\itshape
 }
 
