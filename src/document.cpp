@@ -586,7 +586,7 @@ void Document::saveAsDocument() {
     saveattempt++;
     // Saves file name to current document only accesible variable.
     fileName = QFileDialog::getSaveFileName(this, tr("Save As File"),
-                                            tr("XML files (*.xml)"));
+                                            tr("XML files *.xml"));
     // Need to add if canceled saving a name it will stop the loop, as its currently infinite.
     Document::saveDocument();
 }
