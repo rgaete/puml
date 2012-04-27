@@ -13,54 +13,81 @@ using std::string;
 
 int saveattempt;
 
+/* This opens the specified file as a QDomDocument* or returns NULL on failure.
+ */
+QDomDocument* openSaveFile(QString openName) {
+  QDomDocument *xmlDoc = new QDomDocument(openName);
+
+  // Make sure that this is a readable file.
+  char msg[256];
+  sprintf(msg, "Couldn't open the file %s", openName.toStdString().c_str());
+
+  QFile file(openName);
+  if (!file.open(QIODevice::ReadOnly)) {
+    //QMessageBox::critical(this, "Load XML File Problem", msg, QMessageBox::Ok);
+    return NULL;
+  }
+
+  if (!xmlDoc->setContent(&file)) {
+    //QMessageBox::critical(this, "Load XML File Problem", msg, QMessageBox::Ok);
+    file.close();
+    return NULL;
+  }
+  file.close();
+  return xmlDoc;
+}
+
 /* Goal: Each call to this function generates the next document element.
  */
-QDomElement getNextDocumentElement(QDomDocument xmlDoc) {
-  // TODO check the tag name
-  return xmlDoc.firstChildElement(QString("document"));
+QDomElement getNextDocumentElement(QDomDocument* xmlDoc) {
+  return xmlDoc->firstChildElement(QString("document"));
 }
 
 /* Goal: Each call to this function generates the next node element.
  */
 QDomElement getNextNodeElement(QDomElement &documentElement) {
-  static QDomElement lastDocumentSeen;
-  static QDomNode nodesVectorNode;
-  if (documentElement != lastDocumentSeen) {
+  static QDomElement* lastDocumentSeen;
+  static QDomElement nodesVectorElement;
+  static QDomNode currentNode;
+
+  if (lastDocumentSeen != &documentElement) {
     // Reset the generator on a new document.
-    lastDocumentSeen = documentElement;
-    nodesVectorNode = documentElement.firstChild();
+    lastDocumentSeen = &documentElement;
+    nodesVectorElement = documentElement.firstChildElement(
+        QString("nodes_vector_element"));
+    currentNode = nodesVectorElement.firstChild();
   } else {
     // Iterate the generator to the next element if not a new document.
-    nodesVectorNode = nodesVectorNode.nextSibling();
+    currentNode = currentNode.nextSibling();
   }
 
-  QDomElement retval = nodesVectorNode.toElement();
-  //if (
+  QDomElement retval = currentNode.toElement();
+  if (retval.isNull()) {
+    lastDocumentSeen = NULL;
+  }
   return retval;
 }
 
-/* Goal: This returns the string of an element associated with a key, or
- * NULL if the element cannot be converted to a string, or NULL if the
- * element doesn't exist.
- */
-QString getAttributeByKey(QDomElement element, QString key) {
-  // TODO: Error checking.
-  return element.attribute(key);
-}
-
-void experiment(QDomDocument xmlDoc) {
+void experiment(QString openName) {
+  fprintf(stderr, "> experiment()\n");
+  QDomDocument* xmlDoc = openSaveFile(openName);
   QDomElement docElem = getNextDocumentElement(xmlDoc);
+  if (docElem.isNull()) {
+    fprintf(stderr, "docElem was null...\n");
+  }
   QDomElement n;
   while (1) {
     n = getNextNodeElement(docElem);
     if (n.isNull()) {
-      fprintf(stderr, "It was null...\n");
       break;
     }
 
-    fprintf(stderr, "Should print class_name: %s\n",
-            qPrintable(getAttributeByKey(n, QString("class_name"))));
+    fprintf(stderr, "Should print class_name: %-21s pos_x: %-3s pos_y: %s\n",
+            qPrintable(n.attribute(QString("class_name"))),
+            qPrintable(n.attribute(QString("pos_x"))),
+            qPrintable(n.attribute(QString("pos_y"))));
   }
+  fprintf(stderr, "< experiment()\n");
 }
 
 /* REMOVE ME! I AM SCAR CODE.
@@ -82,18 +109,6 @@ void experiment(QDomDocument xmlDoc) {
 */
 Document::Document() {
   indexOfSelectedObject = -1;
-}
-
-/*vector<QXmlStreamReader::TokenType>*/ void pre_parse_nodes_vector(
-    QXmlStreamReader* xml_reader) {
-
-  while (!xml_reader->atEnd() && !xml_reader->hasError()) {
-    QXmlStreamReader::TokenType token = xml_reader->readNext();
-    fprintf(stderr, "Hey, Sponge Bob, I saw this! %s\n",
-            xml_reader->name().toString().toStdString().c_str());
-  }
-
-  //return NULL;
 }
 
 /*
@@ -152,10 +167,6 @@ Document::Document(QString fpath) {
     QMessageBox::critical(this, "Load XML File Problem", msg, QMessageBox::Ok);
     return;
   }
-
-  QXmlStreamReader* xml_reader = new QXmlStreamReader(xml_file);
-
-  pre_parse_nodes_vector(xml_reader);
 
   fprintf(stderr, "< Document::Document(QString fpath)\n");
 }
@@ -557,13 +568,17 @@ void Document::saveDocument() {
     return;
   } else {
     QFile file(fileName);
-    QDomDocument xml_doc("nodes_vector_xml");
-    QDomElement root = xml_doc.createElement("nodes_vector_xml");
-    xml_doc.appendChild(root);
+    QDomDocument xml_doc("pUML_save_document");
+    //QDomDocument xml_doc("nodes_vector_xml");
+    //QDomElement root = xml_doc.createElement("nodes_vector_xml");
+    QDomElement documentElement = xml_doc.createElement("document");
+    xml_doc.appendChild(documentElement);
+    QDomElement nodesElement = xml_doc.createElement("nodes_vector_element");
+    documentElement.appendChild(nodesElement);
 
     for (vector<BaseNode*>::iterator it = nodes.begin();
          it != nodes.end(); ++it) {
-      (*it)->to_xml(xml_doc, root);
+      (*it)->to_xml(xml_doc, nodesElement);
     }
 
     // Checks to make sure that the file is writable.
