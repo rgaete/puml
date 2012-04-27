@@ -83,6 +83,8 @@ QDomElement BaseNode::to_xml(QDomDocument &doc,  // NOLINT
   set_xml_attr(doc, node, QString("pos_y"), QString::number(position.y()));
   set_xml_attr(doc, node, QString("length"), QString::number(length));
   set_xml_attr(doc, node, QString("height"), QString::number(height));
+  // need to set an xml attribute to get the end points of the connectors
+  // need to set an xml attribute to get title (naming) or the
 
   return node;
 }
