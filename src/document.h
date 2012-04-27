@@ -21,7 +21,7 @@
 #include "./nodes.h"
 #include "./UMLnodes.h"
 
-void experiment(QDomDocument xmlDoc);
+void experiment(QString openName);
 
 class Document : public QWidget {
   Q_OBJECT
