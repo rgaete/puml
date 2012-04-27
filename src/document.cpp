@@ -38,9 +38,25 @@ QDomDocument* openSaveFile(QString openName) {
 }
 
 /* Goal: Each call to this function generates the next document element.
+ * Note: I'm not certain that this will work if more than one document node
+ * is present in the XML!
  */
 QDomElement getNextDocumentElement(QDomDocument* xmlDoc) {
-  return xmlDoc->firstChildElement(QString("document"));
+  static QDomDocument* lastXMLSeen;
+  static QDomNode currentDocument;
+
+  if (lastXMLSeen != xmlDoc) {
+    lastXMLSeen = xmlDoc;
+    currentDocument = xmlDoc->firstChildElement(QString("document"));
+  } else {
+    currentDocument = currentDocument.nextSibling();
+  }
+
+  if (currentDocument.isNull()) {
+    lastXMLSeen = NULL;
+  }
+
+  return currentDocument.toElement();
 }
 
 /* Goal: Each call to this function generates the next node element.
@@ -72,9 +88,6 @@ void experiment(QString openName) {
   fprintf(stderr, "> experiment()\n");
   QDomDocument* xmlDoc = openSaveFile(openName);
   QDomElement docElem = getNextDocumentElement(xmlDoc);
-  if (docElem.isNull()) {
-    fprintf(stderr, "docElem was null...\n");
-  }
   QDomElement n;
   while (1) {
     n = getNextNodeElement(docElem);
