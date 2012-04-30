@@ -192,6 +192,7 @@ void Canvas::mouseMoveEvent(QMouseEvent *event) {
 void Canvas::mouseReleaseEvent(QMouseEvent *event) {
   // QMessageBox::information(0, "pUML", QString::number((int)drawingMode),
   //                          QMessageBox::Ok);
+    QPoint position(0,0);
   if (event->button() == Qt::LeftButton) {
     switch (drawingMode) {
     case Object:
@@ -199,6 +200,7 @@ void Canvas::mouseReleaseEvent(QMouseEvent *event) {
       emit createObject(event->pos());
       // tell the document to show a properties dialog.
       emit showPropertiesDialog();
+      emit objectSelectionChange(position);
       break;
     case Connection:
       // let the document know this is the second connection position.
@@ -206,6 +208,7 @@ void Canvas::mouseReleaseEvent(QMouseEvent *event) {
       // stop drawing the line hint
       drawLineHint = false;
       update();
+      emit objectSelectionChange(position);
       break;
     case Nothing:
       // QMessageBox::information(0, "pUML", "Mouse Release Nothing",
@@ -224,6 +227,7 @@ void Canvas::contextMenuEvent(QContextMenuEvent *event) {
   emit objectSelectionChange(event->pos());
   // popup the menu at the current mouse position
   menuPopup->exec(event->globalPos());
+  emit objectSelectionChange(QPoint(0,0));
 }
 
 void Canvas::on_actionDelete_triggered() {
@@ -242,4 +246,9 @@ void Canvas::on_actionProperties_triggered() {
 }
 
 void Canvas::on_actionCopy_triggered() {
+}
+
+void Canvas::deselect()
+{
+    emit objectSelectionChange(QPoint(0,0));
 }

@@ -138,8 +138,7 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex) {
   disconnect(document, 0, canvases.at(document->getCanvasIndex()), 0);
 
   // create shortcuts for signals/slots
-  QShortcut *delObject = new QShortcut(QKeySequence(QKeySequence::Delete),
-                                       this);
+  QShortcut *delObject = new QShortcut(QKeySequence(QKeySequence::Delete), this);
 
   // Then connect the canvas to the document
   connect(canvas, SIGNAL(createObject(const QPoint &)),
@@ -162,6 +161,12 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex) {
           document, SLOT(createConnectionPoint2(const QPoint &)));
   connect(canvas, SIGNAL(changeSecondConnectionPointHint(const QPoint &)),
           document, SLOT(changeSecondConnectionPointHint(const QPoint &)));
+  connect(canvas, SIGNAL(selectNothing()),
+          this, SLOT(setSelect()));
+  connect(toolsActionGroup, SIGNAL(triggered(QAction*)),
+          canvas, SLOT(deselect()));
+  connect(connectorsActionGroup, SIGNAL(triggered(QAction*)),
+          canvas, SLOT(deselect()));
 
   // Set the currentDocument flag
   currentDocument = documentIndex;
@@ -350,6 +355,8 @@ void MainWindow::connectSignalsSlots() {
           this, SLOT(on_tabWidget_currentChanged(int)));  // NOLINT
   connect(actionSelect, SIGNAL(triggered()),
           this, SLOT(on_actionSelect_triggered()));
+  connect(tabWidget, SIGNAL(tabCloseRequested(int)),
+          this, SLOT(on_tabWidget_tabCloseRequest(int)));
 
   /* list of slots
   void on_actionNew_triggered();
@@ -439,7 +446,19 @@ void MainWindow::createNewDiagram(BaseNode::DiagramType type) {
     // NOTE: Because the tabs can be reordered, tabToCanvasMappings is unused.
     tabToCanvasMappings.insert(
           std::pair<int, int>(tabWidget->count(), canvases.size() - 1));
-    int newTabIndex = tabWidget->addTab(newcanvas, "New Diagram");
+    int newTabIndex;
+    if (type == BaseNode::Class){
+        newTabIndex = tabWidget->addTab(newcanvas, "Class Diagram");
+    }
+    else if(type == BaseNode::Collaboration){
+        newTabIndex = tabWidget->addTab(newcanvas, "Collaboration Diagram");
+    }
+    else if(type == BaseNode::UseCase){
+        newTabIndex = tabWidget->addTab(newcanvas, "Use Case Diagram");
+    }
+    else{
+        newTabIndex = tabWidget->addTab(newcanvas, "Statechart Diagram");
+    }
 
     // Connect the new canvas with the new document.
     connectCanvasWithDocument(canvases.size() - 1, documents.size() - 1);
@@ -542,6 +561,13 @@ void MainWindow::on_actionNew_triggered() {
  *  and only the legal buttons for the diagram. It should also connect
  *  actions in the menu to the current document/canvas.
  */
+void MainWindow::on_tabWidget_tabCloseRequest(int index){
+    tabWidget->removeTab(index);
+    if(tabWidget->count() == 0){
+        updateDiagramType(BaseNode::Nothing);
+    }
+}
+
 void MainWindow::on_tabWidget_currentChanged(int newIndex) {
   if (newIndex > -1 &&
       newIndex < static_cast<int>(tabToCanvasMappings.size())) {
@@ -659,5 +685,10 @@ void MainWindow::on_actionAbout_triggered() {
 
 
 void MainWindow::closeEvent(QCloseEvent *event) {
-  event->accept();
+    event->accept();
+}
+
+void MainWindow::setSelect()
+{
+    actionSelect->trigger();
 }
