@@ -448,3 +448,4 @@ void Document::saveAsDocument() {
     // Need to add if canceled saving a name it will stop the loop, as its currently infinite.
     Document::saveDocument();
 }
+

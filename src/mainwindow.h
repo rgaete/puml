@@ -51,7 +51,11 @@ class MainWindow : public QMainWindow {
   protected:
     void closeEvent(QCloseEvent *event);
 
+  signals:
+    void toggle_toolbar();
+
   public slots:
+    void setSelect();
     void on_actionNew_triggered();
     void on_actionOpen_triggered();
     void on_actionSave_triggered();
@@ -68,6 +72,7 @@ class MainWindow : public QMainWindow {
     void on_actionAbout_triggered();
     void on_actionSelect_triggered();
     void on_tabWidget_currentChanged(int newIndex);
+    void on_tabWidget_tabCloseRequest(int index);
     void on_NodeAction_triggered(Canvas::DrawingMode drawingMode,
                                  int prototypeID);
     void updateDiagramType(BaseNode::DiagramType type);
