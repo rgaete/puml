@@ -817,19 +817,86 @@ SYSTEM FEATURES}
 {The following use cases represent different stages at which options will be available to the user.}
 
 \bigskip
-\bigskip
 
 % ************************************
 % LAUNCH USE CASE & DESCRIPTIONS
 % ************************************
 \paragraph[\ Use Category]
-{\ Launch} {These options will be available to the user upon the immediate launch of pUML.}
+{\ Launch} {These options will be available to the user upon the launch of pUML.}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=6.0in]{usecasehere.jpg}
+\includegraphics[width=6.0in]{ucaseLaunch.jpg}
 \caption{Launch Use Case}
 \end{figure}
+
+%%% CREATE NEW DIAGRAM USE CASE DESCRIPTION
+\begin{flushleft}
+\tablehead{}
+\begin{tabular}{|m{2.0in} m{5.0in}|}
+\hline
+{\bfseries\emph{Use Case Name}}
+& {\bfseries Create New Diagram }
+\\\hline
+\emph{Participating Actor}
+& User
+\\\hline
+\emph{Flow of Events}
+& \begin{my_enumerate}
+\item The user selects ``New'' from menu.
+\item Program requests user select a diagram type.
+\item The program responds by creating a new tab with a blank drawing canvas.
+\item Program loads and displays only objects for the selected diagram type.
+\end{my_enumerate}
+\\\hline
+\emph{Entry Condition}
+& User selects ``New'' from commands
+\\\hline
+\emph{Exit Condition}
+& Program successfully opens new tab with diagram specific tools in toolbar.
+\\\hline
+\emph{Quality Requirements}
+& Toolbar loads only diagram specific objects and connectors.
+\\\hline
+\end{tabular}
+\end{flushleft}
+
+\bigskip
+
+%%% OPEN EXISTING DIAGRAM USE CASE DESCRIPTION
+\begin{flushleft}
+\tablehead{}
+\begin{tabular}{|m{2.0in} m{5.0in}|}
+\hline
+{\bfseries\emph{Use Case Name}}
+& {\bfseries Open Existing Diagram}
+\\\hline
+\emph{Participating Actor}
+& User
+\\\hline
+\emph{Flow of Events}
+& \begin{my_enumerate}
+\item User selects ``Open'' from menu.
+\item Program opens an explorer window.
+\item User selects the file they wish to open.
+\item Program loads selected file into a new tab.
+\end{my_enumerate}
+\\\hline
+\emph{Entry Condition}
+& User selects ``Open'' from menu.
+\\\hline
+\emph{Exit Condition}
+& File is successfully opened into a new tab.
+\\\hline
+\emph{Quality Requirements}
+& User selected file must be of pUML diagram type.\newline
+  Only diagram-appropriate tools loaded into toolbar.
+\\\hline
+\end{tabular}
+\end{flushleft}
+
+\bigskip
+
 
 %%% EXIT PROGRAM USE CASE DESCRIPTION
 \begin{flushleft}
@@ -837,7 +904,7 @@ SYSTEM FEATURES}
 \begin{tabular}{|m{2.0in} m{5.0in}|}
 \hline
 {\bfseries\emph{Use Case Name}}
-& {\bfseries Exit Program}
+& {\bfseries Exit pUML}
 \\\hline
 \emph{Participating Actor}
 & User
@@ -857,79 +924,8 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 & File is successfully saved and the program exits.
 \\\hline
 \emph{Quality Requirements}
-& File must be saved prior to exiting, or changes must be discarded prior to exiting.
-\\\hline
-\end{tabular}
-\end{flushleft}
-\bigskip
-
-\clearpage
-
-% ************************************
-% NEW PROJECT USE CASE & DESCRIPTIONS
-% ************************************
-\paragraph[\ Use Category]
-{\ New Project} 
-{The user has selected to start a new UML project.}
-
-
-%%% CREATE NEW DIAGRAM USE CASE DESCRIPTION
-\begin{flushleft}
-\tablehead{}
-\begin{tabular}{|m{2.0in} m{5.0in}|}
-\hline
-{\bfseries\emph{Use Case Name}}
-& {\bfseries Create New Diagram }
-\\\hline
-\emph{Participating Actor}
-& User
-\\\hline
-\emph{Flow of Events}
-& \begin{my_enumerate}
-\item The user selects new file from menu.
-\item Program requests user select a diagram type
-(includes ChooseDiagramType use case).
-\item The program responds by creating a new file with a blank drawing canvas.
-\end{my_enumerate}
-\\\hline
-\emph{Entry Condition}
-& User selects New File from commands
-\\\hline
-\emph{Exit Condition}
-& Program successfully opens new file
-\\\hline
-\emph{Quality Requirements}
-& TBD
-\\\hline
-\end{tabular}
-\end{flushleft}
-\bigskip
-
-%%% CHOOSE DIAGRAM TYPE USE CASE DESCRIPTION
-\begin{flushleft}
-\tablehead{}
-\begin{tabular}{|m{2.0in} m{5.0in}|}
-\hline
-{\bfseries\emph{Use Case Name}}
-& {\bfseries Choose Diagram Type}
-\\\hline
-\emph{Participating Actor}
-& User 
-\\\hline
-\emph{Flow of Events}
-& \begin{my_enumerate}
-\item User selects a diagram type.
-\item Program loads and displays only objects for the selected diagram type.
-\end{my_enumerate}
-\\\hline
-\emph{Entry Condition}
-& Included from New Diagram use case
-\\\hline
-\emph{Exit Condition}
-& Included from New Diagram use case
-\\\hline
-\emph{Quality Requirements}
-& Toolbar loads only diagram specific objects and connectors.
+& File must be saved prior to exiting, or changes must be discarded prior to exiting. \newline
+  If the current tab closed was the only tab open in pUML, pUML exits.
 \\\hline
 \end{tabular}
 \end{flushleft}
@@ -938,51 +934,17 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \clearpage
 
 
-% ************************************
-% OPEN PROJECT USE CASE & DESCRIPTIONS
-% ************************************
-\paragraph[\ Use Category]
-{\ Open Project} {These options will be available to the user after choosing to open an existing UML project.}
+% *****************************************
+% NEW/OPEN DIAGRAM USE CASES & DESCRIPTIONS
+% *****************************************
+\paragraph[\ New/Open Diagram]
+{\ New/Open Diagram} {These options will be available to the user after creating a new UML diagram, or upon opening an existing UML diagram. This set of use cases covers all edits possible for pUML diagrams.}
 
-%%% OPEN EXISTING DIAGRAM USE CASE DESCRIPTION
-\begin{flushleft}
-\tablehead{}
-\begin{tabular}{|m{2.0in} m{5.0in}|}
-\hline
-{\bfseries\emph{Use Case Name}}
-& {\bfseries Open Existing Diagram}
-\\\hline
-\emph{Participating Actor}
-& User
-\\\hline
-\emph{Flow of Events}
-& \begin{my_enumerate}
-\item User selects Open File from menu.
-\item Program opens an explorer window.
-\item User selects a file.
-\item Program loads selected file into program
-\end{my_enumerate}
-\\\hline
-\emph{Entry Condition}
-& User selects Open File from menu.
-\\\hline
-\emph{Exit Condition}
-& File is successfully opened.
-\\\hline
-\emph{Quality Requirements}
-& User selected file must be able to be opened in pUML.
-\\\hline
-\end{tabular}
-\end{flushleft}
-\bigskip
-
-\clearpage
-
-% ************************************
-% NEW DIAGRAM USE CASE & DESCRIPTIONS
-% ************************************
-\paragraph[\ Use Category]
-{\ New Diagram} {These options will be available to the user upon choosing to create a new UML diagram.}
+\begin{figure}[h]
+\centering
+\includegraphics[width=6.0in]{ucaseNewOpenDiagram.jpg}
+\caption{New/Open Diagram Use Case}
+\end{figure}
 
 %%% SAVE DIAGRAM USE CASE DESCRIPTION
 \begin{flushleft}
@@ -990,7 +952,7 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \begin{tabular}{|m{2.0in} m{5.0in}|}
 \hline
 {\bfseries\emph{Use Case Name}}
-& {\bfseries Save File}
+& {\bfseries Save}
 \\\hline
 \emph{Participating Actor}
 & User
@@ -1012,7 +974,8 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 & File is successfully saved
 \\\hline
 \emph{Quality Requirements}
-& TBD
+& File names must be valid \newline
+  May not create two pUML diagram files with same name in same location.
 \\\hline
 \end{tabular}
 \end{flushleft}
@@ -1025,7 +988,7 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \begin{tabular}{|m{2.0in} m{5.0in}|}
 \hline
 {\bfseries\emph{Use Case Name}}
-& {\bfseries Save Diagram As}
+& {\bfseries Save As}
 \\\hline
 \emph{Participating Actor}
 & User
@@ -1037,63 +1000,32 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \ ~ or
 \begin{my_enumerate}
 \item User selects ``Save'' from File menu, but the program has not been previously saved.
-\item Program displays a dialog box requesting the user to enter a diagram name.
+\item Program displays a dialog box requesting the user to enter a diagram name and save location.
 \item User enters a diagram name and clicks ``Ok.''
-\item Program saves diagram within existing project.
+\item Program saves diagram at user specified location.
 \end{my_enumerate}
 \\\hline
 \emph{Entry Condition}
 & User clicks ``Save As'' or clicks ``Save'' with a previously unsaved diagram. 
 \\\hline
 \emph{Exit Condition}
-& The diagram has been saved under the current working project.
+& The diagram has been saved.
 \\\hline
 \emph{Quality Requirements}
-& Diagram name may not be the same as another diagram within the project. Diagram may not be saved outside of the project.
+& Inherited from Save use case. 
 \\\hline
 \end{tabular}
 \end{flushleft}
 \bigskip
 
 
-
-%%% PRINT DIAGRAM USE CASE DESCRIPTION
+%%% CLOSE DIAGRAM TAB USE CASE DESCRIPTION
 \begin{flushleft}
 \tablehead{}
 \begin{tabular}{|m{2.0in} m{5.0in}|}
 \hline
 {\bfseries\emph{Use Case Name}}
-& {\bfseries Print Diagram}
-\\\hline
-\emph{Participating Actor}
-& User
-\\\hline
-\emph{Flow of Events}
-& \begin{my_enumerate}
-\item User initiates print. 
-\item Program sends to printer
-\end{my_enumerate}
-\\\hline
-\emph{Entry Condition}
-& User initiates Print
-\\\hline
-\emph{Exit Condition}
-& Diagram successfully sent to default printer
-\\\hline
-\emph{Quality Requirements}
-& TBD
-\\\hline
-\end{tabular}
-\end{flushleft}
-\bigskip
-
-%%% CLOSE DIAGRAM/TAB USE CASE DESCRIPTION
-\begin{flushleft}
-\tablehead{}
-\begin{tabular}{|m{2.0in} m{5.0in}|}
-\hline
-{\bfseries\emph{Use Case Name}}
-& {\bfseries Close Diagram}
+& {\bfseries Close Diagram Tab}
 \\\hline
 \emph{Participating Actor}
 & User
@@ -1101,7 +1033,7 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \emph{Flow of Events}
 & \begin{my_enumerate}
 \item User clicks the `X' on the diagram tab.
-\item If the diagram is saved, the program closes the diagram tab.
+\item If the current version of the diagram is saved, the program closes the diagram tab.
 \end{my_enumerate}
 \ ~or
 \begin{my_enumerate}
@@ -1116,20 +1048,18 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 & Diagram tab is closed.
 \\\hline
 \emph{Quality Requirements}
-& Diagram must be saved for the tab to close. Else the user must either choose to save the diagram or discard changes.
+& Diagram must be saved for the tab to close, or the user must either choose to save the diagram or discard changes.
 \\\hline
 \end{tabular}
 \end{flushleft}
 \bigskip
-
-
 
 \clearpage
 
 % ************************************
 % EDIT OBJECT USE CASE & DESCRIPTIONS
 % ************************************
-\paragraph[\ Use Category]
+\paragraph[\ Edit Object]
 {\ Edit Object} {These options will be available to the user with a diagram open for modification, who is choosing to take action on an object.}
 
 \begin{figure}[h]
@@ -1154,16 +1084,18 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \item User selects an object from toolbar.
 \item User clicks the canvas.
 \item Program places an object at that location on the canvas.
+\item User may be prompted to enter a description for the object.
 \end{my_enumerate}
 \\\hline
 \emph{Entry Condition}
-& Toolbar is loaded with valid objects for diagram type.
+& pUML diagram is open for editing. \newline 
+Toolbar is loaded with valid objects for diagram type.
 \\\hline
 \emph{Exit Condition}
 & Object has been successfully placed on drawing canvas.
 \\\hline
 \emph{Quality Requirements}
-& Object may not occupy the same space on the canvas as any other object.
+& Object must be of diagram type.
 \\\hline
 \end{tabular}
 \end{flushleft}
@@ -1191,13 +1123,13 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \end{my_enumerate}
 \\\hline
 \emph{Entry Condition}
-& User clicks on an object.
+& User right-clicks on an object and selects ``Properties'' from the dropdown menu.
 \\\hline
 \emph{Exit Condition}
-& Program is now showing all user-made changes.
+& Object now displays new description.
 \\\hline
 \emph{Quality Requirements}
-& There are limitations as to the number of characters a user may enter in the object description text field.
+& N/A
 \\\hline
 \end{tabular}
 \end{flushleft}
@@ -1230,7 +1162,38 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 & Program has drawn the object at the new location.
 \\\hline
 \emph{Quality Requirements}
-& User may not move an object to a location already occupied by another object. 
+& Connectors move with object. 
+\\\hline
+\end{tabular}
+\end{flushleft}
+\bigskip
+
+
+%%% DELETE OBJECT USE CASE DESCRIPTION
+\begin{flushleft}
+\tablehead{}
+\begin{tabular}{|m{2.0in} m{5.0in}|}
+\hline
+{\bfseries\emph{Use Case Name}}
+& {\bfseries Delete Object}
+\\\hline
+\emph{Participating Actor}
+& User
+\\\hline
+\emph{Flow of Events}
+& \begin{my_enumerate}
+\item User right clicks object and selects ``Delete'' from the dropdown menu.
+\item Program deletes the object and all attached connectors. 
+\end{my_enumerate}
+\\\hline
+\emph{Entry Condition}
+& User right clicks object and selects ``Delete'' from the dropdown menu.
+\\\hline
+\emph{Exit Condition}
+& Program deletes object and all attached connectors.
+\\\hline
+\emph{Quality Requirements}
+& Attached connectors must be deleted with deleted object. 
 \\\hline
 \end{tabular}
 \end{flushleft}
@@ -1244,6 +1207,12 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 % ************************************
 \paragraph[\ Use Category]
 {\ Edit Connector} {These options will be available to the user with a diagram open for modification, who is choosing to take action regarding a connector.}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=6.0in]{ucaseEditConn.jpg}
+\caption{Edit a Connector Use Case}
+\end{figure}
 
 %%% PLACE NEW CONNECTOR USE CASE DESCRIPTION
 \begin{flushleft}
@@ -1259,8 +1228,8 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \emph{Flow of Events}
 & \begin{my_enumerate}
 \item User clicks on desired connector in toolbar.
-\item User clicks on the object the connection is coming from, holding down the left mouse button.
-\item User drags the mouse toward the object to be connected to.
+\item User clicks on the first (origination) object, holding down the left mouse button.
+\item User drags the mouse to a second (destination) object.
 \item User releases the mouse button.
 \item Program draws the connection line between the first and second object.
 \end{my_enumerate}
@@ -1272,7 +1241,7 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
   & The connector is successfully drawn between two objects. 
 \\\hline
   \emph{Quality Requirements}
-  & Only one connector may be placed between any two objects. Some objects may not be able to be connected with certain types of connectors.
+  & Only one connector may be placed between any two objects.
 \\\hline
 \end{tabular}
 \end{flushleft}
@@ -1292,22 +1261,20 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \emph{Flow of Events}
 & 
 \begin{my_enumerate}
-\item User selects a connector by clicking on it.
-\item User right-clicks on the connector.
-\item User selects ``Properties'' from the drop-down menu.
+\item User right-clicks on the connector and selects ``Properties'' from the drop-down menu.
 \item User edits description in the text box presented.
 \item User clicks ``OK.''
 \item Program displays new line description.
 \end{my_enumerate}
 \\\hline
 \emph{Entry Condition}
-& User right clicks on a connector.
+& User right-clicks on the connector and selects ``Properties'' from the drop-down menu.
 \\\hline
 \emph{Exit Condition}
 & Program has updated the connector with the new properties.
 \\\hline
 \emph{Quality Requirements}
-& Not all connectors will have the same property options.
+& Some connectors may not have the option to edit/modify the description.
 \\\hline
 \end{tabular}
 \end{flushleft}
@@ -1326,19 +1293,18 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \\\hline
 \emph{Flow of Events}
 & \begin{my_enumerate}
-\item User right clicks on a connector.
-\item User selects ``Delete'' from the drop-down menu.
+\item User right clicks on a connector and selects ``Delete'' from the drop-down menu.
 \item Program deletes the connector.
 \end{my_enumerate}
 \\\hline
 \emph{Entry Condition}
-& User right clicks on the connector.
+& User right clicks on a connector and selects ``Delete'' from the drop-down menu.
 \\\hline
 \emph{Exit Condition}
 & Connector has been deleted.
 \\\hline
 \emph{Quality Requirements}
-& TBD
+& Only the connector is to be deleted. Attached objects are to remain on the canvas.
 \\\hline
 \end{tabular}
 \end{flushleft}
