@@ -163,7 +163,7 @@ Phunctional UML Editor
 \bigskip
 
 {\centering\bfseries
-Version 0.9
+Version 0.11
 \par}
 
 {\centering\bfseries
@@ -322,11 +322,25 @@ pUML SSRS
 \\\hline
 \centering 9
 & 04/30/2012
-& Section 2.1 \newline
-  Section 4 
+& Section 2.1 
 & \centering M
-& Update reqs traceability section \newline
-  Merge restore and open feature descriptions
+& Update reqs traceability section 
+& MM
+
+\\\hline
+\centering 10
+& 04/30/2012
+& Section 4 
+& \centering M
+& Merge restore and open feature descriptions   
+& MM
+
+\\\hline
+\centering 11
+& 04/30/2012
+& Section 3.2.1
+& \centering M
+& Update all use cases and descriptions
 & MM
 
 
@@ -1324,34 +1338,35 @@ Toolbar is loaded with valid objects for diagram type.
 \paragraph[\ Introduction/Purpose for These Features] 
 {\bfseries Introduction/Purpose for These Features}
 {
-Several processes are required to manage projects. These include the saving of files, loading projects from files, and deleting projects.}
+The features detailed in the use cases (Section 3.2.1) are all basic vital functions for a UML Diagram editor. At the most basic level, in order to create UML diagrams, several processes are required. These processes include the creation of distinct UML diagrams consisting of labeled objects and connectors, saving of these diagrams, and the ability to load these saved diagrams for modification.
+}
 
 
 \paragraph[Input/Output sequence for this feature]
 {\bfseries Input/Output sequence for These Features}
-{
-The user selects the ``File'' pull down menu at the top left corner of his or her screen. The options currently supported are ``New'', ``Open'', ``Copy As'', ``Save'', ``Save As'', and ``Delete Project''. }
+{ All input/output sequences are detailed in associated use case descriptions in section 3.2.1.
+ The purpose of each use case action is detailed below. }
 
-\subparagraph{New}
-{
-This creates a new project space. }
+\subparagraph{Create New Diagram}
+{ This creates a new canvas in which the user may design a UML diagram. Since there are four different diagram types that may be created with pUML, and many design projects necessitate several diagrams, there is currently no predetermined limit on the number of new diagrams that may be created in pUML. (This is determined by system resources only, and may differ from system to system.) }
 
-\subparagraph{Open}
-{
-This opens a previously saved project. The user shall be presented with a dialog option to save the previous project. Once completing this dialog, the previous project will be closed and the selected project will be opened.}
+\subparagraph{Open Existing Diagram}
+{ This opens a previously saved UML diagram. Since each diagram is of a specific diagram type, when a pUML diagram is loaded, only the tools available for that diagram type will be available to the user upon loading. When a diagram has been opened, the user then may modify this diagram further. There is no limit to the number of times a diagram may be modified.  There is currently no limit to the number of diagrams that may be opened into the pUML software. (This is determined by system resources only, and may differ from system to system.)  }
+
+\subparagraph{Exit pUML}
+{ The user may exit pUML by either selecting ``File'' and then ``Exit,'' or may click the ``X'' in the upper corner of the pUML main window. If any currently loaded diagrams have changes which have not been saved, pUML will request confirmation to either save or discard changes prior to exiting. }
 
 \subparagraph{Save}
-{
-This saves the current state of the project into an XML that can later be used to recreate the project state. If the current project does not have a name, the ``Save'' option will be an alias for the ``Save As'' option.}
+{ This saves the current state of the diagra, into an XML file that can later be used to recreate the diagram state. If the current diagram does not have a name, the ``Save'' option will be an alias for the ``Save As'' option.}
 
 \subparagraph{Save As}
-{
-This creates a new project space and then saves the project state into the new project. In contrast with ``Copy As'', this option does not affect the previous project. }
+{ This prompts pUML to load a browser window. The user must select a location and a file name in which to store the pUML diagram.  After clicking ``Ok,'' the Save function completes this process.  This state will be defaulted to if the user clicks ``Save'' on a previously unsaved diagram.}
 
-\subparagraph{Delete Project}
-{
-This deletes the current project and all files within the project folder. The user shall be presented with a confirmation dialog before this action is completed. Upon completion, a blank and unnamed project will be active in the project window. }
+\subparagraph{Close Diagram Tab}
+{ If the user clicks the ``x'' on the tab, and if the current diagram state is saved, the diagram will close. Otherwise, the ``Save As'' function will initiate prior to closing. This feature is useful to de-clutter the pUML workspace. In addition, if the closed tab was the only tab open, then the pUML software will exit.}
 
+\subparagraph{Place New Object/Connector, Edit Object/Connector Descriptions, and Move/Delete Object/Connector}
+{ UML diagrams consist of different types of objects and connectors. Each object and connector ideally have an associated description. UML diagram functionality must include the placement of objects and connectors, in addition to the ability to modify their descriptions, move their locations, and delete them as necessary. When an object is deleted, attached connectors must be deleted as well. However, if a connector is deleted, any attached objects will not be deleted. }
 
 
 % **************************************
