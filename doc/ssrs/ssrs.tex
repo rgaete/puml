@@ -507,16 +507,35 @@ PRODUCT PERSPECTIVE}
 This product is independent of any other product, and as such, is self-contained.
 }
 
-\subsubsection[PRODUCT FUNCTIONS]
+\subsubsection[PRODUCT FUNCTIONS ]
 {\bfseries PRODUCT FUNCTIONS}
 
-This product's primary function is to allow the user to create UML diagrams, edit existing diagrams, and store and retrieve them.
-\newline Features to be tested include all objects, connectors, and associated functionality, Open/Save functionality, and all diagram types load properly. The specific requirements for the UML diagram editor are itemized below.
+This product's primary function is to allow the user to create UML diagrams, edit existing diagrams, and store and retrieve them. \newline 
+Features to be tested include all objects, connectors, and associated functionality, Open/Save functionality, and all diagram types load properly. The specific requirements for the UML diagram editor are itemized insubsequent sections. 
 
 \bigskip
 
-\subsubsection[MENU OPTIONS MENU MAINWINDOW]
-{\bfseries MENU OPTIONS MENU MAINWINDOW} 
+
+\subsubsection[INSTALL / LAUNCH / EXIT]
+{\bfseries INSTALL / LAUNCH / EXIT}
+
+Basic functionality that must be met prior to use of this software involves the successful installation and launch of the pUML software:
+\begin{itemize}
+\item pUML software includes an installer, which at basic functionality will:
+\begin{itemize}
+\item Consist of a single downloadable installation file.
+\item Install on Windows and Linux platforms, resulting in a single application icon.
+\item Uninstall from both Windows and Linux platforms.
+\end{itemize}
+\item Once installed, the pUML software may be launched by double-clicking the pUML icon.
+\item pUML may be exited by clicking an "X" in the upper corner of the software, or by selecting "File,"  and then "Exit." 
+\end{itemize}
+
+\bigskip
+
+
+\subsubsection[MENU OPTIONS / MAIN WINDOW]
+{\bfseries MENU OPTIONS / MAIN WINDOW} 
 {
 \begin{itemize}
 \item Options window appears at pUML startup.
@@ -1404,20 +1423,41 @@ The features detailed in the use cases (Section 3.2.1) are all basic vital funct
   \bfseries Final Test
 \\\hline
   
+  Install
+  & \centering 2.1.2
+  & pUML software installs successfully
+  & \centering M 
+  & ~
+  & testinstall
+  & PASS
+  & ~ 
+  & ~ 
+\\\hline
+
+  Launch
+  & \centering 2.1.2
+  & pUML software launches successfully
+  & \centering M 
+  & ~
+  & testlaunch
+  & PASS
+  & ~ 
+  & ~ 
+\\\hline
+
   Main Window
-  & \centering 2.1.2 
+  & \centering 2.1.3 
   & All main window features 
   & \centering M 
   & ~
-  & testinstall \newline 
-    testlaunch 
-  & ~ 
+  & N/A 
+  & ~
   & ~ 
   & ~ 
 \\\hline
 
   Objects
-  & \centering 2.1.3
+  & \centering 2.1.4
   & Object properties and functionality
   & \centering M 
   & ~ 
@@ -1428,7 +1468,7 @@ The features detailed in the use cases (Section 3.2.1) are all basic vital funct
 \\\hline
 
   Connectors
-  & \centering 2.1.4 
+  & \centering 2.1.5
   & Connector properties and functionality
   & \centering M 
   & ~ 
@@ -1443,13 +1483,14 @@ The features detailed in the use cases (Section 3.2.1) are all basic vital funct
 \\\hline
 
   Open
-  & \centering 2.1.5
+  & \centering 2.1.6
   & Load a pUML file into pUML 
   & \centering M 
   & ~ 
-  & testsave \newline
-    testsaveas 
-  & FAIL
+  & testsave *\newline
+    testsaveas *
+  & FAIL \newline
+    FAIL 
   & ~ \newline
     ~
   & ~ \newline
@@ -1457,7 +1498,7 @@ The features detailed in the use cases (Section 3.2.1) are all basic vital funct
 \\\hline
 
   Save
-  & \centering 2.1.6
+  & \centering 2.1.7
   & Save a diagram 
   & \centering M 
   & ~ 
@@ -1472,34 +1513,42 @@ The features detailed in the use cases (Section 3.2.1) are all basic vital funct
 \\\hline
 
   Diagrams
-  & \centering 2.1.7 
+  & \centering 2.1.8
   & Diagram type integrity 
   & \centering M 
   & ~ 
-  & ~ testdiagrams
-  & ~ 
-  & ~ 
-  & ~ 
+  & testsave *\newline 
+    testsaveas *
+  & FAIL \newline
+    FAIL
+  & ~ \newline
+    ~
+  & ~ \newline
+    ~
 \\\hline
 
   Tabs
-  & \centering 2.1.8 
+  & \centering 2.1.9
   & Tab functionality 
   & \centering M 
   & ~ 
-  & ~ testtabs
-  & ~ 
-  & ~ 
-  & ~ 
+  & testsave *\newline 
+    testsaveas *
+  & FAIL \newline
+    FAIL
+  & ~ \newline
+    ~
+  & ~ \newline
+    ~
 \\\hline
 
 \end{supertabular}
 \end{flushleft}
 
-{Priorities are: \textbf{M}andatory, \textbf{L}ow, \textbf{H}igh}
-{SSDD link is version and page number or function name.}
-{Test cases and results are file names and \textbf{P}ass/\textbf  {F}ail or \% passing.}
-
+{Priorities are: \textbf{M}andatory, \textbf{L}ow, \textbf{H}igh} \newline
+{SSDD link is version and page number or function name.} \newline
+{Test cases and results are file names and \textbf{P}ass/\textbf  {F}ail or \% passing.} \newline
+{* asterisk indicates indirectly tested through another feature test case.}
 
 \bigskip
 
