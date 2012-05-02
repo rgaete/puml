@@ -14,6 +14,7 @@ class NodeFactory {
 
     static int registerPrototype(BaseNode* newPrototype);
     static BaseNode* produce(int prototype_id);
+    static BaseNode* produceFromClassName(QString name);
     static NodeFactory* getInstance();
 
   private:
