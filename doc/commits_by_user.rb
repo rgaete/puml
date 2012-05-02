@@ -24,10 +24,15 @@ Users = {
               'Morgan Weir <skinny.teddy.bear@gmail.com>']
 }
 
+def get_last_commit_number
+  %x/hg log | head/ =~ /changeset:\s*(\d+):.*$/
+  return $1.to_i
+end
+
 def get_all_users
   users = []
   results = []
-  %x/hg log -r 55:388 | grep user/.split("\n").each do |line|
+  %x/hg log -r 55:#{get_last_commit_number} | grep user/.split("\n").each do |line|
     if line =~ /^user:\s*(.*)$/
       results << $1
     end
@@ -51,13 +56,13 @@ end
 def get_num_commits_for user
   count = 0
   Users[user].each do |name|
-    count += %x(hg log -r 55:388 -u '#{name.to_s}' | grep user).split("\n").length
+    count += %x(hg log -r 55:#{get_last_commit_number} -u '#{name.to_s}' | grep user).split("\n").length
   end
   count
 end
 
 if __FILE__ == $0
-    Users.each_pair do |user, names|
-        puts "User: #{user.to_s} -- #{get_num_commits_for user}"
-    end
+  Users.each_pair do |user, names|
+    puts "User: %-6s -- #{get_num_commits_for user}" % user.to_s
+  end
 end
