@@ -3,30 +3,31 @@
 #ifndef SRC_MAINWINDOW_H_
 #define SRC_MAINWINDOW_H_
 
-#include <QShortcut>
-#include <QMainWindow>
-#include <QActionGroup>
-#include <QHBoxLayout>
-#include <QLayout>
-#include <QSignalMapper>
 #include <QAction>
-#include <QMenuBar>
-#include <QMenu>
-#include <QPushButton>
+#include <QActionGroup>
+#include <QButtonGroup>
+#include <QCloseEvent>
+#include <QDialog>
+#include <QFile>
+#include <QFileDialog>
+#include <QGroupBox>
+#include <QHBoxLayout>
+#include <QIODevice>
 #include <QLabel>
+#include <QLayout>
+#include <QMainWindow>
+#include <QMenu>
+#include <QMenuBar>
+#include <QMessageBox>
+#include <QPrintDialog>
+#include <QPrinter>
+#include <QPushButton>
+#include <QShortcut>
+#include <QSignalMapper>
+#include <QStatusBar>
 #include <QString>
 #include <QToolBar>
-#include <QStatusBar>
-#include <QFileDialog>
-#include <QPrinter>
-#include <QPrintDialog>
-#include <QDialog>
-#include <QMessageBox>
-#include <QCloseEvent>
-#include <QGroupBox>
-#include <QButtonGroup>
-#include <QFile>
-#include <QIODevice>
+#include <QDomDocument>
 
 #include <map>
 #include <vector>
@@ -51,7 +52,11 @@ class MainWindow : public QMainWindow {
   protected:
     void closeEvent(QCloseEvent *event);
 
+  signals:
+    void toggle_toolbar();
+
   public slots:
+    void setSelect();
     void on_actionNew_triggered();
     void on_actionOpen_triggered();
     void on_actionSave_triggered();
@@ -68,11 +73,13 @@ class MainWindow : public QMainWindow {
     void on_actionAbout_triggered();
     void on_actionSelect_triggered();
     void on_tabWidget_currentChanged(int newIndex);
+    void on_tabWidget_tabCloseRequest(int index);
     void on_NodeAction_triggered(Canvas::DrawingMode drawingMode,
                                  int prototypeID);
     void updateDiagramType(BaseNode::DiagramType type);
     void createNewDiagram(BaseNode::DiagramType type);
-    void openDiagram(const QString &filename);
+    void openDiagram(const QString &openName);
+    void documentModifiedChanged(bool modified);
 
   private:
     void createActions();
@@ -136,6 +143,7 @@ class MainWindow : public QMainWindow {
     QMenu *menuConnectors;
     QMenu *menuHelp;
     QMenu *menuPopup;
+    QString openName;
 };
 
 #endif  // SRC_MAINWINDOW_H_

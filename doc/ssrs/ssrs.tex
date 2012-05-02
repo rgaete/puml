@@ -11,6 +11,7 @@
 \usepackage{hhline}
 \usepackage{hyperref}
 \usepackage[latin1]{inputenc}
+\usepackage{lscape}
 \usepackage{multirow}
 \usepackage{supertabular}
 \hypersetup{pdftex, colorlinks=true, linkcolor=blue, citecolor=blue, filecolor=blue, urlcolor=blue, pdftitle=SYSTEMS AND SOFTWARE REQUIREMENTS SPECIFICATION (SSRS) TEMPLATE, pdfauthor=Clinton Jeffery, pdfsubject=, pdfkeywords=}
@@ -42,7 +43,7 @@
 % Pages styles
 \makeatletter
 \newcommand\ps@Standard{
-  \renewcommand\@oddhead{\rmfamily University of Idaho CS Department Instructional Use\hfill \hfill NOT FOR RELEASE}
+  \renewcommand\@oddhead{ University of Idaho CS Department Instructional Use\hfill \hfill NOT FOR RELEASE}
   \renewcommand\@evenhead{\@oddhead}
   \renewcommand\@oddfoot{{\textcolor{black}{SSRS Page }}{\textcolor{black}{\thepage{}}}}
   \renewcommand\@evenfoot{\@oddfoot}
@@ -162,11 +163,11 @@ Phunctional UML Editor
 \bigskip
 
 {\centering\bfseries
-Version 0.8
+Version 0.11
 \par}
 
 {\centering\bfseries
-April 23, 2012
+April 30, 2012
 \par}
 
 
@@ -257,7 +258,7 @@ pUML SSRS
 
 \centering 1
 & 12/10/2011
-& ~
+& Section 3
 & \centering A
 & Text material for section 3 of the SSRS document.
 & LE
@@ -273,15 +274,15 @@ pUML SSRS
 \\\hline
 \centering 3
 & 02/01/2012
-& ~
+& SSRS Document
 & \centering M
-& Updated SSRS and SSDD
+& Updated SSRS
 & MM
 
 \\\hline
 \centering 4
 & 02/15/2012
-& ~
+& Section 3
 & \centering M
 & Use cases expanded and descriptions added
 & MM
@@ -289,7 +290,7 @@ pUML SSRS
 \\\hline
 \centering 5
 & 02/23/2012
-& ~
+& Section 3
 & \centering M
 & Use case descriptions completed
 & MM
@@ -297,7 +298,7 @@ pUML SSRS
 \\\hline
 \centering 6
 & 04/04/2012
-& ~
+& Section 3
 & \centering M
 & Revised use case descriptions
 & MW
@@ -305,7 +306,7 @@ pUML SSRS
 \\\hline
 \centering 7
 & 04/09/2012
-& ~
+& Section 2
 & \centering A
 & Requirements update
 & MM
@@ -313,10 +314,35 @@ pUML SSRS
 \\\hline
 \centering 8
 & 04/23/2012
-& ~
+& Section 2.1
 & \centering A
 & Incorporated Test Plan breakdown of requirements
 & MM
+
+\\\hline
+\centering 9
+& 04/30/2012
+& Section 2.1 
+& \centering M
+& Update reqs traceability section 
+& MM
+
+\\\hline
+\centering 10
+& 04/30/2012
+& Section 4 
+& \centering M
+& Merge restore and open feature descriptions   
+& MM
+
+\\\hline
+\centering 11
+& 04/30/2012
+& Section 3.2.1
+& \centering M
+& Update all use cases and descriptions
+& MM
+
 
 \\\hline
 \end{supertabular}
@@ -367,24 +393,24 @@ Section\ \ Page}
 
 
 \clearpage\clearpage\setcounter{page}{1}\pagestyle{Convertii}
-\section[Introduction]{\rmfamily\bfseries
+\section[Introduction]{\bfseries
 Introduction}
 
-\subsection[IDENTIFICATION]{\rmfamily\bfseries
+\subsection[IDENTIFICATION]{\bfseries
 IDENTIFICATION}
 {
 The software system being considered for development is referred to as Phunctional UML Editor (pUML). \ The customer providing specifications
 for the system is Dr. Clint Jeffery at the University of Idaho. \ The ultimate
-customer, or end-user, of the system will be University of Idaho Computer Science students and/or faculty. \ This is a new project effort, so the version under development is version 0.8.
+customer, or end-user, of the system will be University of Idaho Computer Science students and/or faculty. \ This is a new project effort, so the version under development is version 0.9.
 \newline Version 1.0 will be completed upon pUML release date.}
 
-\subsection[PURPOSE]{\rmfamily\bfseries
+\subsection[PURPOSE]{\bfseries
 PURPOSE}
 {
 The purpose of the system under development is to create and store UML diagrams.
 \newline The pUML software will be used by Computer Science students at the University of Idaho, and is intended to be read and understood by the same.}
 
-\subsection[SCOPE]{\rmfamily\bfseries
+\subsection[SCOPE]{\bfseries
 SCOPE}
 {
 The pUML software was conceptualized as a Software Engineering class project, and following its launch in September 2011, spanned nine months and a total of ten software engineering students. The pUML project will be considered finalized as of May 7, 2012, and will not have aquirers or support agencies as of the date of release. 
@@ -394,7 +420,7 @@ The pUML software was conceptualized as a Software Engineering class project, an
 Upon completion, the pUML software will be available only for distribution to the University of Idaho Computer Science department.  The pUML software will no longer be supported by the initial software development team, and will be supported only at the direction of University of Idaho Computer Science faculty. }
 
 \subsection[DEFINITIONS, ACRONYMS, AND
-ABBREVIATIONS]{\rmfamily\bfseries
+ABBREVIATIONS]{\bfseries
 DEFINITIONS, ACRONYMS, AND ABBREVIATIONS}
 
 \bigskip
@@ -422,26 +448,22 @@ full functionality to customer for approval
  SSRS &
  System and Software Requirements
 Specification\\\hline
-~
- &
-~
-\\\hline
 
 \end{supertabular}
 \end{flushleft}
-\subsection[REFERENCES]{\rmfamily\bfseries
+\subsection[REFERENCES]{\bfseries
 REFERENCES}
 {
 The pUML requirements will be addressed in the following documents: 
 
 \begin{itemize}
-\item Test Plan (TP)
-\item System and Software Design Description (SSDD)
+\item Test Plan (TP), Version 2.0
+\item System and Software Design Description (SSDD) Version 0.0
 \end{itemize}
 
 }
 
-\subsection[OVERVIEW AND RESTRICTIONS]{\rmfamily\bfseries
+\subsection[OVERVIEW AND RESTRICTIONS]{\bfseries
 OVERVIEW AND RESTRICTIONS}
 {
 This document is for limited release only to University of Idaho Computer Science personnel assigned to the pUML project.
@@ -474,41 +496,46 @@ project. \ Each feature of the system is indexed by the SSRS
 requirement number and linked to its SDD and test references.}
 
 
-\bigskip
-
-{
-Sections 5 and up are appendices including original information and
-communications used to create this document.}
 
 
-
-
-
-
-
-
-
-
-
-\clearpage\section[OVERALL DESCRIPTION]{\rmfamily\bfseries
+\clearpage\section[OVERALL DESCRIPTION]{\bfseries
 OVERALL DESCRIPTION}
 
-\subsection[PRODUCT PERSPECTIVE]{\rmfamily\bfseries
+\subsection[PRODUCT PERSPECTIVE]{\bfseries
 PRODUCT PERSPECTIVE}
 {
 This product is independent of any other product, and as such, is self-contained.
 }
 
-\subsubsection[PRODUCT FUNCTIONS]
+\subsubsection[PRODUCT FUNCTIONS ]
 {\bfseries PRODUCT FUNCTIONS}
 
-This product's primary function is to allow the user to create UML diagrams, edit existing diagrams, and store and retrieve them.
-\newline Features to be tested include all objects, connectors, and associated functionality, Open/Save/Restore functionality, and all diagram types load properly. The specific requirements for the UML diagram editor are itemized below.
+This product's primary function is to allow the user to create UML diagrams, edit existing diagrams, and store and retrieve them. \newline 
+Features to be tested include all objects, connectors, and associated functionality, Open/Save functionality, and all diagram types load properly. The specific requirements for the UML diagram editor are itemized insubsequent sections. 
 
 \bigskip
 
-\subsubsection[MENU OPTIONS MENU MAINWINDOW]
-{\bfseries MENU OPTIONS MENU MAINWINDOW} 
+
+\subsubsection[INSTALL / LAUNCH / EXIT]
+{\bfseries INSTALL / LAUNCH / EXIT}
+
+Basic functionality that must be met prior to use of this software involves the successful installation and launch of the pUML software:
+\begin{itemize}
+\item pUML software includes an installer, which at basic functionality will:
+\begin{itemize}
+\item Consist of a single downloadable installation file.
+\item Install on Windows and Linux platforms, resulting in a single application icon.
+\item Uninstall from both Windows and Linux platforms.
+\end{itemize}
+\item Once installed, the pUML software may be launched by double-clicking the pUML icon.
+\item pUML may be exited by clicking an "X" in the upper corner of the software, or by selecting "File,"  and then "Exit." 
+\end{itemize}
+
+\bigskip
+
+
+\subsubsection[MENU OPTIONS / MAIN WINDOW]
+{\bfseries MENU OPTIONS / MAIN WINDOW} 
 {
 \begin{itemize}
 \item Options window appears at pUML startup.
@@ -590,8 +617,11 @@ Once the pUML software has been launched, files may be opened if the following c
 Note: The cases listed above are ensured by QT, and will not be tested.
 \newline 
 
+
+If the user opens a pUML diagram file, restore functionality will occur as follows:
 \begin{itemize}
-\item When a file is opened, the diagram loads into a new tab.
+\item If the pUML software is not already loaded, it will load.
+\item A new tab will open, and the previously saved diagram will appear in the tab.
 \item The toolbar is updated with that diagram's objects and connectors.
 \item All objects and connectors in the file are in the exact same state and configuration as when the file had been previously saved.
 \item The file may be modified (edited).
@@ -634,18 +664,6 @@ Save/Save As functionality:
 \bigskip
 
 
-\subsubsection[RESTORE]{\bfseries RESTORE}
-
-If the user opens a pUML diagram file, restore functionality will occur as follows:
-\begin{itemize}
-\item If the pUML software is not already loaded, it will load.
-\item A new tab will open, and the previously saved diagram will appear in the tab.
-\item This newly-loaded diagram will retain all the stored information from the previous save.
-\end{itemize}
-
-
-\bigskip
-
 \subsubsection[DIAGRAM TYPES]{\bfseries DIAGRAM TYPES}
 
 \begin{itemize}
@@ -676,20 +694,20 @@ If the user opens a pUML diagram file, restore functionality will occur as follo
 
 }
 
-\subsection[USER CHARACTERISTICS]{\rmfamily\bfseries
+\subsection[USER CHARACTERISTICS]{\bfseries
 USER CHARACTERISTICS}
 {
 The intended user for the pUML software are software engineers and computer science students with a prior knowledge of UML. This user is already familiar with computers and generally has some experience in programming languages.
 }
 
-\subsection[CONSTRAINTS]{\rmfamily\bfseries
+\subsection[CONSTRAINTS]{\bfseries
 CONSTRAINTS}
 {
 Since the pUML project was developed as a class assignment,
 further development of this project will halt if the University of Idaho faculty overseeing this project decide that this project should to no longer continue.
 }
 
-\subsection[ASSUMPTIONS AND DEPENDENCIES]{\rmfamily\bfseries
+\subsection[ASSUMPTIONS AND DEPENDENCIES]{\bfseries
 ASSUMPTIONS AND DEPENDENCIES}
 {
 The requirements for the pUML software were decided upon by University of Idaho Computer Science Department faculty.  Any further direction this project may take will depend on their decisions. As of this revision, it is currently undecided if this project will be maintained after the corresponding course has concluded. 
@@ -699,10 +717,10 @@ The requirements for the pUML software were decided upon by University of Idaho 
 
 
 \subsection[SYSTEM LEVEL (NON{}-FUNCTIONAL)
-REQUIREMENTS]{\rmfamily\bfseries
+REQUIREMENTS]{\bfseries
 SYSTEM LEVEL (NON-FUNCTIONAL) REQUIREMENTS}
 
-\subsubsection[Site dependencies]{\rmfamily\bfseries
+\subsubsection[Site dependencies]{\bfseries
 Site dependencies}
 {
 The pUML software has no dependencies on any external resources, such as internet access, etc..
@@ -710,13 +728,13 @@ Any modern operating system (2008+) should be sufficient to support the pUML sof
 and since this software is cross-platform, there should be no complications.
 }
 
-\subsubsection[Safety, security and privacy requirements]{\rmfamily\bfseries
+\subsubsection[Safety, security and privacy requirements]{\bfseries
 Safety, security and privacy requirements}
 {
 There are no safety, security or privacy requirements at this time.
 }
 
-\subsubsection[Performance requirements]{\rmfamily\bfseries
+\subsubsection[Performance requirements]{\bfseries
 Performance requirements}
 {
 This software is to be supported on one terminal per install, and since there are no current
@@ -726,7 +744,7 @@ one user per session is recommended as well.  The software has not been tested t
 efficient transaction times as of the date of this SSRS publication.
 }
 
-\subsubsection[System and software quality]{\rmfamily\bfseries System
+\subsubsection[System and software quality]{\bfseries System
 and software quality}
 {
 The fully developed software should be available for use and reliably handle all requests 98 
@@ -735,7 +753,7 @@ editing of multiple diagrams at a time, diagram component deletion, diagram comp
 and loading of saved diagrams.
 }
 
-\subsubsection[Packaging and delivery requirements]{\rmfamily\bfseries
+\subsubsection[Packaging and delivery requirements]{\bfseries
 Packaging and delivery requirements}
 {
 The executable system and all associated documentation (i.e., SSRS, SSDD, code listing, test plan (data and results), and user manual) will be delivered to the customer on CD{\textquoteright}s and/or via email, as
@@ -744,19 +762,19 @@ system development process, the final, edited version of the above
 documents will accompany the final, accepted version of the executable
 system.}
 
-\subsubsection[Personnel{}-related requirements]{\rmfamily\bfseries
+\subsubsection[Personnel{}-related requirements]{\bfseries
 Personnel-related requirements}
 {
 The system under development has no special personnel-related
 characteristics. }
 
-\subsubsection[Training{}-related requirements]{\rmfamily\bfseries
+\subsubsection[Training{}-related requirements]{\bfseries
 Training-related requirements}
 {
 A user manual will be included in this project to aid users who have difficulty intuiting the proper action to produce the corresponding outcome.
 }
 
-\subsubsection[Logistics{}-related requirements]{\rmfamily\bfseries
+\subsubsection[Logistics{}-related requirements]{\bfseries
 Logistics-related requirements}
 {
 The pUML software is intended for use on University of Idaho Computer Science department computers as well as computer science students' personal computers including, at a minimum, operating systems Windows 7, Mac OSX, and Linux.
@@ -764,7 +782,7 @@ Any minimum hardware requirements lie outside the scope of the resources availab
 and there will be no software application dependencies at the time of release.
 }
 
-\subsubsection[Precedence and criticality of requirements]{\rmfamily\bfseries
+\subsubsection[Precedence and criticality of requirements]{\bfseries
 Precedence and criticality of requirements}
 {
 System and software quality are the primary focus of our software development. All additional features and functionality are secondary. 
@@ -781,27 +799,27 @@ System and software quality are the primary focus of our software development. A
 
 
 
-\clearpage\section[SPECIFIC REQUIREMENTS]{\rmfamily\bfseries
+\clearpage\section[SPECIFIC REQUIREMENTS]{\bfseries
 SPECIFIC REQUIREMENTS}
 
-\subsection[EXTERNAL INTERFACE REQUIREMENTS]{\rmfamily\bfseries
+\subsection[EXTERNAL INTERFACE REQUIREMENTS]{\bfseries
 EXTERNAL INTERFACE REQUIREMENTS}
 
-\subsubsection[Hardware Interfaces]{\rmfamily\bfseries
+\subsubsection[Hardware Interfaces]{\bfseries
 Hardware Interfaces}
 {
 
 {
 Any computing system capable of running Linux or Windows 7.}}
 
-\subsubsection[Software Interfaces]{\rmfamily\bfseries
+\subsubsection[Software Interfaces]{\bfseries
 Software Interfaces}
 { 
 {
 Either a Linux or Windows 7 operating system to guarantee functionality.
 }}
 
-\subsubsection[User Interfaces]{\rmfamily\bfseries
+\subsubsection[User Interfaces]{\bfseries
 User Interfaces}
 {
 The only user interfaces required to operate the pUML software are standard computing interfaces
@@ -813,7 +831,7 @@ The only user interfaces required to operate the pUML software are standard comp
 }
 
 \subsubsection[Other Communication
-Interfaces]{\rmfamily\bfseries
+Interfaces]{\bfseries
 Other Communication Interfaces}
 {
 {No other interfaces are required. }}
@@ -824,22 +842,93 @@ Other Communication Interfaces}
 
 \clearpage\setcounter{page}{1}\pagestyle{Convertv}
 
-\subsection[SYSTEM FEATURES]{\rmfamily\bfseries
+\subsection[SYSTEM FEATURES]{\bfseries
 SYSTEM FEATURES}
 
 
 \subsubsection{Use Cases and Descriptions}
-{The following use cases represent three different stages at which options will be available to the user.}
+{The following use cases represent different stages at which options will be available to the user.}
 
-\bigskip
 \bigskip
 
 % ************************************
 % LAUNCH USE CASE & DESCRIPTIONS
 % ************************************
 \paragraph[\ Use Category]
-{\ Launch} {These options will be available to the user upon the immediate launch of pUML.}
+{\ Launch} {These options will be available to the user upon the launch of pUML.}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=6.0in]{ucaseLaunch.jpg}
+\caption{Launch Use Case}
+\end{figure}
+
+%%% CREATE NEW DIAGRAM USE CASE DESCRIPTION
+\begin{flushleft}
+\tablehead{}
+\begin{tabular}{|m{2.0in} m{5.0in}|}
+\hline
+{\bfseries\emph{Use Case Name}}
+& {\bfseries Create New Diagram }
+\\\hline
+\emph{Participating Actor}
+& User
+\\\hline
+\emph{Flow of Events}
+& \begin{my_enumerate}
+\item The user selects ``New'' from menu.
+\item Program requests user select a diagram type.
+\item The program responds by creating a new tab with a blank drawing canvas.
+\item Program loads and displays only objects for the selected diagram type.
+\end{my_enumerate}
+\\\hline
+\emph{Entry Condition}
+& User selects ``New'' from commands
+\\\hline
+\emph{Exit Condition}
+& Program successfully opens new tab with diagram specific tools in toolbar.
+\\\hline
+\emph{Quality Requirements}
+& Toolbar loads only diagram specific objects and connectors.
+\\\hline
+\end{tabular}
+\end{flushleft}
+
+\bigskip
+
+%%% OPEN EXISTING DIAGRAM USE CASE DESCRIPTION
+\begin{flushleft}
+\tablehead{}
+\begin{tabular}{|m{2.0in} m{5.0in}|}
+\hline
+{\bfseries\emph{Use Case Name}}
+& {\bfseries Open Existing Diagram}
+\\\hline
+\emph{Participating Actor}
+& User
+\\\hline
+\emph{Flow of Events}
+& \begin{my_enumerate}
+\item User selects ``Open'' from menu.
+\item Program opens an explorer window.
+\item User selects the file they wish to open.
+\item Program loads selected file into a new tab.
+\end{my_enumerate}
+\\\hline
+\emph{Entry Condition}
+& User selects ``Open'' from menu.
+\\\hline
+\emph{Exit Condition}
+& File is successfully opened into a new tab.
+\\\hline
+\emph{Quality Requirements}
+& User selected file must be of pUML diagram type.\newline
+  Only diagram-appropriate tools loaded into toolbar.
+\\\hline
+\end{tabular}
+\end{flushleft}
+
+\bigskip
 
 
 %%% EXIT PROGRAM USE CASE DESCRIPTION
@@ -848,7 +937,7 @@ SYSTEM FEATURES}
 \begin{tabular}{|m{2.0in} m{5.0in}|}
 \hline
 {\bfseries\emph{Use Case Name}}
-& {\bfseries Exit Program}
+& {\bfseries Exit pUML}
 \\\hline
 \emph{Participating Actor}
 & User
@@ -868,79 +957,8 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 & File is successfully saved and the program exits.
 \\\hline
 \emph{Quality Requirements}
-& File must be saved prior to exiting, or changes must be discarded prior to exiting.
-\\\hline
-\end{tabular}
-\end{flushleft}
-\bigskip
-
-\clearpage
-
-% ************************************
-% NEW PROJECT USE CASE & DESCRIPTIONS
-% ************************************
-\paragraph[\ Use Category]
-{\ New Project} 
-{The user has selected to start a new UML project.}
-
-
-%%% CREATE NEW DIAGRAM USE CASE DESCRIPTION
-\begin{flushleft}
-\tablehead{}
-\begin{tabular}{|m{2.0in} m{5.0in}|}
-\hline
-{\bfseries\emph{Use Case Name}}
-& {\bfseries Create New Diagram }
-\\\hline
-\emph{Participating Actor}
-& User
-\\\hline
-\emph{Flow of Events}
-& \begin{my_enumerate}
-\item The user selects new file from menu.
-\item Program requests user select a diagram type
-(includes ChooseDiagramType use case).
-\item The program responds by creating a new file with a blank drawing canvas.
-\end{my_enumerate}
-\\\hline
-\emph{Entry Condition}
-& User selects New File from commands
-\\\hline
-\emph{Exit Condition}
-& Program successfully opens new file
-\\\hline
-\emph{Quality Requirements}
-& TBD
-\\\hline
-\end{tabular}
-\end{flushleft}
-\bigskip
-
-%%% CHOOSE DIAGRAM TYPE USE CASE DESCRIPTION
-\begin{flushleft}
-\tablehead{}
-\begin{tabular}{|m{2.0in} m{5.0in}|}
-\hline
-{\bfseries\emph{Use Case Name}}
-& {\bfseries Choose Diagram Type}
-\\\hline
-\emph{Participating Actor}
-& User 
-\\\hline
-\emph{Flow of Events}
-& \begin{my_enumerate}
-\item User selects a diagram type.
-\item Program loads and displays only objects for the selected diagram type.
-\end{my_enumerate}
-\\\hline
-\emph{Entry Condition}
-& Included from New Diagram use case
-\\\hline
-\emph{Exit Condition}
-& Included from New Diagram use case
-\\\hline
-\emph{Quality Requirements}
-& Toolbar loads only diagram specific objects and connectors.
+& File must be saved prior to exiting, or changes must be discarded prior to exiting. \newline
+  If the current tab closed was the only tab open in pUML, pUML exits.
 \\\hline
 \end{tabular}
 \end{flushleft}
@@ -949,51 +967,17 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \clearpage
 
 
-% ************************************
-% OPEN PROJECT USE CASE & DESCRIPTIONS
-% ************************************
-\paragraph[\ Use Category]
-{\ Open Project} {These options will be available to the user after choosing to open an existing UML project.}
+% *****************************************
+% NEW/OPEN DIAGRAM USE CASES & DESCRIPTIONS
+% *****************************************
+\paragraph[\ New/Open Diagram]
+{\ New/Open Diagram} {These options will be available to the user after creating a new UML diagram, or upon opening an existing UML diagram. This set of use cases covers all edits possible for pUML diagrams.}
 
-%%% OPEN EXISTING DIAGRAM USE CASE DESCRIPTION
-\begin{flushleft}
-\tablehead{}
-\begin{tabular}{|m{2.0in} m{5.0in}|}
-\hline
-{\bfseries\emph{Use Case Name}}
-& {\bfseries Open Existing Diagram}
-\\\hline
-\emph{Participating Actor}
-& User
-\\\hline
-\emph{Flow of Events}
-& \begin{my_enumerate}
-\item User selects Open File from menu.
-\item Program opens an explorer window.
-\item User selects a file.
-\item Program loads selected file into program
-\end{my_enumerate}
-\\\hline
-\emph{Entry Condition}
-& User selects Open File from menu.
-\\\hline
-\emph{Exit Condition}
-& File is successfully opened.
-\\\hline
-\emph{Quality Requirements}
-& User selected file must be able to be opened in pUML.
-\\\hline
-\end{tabular}
-\end{flushleft}
-\bigskip
-
-\clearpage
-
-% ************************************
-% NEW DIAGRAM USE CASE & DESCRIPTIONS
-% ************************************
-\paragraph[\ Use Category]
-{\ New Diagram} {These options will be available to the user upon choosing to create a new UML diagram.}
+\begin{figure}[h]
+\centering
+\includegraphics[width=6.0in]{ucaseNewOpenDiagram.jpg}
+\caption{New/Open Diagram Use Case}
+\end{figure}
 
 %%% SAVE DIAGRAM USE CASE DESCRIPTION
 \begin{flushleft}
@@ -1001,7 +985,7 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \begin{tabular}{|m{2.0in} m{5.0in}|}
 \hline
 {\bfseries\emph{Use Case Name}}
-& {\bfseries Save File}
+& {\bfseries Save}
 \\\hline
 \emph{Participating Actor}
 & User
@@ -1023,7 +1007,8 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 & File is successfully saved
 \\\hline
 \emph{Quality Requirements}
-& TBD
+& File names must be valid \newline
+  May not create two pUML diagram files with same name in same location.
 \\\hline
 \end{tabular}
 \end{flushleft}
@@ -1036,7 +1021,7 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \begin{tabular}{|m{2.0in} m{5.0in}|}
 \hline
 {\bfseries\emph{Use Case Name}}
-& {\bfseries Save Diagram As}
+& {\bfseries Save As}
 \\\hline
 \emph{Participating Actor}
 & User
@@ -1048,63 +1033,32 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \ ~ or
 \begin{my_enumerate}
 \item User selects ``Save'' from File menu, but the program has not been previously saved.
-\item Program displays a dialog box requesting the user to enter a diagram name.
+\item Program displays a dialog box requesting the user to enter a diagram name and save location.
 \item User enters a diagram name and clicks ``Ok.''
-\item Program saves diagram within existing project.
+\item Program saves diagram at user specified location.
 \end{my_enumerate}
 \\\hline
 \emph{Entry Condition}
 & User clicks ``Save As'' or clicks ``Save'' with a previously unsaved diagram. 
 \\\hline
 \emph{Exit Condition}
-& The diagram has been saved under the current working project.
+& The diagram has been saved.
 \\\hline
 \emph{Quality Requirements}
-& Diagram name may not be the same as another diagram within the project. Diagram may not be saved outside of the project.
+& Inherited from Save use case. 
 \\\hline
 \end{tabular}
 \end{flushleft}
 \bigskip
 
 
-
-%%% PRINT DIAGRAM USE CASE DESCRIPTION
+%%% CLOSE DIAGRAM TAB USE CASE DESCRIPTION
 \begin{flushleft}
 \tablehead{}
 \begin{tabular}{|m{2.0in} m{5.0in}|}
 \hline
 {\bfseries\emph{Use Case Name}}
-& {\bfseries Print Diagram}
-\\\hline
-\emph{Participating Actor}
-& User
-\\\hline
-\emph{Flow of Events}
-& \begin{my_enumerate}
-\item User initiates print. 
-\item Program sends to printer
-\end{my_enumerate}
-\\\hline
-\emph{Entry Condition}
-& User initiates Print
-\\\hline
-\emph{Exit Condition}
-& Diagram successfully sent to default printer
-\\\hline
-\emph{Quality Requirements}
-& TBD
-\\\hline
-\end{tabular}
-\end{flushleft}
-\bigskip
-
-%%% CLOSE DIAGRAM/TAB USE CASE DESCRIPTION
-\begin{flushleft}
-\tablehead{}
-\begin{tabular}{|m{2.0in} m{5.0in}|}
-\hline
-{\bfseries\emph{Use Case Name}}
-& {\bfseries Close Diagram}
+& {\bfseries Close Diagram Tab}
 \\\hline
 \emph{Participating Actor}
 & User
@@ -1112,7 +1066,7 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \emph{Flow of Events}
 & \begin{my_enumerate}
 \item User clicks the `X' on the diagram tab.
-\item If the diagram is saved, the program closes the diagram tab.
+\item If the current version of the diagram is saved, the program closes the diagram tab.
 \end{my_enumerate}
 \ ~or
 \begin{my_enumerate}
@@ -1127,20 +1081,18 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 & Diagram tab is closed.
 \\\hline
 \emph{Quality Requirements}
-& Diagram must be saved for the tab to close. Else the user must either choose to save the diagram or discard changes.
+& Diagram must be saved for the tab to close, or the user must either choose to save the diagram or discard changes.
 \\\hline
 \end{tabular}
 \end{flushleft}
 \bigskip
-
-
 
 \clearpage
 
 % ************************************
 % EDIT OBJECT USE CASE & DESCRIPTIONS
 % ************************************
-\paragraph[\ Use Category]
+\paragraph[\ Edit Object]
 {\ Edit Object} {These options will be available to the user with a diagram open for modification, who is choosing to take action on an object.}
 
 \begin{figure}[h]
@@ -1165,16 +1117,18 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \item User selects an object from toolbar.
 \item User clicks the canvas.
 \item Program places an object at that location on the canvas.
+\item User may be prompted to enter a description for the object.
 \end{my_enumerate}
 \\\hline
 \emph{Entry Condition}
-& Toolbar is loaded with valid objects for diagram type.
+& pUML diagram is open for editing. \newline 
+Toolbar is loaded with valid objects for diagram type.
 \\\hline
 \emph{Exit Condition}
 & Object has been successfully placed on drawing canvas.
 \\\hline
 \emph{Quality Requirements}
-& Object may not occupy the same space on the canvas as any other object.
+& Object must be of diagram type.
 \\\hline
 \end{tabular}
 \end{flushleft}
@@ -1202,13 +1156,13 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \end{my_enumerate}
 \\\hline
 \emph{Entry Condition}
-& User clicks on an object.
+& User right-clicks on an object and selects ``Properties'' from the dropdown menu.
 \\\hline
 \emph{Exit Condition}
-& Program is now showing all user-made changes.
+& Object now displays new description.
 \\\hline
 \emph{Quality Requirements}
-& There are limitations as to the number of characters a user may enter in the object description text field.
+& N/A
 \\\hline
 \end{tabular}
 \end{flushleft}
@@ -1241,7 +1195,38 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 & Program has drawn the object at the new location.
 \\\hline
 \emph{Quality Requirements}
-& User may not move an object to a location already occupied by another object. 
+& Connectors move with object. 
+\\\hline
+\end{tabular}
+\end{flushleft}
+\bigskip
+
+
+%%% DELETE OBJECT USE CASE DESCRIPTION
+\begin{flushleft}
+\tablehead{}
+\begin{tabular}{|m{2.0in} m{5.0in}|}
+\hline
+{\bfseries\emph{Use Case Name}}
+& {\bfseries Delete Object}
+\\\hline
+\emph{Participating Actor}
+& User
+\\\hline
+\emph{Flow of Events}
+& \begin{my_enumerate}
+\item User right clicks object and selects ``Delete'' from the dropdown menu.
+\item Program deletes the object and all attached connectors. 
+\end{my_enumerate}
+\\\hline
+\emph{Entry Condition}
+& User right clicks object and selects ``Delete'' from the dropdown menu.
+\\\hline
+\emph{Exit Condition}
+& Program deletes object and all attached connectors.
+\\\hline
+\emph{Quality Requirements}
+& Attached connectors must be deleted with deleted object. 
 \\\hline
 \end{tabular}
 \end{flushleft}
@@ -1255,6 +1240,12 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 % ************************************
 \paragraph[\ Use Category]
 {\ Edit Connector} {These options will be available to the user with a diagram open for modification, who is choosing to take action regarding a connector.}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=6.0in]{ucaseEditConn.jpg}
+\caption{Edit a Connector Use Case}
+\end{figure}
 
 %%% PLACE NEW CONNECTOR USE CASE DESCRIPTION
 \begin{flushleft}
@@ -1270,8 +1261,8 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \emph{Flow of Events}
 & \begin{my_enumerate}
 \item User clicks on desired connector in toolbar.
-\item User clicks on the object the connection is coming from, holding down the left mouse button.
-\item User drags the mouse toward the object to be connected to.
+\item User clicks on the first (origination) object, holding down the left mouse button.
+\item User drags the mouse to a second (destination) object.
 \item User releases the mouse button.
 \item Program draws the connection line between the first and second object.
 \end{my_enumerate}
@@ -1283,7 +1274,7 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
   & The connector is successfully drawn between two objects. 
 \\\hline
   \emph{Quality Requirements}
-  & Only one connector may be placed between any two objects. Some objects may not be able to be connected with certain types of connectors.
+  & Only one connector may be placed between any two objects.
 \\\hline
 \end{tabular}
 \end{flushleft}
@@ -1303,22 +1294,20 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \emph{Flow of Events}
 & 
 \begin{my_enumerate}
-\item User selects a connector by clicking on it.
-\item User right-clicks on the connector.
-\item User selects ``Properties'' from the drop-down menu.
+\item User right-clicks on the connector and selects ``Properties'' from the drop-down menu.
 \item User edits description in the text box presented.
 \item User clicks ``OK.''
 \item Program displays new line description.
 \end{my_enumerate}
 \\\hline
 \emph{Entry Condition}
-& User right clicks on a connector.
+& User right-clicks on the connector and selects ``Properties'' from the drop-down menu.
 \\\hline
 \emph{Exit Condition}
 & Program has updated the connector with the new properties.
 \\\hline
 \emph{Quality Requirements}
-& Not all connectors will have the same property options.
+& Some connectors may not have the option to edit/modify the description.
 \\\hline
 \end{tabular}
 \end{flushleft}
@@ -1337,19 +1326,18 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \\\hline
 \emph{Flow of Events}
 & \begin{my_enumerate}
-\item User right clicks on a connector.
-\item User selects ``Delete'' from the drop-down menu.
+\item User right clicks on a connector and selects ``Delete'' from the drop-down menu.
 \item Program deletes the connector.
 \end{my_enumerate}
 \\\hline
 \emph{Entry Condition}
-& User right clicks on the connector.
+& User right clicks on a connector and selects ``Delete'' from the drop-down menu.
 \\\hline
 \emph{Exit Condition}
 & Connector has been deleted.
 \\\hline
 \emph{Quality Requirements}
-& TBD
+& Only the connector is to be deleted. Attached objects are to remain on the canvas.
 \\\hline
 \end{tabular}
 \end{flushleft}
@@ -1364,227 +1352,206 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 
 
 
-\clearpage
-
-
 \subsubsection[System feature: [Project management tasks suite]{\bfseries System feature: Project management tasks suite}
 
-\paragraph[\ Introduction/Purpose of this feature] {\bfseries Introduction and Purpose of this feature}
+\paragraph[\ Introduction/Purpose for These Features] 
+{\bfseries Introduction/Purpose for These Features}
 {
-Several processes are required to manage projects. These include the saving of files, loading projects from files, and deleting projects.}
+The features detailed in the use cases (Section 3.2.1) are all basic vital functions for a UML Diagram editor. At the most basic level, in order to create UML diagrams, several processes are required. These processes include the creation of distinct UML diagrams consisting of labeled objects and connectors, saving of these diagrams, and the ability to load these saved diagrams for modification.
+}
 
 
-\paragraph[Input/Output sequence for this feature]{\rmfamily\bfseries Input/Output sequence for this feature}
-{
-The user selects the ``File'' pull down menu at the top left corner of his or her screen. The options currently supported are ``New'', ``Open'', ``Copy As'', ``Save'', ``Save As'', and ``Delete Project''. }
+\paragraph[Input/Output sequence for this feature]
+{\bfseries Input/Output sequence for These Features}
+{ All input/output sequences are detailed in associated use case descriptions in section 3.2.1.
+ The purpose of each use case action is detailed below. }
 
-\subparagraph{New}
-{
-This creates a new project space. }
+\subparagraph{Create New Diagram}
+{ This creates a new canvas in which the user may design a UML diagram. Since there are four different diagram types that may be created with pUML, and many design projects necessitate several diagrams, there is currently no predetermined limit on the number of new diagrams that may be created in pUML. (This is determined by system resources only, and may differ from system to system.) }
 
-\subparagraph{Open}
-{
-This opens a previously saved project. The user shall be presented with a dialog option to save the previous project. Once completing this dialog, the previous project will be closed and the selected project will be opened.}
+\subparagraph{Open Existing Diagram}
+{ This opens a previously saved UML diagram. Since each diagram is of a specific diagram type, when a pUML diagram is loaded, only the tools available for that diagram type will be available to the user upon loading. When a diagram has been opened, the user then may modify this diagram further. There is no limit to the number of times a diagram may be modified.  There is currently no limit to the number of diagrams that may be opened into the pUML software. (This is determined by system resources only, and may differ from system to system.)  }
+
+\subparagraph{Exit pUML}
+{ The user may exit pUML by either selecting ``File'' and then ``Exit,'' or may click the ``X'' in the upper corner of the pUML main window. If any currently loaded diagrams have changes which have not been saved, pUML will request confirmation to either save or discard changes prior to exiting. }
 
 \subparagraph{Save}
-{
-This saves the current state of the project into an XML that can later be used to recreate the project state. If the current project does not have a name, the ``Save'' option will be an alias for the ``Save As'' option.}
+{ This saves the current state of the diagra, into an XML file that can later be used to recreate the diagram state. If the current diagram does not have a name, the ``Save'' option will be an alias for the ``Save As'' option.}
 
 \subparagraph{Save As}
-{
-This creates a new project space and then saves the project state into the new project. In contrast with ``Copy As'', this option does not affect the previous project. }
+{ This prompts pUML to load a browser window. The user must select a location and a file name in which to store the pUML diagram.  After clicking ``Ok,'' the Save function completes this process.  This state will be defaulted to if the user clicks ``Save'' on a previously unsaved diagram.}
 
-\subparagraph{Delete Project}
-{
-This deletes the current project and all files within the project folder. The user shall be presented with a confirmation dialog before this action is completed. Upon completion, a blank and unnamed project will be active in the project window. }
+\subparagraph{Close Diagram Tab}
+{ If the user clicks the ``x'' on the tab, and if the current diagram state is saved, the diagram will close. Otherwise, the ``Save As'' function will initiate prior to closing. This feature is useful to de-clutter the pUML workspace. In addition, if the closed tab was the only tab open, then the pUML software will exit.}
 
-
-
+\subparagraph{Place New Object/Connector, Edit Object/Connector Descriptions, and Move/Delete Object/Connector}
+{ UML diagrams consist of different types of objects and connectors. Each object and connector ideally have an associated description. UML diagram functionality must include the placement of objects and connectors, in addition to the ability to modify their descriptions, move their locations, and delete them as necessary. When an object is deleted, attached connectors must be deleted as well. However, if a connector is deleted, any attached objects will not be deleted. }
 
 
-
-
+% **************************************
+% SECTION 4: REQUIREMENTS TRACEABILITY *
+% **************************************
 
 
 \clearpage\setcounter{page}{1}\pagestyle{Convertvi}
-\section[REQUIREMENTS TRACEABILITY]
-  {\rmfamily\bfseries REQUIREMENTS TRACEABILITY}
-{\itshape
-}
 
+\begin{landscape}
+
+\section[REQUIREMENTS TRACEABILITY]
+  {\bfseries REQUIREMENTS TRACEABILITY}
+{\itshape }
 
 \bigskip
 
 \begin{flushleft}
-\tablehead{\hline
-\multicolumn{1}{|m{0.9212598in}|}{\centering
-\bfseries Feature Name} &
-\centering \bfseries Req No. &
-\centering \bfseries Requirement
-Description &
-\centering \bfseries Priority &
-\centering \bfseries SDD &
-\multicolumn{2}{m{1.2872598in}|}{\centering
-\bfseries Alpha Release} &
-\multicolumn{2}{m{1.3587599in}|}{\centering
-\bfseries Beta Release} &
-\multicolumn{2}{m{1.3795599in}|}{\centering
-\bfseries Final Test}\\\hline
- &
- &
- &
- &
- &
-\centering \bfseries Test Case(s) &
-\centering \bfseries Test Res. &
-\centering \bfseries Test Case(s) &
-\centering \bfseries Test Res. &
-\centering \bfseries Test Case(s) &
-\bfseries Test
-Res.\\\hhline{~~~~~------}}
-\begin{supertabular}{m{0.9212598in}|m{0.42125985in}|m{1.9212599in}|m{0.39275986in}|m{0.7587598in}|m{0.6622598in}|m{0.5462598in}|m{0.6712598in}|m{0.6087598in}|m{0.6712598in}|m{0.6295598in}|}
-\multicolumn{1}{|m{0.9212598in}|}{~Select Diagram Type
-} &
-\centering  1.1 &
-~Selects the appropriate diagram type
- &
-~M
- &
-~N/A
- &
-~N/A
- &
-~N/A
- &
-~N/A
- &
-~N/A
- &
-~N/A
- &
-
-~N/A
-\\\hline
-\multicolumn{1}{|m{0.9212598in}|}{~Save function
-} &
-\centering  2.1 &
-~Saves the Diagram to file
- &
-~M
- &
-~N/A
- &
-~N/A
- &
-~N/A
- &
-~N/A
- &
-~N/A
- &
-~N/A
- &
-~N/A
+\tablehead{}
+\begin{supertabular}[c]{|
+                        m{0.9in}|m{0.4in}|m{2.0in}|
+                        m{0.4in}|m{0.5in}|m{1.0in}|
+                        m{1.0in}|m{1.0in}|c|
+                       }
+\hline
  
+  \centering \bfseries Feature Name &
+  \centering \bfseries Req No. &
+  \centering \bfseries Requirement Description &
+  \centering \bfseries Priority &
+  \centering \bfseries SSDD &
+  \centering \bfseries Test Case(s) & 
+  \centering \bfseries Alpha Release &
+  \centering \bfseries Beta Release &
+  \bfseries Final Test
 \\\hline
-\multicolumn{1}{|m{0.9212598in}|}{~Draw function
-} &
-\centering  2.1 &
-~Draws current objects
- &
-~M
- &
-~N/A
- &
-~N/A
- &
-~N/A
- &
-~N/A
- &
-~N/A
- &
-~N/A
- &
-~N/A
-
-\\\hline
-\multicolumn{1}{|m{0.9212598in}|}{~Open File
-} &
-\centering  2.1 &
-~Opens previously saved file
- &
-~M
- &
-~N/A
- &
-~N/A
- &
-~N/A
- &
-~N/A
- &
-~N/A
- &
-~N/A
- &
-~N/A
-
-\\\hline
-\multicolumn{1}{|m{0.9212598in}|}{~New File
-} &
-\centering  2.1 &
-~Creates New File
- &
-~M
- &
-~N/A
- &
-~N/A
- &
-~N/A
- &
-~N/A
- &
-~N/A
- &
-~N/A
- &
-~N/A
-
+  
+  Install
+  & \centering 2.1.2
+  & pUML software installs successfully
+  & \centering M 
+  & ~
+  & testinstall
+  & PASS
+  & ~ 
+  & ~ 
 \\\hline
 
-\multicolumn{1}{|m{0.9212598in}|}{
-} &
-\centering  2.1 &
-~
- &
-~
- &
-~
- &
-~
- &
-~
- &
-~
- &
-~
- &
-~
+  Launch
+  & \centering 2.1.2
+  & pUML software launches successfully
+  & \centering M 
+  & ~
+  & testlaunch
+  & PASS
+  & ~ 
+  & ~ 
+\\\hline
+
+  Main Window
+  & \centering 2.1.3 
+  & All main window features 
+  & \centering M 
+  & ~
+  & N/A 
+  & ~
+  & ~ 
+  & ~ 
+\\\hline
+
+  Objects
+  & \centering 2.1.4
+  & Object properties and functionality
+  & \centering M 
+  & ~ 
+  & testobjects
+  & PASS
+  & ~ 
+  & ~ 
+\\\hline
+
+  Connectors
+  & \centering 2.1.5
+  & Connector properties and functionality
+  & \centering M 
+  & ~ 
+  & testconnectors\newline 
+    testselfconnector
+  & FAIL \newline
+    PASS
+  & ~ \newline
+    ~
+  & ~ \newline
+    ~
+\\\hline
+
+  Open
+  & \centering 2.1.6
+  & Load a pUML file into pUML 
+  & \centering M 
+  & ~ 
+  & testsave *\newline
+    testsaveas *
+  & FAIL \newline
+    FAIL 
+  & ~ \newline
+    ~
+  & ~ \newline
+    ~
+\\\hline
+
+  Save
+  & \centering 2.1.7
+  & Save a diagram 
+  & \centering M 
+  & ~ 
+  & testsave \newline 
+    testsaveas
+  & FAIL \newline
+    PASS
+  & ~ \newline
+    ~
+  & ~ \newline
+    ~
+\\\hline
+
+  Diagrams
+  & \centering 2.1.8
+  & Diagram type integrity 
+  & \centering M 
+  & ~ 
+  & testsave *\newline 
+    testsaveas *
+  & FAIL \newline
+    FAIL
+  & ~ \newline
+    ~
+  & ~ \newline
+    ~
+\\\hline
+
+  Tabs
+  & \centering 2.1.9
+  & Tab functionality 
+  & \centering M 
+  & ~ 
+  & testsave *\newline 
+    testsaveas *
+  & FAIL \newline
+    FAIL
+  & ~ \newline
+    ~
+  & ~ \newline
+    ~
 \\\hline
 
 \end{supertabular}
 \end{flushleft}
-{
-Priorities are: \textbf{M}andatory, \textbf{L}ow, \textbf{H}igh}
 
-{
-SDD link is version and page number or function name.}
+{Priorities are: \textbf{M}andatory, \textbf{L}ow, \textbf{H}igh} \newline
+{SSDD link is version and page number or function name.} \newline
+{Test cases and results are file names and \textbf{P}ass/\textbf  {F}ail or \% passing.} \newline
+{* asterisk indicates indirectly tested through another feature test case.}
 
-{
-Test cases and results are file names and \textbf{P}ass/\textbf{F}ail or
-\% passing.}
+\bigskip
 
+\end{landscape}
 
 \end{document}

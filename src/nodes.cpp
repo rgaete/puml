@@ -39,10 +39,13 @@ BaseNode::BaseNode() {
  */
 void set_xml_attr(QDomDocument &doc, QDomElement &node,  // NOLINT
                   QString label, QString val) {
+  node.setAttribute(label, val);
+  /*
   QDomElement el = doc.createElement(label);
   node.appendChild(el);
   QDomText text = doc.createTextNode(val);
   el.appendChild(text);
+  */
 }
 
 /*!
@@ -75,12 +78,13 @@ QDomElement BaseNode::to_xml(QDomDocument &doc,  // NOLINT
   set_xml_attr(doc, node, QString("class_name"),
                this->metaObject()->className());
   set_xml_attr(doc, node, QString("selected"), QString::number(selected, 10));
-  set_xml_attr(doc, node, QString("length"), QString::number(length));
   set_xml_attr(doc, node, QString("cpSelected"), QString::number(cpSelected));
   set_xml_attr(doc, node, QString("pos_x"), QString::number(position.x()));
   set_xml_attr(doc, node, QString("pos_y"), QString::number(position.y()));
   set_xml_attr(doc, node, QString("length"), QString::number(length));
   set_xml_attr(doc, node, QString("height"), QString::number(height));
+  // need to set an xml attribute to get the end points of the connectors
+  // need to set an xml attribute to get title (naming) or the
 
   return node;
 }

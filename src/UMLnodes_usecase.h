@@ -88,6 +88,7 @@ class OvalObject: public ObjectNode {
   Case diagram (line from the actor to the use case)
 */
 class InteractionConnection : public ConnectionNode {
+  Q_OBJECT
   public:
     BaseNode* clone() { return new InteractionConnection; }
     QDialog* getDialog() { return 0; }
@@ -102,6 +103,7 @@ class InteractionConnection : public ConnectionNode {
   Case diagram (line from the actor to the use case)
 */
 class ExtendsConnection : public ConnectionNode {
+  Q_OBJECT
   public:
     BaseNode* clone() { return new ExtendsConnection; }
     QDialog* getDialog() { return 0; }
@@ -117,6 +119,7 @@ class ExtendsConnection : public ConnectionNode {
   Case diagram (line from the actor to the use case)
 */
 class IncludesConnection : public ConnectionNode {
+  Q_OBJECT
   public:
     BaseNode* clone() { return new IncludesConnection; }
     QDialog* getDialog() { return 0; }
