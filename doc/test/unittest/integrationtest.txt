@@ -1,0 +1,29 @@
+Test: connectCanvasWithDocument			Risk Level: 
+
+Expected Results:
+  All signals & slots integration properly functioning.
+  No errors
+
+Tested With: 
+  connectCanvasWithDocument unit test
+
+
+***** TEST 01 *****
+
+TesterName: 		Date of Test:  		Pass/Fail: 
+
+Extraneous Observations:
+
+
+
+***** TEST 02 *****
+
+TesterName: 		Date of Test:  		Pass/Fail: 
+
+Extraneous Observations:
+
+
+
+
+
+
