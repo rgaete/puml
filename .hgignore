@@ -5,6 +5,7 @@ syntax: regexp
 \.out$
 latex.*
 ^pUML$
+.hg.*$
 .*\.lock\..*
 src/Makefile$
 .*pUML\.pro\.user$
