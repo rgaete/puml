@@ -1,0 +1,68 @@
+Test: pUML self-connector functionality		Risk Level: 
+
+  Test Steps (input):
+     1. Open a new diagram.
+    2. Click on an object from the toolbar and place it on the canvas.
+    3. Click on the self-connector from the toolbar.
+    4. Click on the canvas away from the object. Nothing should happen.
+    5. Click on the object.  A connector line should appear looping from the object back to the object.
+    6. If a dialog appears at this time, ignore it by clicking Cancel.
+    7. Click on the object again. Nothing should happen.
+    8. Click on an object from the toolbar and place a second object on the canvas.
+    9. Click on the self-connector from the toolbar and drag the mouse from the first object to the second object. Nothing should happen.
+    10. Right-click on the self-connector. A context menu should appear.
+    11. Select "Delete" from the context menu. The self-connector should disappear.
+    12. (Self-connector should still be selected on the toolbar) Drag the mouse from the first object to the second object.  A connector line should appear looping from the first object back to the first object.
+    13. Right-click on the self-connector.
+    14. Select "Properties" from the context menu. A Properties dialog should appear.
+    15. Type a description for the object and click Ok. The description should appear next to the self-connector line.
+    16. Change the description for the self-connector 9 more times.
+    17. Click on Select in the toolbar and click on the self-connector.  
+    18. It should appear highlighted ("selected").
+    19. Try to drag the self-connector away from the object. 
+    20. Nothing should happen.
+    21. Click on the canvas away from the object and self-connector. 
+    22. The highlight effect should disappear from the self-connnector ("deselected").
+    23. Click on the object and drag it across the canvas.
+    24. The self-connector should move with the object.
+    25. Right-click on the self-connector.
+    26. Select "Delete" from the context menu.
+    27. The self-connector and its description should disappear.
+
+
+  Expected Results:
+    Only one self-connector can connect to only one object.
+    Its properties may be modified, and it may be moved with objects and deleted.
+    
+
+***** TEST 01 *****
+
+Change Set#: 346	Date of Test: 4/3/2011	Pass/Fail: PASS
+
+Tester Name: Maxine Major
+
+Log: 
+  All Steps completed in sequence with no errors.
+
+
+Extraneous Observations: 
+  No errors reported.
+  The only diagram type with a self-connector is the Collaboration diagram.
+
+
+
+***** TEST 02 *****
+
+Change Set#: Rev 351		Date of Test: 4/19/2011		Pass/Fail: Pass
+
+Tester Name: Jeremy Klas 
+
+Log: 
+  All of the steps were completed and worked as explained.
+
+Extraneous Observations: 
+  Although the test worked, there is an issue with placing multiple self connectors to an object.
+  If you accidentally click on an object twice with the self connector, two connectors are drawn,
+  this becomes an issue when adding text or when deleting. If you're deleting you are required to
+  do multiple deletions to see the desired result, and when adding text, the text of each line
+  write over each other making each unlegible.

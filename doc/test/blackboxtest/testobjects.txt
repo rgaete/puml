@@ -1,0 +1,80 @@
+Test: pUML object functionality			Risk Level: 
+
+  Test Steps (input):
+       1. Open a new diagram
+    2. Click on an object in the toolbar.
+    3. Click on the canvas. An object should appear at that location.
+    4. A properties dialog box should appear.
+    5. Type the object description in the box and click the Ok button
+    6. The description you typed should appear inside the object.
+    7. Right-click on the object. A context menu should appear.
+    8. Select Properties from the context menu.
+    9. The properties dialog box should appear, with the text you just typed highlighted.
+    10. Type a very long description such as "supercalifragilisticexpialidocious" and click Ok.
+    11. The object should resize to accept the new description.
+    12. Change the description of the object 8 more times.
+    13. Click on the select tool.
+    14. Click on the object. It should appear highlighted ("selected")
+    15. Click on the object and drag it across the canvas. It should move with the mouse cursor.
+    16. Click on the canvas in an area away from the object.  The object should de-select
+    17. Create 10 other objects on the canvas, away from the initial object.
+    18. Click on one of the inter-object connectors in the tool bar.
+    19. Draw a connection line between each of the 10 new objects and the initial object.
+    20. The object should accept all 10 connectors.
+    21. Right-click on the object and select Delete from the context menu.
+    22. The object, its description, and all attached connectors should be deleted.
+
+  Expected Results:
+    Objects can be created, deleted, selected, moved, deselected, and accept connectors.
+    Object descriptions can be modified, and the object will resize to accept the new description.
+     
+
+***** TEST 01 *****
+
+Change Set#: Rev 351		Date of Test: 4/19/12		Pass/Fail: Pass
+
+Tester Name: Jeremy Klas
+
+Log: 
+The object could be created, selected, modified, moved, and deleted just fine. It also accepted connectors and its data was modifiable.
+
+Extraneous Observations: 
+The test ran great, however with that many connectors going into a single object the diagram began to get cluttered around the four north, south, west, east connection points.
+
+***** TEST 02 *****
+
+Change Set#: 		Date of Test: 		Pass/Fail:
+
+Tester Name: 
+
+Log: 
+
+
+Extraneous Observations: 
+
+
+
+***** TEST 03 *****
+
+Change Set#: 		Date of Test: 		Pass/Fail:
+
+Tester Name: 
+
+Log: 
+
+
+Extraneous Observations: 
+
+
+***** TEST 04 *****
+
+Change Set#: 		Date of Test: 		Pass/Fail:
+
+Tester Name: 
+
+Log: 
+
+
+Extraneous Observations: 
+
+
