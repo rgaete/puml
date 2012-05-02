@@ -38,6 +38,7 @@ class Document : public QWidget {
     BaseNode::DiagramType getDiagramType() { return diagramType; }
     void saveDocument();
     void saveAsDocument();
+    void openDocument(QString openName);
     // @TODO Once the saveAs functionality is moved into this class from
     // mainwindow, move nodes back to private.
     // The main vector of nodes

@@ -89,6 +89,8 @@ void experiment(QString openName) {
   QDomDocument* xmlDoc = openSaveFile(openName);
   QDomElement docElem = getNextDocumentElement(xmlDoc);
   QDomElement n;
+  BaseNode* newNode;
+
   while (1) {
     n = getNextNodeElement(docElem);
     if (n.isNull()) {
@@ -99,6 +101,16 @@ void experiment(QString openName) {
             qPrintable(n.attribute(QString("class_name"))),
             qPrintable(n.attribute(QString("pos_x"))),
             qPrintable(n.attribute(QString("pos_y"))));
+
+    // what we have is a QDOMElement, and we need a node to put in the vector
+
+    newNode = NodeFactory::getInstance()->produceFromClassName(n.attribute("class_name"));
+    if (newNode == 0) {
+        fprintf(stderr, "Got a null node\n");
+    } else {
+        fprintf(stderr, "Got a %-21s\n", newNode->metaObject()->className());
+    }
+
   }
   fprintf(stderr, "< experiment()\n");
 }
@@ -619,3 +631,39 @@ void Document::saveAsDocument() {
     Document::saveDocument();
 }
 
+void Document::openDocument(QString openName)
+{
+    QDomDocument* xmlDoc = openSaveFile(openName);
+    QDomElement docElem = getNextDocumentElement(xmlDoc);
+    QDomElement n;
+    BaseNode* newNode;
+
+    // Check if the document needs saving ....
+
+    // Clear the nodes vector
+    nodes.clear();
+    ordering.clear();
+
+    while (1) {
+      n = getNextNodeElement(docElem);
+      if (n.isNull()) {
+        break;
+      }
+
+      // Now that we have the QDomElement, produce the node
+      newNode = NodeFactory::getInstance()->produceFromClassName(n.attribute("class_name"));
+      if (newNode == 0) {
+          fprintf(stderr, "Error loading: Got a null node with class name '%-21s'\n", qPrintable(n.attribute("class_name")));
+      } else {
+          QPoint pos;
+          pos.setX(QString(n.attribute("pos_x")).toInt());
+          pos.setY(QString(n.attribute("pos_y")).toInt());
+          newNode->setPosition(pos);
+
+          if (newNode->isConnector() == false) {
+              nodes.push_back(newNode);
+              ordering.push_back(nodes.size()-1);
+          }
+      }
+    }
+}

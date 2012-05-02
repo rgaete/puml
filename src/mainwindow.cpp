@@ -639,7 +639,8 @@ void MainWindow::on_actionOpen_triggered() {
   */
   QString openName = QFileDialog::getOpenFileName(this, tr("Open Document"),
                                                   tr("XML files (*.xml)"));
-  experiment(openName);
+  // experiment(openName);
+  documents.at(currentDocument)->openDocument(openName);
 }
 
 void MainWindow::on_actionSave_triggered() {
