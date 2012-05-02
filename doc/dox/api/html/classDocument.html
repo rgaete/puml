@@ -95,9 +95,11 @@ Public Slots</h2></td></tr>
 <tr><td colspan="2"><h2><a name="signals"></a>
 Signals</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDocument.html#a623b41b297d20acad5aeb477974abfa1">modelChanged</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDocument.html#a46ff092bdc9ead218e926a504dc329ca">modifiedChanged</a> (bool modified)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDocument.html#acdbcbe550084e8c20f4f67eb229ad66a">Document</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDocument.html#a92fa6d725baa7248052ecba873f96afc">Document</a> (QString fpath)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDocument.html#ac2e3f62307dc22baac21ddc10fa1609c">~Document</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDocument.html#a066ba242e9668ffdfcd58785b82ec7de">addNodeToList</a> (<a class="el" href="classBaseNode.html">BaseNode</a> *newNode)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDocument.html#a651f16a7787831dd5dade529007efdaa">setNewObjectID</a> (int prototypeID)</td></tr>
@@ -106,7 +108,10 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDocument.html#a332acaaa2028de3b5d775637c961f404">getCanvasIndex</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">BaseNode::DiagramType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDocument.html#a9f71a25956993e1a3556007e82a9583d">getDiagramType</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDocument.html#abc205e7c37998d66c9a8ab46f4821fd5">saveDocument</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDocument.html#a67059044d7960d3473e1480285064b13">saveAsDocument</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDocument.html#a7b828c665f035c9fd68e7af0fef52bd7">openDocument</a> (QString openName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDocument.html#a78319276da8efb8572c5648d5f38c18b">hasFilename</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDocument.html#a9da7a4058bd8599d86f5b5a1c9124907">setFilename</a> (QString filename)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDocument.html#af0252374861071c90895ee022041f15c">getModified</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classBaseNode.html">BaseNode</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">nodes</a></td></tr>
@@ -128,6 +133,39 @@ Public Attributes</h2></td></tr>
 <p>Constructor: simply initializes indexOfSelectedObject. </p>
 <div class="fragment"><pre class="fragment">                   {
   indexOfSelectedObject = -1;
+  fileName = <span class="stringliteral">&quot;&quot;</span>;
+  modifiedFlag = <span class="keyword">false</span>;
+}
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="a92fa6d725baa7248052ecba873f96afc"></a><!-- doxytag: member="Document::Document" ref="a92fa6d725baa7248052ecba873f96afc" args="(QString fpath)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Document::Document </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>fpath</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                {
+  fprintf(stderr, <span class="stringliteral">&quot;&gt; Document::Document(QString fpath)\n&quot;</span>);
+
+  QFile* xml_file = <span class="keyword">new</span> QFile(fpath);
+  <span class="keywordflow">if</span> (!xml_file-&gt;open(QIODevice::ReadOnly | QIODevice::Text)) {
+    <span class="keywordtype">char</span> msg[256];
+    sprintf(msg, <span class="stringliteral">&quot;Couldn&#39;t open the file %s&quot;</span>,
+            fpath.toStdString().c_str());
+    QMessageBox::critical(<span class="keyword">this</span>, <span class="stringliteral">&quot;Load XML File Problem&quot;</span>, msg, QMessageBox::Ok);
+    <span class="keywordflow">return</span>;
+  }
+
+  fprintf(stderr, <span class="stringliteral">&quot;&lt; Document::Document(QString fpath)\n&quot;</span>);
 }
 </pre></div>
 </div>
@@ -262,6 +300,10 @@ Public Attributes</h2></td></tr>
 <div class="fragment"><pre class="fragment">                                                         {
   <span class="comment">// Create the object only if a valid first object was found</span>
   <span class="keywordtype">int</span> index;
+  <span class="comment">// creates a temp object node for self connectors</span>
+  <a class="code" href="classBaseNode.html">BaseNode</a> *tempnode;
+  tempnode = <a class="code" href="classNodeFactory.html#a4d54b734a6928d59d8aeff971d091a7b">NodeFactory::getInstance</a>()-&gt;<a class="code" href="classNodeFactory.html#a781f3a67f9bf486c741de69ce8a58f4b">produce</a>(newObjectID);
+
   <span class="keywordflow">if</span> (firstConnectionIndex != -1) {
     index = getIndexAt(point);
     <span class="comment">// And the second index was found</span>
@@ -284,6 +326,7 @@ Public Attributes</h2></td></tr>
 
       <a class="code" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">nodes</a>.at(index)-&gt;setSelectedForConnectionPoint(<span class="keyword">false</span>);
 
+      setModified(<span class="keyword">true</span>);
       emit <a class="code" href="classDocument.html#a623b41b297d20acad5aeb477974abfa1">modelChanged</a>();
     }
     <span class="comment">//  Self connectors</span>
@@ -291,8 +334,9 @@ Public Attributes</h2></td></tr>
     <span class="keywordflow">else</span> <span class="keywordflow">if</span> (((index != -1) &amp;&amp;
          (<a class="code" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">nodes</a>.at(index)-&gt;isConnector() == <span class="keyword">false</span>)) &amp;&amp;
             (index == firstConnectionIndex) &amp;&amp;
-            diagramType == <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcdac7772d1045a9dad07f5fe029a36fcf50">BaseNode::Collaboration</a>) {
-      <span class="comment">// produce the object</span>
+             (tempnode-&gt;<a class="code" href="classBaseNode.html#a86bd186e3435098add1b9bdd79e25cdb">getText</a>() == <span class="stringliteral">&quot;Collaboration Self Line&quot;</span>)) {
+
+        <span class="comment">// produce the object</span>
       <a class="code" href="classBaseNode.html">BaseNode</a> *newNode;
       newNode = <a class="code" href="classNodeFactory.html#a4d54b734a6928d59d8aeff971d091a7b">NodeFactory::getInstance</a>()-&gt;<a class="code" href="classNodeFactory.html#a781f3a67f9bf486c741de69ce8a58f4b">produce</a>(newObjectID);
 
@@ -308,6 +352,7 @@ Public Attributes</h2></td></tr>
 
       <a class="code" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">nodes</a>.at(index)-&gt;setSelectedForConnectionPoint(<span class="keyword">false</span>);
 
+      setModified(<span class="keyword">true</span>);
       emit <a class="code" href="classDocument.html#a623b41b297d20acad5aeb477974abfa1">modelChanged</a>();
     }
 <span class="comment">// end of  self connect</span>
@@ -362,6 +407,7 @@ Public Attributes</h2></td></tr>
   indexOfSelectedObject = <a class="code" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">nodes</a>.size()-1;
   <a class="code" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">nodes</a>.at(indexOfSelectedObject)-&gt;setSelected(<span class="keyword">true</span>);
 
+  setModified(<span class="keyword">true</span>);
   emit <a class="code" href="classDocument.html#a623b41b297d20acad5aeb477974abfa1">modelChanged</a>();
 }
 </pre></div>
@@ -424,6 +470,23 @@ Public Attributes</h2></td></tr>
 </pre></div>
 </div>
 </div>
+<a class="anchor" id="af0252374861071c90895ee022041f15c"></a><!-- doxytag: member="Document::getModified" ref="af0252374861071c90895ee022041f15c" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Document::getModified </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> modifiedFlag; }
+</pre></div>
+</div>
+</div>
 <a class="anchor" id="a9409939da8e9f8536a1d334edaae3668"></a><!-- doxytag: member="Document::getNewObjectID" ref="a9409939da8e9f8536a1d334edaae3668" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -441,6 +504,23 @@ Public Attributes</h2></td></tr>
 </pre></div>
 </div>
 </div>
+<a class="anchor" id="a78319276da8efb8572c5648d5f38c18b"></a><!-- doxytag: member="Document::hasFilename" ref="a78319276da8efb8572c5648d5f38c18b" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Document::hasFilename </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">if</span> (fileName == <span class="stringliteral">&quot;&quot;</span>) { <span class="keywordflow">return</span> <span class="keyword">false</span>; } <span class="keywordflow">else</span> { <span class="keywordflow">return</span> <span class="keyword">true</span>; } }
+</pre></div>
+</div>
+</div>
 <a class="anchor" id="a623b41b297d20acad5aeb477974abfa1"></a><!-- doxytag: member="Document::modelChanged" ref="a623b41b297d20acad5aeb477974abfa1" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -449,6 +529,23 @@ Public Attributes</h2></td></tr>
           <td class="memname">void Document::modelChanged </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
+          <td><code> [signal]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a46ff092bdc9ead218e926a504dc329ca"></a><!-- doxytag: member="Document::modifiedChanged" ref="a46ff092bdc9ead218e926a504dc329ca" args="(bool modified)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Document::modifiedChanged </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>modified</em></td><td>)</td>
           <td><code> [signal]</code></td>
         </tr>
       </table>
@@ -480,7 +577,62 @@ Public Attributes</h2></td></tr>
     <a class="code" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">nodes</a>.at(indexOfSelectedObject)-&gt;setPosition(point + positionDelta);
   }
 
+  setModified(<span class="keyword">true</span>);
   emit <a class="code" href="classDocument.html#a623b41b297d20acad5aeb477974abfa1">modelChanged</a>();
+}
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="a7b828c665f035c9fd68e7af0fef52bd7"></a><!-- doxytag: member="Document::openDocument" ref="a7b828c665f035c9fd68e7af0fef52bd7" args="(QString openName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Document::openDocument </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>openName</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Opens specified file. This function does not ask the user to save an unsaved modified diagram. That is the MainWindow's job. This function will simply clear out the node vector and load the file in. </p>
+<div class="fragment"><pre class="fragment">{
+    QDomDocument* xmlDoc = <a class="code" href="document_8cpp.html#a5f17aca6a0b1fe3972dc239f54c44e6b">openSaveFile</a>(openName);
+    QDomElement docElem = <a class="code" href="document_8cpp.html#a249d1c8f88c7c49c9ee91ff035a8c3c4">getNextDocumentElement</a>(xmlDoc);
+    QDomElement n;
+    <a class="code" href="classBaseNode.html">BaseNode</a>* newNode;
+
+    <span class="comment">// Clear the nodes vector</span>
+    <a class="code" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">nodes</a>.clear();
+    ordering.clear();
+
+    <span class="keywordflow">while</span> (1) {
+      n = <a class="code" href="document_8cpp.html#ab9a732c8785698cc6d7c4b82928520c9">getNextNodeElement</a>(docElem);
+      <span class="keywordflow">if</span> (n.isNull()) {
+        <span class="keywordflow">break</span>;
+      }
+
+      <span class="comment">// Now that we have the QDomElement, produce the node</span>
+      newNode = <a class="code" href="classNodeFactory.html#a4d54b734a6928d59d8aeff971d091a7b">NodeFactory::getInstance</a>()-&gt;<a class="code" href="classNodeFactory.html#ac2a8a4d0f2183fb4c1552b2994839b4c">produceFromClassName</a>(n.attribute(<span class="stringliteral">&quot;class_name&quot;</span>));
+      <span class="keywordflow">if</span> (newNode == 0) {
+          fprintf(stderr, <span class="stringliteral">&quot;Error loading: Got a null node with class name &#39;%-21s&#39;\n&quot;</span>, qPrintable(n.attribute(<span class="stringliteral">&quot;class_name&quot;</span>)));
+      } <span class="keywordflow">else</span> {
+          QPoint pos;
+          pos.setX(QString(n.attribute(<span class="stringliteral">&quot;pos_x&quot;</span>)).toInt());
+          pos.setY(QString(n.attribute(<span class="stringliteral">&quot;pos_y&quot;</span>)).toInt());
+          newNode-&gt;<a class="code" href="classBaseNode.html#aa6675efee5af9fc0e9b2e19c98e4b7dc">setPosition</a>(pos);
+
+          <span class="keywordflow">if</span> (newNode-&gt;<a class="code" href="classBaseNode.html#a7f1ca77b551e9d5320fb08512c9f3d47">isConnector</a>() == <span class="keyword">false</span>) {
+              <a class="code" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">nodes</a>.push_back(newNode);
+              ordering.push_back(<a class="code" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">nodes</a>.size()-1);
+          }
+      }
+    }
+
+    fileName = openName;
+    setModified(<span class="keyword">false</span>);
 }
 </pre></div>
 </div>
@@ -498,8 +650,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Slot. Removes the currently selected node. If the node is an object, it for (int i=0; i&lt;nodes.size(); i++) {</p>
-<p>}also removes all connections connected to that node. </p>
+<p>Slot. Removes the currently selected node. If the node is an object, it also removes all connections connected to that node. </p>
 <div class="fragment"><pre class="fragment">                            {
   assert(indexOfSelectedObject &gt;= -1);
   assert(indexOfSelectedObject &lt; static_cast&lt;int&gt;(<a class="code" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">nodes</a>.size()));
@@ -553,31 +704,9 @@ Public Attributes</h2></td></tr>
       <a class="code" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">nodes</a>.erase(<a class="code" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">nodes</a>.begin()+indexOfSelectedObject);
     }
   }
+  setModified(<span class="keyword">true</span>);
   indexOfSelectedObject = -1;
   emit <a class="code" href="classDocument.html#a623b41b297d20acad5aeb477974abfa1">modelChanged</a>();
-}
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="a67059044d7960d3473e1480285064b13"></a><!-- doxytag: member="Document::saveAsDocument" ref="a67059044d7960d3473e1480285064b13" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Document::saveAsDocument </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                              {
-    <span class="comment">// Saves file name to current document only accesible variable.</span>
-    fileName = QFileDialog::getSaveFileName(<span class="keyword">this</span>, tr(<span class="stringliteral">&quot;Save As File&quot;</span>),
-                                                    tr(<span class="stringliteral">&quot;XML files (*.xml)&quot;</span>));
-    <span class="comment">// Need to add if canceled saving a name it will stop the loop, as its currently infinite.</span>
-    <a class="code" href="classDocument.html#abc205e7c37998d66c9a8ab46f4821fd5">Document::saveDocument</a>();
 }
 </pre></div>
 </div>
@@ -595,24 +724,22 @@ Public Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+<p>Saves the document to a file. The file is specified by the fileName member variable. If the member variable isn't set, the function exits. If the file is an invalid file, the function produces an error message to the user. This function shouldn't ever be called when the filename isn't set. </p>
 <div class="fragment"><pre class="fragment">                            {
-  <span class="keywordtype">string</span> documentName;
-
-  <span class="comment">// Simple converstion for C string check.</span>
-  documentName = fileName.toStdString().c_str();
-  <span class="comment">// Verifies that the filename specified is a valid one.</span>
-  <span class="keywordflow">if</span> (documentName.empty()) {
-    <span class="comment">// If a filename and path doesn&#39;t exist it forces it to the saveas routine to get the filename.</span>
-    <a class="code" href="classDocument.html#a67059044d7960d3473e1480285064b13">Document::saveAsDocument</a>();
-  } <span class="keywordflow">else</span> {
+  <span class="keywordflow">if</span> (this-&gt;<a class="code" href="classDocument.html#a78319276da8efb8572c5648d5f38c18b">hasFilename</a>() != <span class="keyword">false</span>) {
+    QMessageBox::information(<span class="keyword">this</span>, <span class="stringliteral">&quot;pUML&quot;</span>, <span class="stringliteral">&quot;Trying to open file &quot;</span> + fileName);
     QFile file(fileName);
-    QDomDocument test(<span class="stringliteral">&quot;nodes_vector_xml&quot;</span>);
-    QDomElement root = test.createElement(<span class="stringliteral">&quot;nodes_vector_xml&quot;</span>);
-    test.appendChild(root);
+    QDomDocument xml_doc(<span class="stringliteral">&quot;pUML_save_document&quot;</span>);
+    <span class="comment">//QDomDocument xml_doc(&quot;nodes_vector_xml&quot;);</span>
+    <span class="comment">//QDomElement root = xml_doc.createElement(&quot;nodes_vector_xml&quot;);</span>
+    QDomElement documentElement = xml_doc.createElement(<span class="stringliteral">&quot;document&quot;</span>);
+    xml_doc.appendChild(documentElement);
+    QDomElement nodesElement = xml_doc.createElement(<span class="stringliteral">&quot;nodes_vector_element&quot;</span>);
+    documentElement.appendChild(nodesElement);
 
     <span class="keywordflow">for</span> (vector&lt;BaseNode*&gt;::iterator it = <a class="code" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">nodes</a>.begin();
          it != <a class="code" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">nodes</a>.end(); ++it) {
-      (*it)-&gt;to_xml(test, root);
+      (*it)-&gt;to_xml(xml_doc, nodesElement);
     }
 
     <span class="comment">// Checks to make sure that the file is writable.</span>
@@ -624,9 +751,10 @@ Public Attributes</h2></td></tr>
 
     ofstream myfile;
     myfile.open(fileName.toStdString().c_str());
-    myfile &lt;&lt; test.toString().toStdString();
+    myfile &lt;&lt; xml_doc.toString().toStdString();
     myfile.close();
-    <span class="comment">//  write the saving as file function here with the fileName</span>
+
+    setModified(<span class="keyword">false</span>);
   }
 }
 </pre></div>
@@ -654,6 +782,7 @@ Public Attributes</h2></td></tr>
       ordering.move(orderingindex, orderingindex-1);
     }
   }
+  setModified(<span class="keyword">true</span>);
   emit <a class="code" href="classDocument.html#a623b41b297d20acad5aeb477974abfa1">modelChanged</a>();
 }
 </pre></div>
@@ -681,6 +810,7 @@ Public Attributes</h2></td></tr>
       ordering.move(orderingindex, orderingindex+1);
     }
   }
+  setModified(<span class="keyword">true</span>);
   emit <a class="code" href="classDocument.html#a623b41b297d20acad5aeb477974abfa1">modelChanged</a>();
 }
 </pre></div>
@@ -706,6 +836,7 @@ Public Attributes</h2></td></tr>
     ordering.removeAll(indexOfSelectedObject);
     ordering.prepend(indexOfSelectedObject);
   }
+  setModified(<span class="keyword">true</span>);
   emit <a class="code" href="classDocument.html#a623b41b297d20acad5aeb477974abfa1">modelChanged</a>();
 }
 </pre></div>
@@ -731,6 +862,7 @@ Public Attributes</h2></td></tr>
     ordering.removeAll(indexOfSelectedObject);
     ordering.append(indexOfSelectedObject);
   }
+  setModified(<span class="keyword">true</span>);
   emit <a class="code" href="classDocument.html#a623b41b297d20acad5aeb477974abfa1">modelChanged</a>();
 }
 </pre></div>
@@ -769,6 +901,24 @@ Public Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">{ diagramType = type; }
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="a9da7a4058bd8599d86f5b5a1c9124907"></a><!-- doxytag: member="Document::setFilename" ref="a9da7a4058bd8599d86f5b5a1c9124907" args="(QString filename)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Document::setFilename </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{ fileName = filename; }
 </pre></div>
 </div>
 </div>
@@ -829,8 +979,7 @@ Public Attributes</h2></td></tr>
     <span class="comment">// Save the difference between where the mouse click was (point) and</span>
     <span class="comment">// where the actual middle of the object is. This will be used to</span>
     <span class="comment">// acurately move and drag the object.</span>
-    positionDelta = <a class="code" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">nodes</a>.at(indexOfSelectedObject)-&gt;getPosition() - point;
-  }
+    positionDelta = <a class="code" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">nodes</a>.at(indexOfSelectedObject)-&gt;getPosition() - point; }
 
   <span class="comment">// at this point a redraw is needed to outputshow the new</span>
   <span class="comment">// highlighted object.</span>
@@ -867,6 +1016,7 @@ Public Attributes</h2></td></tr>
     }
   }
 
+  setModified(<span class="keyword">true</span>);
   emit <a class="code" href="classDocument.html#a623b41b297d20acad5aeb477974abfa1">modelChanged</a>();
 }
 </pre></div>
@@ -905,7 +1055,7 @@ Public Attributes</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 19:21:07 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed May 2 2012 12:44:13 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

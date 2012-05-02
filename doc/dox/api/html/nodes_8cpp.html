@@ -60,8 +60,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="header">
-  <div class="summary">
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">nodes.cpp File Reference</div>  </div>
 </div>
@@ -74,69 +72,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <code>#include &quot;<a class="el" href="nodes_8h_source.html">./nodes.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="mathfunctions_8h_source.html">./mathfunctions.h</a>&quot;</code><br/>
 </div><table class="memberdecls">
-<tr><td colspan="2"><h2><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nodes_8cpp.html#ac9e4ac83406f3dfd742b4939a1c8e432">set_xml_attr</a> (QDomDocument &amp;doc, QDomElement &amp;node, QString label, QString val)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>describes the behavior of the node classes </p>
-</div><hr/><h2>Function Documentation</h2>
-<a class="anchor" id="ac9e4ac83406f3dfd742b4939a1c8e432"></a><!-- doxytag: member="nodes.cpp::set_xml_attr" ref="ac9e4ac83406f3dfd742b4939a1c8e432" args="(QDomDocument &amp;doc, QDomElement &amp;node, QString label, QString val)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void set_xml_attr </td>
-          <td>(</td>
-          <td class="paramtype">QDomDocument &amp;&#160;</td>
-          <td class="paramname"><em>doc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">QDomElement &amp;&#160;</td>
-          <td class="paramname"><em>node</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">QString&#160;</td>
-          <td class="paramname"><em>label</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">QString&#160;</td>
-          <td class="paramname"><em>val</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>This is a helper method for to_xml that sets an attribute in an XML node.</p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">doc</td><td>This is the document we are creating. Whatever intiates the save will create this object and will need to make it available in all delegations. </td></tr>
-    <tr><td class="paramname">node</td><td>This is the node of the document. For example, when saving the nodes vector, we create a "Node" element. </td></tr>
-    <tr><td class="paramname">label</td><td>This is the name of the attribute we are saving. </td></tr>
-    <tr><td class="paramname">val</td><td>This is the value associated with label. </td></tr>
-  </table>
-  </dd>
-</dl>
-<div class="fragment"><pre class="fragment">                                              {
-  QDomElement el = doc.createElement(label);
-  node.appendChild(el);
-  QDomText text = doc.createTextNode(val);
-  el.appendChild(text);
-}
-</pre></div>
-</div>
-</div>
-</div>
+</div></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -151,7 +90,7 @@ Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 19:21:06 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed May 2 2012 12:44:12 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -63,6 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
+<a href="#pub-slots">Public Slots</a> &#124;
 <a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">TransitionConnection Class Reference</div>  </div>
@@ -86,11 +87,14 @@ Inheritance diagram for TransitionConnection:</div>
 
 <p><a href="classTransitionConnection-members.html">List of all members.</a></p>
 <table class="memberdecls">
+<tr><td colspan="2"><h2><a name="pub-slots"></a>
+Public Slots</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransitionConnection.html#acefe57861a86001cf369ac7eed859fd8">setText</a> (QString t)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransitionConnection.html#a4189125967f1e5be9c19e01ec0b723a7">TransitionConnection</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBaseNode.html">BaseNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransitionConnection.html#ac42cd8770cae95fb2d034402139cdec7">clone</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">QDialog *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransitionConnection.html#a876523978b93fa5a52142fd7d4ec545b">getDialog</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QDialog *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransitionConnection.html#a5524c6a145db68faf5acac05f1ad55bf">getDialog</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransitionConnection.html#a84e70e1af5d2469b0a75b68cc29c6cb1">getIconPath</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransitionConnection.html#a2928bcda816dbd4da281d742bc281d16">getText</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransitionConnection.html#a019ef6570a894f59588115d2e2242aaf">draw</a> (QPainter &amp;painter)</td></tr>
@@ -164,6 +168,10 @@ Public Member Functions</h2></td></tr>
   <a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a> = obj1-&gt;<a class="code" href="classBaseNode.html#ac0a992931fa5e310251c25e28acd210c">getClosestConnectionPoint</a>(obj2-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>());
   <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a> = obj2-&gt;<a class="code" href="classBaseNode.html#ac0a992931fa5e310251c25e28acd210c">getClosestConnectionPoint</a>(obj1-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>());
 
+  <span class="keywordtype">int</span> x = (<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.x() + <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>.x()) / 2;
+  <span class="keywordtype">int</span> y = (<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.y() + <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>.y()) / 2;
+  QPoint textPos(x,y);
+
   <span class="keywordflow">if</span> (<a class="code" href="classBaseNode.html#a321a3231c6688686d5ee779ab169b741">selected</a> == <span class="keyword">true</span>) {
     QPen selectPen;
     selectPen.setWidth(2);
@@ -178,6 +186,8 @@ Public Member Functions</h2></td></tr>
   calcExtensionPoint();
   path.quadTo(extensionPoint, <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>);
   painter.strokePath(path, painter.pen());
+  painter.drawText(textPos, text);
+  drawArrow(painter);
 }
 </pre></div>
 </div>
@@ -201,22 +211,28 @@ Public Member Functions</h2></td></tr>
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="a876523978b93fa5a52142fd7d4ec545b"></a><!-- doxytag: member="TransitionConnection::getDialog" ref="a876523978b93fa5a52142fd7d4ec545b" args="()" -->
+<a class="anchor" id="a5524c6a145db68faf5acac05f1ad55bf"></a><!-- doxytag: member="TransitionConnection::getDialog" ref="a5524c6a145db68faf5acac05f1ad55bf" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">QDialog* TransitionConnection::getDialog </td>
+          <td class="memname">QDialog * TransitionConnection::getDialog </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [inline, virtual]</code></td>
+          <td><code> [virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
 <p>Implements <a class="el" href="classBaseNode.html#a990ffea58e51f55cfa8c6862b79fd880">BaseNode</a>.</p>
-<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classTransitionConnectionDialog.html" title="This class provides a custom dialog for an InteractionLineNode.">TransitionConnectionDialog</a>; }
+<div class="fragment"><pre class="fragment">{
+  <a class="code" href="classTransitionConnectionDialog.html" title="This class provides a custom dialog for an InteractionLineNode.">TransitionConnectionDialog</a> *dialog = <span class="keyword">new</span> <a class="code" href="classTransitionConnectionDialog.html" title="This class provides a custom dialog for an InteractionLineNode.">TransitionConnectionDialog</a>;
+  dialog-&gt;setTextValue(text);
+  connect(dialog, SIGNAL(textValueSelected(QString)),
+          <span class="keyword">this</span>, SLOT(<a class="code" href="classTransitionConnection.html#acefe57861a86001cf369ac7eed859fd8">setText</a>(QString)));
+  <span class="keywordflow">return</span> dialog;
+}
 </pre></div>
 </div>
 </div>
@@ -258,6 +274,24 @@ Public Member Functions</h2></td></tr>
 </pre></div>
 </div>
 </div>
+<a class="anchor" id="acefe57861a86001cf369ac7eed859fd8"></a><!-- doxytag: member="TransitionConnection::setText" ref="acefe57861a86001cf369ac7eed859fd8" args="(QString t)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TransitionConnection::setText </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td><code> [inline, slot]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{ text = t; }
+</pre></div>
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="UMLnodes__state_8h_source.html">UMLnodes_state.h</a></li>
 <li><a class="el" href="UMLnodes__state_8cpp.html">UMLnodes_state.cpp</a></li>
@@ -277,7 +311,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 19:21:08 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed May 2 2012 12:44:13 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

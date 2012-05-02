@@ -79,25 +79,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00014"></a>00014 
 <a name="l00015"></a>00015     <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="classNodeFactory.html#a5e0d91c7d2ae24008a317a74e31d9501">registerPrototype</a>(<a class="code" href="classBaseNode.html">BaseNode</a>* newPrototype);
 <a name="l00016"></a>00016     <span class="keyword">static</span> <a class="code" href="classBaseNode.html">BaseNode</a>* <a class="code" href="classNodeFactory.html#a781f3a67f9bf486c741de69ce8a58f4b">produce</a>(<span class="keywordtype">int</span> prototype_id);
-<a name="l00017"></a>00017     <span class="keyword">static</span> <a class="code" href="classNodeFactory.html">NodeFactory</a>* <a class="code" href="classNodeFactory.html#a4d54b734a6928d59d8aeff971d091a7b">getInstance</a>();
-<a name="l00018"></a>00018 
-<a name="l00019"></a>00019   <span class="keyword">private</span>:
-<a name="l00020"></a>00020     <span class="comment">// Constructor is private so the class cannot be instantiated.</span>
-<a name="l00021"></a>00021     <a class="code" href="classNodeFactory.html">NodeFactory</a>() {}
-<a name="l00022"></a>00022     <span class="comment">// Copy Constructor is private so the class cannot be coppied.</span>
-<a name="l00023"></a>00023     <span class="keyword">explicit</span> <a class="code" href="classNodeFactory.html">NodeFactory</a>(<a class="code" href="classNodeFactory.html">NodeFactory</a> <span class="keyword">const</span> &amp;) {}
-<a name="l00024"></a>00024     <span class="comment">// Assignment operated is private so the class cannot be assigned.</span>
-<a name="l00025"></a>00025     <a class="code" href="classNodeFactory.html">NodeFactory</a>&amp; operator=(<a class="code" href="classNodeFactory.html">NodeFactory</a> <span class="keyword">const</span>&amp;) { <span class="keywordflow">return</span> *<span class="keyword">this</span>; }
-<a name="l00026"></a>00026 
-<a name="l00027"></a>00027     <span class="comment">// The vector of prototypes. This is static so the lifetime is</span>
-<a name="l00028"></a>00028     <span class="comment">// the entire execution time of the program.</span>
-<a name="l00029"></a>00029     <span class="keyword">static</span> std::vector&lt;BaseNode*&gt; prototypes;
-<a name="l00030"></a>00030     <span class="comment">// The single instance of the class. Static so the lifetime is</span>
-<a name="l00031"></a>00031     <span class="comment">// the entire lifetime of the program.</span>
-<a name="l00032"></a>00032     <span class="keyword">static</span> <a class="code" href="classNodeFactory.html">NodeFactory</a>* instance;
-<a name="l00033"></a>00033 };
-<a name="l00034"></a>00034 
-<a name="l00035"></a>00035 <span class="preprocessor">#endif  // SRC_NODEFACTORY_H_</span>
+<a name="l00017"></a>00017     <span class="keyword">static</span> <a class="code" href="classBaseNode.html">BaseNode</a>* <a class="code" href="classNodeFactory.html#ac2a8a4d0f2183fb4c1552b2994839b4c">produceFromClassName</a>(QString name);
+<a name="l00018"></a>00018     <span class="keyword">static</span> <a class="code" href="classNodeFactory.html">NodeFactory</a>* <a class="code" href="classNodeFactory.html#a4d54b734a6928d59d8aeff971d091a7b">getInstance</a>();
+<a name="l00019"></a>00019 
+<a name="l00020"></a>00020   <span class="keyword">private</span>:
+<a name="l00021"></a>00021     <span class="comment">// Constructor is private so the class cannot be instantiated.</span>
+<a name="l00022"></a>00022     <a class="code" href="classNodeFactory.html">NodeFactory</a>() {}
+<a name="l00023"></a>00023     <span class="comment">// Copy Constructor is private so the class cannot be coppied.</span>
+<a name="l00024"></a>00024     <span class="keyword">explicit</span> <a class="code" href="classNodeFactory.html">NodeFactory</a>(<a class="code" href="classNodeFactory.html">NodeFactory</a> <span class="keyword">const</span> &amp;) {}
+<a name="l00025"></a>00025     <span class="comment">// Assignment operated is private so the class cannot be assigned.</span>
+<a name="l00026"></a>00026     <a class="code" href="classNodeFactory.html">NodeFactory</a>&amp; operator=(<a class="code" href="classNodeFactory.html">NodeFactory</a> <span class="keyword">const</span>&amp;) { <span class="keywordflow">return</span> *<span class="keyword">this</span>; }
+<a name="l00027"></a>00027 
+<a name="l00028"></a>00028     <span class="comment">// The vector of prototypes. This is static so the lifetime is</span>
+<a name="l00029"></a>00029     <span class="comment">// the entire execution time of the program.</span>
+<a name="l00030"></a>00030     <span class="keyword">static</span> std::vector&lt;BaseNode*&gt; prototypes;
+<a name="l00031"></a>00031     <span class="comment">// The single instance of the class. Static so the lifetime is</span>
+<a name="l00032"></a>00032     <span class="comment">// the entire lifetime of the program.</span>
+<a name="l00033"></a>00033     <span class="keyword">static</span> <a class="code" href="classNodeFactory.html">NodeFactory</a>* instance;
+<a name="l00034"></a>00034 };
+<a name="l00035"></a>00035 
+<a name="l00036"></a>00036 <span class="preprocessor">#endif  // SRC_NODEFACTORY_H_</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -114,7 +115,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 19:21:06 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed May 2 2012 12:44:12 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

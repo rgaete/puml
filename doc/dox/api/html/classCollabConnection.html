@@ -98,7 +98,6 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollabConnection.html#acf679c77e19d6fa55df982f1f4fb0bc6">getText</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollabConnection.html#aefe828ef1a1cdaebb71946854bcd5cbb">draw</a> (QPainter &amp;painter)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">DiagramType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollabConnection.html#a4caf989dc7cb65865b81888f3328ca75">getDiagramType</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">QPoint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollabConnection.html#a5e86a988f6697905bb7928643abc81c7">FindMidPoint</a> (QPoint point1, QPoint point2)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollabConnection.html#ae559e9a860d8216b4538fd4f3bcc5faa">FindDirection</a> (QPoint point1, QPoint point2, QPoint temppoint1, QPoint temppoint2)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollabConnection.html#a39eae6078cd248a147f93989cf9e6f1e">DrawArrow</a> (QPainter &amp;painter, QPoint point, QPoint point2, QPoint temppoint1, QPoint temppoint2)</td></tr>
 </table>
@@ -141,10 +140,10 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classBaseNode.html#a79627d9a052108d60082dddbd60dfb02">BaseNode</a>.</p>
 <div class="fragment"><pre class="fragment">                                             {  <span class="comment">// NOLINT</span>
-    QPoint temppoint1;
-    QPoint temppoint2;
-    QPoint temppoint3;
-    QPoint temppoint4;
+  QPoint temppoint1;
+  QPoint temppoint2;
+  QPoint temppoint3;
+  QPoint temppoint4;
   <a class="code" href="classBaseNode.html">BaseNode</a> *obj1, *obj2;
   std::list&lt;BaseNode*&gt;::iterator it = <a class="code" href="classBaseNode.html#a6589606c2f8b588e7e27199803cfb2c8">connectedObjects</a>.begin();
   obj1 = *it;
@@ -176,14 +175,16 @@ Public Member Functions</h2></td></tr>
   painter.drawLine(<a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>, <a class="code" href="classSquareConnectionNode.html#a587eb45506ed1e48bae1edf5f2f40d8e">pt3</a>);
   painter.drawLine(<a class="code" href="classSquareConnectionNode.html#a587eb45506ed1e48bae1edf5f2f40d8e">pt3</a>, <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>);
 
-  <span class="comment">//These temp values are needed in order to compute the direction of the arrow</span>
+  <span class="comment">// These temp values are needed in order to compute the direction of the arrow</span>
   <span class="comment">// This is so that the pt values dont get changed</span>
-  <span class="comment">//These are the initial values i chose to use // inner points</span>
+  <span class="comment">// These are the initial values i chose to use</span>
+  <span class="comment">// inner points</span>
   temppoint1.setX(<a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>.x());
   temppoint1.setY(<a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>.y());
   temppoint2.setX(<a class="code" href="classSquareConnectionNode.html#a587eb45506ed1e48bae1edf5f2f40d8e">pt3</a>.x());
   temppoint2.setY(<a class="code" href="classSquareConnectionNode.html#a587eb45506ed1e48bae1edf5f2f40d8e">pt3</a>.y());
-<span class="comment">// these ones were required for a bug fix // outer points</span>
+  <span class="comment">// these ones were required for a bug fix</span>
+  <span class="comment">// outer points</span>
   temppoint3.setX(<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.x());
   temppoint3.setY(<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.y());
   temppoint4.setX(<a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.x());
@@ -193,7 +194,7 @@ Public Member Functions</h2></td></tr>
   <a class="code" href="classCollabConnection.html#a39eae6078cd248a147f93989cf9e6f1e">DrawArrow</a>(painter, temppoint1, temppoint2, temppoint3, temppoint4);
 
   <span class="comment">// Draws the text</span>
-  painter.drawText(textpos,this-&gt;text);
+  painter.drawText(textpos, this-&gt;text);
 }
 </pre></div>
 </div>
@@ -240,58 +241,48 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{
-    <span class="keywordtype">int</span> dir = 1; <span class="comment">//direction pointing, left or right, initialized to right</span>
-    <span class="keywordtype">int</span> <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> = 50; <span class="comment">// length and height variables</span>
-    <span class="keywordtype">int</span> <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> = 50;
-    <span class="keywordtype">int</span> offset = 15; <span class="comment">// offset off of the initial point value on the connection line</span>
-    <span class="comment">// finds the direction of the arrow and then sets it to dir</span>
-    dir = <a class="code" href="classCollabConnection.html#ae559e9a860d8216b4538fd4f3bcc5faa">FindDirection</a>(point1, point2, temppoint1, temppoint2);
+<div class="fragment"><pre class="fragment">                                                    {
+  <span class="keywordtype">int</span> dir = 1;  <span class="comment">// direction pointing, left or right, initialized to right</span>
+  <span class="keywordtype">int</span> <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> = 50;  <span class="comment">// length and height variables</span>
+  <span class="keywordtype">int</span> <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> = 50;
+  <span class="keywordtype">int</span> offset = 15;  <span class="comment">// offset off of the initial point value on the connection</span>
+                    <span class="comment">// line</span>
+  <span class="comment">// finds the direction of the arrow and then sets it to dir</span>
+  dir = <a class="code" href="classCollabConnection.html#ae559e9a860d8216b4538fd4f3bcc5faa">FindDirection</a>(point1, point2, temppoint1, temppoint2);
 
-    <span class="comment">// resets length to either be positive or negative</span>
-    length *= dir;
+  <span class="comment">// resets length to either be positive or negative</span>
+  length *= dir;
 
-    <span class="comment">//computes starting and ending values for the arrow</span>
-    <span class="keywordtype">int</span> tempx = point1.x() + offset;
-    <span class="keywordtype">int</span> tempy = point1.y() - offset;
-    <span class="keywordtype">int</span> headx = tempx + length/2;
-    <span class="keywordtype">int</span> heady = tempy;
+  <span class="comment">// computes starting and ending values for the arrow</span>
+  <span class="keywordtype">int</span> tempx = point1.x() + offset;
+  <span class="keywordtype">int</span> tempy = point1.y() - offset;
+  <span class="keywordtype">int</span> headx = tempx + length / 2;
+  <span class="keywordtype">int</span> heady = tempy;
 
-    <span class="comment">// Sets the position of the text</span>
-    <span class="comment">// Initializes the text position relative to the location of the leftmost point of the arrow</span>
-    <span class="keywordflow">if</span>(tempx &gt; headx)
-    {
-        textpos.setX(tempx+5);
-        textpos.setY(tempy+5);
-    }
-    <span class="keywordflow">else</span>
-    {
-        textpos.setX(headx+5);
-        textpos.setY(heady+5);
-    }
+  <span class="comment">// Sets the position of the text</span>
+  <span class="comment">// Initializes the text position relative to the location of the leftmost</span>
+  <span class="comment">// point of the arrow</span>
+  <span class="keywordflow">if</span> (tempx &gt; headx) {
+    textpos.setX(tempx + 5);
+    textpos.setY(tempy + 5);
+  } <span class="keywordflow">else</span> {
+    textpos.setX(headx + 5);
+    textpos.setY(heady + 5);
+  }
 
-    <span class="comment">//sets up the pen</span>
-    QPen pen;
-    pen.setWidth(2);
-    painter.setPen(pen);
-    painter.setBrush(Qt::NoBrush);
+  <span class="comment">// sets up the pen</span>
+  QPen pen;
+  pen.setWidth(2);
+  painter.setPen(pen);
+  painter.setBrush(Qt::NoBrush);
 
-  <span class="comment">//Draws the body of arrow</span>
-    painter.drawLine(tempx,
-                     tempy,
-                     headx,
-                     heady);
+  <span class="comment">// Draws the body of arrow</span>
+  painter.drawLine(tempx, tempy, headx, heady);
 
-    <span class="comment">// Bottom arrow</span>
-    painter.drawLine(headx,
-                     tempy,
-                     tempx + length/3,
-                     heady + height/6);
-    <span class="comment">//Top Arrow</span>
-    painter.drawLine(headx,
-                     tempy,
-                     tempx + length/3,
-                     heady - height/6);
+  <span class="comment">// Bottom arrow</span>
+  painter.drawLine(headx, tempy, tempx + length / 3, heady + height / 6);
+  <span class="comment">// Top Arrow</span>
+  painter.drawLine(headx, tempy, tempx + length / 3, heady - height / 6);
 }
 </pre></div>
 </div>
@@ -332,105 +323,51 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{
-    QPoint result;
-<span class="comment">// inner points</span>
-    <span class="keywordtype">int</span> temp1x = point1.x();
-    <span class="keywordtype">int</span> temp1y = point1.y();
-    <span class="keywordtype">int</span> temp2x = point2.x();
-    <span class="keywordtype">int</span> temp2y = point2.y();
+<div class="fragment"><pre class="fragment">                                                                          {
+  QPoint result;
+  <span class="comment">// inner points</span>
+  <span class="keywordtype">int</span> temp1x = point1.x();
+  <span class="keywordtype">int</span> temp1y = point1.y();
+  <span class="keywordtype">int</span> temp2x = point2.x();
+  <span class="keywordtype">int</span> temp2y = point2.y();
 
-<span class="comment">// Outer points</span>
-    <span class="keywordtype">int</span> temp3x = temppoint1.x();
-    <span class="keywordtype">int</span> temp3y = temppoint1.y();
-    <span class="keywordtype">int</span> temp4x = temppoint2.x();
-    <span class="keywordtype">int</span> temp4y = temppoint2.y();
+  <span class="comment">// Outer points</span>
+  <span class="keywordtype">int</span> temp3x = temppoint1.x();
+  <span class="keywordtype">int</span> temp3y = temppoint1.y();
+  <span class="keywordtype">int</span> temp4x = temppoint2.x();
+  <span class="keywordtype">int</span> temp4y = temppoint2.y();
 
+  <span class="comment">// extra variables</span>
+  <span class="keywordtype">int</span> fx;
+  <span class="keywordtype">int</span> fy;
+  <span class="keywordtype">int</span> gx;
+  <span class="keywordtype">int</span> gy;
+  <span class="keywordtype">int</span> absfx;
+  <span class="keywordtype">int</span> absfy;
 
-<span class="comment">//extra variables</span>
-    <span class="keywordtype">int</span> fx;
-    <span class="keywordtype">int</span> fy;
-    <span class="keywordtype">int</span> gx;
-    <span class="keywordtype">int</span> gy;
-    <span class="keywordtype">int</span> absfx;
-    <span class="keywordtype">int</span> absfy;
+  <span class="comment">// find differences</span>
+  fx = temp1x - temp2x;
+  fy = temp1y - temp2y;
 
-    <span class="comment">// find differences</span>
-    fx = temp1x - temp2x;
-    fy = temp1y - temp2y;
+  gx = temp3x - temp4x;
+  gy = temp3y - temp4y;
 
-    gx = temp3x - temp4x;
-    gy = temp3y - temp4y;
+  <span class="comment">// find absolute values</span>
+  absfx = abs(fx);
+  absfy = abs(fy);
 
-
-    <span class="comment">// find absolute values</span>
-    absfx = abs(fx);
-    absfy = abs(fy);
-
-    <span class="comment">//if point2 is to the right or</span>
-    <span class="keywordflow">if</span>((fx &gt; 0))<span class="comment">// || (fy &lt; 0))</span>
-    {
-        <span class="keywordflow">return</span> -1;
+  <span class="comment">// if point2 is to the right or</span>
+  <span class="keywordflow">if</span> (fx &gt; 0) {  <span class="comment">// || (fy &lt; 0))</span>
+    <span class="keywordflow">return</span> -1;
+  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (fx == 0) {
+    <span class="keywordflow">if</span> (gx &gt; 0) {
+      <span class="keywordflow">return</span> -1;
+    } <span class="keywordflow">else</span> {
+      <span class="keywordflow">return</span> 1;
     }
-    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(fx == 0)
-    {
-        <span class="keywordflow">if</span>(gx &gt; 0)
-        {
-            <span class="keywordflow">return</span> -1;
-        }
-        <span class="keywordflow">else</span>
-        {
-            <span class="keywordflow">return</span> 1;
-        }
-    }
-    <span class="keywordflow">else</span>
-        <span class="keywordflow">return</span> 1;
-
-}
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="a5e86a988f6697905bb7928643abc81c7"></a><!-- doxytag: member="CollabConnection::FindMidPoint" ref="a5e86a988f6697905bb7928643abc81c7" args="(QPoint point1, QPoint point2)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">QPoint CollabConnection::FindMidPoint </td>
-          <td>(</td>
-          <td class="paramtype">QPoint&#160;</td>
-          <td class="paramname"><em>point1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">QPoint&#160;</td>
-          <td class="paramname"><em>point2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">{
-    QPoint result;
-    <span class="keywordtype">int</span> temp1x = point1.x();
-    <span class="keywordtype">int</span> temp1y = point1.y();
-    <span class="keywordtype">int</span> temp2x = point2.x();
-    <span class="keywordtype">int</span> temp2y = point2.y();
-
-    <span class="keywordtype">int</span> fx;
-    <span class="keywordtype">int</span> fy;
-
-    fx = (temp1x + temp2x)/2;
-    fy = (temp1y + temp2y)/2;
-
-    result.setX(fx);
-    result.setY(fy);
-
-    <span class="keywordflow">return</span> result;
+  } <span class="keywordflow">else</span> {
+    <span class="keywordflow">return</span> 1;
+  }
 }
 </pre></div>
 </div>
@@ -555,7 +492,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 19:21:07 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed May 2 2012 12:44:12 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

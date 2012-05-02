@@ -227,15 +227,24 @@ Public Member Functions</h2></td></tr>
   }
   painter.drawLine(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>, <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>);
 
-  <span class="comment">// draw the text</span>
-  painter.save();
+  QFontMetrics fm = painter.fontMetrics();
+  <span class="keywordtype">int</span> temp = fm.width(<span class="stringliteral">&quot;&lt;&lt;includes&gt;&gt;&quot;</span>);
+  <span class="comment">// calculates the midpoint between the objects</span>
+  <span class="keywordtype">int</span> x = (<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.x() + <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>.x()) / 2;
+  <span class="keywordtype">int</span> y = (<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.y() + <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>.y()) / 2;
+  QPoint textPos(x,y);
+  <span class="keywordtype">int</span> xdist = (<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.x()-<a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>.x())*(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.x()-<a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>.x());
+  <span class="keywordtype">int</span> ydist = (<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.y()-<a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>.y())*(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.y()-<a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>.y());
+  <span class="keywordflow">if</span>(xdist &gt; ydist &amp;&amp; <a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.x() &gt; <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>.x()){
+      painter.drawText(textPos.x()-(temp/2),textPos.y()+20,<span class="stringliteral">&quot;&lt;&lt;includes&gt;&gt;&quot;</span>);
+  }
+  <span class="keywordflow">else</span> <span class="keywordflow">if</span>(xdist &gt; ydist &amp;&amp; <a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.x() &lt; <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>.x()){
+      painter.drawText(textPos.x()-(temp/2),textPos.y()-20,<span class="stringliteral">&quot;&lt;&lt;includes&gt;&gt;&quot;</span>);
+  }
+  <span class="keywordflow">else</span>{
+      painter.drawText(textPos.x()-(temp+5),textPos.y(),<span class="stringliteral">&quot;&lt;&lt;includes&gt;&gt;&quot;</span>);
+  }
 
-  QPoint textPos = <a class="code" href="classIncludesConnection.html#acc0074a57e2233144afcca545bded7a8">calculateTextPosition</a>();
-  painter.translate(textPos);
-
-  painter.rotate(<a class="code" href="namespacemathfunctions.html#af925d1822d94fdd8199ec01d1635f6ad">mathfunctions::toDegrees</a>(-<a class="code" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">lineangle</a>));
-  painter.drawText(0, 0, <span class="stringliteral">&quot;&lt;&lt;includes&gt;&gt;&quot;</span>);
-  painter.restore();
   <a class="code" href="classIncludesConnection.html#ab938b61da56e5e268c2b8985edb7b860">addArrow</a>(painter);
 }
 </pre></div>
@@ -336,7 +345,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 19:21:08 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed May 2 2012 12:44:13 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
