@@ -134,6 +134,8 @@ void experiment(QString openName) {
 */
 Document::Document() {
   indexOfSelectedObject = -1;
+  fileName = "";
+  modifiedFlag = false;
 }
 
 /*
@@ -250,6 +252,8 @@ void Document::setNewObjectID(int prototypeID) {
   newObjectID = prototypeID;
 }
 
+/*!
+*/
 int Document::getIndexAt(const QPoint &point) {
   int index = -1;
   for (int i = ordering.size()-1; i >= 0; i--) {
@@ -262,7 +266,7 @@ int Document::getIndexAt(const QPoint &point) {
   return index;
 }
 
-/*! This helper function removes the specified index from the
+/*! This private helper function removes the specified index from the
     ordering, ensuring that all indexes in the ordering
     remain valid.
     @param index The index value to remove
@@ -289,6 +293,7 @@ void Document::moveSelectedObject(const QPoint &point) {
     nodes.at(indexOfSelectedObject)->setPosition(point + positionDelta);
   }
 
+  setModified(true);
   emit modelChanged();
 }
 
@@ -320,6 +325,7 @@ void Document::createObject(const QPoint &position) {
   indexOfSelectedObject = nodes.size()-1;
   nodes.at(indexOfSelectedObject)->setSelected(true);
 
+  setModified(true);
   emit modelChanged();
 }
 
@@ -376,6 +382,7 @@ void Document::createConnectionPoint2(const QPoint &point) {
 
       nodes.at(index)->setSelectedForConnectionPoint(false);
 
+      setModified(true);
       emit modelChanged();
     }
     //  Self connectors
@@ -401,6 +408,7 @@ void Document::createConnectionPoint2(const QPoint &point) {
 
       nodes.at(index)->setSelectedForConnectionPoint(false);
 
+      setModified(true);
       emit modelChanged();
     }
 // end of  self connect
@@ -432,6 +440,7 @@ void Document::showPropertiesDialog() {
     }
   }
 
+  setModified(true);
   emit modelChanged();
 }
 
@@ -501,6 +510,7 @@ void Document::removeObject() {
       nodes.erase(nodes.begin()+indexOfSelectedObject);
     }
   }
+  setModified(true);
   indexOfSelectedObject = -1;
   emit modelChanged();
 }
@@ -515,6 +525,7 @@ void Document::sendSelectedToFront() {
     ordering.removeAll(indexOfSelectedObject);
     ordering.append(indexOfSelectedObject);
   }
+  setModified(true);
   emit modelChanged();
 }
 
@@ -530,6 +541,7 @@ void Document::sendSelectedForward() {
       ordering.move(orderingindex, orderingindex+1);
     }
   }
+  setModified(true);
   emit modelChanged();
 }
 
@@ -543,6 +555,7 @@ void Document::sendSelectedToBack() {
     ordering.removeAll(indexOfSelectedObject);
     ordering.prepend(indexOfSelectedObject);
   }
+  setModified(true);
   emit modelChanged();
 }
 
@@ -557,9 +570,12 @@ void Document::sendSelectedBackwards() {
       ordering.move(orderingindex, orderingindex-1);
     }
   }
+  setModified(true);
   emit modelChanged();
 }
 
+/*!
+*/
 void Document::changeSecondConnectionPointHint(const QPoint &point) {
   // reset the cpSelection for the previous selected node
   if ((secondConnectionIndex > -1)
@@ -578,20 +594,15 @@ void Document::changeSecondConnectionPointHint(const QPoint &point) {
   }
 }
 
+/*! Saves the document to a file. The file is specified by the fileName
+    member variable. If the member variable isn't set, the function exits.
+    If the file is an invalid file, the function produces an error message
+    to the user. This function shouldn't ever be called when the filename
+    isn't set.
+*/
 void Document::saveDocument() {
-  string documentName;
-
-  // Simple converstion for C string check.
-  documentName = fileName.toStdString().c_str();
-  // Verifies that the filename specified is a valid one.
-  if (documentName.empty() && saveattempt == 0) {
-    // If a filename and path doesn't exist it forces it to the saveas routine
-    // to get the filename.
-    Document::saveAsDocument();
-  } else if (documentName.empty() && saveattempt >= 1) {
-    saveattempt = 0;
-    return;
-  } else {
+  if (this->hasFilename() != false) {
+    QMessageBox::information(this, "pUML", "Trying to open file " + fileName);
     QFile file(fileName);
     QDomDocument xml_doc("pUML_save_document");
     //QDomDocument xml_doc("nodes_vector_xml");
@@ -617,28 +628,21 @@ void Document::saveDocument() {
     myfile.open(fileName.toStdString().c_str());
     myfile << xml_doc.toString().toStdString();
     myfile.close();
-    //  write the saving as file function here with the fileName
+
+    setModified(false);
   }
 }
 
-
-void Document::saveAsDocument() {
-    saveattempt++;
-    // Saves file name to current document only accesible variable.
-    fileName = QFileDialog::getSaveFileName(this, tr("Save As File"),
-                                            tr("XML files *.xml"));
-    // Need to add if canceled saving a name it will stop the loop, as its currently infinite.
-    Document::saveDocument();
-}
-
+/*! Opens specified file. This function does not ask the user to save an
+    unsaved modified diagram. That is the MainWindow's job. This function
+    will simply clear out the node vector and load the file in.
+*/
 void Document::openDocument(QString openName)
 {
     QDomDocument* xmlDoc = openSaveFile(openName);
     QDomElement docElem = getNextDocumentElement(xmlDoc);
     QDomElement n;
     BaseNode* newNode;
-
-    // Check if the document needs saving ....
 
     // Clear the nodes vector
     nodes.clear();
@@ -666,4 +670,7 @@ void Document::openDocument(QString openName)
           }
       }
     }
+
+    fileName = openName;
+    setModified(false);
 }

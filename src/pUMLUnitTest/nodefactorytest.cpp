@@ -7,15 +7,39 @@ NodeFactoryTest::NodeFactoryTest(QObject *parent)
 /*! Initializes this unit test
 */
 void NodeFactoryTest::initTestCase() {
+
 }
+
+void NodeFactoryTest::testInstance()
+{
+  //NodeFactory* instance = new
+}
+
 
 /*! Tests the registerPrototype function.
 */
 void NodeFactoryTest::testRegister() {
-  QCOMPARE(1,1);
+  int prototypeID;
+  // test register an object
+  prototypeID = NodeFactory::getInstance()->registerPrototype(new OvalObject);
+  QCOMPARE(prototypeID, 0);
+
+  // test reregistering the same object
+  prototypeID = NodeFactory::getInstance()->registerPrototype(new OvalObject);
+  QCOMPARE(prototypeID, 1);
+
+  // test registering a null object
+  prototypeID = NodeFactory::getInstance()->registerPrototype(0);
+  QCOMPARE(prototypeID, 2);
+}
+
+void NodeFactoryTest::testProduce()
+{
+
 }
 
 /*! Cleans up this unit test
 */
 void NodeFactoryTest::cleanupTestCase() {
+
 }

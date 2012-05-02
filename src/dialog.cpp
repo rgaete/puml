@@ -163,7 +163,7 @@ void ConfigDialog::changePage(QListWidgetItem *current,
 */
 void ConfigDialog::browseForFile() {
   fileName = QFileDialog::getOpenFileName(this,
-     tr("Open Document"),  tr("XML files (*.xml)"));
+     tr("Open Document"), "", tr("pUML files (*.puml)"));
   filenameBox->setText(fileName);
 }
 
