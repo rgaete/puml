@@ -14,18 +14,21 @@
 #include <vector>
 #include <QFile>
 #include <QString>
+#include <QXmlStreamReader>
 
 
 #include "./nodefactory.h"
 #include "./nodes.h"
 #include "./UMLnodes.h"
 
+void experiment(QString openName);
 
 class Document : public QWidget {
   Q_OBJECT
 
   public:
     Document();
+    Document(QString fpath);
     ~Document();
     void addNodeToList(BaseNode *newNode) { nodes.push_back(newNode); }
     void setNewObjectID(int prototypeID);
