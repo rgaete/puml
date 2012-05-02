@@ -14,18 +14,21 @@
 #include <vector>
 #include <QFile>
 #include <QString>
+#include <QXmlStreamReader>
 
 
 #include "./nodefactory.h"
 #include "./nodes.h"
 #include "./UMLnodes.h"
 
+void experiment(QString openName);
 
 class Document : public QWidget {
   Q_OBJECT
 
   public:
     Document();
+    Document(QString fpath);
     ~Document();
     void addNodeToList(BaseNode *newNode) { nodes.push_back(newNode); }
     void setNewObjectID(int prototypeID);
@@ -35,6 +38,7 @@ class Document : public QWidget {
     BaseNode::DiagramType getDiagramType() { return diagramType; }
     void saveDocument();
     void saveAsDocument();
+    void openDocument(QString openName);
     // @TODO Once the saveAs functionality is moved into this class from
     // mainwindow, move nodes back to private.
     // The main vector of nodes

@@ -5,12 +5,15 @@
 #include <vector>
 #include <fstream>  // NOLINT
 #include <algorithm>
+#include <string>
+#include <iostream>
 // I'm not sure why cpplint.py is insisting that <vector> be included
 // when it exists in mainwindow.h...
 
 // In the future, we might want to consider something other than a stream?
-using std::ofstream;  // NOLINT
+using std::ifstream;  // NOLINT
 using std::vector;
+using std::string;
 
 /*! In the MainWindow constructor, we need to create
   all the actions, menus and widgets. registerObject is
@@ -482,11 +485,12 @@ void MainWindow::createNewDiagram(BaseNode::DiagramType type) {
     @param filename The filename to open.
 */
 void MainWindow::openDiagram(const QString &filename) {
+  on_actionOpen_triggered();
   // This function should be similar to the createNewDiagram function, except
   // loads in a diagram after creating the document and canvas. This probably
   // done by calling a slot in the document class with the filename
-  QMessageBox::information(this, "pUML",
-    "Opening an existing diagram is not yet implemented.\n\n" + filename);
+  // QMessageBox::information(this, "pUML",
+  //    "Opening an existing diagram is not yet implemented.\n\n" + filename);
 }
 
 /*! This slot gets triggered whenever one of the NodeActions are triggered,
@@ -622,15 +626,25 @@ void MainWindow::on_tabWidget_currentChanged(int newIndex) {
 }
 
 void MainWindow::on_actionOpen_triggered() {
-  QString fileName = QFileDialog::getOpenFileName(this,
-     tr("Open Document"),  tr("XML files (*.xml)"));
-
-  //  write the loading file function here with the fileName
+  /*
+    string fileData;
+    string class_name;
+    int selected;
+    int cpSelected;
+    int pos_x;
+    int pos_y;
+    int length;
+    int height;
+    fileData.clear();
+  */
+  QString openName = QFileDialog::getOpenFileName(this, tr("Open Document"),
+                                                  tr("XML files (*.xml)"));
+  // experiment(openName);
+  documents.at(currentDocument)->openDocument(openName);
 }
 
 void MainWindow::on_actionSave_triggered() {
   documents.at(currentDocument)->saveDocument();
-
 }
 
 void MainWindow::on_actionSave_As_triggered() {

@@ -85,6 +85,7 @@ class InheritanceConnectionDialog : public QInputDialog {
 /*! @brief This concrete class defines ...
  */
 class ClassConnection : public SquareConnectionNode {
+  Q_OBJECT
   public:
     BaseNode* clone() { return new ClassConnection; }
     QDialog* getDialog() { return new ClassConnectionDialog; }
@@ -95,6 +96,7 @@ class ClassConnection : public SquareConnectionNode {
 };
 
 class InheritanceConnection : public SquareConnectionNode {
+  Q_OBJECT
 public:
     BaseNode* clone() { return new InheritanceConnection; }
     QDialog* getDialog() { return new InheritanceConnectionDialog; }
