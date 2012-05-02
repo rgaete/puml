@@ -24,31 +24,6 @@ BaseNode::BaseNode() {
 }
 
 /*!
- * This is a helper method for to_xml that sets an attribute in an XML node.
- *
- * @param doc
- *  This is the document we are creating. Whatever intiates the save will
- *  create this object and will need to make it available in all delegations.
- * @param node
- *  This is the node of the document. For example, when saving the nodes
- *  vector, we create a "Node" element.
- * @param label
- *  This is the name of the attribute we are saving.
- * @param val
- *  This is the value associated with label.
- */
-void set_xml_attr(QDomDocument &doc, QDomElement &node,  // NOLINT
-                  QString label, QString val) {
-  node.setAttribute(label, val);
-  /*
-  QDomElement el = doc.createElement(label);
-  node.appendChild(el);
-  QDomText text = doc.createTextNode(val);
-  el.appendChild(text);
-  */
-}
-
-/*!
  * This records the data associated with a node into an XML format.
  *
  * This is used for saving and restoring from save.
@@ -75,16 +50,14 @@ QDomElement BaseNode::to_xml(QDomDocument &doc,  // NOLINT
 
   // Reminder: metaObject depends on the Q_OBJECT macro existing in the class
   // that uses it. Otherwise, the class_name will come out as BaseNode.
-  set_xml_attr(doc, node, QString("class_name"),
-               this->metaObject()->className());
-  set_xml_attr(doc, node, QString("selected"), QString::number(selected, 10));
-  set_xml_attr(doc, node, QString("cpSelected"), QString::number(cpSelected));
-  set_xml_attr(doc, node, QString("pos_x"), QString::number(position.x()));
-  set_xml_attr(doc, node, QString("pos_y"), QString::number(position.y()));
-  set_xml_attr(doc, node, QString("length"), QString::number(length));
-  set_xml_attr(doc, node, QString("height"), QString::number(height));
-  // need to set an xml attribute to get the end points of the connectors
-  // need to set an xml attribute to get title (naming) or the
+  node.setAttribute(QString("class_name"), this->metaObject()->className());
+  node.setAttribute(QString("selected"), QString::number(selected));
+  node.setAttribute(QString("cpSelected"), QString::number(cpSelected));
+  node.setAttribute(QString("pos_x"), QString::number(position.x()));
+  node.setAttribute(QString("pos_y"), QString::number(position.y()));
+  node.setAttribute(QString("length"), QString::number(length));
+  node.setAttribute(QString("height"), QString::number(height));
+fprintf(stderr, "Got HERE\n");
 
   return node;
 }

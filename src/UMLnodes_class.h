@@ -12,6 +12,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QTextEdit>
+#include <QtXml>
 #include "./nodes.h"
 // #include "ui_ClassBoxdialog.h"
 
@@ -51,6 +52,7 @@ class ClassBoxObject: public ObjectNode {
 
   public:
     ClassBoxObject();
+    QDomElement to_xml(QDomDocument &doc, QDomElement &doc_root);
     BaseNode* clone() { return new ClassBoxObject; }
     QDialog* getDialog();
     QString getIconPath() { return QString(":/Images/class.png"); }
