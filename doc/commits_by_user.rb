@@ -48,19 +48,16 @@ def puts_users
   end
 end
 
-def get_num_commits_for name
+def get_num_commits_for user
   count = 0
-  Users[name].each do |name|
-    puts %x(hg log -r 55:388 -u Logan).split "\n"
-    #puts %x(hg log -r 55:388 -u #{name.to_s}).split("\n")
-    #.grep(/changeset/)
-    #count += %x/hg log -r 55:388 -u #{name.to_s} | grep changeset/.split("\n").length
+  Users[user].each do |name|
+    count += %x(hg log -r 55:388 -u '#{name.to_s}' | grep user).split("\n").length
   end
   count
 end
 
 if __FILE__ == $0
-    #get_all_users
-    #puts_users
-    puts get_num_commits_for :Logan
+    Users.each_pair do |user, names|
+        puts "User: #{user.to_s} -- #{get_num_commits_for user}"
+    end
 end
