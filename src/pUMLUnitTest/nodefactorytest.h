@@ -18,7 +18,9 @@ class NodeFactoryTest : public QObject
 
   private slots:
     void initTestCase();
+    void testInstance();
     void testRegister();
+    void testProduce();
     void cleanupTestCase();
 };
 

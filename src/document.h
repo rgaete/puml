@@ -37,8 +37,11 @@ class Document : public QWidget {
     int getCanvasIndex() { return canvasIndex; }
     BaseNode::DiagramType getDiagramType() { return diagramType; }
     void saveDocument();
-    void saveAsDocument();
     void openDocument(QString openName);
+    bool hasFilename() { if (fileName == "") { return false; } else { return true; } }
+    void setFilename(QString filename) { fileName = filename; }
+    bool getModified() { return modifiedFlag; }
+
     // @TODO Once the saveAs functionality is moved into this class from
     // mainwindow, move nodes back to private.
     // The main vector of nodes
@@ -47,6 +50,7 @@ class Document : public QWidget {
   private:
     int getIndexAt(const QPoint &point);
     void removeFromOrdering(int index);
+    void setModified(bool modified) { modifiedFlag = modified; emit modifiedChanged(modified); }
 
     // The index of the selected object, -1 if nothing's selected
     int indexOfSelectedObject;
@@ -65,16 +69,16 @@ class Document : public QWidget {
     int secondConnectionIndex;
     // the list of indexes to objects to draw.
     QList<int> ordering;
-    //
-    std::string filename;
     // the type of diagram that this canvas has
     BaseNode::DiagramType diagramType;
+    // The filename for this document.
     QString fileName;
-
-
+    // Whether the document has been modifed
+    bool modifiedFlag;
 
   signals:
     void modelChanged();
+    void modifiedChanged(bool modified);
 
   public slots:
     void drawList(QPainter &painter);  // NOLINT

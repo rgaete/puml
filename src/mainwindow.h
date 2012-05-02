@@ -78,7 +78,8 @@ class MainWindow : public QMainWindow {
                                  int prototypeID);
     void updateDiagramType(BaseNode::DiagramType type);
     void createNewDiagram(BaseNode::DiagramType type);
-    void openDiagram(const QString &filename);
+    void openDiagram(const QString &openName);
+    void documentModifiedChanged(bool modified);
 
   private:
     void createActions();
