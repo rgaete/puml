@@ -142,6 +142,8 @@ class ObjectNode: public BaseNode {
  * @sa BaseNode
  */
 class ConnectionNode: public BaseNode {
+  Q_OBJECT
+
   public:
     // void setPoints(const QPoint &point1, const QPoint &point2);
 
@@ -157,6 +159,8 @@ class ConnectionNode: public BaseNode {
 
 
 class SquareConnectionNode: public BaseNode {
+  Q_OBJECT
+
   public:
     // void setPoints(const QPoint &point1, const QPoint &point2);
 
