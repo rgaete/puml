@@ -34,6 +34,20 @@ BaseNode *NodeFactory::produce(int prototype_id) {
   return prototypes.at(prototype_id)->clone();
 }
 
+/*! Returns a new copy of the prototype specified by name, or
+  null if the name isn't valid.
+*/
+BaseNode *NodeFactory::produceFromClassName(QString name)
+{
+    std::vector<BaseNode*>::iterator it;
+
+    for (it=prototypes.begin(); it < prototypes.end(); it++) {
+        if ((*it)->metaObject()->className() == name) {
+            return (*it)->clone();
+        }
+    }
+}
+
 /*! Returns the one instance of the class. Functions should
   call produce and registerPrototype with this instance.
 */
