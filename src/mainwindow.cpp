@@ -5,12 +5,15 @@
 #include <vector>
 #include <fstream>  // NOLINT
 #include <algorithm>
+#include <string>
+#include <iostream>
 // I'm not sure why cpplint.py is insisting that <vector> be included
 // when it exists in mainwindow.h...
 
 // In the future, we might want to consider something other than a stream?
-using std::ofstream;  // NOLINT
+using std::ifstream;  // NOLINT
 using std::vector;
+using std::string;
 
 /*! In the MainWindow constructor, we need to create
   all the actions, menus and widgets. registerObject is
@@ -138,8 +141,7 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex) {
   disconnect(document, 0, canvases.at(document->getCanvasIndex()), 0);
 
   // create shortcuts for signals/slots
-  QShortcut *delObject = new QShortcut(QKeySequence(QKeySequence::Delete),
-                                       this);
+  QShortcut *delObject = new QShortcut(QKeySequence(QKeySequence::Delete), this);
 
   // Then connect the canvas to the document
   connect(canvas, SIGNAL(createObject(const QPoint &)),
@@ -162,6 +164,12 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex) {
           document, SLOT(createConnectionPoint2(const QPoint &)));
   connect(canvas, SIGNAL(changeSecondConnectionPointHint(const QPoint &)),
           document, SLOT(changeSecondConnectionPointHint(const QPoint &)));
+  connect(canvas, SIGNAL(selectNothing()),
+          this, SLOT(setSelect()));
+  connect(toolsActionGroup, SIGNAL(triggered(QAction*)),
+          canvas, SLOT(deselect()));
+  connect(connectorsActionGroup, SIGNAL(triggered(QAction*)),
+          canvas, SLOT(deselect()));
 
   // Set the currentDocument flag
   currentDocument = documentIndex;
@@ -350,6 +358,8 @@ void MainWindow::connectSignalsSlots() {
           this, SLOT(on_tabWidget_currentChanged(int)));  // NOLINT
   connect(actionSelect, SIGNAL(triggered()),
           this, SLOT(on_actionSelect_triggered()));
+  connect(tabWidget, SIGNAL(tabCloseRequested(int)),
+          this, SLOT(on_tabWidget_tabCloseRequest(int)));
 
   /* list of slots
   void on_actionNew_triggered();
@@ -436,10 +446,23 @@ void MainWindow::createNewDiagram(BaseNode::DiagramType type) {
     // on_tabWidget_currentChanged slot is called, the mapping is already there.
     // Note that this assumes (which is a valid assumption) that newTabIndex
     // returned by addTab is always equal to the number of tabs.
+
     // NOTE: Because the tabs can be reordered, tabToCanvasMappings is unused.
     tabToCanvasMappings.insert(
           std::pair<int, int>(tabWidget->count(), canvases.size() - 1));
-    int newTabIndex = tabWidget->addTab(newcanvas, "New Diagram");
+    int newTabIndex;
+    if (type == BaseNode::Class){
+        newTabIndex = tabWidget->addTab(newcanvas, "New Class Diagram");
+    }
+    else if(type == BaseNode::Collaboration){
+        newTabIndex = tabWidget->addTab(newcanvas, "New Collaboration Diagram");
+    }
+    else if(type == BaseNode::UseCase){
+        newTabIndex = tabWidget->addTab(newcanvas, "New Use Case Diagram");
+    }
+    else{
+        newTabIndex = tabWidget->addTab(newcanvas, "New Statechart Diagram");
+    }
 
     // Connect the new canvas with the new document.
     connectCanvasWithDocument(canvases.size() - 1, documents.size() - 1);
@@ -462,12 +485,42 @@ void MainWindow::createNewDiagram(BaseNode::DiagramType type) {
     and tab, then recreates the diagram in the Document.
     @param filename The filename to open.
 */
-void MainWindow::openDiagram(const QString &filename) {
+void MainWindow::openDiagram(const QString &openName) {
+  //on_actionOpen_triggered();
+
   // This function should be similar to the createNewDiagram function, except
   // loads in a diagram after creating the document and canvas. This probably
   // done by calling a slot in the document class with the filename
-  QMessageBox::information(this, "pUML",
-    "Opening an existing diagram is not yet implemented.\n\n" + filename);
+  // QMessageBox::information(this, "pUML",
+  //    "Opening an existing diagram is not yet implemented.\n\n" + filename);
+
+  // read in the diagram type...
+  BaseNode::DiagramType diagramType = BaseNode::Class;
+
+  // Create the tab, canvas, and document
+  createNewDiagram(diagramType);
+  // Update the tab title
+  tabWidget->setTabText(tabWidget->currentIndex(), openName);
+  documents.at(currentDocument)->openDocument(openName);
+}
+
+void MainWindow::documentModifiedChanged(bool modified)
+{
+  QChar lastchar;
+  QString tabtext = tabWidget->tabText(tabWidget->currentIndex());
+  lastchar = tabtext.at(tabtext.size()-1);
+  if (modified == true) {
+    // we need to add a '*' to the end of the tab text
+    if (lastchar != '*') {
+      tabtext += '*';
+    }
+  } else {
+    // we need to take away any '*' at the end of the tab text
+    if (lastchar == '*') {
+      tabtext = tabtext.left(tabtext.size()-1);
+    }
+  }
+  tabWidget->setTabText(tabWidget->currentIndex(), tabtext);
 }
 
 /*! This slot gets triggered whenever one of the NodeActions are triggered,
@@ -537,11 +590,32 @@ void MainWindow::on_actionNew_triggered() {
   openFileNewDialog(ConfigDialog::NewOnly);
 }
 
-/*! This slot receives the currentChanged signal from the tabWidget.
- *  It should reupdate the toolbar with the previously selected tool
- *  and only the legal buttons for the diagram. It should also connect
- *  actions in the menu to the current document/canvas.
+/*! Slot. Executed whenver a tab is closed. Asks to save if the
+    document is modifed, and closes the tab.
  */
+void MainWindow::on_tabWidget_tabCloseRequest(int index){
+  // Check if the document needs saving
+  if (documents.at(currentDocument)->getModified() == true) {
+    QMessageBox::StandardButton choice;
+    choice = QMessageBox::question(this, "pUML", "This diagram contains unsaved changes, do you want to save first?",
+                          QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel, QMessageBox::Yes);
+    if (choice == QMessageBox::Yes) {
+      on_actionSave_triggered();
+    } else if (choice == QMessageBox::Cancel) {
+      return;
+    }
+  }
+
+  tabWidget->removeTab(index);
+  if(tabWidget->count() == 0){
+      updateDiagramType(BaseNode::Nothing);
+  }
+}
+
+/*! Slot. Executed whenever the current tab is changed. Disconnects
+    menu and signals from the current document and canvas and connects
+    them to the new canvas and document. Also updates the toolbar.
+*/
 void MainWindow::on_tabWidget_currentChanged(int newIndex) {
   if (newIndex > -1 &&
       newIndex < static_cast<int>(tabToCanvasMappings.size())) {
@@ -558,7 +632,10 @@ void MainWindow::on_tabWidget_currentChanged(int newIndex) {
     disconnect(actionSendToFront, SIGNAL(triggered()), 0, 0);
     disconnect(actionSendToBack, SIGNAL(triggered()), 0, 0);
 
-    // connect thos signals to the current document
+    // disconnect signals that are coming from the documents
+    disconnect(currentDoc, SIGNAL(modifiedChanged(bool)),0,0);
+
+    // connect signals to the current document
     connect(actionSendForwards, SIGNAL(triggered()),
             currentDoc, SLOT(sendSelectedForward()));
     connect(actionSendBackwards, SIGNAL(triggered()),
@@ -567,51 +644,78 @@ void MainWindow::on_tabWidget_currentChanged(int newIndex) {
             currentDoc, SLOT(sendSelectedToFront()));
     connect(actionSendToBack, SIGNAL(triggered()),
             currentDoc, SLOT(sendSelectedToBack()));
+
+    // connect signals from the current document
+    connect(currentDoc, SIGNAL(modifiedChanged(bool)),
+            this, SLOT(documentModifiedChanged(bool)));
+
+
   }
+
+  // Note that when the tab changes, the tool automatically goes to select.
+  // Maybe we should have some functionality to have the chosen tool be saved from
+  // tab to tab?
   actionSelect->trigger();
-  /*
-  // An attempt at making the toolbar update with the last selected tool...
-  Canvas* canvas;
-  Document* document;
-  int documentIndex;
-  Canvas::DrawingMode drawingMode;
 
-  canvas = static_cast<Canvas*>(tabWidget->widget(newIndex));
-  documentIndex = canvas->getDocumentIndex();
-  document = documents.at(documentIndex);
-  drawingMode = canvas->getMode();
+}
 
-  if (drawingMode == Canvas::Nothing) {
-
-  } else {
-    int newObjectID;
-    QAction* lastAction;
-
-    newObjectID = document->getNewObjectID();
-    lastAction = static_cast<QAction*>(signalMapper->mapped(document->getNewObjectID()));
-
-    lastAction->trigger();
-  }
+/*! The slot for when the open action is triggered. Opens up a dialog and
+    asks for the file name. Then it creates a new tab and opens the document.
+    Note that because the diagram is opened in a new tab this function
+    doesn't need to check if the diagram needs saving first.
 */
-}
-
 void MainWindow::on_actionOpen_triggered() {
-  QString fileName = QFileDialog::getOpenFileName(this,
-     tr("Open Document"),  tr("XML files (*.xml)"));
-
-  //  write the loading file function here with the fileName
+  // First, get a filename.
+  QString openName = QFileDialog::getOpenFileName(this, tr("Open Document"),
+                                                  "", tr("pUML files (*.puml)"));
+  // As long as the user didnt' click cancel...
+  if (openName != "") {
+    // Use the openDiagram to create the canvas, document and tab and load the file.
+    openDiagram(openName);
+  }
 }
 
+/*! The slot for when the save action is triggered. If the currently open
+  document is not saved, it triggers the saveas action. If saved successfully
+  then the document is marked as saved.
+*/
 void MainWindow::on_actionSave_triggered() {
-  documents.at(currentDocument)->saveDocument();
+  // First, we need a filename. If there is one already, then use that.
+  if (documents.at(currentDocument)->hasFilename() == true) {
+    documents.at(currentDocument)->saveDocument();
+  } else {
+    // Otherwise, get a new filename.
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save Diagram"),
+                                                    "", tr("pUML files (*.puml)"));
+    qDebug(qPrintable(fileName));
 
+    // If the user didn't click cancel...
+    if (fileName != "") {
+      // Set the filename for the document (so we know what filename
+      // to use later when the user clicks on save again).
+      documents.at(currentDocument)->setFilename(fileName);
+      // Ask the document to save the document to it's fileName.
+      documents.at(currentDocument)->saveDocument();
+      // Update the tab's text
+      tabWidget->setTabText(tabWidget->currentIndex(), fileName);
+    }
+  }
 }
 
+/*! Slot. Erases the store filename for the current document and
+    triggers the save action, so the user is asked to specify a file
+    to save to.
+*/
 void MainWindow::on_actionSave_As_triggered() {
   // FUTURE: This is currently rigged to save only the current document.
   // It will need to iterate over all Document objects and save the nodes
   // vector in each of them.
-  documents.at(currentDocument)->saveAsDocument();
+
+  // Remove the filename so it appears the document hasn't been given a
+  // file name
+  documents.at(currentDocument)->setFilename("");
+  // Trigger the save to get a new filename
+  on_actionSave_triggered();
 }
 
 void MainWindow::on_actionPrint_triggered() {
@@ -659,5 +763,10 @@ void MainWindow::on_actionAbout_triggered() {
 
 
 void MainWindow::closeEvent(QCloseEvent *event) {
-  event->accept();
+    event->accept();
+}
+
+void MainWindow::setSelect()
+{
+    actionSelect->trigger();
 }

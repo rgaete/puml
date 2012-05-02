@@ -8,8 +8,8 @@ MainWindowTest::MainWindowTest(QObject *parent)
 /*! Initializes this unit test
 */
 void MainWindowTest::initTestCase() {
-  this->app = new QApplication(0, NULL);
-  this->app->setStyleSheet("QToolButton { min-width: 150px }");
+  //this->app = new QApplication(0, NULL);
+  //this->app->setStyleSheet("QToolButton { min-width: 150px }");
 
   /*
   MainWindow w;

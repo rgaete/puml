@@ -2,6 +2,7 @@
 
 #include "./UMLnodes_state.h"
 #include <algorithm>
+#include "./mathfunctions.h"
 
 StateObject::StateObject() {
   this->length = 50;
@@ -129,6 +130,10 @@ void TransitionConnection::draw(QPainter &painter) {
   pt1 = obj1->getClosestConnectionPoint(obj2->getPosition());
   pt2 = obj2->getClosestConnectionPoint(obj1->getPosition());
 
+  int x = (pt1.x() + pt2.x()) / 2;
+  int y = (pt1.y() + pt2.y()) / 2;
+  QPoint textPos(x,y);
+
   if (selected == true) {
     QPen selectPen;
     selectPen.setWidth(2);
@@ -143,7 +148,8 @@ void TransitionConnection::draw(QPainter &painter) {
   calcExtensionPoint();
   path.quadTo(extensionPoint, pt2);
   painter.strokePath(path, painter.pen());
-  //painter.drawText(QRect(), 0, QString, QRect);
+  painter.drawText(textPos, text);
+  drawArrow(painter);
 }
 
 void TransitionConnection::calcExtensionPoint()
@@ -223,10 +229,16 @@ void TransitionConnection::calcExtensionPoint()
   }
 }
 
-void TransitionConnection::drawArrow(QPoint begin, QPoint end, double headLength, int radius, QPainter &painter)
+void TransitionConnection::drawArrow(QPainter &painter)
 {
-
-
+    const double arrowAngle = 0.75;
+    lineangle = mathfunctions::computeAngle(pt1, pt2);
+    painter.drawLine(pt2.x(), pt2.y(),
+                     pt2.x() + 10 * sin(lineangle - arrowAngle),
+                     pt2.y() + 10 * cos(lineangle - arrowAngle));
+    painter.drawLine(pt2.x(), pt2.y(),
+                     pt2.x() - 10 * sin(lineangle + arrowAngle),
+                     pt2.y() - 10 * cos(lineangle + arrowAngle));
 }
 
 TransitionConnectionDialog::TransitionConnectionDialog(QWidget *parent)

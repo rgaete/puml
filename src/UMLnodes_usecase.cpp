@@ -253,11 +253,23 @@ void ExtendsConnection::draw(QPainter &painter) {  // NOLINT
   }
   painter.drawLine(pt1, pt2);
 
+  QFontMetrics fm = painter.fontMetrics();
+  int temp = fm.width("<<extends>>");
   // calculates the midpoint between the objects
   int x = (pt1.x() + pt2.x()) / 2;
   int y = (pt1.y() + pt2.y()) / 2;
   QPoint textPos(x,y);
-  painter.drawText(textPos.x()-20,textPos.y()-10,"<<extends>>");
+  int xdist = (pt1.x()-pt2.x())*(pt1.x()-pt2.x());
+  int ydist = (pt1.y()-pt2.y())*(pt1.y()-pt2.y());
+  if(xdist > ydist && pt1.x() > pt2.x()){
+      painter.drawText(textPos.x()-(temp/2),textPos.y()+20,"<<extends>>");
+  }
+  else if(xdist > ydist && pt1.x() < pt2.x()){
+      painter.drawText(textPos.x()-(temp/2),textPos.y()-20,"<<extends>>");
+  }
+  else{
+      painter.drawText(textPos.x()-(temp+5),textPos.y(),"<<extends>>");
+  }
 
   addArrow(painter);
 }
@@ -329,13 +341,23 @@ void IncludesConnection::draw(QPainter &painter) {  // NOLINT
   }
   painter.drawLine(pt1, pt2);
 
-  // draw the text
+  QFontMetrics fm = painter.fontMetrics();
+  int temp = fm.width("<<includes>>");
   // calculates the midpoint between the objects
   int x = (pt1.x() + pt2.x()) / 2;
   int y = (pt1.y() + pt2.y()) / 2;
   QPoint textPos(x,y);
-
-  painter.drawText(textPos.x()-20,textPos.y()-10,"<<includes>>");
+  int xdist = (pt1.x()-pt2.x())*(pt1.x()-pt2.x());
+  int ydist = (pt1.y()-pt2.y())*(pt1.y()-pt2.y());
+  if(xdist > ydist && pt1.x() > pt2.x()){
+      painter.drawText(textPos.x()-(temp/2),textPos.y()+20,"<<includes>>");
+  }
+  else if(xdist > ydist && pt1.x() < pt2.x()){
+      painter.drawText(textPos.x()-(temp/2),textPos.y()-20,"<<includes>>");
+  }
+  else{
+      painter.drawText(textPos.x()-(temp+5),textPos.y(),"<<includes>>");
+  }
 
   addArrow(painter);
 }

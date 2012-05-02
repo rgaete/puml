@@ -98,7 +98,8 @@ class TransitionConnection : public ConnectionNode {
     DiagramType getDiagramType() { return StateChart; }
   private:
     void calcExtensionPoint();
-    void drawArrow(QPoint begin, QPoint end, double headLength, int radius, QPainter &painter);
+    //void drawArrow(QPoint begin, QPoint end, double headLength, int radius, QPainter &painter);
+    void drawArrow(QPainter &painter);
     QPoint extensionPoint;
     double extensionLength;
     QString text;

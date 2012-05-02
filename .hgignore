@@ -5,18 +5,20 @@ syntax: regexp
 \.out$
 latex.*
 ^pUML$
-\.hg.*$
+.hg.*$
 .*\.lock\..*
 src/Makefile$
 .*pUML\.pro\.user$
 src/Makefile$
-src/moc.*\.cpp$
+src/.*moc.*\.cpp$
 src/pUMLTest2$
 src/pUML$
 ~$
 \.orig$
 qrc_icons.*
 pUML-build-desktop*
+src/pUMLUnitTest/Makefile
+src/pUMLUnitTest/pUMLUnitTest
 
 .*log$
 .*aux$
