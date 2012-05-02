@@ -116,12 +116,12 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                  :<a class="code" href="classObjectNode.html#a9a66f6f6af4296a650d06f98a8a181d5">ObjectNode</a>() {
-    this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> = 90;
-    this-&gt;<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> = 50;
-    QPoint pos;
-    pos.setX(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x() + <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2);
-    pos.setY(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y() + <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);
+<div class="fragment"><pre class="fragment">                     :<a class="code" href="classObjectNode.html#a9a66f6f6af4296a650d06f98a8a181d5">ObjectNode</a>() {
+  this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> = 90;
+  this-&gt;<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> = 50;
+  QPoint pos;
+  pos.setX(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x() + <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2);
+  pos.setY(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y() + <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);
 }
 </pre></div>
 </div>
@@ -174,20 +174,18 @@ Public Member Functions</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classObjectNode.html#ae0422bfde3bfb8554826dfbe4806fb08">ObjectNode</a>.</p>
 <div class="fragment"><pre class="fragment">                                                 {  <span class="comment">// NOLINT</span>
-  <span class="comment">//grabs the length of the string and updates the box</span>
-  <span class="comment">//to make everything fit properly</span>
+  <span class="comment">// grabs the length of the string and updates the box</span>
+  <span class="comment">// to make everything fit properly</span>
   QFontMetrics fm = painter.fontMetrics();
   <span class="keywordtype">int</span> temp = fm.width(this-&gt;name);
 
-  <span class="keywordflow">if</span>(temp &gt;= <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-20){
-      temp = temp - (<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-20);
-      temp = temp + <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>;
-      this-&gt;length = temp;
+  <span class="keywordflow">if</span> (temp &gt;= <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-20 || temp &gt;= 70) {
+    temp = temp - (<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-20);
+    temp = temp + <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>;
+    this-&gt;length = temp;
+  } <span class="keywordflow">else</span> {
+    this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> = 90;
   }
-  <span class="keywordflow">else</span>{
-      this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> = 90;
-  }
-
 
   QPen pen;
   pen.setWidth(2);
@@ -197,70 +195,58 @@ Public Member Functions</h2></td></tr>
   <span class="keywordtype">int</span> tempy = <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y();
 
   <span class="comment">// back box  x,y values</span>
-  <span class="keywordtype">int</span> backtempx = tempx+10;
-  <span class="keywordtype">int</span> backtempy = tempy-10;
+  <span class="keywordtype">int</span> backtempx = tempx + 10;
+  <span class="keywordtype">int</span> backtempy = tempy - 10;
 
   <span class="comment">// back box background</span>
   painter.setPen(Qt::NoPen);
   painter.setBrush(Qt::white);
-  painter.drawRect(backtempx - 1/2.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>,
-                   backtempy - 1/2.0 * <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>,
-                   <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>,
-                   <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);
+  painter.drawRect(backtempx - 1 / 2.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, backtempy - 1 / 2.0 * <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>,
+                   <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);
 
   <span class="comment">// back box edge</span>
   painter.setPen(pen);
   painter.setBrush(Qt::NoBrush);
-  painter.drawRect(backtempx - 1/2.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>,
-                   backtempy - 1/2.0 * <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>,
-                   <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>,
-                   <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);
+  painter.drawRect(backtempx - 1 / 2.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, backtempy - 1 / 2.0 * <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>,
+                   <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);
 
   <span class="comment">// middle box x,y values</span>
-  <span class="keywordtype">int</span> midtempx = tempx+5;
-  <span class="keywordtype">int</span> midtempy = tempy-5;
+  <span class="keywordtype">int</span> midtempx = tempx + 5;
+  <span class="keywordtype">int</span> midtempy = tempy - 5;
 
   <span class="comment">// middle box background</span>
   painter.setPen(Qt::NoPen);
   painter.setBrush(Qt::white);
-  painter.drawRect(midtempx - 1/2.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>,
-                   midtempy - 1/2.0 * <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>,
-                   <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>,
-                   <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);
+  painter.drawRect(midtempx - 1 / 2.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, midtempy - 1 / 2.0 * <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>,
+                   <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);
 
   <span class="comment">// middle box edge</span>
   painter.setPen(pen);
   painter.setBrush(Qt::NoBrush);
-  painter.drawRect(midtempx - 1/2.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>,
-                   midtempy - 1/2.0 * <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>,
-                   <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>,
-                     <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);
+  painter.drawRect(midtempx - 1 / 2.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, midtempy - 1 / 2.0 * <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>,
+                   <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);
 
   <span class="comment">// front box background</span>
   painter.setPen(Qt::NoPen);
   painter.setBrush(Qt::white);
-  painter.drawRect(tempx - 1/2.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>,
-                   tempy - 1/2.0 * <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>,
-                   <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>,
-                   <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);
+  painter.drawRect(tempx - 1 / 2.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, tempy - 1 / 2.0 * <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>,
+                   <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);
 
   <span class="comment">// front box edge</span>
   painter.setPen(pen);
   painter.setBrush(Qt::NoBrush);
-  painter.drawRect(tempx - 1/2.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>,
-                   tempy - 1/2.0 * <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>,
-                   <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>,
-                   <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);
+  painter.drawRect(tempx - 1 / 2.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, tempy - 1 / 2.0 * <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>,
+                   <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);
 
   QFont underlineFont;
   underlineFont.setUnderline(<span class="keyword">true</span>);
   painter.setFont(underlineFont);
   painter.drawText(QRect(tempx - <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2, tempy - <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> / 2, <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, 50),
-                   Qt::AlignCenter | Qt::AlignVCenter,
-                   this-&gt;name);
+                   Qt::AlignCenter | Qt::AlignVCenter, this-&gt;name);
 
   <span class="comment">// Always call this ObjectNode&#39;s draw function because it</span>
   <span class="comment">// draws the selection boxes as needed.</span>
+  <a class="code" href="classBaseNode.html#aa1dae1798643a47349b94c4ba006fbcd">BaseNode::setUpConnectionPoints</a>();
   <a class="code" href="classMultiBoxCollabObject.html#a7758bde9a93c3e1f0a9f0dc45ecbf2ba">ObjectNode::draw</a>(painter);
 }
 </pre></div>
@@ -385,7 +371,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 19:21:08 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed May 2 2012 12:44:13 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

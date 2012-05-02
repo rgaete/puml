@@ -61,7 +61,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">document.h File Reference</div>  </div>
 </div>
@@ -75,15 +76,68 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <code>#include &lt;string&gt;</code><br/>
 <code>#include &lt;vector&gt;</code><br/>
 <code>#include &lt;QString&gt;</code><br/>
+<code>#include &lt;QXmlStreamReader&gt;</code><br/>
 <code>#include &quot;<a class="el" href="nodefactory_8h_source.html">./nodefactory.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="nodes_8h_source.html">./nodes.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="UMLnodes_8h_source.html">./UMLnodes.h</a>&quot;</code><br/>
 </div>
 <p><a href="document_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDocument.html">Document</a></td></tr>
+<tr><td colspan="2"><h2><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="document_8h.html#aeaa7f111a52bbfe25223ea85a1191624">experiment</a> (QString openName)</td></tr>
 </table>
+<hr/><h2>Function Documentation</h2>
+<a class="anchor" id="aeaa7f111a52bbfe25223ea85a1191624"></a><!-- doxytag: member="document.h::experiment" ref="aeaa7f111a52bbfe25223ea85a1191624" args="(QString openName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void experiment </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>openName</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                  {
+  fprintf(stderr, <span class="stringliteral">&quot;&gt; experiment()\n&quot;</span>);
+  QDomDocument* xmlDoc = <a class="code" href="document_8cpp.html#a5f17aca6a0b1fe3972dc239f54c44e6b">openSaveFile</a>(openName);
+  QDomElement docElem = <a class="code" href="document_8cpp.html#a249d1c8f88c7c49c9ee91ff035a8c3c4">getNextDocumentElement</a>(xmlDoc);
+  QDomElement n;
+  <a class="code" href="classBaseNode.html">BaseNode</a>* newNode;
+
+  <span class="keywordflow">while</span> (1) {
+    n = <a class="code" href="document_8cpp.html#ab9a732c8785698cc6d7c4b82928520c9">getNextNodeElement</a>(docElem);
+    <span class="keywordflow">if</span> (n.isNull()) {
+      <span class="keywordflow">break</span>;
+    }
+
+    fprintf(stderr, <span class="stringliteral">&quot;Should print class_name: %-21s pos_x: %-3s pos_y: %s\n&quot;</span>,
+            qPrintable(n.attribute(QString(<span class="stringliteral">&quot;class_name&quot;</span>))),
+            qPrintable(n.attribute(QString(<span class="stringliteral">&quot;pos_x&quot;</span>))),
+            qPrintable(n.attribute(QString(<span class="stringliteral">&quot;pos_y&quot;</span>))));
+
+    <span class="comment">// what we have is a QDOMElement, and we need a node to put in the vector</span>
+
+    newNode = <a class="code" href="classNodeFactory.html#a4d54b734a6928d59d8aeff971d091a7b">NodeFactory::getInstance</a>()-&gt;<a class="code" href="classNodeFactory.html#ac2a8a4d0f2183fb4c1552b2994839b4c">produceFromClassName</a>(n.attribute(<span class="stringliteral">&quot;class_name&quot;</span>));
+    <span class="keywordflow">if</span> (newNode == 0) {
+        fprintf(stderr, <span class="stringliteral">&quot;Got a null node\n&quot;</span>);
+    } <span class="keywordflow">else</span> {
+        fprintf(stderr, <span class="stringliteral">&quot;Got a %-21s\n&quot;</span>, newNode-&gt;metaObject()-&gt;className());
+    }
+
+  }
+  fprintf(stderr, <span class="stringliteral">&quot;&lt; experiment()\n&quot;</span>);
+}
+</pre></div>
+</div>
+</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -99,7 +153,7 @@ Classes</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 19:21:06 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed May 2 2012 12:44:12 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

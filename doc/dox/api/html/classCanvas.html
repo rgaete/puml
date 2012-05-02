@@ -85,6 +85,7 @@ Public Types</h2></td></tr>
  }</td></tr>
 <tr><td colspan="2"><h2><a name="pub-slots"></a>
 Public Slots</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvas.html#a893503783777504248a0ec2c5c7b8a0b">deselect</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvas.html#a0a27a449b95938b06f94a155842b6d4f">on_actionDelete_triggered</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvas.html#a2fa86758f4fd6a013c5578ef2db0bd70">on_actionCut_triggered</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvas.html#ad31a2c6bf464e5eeb0d655ce1006ae7b">on_actionCopy_triggered</a> ()</td></tr>
@@ -101,6 +102,7 @@ Signals</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvas.html#a3f40ff5164e2e4e3e46b9664a6fa6820">showPropertiesDialog</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvas.html#a1a9dbf7f189eeb4a273f1982a63b2d79">removeObject</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvas.html#a0f406178f13274a8e3acd0cf86f7d94d">changeSecondConnectionPointHint</a> (const QPoint &amp;point)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvas.html#a9ddffa132e89d1d0ef58f33329c0f0eb">selectNothing</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCanvas.html#a5525075d65b32480dd518d382946e0ea">Canvas</a> (QWidget *parent=0)</td></tr>
@@ -252,6 +254,7 @@ Protected Member Functions</h2></td></tr>
   emit <a class="code" href="classCanvas.html#aee2522d5bb1a8cc049a4109946f59ad2">objectSelectionChange</a>(event-&gt;pos());
   <span class="comment">// popup the menu at the current mouse position</span>
   menuPopup-&gt;exec(event-&gt;globalPos());
+  emit <a class="code" href="classCanvas.html#aee2522d5bb1a8cc049a4109946f59ad2">objectSelectionChange</a>(QPoint(0,0));
 }
 </pre></div>
 </div>
@@ -305,6 +308,25 @@ Protected Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
+</div>
+</div>
+<a class="anchor" id="a893503783777504248a0ec2c5c7b8a0b"></a><!-- doxytag: member="Canvas::deselect" ref="a893503783777504248a0ec2c5c7b8a0b" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Canvas::deselect </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [slot]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{
+    emit <a class="code" href="classCanvas.html#aee2522d5bb1a8cc049a4109946f59ad2">objectSelectionChange</a>(QPoint(0,0));
+}
+</pre></div>
 </div>
 </div>
 <a class="anchor" id="ab7d52f6f1fc590fc41aa55219059c9ee"></a><!-- doxytag: member="Canvas::getDocumentIndex" ref="ab7d52f6f1fc590fc41aa55219059c9ee" args="()" -->
@@ -442,6 +464,7 @@ Protected Member Functions</h2></td></tr>
 <div class="fragment"><pre class="fragment">                                                 {
   <span class="comment">// QMessageBox::information(0, &quot;pUML&quot;, QString::number((int)drawingMode),</span>
   <span class="comment">//                          QMessageBox::Ok);</span>
+    QPoint position(0,0);
   <span class="keywordflow">if</span> (event-&gt;button() == Qt::LeftButton) {
     <span class="keywordflow">switch</span> (drawingMode) {
     <span class="keywordflow">case</span> <a class="code" href="classCanvas.html#af2fe83ddca6a5fccac7896a7ecb1be84accddfa7d7f8fdfe6419b2df713f5026d">Object</a>:
@@ -449,6 +472,7 @@ Protected Member Functions</h2></td></tr>
       emit <a class="code" href="classCanvas.html#ac5e14d00e3ff7830b34b16ce756c03e8">createObject</a>(event-&gt;pos());
       <span class="comment">// tell the document to show a properties dialog.</span>
       emit <a class="code" href="classCanvas.html#a3f40ff5164e2e4e3e46b9664a6fa6820">showPropertiesDialog</a>();
+      emit <a class="code" href="classCanvas.html#aee2522d5bb1a8cc049a4109946f59ad2">objectSelectionChange</a>(position);
       <span class="keywordflow">break</span>;
     <span class="keywordflow">case</span> <a class="code" href="classCanvas.html#af2fe83ddca6a5fccac7896a7ecb1be84ae7676fce1cf0da6e2b67d71a789ba7bd">Connection</a>:
       <span class="comment">// let the document know this is the second connection position.</span>
@@ -456,6 +480,7 @@ Protected Member Functions</h2></td></tr>
       <span class="comment">// stop drawing the line hint</span>
       drawLineHint = <span class="keyword">false</span>;
       update();
+      emit <a class="code" href="classCanvas.html#aee2522d5bb1a8cc049a4109946f59ad2">objectSelectionChange</a>(position);
       <span class="keywordflow">break</span>;
     <span class="keywordflow">case</span> <a class="code" href="classCanvas.html#af2fe83ddca6a5fccac7896a7ecb1be84ab5de4f651f3f55d1f7ee2ce89acf768d">Nothing</a>:
       <span class="comment">// QMessageBox::information(0, &quot;pUML&quot;, &quot;Mouse Release Nothing&quot;,</span>
@@ -695,6 +720,22 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a9ddffa132e89d1d0ef58f33329c0f0eb"></a><!-- doxytag: member="Canvas::selectNothing" ref="a9ddffa132e89d1d0ef58f33329c0f0eb" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Canvas::selectNothing </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [signal]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="aac3a3ff62d4adece9f0b28b1ce97a330"></a><!-- doxytag: member="Canvas::setDocumentIndex" ref="aac3a3ff62d4adece9f0b28b1ce97a330" args="(int docIndex)" -->
 <div class="memitem">
 <div class="memproto">
@@ -792,7 +833,7 @@ Protected Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 19:21:07 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed May 2 2012 12:44:12 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

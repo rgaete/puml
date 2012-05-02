@@ -62,6 +62,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">TransitionConnectionDialog Class Reference</div>  </div>
 </div>
@@ -71,12 +73,41 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <a href="classTransitionConnectionDialog.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="UMLnodes__state_8h_source.html">UMLnodes_state.h</a>&gt;</code></p>
+
+<p><a href="classTransitionConnectionDialog-members.html">List of all members.</a></p>
 <table class="memberdecls">
+<tr><td colspan="2"><h2><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransitionConnectionDialog.html#abfe80932fa8e43dccef99208538ede65">TransitionConnectionDialog</a> (QWidget *parent=0)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This class provides a custom dialog for an InteractionLineNode. </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="abfe80932fa8e43dccef99208538ede65"></a><!-- doxytag: member="TransitionConnectionDialog::TransitionConnectionDialog" ref="abfe80932fa8e43dccef99208538ede65" args="(QWidget *parent=0)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TransitionConnectionDialog::TransitionConnectionDialog </td>
+          <td>(</td>
+          <td class="paramtype">QWidget *&#160;</td>
+          <td class="paramname"><em>parent</em> = <code>0</code></td><td>)</td>
+          <td><code> [explicit]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">  :QInputDialog(parent)
+{
+  setLabelText(<span class="stringliteral">&quot;Tansition Text:&quot;</span>);
+  setWindowTitle(<span class="stringliteral">&quot;Transition Properties&quot;</span>);
+}
+</pre></div>
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="UMLnodes__state_8h_source.html">UMLnodes_state.h</a></li>
+<li><a class="el" href="UMLnodes__state_8cpp.html">UMLnodes_state.cpp</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -93,7 +124,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 19:21:08 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed May 2 2012 12:44:13 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

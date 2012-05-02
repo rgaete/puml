@@ -95,6 +95,7 @@ Public Slots</h2></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassBoxObject.html#a277287ef51a742ac67db21acf60f1a3d">ClassBoxObject</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QDomElement&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassBoxObject.html#aec892a9aa87b0b7bcbb40c5bc067ac3c">to_xml</a> (QDomDocument &amp;doc, QDomElement &amp;doc_root)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBaseNode.html">BaseNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassBoxObject.html#a8f3dbb7c5d882ad63a8dbabcfe1fa4c7">clone</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QDialog *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassBoxObject.html#a459c7c2fecae2d55cbe97f8d205c6c9e">getDialog</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassBoxObject.html#a4a8dd7ee3b7bea8d315b49670b9a12ab">getIconPath</a> ()</td></tr>
@@ -182,7 +183,8 @@ Public Member Functions</h2></td></tr>
     <span class="comment">//in pixels of the strings</span>
     QFontMetrics fm = painter.fontMetrics();
 
-    <span class="keywordtype">int</span> temp = fm.width(this-&gt;className);
+    <span class="keywordtype">int</span> temp;
+    <span class="keywordtype">int</span> width = fm.width(this-&gt;className);
     <span class="keywordtype">int</span> alength,aheight,mlength,mheight,max=0;
 
     alength = <a class="code" href="classBaseNode.html#ab76acaea5c58f6e0c8e6507568b2945c">stringLength</a>(this-&gt;attributes);
@@ -194,19 +196,25 @@ Public Member Functions</h2></td></tr>
     <span class="comment">//figures out if the new strings inputed into the dialog</span>
     <span class="comment">//are bigger or smaller than before and resizes the objects</span>
     <span class="comment">//height and lengths accordingly, first checks the lengths</span>
-    <span class="keywordflow">if</span>(temp &gt;= <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-40){
-        temp = temp - (<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-40);
-        temp = temp + <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>;
-        this-&gt;length = temp;
-    }
-    <span class="keywordflow">else</span> <span class="keywordflow">if</span>( alength+10 &gt;= <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-10 || mlength+10 &gt;= <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-10){
-        <span class="keywordflow">if</span>(mlength &gt; alength)
+    <span class="keywordflow">if</span>( alength+10 &gt;= <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-10 || mlength+10 &gt;= <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-10 ||
+        alength+10 &gt;= 50 || mlength+10 &gt;= 50 || width &gt;= <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-40 ||
+        width &gt;= 20){
+        <span class="keywordflow">if</span>(mlength &gt; alength &amp;&amp; mlength &gt; width &amp;&amp; mlength &gt; 60){
             temp = mlength;
-        <span class="keywordflow">else</span>
+            temp = temp - (<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-5);
+            temp = temp + <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>;
+        }
+        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (alength &gt; mlength &amp;&amp; alength &gt; width &amp;&amp; alength &gt; 60){
             temp = alength;
-        temp = temp - (<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-5);
-        temp = temp + <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>;
-        this-&gt;length = temp;
+            temp = temp - (<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-5);
+            temp = temp + <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>;
+        }
+        <span class="keywordflow">else</span>{
+            temp = width;
+            temp = temp - (<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-40);
+            temp = temp + <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>;
+        }
+        this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> = temp;
     }
     <span class="keywordflow">else</span>{
         this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> = 60;
@@ -214,21 +222,25 @@ Public Member Functions</h2></td></tr>
 
     <span class="comment">//here is the checks to see if the height needs adjustment</span>
     temp = max = 15;
-    <span class="keywordflow">if</span>(attributeHeight &lt;= aheight){
+    <span class="keywordflow">if</span>(aheight &gt;= attributeHeight || aheight &gt;=15){
         temp = aheight;
         this-&gt;attributeHeight = temp;
     }
-    <span class="keywordflow">if</span>(methodHeight &lt;= mheight){
+    <span class="keywordflow">else</span>{
+        this-&gt;attributeHeight = 15;
+    }
+    <span class="keywordflow">if</span>(mheight &gt;= methodHeight || mheight &gt;=15){
         max = mheight;
         this-&gt;methodHeight = max;
     }
+    <span class="keywordflow">else</span>{
+        this-&gt;methodHeight = 15;
+    }
     temp = temp + max + classHeight;
-    <span class="keywordflow">if</span>(temp &gt;= <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>){
+    <span class="keywordflow">if</span>(temp &gt;= <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> || temp &gt;= 45){
         this-&gt;<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> = temp;
     }
     <span class="keywordflow">else</span>{
-        this-&gt;methodHeight=15;
-        this-&gt;attributeHeight=15;
         this-&gt;<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> = 45;
     }
 
@@ -274,6 +286,7 @@ Public Member Functions</h2></td></tr>
 
   <span class="comment">// Always call this ObjectNode&#39;s draw function because it</span>
   <span class="comment">// draws the selection boxes as needed.</span>
+  <a class="code" href="classBaseNode.html#aa1dae1798643a47349b94c4ba006fbcd">BaseNode::setUpConnectionPoints</a>();
   <a class="code" href="classClassBoxObject.html#a909cba1dcbfecb3d401c6d34f6632876">ObjectNode::draw</a>(painter);
 }
 </pre></div>
@@ -424,6 +437,58 @@ Public Member Functions</h2></td></tr>
 </pre></div>
 </div>
 </div>
+<a class="anchor" id="aec892a9aa87b0b7bcbb40c5bc067ac3c"></a><!-- doxytag: member="ClassBoxObject::to_xml" ref="aec892a9aa87b0b7bcbb40c5bc067ac3c" args="(QDomDocument &amp;doc, QDomElement &amp;doc_root)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QDomElement ClassBoxObject::to_xml </td>
+          <td>(</td>
+          <td class="paramtype">QDomDocument &amp;&#160;</td>
+          <td class="paramname"><em>doc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QDomElement &amp;&#160;</td>
+          <td class="paramname"><em>doc_root</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>This records the data associated with a node into an XML format.</p>
+<p>This is used for saving and restoring from save. NOTE: Access to the metaObject *appears* to be contingent on the Q_OBJECT macro being present in THIS class. Thus, if you need to overwrite this method in a derivative class, that derivative class will need the Q_OBJECT macro added.</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">doc</td><td>This is the document we are creating. Whatever intiates the save will create this object and will need to make it available in all delegations. </td></tr>
+    <tr><td class="paramname">doc_root</td><td>This is the element that will contain this element. The initial design uses the top level element as the container, hence the name doc_root. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>QDomElement Based on current implementation, nothing will be done with this return value. However, in the future, it might be possible to disassociate this method call from doc. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classBaseNode.html#aefac1436bf0745dd3449c59212fe6763">BaseNode</a>.</p>
+<div class="fragment"><pre class="fragment">                                                                           {
+fprintf(stderr, <span class="stringliteral">&quot;Got here\n&quot;</span>);
+  QDomElement node = <a class="code" href="classClassBoxObject.html#aec892a9aa87b0b7bcbb40c5bc067ac3c">BaseNode::to_xml</a>(doc, doc_root);
+  node.setAttribute(QString(<span class="stringliteral">&quot;classHeight&quot;</span>), QString::number(classHeight));
+  node.setAttribute(QString(<span class="stringliteral">&quot;attributeHeight&quot;</span>),
+                    QString::number(attributeHeight));
+  node.setAttribute(QString(<span class="stringliteral">&quot;methodHeight&quot;</span>), QString::number(methodHeight));
+  node.setAttribute(QString(<span class="stringliteral">&quot;radius&quot;</span>), QString::number(radius));
+  node.setAttribute(QString(<span class="stringliteral">&quot;className&quot;</span>), className);
+  node.setAttribute(QString(<span class="stringliteral">&quot;attributes&quot;</span>), attributes);
+  node.setAttribute(QString(<span class="stringliteral">&quot;methods&quot;</span>), methods);
+  <span class="keywordflow">return</span> node;
+}
+</pre></div>
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="UMLnodes__class_8h_source.html">UMLnodes_class.h</a></li>
 <li><a class="el" href="UMLnodes__class_8cpp.html">UMLnodes_class.cpp</a></li>
@@ -443,7 +508,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 19:21:07 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed May 2 2012 12:44:12 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

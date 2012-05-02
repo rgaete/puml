@@ -177,7 +177,7 @@ Public Member Functions</h2></td></tr>
   <span class="comment">//length of the oval and changes the size accordingly</span>
   QFontMetrics fm = painter.fontMetrics();
   <span class="keywordtype">int</span> temp = fm.width(this-&gt;name);
-  <span class="keywordflow">if</span>(temp &gt;= <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-20){
+  <span class="keywordflow">if</span>(temp &gt;= <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-20 || temp &gt;= 80){
       temp = temp - (<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-20);
       temp = temp + <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>;
       this-&gt;length = temp;
@@ -202,6 +202,7 @@ Public Member Functions</h2></td></tr>
 
   <span class="comment">// Always call this ObjectNode&#39;s draw function because it</span>
   <span class="comment">// draws the selection boxes as needed.</span>
+  <a class="code" href="classBaseNode.html#aa1dae1798643a47349b94c4ba006fbcd">BaseNode::setUpConnectionPoints</a>();
   <a class="code" href="classOvalObject.html#aa60cb82c3c78097ca70dc7242b120f87">ObjectNode::draw</a>(painter);
 }
 </pre></div>
@@ -326,7 +327,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 19:21:08 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed May 2 2012 12:44:13 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

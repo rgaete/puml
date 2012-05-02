@@ -177,18 +177,17 @@ Public Member Functions</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classObjectNode.html#ae0422bfde3bfb8554826dfbe4806fb08">ObjectNode</a>.</p>
 <div class="fragment"><pre class="fragment">                                            {  <span class="comment">// NOLINT</span>
-  <span class="comment">//grabs the length of the string and updates the box</span>
-  <span class="comment">//to make everything fit properly</span>
+  <span class="comment">// grabs the length of the string and updates the box</span>
+  <span class="comment">// to make everything fit properly</span>
   QFontMetrics fm = painter.fontMetrics();
   <span class="keywordtype">int</span> temp = fm.width(this-&gt;name);
 
-  <span class="keywordflow">if</span>(temp &gt;= <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-20){
-      temp = temp - (<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-20);
-      temp = temp + <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>;
-      this-&gt;length = temp;
-  }
-  <span class="keywordflow">else</span>{
-      this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> = 90;
+  <span class="keywordflow">if</span> (temp &gt;= <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-20 || temp &gt;= 70) {
+    temp = temp - (<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-20);
+    temp = temp + <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>;
+    this-&gt;length = temp;
+  } <span class="keywordflow">else</span> {
+    this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> = 90;
   }
 
   QPen pen;
@@ -202,10 +201,8 @@ Public Member Functions</h2></td></tr>
   painter.setPen(Qt::NoPen);
   painter.setBrush(Qt::white);
 
-  painter.drawRect(tempx - 1/2.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>,
-                     tempy - 1/2.0 * <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>,
-                     <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>,
-                     <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);
+  painter.drawRect(tempx - 1/2.0 * <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, tempy - 1/2.0 * <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>,
+                   <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>);
   <span class="comment">// edge</span>
   painter.setPen(pen);
   painter.setBrush(Qt::NoBrush);
@@ -224,6 +221,7 @@ Public Member Functions</h2></td></tr>
 
   <span class="comment">// Always call this ObjectNode&#39;s draw function because it</span>
   <span class="comment">// draws the selection boxes as needed.</span>
+  <a class="code" href="classBaseNode.html#aa1dae1798643a47349b94c4ba006fbcd">BaseNode::setUpConnectionPoints</a>();
   <a class="code" href="classBoxCollabObject.html#a5df351b68872b450bed10df6b516c6a3">ObjectNode::draw</a>(painter);
 }
 </pre></div>
@@ -348,7 +346,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Mar 20 2012 19:21:07 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Wed May 2 2012 12:44:12 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
