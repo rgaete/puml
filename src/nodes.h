@@ -57,8 +57,10 @@ class BaseNode : public QObject {
     }
     void setPosX(int x) { position.setX(x); }
     void setPosY(int y) { position.setY(y); }
+    void setId(QUuid id) { m_id = id; }
     int posX() { return position.x(); }
     int posY() { return position.y(); }
+    QUuid Id() { return m_id; }
     QPoint getPosition() { return position; }
 
     virtual void draw(QPainter &painter) = 0;  // NOLINT
@@ -100,6 +102,8 @@ class BaseNode : public QObject {
     int height;
     // A linked list of pointers to the connected objects
     std::list<BaseNode*> connectedObjects;
+    // The unique id for this node
+    QUuid m_id;
 };
 
 /*!

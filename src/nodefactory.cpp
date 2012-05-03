@@ -31,7 +31,10 @@ int NodeFactory::registerPrototype(BaseNode *newPrototype) {
 BaseNode *NodeFactory::produce(int prototype_id) {
   assert(prototype_id >= 0);
   assert(prototype_id < static_cast<int>(prototypes.size()));
-  return prototypes.at(prototype_id)->clone();
+  BaseNode* clone = prototypes.at(prototype_id)->clone();
+  // qDebug(qPrintable(id.toString()));
+  clone->setId(QUuid::createUuid());
+  return clone;
 }
 
 /*! Returns a new copy of the prototype specified by name, or
@@ -39,15 +42,18 @@ BaseNode *NodeFactory::produce(int prototype_id) {
 */
 BaseNode *NodeFactory::produceFromClassName(QString name)
 {
-    std::vector<BaseNode*>::iterator it;
+  std::vector<BaseNode*>::iterator it;
+  BaseNode* clone;
 
-    for (it=prototypes.begin(); it < prototypes.end(); it++) {
-        if ((*it)->metaObject()->className() == name) {
-            return (*it)->clone();
-        }
+  for (it=prototypes.begin(); it < prototypes.end(); it++) {
+    if ((*it)->metaObject()->className() == name) {
+      clone = (*it)->clone();
+      clone->setId(QUuid::createUuid());
+      return clone;
     }
-    qDebug("Error: couldn't produce class");
-    return 0;
+  }
+  qDebug("Error: couldn't produce class");
+  return 0;
 }
 
 /*! Returns the one instance of the class. Functions should
