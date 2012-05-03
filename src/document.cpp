@@ -662,7 +662,8 @@ void Document::openDocument(QString openName)
           QPoint pos;
           pos.setX(QString(n.attribute("pos_x")).toInt());
           pos.setY(QString(n.attribute("pos_y")).toInt());
-          newNode->setPosition(pos);
+          // newNode->setPosition(pos);
+          newNode->from_xml(n);
 
           if (newNode->isConnector() == false) {
               nodes.push_back(newNode);

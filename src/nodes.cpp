@@ -50,7 +50,9 @@ QDomElement BaseNode::to_xml(QDomDocument &doc,  // NOLINT
 
   // Reminder: metaObject depends on the Q_OBJECT macro existing in the class
   // that uses it. Otherwise, the class_name will come out as BaseNode.
+
   node.setAttribute(QString("class_name"), this->metaObject()->className());
+  /*
   node.setAttribute(QString("selected"), QString::number(selected));
   node.setAttribute(QString("cpSelected"), QString::number(cpSelected));
   node.setAttribute(QString("pos_x"), QString::number(position.x()));
@@ -58,8 +60,42 @@ QDomElement BaseNode::to_xml(QDomDocument &doc,  // NOLINT
   node.setAttribute(QString("length"), QString::number(length));
   node.setAttribute(QString("height"), QString::number(height));
 fprintf(stderr, "Got HERE\n");
+  */
+
+  QString stringvalue;
+  QString propertyname;
+  for (int i=0; i<this->metaObject()->propertyCount(); i++) {
+    stringvalue = this->metaObject()->property(i).read(this).toString();
+    propertyname = this->metaObject()->property(i).name();
+    node.setAttribute(propertyname, stringvalue);
+  }
 
   return node;
+}
+
+void BaseNode::from_xml(QDomElement &element)
+{
+  QString propertyname;
+  QString stringvalue;
+  QVariant value;
+
+  if (this == 0) {
+    qDebug("We got a null this pointer");
+  }
+  if (this->metaObject() == 0) {
+    qDebug("We got a null metaObject");
+  }
+
+  const QMetaObject *metaObject = this->metaObject();
+  int propertyCount = metaObject->propertyCount();
+  for (int i=0; i<propertyCount; i++) {
+    propertyname = this->metaObject()->property(i).name();
+    stringvalue = element.attribute(propertyname);
+    value = QVariant(stringvalue);
+
+    this->metaObject()->property(i).write(this, value);
+
+  }
 }
 
 void BaseNode::addConnnectionPoint(const QPoint &newpoint) {

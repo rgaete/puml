@@ -23,9 +23,9 @@ fprintf(stderr, "Got here\n");
                     QString::number(attributeHeight));
   node.setAttribute(QString("methodHeight"), QString::number(methodHeight));
   node.setAttribute(QString("radius"), QString::number(radius));
-  node.setAttribute(QString("className"), className);
-  node.setAttribute(QString("attributes"), attributes);
-  node.setAttribute(QString("methods"), methods);
+  node.setAttribute(QString("className"), m_className);
+  node.setAttribute(QString("attributes"), m_attributes);
+  node.setAttribute(QString("methods"), m_methods);
   return node;
 }
 
@@ -36,14 +36,14 @@ void ClassBoxObject::draw(QPainter &painter) {  // NOLINT
     QFontMetrics fm = painter.fontMetrics();
 
     int temp;
-    int width = fm.width(this->className);
+    int width = fm.width(this->m_className);
     int alength,aheight,mlength,mheight,max=0;
 
-    alength = stringLength(this->attributes);
-    mlength = stringLength(this->methods);
+    alength = stringLength(this->m_attributes);
+    mlength = stringLength(this->m_methods);
 
-    aheight = stringHeight(this->attributes);
-    mheight = stringHeight(this->methods);
+    aheight = stringHeight(this->m_attributes);
+    mheight = stringHeight(this->m_methods);
 
     //figures out if the new strings inputed into the dialog
     //are bigger or smaller than before and resizes the objects
@@ -114,7 +114,7 @@ void ClassBoxObject::draw(QPainter &painter) {  // NOLINT
   painter.setFont(boldFont);       // className set to Bold
   painter.drawText(classSection,
                    Qt::AlignCenter | Qt::AlignHCenter | Qt::TextDontClip,
-                   className);
+                   m_className);
 
   // Attributes section
   const QFont normalFont;
@@ -125,7 +125,7 @@ void ClassBoxObject::draw(QPainter &painter) {  // NOLINT
                           length, height);
   painter.drawLine(position.x() - length / 2, position.y() - (height / 2) + classHeight,
                    position.x() + length / 2, position.y() - (height / 2) + classHeight);
-  painter.drawText(attributesSection, attributes);
+  painter.drawText(attributesSection, m_attributes);
 
 
   // Methods section
@@ -134,7 +134,7 @@ void ClassBoxObject::draw(QPainter &painter) {  // NOLINT
                        length, height);
   painter.drawLine(position.x() - length / 2, position.y() - (height / 2) + classHeight + attributeHeight,
                    position.x() + length / 2, position.y() - (height / 2) + classHeight + attributeHeight);
-  painter.drawText(methodsSection, methods);
+  painter.drawText(methodsSection, m_methods);
 
   // Always call this ObjectNode's draw function because it
   // draws the selection boxes as needed.
@@ -203,9 +203,9 @@ void ClassBoxObjectDialog::setMethods(QString newMethods) {
 QDialog * ClassBoxObject::getDialog() {
   ClassBoxObjectDialog *dialog = new ClassBoxObjectDialog;
   dialog->setFixedSize(450, 300);
-  dialog->setClassName(className);
-  dialog->setAttributes(attributes);
-  dialog->setMethods(methods);
+  dialog->setClassName(m_className);
+  dialog->setAttributes(m_attributes);
+  dialog->setMethods(m_methods);
   connect(dialog, SIGNAL(classNameSet(QString)),
           this, SLOT(setClassName(QString)));
   connect(dialog, SIGNAL(attributesSet(QString)),
