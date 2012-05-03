@@ -105,7 +105,7 @@ void StickPersonObject::draw(QPainter &painter) {  // NOLINT
   // painter.drawText(tempx-10,tempy+50,this->name);
   painter.drawText(QRect(tempx - length / 2, tempy + (height-25) / 2, length, 50),
                    Qt::AlignCenter | Qt::AlignTop | Qt::TextDontClip,
-                   this->name);
+                   this->m_name);
 
   // animation
   time(&end);
@@ -132,7 +132,7 @@ StickPersonObjectDialog::StickPersonObjectDialog(QWidget *parent)
 */
 QDialog *StickPersonObject::getDialog() {
   StickPersonObjectDialog *dialog = new StickPersonObjectDialog;
-  dialog->setTextValue(name);
+  dialog->setTextValue(m_name);
   connect(dialog, SIGNAL(textValueSelected(QString)),
           this, SLOT(setName(QString)));
   return dialog;
@@ -153,7 +153,7 @@ void OvalObject::draw(QPainter &painter) {  // NOLINT
   //then checks the length of the string against the
   //length of the oval and changes the size accordingly
   QFontMetrics fm = painter.fontMetrics();
-  int temp = fm.width(this->name);
+  int temp = fm.width(this->m_name);
   if(temp >= length-20 || temp >= 80){
       temp = temp - (length-20);
       temp = temp + length;
@@ -175,7 +175,7 @@ void OvalObject::draw(QPainter &painter) {  // NOLINT
   // painter.drawText(position.x(),position.y(), this->name);
   painter.drawText(QRect(position.x() - length / 2, position.y() - height/2,length, height),
                    Qt::AlignCenter | Qt::AlignHCenter | Qt::TextDontClip,
-                   this->name);
+                   this->m_name);
 
   // Always call this ObjectNode's draw function because it
   // draws the selection boxes as needed.
@@ -193,7 +193,7 @@ OvalObjectDialog::OvalObjectDialog(QWidget *parent)
 
 QDialog * OvalObject::getDialog() {
   OvalObjectDialog *dialog = new OvalObjectDialog;
-  dialog->setTextValue(name);
+  dialog->setTextValue(m_name);
   connect(dialog, SIGNAL(textValueSelected(QString)),
           this, SLOT(setName(QString)));
   return dialog;

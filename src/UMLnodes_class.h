@@ -92,6 +92,8 @@ class ClassBoxObject: public ObjectNode {
  */
 class ClassConnectionDialog : public QInputDialog {
 };
+
+
 class InheritanceConnectionDialog : public QInputDialog {
 };
 

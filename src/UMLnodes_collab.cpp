@@ -110,7 +110,7 @@ void StickPersonCollabObject::draw(QPainter &painter) {  // NOLINT
   painter.drawText(QRect(tempx - length / 2, tempy + (height-25) / 2,
                    length, 50),
                    Qt::AlignCenter | Qt::AlignTop | Qt::TextDontClip,
-                   this->name);
+                   this->m_name);
 
   // animation
   time(&end);
@@ -140,7 +140,7 @@ StickPersonCollabObjectDialog::StickPersonCollabObjectDialog(QWidget *parent)
 
 QDialog *StickPersonCollabObject::getDialog() {
   StickPersonCollabObjectDialog *dialog = new StickPersonCollabObjectDialog;
-  dialog->setTextValue(name);
+  dialog->setTextValue(m_name);
   connect(dialog, SIGNAL(textValueSelected(QString)),
           this, SLOT(setName(QString)));
   return dialog;
@@ -162,7 +162,7 @@ void BoxCollabObject::draw(QPainter &painter) {  // NOLINT
   // grabs the length of the string and updates the box
   // to make everything fit properly
   QFontMetrics fm = painter.fontMetrics();
-  int temp = fm.width(this->name);
+  int temp = fm.width(this->m_name);
 
   if (temp >= length-20 || temp >= 70) {
     temp = temp - (length-20);
@@ -200,7 +200,7 @@ void BoxCollabObject::draw(QPainter &painter) {  // NOLINT
   painter.setFont(underlineFont);
   painter.drawText(QRect(tempx - length / 2, tempy - height / 2, length, 50),
                    Qt::AlignCenter | Qt::AlignVCenter,
-                   this->name);
+                   this->m_name);
 
   // Always call this ObjectNode's draw function because it
   // draws the selection boxes as needed.
@@ -218,7 +218,7 @@ BoxCollabObjectDialog::BoxCollabObjectDialog(QWidget *parent)
 
 QDialog *BoxCollabObject::getDialog() {
   BoxCollabObjectDialog *dialog = new  BoxCollabObjectDialog;
-  dialog->setTextValue(name);
+  dialog->setTextValue(m_name);
   connect(dialog, SIGNAL(textValueSelected(QString)),
           this, SLOT(setName(QString)));
   return dialog;
@@ -241,7 +241,7 @@ void MultiBoxCollabObject::draw(QPainter &painter) {  // NOLINT
   // grabs the length of the string and updates the box
   // to make everything fit properly
   QFontMetrics fm = painter.fontMetrics();
-  int temp = fm.width(this->name);
+  int temp = fm.width(this->m_name);
 
   if (temp >= length-20 || temp >= 70) {
     temp = temp - (length-20);
@@ -306,7 +306,7 @@ void MultiBoxCollabObject::draw(QPainter &painter) {  // NOLINT
   underlineFont.setUnderline(true);
   painter.setFont(underlineFont);
   painter.drawText(QRect(tempx - length / 2, tempy - height / 2, length, 50),
-                   Qt::AlignCenter | Qt::AlignVCenter, this->name);
+                   Qt::AlignCenter | Qt::AlignVCenter, this->m_name);
 
   // Always call this ObjectNode's draw function because it
   // draws the selection boxes as needed.
@@ -324,7 +324,7 @@ MultiBoxCollabObjectDialog::MultiBoxCollabObjectDialog(QWidget *parent)
 
 QDialog *MultiBoxCollabObject::getDialog() {
   MultiBoxCollabObjectDialog *dialog = new  MultiBoxCollabObjectDialog;
-  dialog->setTextValue(name);
+  dialog->setTextValue(m_name);
   connect(dialog, SIGNAL(textValueSelected(QString)),
           this, SLOT(setName(QString)));
   return dialog;
@@ -390,7 +390,7 @@ void CollabConnection::draw(QPainter& painter) {  // NOLINT
   DrawArrow(painter, temppoint1, temppoint2, temppoint3, temppoint4);
 
   // Draws the text
-  painter.drawText(textpos, this->text);
+  painter.drawText(textpos, this->m_text);
 }
 
 
@@ -506,7 +506,7 @@ CollabConnectionDialog::CollabConnectionDialog(QWidget *parent)
 
 QDialog *CollabConnection::getDialog() {
   CollabConnectionDialog *dialog = new CollabConnectionDialog;
-  dialog->setTextValue(text);
+  dialog->setTextValue(m_text);
   connect(dialog, SIGNAL(textValueSelected(QString)),
           this, SLOT(setName(QString)));
   return dialog;
@@ -568,7 +568,7 @@ void CollabSelfConnection::draw(QPainter& painter) {  // NOLINT
   DrawArrow(painter, temppoint1, temppoint2, temppoint3, temppoint4);
 
   // Draws the text
-  painter.drawText(textpos, this->text);
+  painter.drawText(textpos, this->m_text);
 }
 
 // This function is dedicated to the drawing of the arrow
@@ -673,7 +673,7 @@ CollabSelfConnectionDialog::CollabSelfConnectionDialog(QWidget *parent)
 
 QDialog *CollabSelfConnection::getDialog() {
   CollabSelfConnectionDialog *dialog = new CollabSelfConnectionDialog;
-  dialog->setTextValue(text);
+  dialog->setTextValue(m_text);
   connect(dialog, SIGNAL(textValueSelected(QString)),
           this, SLOT(setName(QString)));
   return dialog;

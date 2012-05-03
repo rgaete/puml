@@ -14,7 +14,7 @@ void StateObject::draw(QPainter &painter) {  // NOLINT
     //then checks the length of the string against the
     //length of the oval and changes the size accordingly
     QFontMetrics fm = painter.fontMetrics();
-    int temp = fm.width(this->name);
+    int temp = fm.width(this->m_name);
     if(temp >= length-10 || temp >= 40){
         temp = temp - (length-10);
         temp = temp + length;
@@ -38,7 +38,7 @@ void StateObject::draw(QPainter &painter) {  // NOLINT
   painter.drawText(QRect(position.x() - length / 2, position.y() - height / 2,
                          length, height),
                    Qt::AlignCenter | Qt::AlignHCenter | Qt::TextDontClip,
-                   this->name);
+                   this->m_name);
 
   // Always call this ObjectNode's draw function because it
   // draws the selection boxes as needed.
@@ -56,7 +56,7 @@ StateObjectDialog::StateObjectDialog(QWidget *parent)
 
 QDialog * StateObject::getDialog() {
   StateObjectDialog *dialog = new StateObjectDialog;
-  dialog->setTextValue(name);
+  dialog->setTextValue(m_name);
   connect(dialog, SIGNAL(textValueSelected(QString)),
           this, SLOT(setName(QString)));
   return dialog;
@@ -114,7 +114,7 @@ TransitionConnection::TransitionConnection() {
 QDialog *TransitionConnection::getDialog()
 {
   TransitionConnectionDialog *dialog = new TransitionConnectionDialog;
-  dialog->setTextValue(text);
+  dialog->setTextValue(m_text);
   connect(dialog, SIGNAL(textValueSelected(QString)),
           this, SLOT(setText(QString)));
   return dialog;
@@ -152,7 +152,7 @@ void TransitionConnection::draw(QPainter &painter) {
   calcExtensionPoint();
   path.quadTo(extensionPoint, pt2);
   painter.strokePath(path, painter.pen());
-  painter.drawText(textPos, text);
+  painter.drawText(textPos, m_text);
   drawArrow(painter);
 }
 

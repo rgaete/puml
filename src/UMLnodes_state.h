@@ -12,6 +12,7 @@
  */
 class StateObject: public ObjectNode {
   Q_OBJECT
+  Q_PROPERTY(QString name READ name WRITE setName)
 
   public:
     StateObject();
@@ -20,15 +21,15 @@ class StateObject: public ObjectNode {
     QString getIconPath() { return QString(":/Images/circle.png"); }
     QString getText() { return "State"; }
     DiagramType getDiagramType() { return StateChart; }
-
     void draw(QPainter &painter);  // NOLINT
 
+    QString name() { return m_name; }
   public slots:
-    void setName(QString newName) { this->name = newName; }
+    void setName(QString newName) { this->m_name = newName; }
 
   private:
     int radius;
-    QString name;
+    QString m_name;
 };
 
 class StateObjectDialog : public QInputDialog {
@@ -88,6 +89,7 @@ class TransitionConnectionDialog : public QInputDialog {
 */
 class TransitionConnection : public ConnectionNode {
   Q_OBJECT
+  Q_PROPERTY(QString text READ text WRITE setText)
   public:
     TransitionConnection();
     BaseNode* clone() { return new TransitionConnection; }
@@ -96,16 +98,17 @@ class TransitionConnection : public ConnectionNode {
     QString getText() { return "Transition Line"; }
     void draw(QPainter& painter);  // NOLINT
     DiagramType getDiagramType() { return StateChart; }
+    QString text() { return m_text; }
   private:
     void calcExtensionPoint();
     //void drawArrow(QPoint begin, QPoint end, double headLength, int radius, QPainter &painter);
     void drawArrow(QPainter &painter);
     QPoint extensionPoint;
     double extensionLength;
-    QString text;
+    QString m_text;
     QPainterPath arc;
   public slots:
-    void setText(QString t) { text = t; }
+    void setText(QString t) { m_text = t; }
 
 };
 

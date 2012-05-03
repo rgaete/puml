@@ -32,6 +32,8 @@ class StickPersonCollabObjectDialog : public QInputDialog {
  */
 class StickPersonCollabObject : public ObjectNode {
   Q_OBJECT
+  Q_PROPERTY(QString name READ name WRITE setName)
+
   public:
     StickPersonCollabObject();
     BaseNode* clone() { return new StickPersonCollabObject; }
@@ -39,22 +41,19 @@ class StickPersonCollabObject : public ObjectNode {
     QString getIconPath() { return QString(":/Images/stickman.png"); }
     QString getText() { return "Stick Person"; }
     DiagramType getDiagramType() { return Collaboration; }
-
     void draw(QPainter &painter);  // NOLINT
 
+    QString name() { return m_name; }
   public slots:
-    void setName(QString newName) { this->name = newName; }
+    void setName(QString newName) { this->m_name = newName; }
   private:
-    QString name;
+    QString m_name;
     // animation vars
       // 0 == punch, 1 == no punch
     int punchhand;
     time_t start;
     time_t end;
     double dif;
-
-  private slots:
-    // void setName(QString newName) { name = newName; }
 };
 
 
@@ -62,6 +61,8 @@ class StickPersonCollabObject : public ObjectNode {
  */
 class BoxCollabObject : public ObjectNode {
   Q_OBJECT
+  Q_PROPERTY(QString name READ name WRITE setName)
+
   public:
     BoxCollabObject();
     BaseNode* clone() { return new BoxCollabObject; }
@@ -69,15 +70,13 @@ class BoxCollabObject : public ObjectNode {
     QString getIconPath() { return QString(":/Images/rectangle.png"); }
     QString getText() { return "Collaboration Box"; }
     DiagramType getDiagramType() { return Collaboration; }
-//change above line!!!!!!!!!
     void draw(QPainter &painter);  // NOLINT
+
+    QString name() { return m_name; }
   public slots:
-    void setName(QString newName) { this->name = newName; }
+    void setName(QString newName) { this->m_name = newName; }
   private:
-    QString name;
-    // animation vars
-  private slots:
-    // void setName(QString newName) { name = newName; }
+    QString m_name;
 };
 
 /*! @brief The properties dialog for collaboration boxes
@@ -94,6 +93,8 @@ class BoxCollabObjectDialog : public QInputDialog {
 
 class MultiBoxCollabObject : public ObjectNode {
   Q_OBJECT
+  Q_PROPERTY(QString name READ name WRITE setName)
+
   public:
     MultiBoxCollabObject();
     BaseNode* clone() { return new MultiBoxCollabObject; }
@@ -101,15 +102,13 @@ class MultiBoxCollabObject : public ObjectNode {
     QString getIconPath() { return QString(":/Images/multibox.png"); }
     QString getText() { return "Collaboration Multibox"; }
     DiagramType getDiagramType() { return Collaboration; }
-//change above line!!!!!!!!!
     void draw(QPainter &painter);  // NOLINT
+
+    QString name() { return m_name; }
   public slots:
-    void setName(QString newName) { this->name = newName; }
+    void setName(QString newName) { this->m_name = newName; }
   private:
-    QString name;
-    // animation vars
-  private slots:
-    // void setName(QString newName) { name = newName; }
+    QString m_name;
 };
 
 /*! @brief The properties dialog for collaboration multiboxes
@@ -133,7 +132,9 @@ public:
 /*! @brief This concrete class defines ...
  */
 class CollabConnection : public SquareConnectionNode {
-    Q_OBJECT
+  Q_OBJECT
+  Q_PROPERTY(QString text READ text WRITE setName)
+
   public:
     BaseNode* clone() { return new CollabConnection; }
     QDialog* getDialog();// { return new CollabConnectionDialog; }
@@ -141,15 +142,16 @@ class CollabConnection : public SquareConnectionNode {
     QString getText() { return "Collaboration Line"; }
     void draw(QPainter& painter);  // NOLINT
     DiagramType getDiagramType() { return Collaboration; }
+
+    QString text() { return m_text; }
+
     int FindDirection(QPoint point1, QPoint point2, QPoint temppoint1, QPoint temppoint2);
     void DrawArrow(QPainter &painter, QPoint point, QPoint point2, QPoint temppoint1, QPoint temppoint2);
-
-   private:
-    QString text;
+  public slots:
+    void setName(QString newName) { this->m_text = newName; }
+  private:
+    QString m_text;
     QPoint textpos;
-public slots:
-    void setName(QString newName) { this->text = newName; }
-
 };
 
 
@@ -165,7 +167,9 @@ public:
 /*! @brief This concrete class defines ...
  */
 class CollabSelfConnection : public SquareConnectionNode {
-    Q_OBJECT
+  Q_OBJECT
+  Q_PROPERTY(QString text READ text WRITE setName)
+
   public:
     BaseNode* clone() { return new CollabSelfConnection; }
     QDialog* getDialog();// { return new CollabConnectionDialog; }
@@ -173,14 +177,17 @@ class CollabSelfConnection : public SquareConnectionNode {
     QString getText() { return "Collaboration Self Line"; }
     void draw(QPainter& painter);  // NOLINT
     DiagramType getDiagramType() { return Collaboration; }
+
+    QString text() { return m_text; }
+
     int FindDirection(QPoint point1, QPoint point2, QPoint temppoint1, QPoint temppoint2);
     void DrawArrow(QPainter &painter, QPoint point, QPoint point2, QPoint temppoint1, QPoint temppoint2);
-
-   private:
-    QString text;
+  public slots:
+    void setName(QString newName) { this->m_text = newName; }
+  private:
+    QString m_text;
     QPoint textpos;
-public slots:
-    void setName(QString newName) { this->text = newName; }
+
 
 };
 

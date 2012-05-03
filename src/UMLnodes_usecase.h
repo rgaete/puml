@@ -29,6 +29,8 @@ class StickPersonObjectDialog : public QInputDialog {
  */
 class StickPersonObject : public ObjectNode {
   Q_OBJECT
+  Q_PROPERTY(QString name READ name WRITE setName)
+
   public:
     StickPersonObject();
     BaseNode* clone() { return new StickPersonObject; }
@@ -36,21 +38,19 @@ class StickPersonObject : public ObjectNode {
     QString getIconPath() { return QString(":/Images/stickman.png"); }
     QString getText() { return "Stick Person"; }
     DiagramType getDiagramType() { return UseCase; }
-
     void draw(QPainter &painter);  // NOLINT
+
+    QString name() { return m_name; }
   public slots:
-    void setName(QString newName) { this->name = newName; }
+    void setName(QString newName) { this->m_name = newName; }
   private:
-    QString name;
+    QString m_name;
     // animation vars
       // 0 == punch, 1 == no punch
     int punchhand;
     time_t start;
     time_t end;
     double dif;
-
-  private slots:
-    // void setName(QString newName) { name = newName; }
 };
 
 
@@ -68,6 +68,8 @@ class OvalObjectDialog : public QInputDialog {
  */
 class OvalObject: public ObjectNode {
   Q_OBJECT
+  Q_PROPERTY(QString name READ name WRITE setName)
+
   public:
     OvalObject();
     BaseNode* clone() { return new OvalObject; }
@@ -75,13 +77,14 @@ class OvalObject: public ObjectNode {
     QString getIconPath() { return QString(":/Images/oval.png"); }
     QString getText() { return "Use Case"; }
     DiagramType getDiagramType() { return UseCase; }
-
     void draw(QPainter &painter);  // NOLINT
+
+    QString name() { return m_name; }
   public slots:
-    void setName(QString newName) { this->name = newName; }
+    void setName(QString newName) { this->m_name = newName; }
   private:
-    int radius;
-    QString name;
+    int m_radius;
+    QString m_name;
 };
 
 /*! @brief This concrete class defines an Interaction line in a Use
