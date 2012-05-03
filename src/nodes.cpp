@@ -51,17 +51,13 @@ QDomElement BaseNode::to_xml(QDomDocument &doc,  // NOLINT
   // Reminder: metaObject depends on the Q_OBJECT macro existing in the class
   // that uses it. Otherwise, the class_name will come out as BaseNode.
 
+  // Save the class name (ClassBoxObject, UseCase, etc.)
   node.setAttribute(QString("class_name"), this->metaObject()->className());
-  /*
-  node.setAttribute(QString("selected"), QString::number(selected));
-  node.setAttribute(QString("cpSelected"), QString::number(cpSelected));
-  node.setAttribute(QString("pos_x"), QString::number(position.x()));
-  node.setAttribute(QString("pos_y"), QString::number(position.y()));
-  node.setAttribute(QString("length"), QString::number(length));
-  node.setAttribute(QString("height"), QString::number(height));
-fprintf(stderr, "Got HERE\n");
-  */
 
+  // Save the id
+  node.setAttribute("Id", this->Id());
+
+  // Save all the properties as attributes.
   QString stringvalue;
   QString propertyname;
   for (int i=0; i<this->metaObject()->propertyCount(); i++) {
@@ -70,32 +66,46 @@ fprintf(stderr, "Got HERE\n");
     node.setAttribute(propertyname, stringvalue);
   }
 
+  // Now save connections
+  std::list<BaseNode*>::iterator it;
+  for (it = connectedObjects.begin(); it!=connectedObjects.end(); it++) {
+    QDomElement connectedObjectNode = doc.createElement("ConnectedObject");
+
+    // save the Id as an attribute
+    connectedObjectNode.setAttribute("id",(*it)->Id());
+
+    node.appendChild(connectedObjectNode);
+  }
+
   return node;
 }
 
+/*! This function restores the node with what is specified in element.
+    Specifically it restores the unique id and all Qt Properties.
+*/
 void BaseNode::from_xml(QDomElement &element)
 {
   QString propertyname;
   QString stringvalue;
   QVariant value;
 
-  if (this == 0) {
-    qDebug("We got a null this pointer");
-  }
-  if (this->metaObject() == 0) {
-    qDebug("We got a null metaObject");
-  }
+  // Reminder: class_name has already been used to create this node.
 
-  const QMetaObject *metaObject = this->metaObject();
-  int propertyCount = metaObject->propertyCount();
-  for (int i=0; i<propertyCount; i++) {
+  // Restore the unique id and overwrite the id that was given to us already
+  stringvalue = element.attribute("Id");
+  this->setId(QUuid(stringvalue));
+
+  // Restore all the saved properties.
+  for (int i=0; i<this->metaObject()->propertyCount(); i++) {
     propertyname = this->metaObject()->property(i).name();
     stringvalue = element.attribute(propertyname);
     value = QVariant(stringvalue);
 
     this->metaObject()->property(i).write(this, value);
-
   }
+
+  // Reminder: connections are restored in the calling function, which has
+  // access to the list of nodes.
 }
 
 void BaseNode::addConnnectionPoint(const QPoint &newpoint) {
@@ -103,6 +113,9 @@ void BaseNode::addConnnectionPoint(const QPoint &newpoint) {
 }
 
 void BaseNode::addConnectedNode(BaseNode *newObject) {
+  if (newObject == 0) {
+    qDebug("Adding a null object as a connected node!");
+  }
   connectedObjects.push_back(newObject);
 }
 
@@ -113,27 +126,31 @@ void BaseNode::removeConnectedNode(BaseNode *object) {
 QPoint BaseNode::getClosestConnectionPoint(const QPoint &point) {
   double minlength, testlength;
   int minindex;
-  // Why not use pow()?
-  minlength = sqrt(static_cast<double>(
-                   ((point.x() - connectionPoints.at(0).x()) *
-                    (point.x() - connectionPoints.at(0).x())) +
-                   ((point.y() - connectionPoints.at(0).y()) *
-                    (point.y() - connectionPoints.at(0).y()))));
-  minindex = 0;
+  if (connectionPoints.size() > 0) {
+    // Why not use pow()?
+    minlength = sqrt(static_cast<double>(
+                     ((point.x() - connectionPoints.at(0).x()) *
+                      (point.x() - connectionPoints.at(0).x())) +
+                     ((point.y() - connectionPoints.at(0).y()) *
+                      (point.y() - connectionPoints.at(0).y()))));
+    minindex = 0;
 
-  for (int i = 1; i < static_cast<int>(connectionPoints.size()); i++) {
-    testlength = sqrt(static_cast<double>(
-                      ((point.x() - connectionPoints.at(i).x()) *
-                       (point.x() - connectionPoints.at(i).x())) +
-                      ((point.y() - connectionPoints.at(i).y()) *
-                       (point.y() - connectionPoints.at(i).y()))));
-    if (testlength < minlength) {
-      minlength = testlength;
-      minindex = i;
+    for (int i = 1; i < static_cast<int>(connectionPoints.size()); i++) {
+      testlength = sqrt(static_cast<double>(
+                        ((point.x() - connectionPoints.at(i).x()) *
+                         (point.x() - connectionPoints.at(i).x())) +
+                        ((point.y() - connectionPoints.at(i).y()) *
+                         (point.y() - connectionPoints.at(i).y()))));
+      if (testlength < minlength) {
+        minlength = testlength;
+        minindex = i;
+      }
     }
+    return connectionPoints.at(minindex);
+  } else {
+    qDebug() << "getClosestConnectionPoint Error: There are no connection points";
+    return QPoint();
   }
-
-  return connectionPoints.at(minindex);
 }
 
 std::list<BaseNode*> BaseNode::getConnectedNodes() {

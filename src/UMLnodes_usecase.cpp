@@ -207,22 +207,26 @@ QDialog * OvalObject::getDialog() {
 void InteractionConnection::draw(QPainter& painter) {  // NOLINT
   BaseNode *obj1, *obj2;
   std::list<BaseNode*>::iterator it = connectedObjects.begin();
-  obj1 = *(it);
-  it++;
-  obj2 = *(it);
-
-  pt1 = obj1->getClosestConnectionPoint(obj2->getPosition());
-  pt2 = obj2->getClosestConnectionPoint(obj1->getPosition());
-
-  if (selected == true) {
-    QPen selectPen;
-    selectPen.setWidth(2);
-    selectPen.setColor(Qt::blue);
-    painter.setPen(selectPen);
+  if (connectedObjects.size() != 2) {
+    qDebug() << "InteractionConnection::draw Error: Only " << connectedObjects.size() << " connected objects!";
   } else {
-    painter.setPen(Qt::black);
+    obj1 = *(it);
+    it++;
+    obj2 = *(it);
+
+    pt1 = obj1->getClosestConnectionPoint(obj2->getPosition());
+    pt2 = obj2->getClosestConnectionPoint(obj1->getPosition());
+
+    if (selected == true) {
+      QPen selectPen;
+      selectPen.setWidth(2);
+      selectPen.setColor(Qt::blue);
+      painter.setPen(selectPen);
+    } else {
+      painter.setPen(Qt::black);
+    }
+    painter.drawLine(pt1, pt2);
   }
-  painter.drawLine(pt1, pt2);
 }
 
 

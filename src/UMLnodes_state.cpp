@@ -121,6 +121,10 @@ QDialog *TransitionConnection::getDialog()
 }
 
 void TransitionConnection::draw(QPainter &painter) {
+  if (connectedObjects.size() != 2) {
+    qDebug() << "TransitionConnection::draw Error: Only " << connectedObjects.size() << " connected objects!";
+    return;
+  }
   BaseNode *obj1, *obj2;
   std::list<BaseNode*>::iterator it = connectedObjects.begin();
   obj1 = *(it);

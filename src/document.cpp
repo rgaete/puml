@@ -282,6 +282,31 @@ void Document::removeFromOrdering(int index) {
   }
 }
 
+/*! Sets the modifed flag and emits the modifed changed signal. This is so
+    the tabs get updated with an asterisk to indicate if the document has been
+    modified.
+*/
+void Document::setModified(bool modified)
+{
+  modifiedFlag = modified;
+  emit modifiedChanged(modified);
+}
+
+/*! Tries to find and return the object specifed by the given uniqued id.
+    Returns null otherwise.
+*/
+BaseNode *Document::findNodeById(QUuid id)
+{
+  std::vector<BaseNode*>::iterator it;
+  for (it=nodes.begin(); it!=nodes.end(); it++) {
+    if (id == (*it)->Id()) {
+      return (*it);
+    }
+  }
+  qDebug("Didn't find a node by id :(");
+  return 0;
+}
+
 /*! Slot. This will move whatever object is selected to the new point, while
   adding in the delta that was saved by a previous call to setSelectedObject.
 */
@@ -449,7 +474,11 @@ void Document::showPropertiesDialog() {
 */
 void Document::drawList(QPainter &painter) {  // NOLINT
   for (int i = 0; i < ordering.size(); i++) {
-    nodes.at(ordering.at(i))->draw(painter);
+    if (nodes.at(ordering.at(i)) == 0) {
+      qDebug() << "Drawing error: Ordering points to null node";
+    } else {
+      nodes.at(ordering.at(i))->draw(painter);
+    }
   }
 }
 
@@ -641,6 +670,7 @@ void Document::openDocument(QString openName)
 {
     QDomDocument* xmlDoc = openSaveFile(openName);
     QDomElement docElem = getNextDocumentElement(xmlDoc);
+    QDomElement nodesVectorElement;
     QDomElement n;
     BaseNode* newNode;
 
@@ -648,30 +678,69 @@ void Document::openDocument(QString openName)
     nodes.clear();
     ordering.clear();
 
-    while (1) {
-      n = getNextNodeElement(docElem);
-      if (n.isNull()) {
-        break;
-      }
+    // First get out the first (and hopefully only) nodes_vector_element.
+    nodesVectorElement = docElem.firstChildElement("nodes_vector_element");
 
-      // Now that we have the QDomElement, produce the node
+    // Now we have to iterate over all the Node elements and restor them.
+    // This style of iteration loop was taken from the Qt documentation for
+    // QDomElement.
+    n = nodesVectorElement.firstChildElement("Node");
+    for (; !n.isNull(); n = n.nextSiblingElement("Node")) {
+      // Now that we have the QDomElement, try to produce the node
       newNode = NodeFactory::getInstance()->produceFromClassName(n.attribute("class_name"));
-      if (newNode == 0) {
-          fprintf(stderr, "Error loading: Got a null node with class name '%-21s'\n", qPrintable(n.attribute("class_name")));
-      } else {
-          QPoint pos;
-          pos.setX(QString(n.attribute("pos_x")).toInt());
-          pos.setY(QString(n.attribute("pos_y")).toInt());
-          // newNode->setPosition(pos);
-          newNode->from_xml(n);
 
-          if (newNode->isConnector() == false) {
-              nodes.push_back(newNode);
-              ordering.push_back(nodes.size()-1);
+      // Check we failed
+      if (newNode == 0) {
+        qDebug() << "Document::openDocument Error: Couldn't produce a " << n.attribute("class_name") << " with the node factory.";
+      } else {
+        // Restore the unique id and all the properties
+        newNode->from_xml(n);
+
+        // Push the node onto the node vector
+        nodes.push_back(newNode);
+        ordering.push_back(nodes.size()-1);
+      }
+    }
+
+    // Now that we have all the id's restored, we can restore the connections
+    // between the nodes. We loop over all the Node elements in
+    // node_vector_element and loop over all the ConnectedObject elements in
+    // each Node.
+    n = nodesVectorElement.firstChildElement("Node");
+    for (; !n.isNull(); n = n.nextSiblingElement("Node")) {
+      BaseNode* sourcenode;
+      QUuid sourceid;
+
+      // Find the node that we created earlier from this element
+      sourceid = QUuid(n.attribute("Id"));
+      sourcenode = this->findNodeById(sourceid);
+
+      if (sourcenode == 0) {
+        qDebug() << "Document::openDocument Error: Couldn't find source node by id";
+      } else {
+        QUuid targetid;
+        BaseNode* targetnode;
+
+        // Now that we have the element and it's associated node, iterate
+        // over all of the element's children ("ConnectedObjects")
+        QDomElement child = n.firstChildElement("ConnectedObject");
+        for (; !child.isNull(); child = child.nextSiblingElement("ConnectedObject")) {
+          // Find the targeted node by id
+          targetid = QUuid(child.attribute("id"));
+          targetnode = this->findNodeById(targetid);
+
+          // Check if it failed
+          if (targetnode == 0) {
+            qDebug() << "Document::openDocument Error: Couldn't find a target node by id";
+          } else {
+            // If it didn't fail, add the connection!
+            sourcenode->addConnectedNode(targetnode);
           }
+        }
       }
     }
 
     setFilename(openName);
     setModified(false);
+    update();
 }

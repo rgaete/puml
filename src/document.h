@@ -50,7 +50,8 @@ class Document : public QWidget {
   private:
     int getIndexAt(const QPoint &point);
     void removeFromOrdering(int index);
-    void setModified(bool modified) { modifiedFlag = modified; emit modifiedChanged(modified); }
+    void setModified(bool modified);
+    BaseNode* findNodeById(QUuid id);
 
     // The index of the selected object, -1 if nothing's selected
     int indexOfSelectedObject;
