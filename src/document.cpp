@@ -631,7 +631,7 @@ void Document::changeSecondConnectionPointHint(const QPoint &point) {
 */
 void Document::saveDocument() {
   if (this->hasFilename() != false) {
-    QMessageBox::information(this, "pUML", "Trying to open file " + fileName);
+    QMessageBox::information(this, "pUML", "Trying to open file " + fileName + " for saving");
     QFile file(fileName);
     QDomDocument xml_doc("pUML_save_document");
     //QDomDocument xml_doc("nodes_vector_xml");
@@ -659,6 +659,8 @@ void Document::saveDocument() {
     myfile.close();
 
     setModified(false);
+  } else {
+    qDebug() << "Document::saveDocument Error: No filename to save to!";
   }
 }
 
