@@ -106,6 +106,8 @@ void BaseNode::from_xml(QDomElement &element)
 
   // Reminder: connections are restored in the calling function, which has
   // access to the list of nodes.
+
+  this->setUpConnectionPoints();
 }
 
 void BaseNode::addConnnectionPoint(const QPoint &newpoint) {

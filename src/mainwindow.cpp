@@ -595,12 +595,17 @@ void MainWindow::on_actionNew_triggered() {
  */
 void MainWindow::on_tabWidget_tabCloseRequest(int index){
   // Check if the document needs saving
-  if (documents.at(currentDocument)->getModified() == true) {
+  if (documents.at(index)->getModified() == true) {
     QMessageBox::StandardButton choice;
     choice = QMessageBox::question(this, "pUML", "This diagram contains unsaved changes, do you want to save first?",
                           QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel, QMessageBox::Yes);
     if (choice == QMessageBox::Yes) {
+      // update the currentdocument to index so that the save function
+      // tries to save that document
+      int tempindex = currentDocument;
+      currentDocument = index;
       on_actionSave_triggered();
+      currentDocument = tempindex;
     } else if (choice == QMessageBox::Cancel) {
       return;
     }
