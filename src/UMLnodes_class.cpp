@@ -15,7 +15,9 @@ ClassBoxObject::ClassBoxObject() {
   this->methodHeight = 15;
 }
 
+/*
 QDomElement ClassBoxObject::to_xml(QDomDocument &doc, QDomElement &doc_root) {
+
 fprintf(stderr, "Got here\n");
   QDomElement node = BaseNode::to_xml(doc, doc_root);
   node.setAttribute(QString("classHeight"), QString::number(classHeight));
@@ -27,8 +29,10 @@ fprintf(stderr, "Got here\n");
   node.setAttribute(QString("attributes"), m_attributes);
   node.setAttribute(QString("methods"), m_methods);
   return node;
+
 }
 
+*/
 void ClassBoxObject::draw(QPainter &painter) {  // NOLINT
     //This is for resizing the ClassBoxObject
     //The variables being created here hold the height and length
