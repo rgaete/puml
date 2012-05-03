@@ -685,12 +685,23 @@ void MainWindow::on_actionSave_triggered() {
     documents.at(currentDocument)->saveDocument();
   } else {
     // Otherwise, get a new filename.
+    QString selectedFilter;
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save Diagram"),
-                                                    "", tr("pUML files (*.puml)"));
+                                                    "", tr("pUML files (*.puml)"),
+                                                    &selectedFilter);
     qDebug(qPrintable(fileName));
+    qDebug(qPrintable(selectedFilter));
 
     // If the user didn't click cancel...
     if (fileName != "") {
+      // On linux, the suffix isn't automatically added and we need to
+      // manuall add it.
+#ifdef Q_OS_LINUX
+      if (selectedFilter == "pUML files (*.puml)") {
+        fileName += ".puml";
+      }
+#endif
+
       // Set the filename for the document (so we know what filename
       // to use later when the user clicks on save again).
       documents.at(currentDocument)->setFilename(fileName);

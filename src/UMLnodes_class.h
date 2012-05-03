@@ -49,6 +49,9 @@ class ClassBoxObjectDialog : public QDialog {
  */
 class ClassBoxObject: public ObjectNode {
   Q_OBJECT
+  Q_PROPERTY(QString methods READ methods WRITE setMethods)
+  Q_PROPERTY(QString className READ className WRITE setClassName)
+  Q_PROPERTY(QString attributes READ attributes WRITE setAttributes)
 
   public:
     ClassBoxObject();
@@ -60,21 +63,29 @@ class ClassBoxObject: public ObjectNode {
     DiagramType getDiagramType() { return Class; }
     void draw(QPainter &painter);  // NOLINT
 
+    QString methods() const { return m_methods; }
+    QString attributes() const { return m_attributes; }
+    QString className() const { return m_className; }
+
   public slots:
-    void setClassName(QString newClassName) { this->className = newClassName; }
-    void setAttributes(QString newAttributes) {
-      this->attributes = newAttributes;
+    void setClassName(QString newClassName) {
+      this->m_className = newClassName;
     }
-    void setMethods(QString newMethods) { this->methods = newMethods; }
+    void setAttributes(QString newAttributes) {
+      this->m_attributes = newAttributes;
+    }
+    void setMethods(QString newMethods) {
+      this->m_methods = newMethods;
+    }
 
   private:
     int classHeight;
     int attributeHeight;
     int methodHeight;
     int radius;
-    QString className;
-    QString attributes;
-    QString methods;
+    QString m_className;
+    QString m_attributes;
+    QString m_methods;
 };
 
 /*! @brief The properties dialog for class connections

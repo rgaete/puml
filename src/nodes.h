@@ -46,6 +46,7 @@ class BaseNode : public QObject {
     // ~BaseNode() {}
 
     QDomElement to_xml(QDomDocument &doc, QDomElement &doc_root);
+    void from_xml(QDomElement &element);
     void setSelected(bool newState) { selected = newState; }
     void setPosition(const QPoint &pos) {
       position = pos;

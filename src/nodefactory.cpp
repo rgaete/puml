@@ -46,6 +46,8 @@ BaseNode *NodeFactory::produceFromClassName(QString name)
             return (*it)->clone();
         }
     }
+    qDebug("Error: couldn't produce class");
+    return 0;
 }
 
 /*! Returns the one instance of the class. Functions should
