@@ -672,6 +672,6 @@ void Document::openDocument(QString openName)
       }
     }
 
-    fileName = openName;
+    setFilename(openName);
     setModified(false);
 }

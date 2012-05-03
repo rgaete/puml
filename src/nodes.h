@@ -31,6 +31,8 @@ class BaseNode;
  */
 class BaseNode : public QObject {
   Q_OBJECT
+  Q_PROPERTY(int posX READ posX WRITE setPosX)
+  Q_PROPERTY(int posY READ posY WRITE setPosY)
 
   public:
     enum DiagramType {
@@ -47,11 +49,16 @@ class BaseNode : public QObject {
 
     QDomElement to_xml(QDomDocument &doc, QDomElement &doc_root);
     void from_xml(QDomElement &element);
+
     void setSelected(bool newState) { selected = newState; }
     void setPosition(const QPoint &pos) {
       position = pos;
       setUpConnectionPoints();
     }
+    void setPosX(int x) { position.setX(x); }
+    void setPosY(int y) { position.setY(y); }
+    int posX() { return position.x(); }
+    int posY() { return position.y(); }
     QPoint getPosition() { return position; }
 
     virtual void draw(QPainter &painter) = 0;  // NOLINT
