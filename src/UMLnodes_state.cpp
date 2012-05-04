@@ -9,7 +9,7 @@
 StateObject::StateObject() {
   this->length = 80;
   this->height = 80;
-  this->finalstate = false;
+  this->m_finalstate = false;
 }
 
 void StateObject::draw(QPainter &painter) {  // NOLINT
@@ -48,7 +48,7 @@ void StateObject::draw(QPainter &painter) {  // NOLINT
 
   QPainter::Antialiasing;
 
-  if(finalstate == true){
+  if(m_finalstate == true){
         // background
         painter.setPen(Qt::NoPen);
         painter.setBrush(Qt::white);
@@ -96,7 +96,7 @@ void StateObject::draw(QPainter &painter) {  // NOLINT
 
 void StateObject::setFinal(bool state)
 {
-    finalstate = state;
+    m_finalstate = state;
 }
 
 StateObjectDialog::StateObjectDialog(QWidget *parent)
@@ -162,7 +162,7 @@ QDialog * StateObject::getDialog() {
   dialog->setFixedSize(450, 200);
   dialog->setName(m_name);
   dialog->setAttributes(m_attributes);
-  dialog->setFinal(finalstate);
+  dialog->setFinal(m_finalstate);
   connect(dialog, SIGNAL(nameSet(QString)),
           this, SLOT(setName(QString)));
   connect(dialog, SIGNAL(attributesSet(QString)),

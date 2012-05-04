@@ -16,6 +16,8 @@
 class StateObject: public ObjectNode {
   Q_OBJECT
   Q_PROPERTY(QString name READ name WRITE setName)
+  Q_PROPERTY(QString attributes READ attributes WRITE setAttributes)
+  Q_PROPERTY(bool finalstate READ finalstate WRITE setFinal)
 
   public:
     StateObject();
@@ -28,6 +30,7 @@ class StateObject: public ObjectNode {
 
     QString name() { return m_name; }
     QString attributes() { return m_attributes; }
+    bool finalstate() { return m_finalstate; }
 
   public slots:
     void setName(QString newName) { this->m_name = newName; }
@@ -36,7 +39,7 @@ class StateObject: public ObjectNode {
 
   private:
     int radius;
-    bool finalstate;
+    bool m_finalstate;
     QString m_name;
     QString m_attributes;
 };
