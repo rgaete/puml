@@ -677,6 +677,7 @@ void MainWindow::on_actionOpen_triggered() {
   if (openName != "") {
     // Use the openDiagram to create the canvas, document and tab and load the file.
     openDiagram(openName);
+    updateDiagramType(documents.at(currentDocument)->getDiagramType());
   }
 }
 

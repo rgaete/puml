@@ -634,9 +634,8 @@ void Document::saveDocument() {
     QMessageBox::information(this, "pUML", "Trying to open file " + fileName + " for saving");
     QFile file(fileName);
     QDomDocument xml_doc("pUML_save_document");
-    //QDomDocument xml_doc("nodes_vector_xml");
-    //QDomElement root = xml_doc.createElement("nodes_vector_xml");
     QDomElement documentElement = xml_doc.createElement("document");
+    documentElement.setAttribute("diagramType", diagramType);
     xml_doc.appendChild(documentElement);
     QDomElement nodesElement = xml_doc.createElement("nodes_vector_element");
     documentElement.appendChild(nodesElement);
@@ -679,6 +678,9 @@ void Document::openDocument(QString openName)
     // Clear the nodes vector
     nodes.clear();
     ordering.clear();
+
+    // Get the diagram type
+    diagramType = static_cast<BaseNode::DiagramType>(docElem.attribute("diagramType").toInt());
 
     // First get out the first (and hopefully only) nodes_vector_element.
     nodesVectorElement = docElem.firstChildElement("nodes_vector_element");
