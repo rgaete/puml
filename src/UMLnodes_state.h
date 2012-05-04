@@ -5,6 +5,9 @@
 
 #include <QInputDialog>
 #include "./nodes.h"
+#include <QLabel>
+#include <QTextEdit>
+#include <QCheckBox>
 
 /*!
  * @brief This concrete class is the State node.
@@ -24,18 +27,41 @@ class StateObject: public ObjectNode {
     void draw(QPainter &painter);  // NOLINT
 
     QString name() { return m_name; }
+    QString attributes() { return m_attributes; }
+
   public slots:
     void setName(QString newName) { this->m_name = newName; }
+    void setAttributes(QString newAttributes) { this->m_attributes = newAttributes; }
+    void setFinal(bool state);
 
   private:
     int radius;
+    bool finalstate;
     QString m_name;
+    QString m_attributes;
 };
 
-class StateObjectDialog : public QInputDialog {
+class StateObjectDialog : public QDialog {
   Q_OBJECT
-  public:
-    explicit StateObjectDialog(QWidget *parent = 0);
+
+public:
+  explicit StateObjectDialog(QWidget *parent = 0);
+  void setName(QString newName);
+  void setAttributes(QString newAttributes);
+  void setFinal(bool state);
+private slots:
+  void okButtonClicked();
+signals:
+  void nameSet(QString newName);
+  void attributesSet(QString newAttributes);
+  void finalSet(bool state);
+private:
+  QCheckBox *check;
+  QLabel *NameLabel;
+  QLabel *AttributesLabel;
+  QLineEdit *NameLineEdit;
+  QTextEdit *AttributesLineEdit;
+  QPushButton *okButton;
 };
 
 
