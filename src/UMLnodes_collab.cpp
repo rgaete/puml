@@ -386,11 +386,42 @@ void CollabConnection::draw(QPainter& painter) {  // NOLINT
   temppoint4.setX(pt4.x());
   temppoint4.setY(pt4.y());
 
+  temppoint1.setX(pt2.x());
+  if(pt1.y() > pt4.y())
+     temppoint1.setY(pt1.y()-40);
+  else if(pt1.y() < pt4.y())
+      temppoint1.setY(pt1.y()+40);
+
   // Draws the arrow and computes its direction
-  DrawArrow(painter, temppoint1, temppoint2, temppoint3, temppoint4);
+  if (pt1.x() == obj1->getPosition().x())
+    DrawArrow(painter, temppoint3, temppoint4, temppoint1, temppoint2, 1);
+  else if(pt1.x() != obj1->getPosition().x())
+    DrawArrow(painter, temppoint1, temppoint2, temppoint3, temppoint4, 0);
 
   // Draws the text
-  painter.drawText(textpos, this->m_text);
+  QFontMetrics fm = painter.fontMetrics();
+  int temp = fm.width(m_text);
+
+  if (pt1.x() == obj1->getPosition().x()){
+    if(pt4.x() >= pt1.x() && pt4.y() > pt1.y())
+        painter.drawText(pt1.x()+35,textpos.y(), this->m_text);
+    else if (pt4.x() >= pt1.x() && pt4.y() < pt1.y())
+        painter.drawText(pt1.x()+35,textpos.y(), this->m_text);
+    else if(pt4.x() < pt1.x() && pt4.y() > pt1.y())
+        painter.drawText(pt1.x()-temp-35,textpos.y(), this->m_text);
+    else if(pt4.x() < pt1.x() && pt4.y() < pt1.y())
+        painter.drawText(pt1.x()-temp-35,textpos.y(), this->m_text);
+  }
+  else if(pt1.x() != obj1->getPosition().x()){
+    if(pt4.x() > pt1.x() && pt4.y() >= pt1.y())
+        painter.drawText(pt1.x()+50,textpos.y(), this->m_text);
+    else if (pt4.x() > pt1.x() && pt4.y() < pt1.y())
+        painter.drawText(pt1.x()+50,textpos.y(), this->m_text);
+    else if(pt4.x() < pt1.x() && pt4.y() >= pt1.y())
+        painter.drawText(pt1.x()-temp-50,textpos.y(), this->m_text);
+    else if(pt4.x() < pt1.x() && pt4.y() < pt1.y())
+        painter.drawText(pt1.x()-temp-50,textpos.y(), this->m_text);
+  }
 }
 
 
@@ -447,7 +478,7 @@ int CollabConnection::FindDirection(QPoint point1, QPoint point2,
 // This function is dedicated to the drawing of the arrow
 void CollabConnection::DrawArrow(QPainter &painter, QPoint point1,  // NOLINT
                                  QPoint point2, QPoint temppoint1,
-                                 QPoint temppoint2) {
+                                 QPoint temppoint2, int ud) {
   int dir = 1;  // direction pointing, left or right, initialized to right
   int length = 50;  // length and height variables
   int height = 50;
@@ -460,14 +491,37 @@ void CollabConnection::DrawArrow(QPainter &painter, QPoint point1,  // NOLINT
   length *= dir;
 
   // computes starting and ending values for the arrow
-  int tempx = point1.x() + offset;
-  int tempy = point1.y() - offset;
-  int headx = tempx + length / 2;
-  int heady = tempy;
+  int tempx, tempy, headx, heady;
+  if(temppoint2.x() >= temppoint1.x() && temppoint2.y() >= temppoint1.y()){
+    tempx = temppoint1.x() + offset + 5;
+    tempy = temppoint1.y() - offset;
+    headx = tempx + length / 2;
+    heady = tempy;
+  }
+  else if (temppoint2.x() >= temppoint1.x() && temppoint2.y() < temppoint1.y()){
+    tempx = temppoint1.x() + offset + 5;
+    tempy = temppoint1.y() + offset;
+    headx = tempx + length / 2;
+    heady = tempy;
+  }
+  else if (temppoint2.x() <= temppoint1.x() && temppoint2.y() >= temppoint1.y()){
+    tempx = temppoint1.x() - offset - 5;
+    tempy = temppoint1.y() - offset;
+    headx = tempx + length / 2;
+    heady = tempy;
+  }
+  else if (temppoint2.x() <= temppoint1.x() && temppoint2.y() < temppoint1.y()){
+    tempx = temppoint1.x() - offset - 5;
+    tempy = temppoint1.y() + offset;
+    headx = tempx + length / 2;
+    heady = tempy;
+  }
+
 
   // Sets the position of the text
   // Initializes the text position relative to the location of the leftmost
   // point of the arrow
+
   if (tempx > headx) {
     textpos.setX(tempx + 5);
     textpos.setY(tempy + 5);
@@ -482,13 +536,39 @@ void CollabConnection::DrawArrow(QPainter &painter, QPoint point1,  // NOLINT
   painter.setPen(pen);
   painter.setBrush(Qt::NoBrush);
 
+  int x = temppoint1.x();
+  int y = temppoint1.y();
+
+  if(ud == 0){
   // Draws the body of arrow
   painter.drawLine(tempx, tempy, headx, heady);
-
   // Bottom arrow
   painter.drawLine(headx, tempy, tempx + length / 3, heady + height / 6);
   // Top Arrow
   painter.drawLine(headx, tempy, tempx + length / 3, heady - height / 6);
+  }
+  else if (ud == 1){
+      if(point1.y() > point2.y() && point1.x() <= point2.x()){
+          painter.drawLine(x + 20, y ,x + 20, y + 25);
+          painter.drawLine(x + 20, y, x + 28, y + 9);
+          painter.drawLine(x + 19, y, x + 11, y + 9);
+      }
+      else if(point1.y() > point2.y() && point1.x() > point2.x()){
+          painter.drawLine(x - 20, y ,x - 20, y + 25);
+          painter.drawLine(x - 21, y, x - 29, y + 9);
+          painter.drawLine(x - 20, y, x - 12, y + 9);
+      }
+      else if (point1.y() < point2.y() && point1.x() <= point2.x()){
+          painter.drawLine(x + 20, y-25,x + 20, y);
+          painter.drawLine(x + 20, y, x + 28, y - 9);
+          painter.drawLine(x + 19, y, x + 11, y - 9);
+      }
+      else if (point1.y() < point2.y() && point1.x() > point2.x()){
+          painter.drawLine(x - 20, y - 25, x - 20, y);
+          painter.drawLine(x - 21, y, x - 29, y - 9);
+          painter.drawLine(x - 20, y, x - 12, y - 9);
+      }
+  }
 }
 
 // Dialog for the arrow
@@ -565,16 +645,14 @@ void CollabSelfConnection::draw(QPainter& painter) {  // NOLINT
   temppoint4.setY(pt4.y());
 
   // Draws the arrow and computes its direction
-  DrawArrow(painter, temppoint1, temppoint2, temppoint3, temppoint4);
+  DrawArrow(painter, temppoint2);
 
   // Draws the text
   painter.drawText(textpos, this->m_text);
 }
 
 // This function is dedicated to the drawing of the arrow
-void CollabSelfConnection::DrawArrow(QPainter &painter, QPoint point1, // NOLINT
-                                     QPoint point2, QPoint temppoint1,
-                                     QPoint temppoint2) {
+void CollabSelfConnection::DrawArrow(QPainter &painter, QPoint point2) {
   int length = -50;  // length and height variables
                      // needs to negative to point the right way
   int height = 50;
@@ -609,54 +687,6 @@ void CollabSelfConnection::DrawArrow(QPainter &painter, QPoint point1, // NOLINT
 
 // This function determins the direction of the arrow it returns a 1 to keep
 // the arrow facing the same direction or a -1 to make it point backwards
-int CollabSelfConnection::FindDirection(QPoint point1, QPoint point2,
-                                        QPoint temppoint1, QPoint temppoint2) {
-  QPoint result;
-  // inner points
-  int temp1x = point1.x();
-  int temp1y = point1.y();
-  int temp2x = point2.x();
-  int temp2y = point2.y();
-
-  // Outer points
-  int temp3x = temppoint1.x();
-  int temp3y = temppoint1.y();
-  int temp4x = temppoint2.x();
-  int temp4y = temppoint2.y();
-
-  // extra variables
-  int fx;
-  int fy;
-  int gx;
-  int gy;
-  int absfx;
-  int absfy;
-
-  // find differences
-  fx = temp1x - temp2x;
-  fy = temp1y - temp2y;
-
-  gx = temp3x - temp4x;
-  gy = temp3y - temp4y;
-
-  // find absolute values
-  absfx = abs(fx);
-  absfy = abs(fy);
-
-  // if point2 is to the right or
-  if (fx > 0) {  // || (fy < 0))
-    return -1;
-  } else if (fx == 0) {
-    if (gx > 0) {
-      return -1;
-    } else {
-      return 1;
-    }
-  } else {
-    return 1;
-  }
-}
-
 
 // Dialog for the arrow
 CollabSelfConnectionDialog::CollabSelfConnectionDialog(QWidget *parent)
