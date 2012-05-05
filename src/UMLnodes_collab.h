@@ -146,7 +146,7 @@ class CollabConnection : public SquareConnectionNode {
     QString text() { return m_text; }
 
     int FindDirection(QPoint point1, QPoint point2, QPoint temppoint1, QPoint temppoint2);
-    void DrawArrow(QPainter &painter, QPoint point, QPoint point2, QPoint temppoint1, QPoint temppoint2);
+    void DrawArrow(QPainter &painter, QPoint point, QPoint point2, QPoint temppoint1, QPoint temppoint2, int ud);
   public slots:
     void setName(QString newName) { this->m_text = newName; }
   private:
@@ -180,8 +180,7 @@ class CollabSelfConnection : public SquareConnectionNode {
 
     QString text() { return m_text; }
 
-    int FindDirection(QPoint point1, QPoint point2, QPoint temppoint1, QPoint temppoint2);
-    void DrawArrow(QPainter &painter, QPoint point, QPoint point2, QPoint temppoint1, QPoint temppoint2);
+    void DrawArrow(QPainter &painter, QPoint point2);
   public slots:
     void setName(QString newName) { this->m_text = newName; }
   private:
