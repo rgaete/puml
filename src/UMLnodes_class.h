@@ -88,14 +88,6 @@ class ClassBoxObject: public ObjectNode {
     QString m_methods;
 };
 
-/*! @brief The properties dialog for class connections
- */
-class ClassConnectionDialog : public QInputDialog {
-};
-
-
-class InheritanceConnectionDialog : public QInputDialog {
-};
 
 /*! @brief This concrete class defines ...
  */
@@ -103,25 +95,106 @@ class ClassConnection : public SquareConnectionNode {
   Q_OBJECT
   public:
     BaseNode* clone() { return new ClassConnection; }
-    QDialog* getDialog() { return new ClassConnectionDialog; }
+    QDialog* getDialog();
     QString getIconPath() { return QString(":/Images/interaction.png"); }
     QString getText() { return "Class Line"; }
     void draw(QPainter& painter);  // NOLINT
     DiagramType getDiagramType() { return Class; }
+
+public slots:
+   void setStart(QString newStart) {
+       this->start = newStart;
+   }
+   void setName(QString newName) {
+       this->name = newName;
+   }
+   void setEnd(QString newEnd) {
+       this->end = newEnd;
+   }
+private:
+    double lineAngle;
+    QString start;
+    QString name;
+    QString end;
 };
+
+/*! @brief The properties dialog for class connections
+ */
+class ClassConnectionDialog : public QDialog {
+    Q_OBJECT
+
+public:
+   explicit ClassConnectionDialog(QWidget *parent = 0);
+   void setStart(QString newStart);
+   void setName(QString newName);
+   void setEnd(QString newEnd);
+private slots:
+   void okButtonClicked();
+signals:
+   void startSet(QString newStart);
+   void nameSet(QString newName);
+   void endSet(QString newEnd);
+private:
+   QLabel *StartLabel;
+   QLabel *NameLabel;
+   QLabel *EndLabel;
+   QLineEdit *StartLineEdit;
+   QLineEdit *NameLineEdit;
+   QLineEdit *EndLineEdit;
+   QPushButton *okButton;
+};
+
 
 class InheritanceConnection : public SquareConnectionNode {
   Q_OBJECT
 public:
     BaseNode* clone() { return new InheritanceConnection; }
-    QDialog* getDialog() { return new InheritanceConnectionDialog; }
+    QDialog* getDialog();
     QString getIconPath() { return QString(":/Images/interaction.png"); }
     QString getText() { return "Inheritance Line"; }
     void draw(QPainter& painter);  // NOLINT
     DiagramType getDiagramType() { return Class; }
     void addArrow(QPainter& painter);
+public slots:
+   void setStart(QString newStart) {
+       this->start = newStart;
+   }
+   void setName(QString newName) {
+       this->name = newName;
+   }
+   void setEnd(QString newEnd) {
+       this->end = newEnd;
+   }
 private:
     double lineAngle;
+    QString start;
+    QString name;
+    QString end;
 };
+
+class InheritanceConnectionDialog : public QDialog {
+    Q_OBJECT
+
+public:
+   explicit InheritanceConnectionDialog(QWidget *parent = 0);
+   void setStart(QString newStart);
+   void setName(QString newName);
+   void setEnd(QString newEnd);
+private slots:
+   void okButtonClicked();
+signals:
+   void startSet(QString newStart);
+   void nameSet(QString newName);
+   void endSet(QString newEnd);
+private:
+   QLabel *StartLabel;
+   QLabel *NameLabel;
+   QLabel *EndLabel;
+   QLineEdit *StartLineEdit;
+   QLineEdit *NameLineEdit;
+   QLineEdit *EndLineEdit;
+   QPushButton *okButton;
+};
+
 
 #endif  // SRC_UMLNODES_CLASS_H_

@@ -250,6 +250,138 @@ void ClassConnection::draw(QPainter& painter) {  // NOLINT
   painter.drawLine(pt1, pt2);
   painter.drawLine(pt2, pt3);
   painter.drawLine(pt3, pt4);
+
+  QFontMetrics fm = painter.fontMetrics();
+  int temp = fm.width(this->name);
+
+  QFontMetrics fm1 = painter.fontMetrics();
+  int temp1 = fm1.width(this->end);
+
+  QFontMetrics fm2 = painter.fontMetrics();
+  int temp2 = fm2.width(this->start);
+
+  if(pt1.x() != obj1 -> getPosition().x()){ //East West Text Placement
+    if(pt1.x() < pt4.x() && pt1.y() > pt4.y()){
+        painter.drawText(pt1.x()+10, pt1.y()-5, start);
+        painter.drawText(pt4.x()-7-temp1, pt4.y()-5, end);
+        painter.drawText(pt2.x() -temp/2 , pt2.y()+15, name);
+    }
+    else if(pt1.x() < pt4.x() && pt1.y() <= pt4.y()){
+        painter.drawText(pt1.x()+10, pt1.y()-5, start);
+        painter.drawText(pt4.x()-7-temp1, pt4.y()-5, end);
+        painter.drawText(pt2.x() -temp/2 , pt2.y()-7, name);
+    }
+    else if(pt1.x() > pt4.x() && pt1.y() >= pt4.y()){
+        painter.drawText(pt1.x()-10-temp2, pt1.y()-5, start);
+        painter.drawText(pt4.x()+7, pt4.y()-5, end);
+        painter.drawText(pt2.x() - temp/2, pt2.y()+15, name);
+    }
+    else if(pt1.x() > pt4.x() && pt1.y() < pt4.y()){
+        painter.drawText(pt1.x()-10-temp2, pt1.y()-5, start);
+        painter.drawText(pt4.x()+7, pt4.y()-5, end);
+        painter.drawText(pt2.x() - temp/2, pt2.y()-7, name);
+    }
+  }
+  else if(pt1.x() == obj1 -> getPosition().x()){    //North South Text Placement
+    if(pt1.y() > pt4.y() && pt1.x() <= pt4.x()){
+        painter.drawText(pt1.x()-5-temp2, pt1.y()-5, start);
+        painter.drawText(pt4.x()-10-temp1, pt4.y()+15, end);
+        painter.drawText(pt2.x()+5, pt2.y()+15, name);
+    }
+    else if(pt1.y() > pt4.y() && pt1.x() > pt4.x()){
+        painter.drawText(pt1.x()-5-temp2, pt1.y()-5, start);
+        painter.drawText(pt4.x()-10-temp1, pt4.y()+15, end);
+        painter.drawText(pt2.x()-5-temp, pt2.y()+15, name);
+    }
+    else if(pt1.y() < pt4.y() && pt1.x() <= pt4.x()){
+        painter.drawText(pt1.x()-5-temp2, pt1.y()+15, start);
+        painter.drawText(pt4.x()-10-temp1, pt4.y()-5, end);
+        painter.drawText(pt2.x()+5, pt2.y()-7, name);
+    }
+    else if(pt1.y() < pt4.y() && pt1.x() > pt4.x()){
+        painter.drawText(pt1.x()-5-temp2, pt1.y()+15, start);
+        painter.drawText(pt4.x()-10-temp1, pt4.y()-5, end);
+        painter.drawText(pt2.x()-5-temp, pt2.y()-7, name);
+    }
+  }
+}
+
+ClassConnectionDialog::ClassConnectionDialog(QWidget *parent)
+                     :QDialog(parent) {
+    okButton = new QPushButton(tr("Ok"), this);
+
+    StartLabel = new QLabel(tr("Start of connection multiplicity:"), this);
+    NameLabel = new QLabel(tr("Name:"), this);
+    EndLabel = new QLabel(tr("End of connection multiplicity:"), this);
+
+    StartLineEdit = new QLineEdit(this);
+    NameLineEdit = new QLineEdit(this);
+    EndLineEdit = new QLineEdit(this);
+
+    StartLineEdit->setFixedSize(300, 20);
+    NameLineEdit->setFixedSize(300, 20);
+    EndLineEdit->setFixedSize(300, 20);
+
+    QVBoxLayout *Start = new QVBoxLayout;
+    Start->addWidget(StartLabel);
+    Start->addWidget(StartLineEdit);
+    Start->setAlignment(Start, Qt::AlignTop);
+
+    QVBoxLayout *Name = new QVBoxLayout;
+    Name->addWidget(NameLabel);
+    Name->addWidget(NameLineEdit);
+    Name->setAlignment(Name, Qt::AlignCenter);
+
+    QVBoxLayout *End = new QVBoxLayout;
+    End->addWidget(EndLabel);
+    End->addWidget(EndLineEdit);
+    End->setAlignment(End, Qt::AlignBottom);
+
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+    mainLayout->addLayout(Start);
+    mainLayout->addLayout(Name);
+    mainLayout->addLayout(End);
+    mainLayout->addWidget(okButton, 0, Qt::AlignBottom);
+    connect(okButton, SIGNAL(clicked()), this, SLOT(okButtonClicked()));
+}
+
+QDialog *ClassConnection::getDialog()
+{
+    ClassConnectionDialog *dialog = new ClassConnectionDialog;
+    dialog->setFixedSize(450, 175);
+    dialog->setStart(start);
+    dialog->setName(name);
+    dialog->setEnd(end);
+    connect(dialog, SIGNAL(startSet(QString)),
+            this, SLOT(setStart(QString)));
+    connect(dialog, SIGNAL(nameSet(QString)),
+            this, SLOT(setName(QString)));
+    connect(dialog, SIGNAL(endSet(QString)),
+            this, SLOT(setEnd(QString)));
+    return dialog;
+}
+
+void ClassConnectionDialog::setStart(QString newStart)
+{
+    StartLineEdit->setText(newStart);
+}
+
+void ClassConnectionDialog::setName(QString newName)
+{
+    NameLineEdit->setText(newName);
+}
+
+void ClassConnectionDialog::setEnd(QString newEnd)
+{
+    EndLineEdit->setText(newEnd);
+}
+
+void ClassConnectionDialog::okButtonClicked()
+{
+    emit startSet(StartLineEdit->text());
+    emit nameSet(NameLineEdit->text());
+    emit endSet(EndLineEdit->text());
+    this->close();
 }
 
 void InheritanceConnection::draw(QPainter& painter) {  // NOLINT
@@ -282,6 +414,61 @@ void InheritanceConnection::draw(QPainter& painter) {  // NOLINT
   }
   painter.drawLine(pt1, pt2);
   painter.drawLine(pt2, pt3);
+
+  QFontMetrics fm = painter.fontMetrics();
+  int temp = fm.width(this->name);
+
+  QFontMetrics fm1 = painter.fontMetrics();
+  int temp1 = fm1.width(this->end);
+
+  QFontMetrics fm2 = painter.fontMetrics();
+  int temp2 = fm2.width(this->start);
+
+  if(pt1.x() != obj1 -> getPosition().x()){ //East West Text Placement
+    if(pt1.x() < pt4.x() && pt1.y() > pt4.y()){
+        painter.drawText(pt1.x()+10, pt1.y()-5, start);
+        painter.drawText(pt4.x()-15-temp1, pt4.y()-5, end);
+        painter.drawText(pt2.x() -temp/2 , pt2.y()+15, name);
+    }
+    else if(pt1.x() < pt4.x() && pt1.y() <= pt4.y()){
+        painter.drawText(pt1.x()+10, pt1.y()-5, start);
+        painter.drawText(pt4.x()-15-temp1, pt4.y()-5, end);
+        painter.drawText(pt2.x() -temp/2 , pt2.y()-7, name);
+    }
+    else if(pt1.x() > pt4.x() && pt1.y() >= pt4.y()){
+        painter.drawText(pt1.x()-10-temp2, pt1.y()-5, start);
+        painter.drawText(pt4.x()+15, pt4.y()-5, end);
+        painter.drawText(pt2.x() - temp/2, pt2.y()+15, name);
+    }
+    else if(pt1.x() > pt4.x() && pt1.y() < pt4.y()){
+        painter.drawText(pt1.x()-10-temp2, pt1.y()-5, start);
+        painter.drawText(pt4.x()+15, pt4.y()-5, end);
+        painter.drawText(pt2.x() - temp/2, pt2.y()-7, name);
+    }
+  }
+  else if(pt1.x() == obj1 -> getPosition().x()){    //North South Text Placement
+    if(pt1.y() > pt4.y() && pt1.x() <= pt4.x()){
+        painter.drawText(pt1.x()-5-temp2, pt1.y()-5, start);
+        painter.drawText(pt4.x()-10-temp1, pt4.y()+20, end);
+        painter.drawText(pt2.x()+5, pt2.y()+15, name);
+    }
+    else if(pt1.y() > pt4.y() && pt1.x() > pt4.x()){
+        painter.drawText(pt1.x()-5-temp2, pt1.y()-5, start);
+        painter.drawText(pt4.x()-10-temp1, pt4.y()+20, end);
+        painter.drawText(pt2.x()-5-temp, pt2.y()+15, name);
+    }
+    else if(pt1.y() < pt4.y() && pt1.x() <= pt4.x()){
+        painter.drawText(pt1.x()-5-temp2, pt1.y()+15, start);
+        painter.drawText(pt4.x()-10-temp1, pt4.y()-12, end);
+        painter.drawText(pt2.x()+5, pt2.y()-7, name);
+    }
+    else if(pt1.y() < pt4.y() && pt1.x() > pt4.x()){
+        painter.drawText(pt1.x()-5-temp2, pt1.y()+15, start);
+        painter.drawText(pt4.x()-10-temp1, pt4.y()-12, end);
+        painter.drawText(pt2.x()-5-temp, pt2.y()-7, name);
+    }
+
+  }
 
   //If construct checks connection location, then trims the arrow respectively
   if(pt1.x() < obj1 -> getPosition().x()) //East Connection
@@ -327,4 +514,83 @@ void InheritanceConnection::addArrow(QPainter &painter) {  // NOLINT
                     pt4.y() + 10 * cos(lineAngle - arrowAngle),
                     pt4.x() - 10 * sin(lineAngle + arrowAngle),
                     pt4.y() - 10 * cos(lineAngle + arrowAngle));
+}
+
+
+InheritanceConnectionDialog::InheritanceConnectionDialog(QWidget *parent)
+                     :QDialog(parent) {
+    okButton = new QPushButton(tr("Ok"), this);
+
+    StartLabel = new QLabel(tr("Start of connection multiplicity:"), this);
+    NameLabel = new QLabel(tr("Name:"), this);
+    EndLabel = new QLabel(tr("End of connection multiplicity:"), this);
+
+    StartLineEdit = new QLineEdit(this);
+    NameLineEdit = new QLineEdit(this);
+    EndLineEdit = new QLineEdit(this);
+
+    StartLineEdit->setFixedSize(300, 20);
+    NameLineEdit->setFixedSize(300, 20);
+    EndLineEdit->setFixedSize(300, 20);
+
+    QVBoxLayout *Start = new QVBoxLayout;
+    Start->addWidget(StartLabel);
+    Start->addWidget(StartLineEdit);
+    Start->setAlignment(Start, Qt::AlignTop);
+
+    QVBoxLayout *Name = new QVBoxLayout;
+    Name->addWidget(NameLabel);
+    Name->addWidget(NameLineEdit);
+    Name->setAlignment(Name, Qt::AlignCenter);
+
+    QVBoxLayout *End = new QVBoxLayout;
+    End->addWidget(EndLabel);
+    End->addWidget(EndLineEdit);
+    End->setAlignment(End, Qt::AlignBottom);
+
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+    mainLayout->addLayout(Start);
+    mainLayout->addLayout(Name);
+    mainLayout->addLayout(End);
+    mainLayout->addWidget(okButton, 0, Qt::AlignBottom);
+    connect(okButton, SIGNAL(clicked()), this, SLOT(okButtonClicked()));
+}
+
+QDialog *InheritanceConnection::getDialog()
+{
+    InheritanceConnectionDialog *dialog = new InheritanceConnectionDialog;
+    dialog->setFixedSize(450, 175);
+    dialog->setStart(start);
+    dialog->setName(name);
+    dialog->setEnd(end);
+    connect(dialog, SIGNAL(startSet(QString)),
+            this, SLOT(setStart(QString)));
+    connect(dialog, SIGNAL(nameSet(QString)),
+            this, SLOT(setName(QString)));
+    connect(dialog, SIGNAL(endSet(QString)),
+            this, SLOT(setEnd(QString)));
+    return dialog;
+}
+
+void InheritanceConnectionDialog::setStart(QString newStart)
+{
+    StartLineEdit->setText(newStart);
+}
+
+void InheritanceConnectionDialog::setName(QString newName)
+{
+    NameLineEdit->setText(newName);
+}
+
+void InheritanceConnectionDialog::setEnd(QString newEnd)
+{
+    EndLineEdit->setText(newEnd);
+}
+
+void InheritanceConnectionDialog::okButtonClicked()
+{
+    emit startSet(StartLineEdit->text());
+    emit nameSet(NameLineEdit->text());
+    emit endSet(EndLineEdit->text());
+    this->close();
 }
