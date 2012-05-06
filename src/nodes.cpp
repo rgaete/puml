@@ -241,7 +241,7 @@ int ObjectNode::getClosestConnectionPoint(QPoint whereAt) {
 bool ObjectNode::hitTest(const QPoint &point) {
   if ((point.x() >= (this->position.x()-this->length/2)) &&
     (point.x() <= (this->position.x()+this->length/2))) {
-    if ((point.y() >= this->position.y()-this->length/2) &&
+    if ((point.y() >= this->position.y()-this->height/2) &&
       (point.y() <= this->position.y()+this->height/2)) {
       return true;
     }
@@ -367,3 +367,31 @@ bool SquareConnectionNode::hitTest(const QPoint & point) {
   }
   return false;
 }
+
+bool SelfConnectionNode::hitTest(const QPoint &point)
+{
+    BaseNode *obj1;
+    BaseNode *obj2;
+    std::list<BaseNode*>::iterator it = connectedObjects.begin();
+    obj1 = *(it);
+    obj2 = *(it);
+    it++;
+
+    pt1 = obj1->returnConnectionPoint(1);
+    pt2 = obj2->returnConnectionPoint(2);
+
+    double xdist, ydist;
+    xdist = (pt1.x()-pt2.x())*(pt1.x()-pt2.x());
+    ydist = (pt1.y()-pt2.y())*(pt1.y()-pt2.y());
+    ydist = sqrt(ydist);
+    xdist = sqrt(xdist);
+
+    if((point.x() < pt1.x()+30 && point.y() < pt1.y()+ydist+15 &&
+        point.x() > pt1.x() && point.y() > pt1.y()) ||
+        (point.x() < pt2.x()+xdist+15 && point.y() < pt2.y() + 30 &&
+         point.x() > pt2.x() && point.y() > pt2.y()))
+            return true;
+    else
+        return false;
+}
+

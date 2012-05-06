@@ -270,7 +270,7 @@ void TransitionConnection::draw(QPainter &painter) {
         painter.drawText(textPos.x()-(temp/2),textPos.y()+20, m_text);
     }
     else if(xdist > ydist && pt1.x() < pt2.x()){
-        painter.drawText(textPos.x()-(temp/2),textPos.y()-20, m_text);
+        painter.drawText(textPos.x()-(temp/2),textPos.y()-10, m_text);
     }
     else{
         painter.drawText(textPos.x()-(temp+5),textPos.y(), m_text);
@@ -406,4 +406,48 @@ TransitionConnectionDialog::TransitionConnectionDialog(QWidget *parent)
   setWindowTitle("Transition Properties");
 }
 
+void StateSelfConnection::draw(QPainter &painter)
+{
 
+      BaseNode *obj1, *obj2;
+      std::list<BaseNode*>::iterator it = connectedObjects.begin();
+      obj1 = *it;
+      obj2 = *it;
+      it++;
+
+      pt1 = obj1->returnConnectionPoint(1);
+      pt4 = obj2->returnConnectionPoint(2);
+
+      painter.setPen(Qt::black);
+      if (selected == true) {
+        QPen selectPen;
+        selectPen.setWidth(2);
+        selectPen.setColor(Qt::blue);
+        painter.setPen(selectPen);
+      }
+
+    painter.drawLine(pt1.x(),pt1.y()+10,pt1.x()+15, pt1.y()+10);
+    painter.drawLine(pt1.x()+15,pt1.y()+10,pt1.x()+15, pt4.y()+15);
+    painter.drawLine(pt1.x()+15,pt4.y()+15,pt4.x()+10, pt4.y()+15);
+    painter.drawLine(pt4.x()+10,pt4.y()+15,pt4.x()+10, pt4.y());
+    painter.drawLine(pt4.x()+5,pt4.y()+5,pt4.x()+10,pt4.y());
+    painter.drawLine(pt4.x()+15,pt4.y()+5,pt4.x()+10,pt4.y());
+    painter.drawText(pt4.x()+20,pt4.y()+30,m_text);
+}
+
+StateSelfConnectionDialog::StateSelfConnectionDialog(QWidget *parent)
+                           :QInputDialog(parent) {
+  setCancelButtonText("Cancel");
+  setLabelText("Connector Name:");
+  setWindowTitle("Connector Properties");
+  setOkButtonText("Ok");
+}
+
+QDialog *StateSelfConnection::getDialog()
+{
+    StateSelfConnectionDialog *dialog = new StateSelfConnectionDialog;
+    dialog->setTextValue(m_text);
+    connect(dialog, SIGNAL(textValueSelected(QString)),
+            this, SLOT(setName(QString)));
+    return dialog;
+}
