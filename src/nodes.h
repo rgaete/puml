@@ -186,4 +186,16 @@ class SquareConnectionNode: public BaseNode {
 };
 
 
+class SelfConnectionNode: public BaseNode {
+    Q_OBJECT
+
+public:
+    bool isConnector() {return true;}
+    bool hitTest(const QPoint &point);
+
+protected:
+    QPoint pt1, pt2, pt3, pt4;
+};
+
+
 #endif  // SRC_NODES_H_

@@ -166,7 +166,7 @@ public:
 
 /*! @brief This concrete class defines ...
  */
-class CollabSelfConnection : public SquareConnectionNode {
+class CollabSelfConnection : public SelfConnectionNode {
   Q_OBJECT
   Q_PROPERTY(QString text READ text WRITE setName)
 
@@ -186,8 +186,6 @@ class CollabSelfConnection : public SquareConnectionNode {
   private:
     QString m_text;
     QPoint textpos;
-
-
 };
 
 

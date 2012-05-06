@@ -412,10 +412,12 @@ void Document::createConnectionPoint2(const QPoint &point) {
     }
     //  Self connectors
     // And the second index was found
-    else if (((index != -1) &&
+    else if ((((index != -1) &&
          (nodes.at(index)->isConnector() == false)) &&
             (index == firstConnectionIndex) &&
-             (tempnode->getText() == "Collaboration Self Line")) {
+              (tempnode->getText() == "Collaboration Self Line")) ||
+             ((index != -1) && (nodes.at(index)->isConnector() == false)
+             &&(index == firstConnectionIndex) && (tempnode->getText() == "State Self Line"))) {
 
         // produce the object
       BaseNode *newNode;

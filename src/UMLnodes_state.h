@@ -138,7 +138,34 @@ class TransitionConnection : public ConnectionNode {
     QPainterPath arc;
   public slots:
     void setText(QString t) { m_text = t; }
+};
 
+class StateSelfConnectionDialog : public QInputDialog {
+    Q_OBJECT
+public:
+    explicit StateSelfConnectionDialog(QWidget *parent = 0);
+};
+
+
+/*! @brief This concrete class defines ...
+ */
+class StateSelfConnection : public SelfConnectionNode {
+  Q_OBJECT
+  Q_PROPERTY(QString text READ text WRITE setName)
+
+  public:
+    BaseNode* clone() { return new StateSelfConnection; }
+    QDialog* getDialog();
+    QString getIconPath() { return QString(":/Images/interaction.png"); }
+    QString getText() { return "State Self Line"; }
+    void draw(QPainter& painter);  // NOLINT
+    DiagramType getDiagramType() { return StateChart; }
+
+    QString text() { return m_text; }
+  public slots:
+    void setName(QString newName) { this->m_text = newName; }
+  private:
+    QString m_text;
 };
 
 

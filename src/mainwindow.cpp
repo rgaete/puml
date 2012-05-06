@@ -42,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent)
   registerObject(new InitialStateObject);
   registerObject(new FinalStateObject);
   registerObject(new TransitionConnection);
+  registerObject(new StateSelfConnection);
 
   // class objects
   registerObject(new ClassBoxObject);
