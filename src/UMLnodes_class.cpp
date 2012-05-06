@@ -594,3 +594,211 @@ void InheritanceConnectionDialog::okButtonClicked()
     emit endSet(EndLineEdit->text());
     this->close();
 }
+
+void AggregationConnection::draw(QPainter &painter)
+{
+    BaseNode *obj1, *obj2;
+    std::list<BaseNode*>::iterator it = connectedObjects.begin();
+    obj1 = *it;
+    it++;
+    obj2 = *it;
+
+    pt1 = obj1->getClosestConnectionPoint(obj2->getPosition());
+    pt4 = obj2->getClosestConnectionPoint(obj1->getPosition());
+    painter.setPen(Qt::black);
+    if (pt1.x() == obj1 -> getPosition().x()) {  // North or South connection
+      pt2.setY((pt4.y() + pt1.y()) / 2);
+      pt2.setX(pt1.x());
+      pt3.setX(pt4.x());
+      pt3.setY(pt2.y());
+    } else if (pt1.x() != obj1 -> getPosition().x()) {  // East or West connection
+      pt2.setY(pt1.y());
+      pt2.setX((pt1.x() + pt4.x()) / 2);
+      pt3.setX(pt2.x());
+      pt3.setY(pt4.y());
+    }
+    if (selected == true) {
+      QPen selectPen;
+      selectPen.setWidth(2);
+      selectPen.setColor(Qt::blue);
+      painter.setPen(selectPen);
+      painter.drawLine(pt1, pt2);
+    }
+    painter.drawLine(pt1, pt2);
+    painter.drawLine(pt2, pt3);
+
+    QFontMetrics fm = painter.fontMetrics();
+    int temp = fm.width(this->name);
+
+    QFontMetrics fm1 = painter.fontMetrics();
+    int temp1 = fm1.width(this->end);
+
+    QFontMetrics fm2 = painter.fontMetrics();
+    int temp2 = fm2.width(this->start);
+
+    if(pt1.x() != obj1 -> getPosition().x()){ //East West Text Placement
+      if(pt1.x() < pt4.x() && pt1.y() > pt4.y()){
+          painter.drawText(pt1.x()+10, pt1.y()-5, start);
+          painter.drawText(pt4.x()-15-temp1, pt4.y()-5, end);
+          painter.drawText(pt2.x() -temp/2 , pt2.y()+15, name);
+      }
+      else if(pt1.x() < pt4.x() && pt1.y() <= pt4.y()){
+          painter.drawText(pt1.x()+10, pt1.y()-5, start);
+          painter.drawText(pt4.x()-15-temp1, pt4.y()-5, end);
+          painter.drawText(pt2.x() -temp/2 , pt2.y()-7, name);
+      }
+      else if(pt1.x() > pt4.x() && pt1.y() >= pt4.y()){
+          painter.drawText(pt1.x()-10-temp2, pt1.y()-5, start);
+          painter.drawText(pt4.x()+15, pt4.y()-5, end);
+          painter.drawText(pt2.x() - temp/2, pt2.y()+15, name);
+      }
+      else if(pt1.x() > pt4.x() && pt1.y() < pt4.y()){
+          painter.drawText(pt1.x()-10-temp2, pt1.y()-5, start);
+          painter.drawText(pt4.x()+15, pt4.y()-5, end);
+          painter.drawText(pt2.x() - temp/2, pt2.y()-7, name);
+      }
+    }
+    else if(pt1.x() == obj1 -> getPosition().x()){    //North South Text Placement
+      if(pt1.y() > pt4.y() && pt1.x() <= pt4.x()){
+          painter.drawText(pt1.x()-5-temp2, pt1.y()-5, start);
+          painter.drawText(pt4.x()-10-temp1, pt4.y()+20, end);
+          painter.drawText(pt2.x()+5, pt2.y()+15, name);
+      }
+      else if(pt1.y() > pt4.y() && pt1.x() > pt4.x()){
+          painter.drawText(pt1.x()-5-temp2, pt1.y()-5, start);
+          painter.drawText(pt4.x()-10-temp1, pt4.y()+20, end);
+          painter.drawText(pt2.x()-5-temp, pt2.y()+15, name);
+      }
+      else if(pt1.y() < pt4.y() && pt1.x() <= pt4.x()){
+          painter.drawText(pt1.x()-5-temp2, pt1.y()+15, start);
+          painter.drawText(pt4.x()-10-temp1, pt4.y()-12, end);
+          painter.drawText(pt2.x()+5, pt2.y()-7, name);
+      }
+      else if(pt1.y() < pt4.y() && pt1.x() > pt4.x()){
+          painter.drawText(pt1.x()-5-temp2, pt1.y()+15, start);
+          painter.drawText(pt4.x()-10-temp1, pt4.y()-12, end);
+          painter.drawText(pt2.x()-5-temp, pt2.y()-7, name);
+      }
+
+    }
+
+    //If construct checks connection location, then trims the arrow respectively
+    if(pt1.x() < obj1 -> getPosition().x()) //East Connection
+    {
+        pt4.setX(pt4.x() + 20.0);
+        painter.drawLine(pt3, pt4);
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()-10,pt4.y()-5);
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()-10,pt4.y()+5);
+        pt4.setX(pt4.x() - 20.0 );
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()+10,pt4.y()-5);
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()+10,pt4.y()+5);
+    }
+    else if(pt1.x() > obj1 -> getPosition().x())  //West Connection
+    {
+        pt4.setX(pt4.x() - 20.0);
+        painter.drawLine(pt3, pt4);
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()+10,pt4.y()-5);
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()+10,pt4.y()+5);
+        pt4.setX(pt4.x() + 20.0);
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()-10,pt4.y()-5);
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()-10,pt4.y()+5);
+    }
+    else if(pt1.y() > obj1 -> getPosition().y())  //North Connection
+    {
+        pt4.setY(pt4.y() - 20.0);
+        painter.drawLine(pt3, pt4);
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()+5,pt4.y()+10);
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()-5,pt4.y()+10);
+        pt4.setY(pt4.y() + 20.0);
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()+5,pt4.y()-10);
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()-5,pt4.y()-10);
+    }
+    else if(pt1.y() < obj1 -> getPosition().y())  //South Connection
+    {
+        pt4.setY(pt4.y() + 20.0);
+        painter.drawLine(pt3, pt4);
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()+5,pt4.y()-10);
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()-5,pt4.y()-10);
+        pt4.setY(pt4.y() - 20.0);
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()+5,pt4.y()+10);
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()-5,pt4.y()+10);
+    }
+}
+
+AggregationConnectionDialog::AggregationConnectionDialog(QWidget *parent)
+                     :QDialog(parent) {
+    okButton = new QPushButton(tr("Ok"), this);
+
+    StartLabel = new QLabel(tr("Start of connection multiplicity:"), this);
+    NameLabel = new QLabel(tr("Name:"), this);
+    EndLabel = new QLabel(tr("End of connection multiplicity:"), this);
+
+    StartLineEdit = new QLineEdit(this);
+    NameLineEdit = new QLineEdit(this);
+    EndLineEdit = new QLineEdit(this);
+
+    StartLineEdit->setFixedSize(300, 20);
+    NameLineEdit->setFixedSize(300, 20);
+    EndLineEdit->setFixedSize(300, 20);
+
+    QVBoxLayout *Start = new QVBoxLayout;
+    Start->addWidget(StartLabel);
+    Start->addWidget(StartLineEdit);
+    Start->setAlignment(Start, Qt::AlignTop);
+
+    QVBoxLayout *Name = new QVBoxLayout;
+    Name->addWidget(NameLabel);
+    Name->addWidget(NameLineEdit);
+    Name->setAlignment(Name, Qt::AlignCenter);
+
+    QVBoxLayout *End = new QVBoxLayout;
+    End->addWidget(EndLabel);
+    End->addWidget(EndLineEdit);
+    End->setAlignment(End, Qt::AlignBottom);
+
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+    mainLayout->addLayout(Start);
+    mainLayout->addLayout(Name);
+    mainLayout->addLayout(End);
+    mainLayout->addWidget(okButton, 0, Qt::AlignBottom);
+    connect(okButton, SIGNAL(clicked()), this, SLOT(okButtonClicked()));
+}
+
+QDialog *AggregationConnection::getDialog()
+{
+    AggregationConnectionDialog *dialog = new AggregationConnectionDialog;
+    dialog->setFixedSize(450, 175);
+    dialog->setStart(start);
+    dialog->setName(name);
+    dialog->setEnd(end);
+    connect(dialog, SIGNAL(startSet(QString)),
+            this, SLOT(setStart(QString)));
+    connect(dialog, SIGNAL(nameSet(QString)),
+            this, SLOT(setName(QString)));
+    connect(dialog, SIGNAL(endSet(QString)),
+            this, SLOT(setEnd(QString)));
+    return dialog;
+}
+
+void AggregationConnectionDialog::setStart(QString newStart)
+{
+    StartLineEdit->setText(newStart);
+}
+
+void AggregationConnectionDialog::setName(QString newName)
+{
+    NameLineEdit->setText(newName);
+}
+
+void AggregationConnectionDialog::setEnd(QString newEnd)
+{
+    EndLineEdit->setText(newEnd);
+}
+
+void AggregationConnectionDialog::okButtonClicked()
+{
+    emit startSet(StartLineEdit->text());
+    emit nameSet(NameLineEdit->text());
+    emit endSet(EndLineEdit->text());
+    this->close();
+}

@@ -31,10 +31,13 @@ Canvas::Canvas(QWidget *parent)
   actionDelete->setText("Delete");
   actionCut = new QAction(this);
   actionCut->setText("Cut");
+  actionCut->setEnabled(false);
   actionCopy = new QAction(this);
   actionCopy->setText("Copy");
+  actionCopy->setEnabled(false);
   actionPaste = new QAction(this);
   actionPaste->setText("Paste");
+  actionPaste->setEnabled(false);
   actionProperties = new QAction(this);
   actionProperties->setText("Properties");
   connect(actionDelete, SIGNAL(triggered()),
