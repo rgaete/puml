@@ -196,5 +196,56 @@ private:
    QPushButton *okButton;
 };
 
+class AggregationConnection : public SquareConnectionNode {
+    Q_OBJECT
+  public:
+      BaseNode* clone() { return new AggregationConnection; }
+      QDialog* getDialog();
+      QString getIconPath() { return QString(":/Images/interaction.png"); }
+      QString getText() { return "Aggregation Line"; }
+      void draw(QPainter& painter);  // NOLINT
+      DiagramType getDiagramType() { return Class; }
+  public slots:
+     void setStart(QString newStart) {
+         this->start = newStart;
+     }
+     void setName(QString newName) {
+         this->name = newName;
+     }
+     void setEnd(QString newEnd) {
+         this->end = newEnd;
+     }
+  private:
+      double lineAngle;
+      QString start;
+      QString name;
+      QString end;
+};
+
+/*! @brief The properties dialog for class connections
+ */
+class AggregationConnectionDialog : public QDialog {
+    Q_OBJECT
+
+public:
+   explicit AggregationConnectionDialog(QWidget *parent = 0);
+   void setStart(QString newStart);
+   void setName(QString newName);
+   void setEnd(QString newEnd);
+private slots:
+   void okButtonClicked();
+signals:
+   void startSet(QString newStart);
+   void nameSet(QString newName);
+   void endSet(QString newEnd);
+private:
+   QLabel *StartLabel;
+   QLabel *NameLabel;
+   QLabel *EndLabel;
+   QLineEdit *StartLineEdit;
+   QLineEdit *NameLineEdit;
+   QLineEdit *EndLineEdit;
+   QPushButton *okButton;
+};
 
 #endif  // SRC_UMLNODES_CLASS_H_

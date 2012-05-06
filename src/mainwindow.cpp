@@ -47,6 +47,7 @@ MainWindow::MainWindow(QWidget *parent)
   registerObject(new ClassBoxObject);
   registerObject(new ClassConnection);
   registerObject(new InheritanceConnection);
+  registerObject(new AggregationConnection);
 
   // register collab objects
   registerObject(new StickPersonCollabObject);
@@ -214,22 +215,30 @@ void MainWindow::createActions() {
   actionImport_Export->setText(tr("Import/Export"));
   actionImport_Export->setToolTip(
       tr("Import/Export from/to other UML type file"));
+  actionImport_Export->setEnabled(false);
   actionExit = new QAction(this);
   actionExit->setText(tr("Exit"));
   actionCopy = new QAction(this);
   actionCopy->setText(tr("Copy"));
+  actionCopy->setEnabled(false);
   actionCut = new QAction(this);
   actionCut->setText(tr("Cut"));
+  actionCut->setEnabled(false);
   actionPaste = new QAction(this);
   actionPaste->setText(tr("Paste"));
+  actionPaste->setEnabled(false);
   actionSelect_All = new QAction(this);
   actionSelect_All->setText(tr("Select All"));
+  actionSelect_All->setEnabled(false);
   actionInverse_Select = new QAction(this);
   actionInverse_Select->setText(tr("Inverse Select"));
+  actionInverse_Select->setEnabled(false);
   actionDocument = new QAction(this);
   actionDocument->setText(tr("Help Document"));
+  actionDocument->setEnabled(false);
   actionAbout = new QAction(this);
   actionAbout->setText(tr("About"));
+  actionAbout->setEnabled(false);
   actionSendForwards = new QAction(this);
   actionSendForwards->setText("Send Forwards");
   actionSendBackwards = new QAction(this);
