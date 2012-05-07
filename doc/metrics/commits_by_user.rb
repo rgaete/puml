@@ -15,6 +15,7 @@ Users = {
              'Brian@LoveMachine.localdomain'],
   :Jeremy => ['Jeremy Klas <jeremyklas@gmail.com>',
               'Jeremy@Jeremy-Laptop',
+              'Jeremy@LongDuckDong.natnow.rr.com',
               'Jeremy@Jeremy-Laptop.natnow.rr.com'],
   :Nate => ['Nate Krussel <nate.krussel@gmail.com>'],
   :David => ['David <well4536@vandals.uidaho.edu>',
@@ -40,7 +41,7 @@ def get_all_users
   results.each do |line|
     users << line if !users.include? line
   end
-  puts users
+  return users
 end
 
 def puts_users
@@ -62,7 +63,9 @@ def get_num_commits_for user
 end
 
 if __FILE__ == $0
-  Users.each_pair do |user, names|
-    puts "User: %-6s -- #{get_num_commits_for user}" % user.to_s
+  File.open "commits.txt", "w" do |f|
+    Users.each_pair do |user, names|
+      f.puts "User: %-6s -- #{get_num_commits_for user}" % user.to_s
+    end
   end
 end
