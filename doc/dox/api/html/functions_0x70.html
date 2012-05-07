@@ -67,6 +67,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_vars.html"><span>Variables</span></a></li>
       <li><a href="functions_enum.html"><span>Enumerations</span></a></li>
       <li><a href="functions_eval.html"><span>Enumerator</span></a></li>
+      <li><a href="functions_prop.html"><span>Properties</span></a></li>
     </ul>
   </div>
   <div id="navrow4" class="tabs3">
@@ -75,6 +76,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_0x62.html#index_b"><span>b</span></a></li>
       <li><a href="functions_0x63.html#index_c"><span>c</span></a></li>
       <li><a href="functions_0x64.html#index_d"><span>d</span></a></li>
+      <li><a href="functions_0x65.html#index_e"><span>e</span></a></li>
       <li><a href="functions_0x66.html#index_f"><span>f</span></a></li>
       <li><a href="functions_0x67.html#index_g"><span>g</span></a></li>
       <li><a href="functions_0x68.html#index_h"><span>h</span></a></li>
@@ -102,6 +104,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>position
 : <a class="el" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">BaseNode</a>
 </li>
+<li>posX()
+: <a class="el" href="classBaseNode.html#a7d2028db7583f27a37d589d5617678d6">BaseNode</a>
+</li>
+<li>posY
+: <a class="el" href="classBaseNode.html#a7be0aba97a35f245049b7f9604786685">BaseNode</a>
+</li>
 <li>produce()
 : <a class="el" href="classNodeFactory.html#a781f3a67f9bf486c741de69ce8a58f4b">NodeFactory</a>
 </li>
@@ -109,18 +117,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classNodeFactory.html#ac2a8a4d0f2183fb4c1552b2994839b4c">NodeFactory</a>
 </li>
 <li>pt1
-: <a class="el" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">ConnectionNode</a>
+: <a class="el" href="classSelfConnectionNode.html#a31ffb551d5dac475ad7d9364464a7eff">SelfConnectionNode</a>
+, <a class="el" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">ConnectionNode</a>
 , <a class="el" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">SquareConnectionNode</a>
 </li>
 <li>pt2
-: <a class="el" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">ConnectionNode</a>
-, <a class="el" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">SquareConnectionNode</a>
+: <a class="el" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">SquareConnectionNode</a>
+, <a class="el" href="classSelfConnectionNode.html#a45e5c03903f516d475ab878ff33e9d73">SelfConnectionNode</a>
+, <a class="el" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">ConnectionNode</a>
 </li>
 <li>pt3
 : <a class="el" href="classSquareConnectionNode.html#a587eb45506ed1e48bae1edf5f2f40d8e">SquareConnectionNode</a>
+, <a class="el" href="classSelfConnectionNode.html#a5cebd028c53b071f4236a71a43842b50">SelfConnectionNode</a>
 </li>
 <li>pt4
-: <a class="el" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">SquareConnectionNode</a>
+: <a class="el" href="classSelfConnectionNode.html#a912ea0e6c66485fdcc11970e0b0889e1">SelfConnectionNode</a>
+, <a class="el" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">SquareConnectionNode</a>
 </li>
 </ul>
 </div>
@@ -129,7 +141,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -138,7 +150,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed May 2 2012 12:44:12 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon May 7 2012 14:45:07 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

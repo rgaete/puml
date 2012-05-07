@@ -63,6 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
+<a href="#pub-slots">Public Slots</a> &#124;
 <a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">ClassConnection Class Reference</div>  </div>
@@ -86,10 +87,15 @@ Inheritance diagram for ClassConnection:</div>
 
 <p><a href="classClassConnection-members.html">List of all members.</a></p>
 <table class="memberdecls">
+<tr><td colspan="2"><h2><a name="pub-slots"></a>
+Public Slots</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassConnection.html#a987da7c93c883dd3691f5459a42c9dd7">setStart</a> (QString newStart)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassConnection.html#a7ba74b24d72554c5a340f2b62546acdd">setName</a> (QString newName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassConnection.html#a631b7d35b2458ddf76d15d004312adf4">setEnd</a> (QString newEnd)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBaseNode.html">BaseNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassConnection.html#a187afc5a2a1089c579511170c331653a">clone</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">QDialog *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassConnection.html#ae97a64660be20835e9f686b50aecba2b">getDialog</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QDialog *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassConnection.html#aafb2944acfa130e4158814dd025c18dc">getDialog</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassConnection.html#a184ce5f8a22bc86f2ccdaaacebab56af">getIconPath</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassConnection.html#a9f0bbaf7cd96b2795a70a35a38c7218e">getText</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classClassConnection.html#a75aedc5d6fe145418adb22022330d1af">draw</a> (QPainter &amp;painter)</td></tr>
@@ -164,6 +170,60 @@ Public Member Functions</h2></td></tr>
   painter.drawLine(<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>, <a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>);
   painter.drawLine(<a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>, <a class="code" href="classSquareConnectionNode.html#a587eb45506ed1e48bae1edf5f2f40d8e">pt3</a>);
   painter.drawLine(<a class="code" href="classSquareConnectionNode.html#a587eb45506ed1e48bae1edf5f2f40d8e">pt3</a>, <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>);
+
+  QFontMetrics fm = painter.fontMetrics();
+  <span class="keywordtype">int</span> temp = fm.width(this-&gt;name);
+
+  QFontMetrics fm1 = painter.fontMetrics();
+  <span class="keywordtype">int</span> temp1 = fm1.width(this-&gt;end);
+
+  QFontMetrics fm2 = painter.fontMetrics();
+  <span class="keywordtype">int</span> temp2 = fm2.width(this-&gt;start);
+
+  <span class="keywordflow">if</span>(<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.x() != obj1 -&gt; <a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>().x()){ <span class="comment">//East West Text Placement</span>
+    <span class="keywordflow">if</span>(<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.x() &lt; <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.x() &amp;&amp; <a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.y() &gt; <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.y()){
+        painter.drawText(<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.x()+10, <a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.y()-5, start);
+        painter.drawText(<a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.x()-7-temp1, <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.y()-5, end);
+        painter.drawText(<a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>.x() -temp/2 , <a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>.y()+15, name);
+    }
+    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.x() &lt; <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.x() &amp;&amp; <a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.y() &lt;= <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.y()){
+        painter.drawText(<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.x()+10, <a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.y()-5, start);
+        painter.drawText(<a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.x()-7-temp1, <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.y()-5, end);
+        painter.drawText(<a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>.x() -temp/2 , <a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>.y()-7, name);
+    }
+    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.x() &gt; <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.x() &amp;&amp; <a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.y() &gt;= <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.y()){
+        painter.drawText(<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.x()-10-temp2, <a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.y()-5, start);
+        painter.drawText(<a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.x()+7, <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.y()-5, end);
+        painter.drawText(<a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>.x() - temp/2, <a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>.y()+15, name);
+    }
+    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.x() &gt; <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.x() &amp;&amp; <a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.y() &lt; <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.y()){
+        painter.drawText(<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.x()-10-temp2, <a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.y()-5, start);
+        painter.drawText(<a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.x()+7, <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.y()-5, end);
+        painter.drawText(<a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>.x() - temp/2, <a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>.y()-7, name);
+    }
+  }
+  <span class="keywordflow">else</span> <span class="keywordflow">if</span>(<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.x() == obj1 -&gt; <a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>().x()){    <span class="comment">//North South Text Placement</span>
+    <span class="keywordflow">if</span>(<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.y() &gt; <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.y() &amp;&amp; <a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.x() &lt;= <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.x()){
+        painter.drawText(<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.x()-5-temp2, <a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.y()-5, start);
+        painter.drawText(<a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.x()-10-temp1, <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.y()+15, end);
+        painter.drawText(<a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>.x()+5, <a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>.y()+15, name);
+    }
+    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.y() &gt; <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.y() &amp;&amp; <a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.x() &gt; <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.x()){
+        painter.drawText(<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.x()-5-temp2, <a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.y()-5, start);
+        painter.drawText(<a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.x()-10-temp1, <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.y()+15, end);
+        painter.drawText(<a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>.x()-5-temp, <a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>.y()+15, name);
+    }
+    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.y() &lt; <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.y() &amp;&amp; <a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.x() &lt;= <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.x()){
+        painter.drawText(<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.x()-5-temp2, <a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.y()+15, start);
+        painter.drawText(<a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.x()-10-temp1, <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.y()-5, end);
+        painter.drawText(<a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>.x()+5, <a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>.y()-7, name);
+    }
+    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.y() &lt; <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.y() &amp;&amp; <a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.x() &gt; <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.x()){
+        painter.drawText(<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.x()-5-temp2, <a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.y()+15, start);
+        painter.drawText(<a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.x()-10-temp1, <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.y()-5, end);
+        painter.drawText(<a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>.x()-5-temp, <a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>.y()-7, name);
+    }
+  }
 }
 </pre></div>
 </div>
@@ -187,22 +247,35 @@ Public Member Functions</h2></td></tr>
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="ae97a64660be20835e9f686b50aecba2b"></a><!-- doxytag: member="ClassConnection::getDialog" ref="ae97a64660be20835e9f686b50aecba2b" args="()" -->
+<a class="anchor" id="aafb2944acfa130e4158814dd025c18dc"></a><!-- doxytag: member="ClassConnection::getDialog" ref="aafb2944acfa130e4158814dd025c18dc" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">QDialog* ClassConnection::getDialog </td>
+          <td class="memname">QDialog * ClassConnection::getDialog </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [inline, virtual]</code></td>
+          <td><code> [virtual]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
 <p>Implements <a class="el" href="classBaseNode.html#a990ffea58e51f55cfa8c6862b79fd880">BaseNode</a>.</p>
-<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classClassConnectionDialog.html" title="The properties dialog for class connections.">ClassConnectionDialog</a>; }
+<div class="fragment"><pre class="fragment">{
+    <a class="code" href="classClassConnectionDialog.html" title="The properties dialog for class connections.">ClassConnectionDialog</a> *dialog = <span class="keyword">new</span> <a class="code" href="classClassConnectionDialog.html" title="The properties dialog for class connections.">ClassConnectionDialog</a>;
+    dialog-&gt;setFixedSize(450, 175);
+    dialog-&gt;<a class="code" href="classClassConnectionDialog.html#abe3bce606ceef44ff2f7a3a970831947">setStart</a>(start);
+    dialog-&gt;<a class="code" href="classClassConnectionDialog.html#ac3fa23304d9fc82e3019a8e0b5b32daf">setName</a>(name);
+    dialog-&gt;<a class="code" href="classClassConnectionDialog.html#a65993f2becb59d3ca57eea6cf094c530">setEnd</a>(end);
+    connect(dialog, SIGNAL(startSet(QString)),
+            <span class="keyword">this</span>, SLOT(<a class="code" href="classClassConnection.html#a987da7c93c883dd3691f5459a42c9dd7">setStart</a>(QString)));
+    connect(dialog, SIGNAL(nameSet(QString)),
+            <span class="keyword">this</span>, SLOT(<a class="code" href="classClassConnection.html#a7ba74b24d72554c5a340f2b62546acdd">setName</a>(QString)));
+    connect(dialog, SIGNAL(endSet(QString)),
+            <span class="keyword">this</span>, SLOT(<a class="code" href="classClassConnection.html#a631b7d35b2458ddf76d15d004312adf4">setEnd</a>(QString)));
+    <span class="keywordflow">return</span> dialog;
+}
 </pre></div>
 </div>
 </div>
@@ -244,6 +317,66 @@ Public Member Functions</h2></td></tr>
 </pre></div>
 </div>
 </div>
+<a class="anchor" id="a631b7d35b2458ddf76d15d004312adf4"></a><!-- doxytag: member="ClassConnection::setEnd" ref="a631b7d35b2458ddf76d15d004312adf4" args="(QString newEnd)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ClassConnection::setEnd </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>newEnd</em></td><td>)</td>
+          <td><code> [inline, slot]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                               {
+       this-&gt;end = newEnd;
+   }
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="a7ba74b24d72554c5a340f2b62546acdd"></a><!-- doxytag: member="ClassConnection::setName" ref="a7ba74b24d72554c5a340f2b62546acdd" args="(QString newName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ClassConnection::setName </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>newName</em></td><td>)</td>
+          <td><code> [inline, slot]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                 {
+       this-&gt;name = newName;
+   }
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="a987da7c93c883dd3691f5459a42c9dd7"></a><!-- doxytag: member="ClassConnection::setStart" ref="a987da7c93c883dd3691f5459a42c9dd7" args="(QString newStart)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ClassConnection::setStart </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>newStart</em></td><td>)</td>
+          <td><code> [inline, slot]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                   {
+       this-&gt;start = newStart;
+   }
+</pre></div>
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="UMLnodes__class_8h_source.html">UMLnodes_class.h</a></li>
 <li><a class="el" href="UMLnodes__class_8cpp.html">UMLnodes_class.cpp</a></li>
@@ -254,7 +387,7 @@ Public Member Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -263,7 +396,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed May 2 2012 12:44:12 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon May 7 2012 14:45:08 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
