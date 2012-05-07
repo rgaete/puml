@@ -64,7 +64,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-slots">Public Slots</a> &#124;
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#properties">Properties</a>  </div>
   <div class="headertitle">
 <div class="title">TransitionConnection Class Reference</div>  </div>
 </div>
@@ -99,6 +100,10 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransitionConnection.html#a2928bcda816dbd4da281d742bc281d16">getText</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransitionConnection.html#a019ef6570a894f59588115d2e2242aaf">draw</a> (QPainter &amp;painter)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">DiagramType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransitionConnection.html#a20bab4dc65d1f60138d465a7dac7004c">getDiagramType</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransitionConnection.html#ad648bf8a94a6e84bc58923e8551b4eeb">text</a> ()</td></tr>
+<tr><td colspan="2"><h2><a name="properties"></a>
+Properties</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTransitionConnection.html#a2a3125ef005c64842e25d1d4080c6466">text</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This concrete class defines an Interaction line in a Use Case diagram (line from the actor to the use case) </p>
@@ -159,35 +164,82 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classBaseNode.html#a79627d9a052108d60082dddbd60dfb02">BaseNode</a>.</p>
 <div class="fragment"><pre class="fragment">                                                 {
+  <span class="keywordflow">if</span> (<a class="code" href="classBaseNode.html#a6589606c2f8b588e7e27199803cfb2c8">connectedObjects</a>.size() != 2) {
+    qDebug() &lt;&lt; <span class="stringliteral">&quot;TransitionConnection::draw Error: Only &quot;</span> &lt;&lt; <a class="code" href="classBaseNode.html#a6589606c2f8b588e7e27199803cfb2c8">connectedObjects</a>.size() &lt;&lt; <span class="stringliteral">&quot; connected objects!&quot;</span>;
+    <span class="keywordflow">return</span>;
+  }
   <a class="code" href="classBaseNode.html">BaseNode</a> *obj1, *obj2;
   std::list&lt;BaseNode*&gt;::iterator it = <a class="code" href="classBaseNode.html#a6589606c2f8b588e7e27199803cfb2c8">connectedObjects</a>.begin();
-  obj1 = *(it);
-  it++;
-  obj2 = *(it);
-
-  <a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a> = obj1-&gt;<a class="code" href="classBaseNode.html#ac0a992931fa5e310251c25e28acd210c">getClosestConnectionPoint</a>(obj2-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>());
-  <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a> = obj2-&gt;<a class="code" href="classBaseNode.html#ac0a992931fa5e310251c25e28acd210c">getClosestConnectionPoint</a>(obj1-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>());
-
-  <span class="keywordtype">int</span> x = (<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.x() + <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>.x()) / 2;
-  <span class="keywordtype">int</span> y = (<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.y() + <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>.y()) / 2;
-  QPoint textPos(x,y);
-
-  <span class="keywordflow">if</span> (<a class="code" href="classBaseNode.html#a321a3231c6688686d5ee779ab169b741">selected</a> == <span class="keyword">true</span>) {
-    QPen selectPen;
-    selectPen.setWidth(2);
-    selectPen.setColor(Qt::blue);
-    painter.setPen(selectPen);
+  <span class="keywordflow">if</span> (<a class="code" href="classBaseNode.html#a6589606c2f8b588e7e27199803cfb2c8">connectedObjects</a>.size() != 2) {
+    qDebug() &lt;&lt; <span class="stringliteral">&quot;InteractionConnection::draw Error: Only &quot;</span> &lt;&lt; <a class="code" href="classBaseNode.html#a6589606c2f8b588e7e27199803cfb2c8">connectedObjects</a>.size() &lt;&lt; <span class="stringliteral">&quot; connected objects!&quot;</span>;
   } <span class="keywordflow">else</span> {
-    painter.setPen(Qt::black);
-  }
+    obj1 = *(it);
+    it++;
+    obj2 = *(it);
 
-  QPainterPath path;
-  path.moveTo(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>);
-  calcExtensionPoint();
-  path.quadTo(extensionPoint, <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>);
-  painter.strokePath(path, painter.pen());
-  painter.drawText(textPos, text);
-  drawArrow(painter);
+    <a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a> = obj1-&gt;<a class="code" href="classBaseNode.html#ac0a992931fa5e310251c25e28acd210c">getClosestConnectionPoint</a>(obj2-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>());
+    <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a> = obj2-&gt;<a class="code" href="classBaseNode.html#ac0a992931fa5e310251c25e28acd210c">getClosestConnectionPoint</a>(obj1-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>());
+
+    <span class="keywordflow">if</span> (<a class="code" href="classBaseNode.html#a321a3231c6688686d5ee779ab169b741">selected</a> == <span class="keyword">true</span>) {
+      QPen selectPen;
+      selectPen.setWidth(2);
+      selectPen.setColor(Qt::blue);
+      painter.setPen(selectPen);
+    } <span class="keywordflow">else</span> {
+      painter.setPen(Qt::black);
+    }
+    painter.drawLine(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>, <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>);
+
+    QFontMetrics fm = painter.fontMetrics();
+    <span class="keywordtype">int</span> temp = fm.width(m_text);
+    <span class="comment">// calculates the midpoint between the objects</span>
+    <span class="keywordtype">int</span> x = (<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.x() + <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>.x()) / 2;
+    <span class="keywordtype">int</span> y = (<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.y() + <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>.y()) / 2;
+    QPoint textPos(x,y);
+    <span class="keywordtype">int</span> xdist = (<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.x()-<a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>.x())*(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.x()-<a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>.x());
+    <span class="keywordtype">int</span> ydist = (<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.y()-<a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>.y())*(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.y()-<a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>.y());
+    <span class="keywordflow">if</span>(xdist &gt; ydist &amp;&amp; <a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.x() &gt; <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>.x()){
+        painter.drawText(textPos.x()-(temp/2),textPos.y()+20, m_text);
+    }
+    <span class="keywordflow">else</span> <span class="keywordflow">if</span>(xdist &gt; ydist &amp;&amp; <a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>.x() &lt; <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>.x()){
+        painter.drawText(textPos.x()-(temp/2),textPos.y()-10, m_text);
+    }
+    <span class="keywordflow">else</span>{
+        painter.drawText(textPos.x()-(temp+5),textPos.y(), m_text);
+    }
+    drawArrow(painter);
+  }
+  <span class="comment">/*</span>
+<span class="comment">  BaseNode *obj1, *obj2;</span>
+<span class="comment">  std::list&lt;BaseNode*&gt;::iterator it = connectedObjects.begin();</span>
+<span class="comment">  obj1 = *(it);</span>
+<span class="comment">  it++;</span>
+<span class="comment">  obj2 = *(it);</span>
+<span class="comment"></span>
+<span class="comment">  pt1 = obj1-&gt;getClosestConnectionPoint(obj2-&gt;getPosition());</span>
+<span class="comment">  pt2 = obj2-&gt;getClosestConnectionPoint(obj1-&gt;getPosition());</span>
+<span class="comment"></span>
+<span class="comment">  int x = (pt1.x() + pt2.x()) / 2;</span>
+<span class="comment">  int y = (pt1.y() + pt2.y()) / 2;</span>
+<span class="comment">  QPoint textPos(x,y);</span>
+<span class="comment"></span>
+<span class="comment">  if (selected == true) {</span>
+<span class="comment">    QPen selectPen;</span>
+<span class="comment">    selectPen.setWidth(2);</span>
+<span class="comment">    selectPen.setColor(Qt::blue);</span>
+<span class="comment">    painter.setPen(selectPen);</span>
+<span class="comment">  } else {</span>
+<span class="comment">    painter.setPen(Qt::black);</span>
+<span class="comment">  }</span>
+<span class="comment"></span>
+<span class="comment">  QPainterPath path;</span>
+<span class="comment">  path.moveTo(pt1);</span>
+<span class="comment">  calcExtensionPoint();</span>
+<span class="comment">  path.quadTo(extensionPoint, pt2);</span>
+<span class="comment">  painter.strokePath(path, painter.pen());</span>
+<span class="comment">  painter.drawText(textPos, m_text);</span>
+<span class="comment">  drawArrow(painter);</span>
+<span class="comment">  */</span>
 }
 </pre></div>
 </div>
@@ -228,7 +280,7 @@ Public Member Functions</h2></td></tr>
 <p>Implements <a class="el" href="classBaseNode.html#a990ffea58e51f55cfa8c6862b79fd880">BaseNode</a>.</p>
 <div class="fragment"><pre class="fragment">{
   <a class="code" href="classTransitionConnectionDialog.html" title="This class provides a custom dialog for an InteractionLineNode.">TransitionConnectionDialog</a> *dialog = <span class="keyword">new</span> <a class="code" href="classTransitionConnectionDialog.html" title="This class provides a custom dialog for an InteractionLineNode.">TransitionConnectionDialog</a>;
-  dialog-&gt;setTextValue(text);
+  dialog-&gt;setTextValue(m_text);
   connect(dialog, SIGNAL(textValueSelected(QString)),
           <span class="keyword">this</span>, SLOT(<a class="code" href="classTransitionConnection.html#acefe57861a86001cf369ac7eed859fd8">setText</a>(QString)));
   <span class="keywordflow">return</span> dialog;
@@ -288,8 +340,39 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{ text = t; }
+<div class="fragment"><pre class="fragment">{ m_text = t; }
 </pre></div>
+</div>
+</div>
+<a class="anchor" id="ad648bf8a94a6e84bc58923e8551b4eeb"></a><!-- doxytag: member="TransitionConnection::text" ref="ad648bf8a94a6e84bc58923e8551b4eeb" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString TransitionConnection::text </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> m_text; }
+</pre></div>
+</div>
+</div>
+<hr/><h2>Property Documentation</h2>
+<a class="anchor" id="a2a3125ef005c64842e25d1d4080c6466"></a><!-- doxytag: member="TransitionConnection::text" ref="a2a3125ef005c64842e25d1d4080c6466" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString TransitionConnection::text<code> [read, write]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
@@ -302,7 +385,7 @@ Public Member Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -311,7 +394,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed May 2 2012 12:44:13 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon May 7 2012 14:45:09 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -64,7 +64,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-slots">Public Slots</a> &#124;
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#properties">Properties</a>  </div>
   <div class="headertitle">
 <div class="title">StateObject Class Reference</div>  </div>
 </div>
@@ -90,6 +91,8 @@ Inheritance diagram for StateObject:</div>
 <tr><td colspan="2"><h2><a name="pub-slots"></a>
 Public Slots</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStateObject.html#aea66a5865faa7b53c580de7df8daddb1">setName</a> (QString newName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStateObject.html#aa2932aa43ae07be7be41182d940fd10d">setAttributes</a> (QString newAttributes)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStateObject.html#af7010330a6a1482b1a5d9b899f83c7fa">setFinal</a> (bool state)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStateObject.html#a2a4f677241370a9650586369a7173c8b">StateObject</a> ()</td></tr>
@@ -99,6 +102,14 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStateObject.html#aeb50c6f62de418c29390618d4deff762">getText</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">DiagramType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStateObject.html#a1567d9f8dbaa3caf18b27f65ded02c97">getDiagramType</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStateObject.html#a97fdf2b174bf32f6b9427c9cc4428bb3">draw</a> (QPainter &amp;painter)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStateObject.html#a8e497a238a980442b283f76ec0e5462e">name</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStateObject.html#a8abe96c6cc09cad54054f4bea01ece05">attributes</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStateObject.html#ab99e1968b8f5c985d629ec1c187afdf3">finalstate</a> ()</td></tr>
+<tr><td colspan="2"><h2><a name="properties"></a>
+Properties</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStateObject.html#aeedee56d2efcf55a64996896deb3ec7c">name</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStateObject.html#a396cfeb17f47af31ddadd92390e708f0">attributes</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStateObject.html#abe958911c98f0159f8a352d5534dcce2">finalstate</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This concrete class is the State node. </p>
@@ -118,13 +129,31 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <div class="fragment"><pre class="fragment">                         {
-  this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> = 50;
-  this-&gt;<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> = 50;
+  this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> = 80;
+  this-&gt;<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> = 80;
+  this-&gt;m_finalstate = <span class="keyword">false</span>;
 }
 </pre></div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a8abe96c6cc09cad54054f4bea01ece05"></a><!-- doxytag: member="StateObject::attributes" ref="a8abe96c6cc09cad54054f4bea01ece05" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString StateObject::attributes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> m_attributes; }
+</pre></div>
+</div>
+</div>
 <a class="anchor" id="a7c9241e890a5770224b5169098065938"></a><!-- doxytag: member="StateObject::clone" ref="a7c9241e890a5770224b5169098065938" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -176,37 +205,99 @@ Public Member Functions</h2></td></tr>
     <span class="comment">//then checks the length of the string against the</span>
     <span class="comment">//length of the oval and changes the size accordingly</span>
     QFontMetrics fm = painter.fontMetrics();
-    <span class="keywordtype">int</span> temp = fm.width(this-&gt;name);
-    <span class="keywordflow">if</span>(temp &gt;= <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-10 || temp &gt;= 40){
-        temp = temp - (<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-10);
-        temp = temp + <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>;
-        this-&gt;length = temp;
-        this-&gt;<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> = temp;
+    <span class="keywordtype">int</span> temp = fm.width(this-&gt;m_name);
+    <span class="keywordtype">int</span> alength, aheight;
+
+    alength = <a class="code" href="classBaseNode.html#ab76acaea5c58f6e0c8e6507568b2945c">stringLength</a>(this-&gt;m_attributes);
+    aheight = <a class="code" href="classBaseNode.html#af7d8962381c0ab7e48032316b37f0208">stringHeight</a>(this-&gt;m_attributes);
+
+    <span class="keywordflow">if</span>(temp &gt;= <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-40 || temp &gt;= 70 || alength+10 &gt;= <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> -40 || alength &gt;= 70){
+        <span class="keywordflow">if</span>( temp &gt; alength){
+            temp = temp - (<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-30);
+            temp = temp + <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>;
+            this-&gt;length = temp;
+        }
+        <span class="keywordflow">else</span>{
+            alength = alength - (<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-30);
+            alength = alength + <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>;
+            this-&gt;length = alength;
+        }
     }
     <span class="keywordflow">else</span>{
-        this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> = 50;
-        this-&gt;<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> = 50;
+        this-&gt;<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> = 80;
     }
-  <span class="comment">// background</span>
-  painter.setPen(Qt::NoPen);
-  painter.setBrush(Qt::white);
-  painter.drawEllipse(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>, <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2, <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> / 2);
+    <span class="keywordflow">if</span>(aheight &gt;= <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>-55){
+        aheight = aheight + 45;
+        this-&gt;<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> = aheight;
+    }
+    <span class="keywordflow">else</span>{
+        this-&gt;<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> = 80;
+    }
+
+  QPainter::Antialiasing;
+
+  <span class="keywordflow">if</span>(m_finalstate == <span class="keyword">true</span>){
+        <span class="comment">// background</span>
+        painter.setPen(Qt::NoPen);
+        painter.setBrush(Qt::white);
+        painter.drawRoundedRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()-<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>/2,<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()-<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>/2,<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>,<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>,12,12);
+
+        painter.setPen(Qt::black);
+        painter.setBrush(Qt::NoBrush);
+        painter.drawRoundedRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()-<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>/2,<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()-height/2,<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>,<a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>,12,12);
+  }
+  <span class="keywordflow">else</span>{
+      painter.setPen(Qt::NoPen);
+      painter.setBrush(Qt::white);
+      painter.drawRoundedRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()-<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>/2+5,<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()-height/2+5,<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-10,height-10,12,12);
+  }
 
   <span class="comment">// edge</span>
   painter.setPen(Qt::black);
   painter.setBrush(Qt::NoBrush);
-  painter.drawEllipse(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>, <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2, <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> / 2);
+  painter.drawRoundedRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()-<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>/2+5,<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()-height/2+5,<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-10,height-10,12,12);
+  painter.drawLine(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()-<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>/2+5, <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()-height/2 + 35,
+                   <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x()+<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>/2-5, <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y()-height/2 + 35);
 
-  painter.drawText(QRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x() - <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2, <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y() - <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> / 2,
+  QFont boldFont;
+  boldFont.setBold(<span class="keyword">true</span>);
+  painter.setFont(boldFont);
+  painter.drawText(QRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x() - <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2, <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y() - height + 20,
                          <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>),
                    Qt::AlignCenter | Qt::AlignHCenter | Qt::TextDontClip,
-                   this-&gt;name);
+                   this-&gt;m_name);
+
+   <span class="keyword">const</span> QFont normalFont;
+   painter.setFont(normalFont);
+
+   QRect attributesSection(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x() - (length / 2) + 12,
+                           <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y() - (height / 2) + 40,
+                           length, height);
+   painter.drawText(attributesSection, m_attributes);
+
 
   <span class="comment">// Always call this ObjectNode&#39;s draw function because it</span>
   <span class="comment">// draws the selection boxes as needed.</span>
   <a class="code" href="classBaseNode.html#aa1dae1798643a47349b94c4ba006fbcd">BaseNode::setUpConnectionPoints</a>();
   <a class="code" href="classStateObject.html#a97fdf2b174bf32f6b9427c9cc4428bb3">ObjectNode::draw</a>(painter);
 }
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="ab99e1968b8f5c985d629ec1c187afdf3"></a><!-- doxytag: member="StateObject::finalstate" ref="ab99e1968b8f5c985d629ec1c187afdf3" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool StateObject::finalstate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> m_finalstate; }
 </pre></div>
 </div>
 </div>
@@ -246,9 +337,16 @@ Public Member Functions</h2></td></tr>
 <p>Implements <a class="el" href="classBaseNode.html#a990ffea58e51f55cfa8c6862b79fd880">BaseNode</a>.</p>
 <div class="fragment"><pre class="fragment">                                 {
   <a class="code" href="classStateObjectDialog.html">StateObjectDialog</a> *dialog = <span class="keyword">new</span> <a class="code" href="classStateObjectDialog.html">StateObjectDialog</a>;
-  dialog-&gt;setTextValue(name);
-  connect(dialog, SIGNAL(textValueSelected(QString)),
+  dialog-&gt;setFixedSize(450, 200);
+  dialog-&gt;<a class="code" href="classStateObjectDialog.html#a47aa6de92e01eaa2eea46f0a07e66db7">setName</a>(m_name);
+  dialog-&gt;<a class="code" href="classStateObjectDialog.html#a1047dcd5f95ad75bd59f4b569dff4c35">setAttributes</a>(m_attributes);
+  dialog-&gt;<a class="code" href="classStateObjectDialog.html#a55c623237fad20cf369673483a3b52a7">setFinal</a>(m_finalstate);
+  connect(dialog, SIGNAL(nameSet(QString)),
           <span class="keyword">this</span>, SLOT(<a class="code" href="classStateObject.html#aea66a5865faa7b53c580de7df8daddb1">setName</a>(QString)));
+  connect(dialog, SIGNAL(attributesSet(QString)),
+          <span class="keyword">this</span>, SLOT(<a class="code" href="classStateObject.html#aa2932aa43ae07be7be41182d940fd10d">setAttributes</a>(QString)));
+  connect(dialog, SIGNAL(finalSet(<span class="keywordtype">bool</span>)),
+          <span class="keyword">this</span>, SLOT(<a class="code" href="classStateObject.html#af7010330a6a1482b1a5d9b899f83c7fa">setFinal</a>(<span class="keywordtype">bool</span>)));
   <span class="keywordflow">return</span> dialog;
 }
 </pre></div>
@@ -292,6 +390,61 @@ Public Member Functions</h2></td></tr>
 </pre></div>
 </div>
 </div>
+<a class="anchor" id="a8e497a238a980442b283f76ec0e5462e"></a><!-- doxytag: member="StateObject::name" ref="a8e497a238a980442b283f76ec0e5462e" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString StateObject::name </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> m_name; }
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="aa2932aa43ae07be7be41182d940fd10d"></a><!-- doxytag: member="StateObject::setAttributes" ref="aa2932aa43ae07be7be41182d940fd10d" args="(QString newAttributes)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StateObject::setAttributes </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>newAttributes</em></td><td>)</td>
+          <td><code> [inline, slot]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{ this-&gt;m_attributes = newAttributes; }
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="af7010330a6a1482b1a5d9b899f83c7fa"></a><!-- doxytag: member="StateObject::setFinal" ref="af7010330a6a1482b1a5d9b899f83c7fa" args="(bool state)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StateObject::setFinal </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td><code> [slot]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{
+    m_finalstate = state;
+}
+</pre></div>
+</div>
+</div>
 <a class="anchor" id="aea66a5865faa7b53c580de7df8daddb1"></a><!-- doxytag: member="StateObject::setName" ref="aea66a5865faa7b53c580de7df8daddb1" args="(QString newName)" -->
 <div class="memitem">
 <div class="memproto">
@@ -306,8 +459,48 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{ this-&gt;name = newName; }
+<div class="fragment"><pre class="fragment">{ this-&gt;m_name = newName; }
 </pre></div>
+</div>
+</div>
+<hr/><h2>Property Documentation</h2>
+<a class="anchor" id="a396cfeb17f47af31ddadd92390e708f0"></a><!-- doxytag: member="StateObject::attributes" ref="a396cfeb17f47af31ddadd92390e708f0" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString StateObject::attributes<code> [read, write]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="abe958911c98f0159f8a352d5534dcce2"></a><!-- doxytag: member="StateObject::finalstate" ref="abe958911c98f0159f8a352d5534dcce2" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool StateObject::finalstate<code> [read, write]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aeedee56d2efcf55a64996896deb3ec7c"></a><!-- doxytag: member="StateObject::name" ref="aeedee56d2efcf55a64996896deb3ec7c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString StateObject::name<code> [read, write]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
@@ -320,7 +513,7 @@ Public Member Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -329,7 +522,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed May 2 2012 12:44:13 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon May 7 2012 14:45:09 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

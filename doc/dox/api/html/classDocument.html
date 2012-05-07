@@ -331,10 +331,12 @@ Public Attributes</h2></td></tr>
     }
     <span class="comment">//  Self connectors</span>
     <span class="comment">// And the second index was found</span>
-    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (((index != -1) &amp;&amp;
+    <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((((index != -1) &amp;&amp;
          (<a class="code" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">nodes</a>.at(index)-&gt;isConnector() == <span class="keyword">false</span>)) &amp;&amp;
             (index == firstConnectionIndex) &amp;&amp;
-             (tempnode-&gt;<a class="code" href="classBaseNode.html#a86bd186e3435098add1b9bdd79e25cdb">getText</a>() == <span class="stringliteral">&quot;Collaboration Self Line&quot;</span>)) {
+              (tempnode-&gt;<a class="code" href="classBaseNode.html#a86bd186e3435098add1b9bdd79e25cdb">getText</a>() == <span class="stringliteral">&quot;Collaboration Self Line&quot;</span>)) ||
+             ((index != -1) &amp;&amp; (<a class="code" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">nodes</a>.at(index)-&gt;isConnector() == <span class="keyword">false</span>)
+             &amp;&amp;(index == firstConnectionIndex) &amp;&amp; (tempnode-&gt;<a class="code" href="classBaseNode.html#a86bd186e3435098add1b9bdd79e25cdb">getText</a>() == <span class="stringliteral">&quot;State Self Line&quot;</span>))) {
 
         <span class="comment">// produce the object</span>
       <a class="code" href="classBaseNode.html">BaseNode</a> *newNode;
@@ -430,7 +432,11 @@ Public Attributes</h2></td></tr>
 <p>Slot. This will draw the nodes using painter. It assumes that painter is a valid painter, and uses <a class="el" href="classBaseNode.html#a79627d9a052108d60082dddbd60dfb02">BaseNode.draw()</a>. </p>
 <div class="fragment"><pre class="fragment">                                         {  <span class="comment">// NOLINT</span>
   <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; ordering.size(); i++) {
-    <a class="code" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">nodes</a>.at(ordering.at(i))-&gt;draw(painter);
+    <span class="keywordflow">if</span> (<a class="code" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">nodes</a>.at(ordering.at(i)) == 0) {
+      qDebug() &lt;&lt; <span class="stringliteral">&quot;Drawing error: Ordering points to null node&quot;</span>;
+    } <span class="keywordflow">else</span> {
+      <a class="code" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">nodes</a>.at(ordering.at(i))-&gt;draw(painter);
+    }
   }
 }
 </pre></div>
@@ -601,6 +607,7 @@ Public Attributes</h2></td></tr>
 <div class="fragment"><pre class="fragment">{
     QDomDocument* xmlDoc = <a class="code" href="document_8cpp.html#a5f17aca6a0b1fe3972dc239f54c44e6b">openSaveFile</a>(openName);
     QDomElement docElem = <a class="code" href="document_8cpp.html#a249d1c8f88c7c49c9ee91ff035a8c3c4">getNextDocumentElement</a>(xmlDoc);
+    QDomElement nodesVectorElement;
     QDomElement n;
     <a class="code" href="classBaseNode.html">BaseNode</a>* newNode;
 
@@ -608,31 +615,74 @@ Public Attributes</h2></td></tr>
     <a class="code" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">nodes</a>.clear();
     ordering.clear();
 
-    <span class="keywordflow">while</span> (1) {
-      n = <a class="code" href="document_8cpp.html#ab9a732c8785698cc6d7c4b82928520c9">getNextNodeElement</a>(docElem);
-      <span class="keywordflow">if</span> (n.isNull()) {
-        <span class="keywordflow">break</span>;
-      }
+    <span class="comment">// Get the diagram type</span>
+    diagramType = <span class="keyword">static_cast&lt;</span><a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">BaseNode::DiagramType</a><span class="keyword">&gt;</span>(docElem.attribute(<span class="stringliteral">&quot;diagramType&quot;</span>).toInt());
 
-      <span class="comment">// Now that we have the QDomElement, produce the node</span>
+    <span class="comment">// First get out the first (and hopefully only) nodes_vector_element.</span>
+    nodesVectorElement = docElem.firstChildElement(<span class="stringliteral">&quot;nodes_vector_element&quot;</span>);
+
+    <span class="comment">// Now we have to iterate over all the Node elements and restor them.</span>
+    <span class="comment">// This style of iteration loop was taken from the Qt documentation for</span>
+    <span class="comment">// QDomElement.</span>
+    n = nodesVectorElement.firstChildElement(<span class="stringliteral">&quot;Node&quot;</span>);
+    <span class="keywordflow">for</span> (; !n.isNull(); n = n.nextSiblingElement(<span class="stringliteral">&quot;Node&quot;</span>)) {
+      <span class="comment">// Now that we have the QDomElement, try to produce the node</span>
       newNode = <a class="code" href="classNodeFactory.html#a4d54b734a6928d59d8aeff971d091a7b">NodeFactory::getInstance</a>()-&gt;<a class="code" href="classNodeFactory.html#ac2a8a4d0f2183fb4c1552b2994839b4c">produceFromClassName</a>(n.attribute(<span class="stringliteral">&quot;class_name&quot;</span>));
-      <span class="keywordflow">if</span> (newNode == 0) {
-          fprintf(stderr, <span class="stringliteral">&quot;Error loading: Got a null node with class name &#39;%-21s&#39;\n&quot;</span>, qPrintable(n.attribute(<span class="stringliteral">&quot;class_name&quot;</span>)));
-      } <span class="keywordflow">else</span> {
-          QPoint pos;
-          pos.setX(QString(n.attribute(<span class="stringliteral">&quot;pos_x&quot;</span>)).toInt());
-          pos.setY(QString(n.attribute(<span class="stringliteral">&quot;pos_y&quot;</span>)).toInt());
-          newNode-&gt;<a class="code" href="classBaseNode.html#aa6675efee5af9fc0e9b2e19c98e4b7dc">setPosition</a>(pos);
 
-          <span class="keywordflow">if</span> (newNode-&gt;<a class="code" href="classBaseNode.html#a7f1ca77b551e9d5320fb08512c9f3d47">isConnector</a>() == <span class="keyword">false</span>) {
-              <a class="code" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">nodes</a>.push_back(newNode);
-              ordering.push_back(<a class="code" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">nodes</a>.size()-1);
-          }
+      <span class="comment">// Check we failed</span>
+      <span class="keywordflow">if</span> (newNode == 0) {
+        qDebug() &lt;&lt; <span class="stringliteral">&quot;Document::openDocument Error: Couldn&#39;t produce a &quot;</span> &lt;&lt; n.attribute(<span class="stringliteral">&quot;class_name&quot;</span>) &lt;&lt; <span class="stringliteral">&quot; with the node factory.&quot;</span>;
+      } <span class="keywordflow">else</span> {
+        <span class="comment">// Restore the unique id and all the properties</span>
+        newNode-&gt;<a class="code" href="classBaseNode.html#abac36881ca914e10499fa307ddd7c924">from_xml</a>(n);
+
+        <span class="comment">// Push the node onto the node vector</span>
+        <a class="code" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">nodes</a>.push_back(newNode);
+        ordering.push_back(<a class="code" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">nodes</a>.size()-1);
       }
     }
 
-    fileName = openName;
+    <span class="comment">// Now that we have all the id&#39;s restored, we can restore the connections</span>
+    <span class="comment">// between the nodes. We loop over all the Node elements in</span>
+    <span class="comment">// node_vector_element and loop over all the ConnectedObject elements in</span>
+    <span class="comment">// each Node.</span>
+    n = nodesVectorElement.firstChildElement(<span class="stringliteral">&quot;Node&quot;</span>);
+    <span class="keywordflow">for</span> (; !n.isNull(); n = n.nextSiblingElement(<span class="stringliteral">&quot;Node&quot;</span>)) {
+      <a class="code" href="classBaseNode.html">BaseNode</a>* sourcenode;
+      QUuid sourceid;
+
+      <span class="comment">// Find the node that we created earlier from this element</span>
+      sourceid = QUuid(n.attribute(<span class="stringliteral">&quot;Id&quot;</span>));
+      sourcenode = this-&gt;findNodeById(sourceid);
+
+      <span class="keywordflow">if</span> (sourcenode == 0) {
+        qDebug() &lt;&lt; <span class="stringliteral">&quot;Document::openDocument Error: Couldn&#39;t find source node by id&quot;</span>;
+      } <span class="keywordflow">else</span> {
+        QUuid targetid;
+        <a class="code" href="classBaseNode.html">BaseNode</a>* targetnode;
+
+        <span class="comment">// Now that we have the element and it&#39;s associated node, iterate</span>
+        <span class="comment">// over all of the element&#39;s children (&quot;ConnectedObjects&quot;)</span>
+        QDomElement child = n.firstChildElement(<span class="stringliteral">&quot;ConnectedObject&quot;</span>);
+        <span class="keywordflow">for</span> (; !child.isNull(); child = child.nextSiblingElement(<span class="stringliteral">&quot;ConnectedObject&quot;</span>)) {
+          <span class="comment">// Find the targeted node by id</span>
+          targetid = QUuid(child.attribute(<span class="stringliteral">&quot;id&quot;</span>));
+          targetnode = this-&gt;findNodeById(targetid);
+
+          <span class="comment">// Check if it failed</span>
+          <span class="keywordflow">if</span> (targetnode == 0) {
+            qDebug() &lt;&lt; <span class="stringliteral">&quot;Document::openDocument Error: Couldn&#39;t find a target node by id&quot;</span>;
+          } <span class="keywordflow">else</span> {
+            <span class="comment">// If it didn&#39;t fail, add the connection!</span>
+            sourcenode-&gt;addConnectedNode(targetnode);
+          }
+        }
+      }
+    }
+
+    <a class="code" href="classDocument.html#a9da7a4058bd8599d86f5b5a1c9124907">setFilename</a>(openName);
     setModified(<span class="keyword">false</span>);
+    update();
 }
 </pre></div>
 </div>
@@ -727,12 +777,11 @@ Public Attributes</h2></td></tr>
 <p>Saves the document to a file. The file is specified by the fileName member variable. If the member variable isn't set, the function exits. If the file is an invalid file, the function produces an error message to the user. This function shouldn't ever be called when the filename isn't set. </p>
 <div class="fragment"><pre class="fragment">                            {
   <span class="keywordflow">if</span> (this-&gt;<a class="code" href="classDocument.html#a78319276da8efb8572c5648d5f38c18b">hasFilename</a>() != <span class="keyword">false</span>) {
-    QMessageBox::information(<span class="keyword">this</span>, <span class="stringliteral">&quot;pUML&quot;</span>, <span class="stringliteral">&quot;Trying to open file &quot;</span> + fileName);
+    QMessageBox::information(<span class="keyword">this</span>, <span class="stringliteral">&quot;pUML&quot;</span>, <span class="stringliteral">&quot;Trying to open file &quot;</span> + fileName + <span class="stringliteral">&quot; for saving&quot;</span>);
     QFile file(fileName);
     QDomDocument xml_doc(<span class="stringliteral">&quot;pUML_save_document&quot;</span>);
-    <span class="comment">//QDomDocument xml_doc(&quot;nodes_vector_xml&quot;);</span>
-    <span class="comment">//QDomElement root = xml_doc.createElement(&quot;nodes_vector_xml&quot;);</span>
     QDomElement documentElement = xml_doc.createElement(<span class="stringliteral">&quot;document&quot;</span>);
+    documentElement.setAttribute(<span class="stringliteral">&quot;diagramType&quot;</span>, diagramType);
     xml_doc.appendChild(documentElement);
     QDomElement nodesElement = xml_doc.createElement(<span class="stringliteral">&quot;nodes_vector_element&quot;</span>);
     documentElement.appendChild(nodesElement);
@@ -755,6 +804,8 @@ Public Attributes</h2></td></tr>
     myfile.close();
 
     setModified(<span class="keyword">false</span>);
+  } <span class="keywordflow">else</span> {
+    qDebug() &lt;&lt; <span class="stringliteral">&quot;Document::saveDocument Error: No filename to save to!&quot;</span>;
   }
 }
 </pre></div>
@@ -1046,7 +1097,7 @@ Public Attributes</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -1055,7 +1106,7 @@ Public Attributes</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed May 2 2012 12:44:13 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon May 7 2012 14:45:08 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

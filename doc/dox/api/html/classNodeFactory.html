@@ -151,7 +151,10 @@ Static Public Member Functions</h2></td></tr>
 <div class="fragment"><pre class="fragment">                                               {
   assert(prototype_id &gt;= 0);
   assert(prototype_id &lt; static_cast&lt;int&gt;(prototypes.size()));
-  <span class="keywordflow">return</span> prototypes.at(prototype_id)-&gt;clone();
+  <a class="code" href="classBaseNode.html">BaseNode</a>* clone = prototypes.at(prototype_id)-&gt;clone();
+  <span class="comment">// qDebug(qPrintable(id.toString()));</span>
+  clone-&gt;<a class="code" href="classBaseNode.html#a356e2b683c1706ea24adc8dadd204aa4">setId</a>(QUuid::createUuid());
+  <span class="keywordflow">return</span> clone;
 }
 </pre></div>
 </div>
@@ -172,13 +175,18 @@ Static Public Member Functions</h2></td></tr>
 <div class="memdoc">
 <p>Returns a new copy of the prototype specified by name, or null if the name isn't valid. </p>
 <div class="fragment"><pre class="fragment">{
-    std::vector&lt;BaseNode*&gt;::iterator it;
+  std::vector&lt;BaseNode*&gt;::iterator it;
+  <a class="code" href="classBaseNode.html">BaseNode</a>* clone;
 
-    <span class="keywordflow">for</span> (it=prototypes.begin(); it &lt; prototypes.end(); it++) {
-        <span class="keywordflow">if</span> ((*it)-&gt;metaObject()-&gt;className() == name) {
-            <span class="keywordflow">return</span> (*it)-&gt;clone();
-        }
+  <span class="keywordflow">for</span> (it=prototypes.begin(); it &lt; prototypes.end(); it++) {
+    <span class="keywordflow">if</span> ((*it)-&gt;metaObject()-&gt;className() == name) {
+      clone = (*it)-&gt;<a class="code" href="classBaseNode.html#a78866f78aa92c207f9d0ea1861e15b13">clone</a>();
+      clone-&gt;<a class="code" href="classBaseNode.html#a356e2b683c1706ea24adc8dadd204aa4">setId</a>(QUuid::createUuid());
+      <span class="keywordflow">return</span> clone;
     }
+  }
+  qDebug(<span class="stringliteral">&quot;Error: couldn&#39;t produce class&quot;</span>);
+  <span class="keywordflow">return</span> 0;
 }
 </pre></div>
 </div>
@@ -215,7 +223,7 @@ Static Public Member Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -224,7 +232,7 @@ Static Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed May 2 2012 12:44:13 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon May 7 2012 14:45:08 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

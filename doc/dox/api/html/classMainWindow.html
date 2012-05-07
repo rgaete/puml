@@ -149,11 +149,13 @@ Protected Member Functions</h2></td></tr>
   registerObject(<span class="keyword">new</span> <a class="code" href="classInitialStateObject.html" title="This concrete class is the State node.">InitialStateObject</a>);
   registerObject(<span class="keyword">new</span> <a class="code" href="classFinalStateObject.html" title="This concrete class is the Final State node.">FinalStateObject</a>);
   registerObject(<span class="keyword">new</span> <a class="code" href="classTransitionConnection.html" title="This concrete class defines an Interaction line in a Use Case diagram (line from the actor to the use...">TransitionConnection</a>);
+  registerObject(<span class="keyword">new</span> <a class="code" href="classStateSelfConnection.html" title="This concrete class defines ...">StateSelfConnection</a>);
 
   <span class="comment">// class objects</span>
   registerObject(<span class="keyword">new</span> <a class="code" href="classClassBoxObject.html" title="This concrete class is the ClassBox node.">ClassBoxObject</a>);
   registerObject(<span class="keyword">new</span> <a class="code" href="classClassConnection.html" title="This concrete class defines ...">ClassConnection</a>);
   registerObject(<span class="keyword">new</span> <a class="code" href="classInheritanceConnection.html">InheritanceConnection</a>);
+  registerObject(<span class="keyword">new</span> <a class="code" href="classAggregationConnection.html">AggregationConnection</a>);
 
   <span class="comment">// register collab objects</span>
   registerObject(<span class="keyword">new</span> <a class="code" href="classStickPersonCollabObject.html" title="This concrete class is the StickPersonCollab node.">StickPersonCollabObject</a>);
@@ -509,6 +511,7 @@ Protected Member Functions</h2></td></tr>
   <span class="keywordflow">if</span> (openName != <span class="stringliteral">&quot;&quot;</span>) {
     <span class="comment">// Use the openDiagram to create the canvas, document and tab and load the file.</span>
     <a class="code" href="classMainWindow.html#af91204ae6780f2ac2992b60f97c152bd">openDiagram</a>(openName);
+    <a class="code" href="classMainWindow.html#a0404333cdda871ecfa98bedd3bd3c107">updateDiagramType</a>(documents.at(currentDocument)-&gt;getDiagramType());
   }
 }
 </pre></div>
@@ -604,12 +607,23 @@ Protected Member Functions</h2></td></tr>
     documents.at(currentDocument)-&gt;saveDocument();
   } <span class="keywordflow">else</span> {
     <span class="comment">// Otherwise, get a new filename.</span>
+    QString selectedFilter;
     QString fileName = QFileDialog::getSaveFileName(<span class="keyword">this</span>, tr(<span class="stringliteral">&quot;Save Diagram&quot;</span>),
-                                                    <span class="stringliteral">&quot;&quot;</span>, tr(<span class="stringliteral">&quot;pUML files (*.puml)&quot;</span>));
+                                                    <span class="stringliteral">&quot;&quot;</span>, tr(<span class="stringliteral">&quot;pUML files (*.puml)&quot;</span>),
+                                                    &amp;selectedFilter);
     qDebug(qPrintable(fileName));
+    qDebug(qPrintable(selectedFilter));
 
     <span class="comment">// If the user didn&#39;t click cancel...</span>
     <span class="keywordflow">if</span> (fileName != <span class="stringliteral">&quot;&quot;</span>) {
+      <span class="comment">// On linux, the suffix isn&#39;t automatically added and we need to</span>
+      <span class="comment">// manuall add it.</span>
+<span class="preprocessor">#ifdef Q_OS_LINUX</span>
+<span class="preprocessor"></span>      <span class="keywordflow">if</span> (selectedFilter == <span class="stringliteral">&quot;pUML files (*.puml)&quot;</span>) {
+        fileName += <span class="stringliteral">&quot;.puml&quot;</span>;
+      }
+<span class="preprocessor">#endif</span>
+<span class="preprocessor"></span>
       <span class="comment">// Set the filename for the document (so we know what filename</span>
       <span class="comment">// to use later when the user clicks on save again).</span>
       documents.at(currentDocument)-&gt;setFilename(fileName);
@@ -811,12 +825,17 @@ Protected Member Functions</h2></td></tr>
 <p>Slot. Executed whenver a tab is closed. Asks to save if the document is modifed, and closes the tab. </p>
 <div class="fragment"><pre class="fragment">                                                      {
   <span class="comment">// Check if the document needs saving</span>
-  <span class="keywordflow">if</span> (documents.at(currentDocument)-&gt;getModified() == <span class="keyword">true</span>) {
+  <span class="keywordflow">if</span> (documents.at(index)-&gt;getModified() == <span class="keyword">true</span>) {
     QMessageBox::StandardButton choice;
     choice = QMessageBox::question(<span class="keyword">this</span>, <span class="stringliteral">&quot;pUML&quot;</span>, <span class="stringliteral">&quot;This diagram contains unsaved changes, do you want to save first?&quot;</span>,
                           QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel, QMessageBox::Yes);
     <span class="keywordflow">if</span> (choice == QMessageBox::Yes) {
+      <span class="comment">// update the currentdocument to index so that the save function</span>
+      <span class="comment">// tries to save that document</span>
+      <span class="keywordtype">int</span> tempindex = currentDocument;
+      currentDocument = index;
       <a class="code" href="classMainWindow.html#ad550c61cfa05c7e528dedc6cf636ed10">on_actionSave_triggered</a>();
+      currentDocument = tempindex;
     } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (choice == QMessageBox::Cancel) {
       <span class="keywordflow">return</span>;
     }
@@ -951,7 +970,7 @@ Protected Member Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -960,7 +979,7 @@ Protected Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed May 2 2012 12:44:13 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon May 7 2012 14:45:08 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

@@ -64,12 +64,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-slots">Public Slots</a> &#124;
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#properties">Properties</a>  </div>
   <div class="headertitle">
 <div class="title">CollabSelfConnection Class Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="CollabSelfConnection" --><!-- doxytag: inherits="SquareConnectionNode" -->
+<!-- doxytag: class="CollabSelfConnection" --><!-- doxytag: inherits="SelfConnectionNode" -->
 <p>This concrete class defines ...  
  <a href="classCollabSelfConnection.html#details">More...</a></p>
 
@@ -80,8 +81,8 @@ Inheritance diagram for CollabSelfConnection:</div>
  <div class="center">
   <img src="classCollabSelfConnection.png" usemap="#CollabSelfConnection_map" alt=""/>
   <map id="CollabSelfConnection_map" name="CollabSelfConnection_map">
-<area href="classSquareConnectionNode.html" alt="SquareConnectionNode" shape="rect" coords="0,56,146,80"/>
-<area href="classBaseNode.html" alt="BaseNode" shape="rect" coords="0,0,146,24"/>
+<area href="classSelfConnectionNode.html" alt="SelfConnectionNode" shape="rect" coords="0,56,134,80"/>
+<area href="classBaseNode.html" alt="BaseNode" shape="rect" coords="0,0,134,24"/>
 </map>
  </div></div>
 
@@ -98,8 +99,11 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollabSelfConnection.html#a307930dc15288e39b929a8585d7e300d">getText</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollabSelfConnection.html#a61e7a26488e3085588a2f5a35a3f3564">draw</a> (QPainter &amp;painter)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">DiagramType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollabSelfConnection.html#af7c3be925731bc3171336d46cab23569">getDiagramType</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollabSelfConnection.html#a326b554bd71099273f4fda64496d0858">FindDirection</a> (QPoint point1, QPoint point2, QPoint temppoint1, QPoint temppoint2)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollabSelfConnection.html#ae9ff26d20e53d79c7360082f21e4bbe5">DrawArrow</a> (QPainter &amp;painter, QPoint point, QPoint point2, QPoint temppoint1, QPoint temppoint2)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollabSelfConnection.html#a8e5030769c244f9aa7e4713087baebb3">text</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollabSelfConnection.html#a58799e4b7e789ba2346ebbb7a825d918">DrawArrow</a> (QPainter &amp;painter, QPoint point2)</td></tr>
+<tr><td colspan="2"><h2><a name="properties"></a>
+Properties</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCollabSelfConnection.html#a58ceb5d6c353f2bbec4e48d72b64e0fe">text</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This concrete class defines ... </p>
@@ -152,50 +156,50 @@ Public Member Functions</h2></td></tr>
   obj2 = *it;
   it++;
 
-  <a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a> = obj1-&gt;<a class="code" href="classBaseNode.html#a79cd85fb289784e0c616515f93636fd1">returnConnectionPoint</a>(1);
-  <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a> = obj2-&gt;<a class="code" href="classBaseNode.html#a79cd85fb289784e0c616515f93636fd1">returnConnectionPoint</a>(2);
+  <a class="code" href="classSelfConnectionNode.html#a31ffb551d5dac475ad7d9364464a7eff">pt1</a> = obj1-&gt;<a class="code" href="classBaseNode.html#a79cd85fb289784e0c616515f93636fd1">returnConnectionPoint</a>(1);
+  <a class="code" href="classSelfConnectionNode.html#a912ea0e6c66485fdcc11970e0b0889e1">pt4</a> = obj2-&gt;<a class="code" href="classBaseNode.html#a79cd85fb289784e0c616515f93636fd1">returnConnectionPoint</a>(2);
 
   painter.setPen(Qt::black);
   <span class="comment">// East connection</span>
-  <a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>.setY(<a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.y());
-  <a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>.setX(<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.x() + offset);
-  <a class="code" href="classSquareConnectionNode.html#a587eb45506ed1e48bae1edf5f2f40d8e">pt3</a>.setX(<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.x());
-  <a class="code" href="classSquareConnectionNode.html#a587eb45506ed1e48bae1edf5f2f40d8e">pt3</a>.setY(<a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.y() + offset);
+  <a class="code" href="classSelfConnectionNode.html#a45e5c03903f516d475ab878ff33e9d73">pt2</a>.setY(<a class="code" href="classSelfConnectionNode.html#a912ea0e6c66485fdcc11970e0b0889e1">pt4</a>.y());
+  <a class="code" href="classSelfConnectionNode.html#a45e5c03903f516d475ab878ff33e9d73">pt2</a>.setX(<a class="code" href="classSelfConnectionNode.html#a31ffb551d5dac475ad7d9364464a7eff">pt1</a>.x() + offset);
+  <a class="code" href="classSelfConnectionNode.html#a5cebd028c53b071f4236a71a43842b50">pt3</a>.setX(<a class="code" href="classSelfConnectionNode.html#a31ffb551d5dac475ad7d9364464a7eff">pt1</a>.x());
+  <a class="code" href="classSelfConnectionNode.html#a5cebd028c53b071f4236a71a43842b50">pt3</a>.setY(<a class="code" href="classSelfConnectionNode.html#a912ea0e6c66485fdcc11970e0b0889e1">pt4</a>.y() + offset);
 
   <span class="keywordflow">if</span> (<a class="code" href="classBaseNode.html#a321a3231c6688686d5ee779ab169b741">selected</a> == <span class="keyword">true</span>) {
     QPen selectPen;
     selectPen.setWidth(2);
     selectPen.setColor(Qt::blue);
     painter.setPen(selectPen);
-    painter.drawLine(<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>, <a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>);
+    painter.drawLine(<a class="code" href="classSelfConnectionNode.html#a31ffb551d5dac475ad7d9364464a7eff">pt1</a>, <a class="code" href="classSelfConnectionNode.html#a45e5c03903f516d475ab878ff33e9d73">pt2</a>);
   }
-  painter.drawLine(<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>, <a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>);
-  painter.drawLine(<a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>, <a class="code" href="classSquareConnectionNode.html#a587eb45506ed1e48bae1edf5f2f40d8e">pt3</a>);
-  painter.drawLine(<a class="code" href="classSquareConnectionNode.html#a587eb45506ed1e48bae1edf5f2f40d8e">pt3</a>, <a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>);
+  painter.drawLine(<a class="code" href="classSelfConnectionNode.html#a31ffb551d5dac475ad7d9364464a7eff">pt1</a>, <a class="code" href="classSelfConnectionNode.html#a45e5c03903f516d475ab878ff33e9d73">pt2</a>);
+  painter.drawLine(<a class="code" href="classSelfConnectionNode.html#a45e5c03903f516d475ab878ff33e9d73">pt2</a>, <a class="code" href="classSelfConnectionNode.html#a5cebd028c53b071f4236a71a43842b50">pt3</a>);
+  painter.drawLine(<a class="code" href="classSelfConnectionNode.html#a5cebd028c53b071f4236a71a43842b50">pt3</a>, <a class="code" href="classSelfConnectionNode.html#a912ea0e6c66485fdcc11970e0b0889e1">pt4</a>);
 
   <span class="comment">// These temp values are needed in order to compute the direction of the arrow</span>
   <span class="comment">// This is so that the pt values dont get changed</span>
   <span class="comment">// These are the initial values i chose to use // inner points</span>
-  temppoint1.setX(<a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>.x());
-  temppoint1.setY(<a class="code" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">pt2</a>.y());
-  temppoint2.setX(<a class="code" href="classSquareConnectionNode.html#a587eb45506ed1e48bae1edf5f2f40d8e">pt3</a>.x());
-  temppoint2.setY(<a class="code" href="classSquareConnectionNode.html#a587eb45506ed1e48bae1edf5f2f40d8e">pt3</a>.y());
+  temppoint1.setX(<a class="code" href="classSelfConnectionNode.html#a45e5c03903f516d475ab878ff33e9d73">pt2</a>.x());
+  temppoint1.setY(<a class="code" href="classSelfConnectionNode.html#a45e5c03903f516d475ab878ff33e9d73">pt2</a>.y());
+  temppoint2.setX(<a class="code" href="classSelfConnectionNode.html#a5cebd028c53b071f4236a71a43842b50">pt3</a>.x());
+  temppoint2.setY(<a class="code" href="classSelfConnectionNode.html#a5cebd028c53b071f4236a71a43842b50">pt3</a>.y());
   <span class="comment">// these ones were required for a bug fix // outer points</span>
-  temppoint3.setX(<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.x());
-  temppoint3.setY(<a class="code" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">pt1</a>.y());
-  temppoint4.setX(<a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.x());
-  temppoint4.setY(<a class="code" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">pt4</a>.y());
+  temppoint3.setX(<a class="code" href="classSelfConnectionNode.html#a31ffb551d5dac475ad7d9364464a7eff">pt1</a>.x());
+  temppoint3.setY(<a class="code" href="classSelfConnectionNode.html#a31ffb551d5dac475ad7d9364464a7eff">pt1</a>.y());
+  temppoint4.setX(<a class="code" href="classSelfConnectionNode.html#a912ea0e6c66485fdcc11970e0b0889e1">pt4</a>.x());
+  temppoint4.setY(<a class="code" href="classSelfConnectionNode.html#a912ea0e6c66485fdcc11970e0b0889e1">pt4</a>.y());
 
   <span class="comment">// Draws the arrow and computes its direction</span>
-  <a class="code" href="classCollabSelfConnection.html#ae9ff26d20e53d79c7360082f21e4bbe5">DrawArrow</a>(painter, temppoint1, temppoint2, temppoint3, temppoint4);
+  <a class="code" href="classCollabSelfConnection.html#a58799e4b7e789ba2346ebbb7a825d918">DrawArrow</a>(painter, temppoint2);
 
   <span class="comment">// Draws the text</span>
-  painter.drawText(textpos, this-&gt;text);
+  painter.drawText(textpos, this-&gt;m_text);
 }
 </pre></div>
 </div>
 </div>
-<a class="anchor" id="ae9ff26d20e53d79c7360082f21e4bbe5"></a><!-- doxytag: member="CollabSelfConnection::DrawArrow" ref="ae9ff26d20e53d79c7360082f21e4bbe5" args="(QPainter &amp;painter, QPoint point, QPoint point2, QPoint temppoint1, QPoint temppoint2)" -->
+<a class="anchor" id="a58799e4b7e789ba2346ebbb7a825d918"></a><!-- doxytag: member="CollabSelfConnection::DrawArrow" ref="a58799e4b7e789ba2346ebbb7a825d918" args="(QPainter &amp;painter, QPoint point2)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -209,25 +213,7 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">QPoint&#160;</td>
-          <td class="paramname"><em>point</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">QPoint&#160;</td>
-          <td class="paramname"><em>point2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">QPoint&#160;</td>
-          <td class="paramname"><em>temppoint1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">QPoint&#160;</td>
-          <td class="paramname"><em>temppoint2</em>&#160;</td>
+          <td class="paramname"><em>point2</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -237,7 +223,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                        {
+<div class="fragment"><pre class="fragment">                                                                     {
   <span class="keywordtype">int</span> <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> = -50;  <span class="comment">// length and height variables</span>
                      <span class="comment">// needs to negative to point the right way</span>
   <span class="keywordtype">int</span> <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> = 50;
@@ -268,91 +254,6 @@ Public Member Functions</h2></td></tr>
   <span class="comment">// Initializes the text position right under the arrow</span>
   textpos.setX(headx);
   textpos.setY((heady + height / 6)+ offset);
-}
-</pre></div>
-</div>
-</div>
-<a class="anchor" id="a326b554bd71099273f4fda64496d0858"></a><!-- doxytag: member="CollabSelfConnection::FindDirection" ref="a326b554bd71099273f4fda64496d0858" args="(QPoint point1, QPoint point2, QPoint temppoint1, QPoint temppoint2)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int CollabSelfConnection::FindDirection </td>
-          <td>(</td>
-          <td class="paramtype">QPoint&#160;</td>
-          <td class="paramname"><em>point1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">QPoint&#160;</td>
-          <td class="paramname"><em>point2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">QPoint&#160;</td>
-          <td class="paramname"><em>temppoint1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">QPoint&#160;</td>
-          <td class="paramname"><em>temppoint2</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<div class="fragment"><pre class="fragment">                                                                              {
-  QPoint result;
-  <span class="comment">// inner points</span>
-  <span class="keywordtype">int</span> temp1x = point1.x();
-  <span class="keywordtype">int</span> temp1y = point1.y();
-  <span class="keywordtype">int</span> temp2x = point2.x();
-  <span class="keywordtype">int</span> temp2y = point2.y();
-
-  <span class="comment">// Outer points</span>
-  <span class="keywordtype">int</span> temp3x = temppoint1.x();
-  <span class="keywordtype">int</span> temp3y = temppoint1.y();
-  <span class="keywordtype">int</span> temp4x = temppoint2.x();
-  <span class="keywordtype">int</span> temp4y = temppoint2.y();
-
-  <span class="comment">// extra variables</span>
-  <span class="keywordtype">int</span> fx;
-  <span class="keywordtype">int</span> fy;
-  <span class="keywordtype">int</span> gx;
-  <span class="keywordtype">int</span> gy;
-  <span class="keywordtype">int</span> absfx;
-  <span class="keywordtype">int</span> absfy;
-
-  <span class="comment">// find differences</span>
-  fx = temp1x - temp2x;
-  fy = temp1y - temp2y;
-
-  gx = temp3x - temp4x;
-  gy = temp3y - temp4y;
-
-  <span class="comment">// find absolute values</span>
-  absfx = abs(fx);
-  absfy = abs(fy);
-
-  <span class="comment">// if point2 is to the right or</span>
-  <span class="keywordflow">if</span> (fx &gt; 0) {  <span class="comment">// || (fy &lt; 0))</span>
-    <span class="keywordflow">return</span> -1;
-  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (fx == 0) {
-    <span class="keywordflow">if</span> (gx &gt; 0) {
-      <span class="keywordflow">return</span> -1;
-    } <span class="keywordflow">else</span> {
-      <span class="keywordflow">return</span> 1;
-    }
-  } <span class="keywordflow">else</span> {
-    <span class="keywordflow">return</span> 1;
-  }
 }
 </pre></div>
 </div>
@@ -394,7 +295,7 @@ Public Member Functions</h2></td></tr>
 <p>Implements <a class="el" href="classBaseNode.html#a990ffea58e51f55cfa8c6862b79fd880">BaseNode</a>.</p>
 <div class="fragment"><pre class="fragment">                                         {
   <a class="code" href="classCollabSelfConnectionDialog.html" title="The properties dialog for self connections.">CollabSelfConnectionDialog</a> *dialog = <span class="keyword">new</span> <a class="code" href="classCollabSelfConnectionDialog.html" title="The properties dialog for self connections.">CollabSelfConnectionDialog</a>;
-  dialog-&gt;setTextValue(text);
+  dialog-&gt;setTextValue(m_text);
   connect(dialog, SIGNAL(textValueSelected(QString)),
           <span class="keyword">this</span>, SLOT(<a class="code" href="classCollabSelfConnection.html#aa6369c975019d081401e7e13e68f1d3c">setName</a>(QString)));
   <span class="keywordflow">return</span> dialog;
@@ -454,8 +355,39 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{ this-&gt;text = newName; }
+<div class="fragment"><pre class="fragment">{ this-&gt;m_text = newName; }
 </pre></div>
+</div>
+</div>
+<a class="anchor" id="a8e5030769c244f9aa7e4713087baebb3"></a><!-- doxytag: member="CollabSelfConnection::text" ref="a8e5030769c244f9aa7e4713087baebb3" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString CollabSelfConnection::text </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> m_text; }
+</pre></div>
+</div>
+</div>
+<hr/><h2>Property Documentation</h2>
+<a class="anchor" id="a58ceb5d6c353f2bbec4e48d72b64e0fe"></a><!-- doxytag: member="CollabSelfConnection::text" ref="a58ceb5d6c353f2bbec4e48d72b64e0fe" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString CollabSelfConnection::text<code> [read, write]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
@@ -468,7 +400,7 @@ Public Member Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -477,7 +409,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed May 2 2012 12:44:13 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon May 7 2012 14:45:08 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

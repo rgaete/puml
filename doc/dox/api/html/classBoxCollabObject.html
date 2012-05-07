@@ -64,7 +64,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-slots">Public Slots</a> &#124;
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#properties">Properties</a>  </div>
   <div class="headertitle">
 <div class="title">BoxCollabObject Class Reference</div>  </div>
 </div>
@@ -99,6 +100,10 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoxCollabObject.html#a22e624dd34e15b4c54291e5deab0e34a">getText</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">DiagramType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoxCollabObject.html#a2e3e9647de7b07d6dfc18f79d69e095b">getDiagramType</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoxCollabObject.html#a5df351b68872b450bed10df6b516c6a3">draw</a> (QPainter &amp;painter)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoxCollabObject.html#ad49fe64fbe5ddaffa1bab32a889ca165">name</a> ()</td></tr>
+<tr><td colspan="2"><h2><a name="properties"></a>
+Properties</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoxCollabObject.html#af2f6ceaacfc00445bb8fa236b322d897">name</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This concrete class is the <a class="el" href="classBoxCollabObject.html" title="This concrete class is the BoxCollabObject node.">BoxCollabObject</a> node. </p>
@@ -180,7 +185,7 @@ Public Member Functions</h2></td></tr>
   <span class="comment">// grabs the length of the string and updates the box</span>
   <span class="comment">// to make everything fit properly</span>
   QFontMetrics fm = painter.fontMetrics();
-  <span class="keywordtype">int</span> temp = fm.width(this-&gt;name);
+  <span class="keywordtype">int</span> temp = fm.width(this-&gt;m_name);
 
   <span class="keywordflow">if</span> (temp &gt;= <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-20 || temp &gt;= 70) {
     temp = temp - (<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-20);
@@ -217,7 +222,7 @@ Public Member Functions</h2></td></tr>
   painter.setFont(underlineFont);
   painter.drawText(QRect(tempx - <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2, tempy - <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a> / 2, <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, 50),
                    Qt::AlignCenter | Qt::AlignVCenter,
-                   this-&gt;name);
+                   this-&gt;m_name);
 
   <span class="comment">// Always call this ObjectNode&#39;s draw function because it</span>
   <span class="comment">// draws the selection boxes as needed.</span>
@@ -263,7 +268,7 @@ Public Member Functions</h2></td></tr>
 <p>Implements <a class="el" href="classBaseNode.html#a990ffea58e51f55cfa8c6862b79fd880">BaseNode</a>.</p>
 <div class="fragment"><pre class="fragment">                                    {
   <a class="code" href="classBoxCollabObjectDialog.html" title="The properties dialog for collaboration boxes.">BoxCollabObjectDialog</a> *dialog = <span class="keyword">new</span>  <a class="code" href="classBoxCollabObjectDialog.html" title="The properties dialog for collaboration boxes.">BoxCollabObjectDialog</a>;
-  dialog-&gt;setTextValue(name);
+  dialog-&gt;setTextValue(m_name);
   connect(dialog, SIGNAL(textValueSelected(QString)),
           <span class="keyword">this</span>, SLOT(<a class="code" href="classBoxCollabObject.html#a37c46c3b4020759ced16977d3ca3975a">setName</a>(QString)));
   <span class="keywordflow">return</span> dialog;
@@ -309,6 +314,23 @@ Public Member Functions</h2></td></tr>
 </pre></div>
 </div>
 </div>
+<a class="anchor" id="ad49fe64fbe5ddaffa1bab32a889ca165"></a><!-- doxytag: member="BoxCollabObject::name" ref="ad49fe64fbe5ddaffa1bab32a889ca165" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString BoxCollabObject::name </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> m_name; }
+</pre></div>
+</div>
+</div>
 <a class="anchor" id="a37c46c3b4020759ced16977d3ca3975a"></a><!-- doxytag: member="BoxCollabObject::setName" ref="a37c46c3b4020759ced16977d3ca3975a" args="(QString newName)" -->
 <div class="memitem">
 <div class="memproto">
@@ -323,8 +345,22 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{ this-&gt;name = newName; }
+<div class="fragment"><pre class="fragment">{ this-&gt;m_name = newName; }
 </pre></div>
+</div>
+</div>
+<hr/><h2>Property Documentation</h2>
+<a class="anchor" id="af2f6ceaacfc00445bb8fa236b322d897"></a><!-- doxytag: member="BoxCollabObject::name" ref="af2f6ceaacfc00445bb8fa236b322d897" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString BoxCollabObject::name<code> [read, write]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
@@ -337,7 +373,7 @@ Public Member Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -346,7 +382,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed May 2 2012 12:44:12 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon May 7 2012 14:45:08 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

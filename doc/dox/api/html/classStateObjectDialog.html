@@ -63,6 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
+<a href="#signals">Signals</a> &#124;
 <a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">StateObjectDialog Class Reference</div>  </div>
@@ -73,9 +74,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p><a href="classStateObjectDialog-members.html">List of all members.</a></p>
 <table class="memberdecls">
+<tr><td colspan="2"><h2><a name="signals"></a>
+Signals</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStateObjectDialog.html#a0f7d643b03a1b24140c6304d2682dc6f">nameSet</a> (QString newName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStateObjectDialog.html#ac31cd85a0cb8a3bc98785c96d87f1107">attributesSet</a> (QString newAttributes)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStateObjectDialog.html#a0fc8a1360e2dcd80c2d1097198ceeb7a">finalSet</a> (bool state)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStateObjectDialog.html#a3d3658a927de0324a9eea2238809ac6a">StateObjectDialog</a> (QWidget *parent=0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStateObjectDialog.html#a47aa6de92e01eaa2eea46f0a07e66db7">setName</a> (QString newName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStateObjectDialog.html#a1047dcd5f95ad75bd59f4b569dff4c35">setAttributes</a> (QString newAttributes)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStateObjectDialog.html#a55c623237fad20cf369673483a3b52a7">setFinal</a> (bool state)</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a3d3658a927de0324a9eea2238809ac6a"></a><!-- doxytag: member="StateObjectDialog::StateObjectDialog" ref="a3d3658a927de0324a9eea2238809ac6a" args="(QWidget *parent=0)" -->
@@ -92,11 +101,153 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">                 :QInputDialog(parent) {
-  setWindowTitle(<span class="stringliteral">&quot;State Properties&quot;</span>);
-  setOkButtonText(<span class="stringliteral">&quot;Ok&quot;</span>);
-  setCancelButtonText(<span class="stringliteral">&quot;Cancel&quot;</span>);
-  setLabelText(<span class="stringliteral">&quot;State Name:&quot;</span>);
+<div class="fragment"><pre class="fragment">                 :QDialog(parent) {
+
+    okButton = <span class="keyword">new</span> QPushButton(tr(<span class="stringliteral">&quot;Ok&quot;</span>), <span class="keyword">this</span>);
+
+    NameLabel = <span class="keyword">new</span> QLabel(tr(<span class="stringliteral">&quot;State Name:&quot;</span>), <span class="keyword">this</span>);
+    AttributesLabel = <span class="keyword">new</span> QLabel(tr(<span class="stringliteral">&quot;Attributes:&quot;</span>), <span class="keyword">this</span>);
+
+    NameLineEdit = <span class="keyword">new</span> QLineEdit(<span class="keyword">this</span>);
+    AttributesLineEdit = <span class="keyword">new</span> QTextEdit(<span class="keyword">this</span>);
+    check = <span class="keyword">new</span> QCheckBox(<span class="keyword">this</span>);
+
+    NameLineEdit-&gt;setFixedSize(300, 20);
+    AttributesLineEdit-&gt;setFixedSize(300, 50);
+    check-&gt;setText(<span class="stringliteral">&quot;Click if this is a final state.&quot;</span>);
+
+    QVBoxLayout *Name = <span class="keyword">new</span> QVBoxLayout;
+    Name-&gt;addWidget(NameLabel);
+    Name-&gt;addWidget(NameLineEdit);
+    Name-&gt;setAlignment(Name, Qt::AlignTop);
+
+    QVBoxLayout *Attributes = <span class="keyword">new</span> QVBoxLayout;
+    Attributes-&gt;addWidget(AttributesLabel);
+    Attributes-&gt;addWidget(AttributesLineEdit);
+    Attributes-&gt;setAlignment(Attributes, Qt::AlignCenter);
+
+    QVBoxLayout *Check = <span class="keyword">new</span> QVBoxLayout;
+    Check-&gt;addWidget(check);
+
+
+    QVBoxLayout *mainLayout = <span class="keyword">new</span> QVBoxLayout(<span class="keyword">this</span>);
+    mainLayout-&gt;addLayout(Name);
+    mainLayout-&gt;addLayout(Attributes);
+    mainLayout-&gt;addLayout(Check);
+    mainLayout-&gt;addWidget(okButton, 0, Qt::AlignBottom);
+    connect(okButton, SIGNAL(clicked()), <span class="keyword">this</span>, SLOT(okButtonClicked()));
+}
+</pre></div>
+</div>
+</div>
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="ac31cd85a0cb8a3bc98785c96d87f1107"></a><!-- doxytag: member="StateObjectDialog::attributesSet" ref="ac31cd85a0cb8a3bc98785c96d87f1107" args="(QString newAttributes)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StateObjectDialog::attributesSet </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>newAttributes</em></td><td>)</td>
+          <td><code> [signal]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0fc8a1360e2dcd80c2d1097198ceeb7a"></a><!-- doxytag: member="StateObjectDialog::finalSet" ref="a0fc8a1360e2dcd80c2d1097198ceeb7a" args="(bool state)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StateObjectDialog::finalSet </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td><code> [signal]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0f7d643b03a1b24140c6304d2682dc6f"></a><!-- doxytag: member="StateObjectDialog::nameSet" ref="a0f7d643b03a1b24140c6304d2682dc6f" args="(QString newName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StateObjectDialog::nameSet </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>newName</em></td><td>)</td>
+          <td><code> [signal]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a1047dcd5f95ad75bd59f4b569dff4c35"></a><!-- doxytag: member="StateObjectDialog::setAttributes" ref="a1047dcd5f95ad75bd59f4b569dff4c35" args="(QString newAttributes)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StateObjectDialog::setAttributes </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>newAttributes</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                                           {
+    AttributesLineEdit-&gt;setText(newAttributes);
+}
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="a55c623237fad20cf369673483a3b52a7"></a><!-- doxytag: member="StateObjectDialog::setFinal" ref="a55c623237fad20cf369673483a3b52a7" args="(bool state)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StateObjectDialog::setFinal </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{
+    check-&gt;setChecked(state);
+}
+</pre></div>
+</div>
+</div>
+<a class="anchor" id="a47aa6de92e01eaa2eea46f0a07e66db7"></a><!-- doxytag: member="StateObjectDialog::setName" ref="a47aa6de92e01eaa2eea46f0a07e66db7" args="(QString newName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StateObjectDialog::setName </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>newName</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">                                               {
+    NameLineEdit-&gt;setText(newName);
 }
 </pre></div>
 </div>
@@ -111,7 +262,7 @@ Public Member Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -120,7 +271,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed May 2 2012 12:44:13 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon May 7 2012 14:45:09 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

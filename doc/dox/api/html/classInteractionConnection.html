@@ -136,22 +136,26 @@ Public Member Functions</h2></td></tr>
 <div class="fragment"><pre class="fragment">                                                  {  <span class="comment">// NOLINT</span>
   <a class="code" href="classBaseNode.html">BaseNode</a> *obj1, *obj2;
   std::list&lt;BaseNode*&gt;::iterator it = <a class="code" href="classBaseNode.html#a6589606c2f8b588e7e27199803cfb2c8">connectedObjects</a>.begin();
-  obj1 = *(it);
-  it++;
-  obj2 = *(it);
-
-  <a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a> = obj1-&gt;<a class="code" href="classBaseNode.html#ac0a992931fa5e310251c25e28acd210c">getClosestConnectionPoint</a>(obj2-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>());
-  <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a> = obj2-&gt;<a class="code" href="classBaseNode.html#ac0a992931fa5e310251c25e28acd210c">getClosestConnectionPoint</a>(obj1-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>());
-
-  <span class="keywordflow">if</span> (<a class="code" href="classBaseNode.html#a321a3231c6688686d5ee779ab169b741">selected</a> == <span class="keyword">true</span>) {
-    QPen selectPen;
-    selectPen.setWidth(2);
-    selectPen.setColor(Qt::blue);
-    painter.setPen(selectPen);
+  <span class="keywordflow">if</span> (<a class="code" href="classBaseNode.html#a6589606c2f8b588e7e27199803cfb2c8">connectedObjects</a>.size() != 2) {
+    qDebug() &lt;&lt; <span class="stringliteral">&quot;InteractionConnection::draw Error: Only &quot;</span> &lt;&lt; <a class="code" href="classBaseNode.html#a6589606c2f8b588e7e27199803cfb2c8">connectedObjects</a>.size() &lt;&lt; <span class="stringliteral">&quot; connected objects!&quot;</span>;
   } <span class="keywordflow">else</span> {
-    painter.setPen(Qt::black);
+    obj1 = *(it);
+    it++;
+    obj2 = *(it);
+
+    <a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a> = obj1-&gt;<a class="code" href="classBaseNode.html#ac0a992931fa5e310251c25e28acd210c">getClosestConnectionPoint</a>(obj2-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>());
+    <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a> = obj2-&gt;<a class="code" href="classBaseNode.html#ac0a992931fa5e310251c25e28acd210c">getClosestConnectionPoint</a>(obj1-&gt;<a class="code" href="classBaseNode.html#a0cdc68a9aab1fd700466bdd383700b24">getPosition</a>());
+
+    <span class="keywordflow">if</span> (<a class="code" href="classBaseNode.html#a321a3231c6688686d5ee779ab169b741">selected</a> == <span class="keyword">true</span>) {
+      QPen selectPen;
+      selectPen.setWidth(2);
+      selectPen.setColor(Qt::blue);
+      painter.setPen(selectPen);
+    } <span class="keywordflow">else</span> {
+      painter.setPen(Qt::black);
+    }
+    painter.drawLine(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>, <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>);
   }
-  painter.drawLine(<a class="code" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">pt1</a>, <a class="code" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">pt2</a>);
 }
 </pre></div>
 </div>
@@ -242,7 +246,7 @@ Public Member Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -251,7 +255,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed May 2 2012 12:44:13 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon May 7 2012 14:45:08 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

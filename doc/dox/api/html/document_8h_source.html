@@ -115,54 +115,55 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00050"></a>00050   <span class="keyword">private</span>:
 <a name="l00051"></a>00051     <span class="keywordtype">int</span> getIndexAt(<span class="keyword">const</span> QPoint &amp;point);
 <a name="l00052"></a>00052     <span class="keywordtype">void</span> removeFromOrdering(<span class="keywordtype">int</span> index);
-<a name="l00053"></a>00053     <span class="keywordtype">void</span> setModified(<span class="keywordtype">bool</span> modified) { modifiedFlag = modified; emit <a class="code" href="classDocument.html#a46ff092bdc9ead218e926a504dc329ca">modifiedChanged</a>(modified); }
-<a name="l00054"></a>00054 
-<a name="l00055"></a>00055     <span class="comment">// The index of the selected object, -1 if nothing&#39;s selected</span>
-<a name="l00056"></a>00056     <span class="keywordtype">int</span> indexOfSelectedObject;
-<a name="l00057"></a>00057     <span class="comment">// The prototypeID of the next object to create</span>
-<a name="l00058"></a>00058     <span class="keywordtype">int</span> newObjectID;
-<a name="l00059"></a>00059     <span class="comment">// The difference between where a user clicked on the</span>
-<a name="l00060"></a>00060     <span class="comment">// object and the actual position of that object</span>
-<a name="l00061"></a>00061     QPoint positionDelta;
-<a name="l00062"></a>00062     <span class="comment">// A member variable that could be used to store the index</span>
-<a name="l00063"></a>00063     <span class="comment">// the currently connected canvas (Not used yet - 2/13/12)</span>
-<a name="l00064"></a>00064     <span class="keywordtype">int</span> canvasIndex;
-<a name="l00065"></a>00065     <span class="comment">// This is the first object when creating a connection node</span>
-<a name="l00066"></a>00066     <span class="keywordtype">int</span> firstConnectionIndex;
-<a name="l00067"></a>00067     <span class="comment">// The index of the second connection point hint, i.e., objects</span>
-<a name="l00068"></a>00068     <span class="comment">// that the mouse moves over when drawing a connection</span>
-<a name="l00069"></a>00069     <span class="keywordtype">int</span> secondConnectionIndex;
-<a name="l00070"></a>00070     <span class="comment">// the list of indexes to objects to draw.</span>
-<a name="l00071"></a>00071     QList&lt;int&gt; ordering;
-<a name="l00072"></a>00072     <span class="comment">// the type of diagram that this canvas has</span>
-<a name="l00073"></a>00073     <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">BaseNode::DiagramType</a> diagramType;
-<a name="l00074"></a>00074     <span class="comment">// The filename for this document.</span>
-<a name="l00075"></a>00075     QString fileName;
-<a name="l00076"></a>00076     <span class="comment">// Whether the document has been modifed</span>
-<a name="l00077"></a>00077     <span class="keywordtype">bool</span> modifiedFlag;
-<a name="l00078"></a>00078 
-<a name="l00079"></a>00079   signals:
-<a name="l00080"></a>00080     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#a623b41b297d20acad5aeb477974abfa1">modelChanged</a>();
-<a name="l00081"></a>00081     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#a46ff092bdc9ead218e926a504dc329ca">modifiedChanged</a>(<span class="keywordtype">bool</span> modified);
-<a name="l00082"></a>00082 
-<a name="l00083"></a>00083   <span class="keyword">public</span> slots:
-<a name="l00084"></a>00084     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#af3936be180cb438f9578edf50caf2a1d">drawList</a>(QPainter &amp;painter);  <span class="comment">// NOLINT</span>
-<a name="l00085"></a>00085     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#ac4fb62b6113ce62934ac1d3948a8e43b">setSelectedObject</a>(<span class="keyword">const</span> QPoint &amp;point);
-<a name="l00086"></a>00086     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#a4601ce8219b1c44ae4dcef2d51d9e2ee">moveSelectedObject</a>(<span class="keyword">const</span> QPoint &amp;point);
-<a name="l00087"></a>00087     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#ab083c74be4a967a99c30e5bc28cb2dbb">createObject</a>(<span class="keyword">const</span> QPoint &amp;position);
-<a name="l00088"></a>00088     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#a3bcd5dcc4efba82762de876ba318027a">createConnectionPoint1</a>(<span class="keyword">const</span> QPoint &amp;point);
-<a name="l00089"></a>00089     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#a0b9592ebaaeaef4be30aee568b840d75">createConnectionPoint2</a>(<span class="keyword">const</span> QPoint &amp;point);
-<a name="l00090"></a>00090     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#a4c282f30904039ff4f984f837dfb58a9">showPropertiesDialog</a>();
-<a name="l00091"></a>00091     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#ae2dc5cc8077f84fcf208920105df1ed1">removeObject</a>();
-<a name="l00092"></a>00092     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#a425344c7b35fe8903dba675f99d49c2f">sendSelectedToFront</a>();
-<a name="l00093"></a>00093     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#af840d459f409c82a1bc6b353d4e92f72">sendSelectedForward</a>();
-<a name="l00094"></a>00094     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#abcfd1ceeeb682eea101554c3e54f1a70">sendSelectedToBack</a>();
-<a name="l00095"></a>00095     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#aaac2160159b4ea96c7149559e9e3f26e">sendSelectedBackwards</a>();
-<a name="l00096"></a><a class="code" href="classDocument.html#a44757e4a0f79b1928a9f171eef95ae2b">00096</a>     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#a44757e4a0f79b1928a9f171eef95ae2b">setDiagramType</a>(<a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">BaseNode::DiagramType</a> type) { diagramType = type; }
-<a name="l00097"></a>00097     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#a20536dacfcae37b96303446aca1ec0c8">changeSecondConnectionPointHint</a>(<span class="keyword">const</span> QPoint &amp;point);
-<a name="l00098"></a>00098 };
-<a name="l00099"></a>00099 
-<a name="l00100"></a>00100 <span class="preprocessor">#endif  // SRC_DOCUMENT_H_</span>
+<a name="l00053"></a>00053     <span class="keywordtype">void</span> setModified(<span class="keywordtype">bool</span> modified);
+<a name="l00054"></a>00054     <a class="code" href="classBaseNode.html">BaseNode</a>* findNodeById(QUuid <span class="keywordtype">id</span>);
+<a name="l00055"></a>00055 
+<a name="l00056"></a>00056     <span class="comment">// The index of the selected object, -1 if nothing&#39;s selected</span>
+<a name="l00057"></a>00057     <span class="keywordtype">int</span> indexOfSelectedObject;
+<a name="l00058"></a>00058     <span class="comment">// The prototypeID of the next object to create</span>
+<a name="l00059"></a>00059     <span class="keywordtype">int</span> newObjectID;
+<a name="l00060"></a>00060     <span class="comment">// The difference between where a user clicked on the</span>
+<a name="l00061"></a>00061     <span class="comment">// object and the actual position of that object</span>
+<a name="l00062"></a>00062     QPoint positionDelta;
+<a name="l00063"></a>00063     <span class="comment">// A member variable that could be used to store the index</span>
+<a name="l00064"></a>00064     <span class="comment">// the currently connected canvas (Not used yet - 2/13/12)</span>
+<a name="l00065"></a>00065     <span class="keywordtype">int</span> canvasIndex;
+<a name="l00066"></a>00066     <span class="comment">// This is the first object when creating a connection node</span>
+<a name="l00067"></a>00067     <span class="keywordtype">int</span> firstConnectionIndex;
+<a name="l00068"></a>00068     <span class="comment">// The index of the second connection point hint, i.e., objects</span>
+<a name="l00069"></a>00069     <span class="comment">// that the mouse moves over when drawing a connection</span>
+<a name="l00070"></a>00070     <span class="keywordtype">int</span> secondConnectionIndex;
+<a name="l00071"></a>00071     <span class="comment">// the list of indexes to objects to draw.</span>
+<a name="l00072"></a>00072     QList&lt;int&gt; ordering;
+<a name="l00073"></a>00073     <span class="comment">// the type of diagram that this canvas has</span>
+<a name="l00074"></a>00074     <a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">BaseNode::DiagramType</a> diagramType;
+<a name="l00075"></a>00075     <span class="comment">// The filename for this document.</span>
+<a name="l00076"></a>00076     QString fileName;
+<a name="l00077"></a>00077     <span class="comment">// Whether the document has been modifed</span>
+<a name="l00078"></a>00078     <span class="keywordtype">bool</span> modifiedFlag;
+<a name="l00079"></a>00079 
+<a name="l00080"></a>00080   signals:
+<a name="l00081"></a>00081     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#a623b41b297d20acad5aeb477974abfa1">modelChanged</a>();
+<a name="l00082"></a>00082     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#a46ff092bdc9ead218e926a504dc329ca">modifiedChanged</a>(<span class="keywordtype">bool</span> modified);
+<a name="l00083"></a>00083 
+<a name="l00084"></a>00084   <span class="keyword">public</span> slots:
+<a name="l00085"></a>00085     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#af3936be180cb438f9578edf50caf2a1d">drawList</a>(QPainter &amp;painter);  <span class="comment">// NOLINT</span>
+<a name="l00086"></a>00086     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#ac4fb62b6113ce62934ac1d3948a8e43b">setSelectedObject</a>(<span class="keyword">const</span> QPoint &amp;point);
+<a name="l00087"></a>00087     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#a4601ce8219b1c44ae4dcef2d51d9e2ee">moveSelectedObject</a>(<span class="keyword">const</span> QPoint &amp;point);
+<a name="l00088"></a>00088     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#ab083c74be4a967a99c30e5bc28cb2dbb">createObject</a>(<span class="keyword">const</span> QPoint &amp;position);
+<a name="l00089"></a>00089     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#a3bcd5dcc4efba82762de876ba318027a">createConnectionPoint1</a>(<span class="keyword">const</span> QPoint &amp;point);
+<a name="l00090"></a>00090     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#a0b9592ebaaeaef4be30aee568b840d75">createConnectionPoint2</a>(<span class="keyword">const</span> QPoint &amp;point);
+<a name="l00091"></a>00091     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#a4c282f30904039ff4f984f837dfb58a9">showPropertiesDialog</a>();
+<a name="l00092"></a>00092     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#ae2dc5cc8077f84fcf208920105df1ed1">removeObject</a>();
+<a name="l00093"></a>00093     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#a425344c7b35fe8903dba675f99d49c2f">sendSelectedToFront</a>();
+<a name="l00094"></a>00094     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#af840d459f409c82a1bc6b353d4e92f72">sendSelectedForward</a>();
+<a name="l00095"></a>00095     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#abcfd1ceeeb682eea101554c3e54f1a70">sendSelectedToBack</a>();
+<a name="l00096"></a>00096     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#aaac2160159b4ea96c7149559e9e3f26e">sendSelectedBackwards</a>();
+<a name="l00097"></a><a class="code" href="classDocument.html#a44757e4a0f79b1928a9f171eef95ae2b">00097</a>     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#a44757e4a0f79b1928a9f171eef95ae2b">setDiagramType</a>(<a class="code" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">BaseNode::DiagramType</a> type) { diagramType = type; }
+<a name="l00098"></a>00098     <span class="keywordtype">void</span> <a class="code" href="classDocument.html#a20536dacfcae37b96303446aca1ec0c8">changeSecondConnectionPointHint</a>(<span class="keyword">const</span> QPoint &amp;point);
+<a name="l00099"></a>00099 };
+<a name="l00100"></a>00100 
+<a name="l00101"></a>00101 <span class="preprocessor">#endif  // SRC_DOCUMENT_H_</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -170,7 +171,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -179,7 +180,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed May 2 2012 12:44:12 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon May 7 2012 14:45:07 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

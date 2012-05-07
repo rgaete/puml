@@ -67,6 +67,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li class="current"><a href="functions_vars.html"><span>Variables</span></a></li>
       <li><a href="functions_enum.html"><span>Enumerations</span></a></li>
       <li><a href="functions_eval.html"><span>Enumerator</span></a></li>
+      <li><a href="functions_prop.html"><span>Properties</span></a></li>
     </ul>
   </div>
 </div>
@@ -90,6 +91,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>lineangle
 : <a class="el" href="classConnectionNode.html#ad64ed4658e1bab75462b013100039647">ConnectionNode</a>
 </li>
+<li>m_id
+: <a class="el" href="classBaseNode.html#ac457ecdbece090a1ba9edc597c6808ee">BaseNode</a>
+</li>
 <li>nodes
 : <a class="el" href="classDocument.html#aa8d3d42254e839f65f176f5ab8e68477">Document</a>
 </li>
@@ -98,17 +102,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>pt1
 : <a class="el" href="classConnectionNode.html#a3d6b6e63c1bcaca758aaebd5c07afbe2">ConnectionNode</a>
+, <a class="el" href="classSelfConnectionNode.html#a31ffb551d5dac475ad7d9364464a7eff">SelfConnectionNode</a>
 , <a class="el" href="classSquareConnectionNode.html#aa10af3b858da51a1362685a747361ab8">SquareConnectionNode</a>
 </li>
 <li>pt2
-: <a class="el" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">SquareConnectionNode</a>
-, <a class="el" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">ConnectionNode</a>
+: <a class="el" href="classConnectionNode.html#a1ccd11ea4b73f494042aa33f3620901e">ConnectionNode</a>
+, <a class="el" href="classSelfConnectionNode.html#a45e5c03903f516d475ab878ff33e9d73">SelfConnectionNode</a>
+, <a class="el" href="classSquareConnectionNode.html#a16e19fcecb132a3425ea13d182033634">SquareConnectionNode</a>
 </li>
 <li>pt3
 : <a class="el" href="classSquareConnectionNode.html#a587eb45506ed1e48bae1edf5f2f40d8e">SquareConnectionNode</a>
+, <a class="el" href="classSelfConnectionNode.html#a5cebd028c53b071f4236a71a43842b50">SelfConnectionNode</a>
 </li>
 <li>pt4
-: <a class="el" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">SquareConnectionNode</a>
+: <a class="el" href="classSelfConnectionNode.html#a912ea0e6c66485fdcc11970e0b0889e1">SelfConnectionNode</a>
+, <a class="el" href="classSquareConnectionNode.html#a861d7d6f5bcb94b0d03fbf80d95790e5">SquareConnectionNode</a>
 </li>
 <li>selected
 : <a class="el" href="classBaseNode.html#a321a3231c6688686d5ee779ab169b741">BaseNode</a>
@@ -120,7 +128,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -129,7 +137,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed May 2 2012 12:44:12 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon May 7 2012 14:45:07 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

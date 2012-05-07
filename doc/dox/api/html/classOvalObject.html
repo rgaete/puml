@@ -64,7 +64,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-slots">Public Slots</a> &#124;
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#properties">Properties</a>  </div>
   <div class="headertitle">
 <div class="title">OvalObject Class Reference</div>  </div>
 </div>
@@ -99,6 +100,10 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOvalObject.html#ae3ad4cdff1ebf931d136bdcd974878d2">getText</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBaseNode.html#aa551aa648e877b0717bac9fa58570fcd">DiagramType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOvalObject.html#ab97624ddcc91bf45a8bdf2f207f1dca0">getDiagramType</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOvalObject.html#aa60cb82c3c78097ca70dc7242b120f87">draw</a> (QPainter &amp;painter)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOvalObject.html#a1dad6f33215dc5d80877024c8069ead6">name</a> ()</td></tr>
+<tr><td colspan="2"><h2><a name="properties"></a>
+Properties</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOvalObject.html#a51f05a41a74564a47693c7daafff360d">name</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This concrete class is the Oval node. </p>
@@ -176,7 +181,7 @@ Public Member Functions</h2></td></tr>
   <span class="comment">//then checks the length of the string against the</span>
   <span class="comment">//length of the oval and changes the size accordingly</span>
   QFontMetrics fm = painter.fontMetrics();
-  <span class="keywordtype">int</span> temp = fm.width(this-&gt;name);
+  <span class="keywordtype">int</span> temp = fm.width(this-&gt;m_name);
   <span class="keywordflow">if</span>(temp &gt;= <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-20 || temp &gt;= 80){
       temp = temp - (<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>-20);
       temp = temp + <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>;
@@ -198,7 +203,7 @@ Public Member Functions</h2></td></tr>
   <span class="comment">// painter.drawText(position.x(),position.y(), this-&gt;name);</span>
   painter.drawText(QRect(<a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.x() - <a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a> / 2, <a class="code" href="classBaseNode.html#a336b329e3212cfd27d37616553e1965d">position</a>.y() - <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>/2,<a class="code" href="classBaseNode.html#a2e686d989009618a6ae55dc8e3a485ab">length</a>, <a class="code" href="classBaseNode.html#a34e5023ae303a870511332c54799cb06">height</a>),
                    Qt::AlignCenter | Qt::AlignHCenter | Qt::TextDontClip,
-                   this-&gt;name);
+                   this-&gt;m_name);
 
   <span class="comment">// Always call this ObjectNode&#39;s draw function because it</span>
   <span class="comment">// draws the selection boxes as needed.</span>
@@ -244,7 +249,7 @@ Public Member Functions</h2></td></tr>
 <p>Implements <a class="el" href="classBaseNode.html#a990ffea58e51f55cfa8c6862b79fd880">BaseNode</a>.</p>
 <div class="fragment"><pre class="fragment">                                {
   <a class="code" href="classOvalObjectDialog.html" title="This defines a custom dialog for a OvalObject.">OvalObjectDialog</a> *dialog = <span class="keyword">new</span> <a class="code" href="classOvalObjectDialog.html" title="This defines a custom dialog for a OvalObject.">OvalObjectDialog</a>;
-  dialog-&gt;setTextValue(name);
+  dialog-&gt;setTextValue(m_name);
   connect(dialog, SIGNAL(textValueSelected(QString)),
           <span class="keyword">this</span>, SLOT(<a class="code" href="classOvalObject.html#ac5324b5a29d4399a68a484a1275fe8b7">setName</a>(QString)));
   <span class="keywordflow">return</span> dialog;
@@ -290,6 +295,23 @@ Public Member Functions</h2></td></tr>
 </pre></div>
 </div>
 </div>
+<a class="anchor" id="a1dad6f33215dc5d80877024c8069ead6"></a><!-- doxytag: member="OvalObject::name" ref="a1dad6f33215dc5d80877024c8069ead6" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString OvalObject::name </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<div class="fragment"><pre class="fragment">{ <span class="keywordflow">return</span> m_name; }
+</pre></div>
+</div>
+</div>
 <a class="anchor" id="ac5324b5a29d4399a68a484a1275fe8b7"></a><!-- doxytag: member="OvalObject::setName" ref="ac5324b5a29d4399a68a484a1275fe8b7" args="(QString newName)" -->
 <div class="memitem">
 <div class="memproto">
@@ -304,8 +326,22 @@ Public Member Functions</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<div class="fragment"><pre class="fragment">{ this-&gt;name = newName; }
+<div class="fragment"><pre class="fragment">{ this-&gt;m_name = newName; }
 </pre></div>
+</div>
+</div>
+<hr/><h2>Property Documentation</h2>
+<a class="anchor" id="a51f05a41a74564a47693c7daafff360d"></a><!-- doxytag: member="OvalObject::name" ref="a51f05a41a74564a47693c7daafff360d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString OvalObject::name<code> [read, write]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
@@ -318,7 +354,7 @@ Public Member Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -327,7 +363,7 @@ Public Member Functions</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed May 2 2012 12:44:13 for pUML by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon May 7 2012 14:45:08 for pUML by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>
