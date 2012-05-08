@@ -170,8 +170,8 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex) {
   //        this, SLOT(setSelect()));
   // connect(toolsActionGroup, SIGNAL(triggered(QAction*)),
   //         canvas, SLOT(deselect()));
-  connect(connectorsActionGroup, SIGNAL(triggered(QAction*)),
-          canvas, SLOT(deselect()));
+  //connect(connectorsActionGroup, SIGNAL(triggered(QAction*)),
+  //        canvas, SLOT(deselect()));
 
   // Set the currentDocument flag
   currentDocument = documentIndex;

@@ -133,15 +133,17 @@ void Canvas::paintEvent(QPaintEvent * /*event*/) {  // NOLINT
 
 /*! This event occures when the user presses down on the
   the mouse but hasn't release it yet. Here is where
-  we want to select objects if the canvas is in
-  selection mode.
+  we want to select objects to start dragging them and find
+  the first objects for connections.
 */
 void Canvas::mousePressEvent(QMouseEvent *event) {
   if (event->button() == Qt::LeftButton) {
     switch (drawingMode) {
     case Object:
-      // don't select or draw anything,
-      // the work is done in the release event
+      // The object is actually created in the release event, although
+      // in Object mode we want to be able to select objects and move them,
+      // so we emit selection change here, so objects can get selected.
+      emit objectSelectionChange(event->pos());
       break;
     case Connection:
       // let the document know what the first point was
@@ -154,8 +156,7 @@ void Canvas::mousePressEvent(QMouseEvent *event) {
       update();
       break;
     case Nothing:
-      // let the document know that the new selection is
-      // under this position.
+      // let the document know that the user is selecting at this position.
       emit objectSelectionChange(event->pos());
       break;
     }
@@ -163,7 +164,7 @@ void Canvas::mousePressEvent(QMouseEvent *event) {
 }
 
 /*! In the mouseMoveEvent of the canvas, an object
-  will be moved if the canvas is in selection mode.
+  will be moved if the canvas is in selection or object mode.
 */
 void Canvas::mouseMoveEvent(QMouseEvent *event) {
   if (event->buttons() = Qt::LeftButton) {
@@ -182,7 +183,9 @@ void Canvas::mouseMoveEvent(QMouseEvent *event) {
       update();
       break;
     case Object:
-      // no defined behavior
+      // We want to drag the object even in Object mode, if there is an
+      // object selected.
+      emit moveSelectedObject(this->mapFromGlobal(event->globalPos()));
       break;
     }
   }
@@ -201,9 +204,8 @@ void Canvas::mouseReleaseEvent(QMouseEvent *event) {
     case Object:
       // let the document know to create an object at this position.
       emit createObject(event->pos());
-      // tell the document to show a properties dialog.
-      emit showPropertiesDialog();
-      emit objectSelectionChange(position);
+      // The document will automatically pop up the properties dialog and
+      // select the new object.
       break;
     case Connection:
       // let the document know this is the second connection position.
@@ -214,8 +216,7 @@ void Canvas::mouseReleaseEvent(QMouseEvent *event) {
       emit objectSelectionChange(position);
       break;
     case Nothing:
-      // QMessageBox::information(0, "pUML", "Mouse Release Nothing",
-      //                          QMessageBox::Ok);
+      // no defined behavior
       break;
     }
   }
@@ -230,7 +231,6 @@ void Canvas::contextMenuEvent(QContextMenuEvent *event) {
   emit objectSelectionChange(event->pos());
   // popup the menu at the current mouse position
   menuPopup->exec(event->globalPos());
-  emit objectSelectionChange(QPoint(0,0));
 }
 
 void Canvas::on_actionDelete_triggered() {
@@ -250,10 +250,3 @@ void Canvas::on_actionProperties_triggered() {
 
 void Canvas::on_actionCopy_triggered() {
 }
-
-/*
-void Canvas::deselect()
-{
-    emit objectSelectionChange(QPoint(0,0));
-}
-*/
