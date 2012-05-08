@@ -4,7 +4,7 @@ Test: pUML self-connector functionality		Risk Level: MED
 NOTE: THE FOLLOWING TEST ONLY APPLIES TO COLLABORATION AND STATE DIAGRAMS
  
   Test Steps (input):
-     1. Open a new diagram.
+    1. Open a new diagram.
     2. Click on an object from the toolbar and place it on the canvas.
     3. Click on the self-connector from the toolbar.
     4. Click on the canvas away from the object. Nothing should happen.
