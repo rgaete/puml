@@ -154,7 +154,7 @@ class InheritanceConnection : public SquareConnectionNode {
 public:
     BaseNode* clone() { return new InheritanceConnection; }
     QDialog* getDialog();
-    QString getIconPath() { return QString(":/Images/interaction.png"); }
+    QString getIconPath() { return QString(":/Images/inheritance.png"); }
     QString getText() { return "Inheritance Line"; }
     void draw(QPainter& painter);  // NOLINT
     DiagramType getDiagramType() { return Class; }
@@ -207,7 +207,7 @@ class AggregationConnection : public SquareConnectionNode {
 public:
   BaseNode* clone() { return new AggregationConnection; }
   QDialog* getDialog();
-  QString getIconPath() { return QString(":/Images/interaction.png"); }
+  QString getIconPath() { return QString(":/Images/aggregation.png"); }
   QString getText() { return "Aggregation Line"; }
   void draw(QPainter& painter);  // NOLINT
   DiagramType getDiagramType() { return Class; }
@@ -263,7 +263,7 @@ class CompositionConnection : public SquareConnectionNode {
 public:
   BaseNode* clone() { return new CompositionConnection; }
   QDialog* getDialog();
-  QString getIconPath() { return QString(":/Images/interaction.png"); }
+  QString getIconPath() { return QString(":/Images/composition.png"); }
   QString getText() { return "Composition Line"; }
   void draw(QPainter& painter);  // NOLINT
   DiagramType getDiagramType() { return Class; }
