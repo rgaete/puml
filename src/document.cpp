@@ -649,7 +649,6 @@ void Document::changeSecondConnectionPointHint(const QPoint &point) {
 */
 void Document::saveDocument() {
   if (this->hasFilename() != false) {
-    QMessageBox::information(this, "pUML", "Trying to open file " + fileName + " for saving");
     QFile file(fileName);
     QDomDocument xml_doc("pUML_save_document");
     QDomElement documentElement = xml_doc.createElement("document");

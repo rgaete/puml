@@ -8,9 +8,6 @@
 QT       += core gui
 QT       += xml
 
-QMAKE_CXXFLAGS += -fprofile-arcs -ftest-coverage
-LIBS += -lgcov
-
 TARGET = pUML
 TEMPLATE = app
 

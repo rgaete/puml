@@ -252,4 +252,59 @@ private:
    QPushButton *okButton;
 };
 
+
+
+class CompositionConnection : public SquareConnectionNode {
+  Q_OBJECT
+  Q_PROPERTY(QString start READ getStart WRITE setStart)
+  Q_PROPERTY(QString name READ getName WRITE setName)
+  Q_PROPERTY(QString end READ getEnd WRITE setEnd)
+
+public:
+  BaseNode* clone() { return new CompositionConnection; }
+  QDialog* getDialog();
+  QString getIconPath() { return QString(":/Images/interaction.png"); }
+  QString getText() { return "Composition Line"; }
+  void draw(QPainter& painter);  // NOLINT
+  DiagramType getDiagramType() { return Class; }
+
+  QString getStart() { return m_start; }
+  QString getName() { return m_name; }
+  QString getEnd() { return m_end; }
+public slots:
+  void setStart(QString newStart) { this->m_start = newStart; }
+  void setName(QString newName) {  this->m_name = newName; }
+  void setEnd(QString newEnd) { this->m_end = newEnd; }
+private:
+  double lineAngle;
+  QString m_start;
+  QString m_name;
+  QString m_end;
+};
+
+/*! @brief The properties dialog for class connections
+ */
+class CompositionConnectionDialog : public QDialog {
+    Q_OBJECT
+
+public:
+   explicit CompositionConnectionDialog(QWidget *parent = 0);
+   void setStart(QString newStart);
+   void setName(QString newName);
+   void setEnd(QString newEnd);
+private slots:
+   void okButtonClicked();
+signals:
+   void startSet(QString newStart);
+   void nameSet(QString newName);
+   void endSet(QString newEnd);
+private:
+   QLabel *StartLabel;
+   QLabel *NameLabel;
+   QLabel *EndLabel;
+   QLineEdit *StartLineEdit;
+   QLineEdit *NameLineEdit;
+   QLineEdit *EndLineEdit;
+   QPushButton *okButton;
+};
 #endif  // SRC_UMLNODES_CLASS_H_

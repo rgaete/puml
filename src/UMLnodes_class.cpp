@@ -802,3 +802,241 @@ void AggregationConnectionDialog::okButtonClicked()
     emit endSet(EndLineEdit->text());
     this->close();
 }
+
+//**********
+
+void CompositionConnection::draw(QPainter &painter)
+{
+    BaseNode *obj1, *obj2;
+    std::list<BaseNode*>::iterator it = connectedObjects.begin();
+    obj1 = *it;
+    it++;
+    obj2 = *it;
+
+    pt1 = obj1->getClosestConnectionPoint(obj2->getPosition());
+    pt4 = obj2->getClosestConnectionPoint(obj1->getPosition());
+    painter.setPen(Qt::black);
+    if (pt1.x() == obj1 -> getPosition().x()) {  // North or South connection
+      pt2.setY((pt4.y() + pt1.y()) / 2);
+      pt2.setX(pt1.x());
+      pt3.setX(pt4.x());
+      pt3.setY(pt2.y());
+    } else if (pt1.x() != obj1 -> getPosition().x()) {  // East or West connection
+      pt2.setY(pt1.y());
+      pt2.setX((pt1.x() + pt4.x()) / 2);
+      pt3.setX(pt2.x());
+      pt3.setY(pt4.y());
+    }
+    if (selected == true) {
+      QPen selectPen;
+      selectPen.setWidth(2);
+      selectPen.setColor(Qt::blue);
+      painter.setPen(selectPen);
+      painter.drawLine(pt1, pt2);
+    }
+    painter.drawLine(pt1, pt2);
+    painter.drawLine(pt2, pt3);
+
+    QFontMetrics fm = painter.fontMetrics();
+    int temp = fm.width(this->m_name);
+
+    QFontMetrics fm1 = painter.fontMetrics();
+    int temp1 = fm1.width(this->m_end);
+
+    QFontMetrics fm2 = painter.fontMetrics();
+    int temp2 = fm2.width(this->m_start);
+
+    if(pt1.x() != obj1 -> getPosition().x()){ //East West Text Placement
+      if(pt1.x() < pt4.x() && pt1.y() > pt4.y()){
+          painter.drawText(pt1.x()+10, pt1.y()-5, m_start);
+          painter.drawText(pt4.x()-15-temp1, pt4.y()-5, m_end);
+          painter.drawText(pt2.x() -temp/2 , pt2.y()+15, m_name);
+      }
+      else if(pt1.x() < pt4.x() && pt1.y() <= pt4.y()){
+          painter.drawText(pt1.x()+10, pt1.y()-5, m_start);
+          painter.drawText(pt4.x()-15-temp1, pt4.y()-5, m_end);
+          painter.drawText(pt2.x() -temp/2 , pt2.y()-7, m_name);
+      }
+      else if(pt1.x() > pt4.x() && pt1.y() >= pt4.y()){
+          painter.drawText(pt1.x()-10-temp2, pt1.y()-5, m_start);
+          painter.drawText(pt4.x()+15, pt4.y()-5, m_end);
+          painter.drawText(pt2.x() - temp/2, pt2.y()+15, m_name);
+      }
+      else if(pt1.x() > pt4.x() && pt1.y() < pt4.y()){
+          painter.drawText(pt1.x()-10-temp2, pt1.y()-5, m_start);
+          painter.drawText(pt4.x()+15, pt4.y()-5, m_end);
+          painter.drawText(pt2.x() - temp/2, pt2.y()-7, m_name);
+      }
+    }
+    else if(pt1.x() == obj1 -> getPosition().x()){    //North South Text Placement
+      if(pt1.y() > pt4.y() && pt1.x() <= pt4.x()){
+          painter.drawText(pt1.x()-5-temp2, pt1.y()-5, m_start);
+          painter.drawText(pt4.x()-10-temp1, pt4.y()+20, m_end);
+          painter.drawText(pt2.x()+5, pt2.y()+15, m_name);
+      }
+      else if(pt1.y() > pt4.y() && pt1.x() > pt4.x()){
+          painter.drawText(pt1.x()-5-temp2, pt1.y()-5, m_start);
+          painter.drawText(pt4.x()-10-temp1, pt4.y()+20, m_end);
+          painter.drawText(pt2.x()-5-temp, pt2.y()+15, m_name);
+      }
+      else if(pt1.y() < pt4.y() && pt1.x() <= pt4.x()){
+          painter.drawText(pt1.x()-5-temp2, pt1.y()+15, m_start);
+          painter.drawText(pt4.x()-10-temp1, pt4.y()-12, m_end);
+          painter.drawText(pt2.x()+5, pt2.y()-7, m_name);
+      }
+      else if(pt1.y() < pt4.y() && pt1.x() > pt4.x()){
+          painter.drawText(pt1.x()-5-temp2, pt1.y()+15, m_start);
+          painter.drawText(pt4.x()-10-temp1, pt4.y()-12, m_end);
+          painter.drawText(pt2.x()-5-temp, pt2.y()-7, m_name);
+      }
+
+    }
+
+    QPolygon arrowhead;
+    //If construct checks connection location, then trims the arrow respectively
+    if(pt1.x() < obj1 -> getPosition().x()) //East Connection
+    {
+      // draws the last line segment
+      pt4.setX(pt4.x() + 20.0);
+      painter.drawLine(pt3, pt4);
+
+      arrowhead << pt4;
+      arrowhead << QPoint(pt4.x()-10, pt4.y()-5);
+      arrowhead << QPoint(pt4.x()-20, pt4.y());
+      arrowhead << QPoint(pt4.x()-10, pt4.y()+5);
+
+    }
+    else if(pt1.x() > obj1 -> getPosition().x())  //West Connection
+    {
+        pt4.setX(pt4.x() - 20.0);
+        painter.drawLine(pt3, pt4);
+
+        arrowhead << pt4;
+        arrowhead << QPoint(pt4.x()+10, pt4.y()-5);
+        arrowhead << QPoint(pt4.x()+20, pt4.y());
+        arrowhead << QPoint(pt4.x()+10, pt4.y()+5);
+        /*
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()+10,pt4.y()-5);
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()+10,pt4.y()+5);
+        pt4.setX(pt4.x() + 20.0);
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()-10,pt4.y()-5);
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()-10,pt4.y()+5);
+        */
+    }
+    else if(pt1.y() > obj1 -> getPosition().y())  //North Connection
+    {
+        pt4.setY(pt4.y() - 20.0);
+        painter.drawLine(pt3, pt4);
+
+        arrowhead << pt4;
+        arrowhead << QPoint(pt4.x()+5, pt4.y()+10);
+        arrowhead << QPoint(pt4.x(), pt4.y()+20);
+        arrowhead << QPoint(pt4.x()-5, pt4.y()+10);
+
+        /*
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()+5,pt4.y()+10);
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()-5,pt4.y()+10);
+        pt4.setY(pt4.y() + 20.0);
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()+5,pt4.y()-10);
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()-5,pt4.y()-10);
+        */
+    }
+    else if(pt1.y() < obj1 -> getPosition().y())  //South Connection
+    {
+        pt4.setY(pt4.y() + 20.0);
+        painter.drawLine(pt3, pt4);
+
+        arrowhead << pt4;
+        arrowhead << QPoint(pt4.x()+5, pt4.y()-10);
+        arrowhead << QPoint(pt4.x(), pt4.y()-20);
+        arrowhead << QPoint(pt4.x()-5, pt4.y()-10);
+
+        /*
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()+5,pt4.y()-10);
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()-5,pt4.y()-10);
+        pt4.setY(pt4.y() - 20.0);
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()+5,pt4.y()+10);
+        painter.drawLine(pt4.x(),pt4.y(),pt4.x()-5,pt4.y()+10);
+        */
+    }
+    painter.setBrush(QBrush(Qt::black));
+    painter.drawPolygon(arrowhead);
+}
+
+CompositionConnectionDialog::CompositionConnectionDialog(QWidget *parent)
+                     :QDialog(parent) {
+    okButton = new QPushButton(tr("Ok"), this);
+
+    StartLabel = new QLabel(tr("Start of connection multiplicity:"), this);
+    NameLabel = new QLabel(tr("Name:"), this);
+    EndLabel = new QLabel(tr("End of connection multiplicity:"), this);
+
+    StartLineEdit = new QLineEdit(this);
+    NameLineEdit = new QLineEdit(this);
+    EndLineEdit = new QLineEdit(this);
+
+    StartLineEdit->setFixedSize(300, 20);
+    NameLineEdit->setFixedSize(300, 20);
+    EndLineEdit->setFixedSize(300, 20);
+
+    QHBoxLayout *Start = new QHBoxLayout;
+    Start->addWidget(StartLabel);
+    Start->addWidget(StartLineEdit);
+    Start->setAlignment(Start, Qt::AlignTop);
+
+    QHBoxLayout *Name = new QHBoxLayout;
+    Name->addWidget(NameLabel);
+    Name->addWidget(NameLineEdit);
+    Name->setAlignment(Name, Qt::AlignCenter);
+
+    QHBoxLayout *End = new QHBoxLayout;
+    End->addWidget(EndLabel);
+    End->addWidget(EndLineEdit);
+    End->setAlignment(End, Qt::AlignBottom);
+
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+    mainLayout->addLayout(Start);
+    mainLayout->addLayout(Name);
+    mainLayout->addLayout(End);
+    mainLayout->addWidget(okButton, 0, Qt::AlignBottom);
+    connect(okButton, SIGNAL(clicked()), this, SLOT(okButtonClicked()));
+}
+
+QDialog *CompositionConnection::getDialog()
+{
+    CompositionConnectionDialog *dialog = new CompositionConnectionDialog;
+    dialog->setFixedSize(450, 175);
+    dialog->setStart(m_start);
+    dialog->setName(m_name);
+    dialog->setEnd(m_end);
+    connect(dialog, SIGNAL(startSet(QString)),
+            this, SLOT(setStart(QString)));
+    connect(dialog, SIGNAL(nameSet(QString)),
+            this, SLOT(setName(QString)));
+    connect(dialog, SIGNAL(endSet(QString)),
+            this, SLOT(setEnd(QString)));
+    return dialog;
+}
+
+void CompositionConnectionDialog::setStart(QString newStart)
+{
+    StartLineEdit->setText(newStart);
+}
+
+void CompositionConnectionDialog::setName(QString newName)
+{
+    NameLineEdit->setText(newName);
+}
+
+void CompositionConnectionDialog::setEnd(QString newEnd)
+{
+    EndLineEdit->setText(newEnd);
+}
+
+void CompositionConnectionDialog::okButtonClicked()
+{
+    emit startSet(StartLineEdit->text());
+    emit nameSet(NameLineEdit->text());
+    emit endSet(EndLineEdit->text());
+    this->close();
+}
