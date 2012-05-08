@@ -70,7 +70,6 @@ class Canvas : public QWidget {
     // void selectNothing();
 
   public slots:
-    // void deselect();
     void on_actionDelete_triggered();
     void on_actionCut_triggered();
     void on_actionCopy_triggered();

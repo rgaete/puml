@@ -256,7 +256,9 @@ void Document::setNewObjectID(int prototypeID) {
   newObjectID = prototypeID;
 }
 
-/*!
+/*! This helper function calls the hitTest of every node with the point
+    given. If one of those hitTests returns true, that index is returned.
+    Otherwise -1 is returned.
 */
 int Document::getIndexAt(const QPoint &point) {
   int index = -1;
@@ -320,9 +322,9 @@ void Document::moveSelectedObject(const QPoint &point) {
 
   if (indexOfSelectedObject != -1) {
     nodes.at(indexOfSelectedObject)->setPosition(point + positionDelta);
+    setModified(true);
   }
 
-  setModified(true);
   emit modelChanged();
 }
 
@@ -333,6 +335,13 @@ void Document::moveSelectedObject(const QPoint &point) {
 void Document::createObject(const QPoint &position) {
   assert(indexOfSelectedObject >= -1);
   assert(indexOfSelectedObject < static_cast<int>(nodes.size()));
+
+  // testing
+  int objectUnder = getIndexAt(position);
+  if (objectUnder != -1) {
+    setSelectedObject(position);
+    return;
+  }
 
   // create a new node using the factory
   BaseNode* newNode;
@@ -356,6 +365,9 @@ void Document::createObject(const QPoint &position) {
 
   setModified(true);
   emit modelChanged();
+
+  this->showPropertiesDialog();
+  setSelectedObject(position);
 }
 
 /*! Slot. Sets the object index in a new connection node.
