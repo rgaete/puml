@@ -14,5 +14,8 @@
         <file>Images/class.png</file>
         <file>Images/rectangle.png</file>
         <file>Images/multibox.png</file>
+        <file>Images/aggregation.png</file>
+        <file>Images/composition.png</file>
+        <file>Images/inheritance.png</file>
     </qresource>
 </RCC>
