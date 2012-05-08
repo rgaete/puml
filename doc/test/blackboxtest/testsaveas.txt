@@ -1,4 +1,4 @@
-Test: pUML Save As features		Risk Level: 
+Test: pUML Save As features		Risk Level: MED
 
 
   Test Steps (input):
@@ -27,9 +27,10 @@ Test: pUML Save As features		Risk Level:
 
 
 
-***** TEST 01 *****
+***** ALPHA TEST *****
 
-Change Set#: 361		Date of Test: 4/22/12		Pass/Fail: Fail
+Change Set#: 361		Date of Test: 4/22/12		
+Pass/Fail: Fail
 
 Tester Name: Brian Bowles
 
@@ -43,15 +44,28 @@ If "open" is chosen when program is launched, after the popup says opening isn't
 
 
 
+***** BETA TEST *****
 
-***** TEST 02 *****
-
-Change Set#: 		Date of Test: 		Pass/Fail:
+Change Set#: 		Date of Test: 		
+Pass/Fail:
 
 Tester Name: 
 
 Log: 
 
+Extraneous Observations: 
+
+
+
+***** FINAL TEST *****
+
+Change Set#: 		Date of Test: 		
+Pass/Fail:
+
+Tester Name: 
+
+Log: 
 
 Extraneous Observations: 
+
 
