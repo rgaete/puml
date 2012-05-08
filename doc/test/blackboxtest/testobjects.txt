@@ -1,4 +1,4 @@
-Test: pUML object functionality			Risk Level: 
+Test: pUML object functionality			Risk Level: MED
 
   Test Steps (input):
        1. Open a new diagram
@@ -29,9 +29,10 @@ Test: pUML object functionality			Risk Level:
     Object descriptions can be modified, and the object will resize to accept the new description.
      
 
-***** TEST 01 *****
+***** ALPHA TEST *****
 
-Change Set#: Rev 351		Date of Test: 4/19/12		Pass/Fail: Pass
+Change Set#: Rev 351		Date of Test: 4/19/12		
+Pass/Fail: Pass
 
 Tester Name: Jeremy Klas
 
@@ -41,7 +42,8 @@ The object could be created, selected, modified, moved, and deleted just fine. I
 Extraneous Observations: 
 The test ran great, however with that many connectors going into a single object the diagram began to get cluttered around the four north, south, west, east connection points.
 
-***** TEST 02 *****
+
+***** BETA TEST *****
 
 Change Set#: 		Date of Test: 		Pass/Fail:
 
@@ -54,19 +56,7 @@ Extraneous Observations:
 
 
 
-***** TEST 03 *****
-
-Change Set#: 		Date of Test: 		Pass/Fail:
-
-Tester Name: 
-
-Log: 
-
-
-Extraneous Observations: 
-
-
-***** TEST 04 *****
+***** FINAL TEST *****
 
 Change Set#: 		Date of Test: 		Pass/Fail:
 

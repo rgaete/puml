@@ -138,9 +138,7 @@ SYSTEMS AND SOFTWARE \ REQUIREMENTS SPECIFICATION (SSRS) FOR
 
 \bigskip
 
-{\centering\bfseries
-Phunctional UML Editor
-\\(pUML)
+{\centering\bfseries Phunctional UML Editor \\(pUML)
 \par}
 
 
@@ -162,12 +160,10 @@ Phunctional UML Editor
 
 \bigskip
 
-{\centering\bfseries
-Version 0.11
+{\centering\bfseries Version 0.11 
 \par}
 
-{\centering\bfseries
-April 30, 2012
+{\centering\bfseries May 7, 2012 
 \par}
 
 
@@ -176,11 +172,10 @@ April 30, 2012
 
 \bigskip
 
-{\centering\bfseries
-Prepared for:
+{\centering\bfseries Prepared for: 
 \par}
-{\centering\bfseries
-Dr. Clint Jeffery
+
+{\centering\bfseries Dr. Clint Jeffery
 \par}
 
 \bigskip
@@ -188,8 +183,7 @@ Dr. Clint Jeffery
 
 \bigskip
 
-{\centering\bfseries
-Prepared by:
+{\centering\bfseries Prepared by:
 \par}
 
 {\centering\bfseries
@@ -204,23 +198,17 @@ Josh Armstrong
 \\David Wells
 \par}
 
-{\centering\bfseries
-University of Idaho
-\par}
+{\centering\bfseries University of Idaho \par}
 
-{\centering\bfseries
-Moscow, ID \ 83844-1010
-\par}
+{\centering\bfseries Moscow, ID \ 83844-1010 \par}
 
-\clearpage{\centering\bfseries
-pUML SSRS
-\par}
+
+
+
+\clearpage{\centering\bfseries pUML SSRS \par}
 
 
 \bigskip
-
-
-
 
 
 {\centering\bfseries RECORD OF CHANGES \par}
@@ -343,50 +331,39 @@ pUML SSRS
 & Update all use cases and descriptions
 & MM
 
+\\\hline
+\centering 12
+& 05/07/2012
+& 
+& \centering M
+& Modify use cases
+& MM
 
 \\\hline
 \end{supertabular}
 \end{flushleft}
 
 
+{ {*}{\textbf{A}}{ - ADDED \ }{\textbf{M}}{ - MODIFIED \ }{\textbf{D}}{ - DELETED}}
 
 
 
 
 
-
-
-
-{
-{*}{\textbf{A}}{
-- ADDED
-\ }{\textbf{M}}{ -
-MODIFIED
-\ }{\textbf{D}}{ -
-DELETED}}
 
 \clearpage
-{\centering\bfseries {\MakeUppercase{pUML SSRS}}
-\par}
 
-{\centering\bfseries
-TABLE OF CONTENTS
-\par}
+{\centering\bfseries TABLE OF CONTENTS \par}
 
 
-\bigskip
-
-{\bfseries
-Section\ \ Page}
-
-\setcounter{tocdepth}{9}
-\renewcommand\contentsname{}
 \tableofcontents
 
+
 \bigskip
 
+\bigskip
 
-
+\setcounter{page}{1}\pagestyle{Convertiv}
 
 
 
@@ -507,7 +484,7 @@ PRODUCT PERSPECTIVE}
 This product is independent of any other product, and as such, is self-contained.
 }
 
-\subsubsection[PRODUCT FUNCTIONS ]
+\subsection[PRODUCT FUNCTIONS ]
 {\bfseries PRODUCT FUNCTIONS}
 
 This product's primary function is to allow the user to create UML diagrams, edit existing diagrams, and store and retrieve them. \newline 
@@ -1393,7 +1370,7 @@ The features detailed in the use cases (Section 3.2.1) are all basic vital funct
 % **************************************
 
 
-\clearpage\setcounter{page}{1}\pagestyle{Convertvi}
+\clearpage
 
 \begin{landscape}
 
@@ -1424,7 +1401,7 @@ The features detailed in the use cases (Section 3.2.1) are all basic vital funct
 \\\hline
   
   Install
-  & \centering 2.1.2
+  & \centering 2.2.1
   & pUML software installs successfully
   & \centering M 
   & ~
@@ -1435,7 +1412,7 @@ The features detailed in the use cases (Section 3.2.1) are all basic vital funct
 \\\hline
 
   Launch
-  & \centering 2.1.2
+  & \centering 2.2.1
   & pUML software launches successfully
   & \centering M 
   & ~
@@ -1445,19 +1422,34 @@ The features detailed in the use cases (Section 3.2.1) are all basic vital funct
   & ~ 
 \\\hline
 
+  Exit
+  & \centering 2.2.1
+  & pUML Exit options 
+  & \centering M 
+  & ~
+  & testsave *\newline
+    testsaveas *
+  & FAIL \newline
+    FAIL 
+  & ~ \newline
+    ~
+  & ~ \newline
+    ~
+\\\hline
+
   Main Window
-  & \centering 2.1.3 
+  & \centering 2.2.2
   & All main window features 
   & \centering M 
   & ~
-  & N/A 
-  & ~
+  & testmainwindow 
+  & PASS
   & ~ 
   & ~ 
 \\\hline
 
   Objects
-  & \centering 2.1.4
+  & \centering 2.2.3
   & Object properties and functionality
   & \centering M 
   & ~ 
@@ -1468,7 +1460,7 @@ The features detailed in the use cases (Section 3.2.1) are all basic vital funct
 \\\hline
 
   Connectors
-  & \centering 2.1.5
+  & \centering 2.2.4
   & Connector properties and functionality
   & \centering M 
   & ~ 
@@ -1477,13 +1469,13 @@ The features detailed in the use cases (Section 3.2.1) are all basic vital funct
   & FAIL \newline
     PASS
   & ~ \newline
-    ~
+    PASS
   & ~ \newline
     ~
 \\\hline
 
   Open
-  & \centering 2.1.6
+  & \centering 2.2.5
   & Load a pUML file into pUML 
   & \centering M 
   & ~ 
@@ -1497,8 +1489,8 @@ The features detailed in the use cases (Section 3.2.1) are all basic vital funct
     ~
 \\\hline
 
-  Save
-  & \centering 2.1.7
+  Save/Save As
+  & \centering 2.2.6
   & Save a diagram 
   & \centering M 
   & ~ 
@@ -1513,7 +1505,7 @@ The features detailed in the use cases (Section 3.2.1) are all basic vital funct
 \\\hline
 
   Diagrams
-  & \centering 2.1.8
+  & \centering 2.2.7
   & Diagram type integrity 
   & \centering M 
   & ~ 
@@ -1528,7 +1520,7 @@ The features detailed in the use cases (Section 3.2.1) are all basic vital funct
 \\\hline
 
   Tabs
-  & \centering 2.1.9
+  & \centering 2.2.8
   & Tab functionality 
   & \centering M 
   & ~ 
