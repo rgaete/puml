@@ -82,7 +82,6 @@ class ClassBoxObject: public ObjectNode {
     int classHeight;
     int attributeHeight;
     int methodHeight;
-    int radius;
     QString m_className;
     QString m_attributes;
     QString m_methods;
@@ -93,29 +92,30 @@ class ClassBoxObject: public ObjectNode {
  */
 class ClassConnection : public SquareConnectionNode {
   Q_OBJECT
+  Q_PROPERTY(QString start READ getStart WRITE setStart)
+  Q_PROPERTY(QString name READ getName WRITE setName)
+  Q_PROPERTY(QString end READ getEnd WRITE setEnd)
+
   public:
     BaseNode* clone() { return new ClassConnection; }
     QDialog* getDialog();
     QString getIconPath() { return QString(":/Images/interaction.png"); }
-    QString getText() { return "Class Line"; }
+    QString getText() { return "Association"; }
     void draw(QPainter& painter);  // NOLINT
     DiagramType getDiagramType() { return Class; }
 
+    QString getStart() { return m_start; }
+    QString getName() { return m_name; }
+    QString getEnd() { return m_end; }
 public slots:
-   void setStart(QString newStart) {
-       this->start = newStart;
-   }
-   void setName(QString newName) {
-       this->name = newName;
-   }
-   void setEnd(QString newEnd) {
-       this->end = newEnd;
-   }
+   void setStart(QString newStart) { this->m_start = newStart; }
+   void setName(QString newName) { this->m_name = newName; }
+   void setEnd(QString newEnd) { this->m_end = newEnd; }
 private:
     double lineAngle;
-    QString start;
-    QString name;
-    QString end;
+    QString m_start;
+    QString m_name;
+    QString m_end;
 };
 
 /*! @brief The properties dialog for class connections
@@ -147,6 +147,10 @@ private:
 
 class InheritanceConnection : public SquareConnectionNode {
   Q_OBJECT
+  Q_PROPERTY(QString start READ getStart WRITE setStart)
+  Q_PROPERTY(QString name READ getName WRITE setName)
+  Q_PROPERTY(QString end READ getEnd WRITE setEnd)
+
 public:
     BaseNode* clone() { return new InheritanceConnection; }
     QDialog* getDialog();
@@ -155,21 +159,19 @@ public:
     void draw(QPainter& painter);  // NOLINT
     DiagramType getDiagramType() { return Class; }
     void addArrow(QPainter& painter);
+
+    QString getStart() { return m_start; }
+    QString getName() { return m_name; }
+    QString getEnd() { return m_end; }
 public slots:
-   void setStart(QString newStart) {
-       this->start = newStart;
-   }
-   void setName(QString newName) {
-       this->name = newName;
-   }
-   void setEnd(QString newEnd) {
-       this->end = newEnd;
-   }
+   void setStart(QString newStart) { this->m_start = newStart; }
+   void setName(QString newName) { this->m_name = newName; }
+   void setEnd(QString newEnd) { this->m_end = newEnd; }
 private:
     double lineAngle;
-    QString start;
-    QString name;
-    QString end;
+    QString m_start;
+    QString m_name;
+    QString m_end;
 };
 
 class InheritanceConnectionDialog : public QDialog {
@@ -197,29 +199,31 @@ private:
 };
 
 class AggregationConnection : public SquareConnectionNode {
-    Q_OBJECT
-  public:
-      BaseNode* clone() { return new AggregationConnection; }
-      QDialog* getDialog();
-      QString getIconPath() { return QString(":/Images/interaction.png"); }
-      QString getText() { return "Aggregation Line"; }
-      void draw(QPainter& painter);  // NOLINT
-      DiagramType getDiagramType() { return Class; }
-  public slots:
-     void setStart(QString newStart) {
-         this->start = newStart;
-     }
-     void setName(QString newName) {
-         this->name = newName;
-     }
-     void setEnd(QString newEnd) {
-         this->end = newEnd;
-     }
-  private:
-      double lineAngle;
-      QString start;
-      QString name;
-      QString end;
+  Q_OBJECT
+  Q_PROPERTY(QString start READ getStart WRITE setStart)
+  Q_PROPERTY(QString name READ getName WRITE setName)
+  Q_PROPERTY(QString end READ getEnd WRITE setEnd)
+
+public:
+  BaseNode* clone() { return new AggregationConnection; }
+  QDialog* getDialog();
+  QString getIconPath() { return QString(":/Images/interaction.png"); }
+  QString getText() { return "Aggregation Line"; }
+  void draw(QPainter& painter);  // NOLINT
+  DiagramType getDiagramType() { return Class; }
+
+  QString getStart() { return m_start; }
+  QString getName() { return m_name; }
+  QString getEnd() { return m_end; }
+public slots:
+  void setStart(QString newStart) { this->m_start = newStart; }
+  void setName(QString newName) {  this->m_name = newName; }
+  void setEnd(QString newEnd) { this->m_end = newEnd; }
+private:
+  double lineAngle;
+  QString m_start;
+  QString m_name;
+  QString m_end;
 };
 
 /*! @brief The properties dialog for class connections

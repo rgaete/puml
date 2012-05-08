@@ -251,7 +251,9 @@ void Canvas::on_actionProperties_triggered() {
 void Canvas::on_actionCopy_triggered() {
 }
 
+/*
 void Canvas::deselect()
 {
     emit objectSelectionChange(QPoint(0,0));
 }
+*/

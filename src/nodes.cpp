@@ -282,21 +282,6 @@ void ObjectNode::draw(QPainter &painter) {  // NOLINT
   }
 }
 
-
-/*! NYI
-*/
-/*
-QPoint ObjectNode::translateConnectionPoint(int pointIndex)
-{
-  if (pointIndex < 0 || pointIndex > (int)connectionPoints.size()-1) {
-    //ERROR, index out of bounds
-    return QPoint(0,0);
-  } else {
-    return connectionPoints[pointIndex];
-  }
-}
-*/
-
 /*******************************/
 /* ConnectionNode Functions ****/
 /*******************************/

@@ -84,6 +84,7 @@ QDomElement getNextNodeElement(QDomElement &documentElement) {
   return retval;
 }
 
+/*
 void experiment(QString openName) {
   fprintf(stderr, "> experiment()\n");
   QDomDocument* xmlDoc = openSaveFile(openName);
@@ -114,6 +115,7 @@ void experiment(QString openName) {
   }
   fprintf(stderr, "< experiment()\n");
 }
+*/
 
 /* REMOVE ME! I AM SCAR CODE.
   // print out the element names of all elements that are direct children
@@ -183,6 +185,7 @@ xmlReader->clear();
 xmlFile->close();
 */
 
+/*
 Document::Document(QString fpath) {
   fprintf(stderr, "> Document::Document(QString fpath)\n");
 
@@ -197,6 +200,7 @@ Document::Document(QString fpath) {
 
   fprintf(stderr, "< Document::Document(QString fpath)\n");
 }
+*/
 
 
 /*! Destructor: frees up the memory used up by the vector of nodes.
