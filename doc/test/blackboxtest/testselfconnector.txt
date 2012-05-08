@@ -1,5 +1,8 @@
-Test: pUML self-connector functionality		Risk Level: 
+Test: pUML self-connector functionality		Risk Level: MED
 
+
+NOTE: THE FOLLOWING TEST ONLY APPLIES TO COLLABORATION AND STATE DIAGRAMS
+ 
   Test Steps (input):
      1. Open a new diagram.
     2. Click on an object from the toolbar and place it on the canvas.
@@ -29,15 +32,15 @@ Test: pUML self-connector functionality		Risk Level:
     26. Select "Delete" from the context menu.
     27. The self-connector and its description should disappear.
 
-
   Expected Results:
     Only one self-connector can connect to only one object.
     Its properties may be modified, and it may be moved with objects and deleted.
     
 
-***** TEST 01 *****
+***** ALPHA TEST *****
 
-Change Set#: 346	Date of Test: 4/3/2011	Pass/Fail: PASS
+Change Set#: 346	Date of Test: 4/3/2011	
+Pass/Fail: PASS
 
 Tester Name: Maxine Major
 
@@ -47,13 +50,15 @@ Log:
 
 Extraneous Observations: 
   No errors reported.
-  The only diagram type with a self-connector is the Collaboration diagram.
+  The only diagram type with a self-connector at this time 
+is the Collaboration diagram.
 
 
 
-***** TEST 02 *****
+***** BETA TEST *****
 
-Change Set#: Rev 351		Date of Test: 4/19/2011		Pass/Fail: Pass
+Change Set#: Rev 351		Date of Test: 4/19/2011
+Pass/Fail: Pass
 
 Tester Name: Jeremy Klas 
 
