@@ -174,15 +174,11 @@ class SquareConnectionNode: public BaseNode {
   Q_OBJECT
 
   public:
-    // void setPoints(const QPoint &point1, const QPoint &point2);
-
-    // virtual BaseNode* factory();
     bool isConnector() {return true;}
     bool hitTest(const QPoint &point);
 
   protected:
     QPoint pt1, pt2, pt3, pt4;
-  private:
 };
 
 

@@ -21,14 +21,14 @@
 #include "./nodes.h"
 #include "./UMLnodes.h"
 
-void experiment(QString openName);
+// void experiment(QString openName);
 
 class Document : public QWidget {
   Q_OBJECT
 
   public:
     Document();
-    Document(QString fpath);
+    // Document(QString fpath);
     ~Document();
     void addNodeToList(BaseNode *newNode) { nodes.push_back(newNode); }
     void setNewObjectID(int prototypeID);
@@ -45,6 +45,7 @@ class Document : public QWidget {
     // @TODO Once the saveAs functionality is moved into this class from
     // mainwindow, move nodes back to private.
     // The main vector of nodes
+  private:
     std::vector<BaseNode*> nodes;
 
   private:
@@ -61,7 +62,7 @@ class Document : public QWidget {
     // object and the actual position of that object
     QPoint positionDelta;
     // A member variable that could be used to store the index
-    // the currently connected canvas (Not used yet - 2/13/12)
+    // the currently connected canvas
     int canvasIndex;
     // This is the first object when creating a connection node
     int firstConnectionIndex;

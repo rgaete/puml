@@ -252,56 +252,56 @@ void ClassConnection::draw(QPainter& painter) {  // NOLINT
   painter.drawLine(pt3, pt4);
 
   QFontMetrics fm = painter.fontMetrics();
-  int temp = fm.width(this->name);
+  int temp = fm.width(this->m_name);
 
   QFontMetrics fm1 = painter.fontMetrics();
-  int temp1 = fm1.width(this->end);
+  int temp1 = fm1.width(this->m_end);
 
   QFontMetrics fm2 = painter.fontMetrics();
-  int temp2 = fm2.width(this->start);
+  int temp2 = fm2.width(this->m_start);
 
   if(pt1.x() != obj1 -> getPosition().x()){ //East West Text Placement
     if(pt1.x() < pt4.x() && pt1.y() > pt4.y()){
-        painter.drawText(pt1.x()+10, pt1.y()-5, start);
-        painter.drawText(pt4.x()-7-temp1, pt4.y()-5, end);
-        painter.drawText(pt2.x() -temp/2 , pt2.y()+15, name);
+        painter.drawText(pt1.x()+10, pt1.y()-5, m_start);
+        painter.drawText(pt4.x()-7-temp1, pt4.y()-5, m_end);
+        painter.drawText(pt2.x() -temp/2 , pt2.y()+15, m_name);
     }
     else if(pt1.x() < pt4.x() && pt1.y() <= pt4.y()){
-        painter.drawText(pt1.x()+10, pt1.y()-5, start);
-        painter.drawText(pt4.x()-7-temp1, pt4.y()-5, end);
-        painter.drawText(pt2.x() -temp/2 , pt2.y()-7, name);
+        painter.drawText(pt1.x()+10, pt1.y()-5, m_start);
+        painter.drawText(pt4.x()-7-temp1, pt4.y()-5, m_end);
+        painter.drawText(pt2.x() -temp/2 , pt2.y()-7, m_name);
     }
     else if(pt1.x() > pt4.x() && pt1.y() >= pt4.y()){
-        painter.drawText(pt1.x()-10-temp2, pt1.y()-5, start);
-        painter.drawText(pt4.x()+7, pt4.y()-5, end);
-        painter.drawText(pt2.x() - temp/2, pt2.y()+15, name);
+        painter.drawText(pt1.x()-10-temp2, pt1.y()-5, m_start);
+        painter.drawText(pt4.x()+7, pt4.y()-5, m_end);
+        painter.drawText(pt2.x() - temp/2, pt2.y()+15, m_name);
     }
     else if(pt1.x() > pt4.x() && pt1.y() < pt4.y()){
-        painter.drawText(pt1.x()-10-temp2, pt1.y()-5, start);
-        painter.drawText(pt4.x()+7, pt4.y()-5, end);
-        painter.drawText(pt2.x() - temp/2, pt2.y()-7, name);
+        painter.drawText(pt1.x()-10-temp2, pt1.y()-5, m_start);
+        painter.drawText(pt4.x()+7, pt4.y()-5, m_end);
+        painter.drawText(pt2.x() - temp/2, pt2.y()-7, m_name);
     }
   }
   else if(pt1.x() == obj1 -> getPosition().x()){    //North South Text Placement
     if(pt1.y() > pt4.y() && pt1.x() <= pt4.x()){
-        painter.drawText(pt1.x()-5-temp2, pt1.y()-5, start);
-        painter.drawText(pt4.x()-10-temp1, pt4.y()+15, end);
-        painter.drawText(pt2.x()+5, pt2.y()+15, name);
+        painter.drawText(pt1.x()-5-temp2, pt1.y()-5, m_start);
+        painter.drawText(pt4.x()-10-temp1, pt4.y()+15, m_end);
+        painter.drawText(pt2.x()+5, pt2.y()+15, m_name);
     }
     else if(pt1.y() > pt4.y() && pt1.x() > pt4.x()){
-        painter.drawText(pt1.x()-5-temp2, pt1.y()-5, start);
-        painter.drawText(pt4.x()-10-temp1, pt4.y()+15, end);
-        painter.drawText(pt2.x()-5-temp, pt2.y()+15, name);
+        painter.drawText(pt1.x()-5-temp2, pt1.y()-5, m_start);
+        painter.drawText(pt4.x()-10-temp1, pt4.y()+15, m_end);
+        painter.drawText(pt2.x()-5-temp, pt2.y()+15, m_name);
     }
     else if(pt1.y() < pt4.y() && pt1.x() <= pt4.x()){
-        painter.drawText(pt1.x()-5-temp2, pt1.y()+15, start);
-        painter.drawText(pt4.x()-10-temp1, pt4.y()-5, end);
-        painter.drawText(pt2.x()+5, pt2.y()-7, name);
+        painter.drawText(pt1.x()-5-temp2, pt1.y()+15, m_start);
+        painter.drawText(pt4.x()-10-temp1, pt4.y()-5, m_end);
+        painter.drawText(pt2.x()+5, pt2.y()-7, m_name);
     }
     else if(pt1.y() < pt4.y() && pt1.x() > pt4.x()){
-        painter.drawText(pt1.x()-5-temp2, pt1.y()+15, start);
-        painter.drawText(pt4.x()-10-temp1, pt4.y()-5, end);
-        painter.drawText(pt2.x()-5-temp, pt2.y()-7, name);
+        painter.drawText(pt1.x()-5-temp2, pt1.y()+15, m_start);
+        painter.drawText(pt4.x()-10-temp1, pt4.y()-5, m_end);
+        painter.drawText(pt2.x()-5-temp, pt2.y()-7, m_name);
     }
   }
 }
@@ -349,9 +349,9 @@ QDialog *ClassConnection::getDialog()
 {
     ClassConnectionDialog *dialog = new ClassConnectionDialog;
     dialog->setFixedSize(450, 175);
-    dialog->setStart(start);
-    dialog->setName(name);
-    dialog->setEnd(end);
+    dialog->setStart(m_start);
+    dialog->setName(m_name);
+    dialog->setEnd(m_end);
     connect(dialog, SIGNAL(startSet(QString)),
             this, SLOT(setStart(QString)));
     connect(dialog, SIGNAL(nameSet(QString)),
@@ -416,56 +416,56 @@ void InheritanceConnection::draw(QPainter& painter) {  // NOLINT
   painter.drawLine(pt2, pt3);
 
   QFontMetrics fm = painter.fontMetrics();
-  int temp = fm.width(this->name);
+  int temp = fm.width(this->m_name);
 
   QFontMetrics fm1 = painter.fontMetrics();
-  int temp1 = fm1.width(this->end);
+  int temp1 = fm1.width(this->m_end);
 
   QFontMetrics fm2 = painter.fontMetrics();
-  int temp2 = fm2.width(this->start);
+  int temp2 = fm2.width(this->m_start);
 
   if(pt1.x() != obj1 -> getPosition().x()){ //East West Text Placement
     if(pt1.x() < pt4.x() && pt1.y() > pt4.y()){
-        painter.drawText(pt1.x()+10, pt1.y()-5, start);
-        painter.drawText(pt4.x()-15-temp1, pt4.y()-5, end);
-        painter.drawText(pt2.x() -temp/2 , pt2.y()+15, name);
+        painter.drawText(pt1.x()+10, pt1.y()-5, m_start);
+        painter.drawText(pt4.x()-15-temp1, pt4.y()-5, m_end);
+        painter.drawText(pt2.x() -temp/2 , pt2.y()+15, m_name);
     }
     else if(pt1.x() < pt4.x() && pt1.y() <= pt4.y()){
-        painter.drawText(pt1.x()+10, pt1.y()-5, start);
-        painter.drawText(pt4.x()-15-temp1, pt4.y()-5, end);
-        painter.drawText(pt2.x() -temp/2 , pt2.y()-7, name);
+        painter.drawText(pt1.x()+10, pt1.y()-5, m_start);
+        painter.drawText(pt4.x()-15-temp1, pt4.y()-5, m_end);
+        painter.drawText(pt2.x() -temp/2 , pt2.y()-7, m_name);
     }
     else if(pt1.x() > pt4.x() && pt1.y() >= pt4.y()){
-        painter.drawText(pt1.x()-10-temp2, pt1.y()-5, start);
-        painter.drawText(pt4.x()+15, pt4.y()-5, end);
-        painter.drawText(pt2.x() - temp/2, pt2.y()+15, name);
+        painter.drawText(pt1.x()-10-temp2, pt1.y()-5, m_start);
+        painter.drawText(pt4.x()+15, pt4.y()-5, m_end);
+        painter.drawText(pt2.x() - temp/2, pt2.y()+15, m_name);
     }
     else if(pt1.x() > pt4.x() && pt1.y() < pt4.y()){
-        painter.drawText(pt1.x()-10-temp2, pt1.y()-5, start);
-        painter.drawText(pt4.x()+15, pt4.y()-5, end);
-        painter.drawText(pt2.x() - temp/2, pt2.y()-7, name);
+        painter.drawText(pt1.x()-10-temp2, pt1.y()-5, m_start);
+        painter.drawText(pt4.x()+15, pt4.y()-5, m_end);
+        painter.drawText(pt2.x() - temp/2, pt2.y()-7, m_name);
     }
   }
   else if(pt1.x() == obj1 -> getPosition().x()){    //North South Text Placement
     if(pt1.y() > pt4.y() && pt1.x() <= pt4.x()){
-        painter.drawText(pt1.x()-5-temp2, pt1.y()-5, start);
-        painter.drawText(pt4.x()-10-temp1, pt4.y()+20, end);
-        painter.drawText(pt2.x()+5, pt2.y()+15, name);
+        painter.drawText(pt1.x()-5-temp2, pt1.y()-5, m_start);
+        painter.drawText(pt4.x()-10-temp1, pt4.y()+20, m_end);
+        painter.drawText(pt2.x()+5, pt2.y()+15, m_name);
     }
     else if(pt1.y() > pt4.y() && pt1.x() > pt4.x()){
-        painter.drawText(pt1.x()-5-temp2, pt1.y()-5, start);
-        painter.drawText(pt4.x()-10-temp1, pt4.y()+20, end);
-        painter.drawText(pt2.x()-5-temp, pt2.y()+15, name);
+        painter.drawText(pt1.x()-5-temp2, pt1.y()-5, m_start);
+        painter.drawText(pt4.x()-10-temp1, pt4.y()+20, m_end);
+        painter.drawText(pt2.x()-5-temp, pt2.y()+15, m_name);
     }
     else if(pt1.y() < pt4.y() && pt1.x() <= pt4.x()){
-        painter.drawText(pt1.x()-5-temp2, pt1.y()+15, start);
-        painter.drawText(pt4.x()-10-temp1, pt4.y()-12, end);
-        painter.drawText(pt2.x()+5, pt2.y()-7, name);
+        painter.drawText(pt1.x()-5-temp2, pt1.y()+15, m_start);
+        painter.drawText(pt4.x()-10-temp1, pt4.y()-12, m_end);
+        painter.drawText(pt2.x()+5, pt2.y()-7, m_name);
     }
     else if(pt1.y() < pt4.y() && pt1.x() > pt4.x()){
-        painter.drawText(pt1.x()-5-temp2, pt1.y()+15, start);
-        painter.drawText(pt4.x()-10-temp1, pt4.y()-12, end);
-        painter.drawText(pt2.x()-5-temp, pt2.y()-7, name);
+        painter.drawText(pt1.x()-5-temp2, pt1.y()+15, m_start);
+        painter.drawText(pt4.x()-10-temp1, pt4.y()-12, m_end);
+        painter.drawText(pt2.x()-5-temp, pt2.y()-7, m_name);
     }
 
   }
@@ -560,9 +560,9 @@ QDialog *InheritanceConnection::getDialog()
 {
     InheritanceConnectionDialog *dialog = new InheritanceConnectionDialog;
     dialog->setFixedSize(450, 175);
-    dialog->setStart(start);
-    dialog->setName(name);
-    dialog->setEnd(end);
+    dialog->setStart(m_start);
+    dialog->setName(m_name);
+    dialog->setEnd(m_end);
     connect(dialog, SIGNAL(startSet(QString)),
             this, SLOT(setStart(QString)));
     connect(dialog, SIGNAL(nameSet(QString)),
@@ -628,56 +628,56 @@ void AggregationConnection::draw(QPainter &painter)
     painter.drawLine(pt2, pt3);
 
     QFontMetrics fm = painter.fontMetrics();
-    int temp = fm.width(this->name);
+    int temp = fm.width(this->m_name);
 
     QFontMetrics fm1 = painter.fontMetrics();
-    int temp1 = fm1.width(this->end);
+    int temp1 = fm1.width(this->m_end);
 
     QFontMetrics fm2 = painter.fontMetrics();
-    int temp2 = fm2.width(this->start);
+    int temp2 = fm2.width(this->m_start);
 
     if(pt1.x() != obj1 -> getPosition().x()){ //East West Text Placement
       if(pt1.x() < pt4.x() && pt1.y() > pt4.y()){
-          painter.drawText(pt1.x()+10, pt1.y()-5, start);
-          painter.drawText(pt4.x()-15-temp1, pt4.y()-5, end);
-          painter.drawText(pt2.x() -temp/2 , pt2.y()+15, name);
+          painter.drawText(pt1.x()+10, pt1.y()-5, m_start);
+          painter.drawText(pt4.x()-15-temp1, pt4.y()-5, m_end);
+          painter.drawText(pt2.x() -temp/2 , pt2.y()+15, m_name);
       }
       else if(pt1.x() < pt4.x() && pt1.y() <= pt4.y()){
-          painter.drawText(pt1.x()+10, pt1.y()-5, start);
-          painter.drawText(pt4.x()-15-temp1, pt4.y()-5, end);
-          painter.drawText(pt2.x() -temp/2 , pt2.y()-7, name);
+          painter.drawText(pt1.x()+10, pt1.y()-5, m_start);
+          painter.drawText(pt4.x()-15-temp1, pt4.y()-5, m_end);
+          painter.drawText(pt2.x() -temp/2 , pt2.y()-7, m_name);
       }
       else if(pt1.x() > pt4.x() && pt1.y() >= pt4.y()){
-          painter.drawText(pt1.x()-10-temp2, pt1.y()-5, start);
-          painter.drawText(pt4.x()+15, pt4.y()-5, end);
-          painter.drawText(pt2.x() - temp/2, pt2.y()+15, name);
+          painter.drawText(pt1.x()-10-temp2, pt1.y()-5, m_start);
+          painter.drawText(pt4.x()+15, pt4.y()-5, m_end);
+          painter.drawText(pt2.x() - temp/2, pt2.y()+15, m_name);
       }
       else if(pt1.x() > pt4.x() && pt1.y() < pt4.y()){
-          painter.drawText(pt1.x()-10-temp2, pt1.y()-5, start);
-          painter.drawText(pt4.x()+15, pt4.y()-5, end);
-          painter.drawText(pt2.x() - temp/2, pt2.y()-7, name);
+          painter.drawText(pt1.x()-10-temp2, pt1.y()-5, m_start);
+          painter.drawText(pt4.x()+15, pt4.y()-5, m_end);
+          painter.drawText(pt2.x() - temp/2, pt2.y()-7, m_name);
       }
     }
     else if(pt1.x() == obj1 -> getPosition().x()){    //North South Text Placement
       if(pt1.y() > pt4.y() && pt1.x() <= pt4.x()){
-          painter.drawText(pt1.x()-5-temp2, pt1.y()-5, start);
-          painter.drawText(pt4.x()-10-temp1, pt4.y()+20, end);
-          painter.drawText(pt2.x()+5, pt2.y()+15, name);
+          painter.drawText(pt1.x()-5-temp2, pt1.y()-5, m_start);
+          painter.drawText(pt4.x()-10-temp1, pt4.y()+20, m_end);
+          painter.drawText(pt2.x()+5, pt2.y()+15, m_name);
       }
       else if(pt1.y() > pt4.y() && pt1.x() > pt4.x()){
-          painter.drawText(pt1.x()-5-temp2, pt1.y()-5, start);
-          painter.drawText(pt4.x()-10-temp1, pt4.y()+20, end);
-          painter.drawText(pt2.x()-5-temp, pt2.y()+15, name);
+          painter.drawText(pt1.x()-5-temp2, pt1.y()-5, m_start);
+          painter.drawText(pt4.x()-10-temp1, pt4.y()+20, m_end);
+          painter.drawText(pt2.x()-5-temp, pt2.y()+15, m_name);
       }
       else if(pt1.y() < pt4.y() && pt1.x() <= pt4.x()){
-          painter.drawText(pt1.x()-5-temp2, pt1.y()+15, start);
-          painter.drawText(pt4.x()-10-temp1, pt4.y()-12, end);
-          painter.drawText(pt2.x()+5, pt2.y()-7, name);
+          painter.drawText(pt1.x()-5-temp2, pt1.y()+15, m_start);
+          painter.drawText(pt4.x()-10-temp1, pt4.y()-12, m_end);
+          painter.drawText(pt2.x()+5, pt2.y()-7, m_name);
       }
       else if(pt1.y() < pt4.y() && pt1.x() > pt4.x()){
-          painter.drawText(pt1.x()-5-temp2, pt1.y()+15, start);
-          painter.drawText(pt4.x()-10-temp1, pt4.y()-12, end);
-          painter.drawText(pt2.x()-5-temp, pt2.y()-7, name);
+          painter.drawText(pt1.x()-5-temp2, pt1.y()+15, m_start);
+          painter.drawText(pt4.x()-10-temp1, pt4.y()-12, m_end);
+          painter.drawText(pt2.x()-5-temp, pt2.y()-7, m_name);
       }
 
     }
@@ -768,9 +768,9 @@ QDialog *AggregationConnection::getDialog()
 {
     AggregationConnectionDialog *dialog = new AggregationConnectionDialog;
     dialog->setFixedSize(450, 175);
-    dialog->setStart(start);
-    dialog->setName(name);
-    dialog->setEnd(end);
+    dialog->setStart(m_start);
+    dialog->setName(m_name);
+    dialog->setEnd(m_end);
     connect(dialog, SIGNAL(startSet(QString)),
             this, SLOT(setStart(QString)));
     connect(dialog, SIGNAL(nameSet(QString)),

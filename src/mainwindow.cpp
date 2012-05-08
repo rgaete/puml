@@ -166,10 +166,10 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex) {
           document, SLOT(createConnectionPoint2(const QPoint &)));
   connect(canvas, SIGNAL(changeSecondConnectionPointHint(const QPoint &)),
           document, SLOT(changeSecondConnectionPointHint(const QPoint &)));
-  connect(canvas, SIGNAL(selectNothing()),
-          this, SLOT(setSelect()));
-  connect(toolsActionGroup, SIGNAL(triggered(QAction*)),
-          canvas, SLOT(deselect()));
+  //connect(canvas, SIGNAL(selectNothing()),
+  //        this, SLOT(setSelect()));
+  // connect(toolsActionGroup, SIGNAL(triggered(QAction*)),
+  //         canvas, SLOT(deselect()));
   connect(connectorsActionGroup, SIGNAL(triggered(QAction*)),
           canvas, SLOT(deselect()));
 

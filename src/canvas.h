@@ -67,10 +67,10 @@ class Canvas : public QWidget {
     void showPropertiesDialog();
     void removeObject();
     void changeSecondConnectionPointHint(const QPoint &point);
-    void selectNothing();
+    // void selectNothing();
 
   public slots:
-    void deselect();
+    // void deselect();
     void on_actionDelete_triggered();
     void on_actionCut_triggered();
     void on_actionCopy_triggered();
