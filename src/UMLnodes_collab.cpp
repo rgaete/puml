@@ -446,20 +446,20 @@ int CollabConnection::FindDirection(QPoint point1, QPoint point2,
   int fx;
   int fy;
   int gx;
-  int gy;
-  int absfx;
-  int absfy;
+  // int gy;
+  // int absfx;
+  // int absfy;
 
   // find differences
   fx = temp1x - temp2x;
   fy = temp1y - temp2y;
 
   gx = temp3x - temp4x;
-  gy = temp3y - temp4y;
+  // gy = temp3y - temp4y;
 
   // find absolute values
-  absfx = abs(fx);
-  absfy = abs(fy);
+  // absfx = abs(fx);
+  // absfy = abs(fy);
 
   // if point2 is to the right or
   if (fx > 0) {  // || (fy < 0))

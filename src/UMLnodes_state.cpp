@@ -46,7 +46,7 @@ void StateObject::draw(QPainter &painter) {  // NOLINT
         this->height = 80;
     }
 
-  QPainter::Antialiasing;
+  // QPainter::Antialiasing;
 
   if(m_finalstate == true){
         // background
