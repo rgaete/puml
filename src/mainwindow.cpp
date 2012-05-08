@@ -49,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent)
   registerObject(new ClassConnection);
   registerObject(new InheritanceConnection);
   registerObject(new AggregationConnection);
+  registerObject(new CompositionConnection);
 
   // register collab objects
   registerObject(new StickPersonCollabObject);
@@ -437,8 +438,8 @@ void MainWindow::createNewDiagram(BaseNode::DiagramType type) {
 
     // set the parent to this so that they get automically deleted
     // when the program shuts down
-    newdoc->setParent(this);
-    newcanvas->setParent(this);
+    //newdoc->setParent(this);
+    //newcanvas->setParent(this);
 
     // Update the canvas and document index on the canvas and document
     newdoc->setCanvasIndex(canvases.size()-1);
@@ -616,8 +617,9 @@ void MainWindow::on_tabWidget_tabCloseRequest(int index){
     them to the new canvas and document. Also updates the toolbar.
 */
 void MainWindow::on_tabWidget_currentChanged(int newIndex) {
-  if (newIndex > -1 &&
-      newIndex < static_cast<int>(tabToCanvasMappings.size())) {
+  //if (newIndex > -1 &&
+  //    newIndex < static_cast<int>(tabToCanvasMappings.size())) {
+  if (newIndex > -1) {
     // Get the current doc from the current canvas from the current tab
     // Canvas* currentCanvas = canvases.at(tabToCanvasMappings[newIndex]);
     Canvas* currentCanvas = static_cast<Canvas*>(tabWidget->currentWidget());
@@ -648,13 +650,14 @@ void MainWindow::on_tabWidget_currentChanged(int newIndex) {
     connect(currentDoc, SIGNAL(modifiedChanged(bool)),
             this, SLOT(documentModifiedChanged(bool)));
 
+    // Note that when the tab changes, the tool automatically goes to select.
+    // Maybe we should have some functionality to have the chosen tool be saved from
+    // tab to tab?
+    actionSelect->trigger();
+
+    // Update the current document
+    currentDocument = currentCanvas->getDocumentIndex();
   }
-
-  // Note that when the tab changes, the tool automatically goes to select.
-  // Maybe we should have some functionality to have the chosen tool be saved from
-  // tab to tab?
-  actionSelect->trigger();
-
 }
 
 /*! The slot for when the open action is triggered. Opens up a dialog and
@@ -694,7 +697,7 @@ void MainWindow::on_actionSave_triggered() {
     // If the user didn't click cancel...
     if (fileName != "") {
       // On linux, the suffix isn't automatically added and we need to
-      // manuall add it.
+      // manually add it.
 #ifdef Q_OS_LINUX
       if (selectedFilter == "pUML files (*.puml)") {
         fileName += ".puml";
