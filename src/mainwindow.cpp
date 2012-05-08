@@ -166,12 +166,6 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex) {
           document, SLOT(createConnectionPoint2(const QPoint &)));
   connect(canvas, SIGNAL(changeSecondConnectionPointHint(const QPoint &)),
           document, SLOT(changeSecondConnectionPointHint(const QPoint &)));
-  //connect(canvas, SIGNAL(selectNothing()),
-  //        this, SLOT(setSelect()));
-  // connect(toolsActionGroup, SIGNAL(triggered(QAction*)),
-  //         canvas, SLOT(deselect()));
-  //connect(connectorsActionGroup, SIGNAL(triggered(QAction*)),
-  //        canvas, SLOT(deselect()));
 
   // Set the currentDocument flag
   currentDocument = documentIndex;
@@ -443,23 +437,13 @@ void MainWindow::createNewDiagram(BaseNode::DiagramType type) {
 
     // set the parent to this so that they get automically deleted
     // when the program shuts down
-    // newdoc->setParent(this);
-    // newcanvas->setParent(this);
+    newdoc->setParent(this);
+    newcanvas->setParent(this);
 
     // Update the canvas and document index on the canvas and document
     newdoc->setCanvasIndex(canvases.size()-1);
     newcanvas->setDocumentIndex(documents.size()-1);
 
-    // add the tab and update the map.
-    // Notice that the mapping is inserted before the tab is created. This
-    // is so that the mapping is already there when the
-    // on_tabWidget_currentChanged slot is called, the mapping is already there.
-    // Note that this assumes (which is a valid assumption) that newTabIndex
-    // returned by addTab is always equal to the number of tabs.
-
-    // NOTE: Because the tabs can be reordered, tabToCanvasMappings is unused.
-    tabToCanvasMappings.insert(
-          std::pair<int, int>(tabWidget->count(), canvases.size() - 1));
     int newTabIndex;
     if (type == BaseNode::Class){
         newTabIndex = tabWidget->addTab(newcanvas, "New Class Diagram");
@@ -664,7 +648,6 @@ void MainWindow::on_tabWidget_currentChanged(int newIndex) {
     connect(currentDoc, SIGNAL(modifiedChanged(bool)),
             this, SLOT(documentModifiedChanged(bool)));
 
-
   }
 
   // Note that when the tab changes, the tool automatically goes to select.
@@ -784,7 +767,7 @@ void MainWindow::on_actionAbout_triggered() {
     tr("<p>The <b>pUML</b> project is the CS383 Software Engeering I Class"
      " final project.</p><p> It was developed by seven awesome students during"
      " their spare time. The development tools is provided by Nokia -- Qt"
-     " and Google code repository.</p>"));
+     " and Google code repossetFileNameitory.</p>"));
 }
 
 
