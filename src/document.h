@@ -39,7 +39,10 @@ class Document : public QWidget {
     void saveDocument();
     void openDocument(QString openName);
     bool hasFilename() { if (fileName == "") { return false; } else { return true; } }
-    void setFilename(QString filename) { fileName = filename; }
+    void setFilename(QString newfilename) {
+        fileName = newfilename;
+        QMessageBox::information(this, "pUML", "Setting filename: "  + fileName);
+    }
     bool getModified() { return modifiedFlag; }
 
     // @TODO Once the saveAs functionality is moved into this class from
