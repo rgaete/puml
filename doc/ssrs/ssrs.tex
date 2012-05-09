@@ -160,10 +160,10 @@ SYSTEMS AND SOFTWARE \ REQUIREMENTS SPECIFICATION (SSRS) FOR
 
 \bigskip
 
-{\centering\bfseries Version 0.11 
+{\centering\bfseries Version 1.0 
 \par}
 
-{\centering\bfseries May 7, 2012 
+{\centering\bfseries May 8, 2012 
 \par}
 
 
@@ -201,8 +201,6 @@ Josh Armstrong
 {\centering\bfseries University of Idaho \par}
 
 {\centering\bfseries Moscow, ID \ 83844-1010 \par}
-
-
 
 
 \clearpage{\centering\bfseries pUML SSRS \par}
@@ -254,7 +252,7 @@ Josh Armstrong
 \\\hline
 \centering 2
 & 01/17/2012
-& ~
+& SSRS Document
 & \centering A
 & Added updated SSRS/SSDD pdf and TeX files
 & MM
@@ -334,10 +332,19 @@ Josh Armstrong
 \\\hline
 \centering 12
 & 05/07/2012
-& 
+& Section 3.2
 & \centering M
 & Modify use cases
 & MM
+
+\\\hline
+\centering 13
+& 05/08/2012
+& Section 3.2
+& \centering M
+& Incorporate previous section 3.2.2 into 3.2.1 sections
+& MM
+
 
 \\\hline
 \end{supertabular}
@@ -353,11 +360,18 @@ Josh Armstrong
 
 \clearpage
 
-{\centering\bfseries TABLE OF CONTENTS \par}
+{\centering\bfseries
+pUML SSRS
+\par}
+
+{\centering\bfseries
+TABLE OF CONTENTS
+\par}
 
 
+\setcounter{tocdepth}{9}
+\renewcommand\contentsname{}
 \tableofcontents
-
 
 \bigskip
 
@@ -390,7 +404,7 @@ The purpose of the system under development is to create and store UML diagrams.
 \subsection[SCOPE]{\bfseries
 SCOPE}
 {
-The pUML software was conceptualized as a Software Engineering class project, and following its launch in September 2011, spanned nine months and a total of ten software engineering students. The pUML project will be considered finalized as of May 7, 2012, and will not have aquirers or support agencies as of the date of release. 
+The pUML software was conceptualized as a Software Engineering class project, and following its launch in September 2011, spanned nine months and a total of ten software engineering students. The pUML project will be considered finalized as of May 10, 2012, and will not have aquirers or support agencies as of the date of release. 
 
 \bigskip
 
@@ -434,8 +448,8 @@ REFERENCES}
 The pUML requirements will be addressed in the following documents: 
 
 \begin{itemize}
-\item Test Plan (TP), Version 2.0
-\item System and Software Design Description (SSDD) Version 0.0
+\item Test Plan (TP), Version 1.0
+\item System and Software Design Description (SSDD) Version 1.0
 \end{itemize}
 
 }
@@ -824,14 +838,16 @@ SYSTEM FEATURES}
 
 
 \subsubsection{Use Cases and Descriptions}
-{The following use cases represent different stages at which options will be available to the user.}
+{
+The features detailed in the following use cases are all basic vital functions for a UML Diagram editor. At the most basic level, in order to create UML diagrams, several processes are required. These processes include the creation of distinct UML diagrams consisting of labeled objects and connectors, saving of these diagrams, and the ability to load these saved diagrams for modification.
+}
 
 \bigskip
 
 % ************************************
 % LAUNCH USE CASE & DESCRIPTIONS
 % ************************************
-\paragraph[\ Use Category]
+\paragraph[\ Launch ]
 {\ Launch} {These options will be available to the user upon the launch of pUML.}
 
 \begin{figure}[h]
@@ -839,6 +855,10 @@ SYSTEM FEATURES}
 \includegraphics[width=6.0in]{ucaseLaunch.jpg}
 \caption{Launch Use Case}
 \end{figure}
+
+\subparagraph[\ Create New Diagram ] 
+{\bfseries Create New Diagram }
+{ This creates a new canvas in which the user may design a UML diagram. Since there are four different diagram types that may be created with pUML, and many design projects necessitate several diagrams, there is currently no predetermined limit on the number of new diagrams that may be created in pUML. (This is determined by system resources only, and may differ from system to system.) }
 
 %%% CREATE NEW DIAGRAM USE CASE DESCRIPTION
 \begin{flushleft}
@@ -873,7 +893,13 @@ SYSTEM FEATURES}
 
 \bigskip
 
+
 %%% OPEN EXISTING DIAGRAM USE CASE DESCRIPTION
+
+\subparagraph[\ Open Existing Diagram ] 
+{\bfseries Open Existing Diagram }
+{ This opens a previously saved UML diagram. Since each diagram is of a specific diagram type, when a pUML diagram is loaded, only the tools available for that diagram type will be available to the user upon loading. When a diagram has been opened, the user then may modify this diagram further. There is no limit to the number of times a diagram may be modified.  There is currently no limit to the number of diagrams that may be opened into the pUML software. (This is determined by system resources only, and may differ from system to system.)  }
+
 \begin{flushleft}
 \tablehead{}
 \begin{tabular}{|m{2.0in} m{5.0in}|}
@@ -909,6 +935,11 @@ SYSTEM FEATURES}
 
 
 %%% EXIT PROGRAM USE CASE DESCRIPTION
+
+\subparagraph[\ Exit pUML] 
+{\bfseries Exit pUML }
+{ The user may exit pUML by either selecting ``File'' and then ``Exit,'' or may click the ``X'' in the upper corner of the pUML main window. If any currently loaded diagrams have changes which have not been saved, pUML will request confirmation to either save or discard changes prior to exiting. }
+
 \begin{flushleft}
 \tablehead{}
 \begin{tabular}{|m{2.0in} m{5.0in}|}
@@ -944,6 +975,8 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \clearpage
 
 
+
+
 % *****************************************
 % NEW/OPEN DIAGRAM USE CASES & DESCRIPTIONS
 % *****************************************
@@ -957,6 +990,11 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \end{figure}
 
 %%% SAVE DIAGRAM USE CASE DESCRIPTION
+
+\subparagraph[\ Save] 
+{\bfseries Save }
+{ This saves the current state of the diagram into an XML file that can later be used to recreate the diagram state. If the current diagram does not have a name, the ``Save'' option will be an alias for the ``Save As'' option.}
+
 \begin{flushleft}
 \tablehead{}
 \begin{tabular}{|m{2.0in} m{5.0in}|}
@@ -992,7 +1030,16 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \bigskip
 
 
+
+
 %%% SAVE DIAGRAM AS USE CASE DESCRIPTION
+
+\clearpage
+
+\subparagraph[\ Save As ] 
+{\bfseries Save As }
+{ This prompts pUML to load a browser window. The user must select a location and a file name in which to store the pUML diagram.  After clicking ``Ok,'' the Save function completes this process.  This state will be defaulted to if the user clicks ``Save'' on a previously unsaved diagram.}
+
 \begin{flushleft}
 \tablehead{}
 \begin{tabular}{|m{2.0in} m{5.0in}|}
@@ -1029,7 +1076,15 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \bigskip
 
 
+
+
 %%% CLOSE DIAGRAM TAB USE CASE DESCRIPTION
+
+\subparagraph[\ Close Diagram Tab ] 
+{\bfseries Close Diagram Tab }
+{ If the user clicks the ``x'' on the tab, and if the current diagram state is saved, the diagram will close. Otherwise, the ``Save As'' function will initiate prior to closing. This feature is useful to de-clutter the pUML workspace. In addition, if the closed tab was the only tab open, then the pUML software will exit.}
+
+
 \begin{flushleft}
 \tablehead{}
 \begin{tabular}{|m{2.0in} m{5.0in}|}
@@ -1067,10 +1122,12 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \clearpage
 
 % ************************************
-% EDIT OBJECT USE CASE & DESCRIPTIONS
+% OBJECT USE CASE & DESCRIPTIONS
 % ************************************
-\paragraph[\ Edit Object]
-{\ Edit Object} {These options will be available to the user with a diagram open for modification, who is choosing to take action on an object.}
+
+\paragraph[\ Use Objects]
+{\ Use Objects} 
+{These options will be available to the user with a diagram open for modification, who is choosing to take action on an object.}
 
 \begin{figure}[h]
 \centering
@@ -1079,6 +1136,10 @@ User initiates File menu option ``Close Program'' or clicks X in the corner of t
 \end{figure}
 
 %%% PLACE NEW OBJECT USE CASE DESCRIPTION
+
+\subparagraph[\ Place New Object ] 
+{\bfseries Place New Object }
+
 \begin{flushleft}
 \tablehead{}
 \begin{tabular}{|m{2.0in} m{5.0in}|}
@@ -1112,6 +1173,12 @@ Toolbar is loaded with valid objects for diagram type.
 \bigskip
 
 %%% EDIT OBJECT DESCRIPTION USE CASE DESCRIPTION
+
+\clearpage
+
+\subparagraph[\ Edit Object ] 
+{\bfseries Edit Object }
+
 \begin{flushleft}
 \tablehead{}
 \begin{tabular}{|m{2.0in} m{5.0in}|}
@@ -1147,6 +1214,10 @@ Toolbar is loaded with valid objects for diagram type.
 
 
 %%% MOVE OBJECT USE CASE DESCRIPTION
+
+\subparagraph[\ Move Object ] 
+{\bfseries Move Object }
+
 \begin{flushleft}
 \tablehead{}
 \begin{tabular}{|m{2.0in} m{5.0in}|}
@@ -1180,6 +1251,12 @@ Toolbar is loaded with valid objects for diagram type.
 
 
 %%% DELETE OBJECT USE CASE DESCRIPTION
+
+\clearpage
+
+\subparagraph[\ Delete Object ] 
+{\bfseries Delete Object }
+
 \begin{flushleft}
 \tablehead{}
 \begin{tabular}{|m{2.0in} m{5.0in}|}
@@ -1210,13 +1287,14 @@ Toolbar is loaded with valid objects for diagram type.
 \bigskip
 
 
+% ************************************
+% CONNECTOR USE CASE & DESCRIPTIONS
+% ************************************
+
 \clearpage
 
-% ************************************
-% EDIT CONNECTOR CASE & DESCRIPTIONS
-% ************************************
-\paragraph[\ Use Category]
-{\ Edit Connector} {These options will be available to the user with a diagram open for modification, who is choosing to take action regarding a connector.}
+\paragraph[\ Use Connectors ]
+{\ Use Connectors} {These options will be available to the user with a diagram open for modification, who is choosing to take action regarding a connector.}
 
 \begin{figure}[h]
 \centering
@@ -1225,6 +1303,10 @@ Toolbar is loaded with valid objects for diagram type.
 \end{figure}
 
 %%% PLACE NEW CONNECTOR USE CASE DESCRIPTION
+
+\subparagraph[\ Place New Connector ] 
+{\bfseries Place New Connector }
+
 \begin{flushleft}
 \tablehead{}
 \begin{tabular}{|m{2.0in} m{5.0in}|}
@@ -1259,6 +1341,12 @@ Toolbar is loaded with valid objects for diagram type.
 
 
 %%% EDIT CONNECTOR PROPERTIES USE CASE DESCRIPTION
+
+\clearpage
+
+\subparagraph[\ Edit Connector ] 
+{\bfseries Edit Connector }
+
 \begin{flushleft}
 \tablehead{}
 \begin{tabular}{|m{2.0in} m{5.0in}|}
@@ -1292,6 +1380,10 @@ Toolbar is loaded with valid objects for diagram type.
 
 
 %%% DELETE CONNECTOR USE CASE DESCRIPTION
+
+\subparagraph[\ Delete Connector ] 
+{\bfseries Delete Connector }
+
 \begin{flushleft}
 \tablehead{}
 \begin{tabular}{|m{2.0in} m{5.0in}|}
@@ -1321,54 +1413,9 @@ Toolbar is loaded with valid objects for diagram type.
 \bigskip
 
 
-
-\clearpage
-
-
-
-
-
-
-\subsubsection[System feature: [Project management tasks suite]{\bfseries System feature: Project management tasks suite}
-
-\paragraph[\ Introduction/Purpose for These Features] 
-{\bfseries Introduction/Purpose for These Features}
-{
-The features detailed in the use cases (Section 3.2.1) are all basic vital functions for a UML Diagram editor. At the most basic level, in order to create UML diagrams, several processes are required. These processes include the creation of distinct UML diagrams consisting of labeled objects and connectors, saving of these diagrams, and the ability to load these saved diagrams for modification.
-}
-
-
-\paragraph[Input/Output sequence for this feature]
-{\bfseries Input/Output sequence for These Features}
-{ All input/output sequences are detailed in associated use case descriptions in section 3.2.1.
- The purpose of each use case action is detailed below. }
-
-\subparagraph{Create New Diagram}
-{ This creates a new canvas in which the user may design a UML diagram. Since there are four different diagram types that may be created with pUML, and many design projects necessitate several diagrams, there is currently no predetermined limit on the number of new diagrams that may be created in pUML. (This is determined by system resources only, and may differ from system to system.) }
-
-\subparagraph{Open Existing Diagram}
-{ This opens a previously saved UML diagram. Since each diagram is of a specific diagram type, when a pUML diagram is loaded, only the tools available for that diagram type will be available to the user upon loading. When a diagram has been opened, the user then may modify this diagram further. There is no limit to the number of times a diagram may be modified.  There is currently no limit to the number of diagrams that may be opened into the pUML software. (This is determined by system resources only, and may differ from system to system.)  }
-
-\subparagraph{Exit pUML}
-{ The user may exit pUML by either selecting ``File'' and then ``Exit,'' or may click the ``X'' in the upper corner of the pUML main window. If any currently loaded diagrams have changes which have not been saved, pUML will request confirmation to either save or discard changes prior to exiting. }
-
-\subparagraph{Save}
-{ This saves the current state of the diagra, into an XML file that can later be used to recreate the diagram state. If the current diagram does not have a name, the ``Save'' option will be an alias for the ``Save As'' option.}
-
-\subparagraph{Save As}
-{ This prompts pUML to load a browser window. The user must select a location and a file name in which to store the pUML diagram.  After clicking ``Ok,'' the Save function completes this process.  This state will be defaulted to if the user clicks ``Save'' on a previously unsaved diagram.}
-
-\subparagraph{Close Diagram Tab}
-{ If the user clicks the ``x'' on the tab, and if the current diagram state is saved, the diagram will close. Otherwise, the ``Save As'' function will initiate prior to closing. This feature is useful to de-clutter the pUML workspace. In addition, if the closed tab was the only tab open, then the pUML software will exit.}
-
-\subparagraph{Place New Object/Connector, Edit Object/Connector Descriptions, and Move/Delete Object/Connector}
-{ UML diagrams consist of different types of objects and connectors. Each object and connector ideally have an associated description. UML diagram functionality must include the placement of objects and connectors, in addition to the ability to modify their descriptions, move their locations, and delete them as necessary. When an object is deleted, attached connectors must be deleted as well. However, if a connector is deleted, any attached objects will not be deleted. }
-
-
 % **************************************
 % SECTION 4: REQUIREMENTS TRACEABILITY *
 % **************************************
-
 
 \clearpage
 

@@ -71,3 +71,17 @@ Extraneous Observations:
   this becomes an issue when adding text or when deleting. If you're deleting you are required to
   do multiple deletions to see the desired result, and when adding text, the text of each line
   write over each other making each unlegible.
+
+
+
+***** FINAL TEST *****
+
+Change Set#: 			Date of Test: 
+Pass/Fail: 	
+
+Tester Name:  
+
+Log: 
+
+Extraneous Observations: 
+  
