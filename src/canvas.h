@@ -7,6 +7,7 @@
 #include <QTableWidget>
 #include <QMenu>
 #include <QMouseEvent>
+#include <QShortcut>
 
 #include <vector>
 

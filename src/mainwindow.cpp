@@ -36,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
   registerObject(new InteractionConnection);
   registerObject(new ExtendsConnection);
   registerObject(new IncludesConnection);
+  registerObject(new UCInheritanceConnection);
 
   // statechart objects
   registerObject(new StateObject);
@@ -143,9 +144,6 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex) {
   disconnect(canvas, 0, documents.at(canvas->getDocumentIndex()), 0);
   disconnect(document, 0, canvases.at(document->getCanvasIndex()), 0);
 
-  // create shortcuts for signals/slots
-  QShortcut *delObject = new QShortcut(QKeySequence(QKeySequence::Delete), this);
-
   // Then connect the canvas to the document
   connect(canvas, SIGNAL(createObject(const QPoint &)),
           document, SLOT(createObject(const QPoint &)));
@@ -160,7 +158,7 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex) {
           document, SLOT(showPropertiesDialog()));
   connect(canvas, SIGNAL(removeObject()),
           document, SLOT(removeObject()));
-  connect(delObject, SIGNAL(activated()), document, SLOT(removeObject()));
+  //connect(delObject, SIGNAL(activated()), document, SLOT(removeObject()));
   connect(canvas, SIGNAL(createConnectionPoint1(const QPoint &)),
           document, SLOT(createConnectionPoint1(const QPoint &)));
   connect(canvas, SIGNAL(createConnectionPoint2(const QPoint &)),
@@ -174,8 +172,6 @@ void MainWindow::connectCanvasWithDocument(int canvasIndex, int documentIndex) {
   // Go into selection mode
   actionSelect->trigger();
 }
-
-
 
 /*! This deconstructor frees up the memory held in any vectors that
   hold objects which don't have parents (basically any non-Qt objects)
@@ -195,18 +191,22 @@ void MainWindow::createActions() {
   actionNew = new QAction(this);
   actionNew->setText(tr("New"));
   actionNew->setToolTip(tr("Create New pUML File"));
+  actionNew->setShortcut(Qt::CTRL + Qt::Key_N);
   actionOpen = new QAction(this);
   actionOpen->setText(tr("Open"));
   actionOpen->setToolTip(tr("Open a exsiting pUML file"));
+  actionOpen->setShortcut(Qt::CTRL + Qt::Key_O);
   actionSave = new QAction(this);
   actionSave->setText(tr("Save"));
   actionSave->setToolTip(tr("Save current work into file"));
+  actionSave->setShortcut(Qt::CTRL + Qt::Key_S);
   actionSave_As = new QAction(this);
   actionSave_As->setText(tr("Save As.."));
   actionSave_As->setToolTip(tr("Save current work into another file"));
   actionPrint = new QAction(this);
   actionPrint->setText(tr("Print"));
   actionPrint->setToolTip(tr("Print the current work"));
+  actionPrint->setShortcut(Qt::CTRL + Qt::Key_P);
   actionImport_Export = new QAction(this);
   actionImport_Export->setText(tr("Import/Export"));
   actionImport_Export->setToolTip(
@@ -214,21 +214,27 @@ void MainWindow::createActions() {
   actionImport_Export->setEnabled(false);
   actionExit = new QAction(this);
   actionExit->setText(tr("Exit"));
+  actionExit->setShortcut(Qt::CTRL + Qt::Key_Q);
   actionCopy = new QAction(this);
   actionCopy->setText(tr("Copy"));
   actionCopy->setEnabled(false);
+  actionCopy->setShortcut(Qt::CTRL + Qt::Key_C);
   actionCut = new QAction(this);
   actionCut->setText(tr("Cut"));
   actionCut->setEnabled(false);
+  actionCut->setShortcut(Qt::CTRL + Qt::Key_X);
   actionPaste = new QAction(this);
   actionPaste->setText(tr("Paste"));
   actionPaste->setEnabled(false);
+  actionPaste->setShortcut(Qt::CTRL + Qt::Key_V);
   actionSelect_All = new QAction(this);
   actionSelect_All->setText(tr("Select All"));
   actionSelect_All->setEnabled(false);
+  actionSelect_All->setShortcut(Qt::CTRL + Qt::Key_A);
   actionInverse_Select = new QAction(this);
   actionInverse_Select->setText(tr("Inverse Select"));
   actionInverse_Select->setEnabled(false);
+  actionInverse_Select->setShortcut(Qt::CTRL + Qt::SHIFT + Qt::Key_A);
   actionDocument = new QAction(this);
   actionDocument->setText(tr("Help Document"));
   actionDocument->setEnabled(false);
@@ -589,19 +595,24 @@ void MainWindow::on_actionNew_triggered() {
     document is modifed, and closes the tab.
  */
 void MainWindow::on_tabWidget_tabCloseRequest(int index){
+  // Get the document associated with the canvas in this tab
+  Canvas* currentCanvas = static_cast<Canvas*>(tabWidget->currentWidget());
+  int documentIndex = currentCanvas->getDocumentIndex();
+
   // Check if the document needs saving
-  if (documents.at(index)->getModified() == true) {
+  if (documents.at(documentIndex)->getModified() == true) {
     QMessageBox::StandardButton choice;
     choice = QMessageBox::question(this, "pUML", "This diagram contains unsaved changes, do you want to save first?",
                           QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel, QMessageBox::Yes);
     if (choice == QMessageBox::Yes) {
-      // update the currentdocument to index so that the save function
+      // update the currentdocument to documentIndex so that the save function
       // tries to save that document
       int tempindex = currentDocument;
-      currentDocument = index;
+      currentDocument = documentIndex;
       on_actionSave_triggered();
       currentDocument = tempindex;
     } else if (choice == QMessageBox::Cancel) {
+      // Exit the function, don't close tab.
       return;
     }
   }
@@ -773,10 +784,45 @@ void MainWindow::on_actionAbout_triggered() {
      " and Google code repossetFileNameitory.</p>"));
 }
 
-
-
 void MainWindow::closeEvent(QCloseEvent *event) {
-    event->accept();
+  // for (int i=0; i<tabWidget->count(); i++) {
+  int i = 0;
+  Canvas* currentCanvas;
+  int documentIndex;
+
+  // while (tabWidget->count() > 0) {
+  // for (int i=0; i<tabWidget->count(); i++) {
+  for (int i=tabWidget->count()-1; i>=0; i--) {
+    // Get the document associated with the canvas in this tab
+    currentCanvas = static_cast<Canvas*>(tabWidget->widget(i));
+    documentIndex = currentCanvas->getDocumentIndex();
+
+    // Check if the document needs saving
+    if (documents.at(documentIndex)->getModified() == true) {
+      tabWidget->setCurrentIndex(i);
+      QMessageBox::StandardButton choice;
+      choice = QMessageBox::question(this, "pUML", "This diagram contains unsaved changes, do you want to save first?",
+                            QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel, QMessageBox::Yes);
+      if (choice == QMessageBox::Yes) {
+        // update the currentdocument to documentIndex so that the save function
+        // tries to save that document
+        int tempindex = currentDocument;
+        currentDocument = documentIndex;
+        on_actionSave_triggered();
+        currentDocument = tempindex;
+      } else if (choice == QMessageBox::No) {
+        tabWidget->removeTab(i);
+        if(tabWidget->count() == 0){
+            updateDiagramType(BaseNode::Nothing);
+        }
+      } else {
+        // Exit the function, don't close tab.
+        event->ignore();
+        return;
+      }
+    }
+  }
+  event->accept();
 }
 
 void MainWindow::setSelect()
