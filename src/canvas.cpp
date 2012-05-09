@@ -13,6 +13,10 @@ Canvas::Canvas(QWidget *parent)
   // minimum, but the widget should take up all space available,
   // and the widget can also be smaller than the sizeHint().
   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+  //setFocusPolicy(Qt::StrongFocus);
+
+  QShortcut *deleteKey = new QShortcut(QKeySequence(Qt::Key_Delete), this);
+  connect(deleteKey, SIGNAL(activated()), this, SIGNAL(removeObject()));
 
   // Set the background to white. This is done by setting the
   // background role of a new palette to white, and then setting
@@ -29,6 +33,7 @@ Canvas::Canvas(QWidget *parent)
   // Create the actions
   actionDelete = new QAction(this);
   actionDelete->setText("Delete");
+  actionDelete->setShortcut(Qt::Key_Delete);
   actionCut = new QAction(this);
   actionCut->setText("Cut");
   actionCut->setEnabled(false);

@@ -110,7 +110,7 @@ class ExtendsConnection : public ConnectionNode {
   public:
     BaseNode* clone() { return new ExtendsConnection; }
     QDialog* getDialog() { return 0; }
-    QString getIconPath() { return QString(":/Images/interaction.png"); }
+    QString getIconPath() { return QString(":/Images/extends.png"); }
     QString getText() { return "Extends Line"; }
     void addArrow(QPainter &painter);  // NOLINT
     QPoint calculateTextPosition();
@@ -126,12 +126,30 @@ class IncludesConnection : public ConnectionNode {
   public:
     BaseNode* clone() { return new IncludesConnection; }
     QDialog* getDialog() { return 0; }
-    QString getIconPath() { return QString(":/Images/interaction.png"); }
+    QString getIconPath() { return QString(":/Images/includes.png"); }
     QString getText() { return "Includes Line"; }
     void addArrow(QPainter &painter);  // NOLINT
     QPoint calculateTextPosition();
     void draw(QPainter& painter);  // NOLINT
     DiagramType getDiagramType() { return UseCase; }
+};
+
+/*!
+*
+*/
+class UCInheritanceConnection : public ConnectionNode {
+  Q_OBJECT
+
+public:
+    BaseNode* clone() { return new UCInheritanceConnection; }
+    QDialog* getDialog() { return 0; }
+    QString getIconPath() { return QString(":/Images/inheritance.png"); }
+    QString getText() { return "Inheritance Line"; }
+    void draw(QPainter& painter);  // NOLINT
+    DiagramType getDiagramType() { return UseCase; }
+    void addArrow(QPainter& painter);
+private:
+    double lineAngle;
 };
 
 #endif  // SRC_UMLNODES_USECASE_H_

@@ -405,3 +405,52 @@ QPoint IncludesConnection::calculateTextPosition() {
   }
   return middle;
 }
+
+/*******************************
+**** Inheritance functions *****
+*******************************/
+
+void UCInheritanceConnection::draw(QPainter& painter) {  // NOLINT
+  BaseNode *obj1, *obj2;
+  std::list<BaseNode*>::iterator it = connectedObjects.begin();
+  obj1 = *it;
+  it++;
+  obj2 = *it;
+
+  pt1 = obj1->getClosestConnectionPoint(obj2->getPosition());
+  pt2 = obj2->getClosestConnectionPoint(obj1->getPosition());
+
+  if (selected == true) {
+    QPen selectPen;
+    selectPen.setWidth(2);
+    selectPen.setColor(Qt::blue);
+    painter.setPen(selectPen);
+  } else {
+    painter.setPen(Qt::black);
+  }
+  painter.drawLine(pt1, pt2);
+  addArrow(painter);
+}
+
+void UCInheritanceConnection::addArrow(QPainter &painter) {  // NOLINT
+  double arrowAngle = 0.8;
+  if(pt2.y()>pt1.y())
+  {
+      // arrowAngle=-arrowAngle;   //reverse arrow point
+  }
+  lineAngle = mathfunctions::computeAngle(pt1, pt2);
+
+  QPolygon arrowHead;
+  arrowHead << pt2;
+  arrowHead << QPoint(pt2.x()+10*sin(lineAngle-arrowAngle),
+                      pt2.y()+10*cos(lineAngle-arrowAngle));
+  arrowHead << QPoint(pt2.x()-10*sin(lineAngle+arrowAngle),
+                      pt2.y()-10*cos(lineAngle+arrowAngle));
+  painter.setPen(Qt::black);
+  if (selected) {
+      painter.setBrush(Qt::blue);
+  } else {
+    painter.setBrush(Qt::white);
+  }
+  painter.drawPolygon(arrowHead);
+}
