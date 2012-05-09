@@ -17,5 +17,7 @@
         <file>Images/aggregation.png</file>
         <file>Images/composition.png</file>
         <file>Images/inheritance.png</file>
+        <file>Images/extends.png</file>
+        <file>Images/includes.png</file>
     </qresource>
 </RCC>
