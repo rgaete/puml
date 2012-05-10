@@ -1,0 +1,92 @@
+Test: pUML Main Window features		Risk Level: MED
+
+
+  Test Steps (input):
+    1. Launch pUML.
+    2. When the options window appears, close it.
+       The pUML main window should remain.
+    3. Click on "File" --> "New" 
+       The options window should appear again.  Close it.
+    4. Click on "File" --> "Open"
+       The "Open" dialog should appear. Close it.
+    5. Click on "File" --> "Save"
+       An error message should appear. Close it.
+    6. Click on "File" --> "Save-As"  
+       An error message should appear. Close it.
+    7. Click on "File" --> "New" and initiate one of the diagram types from that window. 
+    8. Draw two shapes, and label them accordingly "Shape 1" and "Shape 2."
+    9. Click on "File" --> "Save"
+        The "Save-As" dialog should appear. Close it.
+    10. Click on "File" --> "Save-As"  
+        The "Save-As" dialog should appear. Close it.
+    11. Drag Shape 1 to the same location as Shape 2.
+        Shape 1 should appear to be behind Shape 2.
+    12. With Shape 1 still highlighted, click "Edit" --> "Send to Front."
+        Shape 1 should now appear in front of Shape 2.
+    13. With Shape 1 still highlighted, click "Edit" --> "Send to Back."
+        Shape 1 should appear behind Shape 2 again. 
+    14. Add two more shapes, labeled Shape 3 and Shape 4. 
+    15. Drag Shape 2, Shape 3, and Shape 4 on top of Shape 1, but leave enough room so that you can still select Shape 1.
+    16. With Shape 1 selected, click "Edit" --> "Send Forwards." three times.
+        With each click, Shape 1 should appear in front of Shape 2, then Shape 3, then in front of Shape 4.
+    16. With Shape 1 selected, click "Edit" --> "Send Backwards." three times.
+    17. With each click, Shape 1 should disappear behind Shape 4, then Shape 3, then Shape 2.
+    18. Click on "Tools" and then hover over each "Shapes" and "Connectors."  
+        Each of these should populate the options that appear in the toolbar for the appropriate shapes and connectors for this diagram type.
+    19. Place one of each of the connectors and shapes that appear in this menu on the canvas.
+    20. Click on "Help" --> "Help Document" 
+        The pdf of the pUML User Manual should appear.
+        (NOTE: as of the Alpha release, this is nonfunctional)
+    21. Click on "Help" --> "About" 
+        A window with information about the pUML development team should appear.
+        (NOTE: as of the Alpha release, this is nonfunctional)
+    22. Click on "File" --> "Exit" 
+        the pUML software should close.
+  
+  Expected Results:
+    Refer to above steps for all expected results.
+
+
+
+***** ALPHA TEST *****
+
+Change Set#: 384:1213120b7b86	Date of Test: 5/1/2012
+Pass/Fail: PASS
+
+Tester Name: Maxine Major 
+
+Log: 
+Test was developed as these steps were walked through. 
+
+Extraneous Observations:
+A few menu options still exist as of the time of this test. They will be deleted, since they are no longer a part of our intended design.
+
+
+***** BETA TEST*****
+
+Change Set#: 		Date of Test: 		
+Pass/Fail:
+
+Tester Name: 
+
+Log: 
+
+
+Extraneous Observations: 
+
+
+
+***** FINAL TEST*****
+
+Change Set#: 		Date of Test: 		
+Pass/Fail:
+
+Tester Name: 
+
+Log: 
+
+
+Extraneous Observations: 
+
+
+

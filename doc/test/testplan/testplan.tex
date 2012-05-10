@@ -1,0 +1,501 @@
+% This file was converted to LaTeX by Writer2LaTeX ver. 1.0.2
+% see http://writer2latex.sourceforge.net for more info
+\documentclass[twoside,letterpaper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb,amsfonts,textcomp}
+\usepackage{color}
+\usepackage{array}
+\usepackage{supertabular}
+\usepackage{hhline}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\hypersetup{pdftex, colorlinks=true, linkcolor=blue, citecolor=blue, filecolor=blue, urlcolor=blue, pdftitle=SYSTEM AND SOFTWARE ARCHITECTURAL AND DETAILED DESIGN DESCRIPTI, pdfauthor=Clinton Jeffery, pdfsubject=, pdfkeywords=}
+\usepackage[pdftex]{graphicx}
+% Outline numbering
+\setcounter{secnumdepth}{5}
+\renewcommand\thesection{\arabic{section}}
+\renewcommand\thesubsection{\arabic{section}.\arabic{subsection}}
+\renewcommand\thesubsubsection{\arabic{section}.\arabic{subsection}.\arabic{subsubsection}}
+\renewcommand\theparagraph{\arabic{section}.\arabic{subsection}.\arabic{subsubsection}.\arabic{paragraph}}
+\renewcommand\thesubparagraph{\arabic{section}.\arabic{subsection}.\arabic{subsubsection}.\arabic{paragraph}.\arabic{subparagraph}}
+\makeatletter
+\newcommand\arraybslash{\let\\\@arraycr}
+\makeatother
+% List styles
+\newcommand\liststyleWWviiiNumii{%
+\renewcommand\theenumi{\arabic{enumi}}
+\renewcommand\theenumii{\arabic{enumii}}
+\renewcommand\theenumiii{\arabic{enumiii}}
+\renewcommand\theenumiv{\arabic{enumiv}}
+\renewcommand\labelenumi{\theenumi)}
+\renewcommand\labelenumii{\theenumii.}
+\renewcommand\labelenumiii{\theenumiii.}
+\renewcommand\labelenumiv{\theenumiv.}
+}
+% Page layout (geometry)
+\setlength\voffset{-1in}
+\setlength\hoffset{-1in}
+\setlength\topmargin{0.5in}
+\setlength\oddsidemargin{1in}
+\setlength\evensidemargin{1in}
+\setlength\textheight{8.278in}
+\setlength\textwidth{6.5in}
+\setlength\footskip{0.561in}	
+\setlength\headheight{0.5in}
+\setlength\headsep{0.461in}
+% Footnote rule
+\setlength{\skip\footins}{0.0469in}
+\renewcommand\footnoterule{\vspace*{-0.0071in}\setlength\leftskip{0pt}\setlength\rightskip{0pt plus 1fil}\noindent\textcolor{black}{\rule{0.25\columnwidth}{0.0071in}}\vspace*{0.0398in}}
+% Pages styles
+\makeatletter
+\newcommand\ps@Standard{
+  \renewcommand\@oddhead{}
+  \renewcommand\@evenhead{\@oddhead}
+  \renewcommand\@oddfoot{{\textcolor{black}{\hfill Test Plan Page }}{{\textcolor{black}{\thepage{}}}}}
+  \renewcommand\@evenfoot{\@oddfoot}
+  \renewcommand\thepage{\arabic{page}}
+}
+\newcommand\ps@Convertix{
+  \renewcommand\@oddhead{}
+  \renewcommand\@evenhead{\@oddhead}
+  \renewcommand\@oddfoot{}
+  \renewcommand\@evenfoot{\@oddfoot}
+  \renewcommand\thepage{\arabic{page}}
+}
+\newcommand\ps@Convertviii{
+  \renewcommand\@oddhead{}
+  \renewcommand\@evenhead{\@oddhead}
+  \renewcommand\@oddfoot{}
+  \renewcommand\@evenfoot{\@oddfoot}
+  \renewcommand\thepage{\arabic{page}}
+}
+\newcommand\ps@Convertvii{
+  \renewcommand\@oddhead{}
+  \renewcommand\@evenhead{\@oddhead}
+  \renewcommand\@oddfoot{}
+  \renewcommand\@evenfoot{\@oddfoot}
+  \renewcommand\thepage{\arabic{page}}
+}
+\newcommand\ps@Convertvi{
+  \renewcommand\@oddhead{}
+  \renewcommand\@evenhead{\@oddhead}
+  \renewcommand\@oddfoot{}
+  \renewcommand\@evenfoot{\@oddfoot}
+  \renewcommand\thepage{\arabic{page}}
+}
+\newcommand\ps@Convertiv{
+  \renewcommand\@oddhead{}
+  \renewcommand\@evenhead{\@oddhead}
+  \renewcommand\@oddfoot{}
+  \renewcommand\@evenfoot{\@oddfoot}
+  \renewcommand\thepage{\arabic{page}}
+}
+\newcommand\ps@FirstPage{
+  \renewcommand\@oddhead{}
+  \renewcommand\@evenhead{\@oddhead}
+  \renewcommand\@oddfoot{{\textcolor{black}{\hfill TP Page }}{{\textcolor{black}{\thepage{}}}}}
+  \renewcommand\@evenfoot{\@oddfoot}
+  \renewcommand\thepage{\arabic{page}}
+}
+\makeatother
+\pagestyle{Standard}
+\setlength\tabcolsep{1mm}
+\renewcommand\arraystretch{1.3}
+\title{TEST PLAN}
+\author{Clinton Jeffery}
+\date{2011-02-09}
+\begin{document}
+\clearpage\setcounter{page}{1}\pagestyle{Standard}
+\thispagestyle{FirstPage}
+
+{\centering\bfseries
+TEST PLAN (TP)
+\par}
+
+{\centering\bfseries
+FOR
+\par}
+
+
+\bigskip
+
+{\centering\bfseries
+Phunctional UML Editor
+\\(pUML)
+\par}
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+{\centering \par}
+
+\begin{figure}
+\centering
+\includegraphics[width=3.5in]{uidahologo.jpg}
+\end{figure}
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+
+\bigskip
+
+
+{\centering\bfseries
+Version 2.0
+\par}
+
+{\centering\bfseries
+May 8, 2012
+\par}
+
+
+\bigskip
+
+
+\bigskip
+
+{\centering\bfseries
+Prepared for:
+\par}
+
+{\centering\bfseries
+Dr. Clint Jeffery
+\par}
+
+
+\bigskip
+
+
+
+{\centering\bfseries
+Prepared by:
+\par}
+
+{\centering\bfseries
+Josh Armstrong
+\\Zach Curtis
+\\Brian Bowles
+\\Logan Evans
+\\Jeremy Klas
+\\Nathan Krussel
+\\Maxine Major
+\\Morgan Weir
+\\David Wells
+\par}
+
+
+\bigskip
+
+{\centering\bfseries
+University of Idaho
+\par}
+
+{\centering\bfseries
+Moscow, ID \ 83844-1010
+\par}
+
+\pagebreak
+
+
+{\centering\bfseries
+CS384 TPD
+\par}
+
+
+
+{\centering\bfseries
+RECORD OF CHANGES (Change History)
+\par}
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{|m{0.5462598in}|m{0.6712598in}|m{1.4212599in}|m{0.23375985in}|m{1.7962599in}|m{0.7337598in}|m{0.6295598in}|}
+\hline
+~
+
+\centering {\bfseries Change}\par
+\centering {\bfseries Number}\par
+&
+
+\centering \bfseries Date completed
+&
+
+\centering {\bfseries Location of
+change }\par
+\centering \bfseries (e.g., page or
+figure \#) &
+
+\centering {\bfseries A}\par
+\centering \bfseries M\newline
+D
+&
+
+\centering {\bfseries Brief description }\par
+\centering \bfseries of change 
+&
+
+\centering \bfseries Approved by
+(initials) 
+&
+
+\centering {\bfseries Date }\par
+\centering\arraybslash\bfseries
+approved\\
+ &
+ &
+ &
+ &
+ &
+ &
+\\\hline
+01 & 03/27/2012 & Test Plan & A & Document Created & MM & 03/27/2012
+\\\hline
+02 & 04/09/2012 & Test Plan & A & Test cases added & MM & 04/09/2012
+\\\hline
+03 & 05/08/2012 & Test Plan & M & Final Revision & MM & 05/08/2012
+
+\\\hline
+\end{supertabular}
+\end{flushleft}
+{
+A - ADDED \ M - MODIFIED \ D -- DELETED}
+
+\clearpage
+
+{\centering\bfseries
+pUML
+\par}
+
+{\centering\bfseries
+TABLE OF CONTENTS
+\par}
+
+
+\setcounter{tocdepth}{1}
+\renewcommand\contentsname{}
+\tableofcontents
+
+\bigskip
+
+\bigskip
+
+\setcounter{page}{1}\pagestyle{Convertiv}
+
+\clearpage
+
+\section[IDENTIFIER]{\bfseries TEST PLAN IDENTIFIER}
+
+This document is a stand-alone document and has no identification numbers other than the revision number.
+
+\section[REFERENCES]{\bfseries REFERENCES}
+\begin{comment}
+{\itshape List all documents that support this test plan. Refer to the actual version/release number of the document as stored in the configuration management system. Do not duplicate the text from other documents as this will reduce the viability of this document and increase the maintenance effort.}
+\end{comment}
+
+\begin{itemize}
+\item   Systems and Software Requirements Specification (SSRS) ver. 1.0
+\item   System and Software Design Description (SSDD) ver. 1.0
+\end{itemize}
+
+\section[INTRODUCTION]{\bfseries INTRODUCTION}
+\begin{comment}
+{\itshape State the purpose of the Plan, possibly identifying the level of the plan (master etc.). This is essentially the executive summary part of the plan. }
+\end{comment}
+
+The purpose of this Test Plan is to ensure the integrity of the pUML software through a well-defined series of tests. The testing outlined in this plan will be applied to each component of the pUML software. Errors will be well-documented and each test will require a follow-up so all changes or recommended improvements to both functionality and features may be applied to this software.
+
+\bigskip
+
+The testing required will include manual testing, unit testing, and a combination of both and/or other specialized tests as necessary for each test item. 
+\ results for each test item will be logged.
+\ action taken on each test item will be logged
+\ The purpose for this test is to ensure that all errors are found and handled. 
+
+\section[TEST ITEMS]{\bfseries TEST ITEMS}
+\begin{comment}
+{\itshape These are things you intend to test within the scope of this test plan. Essentially, something you will test, a list of what is to be tested. This can be developed from the software application inventories as well as other sources of documentation and information.}
+\end{comment}
+
+Items to be tested include:
+\begin{itemize}
+\item   Installers
+\item   Multiplatform portability (Windows and Linux)
+\item   Functions and parameters
+\item   Excessive code complexity
+\item   Large program components, i.e. Window and Canvas class
+\end{itemize}
+
+\section[SOFTWARE RISK ISSUES]{\bfseries SOFTWARE RISK ISSUES} \begin{comment}
+{\itshape Identify what software is to be tested and what the critical areas are, such as:}
+\end{comment}
+
+Software risk areas include extremely complex functions and modifications made on components with a history of failure. These functions and components are itemized as follows: 
+\begin{itemize}
+\item   QPaint. This introduces a complex hierarchy of classes and functions. To ensure this is adequately functional, manual testing will be required.
+\item   Compilation issues.
+\item   Restoring object classes. This tends to be fragile.
+\end{itemize}
+
+\clearpage
+\section[FEATURES TO BE TESTED]{\bfseries FEATURES TO BE TESTED} \begin{comment}
+{\itshape This is a listing of what is to be tested from the USERS viewpoint of what the system does. This is not a technical description of the software, but a USERS view of the functions.}
+\end{comment}
+
+Features to be tested include all objects, connectors, and associated functionality, Open/Save/Restore functionality, and ensuring that all diagram types load properly.
+
+\subsection[]{\bfseries Black Box Testing} 
+
+All black box tests will be conducted by students in the Computer Science department, and will be performed from a user perspective on the GUI functionality only. 
+
+\begin{flushleft}
+\tablehead{}
+\begin{tabular}{|m{1.5in} m{3.0in} m{2.0in}|}
+\hline
+{\bfseries\centering Name of Test}
+& {\bfseries\centering Tests}
+& {\bfseries\centering Fulfils SSRS Req.}
+\\\hline
+testinstall & pUML installer successfully installs and uninstalls & 2.2.1
+\\\hline
+testlaunch & pUML launches correctly & 2.2.1
+\\\hline
+testmainwindow & All main window options & 2.2.2
+\\\hline
+testobjects & All object behavior & 2.2.3
+\\\hline
+   testconnectors \newline
+   testselfconnector
+ & All connector behavior 
+ & 2.2.4
+\\\hline
+  testsave \newline 
+  testsaveas 
+  & Launch function \newline
+    All open functions \newline
+    All save functions \newline
+    Diagram integrity \newline
+    Tab functionality  
+  & 2.2.1 \newline
+    2.2.5 \newline
+    2.2.6 \newline
+    2.2.7 \newline
+    2.2.8
+\\\hline
+
+
+\end{tabular}
+\end{flushleft}
+\bigskip
+
+\subsection[]{\bfseries Integration Testing} 
+
+The integration test is being indirectly tested as a combination of the user-tested black box tests on the GUI, and the unit tests performed on the pUML software.
+
+\bigskip
+
+
+\subsection[]{\bfseries Unit Testing} 
+
+The unit tests will be conducted as part of a QT unit test project named {\bfseries pUMLUnitTest.} 
+
+\bigskip
+
+
+\section[FEATURES NOT TO BE TESTED]{\bfseries
+FEATURES NOT TO BE TESTED}
+\begin{comment}
+{\itshape This is a listing of what is NOT to be tested from both the Users viewpoint of what the system does and a configuration management/version control view. This is not a technical description of the software, but a USERS view of the functions.}
+\end{comment}
+
+\begin{itemize}
+\item We will not test invalid Save file names. QT already has implemented measures to prevent invalid file names.
+\item We will not test what the right-click function does in areas we have not assigned right-click features.
+\end{itemize}
+
+
+
+\section[APPROACH]{\bfseries APPROACH}
+
+We will be utilizing QT's built in unit testing features by designing a project to test all units. 
+Black box testing will be conducted by Computer Science students per text files outlining all steps to complete the test. Failed tests will be logged as issues in Google code and will be resolved manually.
+
+
+\section[ITEM PASS/FAIL CRITERIA]
+{\bfseries ITEM PASS/FAIL CRITERIA}
+
+If any test fails in any aspect, then entire test will have been assumed to have failed. A test will not be considered to pass until all steps of that test have passed successfully. If a test continues to fail and seems unresolvable given time and resources, the test may be rewritten to ensure a satisfactory pass grade may occur.
+
+
+\section[SUSPENSION CRITERIA]
+{\bfseries SUSPENSION CRITERIA AND RESUMPTION 
+\\REQUIREMENTS}
+\begin{comment}
+{\itshape If the number or type of defects reaches a point where the follow on testing has no value, it makes no sense to continue the test; you are just wasting resources.
+Specify what constitutes stoppage for a test or series of tests and what is the acceptable level of defects that will allow the testing to proceed past the defects. }
+\end{comment}
+
+Features and desired functionality may be suspended if it is assumed that it cannot be reasonably functional within the remaining time left to complete this project. 
+Features to be suspended at this time will not be resumed.
+
+\section[TEST DELIVERABLES]
+{\bfseries TEST DELIVERABLES}
+
+\begin{itemize}
+\item Test plan document
+\item All black box test cases with extraneous observations
+\item All unit test runs 
+\item Relevant error logs and problem reports
+\end{itemize}
+
+\section[REMAINING TEST TASKS]{\bfseries REMAINING TEST TASKS}
+
+There are no remaining test tasks at this time, since further testing will not continue after the end of Spring semester 2012.
+
+\section[ENVIRONMENTAL NEEDS]{\bfseries ENVIRONMENTAL NEEDS}
+
+There are no environmental needs associated with the pUML project.
+
+
+\section[STAFFING AND TRAINING NEEDS]
+{\bfseries STAFFING AND TRAINING NEEDS}
+
+pUML users are assumed to be familiar with UML and have a need to perform UML diagramming. As such, basic training will not be necessary.  A user guide will be provided with the pUML software to address any additional concerns. 
+
+
+\section[RESPONSIBILITIES]{\bfseries RESPONSIBILITIES}
+
+The test plan documentation is being handled by Maxine Major.
+The unit test is being developed primarily by Josh Armstrong.
+The other members of the group have contributed to the development of the content to be tested and have decided which features may forgo testing. All group members have contributed to the Alpha phase of black box testing, to ensure that major bugs are resolved prior to giving tests to third party testers.
+
+
+\section[SCHEDULE]{\bfseries SCHEDULE}
+
+The black box tests and the unit test have been modified several times during the last month of the semester, and testing will occur until the project completion deadline. All testing will be considered complete at that time.
+
+\section[APPROVALS]{\bfseries APPROVALS}
+
+Dr. Clint Jeffery is the only authorized individual to approve this project as complete.
+
+\begin{comment}
+
+\end{comment}
+
+\bigskip
+\end{document}
+
