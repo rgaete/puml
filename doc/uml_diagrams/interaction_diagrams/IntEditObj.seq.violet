@@ -26,14 +26,14 @@ the interactions of a user
 clicking an object and 
 editing its properties
 
-May 10, 2011</string> 
+May 10, 2012</string> 
      </void> 
     </void> 
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>1145.0</double> 
-     <double>10.0</double> 
+     <double>476.0</double> 
+     <double>11.0</double> 
     </void> 
    </object> 
   </void> 
@@ -139,7 +139,7 @@ May 10, 2011</string>
    <object idref="LifelineNode2"/> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>418.0</double> 
+     <double>204.0</double> 
      <double>0.0</double> 
     </void> 
    </object> 
@@ -148,7 +148,7 @@ May 10, 2011</string>
    <object idref="ActivationBarNode1"/> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>450.0</double> 
+     <double>236.0</double> 
      <double>104.0</double> 
     </void> 
    </object> 
@@ -157,7 +157,7 @@ May 10, 2011</string>
    <object idref="LifelineNode1"/> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>639.0</double> 
+     <double>369.0</double> 
      <double>0.0</double> 
     </void> 
    </object> 
@@ -166,7 +166,7 @@ May 10, 2011</string>
    <object idref="ActivationBarNode2"/> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>671.0</double> 
+     <double>401.0</double> 
      <double>128.0</double> 
     </void> 
    </object> 
@@ -175,7 +175,7 @@ May 10, 2011</string>
    <object idref="ActivationBarNode4"/> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>679.0</double> 
+     <double>409.0</double> 
      <double>216.0</double> 
     </void> 
    </object> 
@@ -184,7 +184,7 @@ May 10, 2011</string>
    <object idref="ActivationBarNode3"/> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>679.0</double> 
+     <double>409.0</double> 
      <double>157.0</double> 
     </void> 
    </object> 
@@ -193,7 +193,7 @@ May 10, 2011</string>
    <object idref="ActivationBarNode5"/> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>458.0</double> 
+     <double>244.0</double> 
      <double>295.0</double> 
     </void> 
    </object> 
@@ -202,7 +202,7 @@ May 10, 2011</string>
    <object idref="ActivationBarNode6"/> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>450.0</double> 
+     <double>236.0</double> 
      <double>369.0</double> 
     </void> 
    </object> 
@@ -211,7 +211,7 @@ May 10, 2011</string>
    <object idref="ActivationBarNode7"/> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>671.0</double> 
+     <double>401.0</double> 
      <double>393.0</double> 
     </void> 
    </object> 
@@ -220,7 +220,7 @@ May 10, 2011</string>
    <object idref="LifelineNode3"/> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>970.0</double> 
+     <double>512.0</double> 
      <double>387.0</double> 
     </void> 
    </object> 
@@ -229,7 +229,7 @@ May 10, 2011</string>
    <object idref="ActivationBarNode8"/> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>1002.0</double> 
+     <double>544.0</double> 
      <double>511.0</double> 
     </void> 
    </object> 
@@ -238,7 +238,7 @@ May 10, 2011</string>
    <object idref="ActivationBarNode9"/> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>671.0</double> 
+     <double>401.0</double> 
      <double>535.0</double> 
     </void> 
    </object> 
