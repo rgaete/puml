@@ -1,0 +1,26 @@
+Name: Nate Pueschel	
+Major: Mechanical Engineer 
+Age: 21
+Bugs/Issues: When in classbox, wrote down two things in attributes (without pushing enter) and then one thing in methods the end product showed two things overlapped in the third line.
+
+Things to be Improved: Lines overlap each other when making a connection between objects. Would be nice to be able to place your line where you want.  English of nate krussel
+
+Things found to be done well:  like how everything thing interacted well together.  Good use of line movement when moving the object.  I like the lines
+
+Name: Brady Espeland	
+Major: Accounting
+Age: 22
+Bugs/Issues: If you overlap class boxes, only the send to back function will work. Send backwards does not work properly. Any attributes or methods that exceed the size of the original box will run off and not get printed on the screen. The box should have the ability to adjust with longer length names or return to a new line after so many characters. Also, Pueschel is just an irrecoverable issue in and of his own. 
+
+Things to be improved upon: No help menu options. Would be nice to have the ability to add a new diagram using a button right after the tabs of current diagrams. Much like today's browsers allow you to start a new tab. There is currently no import or export option available even though there is a menu item for it. When you save a file and then open it, it opens a new tab of the same pUML even though you already have it up. A little bit of logic to recognize that the puml is already loaded would be nifty. 
+
+Things found to be done well: The tabbing of diagrams was very slick and the general toolbar on the left is nice. When moving a classbox, I like how the inheritance line follows with it. 
+
+Name: Alex Otter
+Major: Biology
+Age: 20
+Bugs/Issues: Ya I don't know.
+
+Things to be improved on: I don't like that when I hit enter after entering a state name it adds the state while removing the entry box, but when I hit enter while in the attributes field it just adds a line break. It would be nice if you were able to move objects to the back/front/etc by right clicking.
+
+Things found to be done well: I like that the lines and interactions move when you move objects. I also like that I'm able to move objects back and forwards.
