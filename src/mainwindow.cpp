@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <string>
 #include <iostream>
+#include <QDesktopServices>
 // I'm not sure why cpplint.py is insisting that <vector> be included
 // when it exists in mainwindow.h...
 
@@ -237,7 +238,6 @@ void MainWindow::createActions() {
   actionInverse_Select->setShortcut(Qt::CTRL + Qt::SHIFT + Qt::Key_A);
   actionDocument = new QAction(this);
   actionDocument->setText(tr("Help Document"));
-  actionDocument->setEnabled(false);
   actionAbout = new QAction(this);
   actionAbout->setText(tr("About"));
   actionAbout->setEnabled(false);
@@ -749,6 +749,7 @@ void MainWindow::on_actionInverse_Select_triggered() {
 }
 
 void MainWindow::on_actionDocument_triggered() {
+    QDesktopServices::openUrl(QUrl("http://www.puml.net/user_manual.html", QUrl::TolerantMode));
 }
 
 void MainWindow::on_actionAbout_triggered() {
