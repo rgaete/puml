@@ -1,0 +1,25 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Images/circle.png</file>
+        <file>Images/diamond.png</file>
+        <file>Images/oval.png</file>
+        <file>Images/select.png</file>
+        <file>Images/square.png</file>
+        <file>Images/stickman.png</file>
+        <file>Images/interaction.png</file>
+        <file>Images/New.png</file>
+        <file>Images/Open.png</file>
+        <file>Images/initialstate.png</file>
+        <file>Images/finalstate.png</file>
+        <file>Images/class.png</file>
+        <file>Images/rectangle.png</file>
+        <file>Images/multibox.png</file>
+        <file>Images/aggregation.png</file>
+        <file>Images/composition.png</file>
+        <file>Images/inheritance.png</file>
+        <file>Images/extends.png</file>
+        <file>Images/includes.png</file>
+        <file>Images/transition.png</file>
+        <file>Images/association.png</file>
+    </qresource>
+</RCC>
