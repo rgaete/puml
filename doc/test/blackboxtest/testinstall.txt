@@ -1,0 +1,47 @@
+Test: pUML Installer				Risk Level: MED
+
+Test Steps (input):
+  1. Double-click the installer
+  2. Follow all installer directions.
+  3. Link for pUML appears on desktop.
+
+Expected Results:
+  pUML installer successfully installs.
+  pUML installer successfully uninstalls.
+
+
+***** ALPHA TEST *****
+
+Change Set#:353:4680fa360dcf Date of Test: 4/19/12
+Pass/Fail: Pass
+
+Tester Name: Morgan Weir
+
+Log: Installs quickly and efficiently
+
+Extraneous Observations: Had some library issues initially, these have been corrected
+
+
+***** BETA TEST *****
+
+Change Set#: 451:42bfa2387066		Date of Test: 5/10/12		
+Pass/Fail: PASS
+
+Tester Name: Maxine Major
+
+Log: Downloaded the installer and ran it. Everything happened on its own. Tested launch test at the same time. 
+
+Extraneous Observations: Is there an un-installer?
+
+
+***** FINAL TEST *****
+
+Change Set#: 451:42bfa2387066		Date of Test: 5/10/12		
+Pass/Fail: PASS
+
+Tester Name: Madisen Chinnock
+
+Log: Ran installer, installed without any problem. Easy to find in start menu.
+
+Extraneous Observations: None.
+
