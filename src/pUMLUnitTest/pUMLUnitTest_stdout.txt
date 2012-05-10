@@ -1,0 +1,16 @@
+********* Start testing of MainWindowTest *********
+Config: Using QTest library 4.7.4, Qt 4.7.4
+PASS   : MainWindowTest::initTestCase()
+PASS   : MainWindowTest::testRegister()
+PASS   : MainWindowTest::cleanupTestCase()
+Totals: 3 passed, 0 failed, 0 skipped
+********* Finished testing of MainWindowTest *********
+********* Start testing of NodeFactoryTest *********
+Config: Using QTest library 4.7.4, Qt 4.7.4
+PASS   : NodeFactoryTest::initTestCase()
+PASS   : NodeFactoryTest::testInstance()
+PASS   : NodeFactoryTest::testRegister()
+PASS   : NodeFactoryTest::testProduce()
+PASS   : NodeFactoryTest::cleanupTestCase()
+Totals: 5 passed, 0 failed, 0 skipped
+********* Finished testing of NodeFactoryTest *********
