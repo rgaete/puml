@@ -28,6 +28,7 @@
 #include <QString>
 #include <QToolBar>
 #include <QDomDocument>
+#include <QDesktopServices>
 
 #include <map>
 #include <vector>
