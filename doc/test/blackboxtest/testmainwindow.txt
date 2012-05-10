@@ -39,7 +39,7 @@ Test: pUML Main Window features		Risk Level: MED
         (NOTE: as of the Alpha release, this is nonfunctional)
     21. Click on "Help" --> "About" 
         A window with information about the pUML development team should appear.
-        (NOTE: as of the Alpha release, this is nonfunctional)
+        (NOTE: this feature will remain nonfunctional for this release of pUMl.)
     22. Click on "File" --> "Exit" 
         the pUML software should close.
   
@@ -64,16 +64,16 @@ A few menu options still exist as of the time of this test. They will be deleted
 
 ***** BETA TEST*****
 
-Change Set#: 		Date of Test: 		
-Pass/Fail:
+Change Set#: 451:42bfa2387066		Date of Test: 5/10/12
+Pass/Fail: PASS
 
-Tester Name: 
+Tester Name: Madisen Chinnock
 
-Log: 
-
+Log: Tested each item on the list. 
 
 Extraneous Observations: 
-
+  Step#6 crashed every time I closed the Save-as window, but this was fixed when the test administrator (Maxine) loaded the QT version of pUML. Apparently the current installer isn't up to date.
+  Step#21 doesn't work. About is grayed out. Will this feature work?
 
 
 ***** FINAL TEST*****

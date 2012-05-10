@@ -76,12 +76,12 @@ Extraneous Observations:
 
 ***** FINAL TEST *****
 
-Change Set#: 			Date of Test: 
-Pass/Fail: 	
+Change Set#: 451:42bfa2387066		Date of Test: 5/10/12
+Pass/Fail: PASS
 
-Tester Name:  
+Tester Name: Madisen Chinnock 
 
-Log: 
+Log: Followed all steps. Easy to test.
 
 Extraneous Observations: 
-  
+  Steps 7 and 9 actually place another self connector on top of the other self connectors. Everything works okay, but this is probably an undesirable feature.
