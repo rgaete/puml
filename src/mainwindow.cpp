@@ -764,7 +764,6 @@ void MainWindow::on_actionAbout_triggered() {
 
 void MainWindow::closeEvent(QCloseEvent *event) {
   // for (int i=0; i<tabWidget->count(); i++) {
-  int i = 0;
   Canvas* currentCanvas;
   int documentIndex;
 

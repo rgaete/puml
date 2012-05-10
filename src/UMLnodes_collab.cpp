@@ -429,7 +429,6 @@ void CollabConnection::draw(QPainter& painter) {  // NOLINT
 // arrow facing the same direction or a -1 to make it point backwards
 int CollabConnection::FindDirection(QPoint point1, QPoint point2,
                                     QPoint temppoint1, QPoint temppoint2) {
-  QPoint result;
   // inner points
   int temp1x = point1.x();
   int temp1y = point1.y();
@@ -438,9 +437,7 @@ int CollabConnection::FindDirection(QPoint point1, QPoint point2,
 
   // Outer points
   int temp3x = temppoint1.x();
-  int temp3y = temppoint1.y();
   int temp4x = temppoint2.x();
-  int temp4y = temppoint2.y();
 
   // extra variables
   int fx;
