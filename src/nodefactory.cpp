@@ -25,7 +25,7 @@ int NodeFactory::registerPrototype(BaseNode *newPrototype) {
 }
 
 /*! Returns a new copy of the prototype specified by prototype_id.
-  Assumes that the id is valid. Functions should use the id
+  The id must be valid. Functions should use the id
   returned by registerPrototype.
 */
 BaseNode *NodeFactory::produce(int prototype_id) {

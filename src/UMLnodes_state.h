@@ -123,7 +123,7 @@ class TransitionConnection : public ConnectionNode {
     TransitionConnection();
     BaseNode* clone() { return new TransitionConnection; }
     QDialog* getDialog();
-    QString getIconPath() { return QString(":/Images/interaction.png"); }
+    QString getIconPath() { return QString(":/Images/transition.png"); }
     QString getText() { return "Transition Line"; }
     void draw(QPainter& painter);  // NOLINT
     DiagramType getDiagramType() { return StateChart; }
@@ -156,7 +156,7 @@ class StateSelfConnection : public SelfConnectionNode {
   public:
     BaseNode* clone() { return new StateSelfConnection; }
     QDialog* getDialog();
-    QString getIconPath() { return QString(":/Images/interaction.png"); }
+    QString getIconPath() { return QString(":/Images/transition.png"); }
     QString getText() { return "State Self Line"; }
     void draw(QPainter& painter);  // NOLINT
     DiagramType getDiagramType() { return StateChart; }

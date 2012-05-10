@@ -138,7 +138,7 @@ class CollabConnection : public SquareConnectionNode {
   public:
     BaseNode* clone() { return new CollabConnection; }
     QDialog* getDialog();// { return new CollabConnectionDialog; }
-    QString getIconPath() { return QString(":/Images/interaction.png"); }
+    QString getIconPath() { return QString(":/Images/transition.png"); }
     QString getText() { return "Collaboration Line"; }
     void draw(QPainter& painter);  // NOLINT
     DiagramType getDiagramType() { return Collaboration; }
@@ -173,7 +173,7 @@ class CollabSelfConnection : public SelfConnectionNode {
   public:
     BaseNode* clone() { return new CollabSelfConnection; }
     QDialog* getDialog();// { return new CollabConnectionDialog; }
-    QString getIconPath() { return QString(":/Images/interaction.png"); }
+    QString getIconPath() { return QString(":/Images/transition.png"); }
     QString getText() { return "Collaboration Self Line"; }
     void draw(QPainter& painter);  // NOLINT
     DiagramType getDiagramType() { return Collaboration; }
