@@ -36,13 +36,12 @@ Extraneous Observations: See "saveas" test for filename bug.
 
 ***** BETA TEST *****
 
-Change Set#: 		Date of Test: 		
-Pass/Fail:
+Change Set#: 451:42bfa2387066		Date of Test: 5/10/12
+Pass/Fail: PASS
 
-Tester Name: 
+Tester Name: Madisen Chinnock
 
-Log: 
-
+Log: Save works perfectly.
 
 Extraneous Observations: 
 

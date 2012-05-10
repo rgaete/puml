@@ -20,28 +20,34 @@ Log: Launches quickly
 Extraneous Observations: 
 
 
-
 ***** BETA TEST *****
 
-Change Set#: 		Date of Test: 		
-Pass/Fail:
+Change Set#: 451:42bfa2387066		Date of Test: 5/10/12		
+Pass/Fail: PASS
 
-Tester Name: 
+Tester Name: Maxine Major
 
-Log: 
+Log: Clicked on icon in start menu, and the initial "choose a diagram" menu appeared. Was able to conduct other tests from this launch.
 
 Extraneous Observations: 
+
 
 
 ***** FINAL TEST *****
 
-Change Set#: 		Date of Test: 		
-Pass/Fail:
+Change Set#: 451:42bfa2387066		Date of Test: 5/10/12	
+Pass/Fail: PASS
 
-Tester Name: 
+Tester Name: Madisen Chinnock
 
-Log: 
+Log: The program starts up right away.
 
 Extraneous Observations: 
+
+
+
+
+
+
 
 

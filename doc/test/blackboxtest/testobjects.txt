@@ -45,15 +45,15 @@ The test ran great, however with that many connectors going into a single object
 
 ***** BETA TEST *****
 
-Change Set#: 		Date of Test: 		Pass/Fail:
+Change Set#: 451:42bfa2387066		Date of Test: 5/10/12
+Pass/Fail: PASS
 
-Tester Name: 
+Tester Name: Madisen Chinnock
 
-Log: 
-
+Log: Followed all steps and everything looked okay. On step 19 I used a lot of different connection lines instead of the same line for all 10 connections. I hope that was okay for this test.
 
 Extraneous Observations: 
-
+ Step #11 should be rewritten, because the actor object can't stretch when text is big. The text still showed up though, so it still passes.
 
 
 ***** FINAL TEST *****

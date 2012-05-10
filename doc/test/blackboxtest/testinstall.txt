@@ -24,27 +24,24 @@ Extraneous Observations: Had some library issues initially, these have been corr
 
 ***** BETA TEST *****
 
-Change Set#: 		Date of Test: 		
-Pass/Fail:
+Change Set#: 451:42bfa2387066		Date of Test: 5/10/12		
+Pass/Fail: PASS
 
-Tester Name: 
+Tester Name: Maxine Major
 
-Log: 
+Log: Downloaded the installer and ran it. Everything happened on its own. Tested launch test at the same time. 
 
-Extraneous Observations: 
-
+Extraneous Observations: Is there an un-installer?
 
 
 ***** FINAL TEST *****
 
-Change Set#: 		Date of Test: 		
-Pass/Fail:
+Change Set#: 451:42bfa2387066		Date of Test: 5/10/12		
+Pass/Fail: PASS
 
-Tester Name: 
+Tester Name: Madisen Chinnock
 
-Log: 
+Log: Ran installer, installed without any problem. Easy to find in start menu.
 
-Extraneous Observations: 
-
-
+Extraneous Observations: None.
 

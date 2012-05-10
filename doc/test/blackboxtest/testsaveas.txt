@@ -46,12 +46,12 @@ If "open" is chosen when program is launched, after the popup says opening isn't
 
 ***** BETA TEST *****
 
-Change Set#: 		Date of Test: 		
-Pass/Fail:
+Change Set#: 451:42bfa2387066		Date of Test: 5/10/12
+Pass/Fail: PASS
 
-Tester Name: 
+Tester Name: Madisen Chinnock
 
-Log: 
+Log: Save-as works just as described above. No errors.
 
 Extraneous Observations: 
 

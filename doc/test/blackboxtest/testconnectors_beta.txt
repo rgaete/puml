@@ -48,53 +48,54 @@ NOTE: TEST STEPS 13-16 DO NOT APPLY TO CLASS DIAGRAMS
 
 ***** BETA TEST USE CASE DIAGRAM *****
 
-Change Set#:		 Date of Test: 		
-Pass/Fail: 
+Change Set#: 451:42bfa2387066		Date of Test: 5/10/12
+Pass/Fail: PASS
 
-Tester Name: 
+Tester Name: Madisen Chinnock 
 
-Log: 
+Log: Everything works ok.
 
 Extraneous Observations: 
-
+  Step#11 should say "click select first" or something like that. Select misses when I'm still in connector mode.
+  Steps # 26, 27 32, 33 assume that placing a connector in the same place as another connector won't place another connector. But it does. I had to delete 3 of them in step# 32.  I first found this out when the arrowheads appeared when I drew a line from one object to the second object, and then back, in reverse. Arrowheads appeared on both ends.
 
 
 ***** BETA TEST CLASS DIAGRAM *****
 
-Change Set#:		 Date of Test: 		
-Pass/Fail: 
+Change Set#: 451:42bfa2387066		Date of Test: 5/10/12
+Pass/Fail: PASS
 
-Tester Name: 
+Tester Name: Madisen Chinnock
 
-Log: 
+Log: Works okay.
 
 Extraneous Observations: 
-
+ Multiple connectors problem. See Use Case extraneous observations.
 
 
 ***** BETA TEST STATE DIAGRAM *****
 
-Change Set#:		 Date of Test: 		
-Pass/Fail: 
+Change Set#: 451:42bfa2387066		Date of Test: 5/10/12
+Pass/Fail: PASS
 
-Tester Name: 
+Tester Name: Madisen Chinnock
 
-Log: 
+Log: Everything looks good.
 
 Extraneous Observations: 
-
+  Multiple connectors placed again.
 
 
 ***** BETA TEST COLLABORATION DIAGRAM *****
 
-Change Set#:		 Date of Test: 		
-Pass/Fail: 
+Change Set#: 451:42bfa2387066		Date of Test: 5/10/12
+Pass/Fail: PASS
 
-Tester Name: 
+Tester Name: Madisen Chinnock 
 
-Log: 
+Log: Everything works.
 
 Extraneous Observations: 
-
+  Same message as above. Multiple connector lines can be drawn.
 
 
