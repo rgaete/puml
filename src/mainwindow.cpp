@@ -372,6 +372,8 @@ void MainWindow::connectSignalsSlots() {
           this, SLOT(on_actionSelect_triggered()));
   connect(tabWidget, SIGNAL(tabCloseRequested(int)),
           this, SLOT(on_tabWidget_tabCloseRequest(int)));
+  connect(actionDocument, SIGNAL(triggered()), this, SLOT(on_actionDocument_triggered()));
+
 }
 
 void MainWindow::openFileNewDialog(ConfigDialog::ConfigDialogType type) {
