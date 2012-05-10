@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<java version="1.6.0_30" class="java.beans.XMLDecoder"> 
+<java version="1.6.0_31" class="java.beans.XMLDecoder"> 
  <object class="com.horstmann.violet.SequenceDiagramGraph"> 
   <void method="addNode"> 
    <object id="LifelineNode0" class="com.horstmann.violet.ImplicitParameterNode"> 
@@ -11,7 +11,7 @@
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>308.0</double> 
+     <double>60.0</double> 
      <double>0.0</double> 
     </void> 
    </object> 
@@ -25,14 +25,14 @@ This interaction diagram follows
 the interactions of a user 
 deleting an object
 
-November 17, 2011</string> 
+May 10, 2011</string> 
      </void> 
     </void> 
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>672.0</double> 
-     <double>15.0</double> 
+     <double>1001.0</double> 
+     <double>8.0</double> 
     </void> 
    </object> 
   </void> 
@@ -46,8 +46,7 @@ November 17, 2011</string>
          <object id="LifelineNode1" class="com.horstmann.violet.ImplicitParameterNode"> 
           <void property="name"> 
            <void property="text"> 
-            <string>Canvas
-</string> 
+            <string>Document</string> 
            </void> 
           </void> 
          </object> 
@@ -57,17 +56,11 @@ November 17, 2011</string>
       <void method="addChild"> 
        <object id="ActivationBarNode3" class="com.horstmann.violet.CallNode"> 
         <void property="implicitParameter"> 
-         <object idref="LifelineNode1"/> 
-        </void> 
-       </object> 
-      </void> 
-      <void method="addChild"> 
-       <object id="ActivationBarNode4" class="com.horstmann.violet.CallNode"> 
-        <void property="implicitParameter"> 
          <object id="LifelineNode2" class="com.horstmann.violet.ImplicitParameterNode"> 
           <void property="name"> 
            <void property="text"> 
-            <string>QMenu</string> 
+            <string>Canvas
+</string> 
            </void> 
           </void> 
          </object> 
@@ -75,16 +68,16 @@ November 17, 2011</string>
        </object> 
       </void> 
       <void property="implicitParameter"> 
-       <object idref="LifelineNode1"/> 
+       <object idref="LifelineNode2"/> 
       </void> 
      </object> 
     </void> 
     <void method="addChild"> 
-     <object id="ActivationBarNode5" class="com.horstmann.violet.CallNode"> 
+     <object id="ActivationBarNode4" class="com.horstmann.violet.CallNode"> 
       <void method="addChild"> 
-       <object id="ActivationBarNode6" class="com.horstmann.violet.CallNode"> 
+       <object id="ActivationBarNode5" class="com.horstmann.violet.CallNode"> 
         <void method="addChild"> 
-         <object id="ActivationBarNode7" class="com.horstmann.violet.CallNode"> 
+         <object id="ActivationBarNode6" class="com.horstmann.violet.CallNode"> 
           <void property="implicitParameter"> 
            <object idref="LifelineNode1"/> 
           </void> 
@@ -106,7 +99,7 @@ November 17, 2011</string>
    </object> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>340.0</double> 
+     <double>92.0</double> 
      <double>80.0</double> 
     </void> 
    </object> 
@@ -115,34 +108,7 @@ November 17, 2011</string>
    <object idref="LifelineNode2"/> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>566.0</double> 
-     <double>0.0</double> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="addNode"> 
-   <object idref="ActivationBarNode4"/> 
-   <object class="java.awt.geom.Point2D$Double"> 
-    <void method="setLocation"> 
-     <double>598.0</double> 
-     <double>246.0</double> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="addNode"> 
-   <object idref="ActivationBarNode5"/> 
-   <object class="java.awt.geom.Point2D$Double"> 
-    <void method="setLocation"> 
-     <double>598.0</double> 
-     <double>320.0</double> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="addNode"> 
-   <object idref="LifelineNode1"/> 
-   <object class="java.awt.geom.Point2D$Double"> 
-    <void method="setLocation"> 
-     <double>414.0</double> 
+     <double>263.0</double> 
      <double>0.0</double> 
     </void> 
    </object> 
@@ -151,8 +117,17 @@ November 17, 2011</string>
    <object idref="ActivationBarNode1"/> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>446.0</double> 
+     <double>295.0</double> 
      <double>104.0</double> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="addNode"> 
+   <object idref="LifelineNode1"/> 
+   <object class="java.awt.geom.Point2D$Double"> 
+    <void method="setLocation"> 
+     <double>478.0</double> 
+     <double>0.0</double> 
     </void> 
    </object> 
   </void> 
@@ -160,8 +135,8 @@ November 17, 2011</string>
    <object idref="ActivationBarNode2"/> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>454.0</double> 
-     <double>133.0</double> 
+     <double>510.0</double> 
+     <double>128.0</double> 
     </void> 
    </object> 
   </void> 
@@ -169,8 +144,26 @@ November 17, 2011</string>
    <object idref="ActivationBarNode3"/> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>454.0</double> 
-     <double>192.0</double> 
+     <double>303.0</double> 
+     <double>187.0</double> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="addNode"> 
+   <object idref="ActivationBarNode4"/> 
+   <object class="java.awt.geom.Point2D$Double"> 
+    <void method="setLocation"> 
+     <double>295.0</double> 
+     <double>261.0</double> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="addNode"> 
+   <object idref="ActivationBarNode5"/> 
+   <object class="java.awt.geom.Point2D$Double"> 
+    <void method="setLocation"> 
+     <double>510.0</double> 
+     <double>285.0</double> 
     </void> 
    </object> 
   </void> 
@@ -178,28 +171,10 @@ November 17, 2011</string>
    <object idref="ActivationBarNode6"/> 
    <object class="java.awt.geom.Point2D$Double"> 
     <void method="setLocation"> 
-     <double>446.0</double> 
-     <double>344.0</double> 
+     <double>518.0</double> 
+     <double>314.0</double> 
     </void> 
    </object> 
-  </void> 
-  <void method="addNode"> 
-   <object idref="ActivationBarNode7"/> 
-   <object class="java.awt.geom.Point2D$Double"> 
-    <void method="setLocation"> 
-     <double>454.0</double> 
-     <double>373.0</double> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="connect"> 
-   <object class="com.horstmann.violet.CallEdge"> 
-    <void property="middleLabel"> 
-     <string>select(delete)</string> 
-    </void> 
-   </object> 
-   <object idref="ActivationBarNode0"/> 
-   <object idref="ActivationBarNode5"/> 
   </void> 
   <void method="connect"> 
    <object class="com.horstmann.violet.CallEdge"> 
@@ -213,7 +188,7 @@ November 17, 2011</string>
   <void method="connect"> 
    <object class="com.horstmann.violet.CallEdge"> 
     <void property="middleLabel"> 
-     <string>IDObject()</string> 
+     <string>setSelectedObject</string> 
     </void> 
    </object> 
    <object idref="ActivationBarNode1"/> 
@@ -222,7 +197,7 @@ November 17, 2011</string>
   <void method="connect"> 
    <object class="com.horstmann.violet.CallEdge"> 
     <void property="middleLabel"> 
-     <string>setSelectedObjects()</string> 
+     <string>showContextMenu</string> 
     </void> 
    </object> 
    <object idref="ActivationBarNode1"/> 
@@ -231,29 +206,29 @@ November 17, 2011</string>
   <void method="connect"> 
    <object class="com.horstmann.violet.CallEdge"> 
     <void property="middleLabel"> 
-     <string>show()</string> 
+     <string>click Delete</string> 
     </void> 
    </object> 
-   <object idref="ActivationBarNode1"/> 
+   <object idref="ActivationBarNode0"/> 
    <object idref="ActivationBarNode4"/> 
   </void> 
   <void method="connect"> 
    <object class="com.horstmann.violet.CallEdge"> 
     <void property="middleLabel"> 
-     <string>delete()</string> 
+     <string>deleteSelectedObject</string> 
     </void> 
    </object> 
+   <object idref="ActivationBarNode4"/> 
    <object idref="ActivationBarNode5"/> 
-   <object idref="ActivationBarNode6"/> 
   </void> 
   <void method="connect"> 
    <object class="com.horstmann.violet.CallEdge"> 
     <void property="middleLabel"> 
-     <string>drawList()</string> 
+     <string>deleteConnectedObjects</string> 
     </void> 
    </object> 
+   <object idref="ActivationBarNode5"/> 
    <object idref="ActivationBarNode6"/> 
-   <object idref="ActivationBarNode7"/> 
   </void> 
  </object> 
 </java> 
