@@ -99,7 +99,7 @@ class ClassConnection : public SquareConnectionNode {
   public:
     BaseNode* clone() { return new ClassConnection; }
     QDialog* getDialog();
-    QString getIconPath() { return QString(":/Images/interaction.png"); }
+    QString getIconPath() { return QString(":/Images/association.png"); }
     QString getText() { return "Association"; }
     void draw(QPainter& painter);  // NOLINT
     DiagramType getDiagramType() { return Class; }

@@ -271,7 +271,7 @@ void MainWindow::createActions() {
 */
 void MainWindow::createMenus() {
   menuBar = new QMenuBar(this);
-  menuBar->setGeometry(QRect(0, 0, 673, 21));
+  //menuBar->setGeometry(QRect(0, 0, 673, 21));
   menuFile = new QMenu(menuBar);
   menuEdit = new QMenu(menuBar);
   menuTools = new QMenu(menuBar);
@@ -341,7 +341,8 @@ void MainWindow::createWidgets() {
   toolbarLabel = new QLabel;
   toolbarLabel->setText("Diagram Tools");
   toolbarLabel->setStyleSheet(
-      "padding-left: 13px; padding-top: 2px; font-size: 12px; font: bold");
+     // "padding-left: 13px; padding-top: 2px; font-size: 12px; font: bold");
+              "alignment: center;");
   mainToolBar->addWidget(toolbarLabel);
 }
 
@@ -371,34 +372,6 @@ void MainWindow::connectSignalsSlots() {
           this, SLOT(on_actionSelect_triggered()));
   connect(tabWidget, SIGNAL(tabCloseRequested(int)),
           this, SLOT(on_tabWidget_tabCloseRequest(int)));
-
-  /* list of slots
-  void on_actionNew_triggered();
-  void on_actionOpen_triggered();
-  void on_actionSave_triggered();
-  void on_actionSave_As_triggered();
-  void on_actionPrint_triggered();
-  void on_actionImport_Export_triggered();
-  void on_actionExit_triggered();
-  void on_actionCopy_triggered();
-  void on_actionCut_triggered();
-  void on_actionPaste_triggered();
-  void on_actionSelect_triggered();
-  void on_actionSelect_All_triggered();
-  void on_actionInverse_Select_triggered();
-  void on_actionCircle_toggled(bool arg1);
-  void on_actionDiamond_toggled(bool arg1);
-  void on_actionRectangle_toggled(bool arg1);
-  void on_actionStickMan_toggled(bool arg1);
-  void on_actionArrow_toggled(bool arg1);
-  void on_actionLine_toggled(bool arg1);
-  void on_actionDotted_Line_toggled(bool arg1);
-  void on_actionTile_Horizontally_toggled(bool arg1);
-  void on_actionTile_Vertically_toggled(bool arg1);
-  void on_actionCascade_toggled(bool arg1);
-  void on_actionDocument_triggered();
-  void on_actionAbout_triggered();
-  */
 }
 
 void MainWindow::openFileNewDialog(ConfigDialog::ConfigDialogType type) {
@@ -444,8 +417,10 @@ void MainWindow::createNewDiagram(BaseNode::DiagramType type) {
 
     // set the parent to this so that they get automically deleted
     // when the program shuts down
-    //newdoc->setParent(this);
-    //newcanvas->setParent(this);
+    // NOTE: Uncommenting these lines makes it so you can't click anywhere
+    // on the program. They are already deleted as well.
+    // newdoc->setParent(this);
+    // newcanvas->setParent(this);
 
     // Update the canvas and document index on the canvas and document
     newdoc->setCanvasIndex(canvases.size()-1);

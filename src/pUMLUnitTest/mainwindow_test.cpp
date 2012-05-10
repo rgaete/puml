@@ -24,7 +24,7 @@ void MainWindowTest::initTestCase() {
 /*! Tests the registerPrototype function.
 */
 void MainWindowTest::testRegister() {
-  //QCOMPARE(2, 1);
+
 }
 
 /*! Cleans up this unit test

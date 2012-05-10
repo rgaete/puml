@@ -31,7 +31,7 @@ public:
 int main(int argc, char *argv[]) {
     // MyApplication a(argc, argv);
     QApplication a(argc, argv);
-    a.setStyleSheet("QToolButton { min-width: 150px }");
+    a.setStyleSheet("QToolButton { min-width: 200px }");
     MainWindow w;
     w.show();
 

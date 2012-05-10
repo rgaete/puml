@@ -19,5 +19,7 @@
         <file>Images/inheritance.png</file>
         <file>Images/extends.png</file>
         <file>Images/includes.png</file>
+        <file>Images/transition.png</file>
+        <file>Images/association.png</file>
     </qresource>
 </RCC>
