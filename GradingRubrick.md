@@ -1,0 +1,1 @@
+A copy of the rubric can be found [| here](http://puml.googlecode.com/hg/doc/checklist.html)
